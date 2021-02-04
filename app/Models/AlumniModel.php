@@ -39,4 +39,11 @@ class AlumniModel extends Model
             ->orLike('jabatan_terakhir', $search)
             ->orLike('aktif_pns', $search);
     }
+    public function getAlumniDetail($nim){
+        if(empty($nim)){
+            return null;
+        }
+        // Buat model data alumni lengkap dibawah ini
+
+    }
 }
