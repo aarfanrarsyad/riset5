@@ -83,7 +83,8 @@ phpunit
 #-------------------------
 # Composer
 #-------------------------
-vendor/
+vendor/*
+!vendor/*.rar
 
 #-------------------------
 # IDE / Development Files
@@ -125,3 +126,5 @@ nb-configuration.xml
 /phpunit*.xml
 /.phpunit.*.cache
 
+public/*
+!public/public.rar
