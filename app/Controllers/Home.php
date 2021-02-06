@@ -17,287 +17,384 @@ class Home extends BaseController
 		$this->modelAuth = new \App\Models\AuthModel();
 		$this->modelAlumni = new \App\Models\AlumniModel();
 		$this->loginModel = new LoginModel();
+		$this->roleModel = new \App\Models\RoleModel();
 		$faker = \Faker\Factory::create('id_ID');
 
 		// // processing data sipadu
-		if (isset($_REQUEST['code']) && $_REQUEST['code']) {
+		// if (isset($_REQUEST['code']) && $_REQUEST['code']) {
 
-			$curl_status = curl_init();
+		// 	$curl_status = curl_init();
 
-			curl_setopt_array($curl_status, [
-				CURLOPT_RETURNTRANSFER => 1,
-				CURLOPT_URL => 'https://ws.stis.ac.id/oauth/token',
-				CURLOPT_POST => 1,
+		// 	curl_setopt_array($curl_status, [
+		// 		CURLOPT_RETURNTRANSFER => 1,
+		// 		CURLOPT_URL => 'https://ws.stis.ac.id/oauth/token',
+		// 		CURLOPT_POST => 1,
 
-				CURLOPT_POSTFIELDS => [
-					'grant_type' => 'authorization_code',
-					'client_id' => '14',
-					'client_secret' => '3r3grLcMKEEqhq1gHbks1ZzztbFdasLbzpg0YDj0',
-					'redirect_uri' => 'http://localhost:8080',
-					'code' => $_REQUEST['code']
-				]
-			]);
-			curl_setopt($curl_status, CURLOPT_FRESH_CONNECT, TRUE);
-			$result = curl_exec($curl_status);
-			curl_close($curl_status);
-			$hasil = json_decode($result); //hasil json untuk token
-			$token = $hasil->access_token;
+		// 		CURLOPT_POSTFIELDS => [
+		// 			'grant_type' => 'authorization_code',
+		// 			'client_id' => '14',
+		// 			'client_secret' => '3r3grLcMKEEqhq1gHbks1ZzztbFdasLbzpg0YDj0',
+		// 			'redirect_uri' => 'http://localhost:8080',
+		// 			'code' => $_REQUEST['code']
+		// 		]
+		// 	]);
+		// 	curl_setopt($curl_status, CURLOPT_FRESH_CONNECT, TRUE);
+		// 	$result = curl_exec($curl_status);
+		// 	curl_close($curl_status);
+		// 	$hasil = json_decode($result); //hasil json untuk token
+		// 	$token = $hasil->access_token;
 
-			if (!isset($token))
-				return redirect()->to('/');
+		// 	if (!isset($token))
+		// 		return redirect()->to('/');
 
-			$authorization = "Authorization: Bearer " . $token;
+		// 	$authorization = "Authorization: Bearer " . $token;
 
-			$curl_status = curl_init();
+		// 	$curl_status = curl_init();
 
-			curl_setopt_array($curl_status, [
-				CURLOPT_RETURNTRANSFER => 1,
-				CURLOPT_URL => 'https://ws.stis.ac.id/api/user',
-				CURLOPT_HTTPHEADER => array($authorization)
-			]);
+		// 	curl_setopt_array($curl_status, [
+		// 		CURLOPT_RETURNTRANSFER => 1,
+		// 		CURLOPT_URL => 'https://ws.stis.ac.id/api/user',
+		// 		CURLOPT_HTTPHEADER => array($authorization)
+		// 	]);
 
-			curl_setopt($curl_status, CURLOPT_FRESH_CONNECT, TRUE);
+		// 	curl_setopt($curl_status, CURLOPT_FRESH_CONNECT, TRUE);
 
-			$result = curl_exec($curl_status);
-			curl_close($curl_status);
+		// 	$result = curl_exec($curl_status);
+		// 	curl_close($curl_status);
 
-			// echo ($result);	//cek result sipadu
-			// die();
+		// 	// echo ($result);	//cek result sipadu
+		// 	// die();
 
-			$hasil = json_decode($result, true);	// hasil akhir sipadu
+		// 	$hasil = json_decode($result, true);	// hasil akhir sipadu
 
-			if (isset($hasil['profile']['nim'])) {
-				// if ($this->modelAuth->getUserByUsername($hasil['profile']['nim']) == NULL) {
-				// 	$data = array(
-				// 		"username" => $hasil['profile']['nim'],
-				// 		"nama" => $hasil['profile']['nama']
-				// 	);
-				// 	$this->modelAuth->insertUser($data);
-				// }
+		// 	if (isset($hasil['profile']['nim'])) {	//apabila alumni login dengan akun sipadu mahasiswa
+		// 		$user = $hasil['profile'];
 
-				// $user = $this->modelAuth->getUserByUsername($hasil['profile']['nim']);
+		// 		// binding session dengan database (insert data ke tabel alumni kalau belum terdaftar di tabel alumni) 
+		// 		if ($this->modelAlumni->getUserByNIM($user['nim']) == NULL) {
+		// 			$bindUser = [
+		// 				'angkatan'      	=> $faker->numberBetween(1, 62),
+		// 				'nama'				=> $user['nama'],
+		// 				'nim'				=> $user['nim'],
+		// 				'jenis_kelamin'		=> $faker->randomElement(array('L', 'P')),
+		// 				'tempat_lahir'  	=> $faker->city,
+		// 				'tanggal_lahir' 	=> $faker->date('Y-m-d', 'now'),
+		// 				'telp_alumni'   	=> $faker->phoneNumber,
+		// 				'alamat'        	=> $faker->address,
+		// 				'status_bekerja'	=> $faker->boolean,
+		// 				'perkiraan_pensiun' => $faker->year,
+		// 				'jabatan_terakhir'  => $faker->jobTitle,
+		// 				'aktif_pns'      	=> $faker->boolean,
+		// 			];
+		// 			$this->modelAlumni->db->table('alumni')->insert($bindUser);;
+		// 		}
 
-				$user = $hasil['profile'];
+		// 		//insert new user sipadu (mahasiswa)
+		// 		if ($this->modelAuth->getUserByUsername($hasil['profile']['nim']) == NULL) {
+		// 			$now = date("Y-m-d H:i:s");
+		// 			$data = [
+		// 				'email'				=> $user['nim'] . "@stis.ac.id",
+		// 				'username'			=> $user['nim'],
+		// 				'nim'				=> $user['nim'],
+		// 				'fullname'			=> $user['nama'],
+		// 				'password_hash'		=> null,
+		// 				'reset_at'			=> null,
+		// 				'active'			=> 1,
+		// 				'force_pass_reset'	=> 0,
+		// 				'created_at'		=> $now,
+		// 				'updated_at'		=> $now
+		// 			];
+		// 			$this->modelAuth->insertUser($data);
+		// 		}
 
-				session()->set([
-					'nim' => $user['nim'],
-					'nama' => $user['nama'],
-					'role' => $user['role']
-				]);
-
-				$ipAddress = Services::request()->getIPAddress();
-				$this->recordLoginAttempt(session('nim'), $ipAddress, session('nim') ?? null, true);
-
-				// binding session dengan database
-				if ($this->modelAlumni->getUserByNIM(session('nim')) == NULL) {
-					$bindUser = [
-						'angkatan'      => $faker->numberBetween(1, 62),
-						'nama'			=> session('nama'),
-						'nim'		=> session('nim'),
-						'jenis_kelamin'  => $faker->randomElement(array('L', 'P')),
-						'tempat_lahir'   => $faker->city,
-						'tanggal_lahir'  => $faker->date('Y-m-d', 'now'),
-						'telp_alumni'    => $faker->phoneNumber,
-						'alamat'        => $faker->address,
-						'status_bekerja' => $faker->boolean,
-						'perkiraan_pensiun' => $faker->year,
-						'jabatan_terakhir'  => $faker->jobTitle,
-						'aktif_pns'      => $faker->boolean,
-					];
-					$this->modelAlumni->db->table('alumni')->insert($bindUser);;
-				}
-
-				//insert new user sipadu (mahasiswa)
-				if ($this->modelAuth->getUserByUsername($hasil['profile']['nim']) == NULL) {
-					$now = date("Y-m-d H:i:s");
-					$data = [
-						'email'				=> session('nim') . "@stis.ac.id",
-						'username'			=> session('nim'),
-						'nim'				=> session('nim'),
-						'fullname'			=> session('nama'),
-						'password_hash'		=> null,
-						'reset_at'			=> null,
-						'active'			=> 1,
-						'force_pass_reset'	=> 0,
-						'created_at'		=> $now,
-						'updated_at'		=> $now
-					];
-					$this->modelAuth->insertUser($data);
-				}
-			} else {
-				// if ($this->modelAuth->getUserByUsername($hasil['profile']['username']) == NULL) {
-				// 	$data = array(
-				// 		"username" => $hasil['profile']['username'],
-				// 		"nama" => $hasil['profile']['nama']
-				// 	);
-				// 	$this->modelAuth->insertUser($data);
-				// }
-
-				// $user = $this->modelAuth->getUserByUsername($hasil['profile']['username']);
-				$user = $hasil['profile'];
-
-				session()->set([
-					'username' => $user['username'],
-					'nim'	=> "0",
-					'nama' => $user['nama'],
-					'role' => $user['role']
-				]);
-
-				$ipAddress = Services::request()->getIPAddress();
-				$this->recordLoginAttempt(session('username'), $ipAddress, session('nim') ?? null, true);
-
-				// binding session dengan database
-				if ($this->modelAlumni->getUserByNIM(session('username')) == NULL) {
-					$bindUser = [
-						'angkatan'      => $faker->numberBetween(1, 62),
-						'nama'	=> session('nama'),
-						'nim'	=> session('nim'),
-						'jenis_kelamin'  => $faker->randomElement(array('L', 'P')),
-						'tempat_lahir'   => $faker->city,
-						'tanggal_lahir'  => $faker->date('Y-m-d', 'now'),
-						'telp_alumni'    => $faker->phoneNumber,
-						'alamat'        => $faker->address,
-						'status_bekerja' => $faker->boolean,
-						'perkiraan_pensiun' => $faker->year,
-						'jabatan_terakhir'  => $faker->jobTitle,
-						'aktif_pns'      => $faker->boolean,
-					];
-					$this->modelAlumni->db->table('alumni')->insert($bindUser);
-				}
-
-				//insert new user sipadu (dosen)
-				if ($this->modelAuth->getUserByUsername($hasil['profile']['nim']) == NULL) {
-					$now = date("Y-m-d H:i:s");
-					$data = [
-						'email'				=> session('username') . "@stis.ac.id",
-						'username'			=> session('nim'),
-						'nim'				=> session('nim'),
-						'fullname'			=> session('nama'),
-						'password_hash'		=> null,
-						'reset_at'			=> null,
-						'active'			=> 1,
-						'force_pass_reset'	=> 0,
-						'created_at'		=> $now,
-						'updated_at'		=> $now
-					];
-					$this->modelAuth->insertUser($data);
-				}
-			}
-
-			setcookie('login', 'yes', time() + 60, $_SERVER['SERVER_NAME']);
-
-			echo '<script>window.close();</script>';
-
-			session()->setFlashdata('pesan', 'Login berhasil. Hai, <b>' . session('username') . '!</b>');
-			session()->setFlashdata('warna', 'success');
-			die();
-		}
-
-		// // processing login sso bps
-		// if (isset($_GET['code']) && $_GET['code']) {
-		// 	if (empty($_GET['state']) || ($_GET['state'] !== session('oauth2state'))) {
-
-		// 		session()->remove('oauth2state');
-		// 		exit('Invalid state');
-		// 	} else {
-
-		// 		$provider = new Keycloak([
-		// 			'authServerUrl'         => 'https://sso.bps.go.id',
-		// 			'realm'                 => 'pegawai-bps',
-		// 			'clientId'              => '02700-dbalumni-mu1',
-		// 			'clientSecret'          => 'e69810d0-f915-49c4-9ed1-cd9edf05436a',
-		// 			'redirectUri'           => 'http://localhost:8080',
-		// 			'scope' 				=> 'openid profile-pegawai'
+		// 		$user = $this->modelAuth->getUserByUsername($hasil['profile']['nim']);
+		// 		session()->set([	//set session (informasi identitas) dari tabel users
+		// 			'id_user' => $user['id'],
+		// 			'nim' => $user['nim'],
+		// 			'nama' => $user['fullname']
 		// 		]);
 
-		// 		// get token
-		// 		try {
-		// 			$token = $provider->getAccessToken('authorization_code', [
-		// 				'code' => $_GET['code']
-		// 			]);
-		// 		} catch (Exception $e) {
-		// 			exit('Gagal mendapatkan akses token : ' . $e->getMessage());
-		// 		}
+		// 		$query = $this->roleModel->getRole(session('id_user'));
+		// 		$role = array();
 
-		// 		try {
-		// 			$user = $provider->getResourceOwner($token);
-
-		// 			// var_dump($user->toArray());	//cek result sso-bps
-		// 			// die();
-
-		// 			$data = array(
-		// 				"username" => $user->getNip(),
-		// 				"nama" => $user->getName()
-		// 			);
-		// 			$this->modelAuth->insertUser($data);
-
-		// 			$hasil = $this->modelAuth->getUserByUsername($user->getNip());
-
-		// 			session()->set([
-		// 				'id_user' => $hasil['id'],
-		// 				'username' => $hasil['username'],
-		// 				'nama' => $hasil['nama'],
-		// 				'role' => $hasil['role']
-		// 			]);
-
-		// 			$ipAddress = Services::request()->getIPAddress();
-		// 			$this->recordLoginAttempt(session('username'), $ipAddress, session('id_user') ?? null, true);
-
-		// 			// binding session dengan database
-		// 			if ($this->modelAlumni->getUserByNIM(session('username')) == NULL) {
-		// 				$bindUser = [
-		// 					'angkatan'      => $faker->numberBetween(1, 62),
-		// 					'nama'			=> session('nama'),
-		// 					'nim'		=> session('username'),
-		// 					'jenis_kelamin'  => $faker->randomElement(array('L', 'P')),
-		// 					'tempat_lahir'   => $faker->city,
-		// 					'tanggal_lahir'  => $faker->date('Y-m-d', 'now'),
-		// 					'telp_alumni'    => $faker->phoneNumber,
-		// 					'alamat'        => $faker->address,
-		// 					'status_bekerja' => $faker->boolean,
-		// 					'perkiraan_pensiun' => $faker->year,
-		// 					'jabatan_terakhir'  => $faker->jobTitle,
-		// 					'aktif_pns'      => $faker->boolean,
-		// 				];
-		// 				$this->modelAlumni->db->table('alumni')->insert($bindUser);;
+		// 		if ($query != null) {
+		// 			foreach ($query as $arr) {
+		// 				array_push($role, $arr->group_id);
 		// 			}
-
-		// 			setcookie('login', 'yes', time() + 60, $_SERVER['SERVER_NAME']);
-
-		// 			echo '<script>window.close();</script>';
-
-		// 			session()->setFlashdata('pesan', 'Login berhasil. Hai, <b>' . session('username') . '!</b>');
-		// 			session()->setFlashdata('warna', 'success');
-		// 			die();
-
-		// 			// echo "Id : " . $user->getId();
-		// 			// echo "Nama : " . $user->getName();
-		// 			// echo "Nama Depan: " . $user->getnamaDepan();
-		// 			// echo "Nama Belakang: " . $user->getnamaBelakang();
-		// 			// echo "E-Mail : " . $user->getEmail();
-		// 			// echo "Username : " . $user->getUsername();
-		// 			// echo "NIP : " . $user->getNip();
-		// 			// echo "NIP Baru : " . $user->getNipBaru();
-		// 			// echo "Kode Organisasi : " . $user->getKodeOrganisasi();
-		// 			// echo "Kode Provinsi : " . $user->getKodeProvinsi();
-		// 			// echo "Kode Kabupaten : " . $user->getKodeKabupaten();
-		// 			// echo "Alamat Kantor : " . $user->getAlamatKantor();
-		// 			// echo "Provinsi : " . $user->getProvinsi();
-		// 			// echo "Kabupaten : " . $user->getKabupaten();
-		// 			// echo "Golongan : " . $user->getGolongan();
-		// 			// echo "Jabatan : " . $user->getJabatan();
-		// 			// echo "Foto : " . $user->getUrlFoto();
-		// 			// echo "Eselon : " . $user->getEselon();
-		// 		} catch (Exception $e) {
-		// 			exit('Gagal Mendapatkan Data Pengguna: ' . $e->getMessage());
+		// 			session()->set([
+		// 				'role' => $role
+		// 			]);
+		// 		} else {
+		// 			$data = [
+		// 				'group_id'	=> 2,
+		// 				'user_id'	=> session('id_user')
+		// 			];
+		// 			$this->roleModel->insertRole($data);
+		// 			$query = $this->roleModel->getRole(session('id_user'));
+		// 			foreach ($query as $arr) {
+		// 				array_push($role, $arr->group_id);
+		// 			}
+		// 			session()->set([
+		// 				'role' => $role
+		// 			]);
 		// 		}
+
+		// 		$ipAddress = Services::request()->getIPAddress();
+		// 		$this->recordLoginAttempt(session('nim') . '@stis.ac.id', $ipAddress, session('id_user') ?? null, true);	//insert ke tabel auth_login untuk log login
+		// 	} else {	//apabila alumni memakai akun dosen
+		// 		/* KATANYA LANGSUNG ALERT AJA */
+
+		// 		// $user = $hasil['profile'];
+
+		// 		// session()->set([
+		// 		// 	'username' => $user['username'],
+		// 		// 	'nim'	=> "0",
+		// 		// 	'nama' => $user['nama'],
+		// 		// 	'role' => $user['role']
+		// 		// ]);
+
+		// 		// $ipAddress = Services::request()->getIPAddress();
+		// 		// $this->recordLoginAttempt(session('username'), $ipAddress, session('nim') ?? null, true);
+
+		// 		// // binding session dengan database
+		// 		// if ($this->modelAlumni->getUserByNIM(session('username')) == NULL) {
+		// 		// 	$bindUser = [
+		// 		// 		'angkatan'      => $faker->numberBetween(1, 62),
+		// 		// 		'nama'	=> session('nama'),
+		// 		// 		'nim'	=> session('nim'),
+		// 		// 		'jenis_kelamin'  => $faker->randomElement(array('L', 'P')),
+		// 		// 		'tempat_lahir'   => $faker->city,
+		// 		// 		'tanggal_lahir'  => $faker->date('Y-m-d', 'now'),
+		// 		// 		'telp_alumni'    => $faker->phoneNumber,
+		// 		// 		'alamat'        => $faker->address,
+		// 		// 		'status_bekerja' => $faker->boolean,
+		// 		// 		'perkiraan_pensiun' => $faker->year,
+		// 		// 		'jabatan_terakhir'  => $faker->jobTitle,
+		// 		// 		'aktif_pns'      => $faker->boolean,
+		// 		// 	];
+		// 		// 	$this->modelAlumni->db->table('alumni')->insert($bindUser);
+		// 		// }
+
+		// 		// //insert new user sipadu (dosen)
+		// 		// if ($this->modelAuth->getUserByUsername($hasil['profile']['nim']) == NULL) {
+		// 		// 	$now = date("Y-m-d H:i:s");
+		// 		// 	$data = [
+		// 		// 		'email'				=> session('username') . "@stis.ac.id",
+		// 		// 		'username'			=> session('nim'),
+		// 		// 		'nim'				=> session('nim'),
+		// 		// 		'fullname'			=> session('nama'),
+		// 		// 		'password_hash'		=> null,
+		// 		// 		'reset_at'			=> null,
+		// 		// 		'active'			=> 1,
+		// 		// 		'force_pass_reset'	=> 0,
+		// 		// 		'created_at'		=> $now,
+		// 		// 		'updated_at'		=> $now
+		// 		// 	];
+		// 		// 	$this->modelAuth->insertUser($data);
+		// 		// }
+
+		// 		// session()->setFlashdata('pesan', 'Silahkan gunakan akun Sipadu Mahasiswa atau akun BPS, atau hubungi admin website');
+		// 		echo '<script>alert(\'Silahkan gunakan akun Sipadu Mahasiswa atau akun BPS, atau hubungi admin website\')</script>';
+		// 		die();
 		// 	}
+
+		// 	setcookie('login', 'yes', time() + 60, $_SERVER['SERVER_NAME']);
+
+		// 	echo '<script>window.close();</script>';
+
+		// 	session()->setFlashdata('pesan', 'Login berhasil. Hai, <b>' . session('username') . '!</b>');
+		// 	session()->setFlashdata('warna', 'success');
+		// 	die();
 		// }
 
-		$data = [
-			'title' => 'Dashboard | Riset 5 Website Alumni',
-		];
-		return view('pages/dashboard', $data);
+		// processing login sso bps
+		if (isset($_GET['code']) && $_GET['code']) {
+			$provider = new Keycloak([
+				'authServerUrl'         => 'https://sso.bps.go.id',
+				'realm'                 => 'pegawai-bps',
+				'clientId'              => '02700-dbalumni-mu1',
+				'clientSecret'          => 'e69810d0-f915-49c4-9ed1-cd9edf05436a',
+				'redirectUri'           => 'http://localhost:8080',
+				'scope' 				=> 'openid profile-pegawai'
+			]);
+
+			if (empty($_GET['state']) || ($_GET['state'] !== session('oauth2state'))) {
+
+				session()->remove('oauth2state');
+				exit('Invalid state');
+			} else {
+
+				$provider = new Keycloak([
+					'authServerUrl'         => 'https://sso.bps.go.id',
+					'realm'                 => 'pegawai-bps',
+					'clientId'              => '02700-dbalumni-mu1',
+					'clientSecret'          => 'e69810d0-f915-49c4-9ed1-cd9edf05436a',
+					'redirectUri'           => 'http://localhost:8080',
+					'scope' 				=> 'openid profile-pegawai'
+				]);
+
+				// get token
+				try {
+					$token = $provider->getAccessToken('authorization_code', [
+						'code' => $_GET['code']
+					]);
+				} catch (Exception $e) {
+					exit('Gagal mendapatkan akses token : ' . $e->getMessage());
+				}
+
+				try {
+					$user = $provider->getResourceOwner($token);
+
+
+					// var_dump($user->toArray());	//cek result sso-bps
+					// die();
+
+					$curl = curl_init();
+					curl_setopt_array($curl, [
+						CURLOPT_RETURNTRANSFER => 1,
+						CURLOPT_URL => "https://pbd.bps.go.id/simpeg_api/pkl_stis_2021",
+						CURLOPT_POST => 1,
+						CURLOPT_POSTFIELDS => [
+							'apiKey'	=> "0smUjhQHo2SMu2MJkcJmgEmEkv4qAfCvTW8PwnQQ724=",
+							'kategori'	=> "get_riwayat_pendidikan",
+							'nipbps'	=> $user->getNip()
+						]
+					]);
+					curl_setopt($curl, CURLOPT_FRESH_CONNECT, TRUE);
+
+					$result = curl_exec($curl);
+					curl_close($curl);
+					$hasil = json_decode($result);
+
+					if (isset($hasil->pesan)) {
+						echo "data tidak ditemukan";
+					} else {
+						$riwayat_pendidikan = array();
+						foreach ($hasil as $data)
+							array_push($riwayat_pendidikan, $data->Nama_Instansi_Pendidikan);
+						if (in_array('Akademi Ilmu Statistik', $riwayat_pendidikan) || in_array('Sekolah Tinggi Ilmu Statistik', $riwayat_pendidikan) || in_array('Politeknin Statistika STIS', $riwayat_pendidikan)) {
+
+							// binding session dengan database
+							if ($this->modelAlumni->getUserByNIM($user->getNip()) == NULL) {
+								$bindUser = [
+									'angkatan'      => $faker->numberBetween(1, 62),
+									'nama'			=> $user->getName(),
+									'nim'			=> $user->getNip(),
+									'jenis_kelamin'  => $faker->randomElement(array('L', 'P')),
+									'tempat_lahir'   => $faker->city,
+									'tanggal_lahir'  => $faker->date('Y-m-d', 'now'),
+									'telp_alumni'    => $faker->phoneNumber,
+									'alamat'        => $faker->address,
+									'status_bekerja' => $faker->boolean,
+									'perkiraan_pensiun' => $faker->year,
+									'jabatan_terakhir'  => $faker->jobTitle,
+									'aktif_pns'      => $faker->boolean,
+								];
+								$this->modelAlumni->db->table('alumni')->insert($bindUser);
+							}
+
+							if ($this->modelAuth->getUserByUsername($user->getUsername()) == NULL) {
+								$now = date("Y-m-d H:i:s");
+								$data = [
+									'email'				=> $user->getEmail(),
+									'username'			=> $user->getUsername(),
+									'nim'				=> $user->getNip(),
+									'fullname'			=> $user->getName(),
+									'password_hash'		=> null,
+									'reset_at'			=> null,
+									'active'			=> 1,
+									'force_pass_reset'	=> 0,
+									'created_at'		=> $now,
+									'updated_at'		=> $now
+								];
+								$this->modelAuth->insertUser($data);
+							}
+
+							$hasil = $this->modelAuth->getUserByUsername($user->getUsername());
+
+							session()->set([	//set session (informasi identitas) dari tabel users
+								'id_user' => $hasil['id'],
+								'nim' => $hasil['nim'],
+								'nama' => $hasil['fullname']
+							]);
+
+							$query = $this->roleModel->getRole(session('id_user'));
+							$role = array();
+
+							if ($query != null) {
+								foreach ($query as $arr) {
+									array_push($role, $arr->group_id);
+								}
+								session()->set([
+									'role' => $role
+								]);
+							} else {
+								$data = [
+									'group_id'	=> 2,
+									'user_id'	=> session('id_user')
+								];
+								$this->roleModel->insertRole($data);
+								$query = $this->roleModel->getRole(session('id_user'));
+								foreach ($query as $arr) {
+									array_push($role, $arr->group_id);
+								}
+								session()->set([
+									'role' => $role
+								]);
+							}
+
+							$ipAddress = Services::request()->getIPAddress();
+							$this->recordLoginAttempt($hasil['email'], $ipAddress, session('id_user') ?? null, true);
+
+							setcookie('login', 'yes', time() + 60, $_SERVER['SERVER_NAME']);
+
+							session()->setFlashdata('pesan', 'Login berhasil. Hai, <b>' . session('username') . '!</b>');
+							session()->setFlashdata('warna', 'success');
+							echo '<script>window.close();</script>';
+
+							die();
+						} else
+							echo "Bukan Alumni";
+					}
+
+					// echo "Id : " . $user->getId();
+					// echo "Nama : " . $user->getName();
+					// echo "Nama Depan: " . $user->getnamaDepan();
+					// echo "Nama Belakang: " . $user->getnamaBelakang();
+					// echo "E-Mail : " . $user->getEmail();
+					// echo "Username : " . $user->getUsername();
+					// echo "NIP : " . $user->getNip();
+					// echo "NIP Baru : " . $user->getNipBaru();
+					// echo "Kode Organisasi : " . $user->getKodeOrganisasi();
+					// echo "Kode Provinsi : " . $user->getKodeProvinsi();
+					// echo "Kode Kabupaten : " . $user->getKodeKabupaten();
+					// echo "Alamat Kantor : " . $user->getAlamatKantor();
+					// echo "Provinsi : " . $user->getProvinsi();
+					// echo "Kabupaten : " . $user->getKabupaten();
+					// echo "Golongan : " . $user->getGolongan();
+					// echo "Jabatan : " . $user->getJabatan();
+					// echo "Foto : " . $user->getUrlFoto();
+					// echo "Eselon : " . $user->getEselon();
+				} catch (Exception $e) {
+					exit('Gagal Mendapatkan Data Pengguna: ' . $e->getMessage());
+				}
+			}
+		}
+
+		if (session()->has('id_user')) {
+			$data = [
+				'judulHalaman' 	=> 'Beranda WEBSIA',
+				'login'			=> 'sudah'
+			];
+		} else {
+			$data = [
+				'judulHalaman' 	=> 'Beranda WEBSIA',
+				'login'			=> 'belum'
+			];
+		}
+
+		return view('websia/kontenWebsia/halamanUtama/beranda', $data);
+		// return view('pages/dashboard', $data);
 	}
 
 	public function recordLoginAttempt(string $email, string $ipAddress = null, int $userID = null, bool $success)
@@ -311,65 +408,146 @@ class Home extends BaseController
 		]);
 	}
 
-	//--------------------------------------------------------------------
-
-	public function reset()
+	public function daftar()
 	{
-		$data['title'] = 'Reset Password';
-		$data['template'] = 'reset';
-		return view('reset/inputemail', $data);
+		return view('login/daftar.php');
 	}
 
-	public function resetPass()
+	// public function resetPass()
+	// {
+	// 	return view('login/resetpass.php');
+	// }
+
+	public function searchAndFilter()
 	{
-		$data['title'] = 'Reset Password';
-		$data['template'] = 'reset';
-		return view('reset/resetpass', $data);
-	}
-
-	//--------------------------------------------------------------------
-
-	public function search() //pencarian
-	{
-		// nyoba faker,, gakepake di controller ini
-		// $faker = \Faker\Factory::create('id_ID');
-		// dd($faker->phoneNumber);
-
 		$pager = \Config\Services::pager();
 		$model = new \App\Models\AlumniModel;
-		$atribut  = $this->request->getVar('atribut');
+		$minAng = $this->request->getVar('min');
+		$maxAng = $this->request->getVar('max');
+		if($minAng > $maxAng){
+			$temp = $minAng;
+			$minAng = $maxAng;
+			$maxAng = $temp;
+		}
+		if($minAng!=NULL && $minAng>=$model->getMinAngkatan()[0]->angkatan ){
+			$min_angkatan  =$minAng;
+		} else {
+			$min_angkatan  = $model->getMinAngkatan()[0]->angkatan;
+		}
+		if($maxAng!=NULL && $maxAng<=$model->getMaxAngkatan()[0]->angkatan){
+			$max_angkatan  = $maxAng;
+		} else {
+			$max_angkatan  = $model->getMaxAngkatan()[0]->angkatan;
+		}
 		$cari = $this->request->getVar('cari');
-		$filter = $this->request->getVar('filter');
+        $filter = $this->request->getVar('filter');
 
-		if (isset($filter) && !empty($cari)) {
-			if ($atribut == "all") {
-				$query = $model->orderBy('nama', $direction = 'ASC')->getAlumni($cari);
-				$jumlah = "Pencarian dengan kata <B>$cari</B> ditemukan " . $query->countAllResults(false) . " Data";
-			} else {
-				$query = $model->orderBy('nama', $direction = 'ASC')->getSearch($atribut, $cari);
-				$jumlah = "Pencarian dengan kata <B>$cari</B> ditemukan " . $query->countAllResults(false) . " Data";
-			}
+		if (isset($filter)) {
+                $query = $model->orderBy('nama', $direction = 'ASC')->getAlumniFilter($cari,$min_angkatan,$max_angkatan);
+                if(!empty($cari)){
+                    $jumlah = "Pencarian dengan kata <B>$cari</B> ditemukan " . $query->countAllResults(false) . " Data";
+                } else {
+                    $jumlah = "Pencarian berhasil";
+                }
 		} else {
 			$query = $model->orderBy('nama', $direction = 'ASC');
-			$jumlah = "";
+			$jumlah = "Pencarian belum dilakukan";
 		}
 
 		$data = [
-			'title' => 'Pencarian Alumni | Website Riset 5',
-			'alumni' => $query->paginate(10),
+			'judulHalaman' => 'Pencarian Alumni | Website Riset 5',
+			'alumni' => $query->paginate(9),
 			'pager' => $model->pager,
 			'page'  => $this->request->getVar('page') ? $this->request->getVar('page') : 1,
-			'jumlah' => $jumlah,
+            'jumlah' => $jumlah,
+			'min_angkatan' => $model->getMinAngkatan()[0]->angkatan,
+			'max_angkatan' => $model->getMaxAngkatan()[0]->angkatan
 		];
 
-		echo view('pages/search', $data);
+		echo view('websia/kontenWebsia/searchAndFilter/searchAndFilter', $data);
+	
 	}
+
+	public function profil()
+	{
+		// ganti status ='user' atau 'bukan user' sesuai pengakses, user itu untuk melihat profil diri sendiri, sedangkan bukan user untuk melihat profil orang lain
+		$data['status'] = 'user';
+		$data['judulHalaman'] = 'User Profile';
+		return view('websia/kontenWebsia/userProfile/userProfile', $data);
+	}
+
+	public function rekomendasi()
+	{
+		$data['judulHalaman'] = 'Rekomendasi';
+		return view('websia/kontenWebsia/userProfile/rekomendasi', $data);
+	}
+
+	public function galeriFoto()
+	{
+		$data['judulHalaman'] = 'Galeri Kenangan Alumni';
+		return view('websia/kontenWebsia/galeri/galeriAlumni', $data);
+	}
+
+	public function galeriVideo()
+	{
+		$data['judulHalaman'] = 'Galeri Video Kegiatan Alumni';
+		$data['login'] = 'sudah';
+		return view('kontenWebsia/galeri/galeriVidAlumni', $data);
+	}
+
+	public function galeriWisuda()
+	{
+		$data['judulHalaman'] = 'Galeri Video Wisuda';
+		$data['login'] = 'sudah';
+		return view('kontenWebsia/galeri/galeriWisuda', $data);
+	}
+
+	public function coba()
+	{
+		return view('cobaWebsia/map');
+	}
+
+	// public function search() //pencarian
+	// {
+	// 	// nyoba faker,, gakepake di controller ini
+	// 	// $faker = \Faker\Factory::create('id_ID');
+	// 	// dd($faker->phoneNumber);
+
+	// 	$pager = \Config\Services::pager();
+	// 	$model = new \App\Models\AlumniModel;
+	// 	$atribut  = $this->request->getVar('atribut');
+	// 	$cari = $this->request->getVar('cari');
+	// 	$filter = $this->request->getVar('filter');
+
+	// 	if (isset($filter) && !empty($cari)) {
+	// 		if ($atribut == "") {
+	// 			$query = $model->orderBy('nama', $direction = 'ASC')->getAlumni($cari);
+	// 			$jumlah = "Pencarian dengan kata <B>$cari</B> ditemukan " . $query->countAllResults(false) . " Data";
+	// 		} else {
+	// 			$query = $model->orderBy('nama', $direction = 'ASC')->getSearch($atribut, $cari);
+	// 			$jumlah = "Pencarian dengan kata <B>$cari</B> ditemukan " . $query->countAllResults(false) . " Data";
+	// 		}
+	// 	} else {
+	// 		$query = $model->orderBy('nama', $direction = 'ASC');
+	// 		$jumlah = "";
+	// 	}
+
+	// 	$data = [
+	// 		'title' => 'Pencarian Alumni | Website Riset 5',
+	// 		'alumni' => $query->paginate(20),
+	// 		'pager' => $model->pager,
+	// 		'page'  => $this->request->getVar('page') ? $this->request->getVar('page') : 1,
+	// 		'jumlah' => $jumlah,
+	// 	];
+
+	// 	echo view('pages/search', $data);
+	// }
 
 	//--------------------------------------------------------------------
 
 	public function profile()
 	{
-		if (!session()->has('nim') && !logged_in())
+		if (!session()->has('id_user') && !logged_in())
 			return redirect()->to('/');
 
 		$model = new AlumniModel();
@@ -419,7 +597,7 @@ class Home extends BaseController
 
 	public function update()
 	{
-		if (!session()->has('nim'))
+		if (!session()->has('id_user'))
 			return redirect()->to('/');
 
 		$model = new AlumniModel();
@@ -447,7 +625,7 @@ class Home extends BaseController
 
 	public function updating()
 	{
-		if (!session()->has('nim'))
+		if (!session()->has('id_user'))
 			return redirect()->to('/');
 
 		$this->modelAlumni = new AlumniModel();

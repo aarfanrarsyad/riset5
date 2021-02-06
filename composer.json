@@ -4,11 +4,14 @@
 	"description": "CodeIgniter4 starter app",
 	"homepage": "https://codeigniter.com",
 	"license": "MIT",
+	"minimum-stability": "beta",
+	"prefer-stable": true,
 	"require": {
 		"php": ">=7.2",
 		"codeigniter4/framework": "^4.0",
 		"irsadarief/jkd-sso": "^1.6",
-		"fzaninotto/faker": "^1.9"
+		"fzaninotto/faker": "^1.9",
+		"myth/auth": "^1.0@beta"
 	},
 	"require-dev": {
 		"mikey179/vfsstream": "1.6.*",

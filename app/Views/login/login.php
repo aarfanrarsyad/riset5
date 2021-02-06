@@ -1,106 +1,61 @@
-<?= $this->extend('layout/templateLoginRegisterReset') ?>
+<?= $this->extend('login/templateLogin.php'); ?>
 
-<?php
-$visibility = 'hidden'; // bisa diisi hidden untuk menonaktifkan
-?>
-<?= $this->section('content') ?>
-<!-- konten  -->
-<div class="flex flex-col justify-center flex-grow">
-    <div class="block md:flex mx-auto w-11/12 ">
+<?= $this->section('content'); ?>
 
-        <div class="bg-cover bg-center w-1/2" style="background-image: url(/img/illus-02-02.png)"></div>
+<div class="flex sm:w-max w-11/12 px-2">
+    <div class="w-full xl:mr-40 md:mr-10 mr-4 items-center sm:flex hidden">
+        <img src="/img/login.png" alt="gambar login" class="">
+    </div>
+    <div class="w-full">
+        <form method="POST" action="<?= route_to('login') ?>" class="py-8 rounded-3xl shadow-2xl flex flex-col">
+            <?= csrf_field(); ?>
+            <h2 class="text-2xl mb-6 mt-2 font-bold text-center cursor-default text-primary">LOGIN PENGGUNA</h2>
+            <div class="flex sm:mx-4 md:mx-8 mx-8 h-10">
+                <label for="email" class="w-1/4 text-primary font-medium flex items-center sm:text-sm md:text-base">Email</label>
+                <input type="text" name="login" class="input pl-2 w-3/4 border-2 rounded-lg border-gray-400 text-sm outline-none text-gray-400" id="email" placeholder="Ketik email di sini">
+            </div>
+            <div class="flex sm:mx-4 md:mx-8 mx-8 my-1">
+                <div class="w-1/4"></div>
+                <p class="w-3/4 text-xs text-red-500 <?php if (!session('errors.login')) : ?>hidden<?php endif; ?>" id="msg-email">Email yang anda masukkan tidak cocok</p>
+            </div>
+            <div class="flex sm:mx-4 md:mx-8 mx-8 my-1 h-10 relative">
+                <label for="pass" class="w-1/4 text-primary font-medium flex items-center sm:text-sm md:text-base">Kata Sandi</label>
+                <input type="password" name="password" class="input pl-2 w-3/4 border-2 rounded-lg border-gray-400 text-sm outline-none text-gray-400" id="password" placeholder="Ketik kata sandi di sini">
+                <i class="eyes fas fa-eye-slash absolute right-0 transform translate-y-3 -translate-x-3 cursor-pointer text-primary"></i>
+            </div>
+            <div class="flex sm:mx-4 md:mx-8 mx-8">
+                <div class="w-1/4"></div>
+                <p class="text-xs text-red-500 <?php if (!session('errors.password')) : ?>hidden<?php endif; ?>" id="msg-pass">Kata sandi yang anda masukkan kurang tepat</p>
+            </div>
 
-        <div class="flex flex-col flex-grow items-center py-5 px-1 bg-white shadow-2xl rounded-xl md:-ml-2">
-            <div class="font-bold font-sans text-xl mb-8 mt-5"> LOGIN USER</div>
-
-            <!-- tulisan kalo akun yang dimasukkan salah untuk saat ini masih ke hidden, untuk mennonaktifkan bisa mengisi 'hidden' pada variabel visibility di text php -->
-            <div class=" w-11/12 md:w-9/12 mb-2 text-center text-sm md:text-base bg-red-200 text-red-600 font-semibold p-1 rounded-lg <?= $visibility ?>">Username/password was wrong!</div>
-            <!-- tulisan kalo akun yang dimasukkan salah -->
-
-            <?= view('Myth\Auth\Views\_message_block') ?>
-
-            <form action="<?= route_to('login') ?>" class="flex flex-col items-center w-full" method="POST">
-                <?= csrf_field() ?>
-                <!-- email or username -->
-                <?php if ($config->validFields === ['email']) : ?>
-                    <div class="flex w-11/12 md:w-9/12 mb-4 ">
-                        <label for="login" class="my-auto"><?= lang('Auth.email') ?>&nbsp;:</label>
-                        <div class="flex-grow ml-4 ">
-                            <input type="email" name="login" id="username" placeholder="<?= lang('Auth.email') ?>" autocomplete="off" class="shadow-md border-2 w-full h-10 rounded-lg px-3 py-2 focus:outline-none border-gray-200 focus:border-gray-700 placeholder-gray-700 text-sm align-middle <?php if (session('errors.login')) : ?>is-invalid<?php endif ?>">
-                        </div>
+            <div class="flex sm:mx-4 md:mx-8 mx-8 my-3">
+                <div class="w-1/4"></div>
+                <div class="w-3/4 flex justify-between">
+                    <div>
+                        <input type="checkbox" class="cursor-pointer">
+                        <label for="check" id="remember" class="text-sm cursor-pointer hover:text-blue-600 text-primary font-medium">Ingat saya</label>
                     </div>
-                    <div class="invalid-feedback">
-                        <?= session('errors.login') ?>
-                    </div>
-                <?php else : ?>
-                    <div class="flex w-11/12 md:w-9/12 mb-4 ">
-                        <label for="login" class="my-auto"><?= lang('Auth.emailOrUsername') ?>&nbsp;:</label>
-                        <div class="flex-grow ml-4 ">
-                            <input type="text" name="login" id="username" placeholder="<?= lang('Auth.emailOrUsername') ?>" autocomplete="off" class="shadow-md border-2 w-full h-10 rounded-lg px-3 py-2 focus:outline-none border-gray-200 focus:border-gray-700 placeholder-gray-700 text-sm align-middle">
-                        </div>
-                    </div>
-                    <div class="invalid-feedback">
-                        <?= session('errors.login') ?>
-                    </div>
-                <?php endif; ?>
-                <!-- email or username -->
-
-                <!-- password  -->
-                <div class="flex w-11/12 md:w-9/12 mb-4 ">
-                    <label for="password" class="my-auto"><?= lang('Auth.password') ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</label>
-                    <div class="flex-grow ml-4 ">
-                        <input type="password" name="password" id="password" placeholder="<?= lang('Auth.password') ?>" autocomplete="off" class="shadow-md border-2 w-full h-10 rounded-lg px-3 py-2 focus:outline-none border-gray-200 focus:border-gray-700 placeholder-gray-700 text-sm align-middle <?php if (session('errors.password')) : ?>is-invalid<?php endif ?>">
-                    </div>
-                </div>
-                <div class="invalid-feedback">
-                    <?= session('errors.password') ?>
-                </div>
-                <!-- password  -->
-
-                <!-- Remember Me -->
-                <?php if ($config->allowRemembering) : ?>
-                    <div class="flex w-11/12 md:w-9/12 mb-4 ">
-                        <div class="w-20 "></div>
-                        <div class="flex flex-grow ml-4 ">
-                            <input type="checkbox" name="remember" id="rememberMe" class="my-auto<?php if (old('remember')) : ?> checked <?php endif ?>">
-                            <label for="rememberMe" class="ml-3 text-sm"><?= lang('Auth.rememberMe') ?></label>
-                        </div>
-                    </div>
-                <?php endif; ?>
-                <!-- Remember Me -->
-
-                <!-- submit + forgot your password -->
-                <div class="flex w-11/12 md:w-9/12 mb-4 ">
-                    <div class=" w-20 "></div>
-                    <div class="flex flex-grow ml-2 justify-between">
-                        <button type="submit" id="submit" class="text-xs my-auto text-white font-bold hover:from-blue-500 hover:to-indigo-600 py-2 px-10cursor-pointer focus:outline-none bg-gradient-to-r from-blue-500 to-indigo-500 py-2 px-8 ml-4 rounded-md"><?= lang('Auth.loginAction') ?></button>
-                        <?php if ($config->activeResetter) : ?>
-                            <div class="text-blue-500 my-auto mr-2 ml-1 text-sm"> <a href="<?= route_to('forgot') ?>">Forgot your password?</a>
-                            </div>
-                        <?php endif; ?>
-                    </div>
-                </div>
-                <!-- submit + forgot your password -->
-
-            </form>
-
-            <div class="flex w-11/12 md:w-9/12 justify-center mb-4 ">
-                <div class="flex-grow my-auto">
-                    <hr class="bg-gray-500">
-                </div>
-                <div class="mx-6 text-lg">ATAU</div>
-                <div class="flex-grow my-auto">
-                    <hr class="bg-gray-500">
+                    <a href="<?= route_to('forgot') ?>" class="text-sm cursor-pointer text-secondary font-medium hover:text-yellow-700">Lupa kata sandi?</a>
                 </div>
             </div>
 
+            <div class="flex justify-center sm:mx-4 md:mx-8 mx-8 my-4">
+                <input type="submit" class="tombol w-full shadow-2xl h-10 rounded-2xl text-base outline-none border-none cursor-pointer text-white duration-300" value="Kirim">
+            </div>
+
+            <div class="sm:mx-4 md:mx-8 mx-8 flex mt-2 mb-6">
+                <hr class="border border-primary w-1/4 transform translate-y-2">
+                <p class="flex justify-center text-sm text-primary w-1/2 font-medium cursor-default">atau masuk dengan</p>
+                <hr class="border border-primary w-1/4 transform translate-y-2">
+            </div>
+
             <!-- login with sipadu -->
-            <button onclick="loginSipadu()">
-                <div class=" flex py-2 px-6 border-2 border-blue-500 rounded-lg mb-4 hover:border-blue-700 hover:bg-blue-100">
-                    <img src="/img/logo.png" alt="" class="w-6 h-6">
-                    <div class="ml-2 my-auto text-blue-500 hover:text-blue-700 font-semibold"> Login with SIPADU</div>
+            <div class="sm:mx-4 md:mx-8 mx-8 mb-4" onclick="loginSipadu()">
+                <div class="sso flex justify-center rounded-2xl w-full border-2 border-secondary py-2 cursor-pointer trasform transform duration-300 hover:bg-yellow-200 hover:border-yellow-600 hover:scale-105">
+                    <img src="/img/sipadu.png" alt="google" width="25" height="25" class="mr-4">
+                    <h3 class="flex items-center text-sm text-secondary">Login with SIPADU</h3>
                 </div>
-            </button>
+            </div>
 
             <script>
                 function loginSipadu() {
@@ -117,12 +72,12 @@ $visibility = 'hidden'; // bisa diisi hidden untuk menonaktifkan
             <!-- login with sipadu -->
 
             <!-- login with BPS -->
-            <button onclick="loginBPS()">
-                <div class=" flex py-2 px-6 border-2 border-blue-500 rounded-lg hover:border-blue-700 hover:bg-blue-100">
-                    <img src="/img/bps.png" alt="" class="w-6 h-6">
-                    <div class="ml-2 my-auto text-blue-500 hover:text-blue-700 font-semibold"> Login with SSOBPS</div>
+            <div class="sm:mx-4 md:mx-8 mx-8" onclick="loginBPS()">
+                <div class="sso flex justify-center rounded-2xl w-full border-2 border-secondary py-2 cursor-pointer transform hover:scale-105 duration-300 hover:bg-yellow-200 hover:border-yellow-600">
+                    <img src="/img/google.png" alt="google" width="25" height="25" class="mr-4">
+                    <h3 class="flex items-center text-sm text-secondary">Login with BPS</h3>
                 </div>
-            </button>
+            </div>
 
             <script>
                 function loginBPS() {
@@ -138,9 +93,10 @@ $visibility = 'hidden'; // bisa diisi hidden untuk menonaktifkan
             </script>
             <!-- login with BPS -->
 
-
-        </div>
+            <p class="text-center mt-6 text-primary mb-4 font-medium cursor-default">Akun belum terdaftar? <span><a href="/home/daftar" class="text-secondary hover:text-yellow-700 font-medium">Daftar</a></span></p>
+        </form>
     </div>
 </div>
-<!-- konten -->
-<?= $this->endSection() ?>
+
+
+<?= $this->endSection(); ?>
