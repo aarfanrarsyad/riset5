@@ -1,15 +1,15 @@
-<?= $this->extend('Login/templateLogin.php'); ?>
+<?= $this->extend('login/templateLogin.php'); ?>
 
 <?= $this->section('content'); ?>
 
 <div class="xl:w-8/12 md:w-10/12">
     <form method="POST" action="" class="rounded-3xl shadow-2xl xl:px-16 md:px-8 px-8 sm:mx-0 mx-4">
         <h2 class="sm:text-2xl text-lg mb-3 font-bold text-center pt-8 text-primary">ATUR ULANG KATA SANDI</h2>
-        <div class="pl-3 bg-green-300 rounded-full flex items-center">
+        <div class="pl-3 bg-green-300 rounded-full flex items-center <?php if (!session('errors.email')) : ?>hidden<?php endif; ?>">
             <img src="/img/icon/check.png" class="h-5 mr-1">
             <p class="text-green-700 sm:text-base text-sm">Kata sandi baru telah dikirim.</p>
         </div>
-        <div class="pl-3 bg-red-400 rounded-full flex items-center">
+        <div class="pl-3 bg-red-400 rounded-full flex items-center <?php if (!session('errors.email')) : ?>hidden<?php endif; ?>">
             <img src="/img/icon/false.png" class="h-5 mr-1">
             <p class="text-red-800 sm:text-base text-sm">Email tidak terdaftar. Mohon periksa kembali.</p>
         </div>

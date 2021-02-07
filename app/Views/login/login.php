@@ -1,4 +1,4 @@
-<?= $this->extend('Login/templateLogin.php'); ?>
+<?= $this->extend('login/templateLogin.php'); ?>
 
 <?= $this->section('content'); ?>
 
@@ -35,7 +35,7 @@
                         <input type="checkbox" class="cursor-pointer">
                         <label for="check" id="remember" class="text-sm cursor-pointer hover:text-blue-600 text-primary font-medium">Ingat saya</label>
                     </div>
-                    <a href="/home/resetpass" class="text-sm cursor-pointer text-secondary font-medium hover:text-yellow-700">Lupa kata sandi?</a>
+                    <a href="<?= route_to('forgot') ?>" class="text-sm cursor-pointer text-secondary font-medium hover:text-yellow-700">Lupa kata sandi?</a>
                 </div>
             </div>
 

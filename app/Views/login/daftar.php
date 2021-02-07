@@ -1,4 +1,4 @@
-<?= $this->extend('Login/templateLogin.php'); ?>
+<?= $this->extend('login/templateLogin.php'); ?>
 
 <?= $this->section('content'); ?>
 
