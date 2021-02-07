@@ -1,0 +1,88 @@
+{
+    "nim" : "2218",
+    "angkatan" : 60,
+    "jenis_kelamin": "l",
+    "tempat_lahir":"asdasdasd",
+    "tanggal_lahir": 2323123,
+    "telp_alumni":"08982938",
+    "alamat":"asdasdasd",
+    "status_bekerja":1,
+    "perkiraan_pensiun":2034,
+    "jabatan_terakhir":"Dosen",
+    "aktif_pns":1,
+    "nip": "23819283",
+    "email":"jaksjdhk@jhsjfd",
+    "pendidikan": [
+        {
+            "jenjang":"ff",
+            "universitas":"asdkjhjkhkvjcv",
+            "program_studi":"asdjkhkjhkjhjhckvc",
+            "tahun_lulus":2302,
+            "tahun_masuk":1213,
+            "judul_tulisan":"asjdkhkjhkjvcv"
+        },
+
+        {
+            "jenjang":"ff",
+            "universitas":"asdkjhjkhkvjcv",
+            "program_studi":"asdjkhkjhkjhjhckvc",
+            "tahun_lulus":2302,
+            "tahun_masuk":1213,
+            "judul_tulisan":"asjdkhkjhkjvcv"
+        }
+    ],
+
+    "prestasi":[
+        {
+            "nama_prestasi":"nama_prestasi1",
+            "tahun_prestasi":23123
+        },
+        {
+            "nama_prestasi":"nama_prestasi2",
+            "tahun_prestasi":3434
+        }
+    ],
+    "publikasi":[
+        {
+            "author":[
+                "author1",
+                "author2",
+                "author3"
+            ],
+            "topik":"asdjhkjhakjsd",
+            "judul":"aksjdhkjhkasd",
+            "deskripsi":"askdkjhkjhkxjcv",
+            "publisher":"ajshdkjhkjhuqiwehiu",
+            "tanggal_disahkan":2015
+        },
+        {
+            "author":[
+                "author4",
+                "author5",
+                "author6"
+            ],
+            "topik":"asdjhkjhakjsd",
+            "judul":"aksjdhkjhkasd",
+            "deskripsi":"askdkjhkjhkxjcv",
+            "publisher":"ajshdkjhkjhuqiwehiu",
+            "tanggal_disahkan":2013
+        }
+    ],
+    "tempat_kerja":[
+        {
+            "nama_instansi": "asdkjhkjhkjqwe",
+            "alamat_instansi": "asjdkajhkj",
+            "telp_instansi" : "09820938",
+            "faks_instansi": "9093804",
+            "email_instansi":"aksjdkjhkjas"
+        },
+        {
+            "nama_instansi": "aasdhkjqwe",
+            "alamat_instansi": "sd",
+            "telp_instansi" : "09820938",
+            "faks_instansi": "9093804",
+            "email_instansi":"aksjdkjhkjas"
+        }
+    ]
+
+}
