@@ -43,7 +43,32 @@ class AlumniModel extends Model
         if(empty($nim)){
             return null;
         }
-        // Buat model data alumni lengkap dibawah ini
-
+        $data = $this->table('alumni')->getWhere(['nim' => $nim]);
+        $data['pendidikan']=$this->getAlumniPendidikan($nim);
+        $data['prestasi']=$this->getAlumniPrestasi($nim);
+        $data['publikasi']=$this->getAlumniPublikasi($nim);
+        return $data;
     }
+
+
+    public function getAlumniPendidikan($nim){
+        // Mendapatkan daftar pendidikan dari alumni
+        return $this->table('pendidikan')->getWhere(['nim' => $nim]);
+    }
+
+    public function getAlumniPrestasi($nim){
+        return $this->table('prestasi')->getWhere(['nim' => $nim]);
+    }
+
+    public function getAlumniPublikasi($nim){
+        $arrpub = $this->table('alumni_publikasi')->getWhere(['nim' => $nim]);
+        $r = [];
+        foreach($arrpub as $p){
+            $r[] = $p['id_publikasi'];
+        }
+        return $this->table('alumni_publikasi')->whereIn('id_publikasi',$r);
+    }
+
+
+    
 }
