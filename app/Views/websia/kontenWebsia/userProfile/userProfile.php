@@ -6,47 +6,47 @@ if ($status == 'bukan user') {
     $tombolEdit = 'hidden';
 
     // berfungsi, tapi butuh tempat tersendiri biar bisa di hidden, sekarang masih gabung sama tempat lahir
-    if ($checked->ttl == 1) {
+    if ($alumni->cttl == 1) {
         $cttl = "";
     } else {
         $cttl = "hidden";
     }
-    if ($checked->email == 1) {
+    if ($alumni->cemail == 1) {
         $cemail = "";
     } else {
         $cemail = "hidden";
     }
-    if ($checked->alamat == 1) {
+    if ($alumni->calamat == 1) {
         $calamat = "";
     } else {
         $calamat = "hidden";
     }
-    if ($checked->jabatan_terakhir == 1) {
+    if ($alumni->cjabatan_terakhir == 1) {
         $cjab = "";
     } else {
         $cjab = "hidden";
     }
-    if ($checked->ig == 1) {
+    if ($alumni->cig == 1) {
         $cig = "";
     } else {
         $cig = "hidden";
     }
-    if ($checked->twitter == 1) {
+    if ($alumni->ctwitter == 1) {
         $ctw = "";
     } else {
         $ctw = "hidden";
     }
-    if ($checked->fb == 1) {
+    if ($alumni->cfb == 1) {
         $cfb = "";
     } else {
         $cfb = "hidden";
     }
-    if ($checked->pendidikan == 1) {
+    if ($alumni->cpendidikan == 1) {
         $cpendidikan = "1";
     } else {
         $cpendidikan = "0";
     }
-    if ($checked->prestasi == 1) {
+    if ($alumni->cprestasi == 1) {
         $cprestasi = "1";
     } else {
         $cprestasi = "0";
@@ -148,10 +148,10 @@ if ($status == 'bukan user') {
             <?php endif ?>
             <!-- Awal media sosial dan telepon -->
             <?php
-            if ($email == "") {
-                $email = "belum terisi";
+            if ($alumni->email == "") {
+                $alumni->email = "belum terisi";
             } else {
-                $email = $email;
+                $alumni->email = $alumni->email;
             }
             if ($alumni->fb == "") {
                 $fb = "belum terisi";
@@ -176,7 +176,7 @@ if ($status == 'bukan user') {
                         <?php if ($cemail == "") : ?>
                             <div <?= $cemail ?> class="inline-block mb-2 flex flex-row">
                                 <img src="/img/icon/message.png" alt="" class="float-left w-5">
-                                <span class="font-heading text-xs text-primary text-center ml-1 md:ml-2"><?= $email ?></span>
+                                <span class="font-heading text-xs text-primary text-center ml-1 md:ml-2"><?= $alumni->email ?></span>
                             </div>
                         <?php endif ?>
                         <!-- Facebook -->
