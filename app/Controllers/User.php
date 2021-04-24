@@ -139,37 +139,37 @@ class User extends BaseController
 		// dd($query3);
 		//isi :
 		// array :
-			// 'name'
+		// 'name'
 
-		$query4 = $model->getIdAlumniByAngkatan($model->getAngkatanByIdAlumni(session('id_alumni')),session('id_alumni'))->getResult();
+		$query4 = $model->getIdAlumniByAngkatan($model->getAngkatanByIdAlumni(session('id_alumni')), session('id_alumni'))->getResult();
 		// dd($query4);
 		//isi :
 		// array :
-			// 'angkatan'
-			// 'id_alumni'
+		// 'angkatan'
+		// 'id_alumni'
 
 		$query5 = $model->getPrestasiByIdAlumni(session('id_alumni'))->getResult();
 		// dd($query5);
 		//isi :
 		// array :
-			// 'id_prestasi'
-			// 'nama_prestasi'
-			// 'tahun_prestasi'
-			// 'id_alumni'
+		// 'id_prestasi'
+		// 'nama_prestasi'
+		// 'tahun_prestasi'
+		// 'id_alumni'
 
 		$query6 = $model->getPendidikanByIdAlumni(session('id_alumni'))->getResult();
 		// dd($query6);
 		//isi :
 		// array :
-			// 'id_pendidikan'
-			// 'jenjang'
-			// 'instansi'
-			// 'tahun_lulus'
-			// 'tahun_masuk'
-			// 'id_alumni'
-			// 'program_studi'
-			// 'nim'
-			// 'judul_tulisan'
+		// 'id_pendidikan'
+		// 'jenjang'
+		// 'instansi'
+		// 'tahun_lulus'
+		// 'tahun_masuk'
+		// 'id_alumni'
+		// 'program_studi'
+		// 'nim'
+		// 'judul_tulisan'
 
 		$query7 = $model->getUsersById(session('id_user'))->getRow();
 		// dd($query7);
@@ -848,5 +848,14 @@ class User extends BaseController
 		$data['login'] = 'sudah';
 
 		return view('websia/kontenWebsia/galeri/galeriWisuda', $data);
+	}
+
+	public function berita()
+	{
+		$data['judulHalaman'] = 'Berita';
+		$data['active'] = 'berita';
+		$data['login'] = 'sudah';
+
+		return view('websia/kontenWebsia/beritaArtikel/berandaBerita', $data);
 	}
 }

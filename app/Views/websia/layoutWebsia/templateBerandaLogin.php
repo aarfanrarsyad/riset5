@@ -77,6 +77,11 @@
                                     <a href="/User/galeriWisuda" class="bg-primaryDark hover:bg-primary text-white hover:text-secondary text-left w-full px-2 transition duration-300"> Galeri Video Wisuda AIS/STIS/Polstat STIS </a>
                                 </div>
                             </div>
+                            <a href="/User/berita">
+                                <div class="nav-menu transition-colors duration-300 <?= ($active == 'berita') ? 'active' : ''; ?>">
+                                    BERITA
+                                </div>
+                            </a>
                             <!-- Navbar admin -->
                             <?php if (in_array("1", session('role'))) : ?>
                                 <a href="/admin">
