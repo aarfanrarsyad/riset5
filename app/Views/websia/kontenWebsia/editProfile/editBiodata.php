@@ -31,12 +31,12 @@ if ($checked->alamat == 0) {
 } else {
     $calamat = "checked";
 }
-if ($checked->jabatan == 0) {
+if ($checked->jabatan_terakhir == 0) {
     $cjab = "";
 } else {
     $cjab = "checked";
 }
-if ($checked->instagram == 0) {
+if ($checked->ig == 0) {
     $cig = "";
 } else {
     $cig = "checked";
@@ -46,7 +46,7 @@ if ($checked->twitter == 0) {
 } else {
     $ctw = "checked";
 }
-if ($checked->facebook == 0) {
+if ($checked->fb == 0) {
     $cfb = "";
 } else {
     $cfb = "checked";
@@ -99,17 +99,17 @@ if ($checked->facebook == 0) {
                     </div>
                 </div>
                 <div class="text-black font-heading font-normal mb-2"><?= $alumni->nama ?></div>
-                <div class="grid grid-cols-2 gap-x-4">
+                <!-- <div class="grid grid-cols-2 gap-x-4">
                     <div>
                         <div class="font-medium">NIM:</div>
-                        <div class="text-black font-heading font-normal mb-2"><?= $alumni->nim ?></div>
+                        <div class="text-black font-heading font-normal mb-2">?= $alumni->nim ?></div>
                     </div>
                     <div>
                         <div class="font-medium">Angkatan:</div>
-                        <div class="text-black font-heading font-normal mb-2"><?= $alumni->angkatan ?></div>
+                        <div class="text-black font-heading font-normal mb-2">?= $alumni->angkatan ?></div>
                     </div>
                 </div>
-                <div class="mb-2">
+                <div class="mb-2"> -->
                     <div class="flex justify-between items-center">
                         <div class="font-medium" id="labelJenisKelamin">Jenis Kelamin:</div>
                     </div>

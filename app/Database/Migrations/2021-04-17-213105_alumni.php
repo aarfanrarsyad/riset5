@@ -12,8 +12,10 @@ class Alumni extends Migration
 		// tabel alumni
 		$this->forge->addField([
 			'id_alumni' => [
-				'type' => 'VARCHAR',
-				'constraint' => '7',
+				'type' => 'INT',
+				'constraint' => 6,
+				'unsigned' => true,
+				'auto_increment' => true,
 			],
 			'nama' => [
 				'type' => 'VARCHAR',
@@ -77,6 +79,10 @@ class Alumni extends Migration
 				'constraint' => '300',
 				'null' => true,
 			],
+			'email' =>[
+				'type' => 'VARCHAR',
+				'constraint' => '50',
+			],
 			'ig' => [
 				'type' => 'VARCHAR',
 				'constraint' => '50',
@@ -107,10 +113,41 @@ class Alumni extends Migration
 				'constraint' => '255',
 				'default' => 'default.svg',
 			],
-			'idAkses'	=> [
-				'type' => 'INT',
-				'constraint' => 16,
-				'unsigned'	=> true,
+			'cttl' => [
+				'type' => 'BOOLEAN',
+				'default' => '0',
+			],
+			'cemail' => [
+				'type' => 'BOOLEAN',
+				'default' => '0',
+			],
+			'calamat' => [
+				'type' => 'BOOLEAN',
+				'default' => '0',
+			],
+			'cjabatan_terakhir' => [
+				'type' => 'BOOLEAN',
+				'default' => '0',
+			],
+			'cig' => [
+				'type' => 'BOOLEAN',
+				'default' => '0',
+			],
+			'ctwitter' => [
+				'type' => 'BOOLEAN',
+				'default' => '0',
+			],
+			'cfb' => [
+				'type' => 'BOOLEAN',
+				'default' => '0',
+			],
+			'cpendidikan' => [
+				'type' => 'BOOLEAN',
+				'default' => '0',
+			],
+			'cprestasi' => [
+				'type' => 'BOOLEAN',
+				'default' => '0',
 			],
 		]);
 
@@ -176,7 +213,10 @@ class Alumni extends Migration
 		// tabel alumni_tempat_kerja
 		$this->forge->addField([
 			'id_alumni' => [
-				'type' => 'VARCHAR',
+				'type' => 'INT',
+				'constraint' => 6,
+				'unsigned' => true,
+				
 				'constraint' => '7',
 			],
 			'id_tempat_kerja' => [
@@ -203,7 +243,10 @@ class Alumni extends Migration
 				'constraint' => '4',
 			],
 			'id_alumni' => [
-				'type' => 'VARCHAR',
+				'type' => 'INT',
+				'constraint' => 6,
+				'unsigned' => true,
+				
 				'constraint' => '7',
 			],
 		]);
@@ -233,7 +276,10 @@ class Alumni extends Migration
 				'type' => 'YEAR',
 			],
 			'id_alumni' => [
-				'type' => 'VARCHAR',
+				'type' => 'INT',
+				'constraint' => 6,
+				'unsigned' => true,
+				
 				'constraint' => '12',
 			],
 		]);
@@ -244,78 +290,6 @@ class Alumni extends Migration
 		$this->forge->addForeignKey('id_alumni', 'alumni', 'id_alumni', 'CASCADE', 'CASCADE');
 		// create table
 		$this->forge->createTable('prestasi');
-
-		//==================================================================
-		// tabel email
-		$this->forge->addField([
-			'email_alumni' => [
-				'type' => 'VARCHAR',
-				'constraint' => '50',
-			],
-			'id_alumni' => [
-				'type' => 'VARCHAR',
-				'constraint' => '7',
-			],
-		]);
-
-		//primary key
-		$this->forge->addKey('email_alumni', TRUE);
-		//foreign key
-		$this->forge->addForeignKey('id_alumni', 'alumni', 'id_alumni', 'CASCADE', 'CASCADE');
-		// create table
-		$this->forge->createTable('email');
-
-		//================================================================== 
-		// tabel akses
-		$this->forge->addField([
-			'id_alumni' => [
-				'type' => 'VARCHAR',
-				'constraint' => '7',
-			],
-			'ttl' => [
-				'type' => 'BOOLEAN',
-				'default' => '0',
-			],
-			'email' => [
-				'type' => 'BOOLEAN',
-				'default' => '0',
-			],
-			'alamat' => [
-				'type' => 'BOOLEAN',
-				'default' => '0',
-			],
-			'jabatan_terakhir' => [
-				'type' => 'BOOLEAN',
-				'default' => '0',
-			],
-			'ig' => [
-				'type' => 'BOOLEAN',
-				'default' => '0',
-			],
-			'twitter' => [
-				'type' => 'BOOLEAN',
-				'default' => '0',
-			],
-			'fb' => [
-				'type' => 'BOOLEAN',
-				'default' => '0',
-			],
-			'pendidikan' => [
-				'type' => 'BOOLEAN',
-				'default' => '0',
-			],
-			'prestasi' => [
-				'type' => 'BOOLEAN',
-				'default' => '0',
-			],
-		]);
-
-		//primary key
-		$this->forge->addKey('id_alumni', TRUE);
-		//foreign key
-		$this->forge->addForeignKey('id_alumni', 'alumni', 'id_alumni', 'CASCADE', 'CASCADE');
-		//create table
-		$this->forge->createTable('akses');
 
 		//================================================================== 
 		// tabel pendidikan
@@ -341,7 +315,10 @@ class Alumni extends Migration
 				'type' => 'YEAR',
 			],
 			'id_alumni' => [
-				'type' => 'VARCHAR',
+				'type' => 'INT',
+				'constraint' => 6,
+				'unsigned' => true,
+				
 				'constraint' => '7',
 			],
 		]);
@@ -392,7 +369,10 @@ class Alumni extends Migration
 				'null'			 => true,
 			],
 			'id_alumni' => [
-				'type' => 'VARCHAR',
+				'type' => 'INT',
+				'constraint' => 6,
+				'unsigned' => true,
+				
 				'constraint' => '7',
 			],
 		]);
@@ -435,7 +415,10 @@ class Alumni extends Migration
 				'default' => 0,
 			],
 			'id_alumni' => [
-				'type' => 'VARCHAR',
+				'type' => 'INT',
+				'constraint' => 6,
+				'unsigned' => true,
+				
 				'constraint' => '7',
 			],
 		]);
@@ -484,7 +467,10 @@ class Alumni extends Migration
 				'constraint'     => 300,
 			],
 			'id_alumni' => [
-				'type' => 'VARCHAR',
+				'type' => 'INT',
+				'constraint' => 6,
+				'unsigned' => true,
+				
 				'constraint' => '7',
 			],
 			'id_foto' => [
@@ -527,7 +513,10 @@ class Alumni extends Migration
 				'default'	=> 0,
 			],
 			'id_alumni' => [
-				'type' => 'VARCHAR',
+				'type' => 'INT',
+				'constraint' => 6,
+				'unsigned' => true,
+				
 				'constraint' => '7',
 			],
 		]);
