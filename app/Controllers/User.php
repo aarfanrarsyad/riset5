@@ -228,24 +228,6 @@ class User extends BaseController
 		return view('websia/kontenWebsia/userProfile/userProfile', $data);
 	}
 
-	public function rekomendasi()
-	{
-		$model = new AlumniModel();
-
-		$query = $model->getAlumniByAngkatan($model->bukaProfile(session('nim'))->getRow()->angkatan);
-		// dd($query->orderBy('nama', $direction = 'asc')->get()->getResult());
-
-		$data = [
-			'judulHalaman'  => 'Rekomendasi',
-			'active' 		=> 'rekomendasi',
-			'jumlah'        => $query->countAllResults(false),
-			'alumni'          => $query->orderBy('nama', $direction = 'asc')->paginate(16),
-			'pager'		=> $query->orderBy('nama', $direction = 'asc')->pager
-		];
-
-		return view('websia/kontenWebsia/userProfile/rekomendasi', $data);
-	}
-
 	public function profilAlumni()
 	{
 		$model = new AlumniModel();
@@ -387,13 +369,29 @@ class User extends BaseController
 		return view('websia/kontenWebsia/userProfile/userProfile', $data);
 	}
 
+	public function rekomendasi()
+	{
+		$model = new AlumniModel();
+
+		$query = $model->getAlumniByAngkatan($model->bukaProfile(session('nim'))->getRow()->angkatan);
+		// dd($query->orderBy('nama', $direction = 'asc')->get()->getResult());
+
+		$data = [
+			'judulHalaman'  => 'Rekomendasi',
+			'active' 		=> 'rekomendasi',
+			'jumlah'        => $query->countAllResults(false),
+			'alumni'          => $query->orderBy('nama', $direction = 'asc')->paginate(16),
+			'pager'		=> $query->orderBy('nama', $direction = 'asc')->pager
+		];
+
+		return view('websia/kontenWebsia/userProfile/rekomendasi', $data);
+	}
+
 	public function editProfil()
 	{
 
 		$model = new AlumniModel();
-		$query = $model->bukaProfile(session('nim'));
-		$sql = "SELECT * FROM tampilan where nim = " . session('nim');
-		$tampilan = $model->query($sql);
+		$query = $model->bukaProfile(session('id_alumni'));
 
 		$sqlcek = "SELECT password_hash from users where id = " . session('id_user');
 		$cekLM = $model->query($sqlcek);
@@ -412,17 +410,15 @@ class User extends BaseController
 			'activeEditProfil' => 'biodata',
 			'active' 		=> 'profil',
 			'alumni'      => $query->getRow(),
-			'checked'	=> $tampilan->getRow(),
 		];
 		return view('websia/kontenWebsia/editProfile/editBiodata.php', $data);
 	}
 
-	// FUNGSINYA BELUM BISA DIEKSEKUSI```````````````````````````````````````````````````````
 	public function updateFotoProfil()
 	{
 
 		$model = new AlumniModel();
-		$query1 = $model->bukaProfile(session('nim'))->getRow();
+		$query1 = $model->bukaProfile(session('id_alumni'))->getRow();
 		$foto = $query1->foto_profil;
 
 		$validated = $this->validate([
@@ -436,17 +432,26 @@ class User extends BaseController
 		} else {
 			$avatar = $this->request->getFile('file_upload');
 			$avatar->move(ROOTPATH . '/public/img/user/userid_' . session('id_user'));
+
 			if ($foto != 'default.svg') {
 				$url = ROOTPATH . '/public/img/' . $foto;
 				if (is_file($url))
 					unlink($url);
 			}
+			
+			$image = \Config\Services::image()
+				->withFile(ROOTPATH . '/public/img/user/userid_' . session('id_user').'/' .$avatar->getName())
+				->fit(350, 350, 'center')
+				->convert(IMAGETYPE_JPEG)
+				->save(ROOTPATH . '/public/img/user/userid_' . session('id_user').'/foto_profil.jpeg', 70);
+			
+			unlink(ROOTPATH . '/public/img/user/userid_' . session('id_user').'/' .$avatar->getName());
 
 			$data = [
-				'foto_profil' => 'user/userid_' . session('id_user') . '/' . htmlspecialchars($avatar->getName())
+				'foto_profil' => 'user/userid_' . session('id_user') . '/foto_profil.jpeg'
 			];
 
-			$model->db->table('alumni')->set($data)->where('nim', session('nim'))->update();
+			$model->db->table('alumni')->set($data)->where('id_alumni', session('id_alumni'))->update();
 			session()->setFlashdata('edit-foto-success', 'Foto Profil Berhasil Diubah');
 			return redirect()->to(base_url('User/editProfil'));
 		}
@@ -456,7 +461,7 @@ class User extends BaseController
 	{
 
 		$model = new AlumniModel();
-		$query1 = $model->bukaProfile(session('nim'))->getRow();
+		$query1 = $model->bukaProfile(session('id_alumni'))->getRow();
 		$foto = $query1->foto_profil;
 
 		if ($foto != 'default.svg') {
@@ -470,7 +475,7 @@ class User extends BaseController
 		];
 
 
-		$model->db->table('alumni')->set($data)->where('nim', session('nim'))->update();
+		$model->db->table('alumni')->set($data)->where('id_alumni', session('id_alumni'))->update();
 		session()->setFlashdata('hapus-foto', 'Foto berhasil dihapus');
 		return redirect()->to(base_url('User/editProfil'));
 	}
@@ -482,32 +487,22 @@ class User extends BaseController
 		$telp_alumni   	= htmlspecialchars($_POST['telp_alumni']);
 		$email			= htmlspecialchars($_POST['email']);
 		$alamat       	= htmlspecialchars($_POST['alamat']);
+		$alamat       	= htmlspecialchars($_POST['negara']);
+		$alamat       	= htmlspecialchars($_POST['provinsi']);
+		$alamat       	= htmlspecialchars($_POST['kabkota']);
 		$ig				= htmlspecialchars($_POST['ig']);
 		$fb				= htmlspecialchars($_POST['fb']);
 		$twitter		= htmlspecialchars($_POST['twitter']);
-		$biografi		= htmlspecialchars($_POST['biografi']);
-		$cjk = 0;
-		$cteml = 0;
-		$ctl = 0;
-		$cnt = 0;
+		$deskripsi		= htmlspecialchars($_POST['biografi']);
+		$cttl = 0;
 		$cemail = 0;
 		$calamat = 0;
 		$cjab = 0;
 		$cig = 0;
 		$ctw = 0;
 		$cfb = 0;
-
-		if (isset($_POST['checkJenisKelamin'])) {
-			$cjk = 1;
-		}
-		if (isset($_POST['checkTempatLahir'])) {
-			$cteml = 1;
-		}
 		if (isset($_POST['checkTanggalLahir'])) {
-			$ctl = 1;
-		}
-		if (isset($_POST['checkTelepon'])) {
-			$cnt = 1;
+			$cttl = 1;
 		}
 		if (isset($_POST['checkEmail'])) {
 			$cemail = 1;
@@ -529,42 +524,35 @@ class User extends BaseController
 		}
 
 		$data = [
-			'nim'		=> session('nim'),
+			'id_alumni'		=> session('id_alumni'),
 			'telp_alumni'    => $telp_alumni,
 			'email'			=> $email,
-			'alamat'        => $alamat,
+			'alamat_alumni'        => $alamat,
 			'ig'			=> $ig,
 			'fb'			=> $fb,
 			'twitter'		=> $twitter,
-			'biografi'		=> $biografi,
-		];
-
-		$data2 = [
-			'jenis_kelamin' => $cjk,
-			'tempat_lahir' => $cteml,
-			'tanggal_lahir' => $ctl,
-			'no_telp' => $cnt,
-			'email' => $cemail,
-			'alamat' => $calamat,
-			'jabatan' => $cjab,
-			'instagram' => $cig,
-			'twitter' => $ctw,
-			'facebook' => $cfb,
+			'deskripsi'		=> $deskripsi,
+			'cttl' => $cttl,
+			'cemail' => $cemail,
+			'calamat' => $calamat,
+			'cjabatan_terakhir' => $cjab,
+			'cig' => $cig,
+			'ctwitter' => $ctw,
+			'cfb' => $cfb,
 		];
 
 		// dd($this->form_validation->run($data, 'editProfil'));
 
 		if ($this->form_validation->run($data, 'editProfil') === FALSE) {
+			// dd($this->form_validation->getError('email'));
 			session()->setFlashdata('edit-bio-fail', 'Biodata gagal Disimpan');
 			session()->setFlashdata('inputs', $this->request->getPost());
-			session()->setFlashdata('errors', $this->form_validation->getErrors());
 			session()->setFlashdata('error-email', $this->form_validation->getError('email'));
 			session()->setFlashdata('error-telp_alumni', $this->form_validation->getError('telp_alumni'));
 			// dd(session('errors'));
 			return redirect()->to(base_url('User/editProfil'));
 		} else {
-			$model->db->table('alumni')->set($data)->where('nim', session('nim'))->update();
-			$model->db->table('tampilan')->set($data2)->where('nim', session('nim'))->update();
+			$model->db->table('alumni')->set($data)->where('id_alumni', session('id_alumni'))->update();
 			session()->setFlashdata('edit-bio-success', 'Biodata Berhasil Disimpan');
 			return redirect()->to(base_url('User/editProfil'));
 		}
