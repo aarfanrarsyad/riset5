@@ -92,7 +92,7 @@ class Validation
 			'rules' =>'required|numeric|min_length[9]',
 		],
 		'email'			=> [
-			'rules' =>'valid_email|is_unique[alumni.email,nim,{nim}]',
+			'rules' =>'valid_email|is_unique[alumni.email,id_alumni,{id_alumni}]',
 		],
 	];
 
@@ -103,7 +103,7 @@ class Validation
 			'min_length'=> 'minimal memiliki panjang 9 angka',
 		],
 		'email'			=> [
-			'rules' =>'valid_email|is_unique[alumni.email,nim,{nim}]',
+			'rules' =>'valid_email|is_unique[alumni.email,id_alumni,{id_alumni}]',
 			'required'	=> 'kolom email harus diisi',
 			'valid_email'	=> 'harus memiliki format email',
 			'is_unique'	=> 'alamat email telah digunakan alumni lain',
