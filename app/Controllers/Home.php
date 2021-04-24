@@ -108,6 +108,7 @@ class Home extends BaseController
 										'jabatan_terakhir'   => $faker->jobTitle,
 										'aktif_pns'          => $faker->boolean,
 										'deskripsi'          => $faker->text,
+										'email'				 => $user->getEmail(),
 										// 'ig'          		 => "",
 										// 'fb'          		 => "",
 										// 'twitter'          	 => "Dummy__",
@@ -140,17 +141,6 @@ class Home extends BaseController
 										'id_alumni' 	=> $data['id_alumni'],
 									];
 									$this->modelAlumni->db->table('angkatan_alumni')->insert($data);
-
-									$data = [
-										'email_alumni'  => $user->getEmail(),
-										'id_alumni' 	=> $data['id_alumni'],
-									];
-									$this->modelAlumni->db->table('email')->insert($data);
-
-									$data = [
-										'id_alumni' 	=> $data['id_alumni'],
-									];
-									$this->modelAlumni->db->table('akses')->insert($data);
 
 									// $data = [
 									// 	'id_alumni'          => $user->getNip(),
@@ -344,6 +334,7 @@ class Home extends BaseController
 							'jabatan_terakhir'   => $faker->jobTitle,
 							'aktif_pns'          => $faker->boolean,
 							'deskripsi'          => $faker->text,
+							'email'				 => $user['nim'] . "@stis.ac.id",
 							// 'ig'          		 => "",
 							// 'fb'          		 => "",
 							// 'twitter'          	 => "Dummy__",
@@ -376,17 +367,6 @@ class Home extends BaseController
 							'id_alumni' 	=> $data['id_alumni'],
 						];
 						$this->modelAlumni->db->table('angkatan_alumni')->insert($data);
-
-						$data = [
-							'email_alumni'  => $user['nim'] . "@stis.ac.id",
-							'id_alumni' 	=> $data['id_alumni'],
-						];
-						$this->modelAlumni->db->table('email')->insert($data);
-
-						$data = [
-							'id_alumni' 	=> $data['id_alumni'],
-						];
-						$this->modelAlumni->db->table('akses')->insert($data);
 
 						// $data = [
 						// 	'nim'                => $user['nim'],

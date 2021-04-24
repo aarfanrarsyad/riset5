@@ -26,6 +26,7 @@ class Alumni extends Seeder
 			'jabatan_terakhir'   => $faker->jobTitle,
 			'aktif_pns'          => $faker->boolean,
 			'deskripsi'          => $faker->text,
+			'email'				 => $faker->email,
 			'ig'          		 => "dummy_igza__",
 			'fb'          		 => "Dummy",
 			'twitter'          	 => "Dummy__",
@@ -60,14 +61,9 @@ class Alumni extends Seeder
 		$this->db->table('angkatan_alumni')->insert($data);
 
 		$data = [
-			'email_alumni'  => "dummy@stis.ac.id",
+			'angkatan'     	=> 52,
 			'id_alumni' 	=> "0110160",
 		];
-		$this->db->table('email')->insert($data);
-
-		$data = [
-			'id_alumni' 	=> "0110160",
-		];
-		$this->db->table('akses')->insert($data);
+		$this->db->table('angkatan_alumni')->insert($data);
 	}
 }
