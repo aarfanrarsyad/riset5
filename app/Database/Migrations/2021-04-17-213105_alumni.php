@@ -14,7 +14,6 @@ class Alumni extends Migration
 			'id_alumni' => [
 				'type' => 'INT',
 				'constraint' => 6,
-				'unsigned' => true,
 				'auto_increment' => true,
 			],
 			'nama' => [
@@ -215,7 +214,6 @@ class Alumni extends Migration
 			'id_alumni' => [
 				'type' => 'INT',
 				'constraint' => 6,
-				'unsigned' => true,
 				
 				'constraint' => '7',
 			],
@@ -245,7 +243,6 @@ class Alumni extends Migration
 			'id_alumni' => [
 				'type' => 'INT',
 				'constraint' => 6,
-				'unsigned' => true,
 				
 				'constraint' => '7',
 			],
@@ -278,7 +275,6 @@ class Alumni extends Migration
 			'id_alumni' => [
 				'type' => 'INT',
 				'constraint' => 6,
-				'unsigned' => true,
 				
 				'constraint' => '12',
 			],
@@ -317,7 +313,6 @@ class Alumni extends Migration
 			'id_alumni' => [
 				'type' => 'INT',
 				'constraint' => 6,
-				'unsigned' => true,
 				
 				'constraint' => '7',
 			],
@@ -371,7 +366,6 @@ class Alumni extends Migration
 			'id_alumni' => [
 				'type' => 'INT',
 				'constraint' => 6,
-				'unsigned' => true,
 				
 				'constraint' => '7',
 			],
@@ -417,7 +411,6 @@ class Alumni extends Migration
 			'id_alumni' => [
 				'type' => 'INT',
 				'constraint' => 6,
-				'unsigned' => true,
 				
 				'constraint' => '7',
 			],
@@ -469,7 +462,6 @@ class Alumni extends Migration
 			'id_alumni' => [
 				'type' => 'INT',
 				'constraint' => 6,
-				'unsigned' => true,
 				
 				'constraint' => '7',
 			],
@@ -515,7 +507,6 @@ class Alumni extends Migration
 			'id_alumni' => [
 				'type' => 'INT',
 				'constraint' => 6,
-				'unsigned' => true,
 				
 				'constraint' => '7',
 			],
