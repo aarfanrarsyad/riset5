@@ -5,12 +5,12 @@
 <div class="xl:w-7/12 md:w-10/12 flex items-center">
     <form method="POST" action="" class="rounded-3xl shadow-2xl xl:px-16 md:px-8 px-4 sm:mx-0 mx-4 w-full" data-aos="zoom-in">
         <h2 class="sm:text-2xl text-lg mb-3 font-bold text-center pt-8 text-primary">ATUR ULANG KATA SANDI</h2>
-        <div class="pl-3 rounded-full flex items-center" style="background-color: #B1FF66;">
-            <img src="/img/icon/check.png" class="h-5 mr-1">
+        <div class="pl-3 rounded-full flex items-center <?php if (!session('errors.email')) : ?>hidden<?php endif; ?>" style="background-color: #B1FF66;">
+            <img src="/img/components/icon/check.png" class="h-5 mr-1" alt="icon check">
             <p class="sm:text-base text-sm" style="color: #54AC00;">Kata sandi baru telah dikirim.</p>
         </div>
-        <div class="pl-3 bg-red-400 rounded-full flex items-center">
-            <img src="/img/icon/false.png" class="h-5 mr-1">
+        <div class="pl-3 bg-red-400 rounded-full flex items-center <?php if (!session('errors.email')) : ?>hidden<?php endif; ?>">
+            <img src="/img/components/icon/false.png" class="h-5 mr-1" alt="icon false">
             <p class="text-red-900 sm:text-base text-sm">Email tidak terdaftar. Mohon periksa kembali.</p>
         </div>
         <p class="text-primary font-medium mb-4 mt-1 xl:text-base sm:text-sm text-xs text-justify">Masukkan email yang terdaftar. Kata sandi baru akan dikirimkan melalui email tersebut.</p>
