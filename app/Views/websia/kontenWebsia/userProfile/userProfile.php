@@ -4,31 +4,12 @@ Hal ini berpengaruh pada ada tidaknya tampilan tombol edit profil di halaman pro
 <?php
 if ($status == 'bukan user') {
     $tombolEdit = 'hidden';
-    // anehh jk gaada tapi ada di tampilan edit profil waodkaodka
-    if ($checked->jenis_kelamin == 1) {
-        $cjk = "";
-    } else {
-        $cjk = "hidden";
-    }
 
     // berfungsi, tapi butuh tempat tersendiri biar bisa di hidden, sekarang masih gabung sama tempat lahir
-    if ($checked->tanggal_lahir == 1) {
-        $ctl = "";
+    if ($checked->ttl == 1) {
+        $cttl = "";
     } else {
-        $ctl = "hidden";
-    }
-
-    // berfungsi, sama anehnya
-    if ($checked->tempat_lahir == 1) {
-        $cteml = "";
-    } else {
-        $cteml = "hidden";
-    }
-
-    if ($checked->no_telp == 1) {
-        $cnt = "";
-    } else {
-        $cnt = "hidden";
+        $cttl = "hidden";
     }
     if ($checked->email == 1) {
         $cemail = "";
@@ -60,18 +41,27 @@ if ($status == 'bukan user') {
     } else {
         $cfb = "hidden";
     }
+    if ($checked->pendidikan == 1) {
+        $cpendidikan = "1";
+    } else {
+        $cpendidikan = "0";
+    }
+    if ($checked->prestasi == 1) {
+        $cprestasi = "1";
+    } else {
+        $cprestasi = "0";
+    }
 } else if ($status == 'user') {
     $tombolEdit = '';
-    $cjk = "";
-    $ctl = "";
-    $cteml = "";
-    $cnt = "";
+    $cttl = "";
     $cemail = "";
     $calamat = "";
     $cjab = "";
     $cig = "";
     $ctw = "";
     $cfb = "";
+    $cpendidikan = "1";
+    $cprestasi  = "1";
 }
 
 
@@ -113,28 +103,28 @@ if ($status == 'bukan user') {
             </div>
             <!-- tempat dan tanggal lahir -->
             <p class="font-heading text-primary text-center md:text-left text-sm mb-5 md:mb-3 lg:mb-5">
-                <?php if ($cteml == "") : ?>
-                    | <?= $alumni->tempat_lahir ?> |
-                <?php endif ?>
-                <?php if ($ctl == "") : ?>
-                    <?= strftime("%d %B %Y", strtotime($alumni->tanggal_lahir)); ?>
+            <?php if ($cttl == "") : ?>
+                    <?= $alumni->tempat_lahir ?>, <?= strftime("%d %B %Y", strtotime($alumni->tanggal_lahir)); ?>
                 <?php endif ?>
             </p>
             <p class="font-heading text-center md:text-left text-base mb-5 md:mb-3 lg:mb-5">
                 <!-- Angkatan -->
-                Angkatan <span class="text-primary">ke-<?= $alumni->angkatan; ?> </span><br />
+                Angkatan <span class="text-primary">ke-<?= $angkatan; ?> </span><br />
                 <!-- Akademi Ilmu Statistik / STIS/ POLSTAT STIS  ========>  Harusnya diatur di BE -->
                 <?php foreach ($pendidikan as $row) {
-                    echo $row->instansi; ?> <br />
-                <?php } ?>
-                <!-- NIM -->
-                NIM <span class="text-primary"><?= $alumni->nim; ?></span>
+                    if($row->instansi == "Akademi Ilmu Statistik" || $row->instansi == "STIS" || $row->instansi == "POLSTAT STIS" ) {
+                        echo $row->instansi; ?>
+                        <br/>
+                        <!-- NIM -->
+                        NIM <span class="text-primary"><?= $row->nim; ?></span>
+                    <?php }
+                } ?>
             </p>
             <!-- Instansi tempat bekerja dan jabatan -->
             <p class="font-heading text-base text-center md:text-left">
                 Bekerja di <span class="text-primary"> <?= $tempat_kerja->nama_instansi; ?> </span></br>
                 <?php if ($cjab == "") : ?>
-                    Sebagai <span class="text-primary"> <?= $alumni->jabatan_terakhir; ?> </span>
+                    Jabatan terakhir di BPS sebagai <span class="text-primary"> <?= $alumni->jabatan_terakhir; ?> </span>
                 <?php endif ?>
             </p>
         </div>
@@ -143,7 +133,7 @@ if ($status == 'bukan user') {
         <!-- Awal Deskripsi user profile -->
         <div class="md:p-7 md:shadow-lg md:rounded-xl">
             <p class="px-5 md:px-0 mt-8 md:mt-0 font-heading text-primary text-sm italic text-justify mb-4 md:mb-0 text-center md:text-justify lg:text-left">
-                `Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea incidunt quos saepe doloribus esse, fugit ratione culpa reprehenderit eos totam tenetur consectetur. Id, recusandae aspernatur incidunt cum, quo quaerat sequi earum ex doloremque eos ullam`
+                <?= $alumni->deskripsi ?>
             </p>
         </div>
         <!-- Akhir Deskripsi user profile -->
@@ -153,15 +143,15 @@ if ($status == 'bukan user') {
                 <span class="font-heading flex justify-start px-3 md:px-0 text-base text-left mb-5 md:mb-2">
                     <img class="my-2 mt-2 mr-0 md:mr-2 ml-1 md:ml-0 w-6 h-6 md:w-6 float-left" src="/img/icon/maps_flag.png" alt="">
                     <!-- Lokasi tempat tinggal -->
-                    <p class="font-heading my-2 mt-2"> <?= $alumni->alamat ?> </p>
+                    <p class="font-heading my-2 mt-2"> <?= $alumni->alamat_alumni ?> </p>
                 </span>
             <?php endif ?>
             <!-- Awal media sosial dan telepon -->
             <?php
-            if ($alumni->email == "") {
+            if ($email == "") {
                 $email = "belum terisi";
             } else {
-                $email = $alumni->email;
+                $email = $email;
             }
             if ($alumni->fb == "") {
                 $fb = "belum terisi";
@@ -180,35 +170,35 @@ if ($status == 'bukan user') {
             }
             ?>
             <div class="md:space-x-4 md:flex md:flex-row items-start justify-center lg:justify-start md:py-2 px-5 md:px-0">
-                <?php if ($cemail == "" && $cfb == "") : ?>
+                <?php if ($cemail == "" || $cfb == "") : ?>
                     <div class="w-full md:w-1/2 mr-10">
                         <!-- Email -->
                         <?php if ($cemail == "") : ?>
-                            <div class="inline-block mb-2 flex flex-row">
+                            <div <?= $cemail ?> class="inline-block mb-2 flex flex-row">
                                 <img src="/img/icon/message.png" alt="" class="float-left w-5">
                                 <span class="font-heading text-xs text-primary text-center ml-1 md:ml-2"><?= $email ?></span>
                             </div>
                         <?php endif ?>
                         <!-- Facebook -->
                         <?php if ($cfb == "") : ?>
-                            <div class="inline-block flex flex-row">
+                            <div <?= $cfb ?> class="inline-block flex flex-row">
                                 <img src="/img/icon/facebook.png" alt="" class="float-left ml-1 w-2 h-4">
                                 <span class="font-heading text-xs text-primary text-left flex items-center ml-3 md:ml-4"><?= $fb ?></span>
                             </div>
                         <?php endif ?>
                     </div>
                 <?php endif ?>
-                <?php if ($cig == "" && $ctw == "") : ?>
+                <?php if ($cig == "" || $ctw == "") : ?>
                     <div class="w-full md:w-1/2 mt-2 md:mt-0">
                         <!-- Twitter -->
-                        <?php if ($cig == "") : ?>
+                        <?php if ($ctw == "") : ?>
                             <div <?= $ctw ?> class="inline-block mb-2 flex flex-row">
                                 <img src="/img/icon/twitter.png" alt="" class="float-left w-4 w-4">
                                 <span class="font-heading text-xs text-primary text-center ml-2 md:ml-3"><?= $twitter ?></span>
                             </div>
                         <?php endif ?>
                         <!-- Instagram -->
-                        <?php if ($ctw == "") : ?>
+                        <?php if ($cig == "") : ?>
                             <div <?= $cig ?> class="inline-block flex flex-row">
                                 <img src="/img/icon/instagram.png" alt="" class="float-left w-4">
                                 <span class="font-heading text-xs text-primary text-center flex items-center ml-2 md:ml-3"><?= $ig ?></span>
@@ -322,22 +312,29 @@ if ($status == 'bukan user') {
 </div>
 <!-- Akhir Informasi Intsansi -->
 
+<?php if ($cprestasi == 1) { ?>
 <!-- Awal Riwayat Prestasi -->
 <div class="w-full my-8 lg:px-20 md:px-8 px-2">
     <h3 class="font-heading font-bold text-xl text-secondary">Riwayat Prestasi</h3>
     <div class="md:shadow-lg lg:shadow-xl rounded-2xl px-0 py-1 md:px-5 md:py-5 lg:mx-14 lg:p-8 mb-1 md:mt-3">
+    <?php if($prestasi == NULL){
+        echo "<p>Riwayat Prestasi tidak ditemukan.</p>";
+    } else { ?>
         <?php foreach ($prestasi as $row) : ?>
             <div class="flex justify-between px-3 font-heading text-primary mt-2 md:mt-2 lg:mt-3">
                 <div class=""><span class="text-black"><?= $row->nama_prestasi; ?></span> </div>
                 <div class="font-bold"><?= $row->tahun_prestasi; ?></div>
             </div>
-        <?php endforeach; ?>
+        <?php endforeach; 
+    } ?>
         <!-- Jika data prestasi belum diinput, ditampilkan "belum ada riwayat prestasi" -->
     </div>
     <hr class="visible sm:invisible border-primary border-opacity-75 w-4/5 object-center mx-auto mt-8">
 </div>
 <!-- Akhir Riwayat Prestasi -->
+<?php } ?>
 
+<?php if ($cpendidikan == 1) { ?>
 <!-- Awal Riwayat Pendidikan -->
 <div class="w-full my-8 lg:px-20 md:px-8 px-2 mb-6 md:mb-12">
     <h3 class="font-heading font-bold text-xl text-secondary">Riwayat Pendidikan</h3>
@@ -356,6 +353,13 @@ if ($status == 'bukan user') {
                         </tr>
                     </thead>
                     <tbody>
+                    <?php if($prestasi == NULL){ ?>
+                     <!-- Tampilan jika data semua kolom belum diisi -->
+
+                        <tr>
+                            <td colspan="6" class="text-sm text-center border-b-2 border-gray-200 px-3 lg:px-5 py-2 md:py-3 lg:py-4">Riwayat pendidikan tidak ditemukan.</td>
+                        </tr>
+                    <?php } else { ?>
                         <?php foreach ($pendidikan as $row) : ?>
                             <?php
                             if ($row->jenjang == "") {
@@ -397,13 +401,8 @@ if ($status == 'bukan user') {
                                 <td class="text-sm text-left border-b-2 border-gray-200 px-3 lg:px-5 py-2 md:py-3 lg:py-4"><?= $tahun_lulus; ?></td>
                                 <td class="text-sm text-left border-b-2 border-gray-200 px-3 lg:px-5 py-2 md:py-3 lg:py-4"><?= $judul_tulisan; ?></td>
                             </tr>
-                        <?php endforeach; ?>
-                        <!-- Tampilan jika data semua kolom belum diisi -->
-
-                        <!-- <tr>
-                            <td colspan="6" class="text-sm text-center border-b-2 border-gray-200 px-3 lg:px-5 py-2 md:py-3 lg:py-4">belum terisi</td>
-                        </tr> -->
-
+                        <?php endforeach; 
+                        }?>
                         <tr>
                             <td class="bg-gray-100 rounded-bl-xl lg:rounded-bl-3xl text-sm text-left px-3 lg:px-5 py-2 md:py-3 lg:py-4"></td>
                             <td class="bg-gray-100 text-sm text-left px-3 lg:px-5 py-2 md:py-3 lg:py-4"></td>
@@ -419,5 +418,6 @@ if ($status == 'bukan user') {
     </div>
 </div>
 <!-- Akhir Riwayat Pendidikan -->
+<?php } ?>
 
 <?= $this->endSection(); ?>

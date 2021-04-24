@@ -89,18 +89,24 @@ class Validation
 
 	public $editProfil = [
 		'telp_alumni'   => [
-			'rules' =>'required|numeric',
-			'errors' => [
-				'required'	   => 'Nomor harus diisi',
-				'numeric'      => 'Hanya berisi angka',
-			]
+			'rules' =>'required|numeric|min_length[9]',
 		],
 		'email'			=> [
 			'rules' =>'valid_email|is_unique[alumni.email,nim,{nim}]',
-			'errors' => [
-				'valid_email' => 'Tidak sesuai format email',
-				'is_unique[alumni.email]' => 'Alamat email sudah digunakan',
-			]
 		],
+	];
+
+	public $editProfil_errors  = [
+		'telp_alumni'   => [
+			'required'	=> 'kolom nomor harus diisi',
+			'numeric'	=> 'kolom harus berisi angka',
+			'min_length'=> 'minimal memiliki panjang 9 angka',
+		],
+		'email'			=> [
+			'rules' =>'valid_email|is_unique[alumni.email,nim,{nim}]',
+			'required'	=> 'kolom email harus diisi',
+			'valid_email'	=> 'harus memiliki format email',
+			'is_unique'	=> 'alamat email telah digunakan alumni lain',
+		]
 	];
 }

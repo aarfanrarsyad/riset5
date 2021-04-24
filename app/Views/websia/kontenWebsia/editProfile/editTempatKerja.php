@@ -2,7 +2,7 @@
 
 <?= $this->section('contentEdit'); ?>
 <div class="shadow-2xl rounded-3xl mb-8">
-    <div class="p-6 font-paragraph text-primary">
+    <div class="p-6 font-paragraph text-primary lg:min-h-screen">
         <!-- start form edit tempat kerja -->
         <!-- kalau nama instansi ada di database -->
         <div>
@@ -51,7 +51,7 @@
                     <label for="email" class="font-medium">Email:</label>
                     <input type="text" name="email_instansi" id="email" class="inputForm" placeholder="Masukkan email instansi">
                 </div>
-                <div class="flex justify-end md:mb-6 mt-16">
+                <div class="flex justify-end md:mb-6 mt-12">
                     <input type="submit" value="SIMPAN" class="w-24 text-center py-1 bg-secondary hover:bg-secondaryhover text-white rounded-full cursor-pointer focus:outline-none" id="tambahTempatKerja">
                 </div>
             </form>
@@ -73,9 +73,9 @@
     </div>
 </div>
 <script>
-    $(document).click(function() {
+    setTimeout(function() {
         $('#berhasilEditInstansi').fadeOut();
-    })
+    }, 1500);
 </script>
 <!-- GAGAL edit instansi -->
 <div id="gagalEditInstansi">
@@ -87,9 +87,9 @@
     </div>
 </div>
 <script>
-    $(document).click(function() {
+    setTimeout(function() {
         $('#gagalEditInstansi').fadeOut();
-    })
+    }, 1500);
 </script>
 <!-- BERHASIL tambah instansi -->
 <div id="berhasilTambahInstansi">
@@ -101,9 +101,9 @@
     </div>
 </div>
 <script>
-    $(document).click(function() {
+    setTimeout(function() {
         $('#berhasilTambahInstansi').fadeOut();
-    })
+    }, 1500);
 </script>
 <!-- GAGAL tambah instansi -->
 <div id="gagalTambahInstansi">
@@ -115,9 +115,9 @@
     </div>
 </div>
 <script>
-    $(document).click(function() {
+    setTimeout(function() {
         $('#gagalTambahInstansi').fadeOut();
-    })
+    }, 1500);
 </script>
 <!-- end dialog box-->
 <?= $this->endSection(); ?>

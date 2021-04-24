@@ -2,7 +2,7 @@
 
 <?= $this->section('contentEdit'); ?>
 <div class="shadow-2xl rounded-3xl mb-8">
-    <div class="p-6 font-paragraph text-primary">
+<div class="p-6 font-paragraph text-primary lg:min-h-screen">
         <!-- start form edit akun -->
         <form action="/User/updateAkun" method="POST" id="formEditAkun">
             <!-- tambahin form actionnya ya -->
@@ -23,7 +23,7 @@
                 <label for="passlama" class="font-medium">Kata Sandi Lama:</label>
                 <input type="password" name="passlama" id="passlama" class="inputForm" placeholder="🞄🞄🞄🞄🞄🞄🞄🞄" required>
             </div>
-            <div class="flex justify-end md:mb-6 mt-12">
+            <div class="flex justify-end md:mb-6 mt-48">
                 <input type="submit" value="SIMPAN" class="w-24 text-center py-1 bg-secondary hover:bg-secondaryhover text-white rounded-full cursor-pointer focus:outline-none" id="submitAkun">
             </div>
         </form>
@@ -44,9 +44,9 @@
     </div>
 </div>
 <script>
-    $(document).click(function() {
+    setTimeout(function() {
         $('#berhasilEditAkun').fadeOut();
-    })
+    }, 1500);
 </script>
 <!-- GAGAL edit akun -->
 <div id="gagalEditAkun">
@@ -58,9 +58,9 @@
     </div>
 </div>
 <script>
-    $(document).click(function() {
+    setTimeout(function() {
         $('#gagalEditAkun').fadeOut();
-    })
+    }, 1500);
 </script>
 <!-- end dialog box -->
 <?= $this->endSection(); ?>

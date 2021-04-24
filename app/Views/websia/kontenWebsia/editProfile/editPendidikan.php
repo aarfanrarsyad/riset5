@@ -1,8 +1,39 @@
+<?php
+if ($checked->pendidikan == 0) {
+    $cpendidikan = "";
+} else {
+    $cpendidikan = "checked";
+}
+?>
 <?= $this->extend('websia/kontenWebsia/editProfile/layoutEdit.php'); ?>
 
 <?= $this->section('contentEdit'); ?>
+<style>
+    .formEdit {
+        background-color: #F9F9F9;
+    }
+</style>
 
-<div class="w-full bg-white mb-8" id="pagePendidikan">
+<div class="w-full bg-white min-h-screen" id="pagePendidikan">
+    <div class="flex justify-end w-full mb-4 w-36">
+        <div class="bg-secondary hover:bg-secondaryhover text-white lg:py-1.5 py-1 px-3 lg:text-sm text-xs outline-none cursor-pointer rounded-full flex gap-x-2 items-center" id="buttonEditTampilanPendidikan">
+            <div>
+                Edit Tampilan
+            </div>
+            <img src="/img/icon/edit.png" alt="" class="w-4 h-4">
+        </div>
+    </div>
+    <div class="editTampilanPendidikan hidden">
+        <form action="/User/updateTampilanPendidikan" method="POST" >
+            <div class="flex justify-between mb-4">
+                <label for="checkPendidikan" id="labelCheckPendidikan" class="text-gray-500 font-bold">Tampilkan Pendidikan</label>
+                <input type="checkbox" <?= $cpendidikan ?> name="checkPendidikan" id="checkPendidikan" class="cursor-pointer outline-none" onclick="checkPendidikan()">
+            </div>
+            <div class="flex justify-end">
+                <input type="submit" value="SIMPAN" class="ml-auto bg-secondary text-white rounded-full w-24 py-1 text-center cursor-pointer hover:bg-secondaryhover transition-colors duration-300 -mt-2 mb-4">
+            </div>
+        </form>
+    </div>
     <div class="md:overflow-x-auto overflow-x-scroll shadow-2xl rounded-3xl">
         <!-- start tabel pendidikan-->
         <table class="w-full sm:text-sm text-xs rounded-3xl shadow-2xl md:shadow-none font-paragraph">
@@ -106,9 +137,9 @@
     </div>
 </div>
 <script>
-    $(document).click(function() {
+    setTimeout(function() {
         $('#berhasilEditPendidikan').fadeOut();
-    })
+    }, 1500);
 </script>
 
 <!-- GAGAL edit pendidikan -->
@@ -121,9 +152,9 @@
     </div>
 </div>
 <script>
-    $(document).click(function() {
+    setTimeout(function() {
         $('#gagalEditPendidikan').fadeOut();
-    })
+    }, 1500);
 </script>
 
 <!-- BERHASIL tambah pendidikan -->
@@ -136,9 +167,9 @@
     </div>
 </div>
 <script>
-    $(document).click(function() {
+    setTimeout(function() {
         $('#berhasilTambahPendidikan').fadeOut();
-    })
+    }, 1500);
 </script>
 
 <!-- GAGAL tambah pendidikan -->
@@ -151,9 +182,9 @@
     </div>
 </div>
 <script>
-    $(document).click(function() {
+    setTimeout(function() {
         $('#gagalTambahPendidikan').fadeOut();
-    })
+    }, 1500);
 </script>
 
 <!-- end dialog box -->

@@ -1,8 +1,40 @@
+<?php
+if ($checked->prestasi == 0) {
+    $cprestasi = "";
+} else {
+    $cprestasi = "checked";
+}
+?>
 <?= $this->extend('websia/kontenWebsia/editProfile/layoutEdit.php'); ?>
 
 <?= $this->section('contentEdit'); ?>
 
-<div class="w-full bg-white mb-8" id="pagePrestasi">
+<style>
+    .formEdit {
+        background-color: #F9F9F9;
+    }
+</style>
+
+<div class="w-full bg-white min-h-screen" id="pagePrestasi">
+    <div class="flex justify-end w-full mb-4 w-36">
+        <div class="bg-secondary hover:bg-secondaryhover text-white lg:py-1.5 py-1 px-3 lg:text-sm text-xs outline-none cursor-pointer rounded-full flex gap-x-2 items-center" onclick="buttonEditTampilanPrestasi()">
+            <div>
+                Edit Tampilan
+            </div>
+            <img src="/img/icon/edit.png" alt="" class="w-4 h-4">
+        </div>
+    </div>
+    <div class="editTampilanPrestasi hidden">
+        <form action="/User/updateTampilanPrestasi" method="POST" >
+            <div class="flex justify-between mb-4">
+                <label for="checkPrestasi" id="labelCheckPrestasi" class="text-gray-500 font-bold">Tampilkan Prestasi</label>
+                <input type="checkbox" <?= $cprestasi ?> name="checkPrestasi" id="checkPrestasi" class="cursor-pointer outline-none" onclick="checkPrestasi()">
+            </div>
+            <div class="flex justify-end">
+                <input type="submit" value="SIMPAN" class="ml-auto bg-secondary text-white rounded-full w-24 py-1 text-center cursor-pointer hover:bg-secondaryhover transition-colors duration-300 -mt-2 mb-4">
+            </div>
+        </form>
+    </div>
     <div class="md:overflow-x-auto overflow-x-scroll shadow-2xl rounded-3xl">
         <!-- start tabel prestasi -->
         <table class="w-full sm:text-sm text-xs rounded-3xl shadow-2xl md:shadow-none font-paragraph">
@@ -58,7 +90,7 @@
                 endforeach; ?>
                 <tr class="formEdit">
                     <td colspan="8" class="border-b-2">
-                        <div class="ml-auto mr-3 bg-secondary text-white rounded-full w-28 py-1 text-center cursor-pointer hover:bg-secondaryhover transition-colors duration-300 my-2 tambahPrestasi">TAMBAH</div>
+                        <div class="ml-auto mr-3 bg-secondary text-white rounded-full w-28 py-1 text-center cursor-pointer hover:bg-secondaryhover transition-colors duration-300 my-2 tambahPrestasi" onclick="tambahPrestasi()">TAMBAH</div>
                     </td>
                 </tr>
                 <tr class="h-5 formEdit">
@@ -85,9 +117,9 @@
     </div>
 </div>
 <script>
-    $(document).click(function() {
+    setTimeout(function() {
         $('#berhasilEditPrestasi').fadeOut();
-    })
+    }, 1500);
 </script>
 <!-- GAGAL edit prestasi -->
 <div id="gagalEditPrestasi">
@@ -99,9 +131,9 @@
     </div>
 </div>
 <script>
-    $(document).click(function() {
+    setTimeout(function() {
         $('#gagalEditPrestasi').fadeOut();
-    })
+    }, 1500);
 </script>
 <!-- BERHASIL tambah prestasi -->
 <div id="berhasilTambahPrestasi">
@@ -113,9 +145,9 @@
     </div>
 </div>
 <script>
-    $(document).click(function() {
+    setTimeout(function() {
         $('#berhasilTambahPrestasi').fadeOut();
-    })
+    }, 1500);
 </script>
 <!-- GAGAL tambah prestasi -->
 <div id="gagalTambahPrestasi">
@@ -127,9 +159,9 @@
     </div>
 </div>
 <script>
-    $(document).click(function() {
+    setTimeout(function() {
         $('#gagalTambahPrestasi').fadeOut();
-    })
+    }, 1500);
 </script>
 <!-- end dialog box-->
 <?= $this->endSection(); ?>

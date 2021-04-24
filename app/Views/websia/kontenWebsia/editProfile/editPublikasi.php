@@ -2,7 +2,13 @@
 
 <?= $this->section('contentEdit'); ?>
 
-<div class="w-full bg-white mb-8" id="pagePublikasi">
+<style>
+    .formEdit {
+        background-color: #F9F9F9;
+    }
+</style>
+
+<div class="w-full bg-white min-h-screen" id="pagePublikasi">
     <div class="md:overflow-x-auto overflow-x-scroll shadow-2xl rounded-3xl">
         <!-- start tabel publikasi -->
         <table class="w-full sm:text-sm text-xs rounded-3xl shadow-2xl md:shadow-none font-paragraph">
@@ -50,7 +56,7 @@
                                         <path d="M19.7124 0.609397C18.9 -0.203132 17.5783 -0.203132 16.7665 0.609397L15.6133 1.76266L18.5591 4.70851L19.7124 3.5551C20.1058 3.16265 20.3224 2.63927 20.3224 2.08263C20.3224 1.52599 20.1058 1.00262 19.7124 0.609397Z" fill="black" />
                                     </svg>
                                 </div>
-                                <div class="hapusPublikasi cursor-pointer"><svg class="lg:w-5 lg:h-5 w-4 h-4" viewBox="0 0 19 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <div class="hapusPublikasi cursor-pointer" onclick="hapusPublikasi()"><svg class="lg:w-5 lg:h-5 w-4 h-4" viewBox="0 0 19 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M15.492 3.84814L14.2169 18.3784H4.86875L3.5939 3.84814L1.97852 3.98975L3.27664 18.7835C3.34496 19.4654 3.9366 20 4.6239 20H14.4617C15.1488 20 15.7407 19.4657 15.8101 18.7738L17.1074 3.98975L15.492 3.84814Z" fill="black" />
                                         <path d="M12.5141 0H6.56816C5.82301 0 5.2168 0.60621 5.2168 1.35137V3.91894H6.8384V1.6216H12.2438V3.9189H13.8654V1.35133C13.8655 0.60621 13.2593 0 12.5141 0Z" fill="black" />
                                         <path d="M18.1901 3.10791H0.892851C0.445 3.10791 0.0820312 3.47088 0.0820312 3.91873C0.0820312 4.36658 0.445 4.72955 0.892851 4.72955H18.1901C18.638 4.72955 19.001 4.36658 19.001 3.91873C19.001 3.47088 18.638 3.10791 18.1901 3.10791Z" fill="black" />
@@ -63,7 +69,7 @@
                 endforeach; ?>
                 <tr class="formEdit">
                     <td colspan="8" class="border-b-2">
-                        <div class="ml-auto mr-3 bg-secondary text-white rounded-full w-28 py-1 text-center cursor-pointer hover:bg-secondaryhover transition-colors duration-300 my-2 tambahPublikasi">TAMBAH</div>
+                        <div class="ml-auto mr-3 bg-secondary text-white rounded-full w-28 py-1 text-center cursor-pointer hover:bg-secondaryhover transition-colors duration-300 my-2 tambahPublikasi" onclick="tambahPublikasi()">TAMBAH</div>
                     </td>
                 </tr>
                 <tr class="h-5 formEdit">
@@ -89,9 +95,9 @@
     </div>
 </div>
 <script>
-    $(document).click(function() {
+    setTimeout(function() {
         $('#berhasilEditPublikasi').fadeOut();
-    })
+    }, 1500);
 </script>
 <!-- GAGAL edit publikasi -->
 <div id="gagalEditPublikasi">
@@ -103,9 +109,9 @@
     </div>
 </div>
 <script>
-    $(document).click(function() {
+    setTimeout(function() {
         $('#gagalEditPublikasi').fadeOut();
-    })
+    }, 1500);
 </script>
 <!-- BERHASIL tambah publikasi -->
 <div id="berhasilTambahPublikasi">
@@ -117,9 +123,9 @@
     </div>
 </div>
 <script>
-    $(document).click(function() {
+    setTimeout(function() {
         $('#berhasilTambahPublikasi').fadeOut();
-    })
+    }, 1500);
 </script>
 <!-- GAGAL tambah publikasi -->
 <div id="gagalTambahPublikasi">
@@ -131,9 +137,9 @@
     </div>
 </div>
 <script>
-    $(document).click(function() {
+    setTimeout(function() {
         $('#gagalTambahPublikasi').fadeOut();
-    })
+    }, 1500);
 </script>
 <!-- end dialog box-->
 <?= $this->endSection(); ?>

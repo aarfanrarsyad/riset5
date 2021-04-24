@@ -1,7 +1,7 @@
 <?php
-if ($alumni->jenis_kelamin == 'L') {
+if ($alumni->jenis_kelamin == 'Lk') {
     $jk = "Laki-laki";
-} else if ($alumni->jenis_kelamin == 'P') {
+} else if ($alumni->jenis_kelamin == 'Pr') {
     $jk = "Perempuan";
 }
 
@@ -16,27 +16,10 @@ if ($alumni->aktif_pns == '1') {
 } else if ($alumni->aktif_pns == '0') {
     $aktif_pns = "Tidak aktif sebagai PNS";
 }
-
-if ($checked->jenis_kelamin == 0) {
-    $cjk = "";
+if ($checked->ttl == 0) {
+    $cttl = "";
 } else {
-    $cjk = "checked";
-}
-
-if ($checked->tanggal_lahir == 0) {
-    $ctl = "";
-} else {
-    $ctl = "checked";
-}
-if ($checked->tempat_lahir == 0) {
-    $cteml = "";
-} else {
-    $cteml = "checked";
-}
-if ($checked->no_telp == 0) {
-    $cnt = "";
-} else {
-    $cnt = "checked";
+    $cttl = "checked";
 }
 if ($checked->email == 0) {
     $cemail = "";
@@ -116,7 +99,7 @@ if ($checked->facebook == 0) {
                     </div>
                 </div>
                 <div class="text-black font-heading font-normal mb-2"><?= $alumni->nama ?></div>
-                <div class="grid grid-cols-2 gap-x-4 mr-6">
+                <div class="grid grid-cols-2 gap-x-4">
                     <div>
                         <div class="font-medium">NIM:</div>
                         <div class="text-black font-heading font-normal mb-2"><?= $alumni->nim ?></div>
@@ -129,11 +112,10 @@ if ($checked->facebook == 0) {
                 <div class="mb-2">
                     <div class="flex justify-between items-center">
                         <div class="font-medium" id="labelJenisKelamin">Jenis Kelamin:</div>
-                        <input type="checkbox" <?= $cjk ?> name="checkJenisKelamin" data-id="JenisKelamin" id="checkJenisKelamin" class="cursor-pointer focus:outline-none editTampilan hidden">
                     </div>
                     <div class="text-black font-heading font-normal mb-2"><?= $jk ?></div>
                 </div>
-                <div class="md:grid md:grid-cols-2 md:gap-x-4 md:mr-6">
+                <div class="md:grid md:grid-cols-2 md:gap-x-4">
                     <div class="mr-1">
                         <div class="font-medium" id="labelTempatLahir">Tempat Lahir:</div>
                         <input type="text" name="tempatLahir" id="tempatLahir" class="inputForm" placeholder="Tempat Lahir" value="<?= $alumni->tempat_lahir ?>">
@@ -141,22 +123,25 @@ if ($checked->facebook == 0) {
                     <div>
                         <div class="flex justify-between items-center">
                             <div class="font-medium" id="labelTanggalLahir">Tanggal Lahir:</div>
-                            <input type="checkbox" <?= $ctl ?> name="checkTanggalLahir" id="checkTanggalLahir" class="cursor-pointer focus:outline-none md:-mr-6 editTampilan hidden">
+                            <input type="checkbox" <?= $cttl ?> name="checkTanggalLahir" id="checkTanggalLahir" class="cursor-pointer focus:outline-none editTampilan hidden">
                         </div>
                         <input type="date" name="tanggalLahir" data-id="TanggalLahir" id="tanggalLahir" class="inputForm" value="<?= $alumni->tanggal_lahir ?>">
                     </div>
                 </div>
                 <div class="flex justify-between items-center md:mr-6">
                     <label for="notelepon" class="font-medium" id="labelTelepon">No. Telepon:</label>
-                    <input type="checkbox" <?= $cnt ?> name="checkTelepon" data-id="Telepon" id="checkTelepon" class="cursor-pointer focus:outline-none md:-mr-6 editTampilan hidden">
                 </div>
-                <p class="text-xs text-red-500 text-justify" id="errorNoTelp">
-                    Nomor telepon hanya boleh berupa angka dan panjangnya minimum 9 digit.
-                </p>
                 <div class="lg:w-1/2">
-                    <div class="lg:mr-6">
-                        <?php if (session('inputs')) { ?>
-                            <input type="text" name="telp_alumni" id="notelepon" class="inputFormError" placeholder="Nomor telfon WA aktif" value="<?= session('inputs')['telp_alumni'] ?>" required>
+                    <div class="lg:mr-3">
+                        <?php if (session()->getFlashdata('error-telp_alumni') != "") { ?>
+                            <p class="text-xs text-red-500 text-justify" id="errorNoTelp">
+                                <?= session('error-telp_alumni') ?>
+                            </p>
+                            <?php if (session()->getFlashdata()['inputs']['telp_alumni'] != $alumni->telp_alumni) { ?>
+                                <input type="text" name="telp_alumni" id="notelepon" class="inputFormError" placeholder="Nomor telfon WA aktif" value="<?= session('inputs')['telp_alumni'] ?>" required>
+                            <?php } else { ?>
+                                <input type="text" name="telp_alumni" id="notelepon" class="inputForm" placeholder="Nomor telfon WA aktif" value="<?= $alumni->telp_alumni ?>" required>
+                            <?php } ?>
                         <?php } else { ?>
                             <input type="text" name="telp_alumni" id="notelepon" class="inputForm" placeholder="Nomor telfon WA aktif" value="<?= $alumni->telp_alumni ?>" required>
                         <?php } ?>
@@ -166,29 +151,57 @@ if ($checked->facebook == 0) {
                     <label for="email" class="font-medium" id="labelEmail">Email:</label>
                     <input type="checkbox" <?= $cemail ?> name="checkEmail" data-id="Email" id="checkEmail" class="cursor-pointer focus:outline-none md:-mr-6 editTampilan hidden">
                 </div>
-                <p class="text-xs text-red-500 text-justify" id="errorEmail">
-                    Email telah digunakan oleh alumni lain.
-                </p>
+
                 <div class="lg:w-1/2">
-                    <div class="lg:mr-6">
-                        <?php if (session('inputs')) { ?>
-                            <input type="email" name="email" id="email" class="inputFormError" placeholder="Alamat email aktif" value="<?= session('inputs')['email'] ?>" required>
+                    <div class="lg:mr-3">
+                        <?php if (session()->getFlashdata('error-email') != "") { ?>
+                            <p class="text-xs text-red-500 text-justify" id="errorEmail">
+                                <?= session('error-email') ?>
+                            </p>
+                            <?php if (session()->getFlashdata()['inputs']['email'] != $alumni->email) { ?>
+                                <input type="email" name="email" id="email" class="inputFormError" placeholder="Alamat email aktif" value="<?= session('inputs')['email'] ?>" required>
+                            <?php } else { ?>
+                                <input type="email" name="email" id="email" class="inputForm" placeholder="Alamat email aktif" value="<?= $alumni->email ?>" required>
+                            <?php } ?>
                         <?php } else { ?>
                             <input type="email" name="email" id="email" class="inputForm" placeholder="Alamat email aktif" value="<?= $alumni->email ?>" required>
                         <?php } ?>
                     </div>
                 </div>
+                <hr class="border-gray-300 my-3">
                 <div class="flex justify-between items-center">
-                    <label for="alamat" class="font-medium" id="labelAlamat">Alamat:</label>
+                    <label for="negara" class="font-medium" id="labelNegara">Negara:</label>
                     <input type="checkbox" <?= $calamat ?> name="checkAlamat" data-id="Alamat" id="checkAlamat" class="cursor-pointer focus:outline-none editTampilan hidden">
                 </div>
+                <input list="daftarNegara" name="negara" id="negara" placeholder="Masukkan nama negara" value="" class="inputForm">
+                <datalist id="daftarNegara" class="font-paragraph">
+                    <option data-value="Indonesia">Indonesia</option>
+                </datalist>
+                <div class="md:grid md:grid-cols-2 md:gap-x-4">
+                    <div>
+                        <label for="provinsi" class="font-medium" id="labelProvinsi">Provinsi:</label>
+                        <input list="daftarProvinsi" name="provinsi" id="provinsi" placeholder="Masukkan nama provinsi" value="" class="inputForm">
+                        <datalist id="daftarProvinsi" class="font-paragraph">
+                            <option data-value="DKI Jakarta">DKI Jakarta</option>
+                        </datalist>
+                    </div>
+                    <div>
+                        <label for="kabkota" class="font-medium" id="labelKabkot">Kabupaten/Kota:</label>
+                        <input list="daftarKabkota" name="kabkota" id="kabkota" placeholder="Masukkan nama kabupaten/kota" value="" class="inputForm">
+                        <datalist id="daftarKabkota" class="font-paragraph">
+                            <option data-value="Kota Jakarta Timur">Kota Jakarta Timur</option>
+                        </datalist>
+                    </div>
+                </div>
+                <label for="alamat" class="font-medium" id="labelAlamat">Alamat:</label>
                 <div>
                     <?php if (session('inputs')) { ?>
-                        <textarea name="alamat" id="alamat" cols="50" rows="3" placeholder="Alamat saat ini" class="inputForm resize-none" required><?= session('inputs')['alamat'] ?></textarea>
+                        <textarea name="alamat" id="alamat" cols="50" rows="3" placeholder="Alamat saat ini" class="inputForm resize-none" required><?= htmlspecialchars(session('inputs')['alamat']) ?></textarea>
                     <?php } else { ?>
                         <textarea name="alamat" id="alamat" cols="50" rows="3" placeholder="Alamat saat ini" class="inputForm resize-none" required><?= $alumni->alamat ?></textarea>
                     <?php } ?>
                 </div>
+                <hr class="border-gray-300 mb-3 mt-1">
                 <div class="md:grid md:grid-cols-2 md:gap-x-4 md:mr-6">
                     <div>
                         <div class="font-medium">Status Bekerja di BPS:</div>
@@ -210,6 +223,7 @@ if ($checked->facebook == 0) {
                     <div class="font-medium">Perkiraan Tahun Pensiun:</div>
                     <div class="text-black font-heading font-normal mb-2"><?= $alumni->perkiraan_pensiun ?></div>
                 </div>
+                <hr class="border-gray-300 my-3">
                 <div>
                     <div class="font-medium mb-2">Akun Media Sosial:</div>
                     <div class="w-full">
@@ -255,6 +269,14 @@ if ($checked->facebook == 0) {
                         </div>
                     </div>
                 </div>
+                <div>
+                    <label for="biografi" class="font-medium">Biografi:</label>
+                    <?php if (session('inputs')) { ?>
+                        <textarea name="biografi" id="biografi" cols="30" rows="5" placeholder="Tambahkan biografi Anda di sini" class="inputForm resize-none" required><?= htmlspecialchars(session('inputs')['biografi']) ?></textarea>
+                    <?php } else { ?>
+                        <textarea name="biografi" id="biografi" cols="30" rows="5" placeholder="Tambahkan biografi Anda di sini" class="inputForm resize-none" required><?= $alumni->biografi ?></textarea>
+                    <?php } ?>
+                </div>
                 <div class="flex justify-end mt-8 mb-6">
                     <input type="submit" value="SIMPAN" class="w-24 text-center py-1 bg-secondary hover:bg-secondaryhover text-white rounded-full cursor-pointer mb-6 focus:outline-none" id="submitBiodata">
                 </div>
@@ -278,9 +300,9 @@ if ($checked->facebook == 0) {
         </div>
     </div>
     <script>
-        $(document).click(function() {
+        setTimeout(function() {
             $('#berhasilUpdateFoto').fadeOut();
-        })
+        }, 1500);
     </script>
 <?php }
 if (session()->getFlashdata('edit-foto-fail')) { ?>
@@ -292,9 +314,9 @@ if (session()->getFlashdata('edit-foto-fail')) { ?>
         </div>
     </div>
     <script>
-        $(document).click(function() {
+        setTimeout(function() {
             $('#gagalUpdateFoto').fadeOut();
-        })
+        }, 1500);
     </script>
 <?php }
 if (session()->getFlashdata('edit-bio-success')) { ?>
@@ -309,9 +331,9 @@ if (session()->getFlashdata('edit-bio-success')) { ?>
         </div>
     </div>
     <script>
-        $(document).click(function() {
+        setTimeout(function() {
             $('#berhasilUpdateBiodata').fadeOut();
-        })
+        }, 1500);
     </script>
 <?php }
 if (session()->getFlashdata('edit-bio-fail')) { ?>
@@ -325,9 +347,9 @@ if (session()->getFlashdata('edit-bio-fail')) { ?>
         </div>
     </div>
     <script>
-        $(document).click(function() {
+        setTimeout(function() {
             $('#gagalUpdateBiodata').fadeOut();
-        })
+        }, 1500);
     </script>
 <?php }
 if (session()->getFlashdata('hapus-foto') != NULL) { ?>
@@ -341,9 +363,9 @@ if (session()->getFlashdata('hapus-foto') != NULL) { ?>
         </div>
     </div>
     <script>
-        $(document).click(function() {
+        setTimeout(function() {
             $('#berhasilHapusFoto').fadeOut();
-        })
+        }, 1500);
     </script>
 <?php } ?>
 
