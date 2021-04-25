@@ -495,10 +495,15 @@ class Home extends BaseController
 		return view('login/daftar.php');
 	}
 
-	// public function resetPass()
-	// {
-	// 	return view('login/resetpass.php');
-	// }
+	public function resetpass()
+	{
+		return view('login/resetpass.php');
+	}
+
+	public function lamanResetPass()
+	{
+		return view('login/lamanResetPass.php');
+	}
 
 	public function coba()
 	{
