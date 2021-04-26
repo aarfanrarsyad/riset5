@@ -2,7 +2,7 @@
 
 <?= $this->section('contentEdit'); ?>
 <div class="flex justify-center mb-8">
-    <div class="shadow-2xl rounded-xl md:p-16 p-4 lg:w-full w-5/6">
+    <div class="shadow-2xl rounded-xl p-6 lg:w-full w-5/6">
         <form action="" method="POST" class="font-paragraph text-primary" id="formEditBiodataDev">
             <label for="nama" class="font-medium">Nama:</label>
             <input type="text" name="nama" id="nama" class="inputForm mb-2" placeholder="Nama Lengkap">
@@ -21,7 +21,7 @@
             <label for="instansi" class="font-medium">Instansi:</label>
             <input type="text" name="instansi" id="instansi" class="inputForm mb-2" placeholder="Politeknik Statistika STIS">
             <div class="flex justify-end">
-                <input type="submit" value="SIMPAN" class="w-24 text-center py-1 bg-secondary hover:bg-secondaryhover text-white rounded-full cursor-pointer focus:outline-none mt-8 md:text-base text-sm" id="simpanBiodata">
+                <input type="submit" value="SIMPAN" class="w-24 text-center py-1 bg-secondary hover:bg-secondaryhover text-white rounded-full cursor-pointer focus:outline-none mt-8 text-sm" id="simpanBiodata">
             </div>
         </form>
     </div>
