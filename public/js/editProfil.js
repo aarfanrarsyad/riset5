@@ -245,8 +245,18 @@ $('#checkPendidikan').click(function(){
     } else $('#labelCheckPendidikan').removeClass('text-primary');
 })
 
-function formPendidikan(id, jenjang, univ, studi, masuk, lulus, tulisan) {
-    $('body').prepend(`
+function formPendidikan(
+  id,
+  jenjang,
+  univ,
+  studi,
+  masuk,
+  lulus,
+  angkatan,
+  nim,
+  tulisan
+) {
+  $("body").prepend(`
     <div class="fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40 font-paragraph" id='formEditPendidikan'>
         <div class="hidden opacity-0 duration-700 transition-all xl:w-1/2 lg:w-7/12 md:w-2/3 sm:w-3/4 w-11/12 bg-gray bg-opacity-0">
             <div class="bg-primary py-4 px-6 rounded-t-2xl flex items-center justify-between text-secondary text-2xl">
@@ -258,21 +268,27 @@ function formPendidikan(id, jenjang, univ, studi, masuk, lulus, tulisan) {
             <form action="/User/updatePendidikan" method="post" class="flex flex-col bg-gray-100 sm:px-12 px-4 rounded-b-2xl text-sm">
                 <input type="hidden" name="id_pendidikan" id="editId">
                 <label for="editJenjang" class="text-primary font-medium mt-2">Jenjang:</label>
-                <input type="text" placeholder="Masukkan nama Jenjang" class="inputForm" name="jenjang" id="editJenjang">
+                <input type="text" placeholder="Masukkan nama Jenjang" class="inputForm" name="jenjang" id="editJenjang" required>
                 <label for="editUniversitas" class="text-primary font-medium">Universitas:</label>
-                <input type="text" placeholder="Masukkan nama Universitas" class="inputForm" name="instansi" id="editUniversitas">
+                <input type="text" placeholder="Masukkan nama Universitas" class="inputForm" name="instansi" id="editUniversitas" required>
                 <label for="editStudi" class="text-primary font-medium">Program Studi:</label>
                 <input type="text" placeholder="Masukkan nama Program Studi" class="inputForm" name="program_studi" id="editStudi">
                 <div class="flex">
                     <div class="flex flex-col mr-8 w-1/3">
                         <label for="editMasuk" class="text-primary font-medium">Tahun Masuk:</label>
-                        <input type="number" name="tahun_masuk" id="editMasuk" min="1950" max="2100" class="inputForm">
+                        <input type="number" name="tahun_masuk" id="editMasuk" min="1950" max="2100" class="inputForm" required>
+                    </div>
+                    <div class="flex flex-col mr-8 w-1/3">
+                        <label for="editLulus" class="text-primary font-medium">Tahun Lulus:</label>
+                        <input type="number" name="tahun_lulus" id="editLulus" min="1950" max="2100" class="inputForm" required>
                     </div>
                     <div class="flex flex-col w-1/3">
-                        <label for="editLulus" class="text-primary font-medium">Tahun Lulus:</label>
-                        <input type="number" name="tahun_lulus" id="editLulus" min="1950" max="2100" class="inputForm">
+                        <label for="editAngkatan" class="text-primary font-medium">Angkatan:</label>
+                        <input type="number" name="angkatan" id="editAngkatan" min="1" max="2000" class="inputForm">
                     </div>
                 </div>
+                <label for="editNIM" class="text-primary font-medium mt-2">NIM:</label>
+                <input type="text" placeholder="Masukkan NIM anda" class="inputForm" name="nim" id="editNIM">
                 <label for="editTulisan" class="text-primary font-medium">Judul Tulisan:</label>
                 <textarea name="judul_tulisan" id="editTulisan" rows="2" class="inputForm" placeholder="Masukkan judul tulisan"></textarea>
                 <div class="flex justify-end my-4">
@@ -284,48 +300,61 @@ function formPendidikan(id, jenjang, univ, studi, masuk, lulus, tulisan) {
 
         </div>
     </div>
-    `)
+    `);
 
-    $('#formEditPendidikan').children().first().removeClass('hidden')
-    setTimeout(function () {
-        $('#formEditPendidikan').children().first().removeClass('opacity-0')
-    }, 10);
+  $("#formEditPendidikan").children().first().removeClass("hidden");
+  setTimeout(function () {
+    $("#formEditPendidikan").children().first().removeClass("opacity-0");
+  }, 10);
 
-    $('.closePendidikan').click(function () {
-        $('#formEditPendidikan').children().first().addClass('opacity-0')
-        $('#formEditPendidikan').children().first().on('transitionend MSTransitionEnd webkitTransitionEnd oTransitionEnd', function () {
-            $('#formEditPendidikan').children().first().addClass('hidden')
-        });
-        setTimeout(function () {
-            $('#formEditPendidikan').remove()
-        }, 400);
-    })
-
-    var modal = document.getElementById('formEditPendidikan')
-    $(window).click(function (e) {
-        if (e.target === modal) {
-            $('#formEditPendidikan').children().first().addClass('opacity-0')
-            $('#formEditPendidikan').children().first().on('transitionend MSTransitionEnd webkitTransitionEnd oTransitionEnd', function () {
-                $('#formEditPendidikan').children().first().addClass('hidden')
-            });
-            setTimeout(function () {
-                $('#formEditPendidikan').remove()
-            }, 400);
+  $(".closePendidikan").click(function () {
+    $("#formEditPendidikan").children().first().addClass("opacity-0");
+    $("#formEditPendidikan")
+      .children()
+      .first()
+      .on(
+        "transitionend MSTransitionEnd webkitTransitionEnd oTransitionEnd",
+        function () {
+          $("#formEditPendidikan").children().first().addClass("hidden");
         }
-    })
+      );
+    setTimeout(function () {
+      $("#formEditPendidikan").remove();
+    }, 400);
+  });
 
-    $('#editId').val(id);
-    $('#editJenjang').val(jenjang);
-    $('#editUniversitas').val(univ);
-    $('#editStudi').val(studi);
-    $('#editMasuk').val(masuk);
-    $('#editLulus').val(lulus);
-    $('#editTulisan').val(tulisan);
+  var modal = document.getElementById("formEditPendidikan");
+  $(window).click(function (e) {
+    if (e.target === modal) {
+      $("#formEditPendidikan").children().first().addClass("opacity-0");
+      $("#formEditPendidikan")
+        .children()
+        .first()
+        .on(
+          "transitionend MSTransitionEnd webkitTransitionEnd oTransitionEnd",
+          function () {
+            $("#formEditPendidikan").children().first().addClass("hidden");
+          }
+        );
+      setTimeout(function () {
+        $("#formEditPendidikan").remove();
+      }, 400);
+    }
+  });
 
+  $("#editId").val(id);
+  $("#editJenjang").val(jenjang);
+  $("#editUniversitas").val(univ);
+  $("#editStudi").val(studi);
+  $("#editMasuk").val(masuk);
+  $("#editLulus").val(lulus);
+  $("#editAngkatan").val(angkatan);
+  $("#editNIM").val(nim);
+  $("#editTulisan").val(tulisan);
 }
 
 $('.tambahPendidikan').click(function () {
-    $('body').prepend(`
+    $("body").prepend(`
     <div class="fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40 font-paragraph" id='formTambahPendidikan'>
         <div class="hidden opacity-0 duration-700 transition-all xl:w-1/2 lg:w-7/12 md:w-2/3 sm:w-3/4 w-11/12 bg-gray bg-opacity-0">
             <div class="bg-primary py-4 px-6 rounded-t-2xl flex items-center justify-between text-secondary text-2xl">
@@ -336,21 +365,27 @@ $('.tambahPendidikan').click(function () {
             </div>
             <form action="/User/addPendidikan" method="post" class="flex flex-col bg-gray-100 sm:px-12 px-4 rounded-b-2xl text-sm">
                 <label for="editJenjang" class="text-primary font-medium mt-2">Jenjang:</label>
-                <input type="text" placeholder="Masukkan nama Jenjang" class="inputForm" name="jenjang" id="editJenjang">
+                <input type="text" placeholder="Masukkan nama Jenjang" class="inputForm" name="jenjang" id="editJenjang" required>
                 <label for="editUniversitas" class="text-primary font-medium">Universitas:</label>
-                <input type="text" placeholder="Masukkan nama Universitas" class="inputForm" name="instansi" id="editUniversitas">
+                <input type="text" placeholder="Masukkan nama Universitas" class="inputForm" name="instansi" id="editUniversitas" required>
                 <label for="editStudi" class="text-primary font-medium">Program Studi:</label>
                 <input type="text" placeholder="Masukkan nama Program Studi" class="inputForm" name="program_studi" id="editStudi">
                 <div class="flex">
                     <div class="flex flex-col mr-8 w-1/3">
                         <label for="editMasuk" class="text-primary font-medium">Tahun Masuk:</label>
-                        <input type="number" name="tahun_masuk" id="editMasuk" placeholder="1973" min="1950" max="2100" class="inputForm">
+                        <input type="number" name="tahun_masuk" id="editMasuk" placeholder="1973" min="1950" max="2100" class="inputForm" required>
+                    </div>
+                    <div class="flex flex-col mr-8 w-1/3">
+                        <label for="editLulus" class="text-primary font-medium">Tahun Lulus:</label>
+                        <input type="number" name="tahun_lulus" id="editLulus" placeholder="1977" min="1950" max="2100" class="inputForm" required>
                     </div>
                     <div class="flex flex-col w-1/3">
-                        <label for="editLulus" class="text-primary font-medium">Tahun Lulus:</label>
-                        <input type="number" name="tahun_lulus" id="editLulus" placeholder="1977" min="1950" max="2100" class="inputForm">
+                        <label for="editAngkatan" class="text-primary font-medium">Angkatan:</label>
+                        <input type="number" name="angkatan" id="editAngkatan" placeholder="25" min="1" max="2000" class="inputForm">
                     </div>
                 </div>
+                <label for="editNIM" class="text-primary font-medium mt-2">NIM:</label>
+                <input type="text" placeholder="Masukkan NIM anda" class="inputForm" name="nim" id="editNIM">
                 <label for="editTulisan" class="text-primary font-medium">Judul Tulisan:</label>
                 <textarea name="judul_tulisan" id="editTulisan" rows="2" class="inputForm resize-none" placeholder="Masukkan judul tulisan"></textarea>
                 <div class="flex justify-end my-4">
@@ -362,7 +397,7 @@ $('.tambahPendidikan').click(function () {
 
         </div>
     </div>
-`)
+`);
 
     $('#formTambahPendidikan').children().first().removeClass('hidden')
     setTimeout(function () {

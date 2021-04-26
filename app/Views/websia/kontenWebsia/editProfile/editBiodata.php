@@ -16,37 +16,37 @@ if ($alumni->aktif_pns == '1') {
 } else if ($alumni->aktif_pns == '0') {
     $aktif_pns = "Tidak aktif sebagai PNS";
 }
-if ($checked->ttl == 0) {
+if ($alumni->cttl == 0) {
     $cttl = "";
 } else {
     $cttl = "checked";
 }
-if ($checked->email == 0) {
+if ($alumni->cemail == 0) {
     $cemail = "";
 } else {
     $cemail = "checked";
 }
-if ($checked->alamat == 0) {
+if ($alumni->calamat == 0) {
     $calamat = "";
 } else {
     $calamat = "checked";
 }
-if ($checked->jabatan_terakhir == 0) {
+if ($alumni->cjabatan_terakhir == 0) {
     $cjab = "";
 } else {
     $cjab = "checked";
 }
-if ($checked->ig == 0) {
+if ($alumni->cig == 0) {
     $cig = "";
 } else {
     $cig = "checked";
 }
-if ($checked->twitter == 0) {
+if ($alumni->ctwitter == 0) {
     $ctw = "";
 } else {
     $ctw = "checked";
 }
-if ($checked->fb == 0) {
+if ($alumni->cfb == 0) {
     $cfb = "";
 } else {
     $cfb = "checked";
@@ -108,8 +108,8 @@ if ($checked->fb == 0) {
                         <div class="font-medium">Angkatan:</div>
                         <div class="text-black font-heading font-normal mb-2">?= $alumni->angkatan ?></div>
                     </div>
-                </div>
-                <div class="mb-2"> -->
+                </div> -->
+                <div class="mb-2">
                     <div class="flex justify-between items-center">
                         <div class="font-medium" id="labelJenisKelamin">Jenis Kelamin:</div>
                     </div>
@@ -198,7 +198,7 @@ if ($checked->fb == 0) {
                     <?php if (session('inputs')) { ?>
                         <textarea name="alamat" id="alamat" cols="50" rows="3" placeholder="Alamat saat ini" class="inputForm resize-none" required><?= htmlspecialchars(session('inputs')['alamat']) ?></textarea>
                     <?php } else { ?>
-                        <textarea name="alamat" id="alamat" cols="50" rows="3" placeholder="Alamat saat ini" class="inputForm resize-none" required><?= $alumni->alamat ?></textarea>
+                        <textarea name="alamat" id="alamat" cols="50" rows="3" placeholder="Alamat saat ini" class="inputForm resize-none" required><?= $alumni->alamat_alumni ?></textarea>
                     <?php } ?>
                 </div>
                 <hr class="border-gray-300 mb-3 mt-1">
@@ -274,7 +274,7 @@ if ($checked->fb == 0) {
                     <?php if (session('inputs')) { ?>
                         <textarea name="biografi" id="biografi" cols="30" rows="5" placeholder="Tambahkan biografi Anda di sini" class="inputForm resize-none" required><?= htmlspecialchars(session('inputs')['biografi']) ?></textarea>
                     <?php } else { ?>
-                        <textarea name="biografi" id="biografi" cols="30" rows="5" placeholder="Tambahkan biografi Anda di sini" class="inputForm resize-none" required><?= $alumni->biografi ?></textarea>
+                        <textarea name="biografi" id="biografi" cols="30" rows="5" placeholder="Tambahkan biografi Anda di sini" class="inputForm resize-none" required><?= $alumni->deskripsi ?></textarea>
                     <?php } ?>
                 </div>
                 <div class="flex justify-end mt-8 mb-6">
