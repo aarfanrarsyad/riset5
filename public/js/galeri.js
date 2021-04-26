@@ -24,7 +24,7 @@ $('.albumImg').click(function () {
                     <a href="#img-1">
                         <img src="/img/components/icon/left-on.png" alt="" class="">
                     </a>
-                    <img src="/img/alumni.jpg" alt="" class="w-3/4">
+                    <img src="/img/components/alumni.jpg" alt="" class="w-3/4">
                     <a href="">
                         <img src="/img/components/icon/right-on.png" alt="" class="">
                     </a>

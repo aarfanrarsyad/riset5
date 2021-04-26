@@ -4,10 +4,14 @@
 <!-- Awal Galeri Alumni -->
 <div class="text-center">
     <div id="coba" class="coba mt-8 text-2xl font-bold font-heading">
-        Galeri Video Kenangan Alumni
+        Judul Album 1
     </div>
     <div class="flex items-center justify-center mt-4 mb-8">
-        <button class="mr-4 px-4 py-1 rounded-3xl border border-secondary text-sm bg-secondary text-white hover:bg-secondaryhover hover:text-white transition-colors duration-300 focus:outline-none galeriButton">SEMUA VIDEO</button>
+        <button type="button" class="mr-4 px-4 py-1 rounded-3xl border border-secondary text-sm bg-white text-secondary hover:bg-secondaryhover hover:text-white transition-colors duration-300 focus:outline-none galeriButton">
+            <a href="/User/galeriVideo">
+                SEMUA VIDEO
+            </a>
+        </button>
         <div class="album-btn rounded-3xl text-sm bg-white text-secondary hover:bg-secondaryhover hover:text-white transition-all duration-400 galeriButton">
             <!-- Awal button album -->
             <div class="font-paragraph">

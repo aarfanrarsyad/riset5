@@ -1,34 +1,21 @@
 <?= $this->extend('websia/layoutWebsia/templateBerandaLogin.php'); ?>
 
 <?= $this->section('content'); ?>
-<style>
-    .album-btn:hover {
-        border-radius: 0px;
-    }
-</style>
 <!-- Awal Galeri Alumni -->
 <div class="text-center">
     <div id="coba" class="coba mt-8 text-2xl font-bold font-heading">
         Galeri Video Wisuda AIS/STIS/POLSTAT STIS
     </div>
     <div class="flex items-center justify-center mt-4 mb-8">
-        <button class="-ml-4 mr-4 px-4 py-1 rounded-3xl border border-secondary text-sm bg-white text-secondary hover:bg-secondaryhover hover:text-white transition-colors duration-300 focus:outline-none galeriButton">SEMUA VIDEO</button>
+        <button class="mr-4 px-4 py-1 rounded-3xl border border-secondary text-sm bg-secondary text-white hover:bg-secondaryhover hover:text-white transition-colors duration-300 focus:outline-none galeriButton">SEMUA VIDEO</button>
         <div class="album-btn rounded-3xl text-sm bg-white text-secondary hover:bg-secondaryhover hover:text-white transition-all duration-400 galeriButton">
-            <!-- Awal dropdown button album -->
-            <div class="dropdown font-paragraph">
+            <!-- Awal button album -->
+            <div class="font-paragraph">
                 <button class="text-center rounded-3xl px-4 py-1 border border-secondary focus:outline-none">
                     ALBUM
-                    <!-- awal konten dropdown -->
-                    <div class="dropdown-content content-center w-max -ml-4 mt-1">
-                        <a href="" class="text-secondary bg-white border-2 border-secondary hover:bg-secondary hover:text-white py-4 px-3 text-left transiton duration-300"> AIS/STIS/POLSTAT STIS </a>
-                        <a href="" class="text-secondary bg-white border-b-2 border-l-2 border-r-2 border-secondary hover:bg-secondary hover:text-white py-1 px-3 text-left transiton duration-300"> Wisuda </a>
-                        <a href="" class="text-secondary bg-white border-l-2 border-r-2 border-secondary hover:bg-secondary hover:text-white py-1 px-3 text-left transiton duration-300"> Prestasi </a>
-                        <a href="" class="text-secondary bg-white border-2 border-secondary hover:bg-secondary hover:text-white py-1 px-3 text-left transiton duration-300"> Sweet Memories </a>
-                    </div>
-                    <!-- akhir konten dropdown -->
                 </button>
             </div>
-            <!-- Akhir dropdown button album -->
+            <!-- Akhir button album -->
         </div>
     </div>
 </div>

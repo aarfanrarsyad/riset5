@@ -5,17 +5,19 @@
 <!-- Awal Galeri Alumni -->
 <div class="text-center">
     <div class="mt-8 text-2xl font-bold font-heading">
-        Galeri Kenangan Alumni
+        Album Galeri Video Kenangan Alumni
     </div>
     <div class="flex items-center justify-center mt-4 mb-8">
-        <button class="mr-4 px-4 py-1 rounded-3xl border border-secondary text-sm bg-secondary text-white hover:bg-secondaryhover hover:text-white transition-colors duration-300 focus:outline-none galeriButton">SEMUA FOTO</button>
-        <div class="album-btn rounded-3xl text-sm bg-white text-secondary hover:bg-secondaryhover hover:text-white transition-all duration-400 galeriButton">
+        <button type="button" class="mr-4 px-4 py-1 rounded-3xl border border-secondary text-sm bg-white text-secondary hover:bg-secondaryhover hover:text-white transition-colors duration-300 focus:outline-none galeriButton">
+            <a href="/User/galeriVideo">
+                SEMUA VIDEO
+            </a>
+        </button>
+        <div class="album-btn rounded-3xl text-sm bg-secondary text-white hover:bg-secondaryhover transition-all duration-400 galeriButton">
             <!-- Awal button album -->
             <div class="font-paragraph">
-                <button type="button" class="text-center rounded-3xl px-4 py-1 border border-secondary focus:outline-none">
-                    <a href="/User/listAlbumFoto">
-                        ALBUM
-                    </a>
+                <button class="text-center rounded-3xl px-4 py-1 border border-secondary focus:outline-none">
+                    ALBUM
                 </button>
             </div>
             <!-- Akhir button album -->
@@ -28,9 +30,17 @@
             <!-- Awal Tampilan Galeri (Buat ditambahkan coding sesuai gambar dari database) -->
             <?php for ($x = 0; $x < 12; $x++) : ?>
                 <!-- 1 gambar -->
-                <a href="#img-1">
-                    <div class="rounded-3xl m-2 relative hover:shadow-xl transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105 cursor-pointer">
-                        <img class="albumImg w-full rounded-3xl mx-auto" src="/img/components/alumni.jpg" alt="" />
+                <a href="/User/albumVideo">
+                    <div class="flex flex-col rounded-3xl m-2 relative hover:shadow-xl transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105 cursor-pointer">
+                        <div class="rounded-3xl w-full mb-2 bg-gray-300">
+                            <img src="/img/components/alumni.jpg" alt="" class="opacity-0">
+                        </div>
+                        <div class="text-white">
+                            Judul Album 1
+                        </div>
+                        <div class="text-white">
+                            Keterangan Album 1
+                        </div>
                     </div>
                 </a>
             <?php endfor; ?>
@@ -75,7 +85,7 @@
             <div class="my-4 md:my-5 font-paragraph italic text-base lg:text-xl">
                 "Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit adipisci sed fuga, earum fugit reiciendis repellendus maxime at quia dolore similique cupiditate inventore accusantium autem exercitationem ratione, natus minus fugiat?"
             </div>
-            <button class="unggahFoto focus:outline-none p-1 rounded-3xl bg-secondary border-2 border-secondary text-white hover:bg-white hover:border-2 hover:border-secondary hover:text-secondary transition-colors duration-300 font-paragraph text-base lg:text-xl">UNGGAH KENANGANMU</button>
+            <button class="unggahVideo focus:outline-none p-1 rounded-3xl bg-secondary border-2 border-secondary text-white hover:bg-white hover:border-2 hover:border-secondary hover:text-secondary transition-colors duration-300 font-paragraph text-base lg:text-xl">UNGGAH KENANGANMU</button>
         </div>
     </div>
     <div class="md:col-span-2 lg:col-span-2">

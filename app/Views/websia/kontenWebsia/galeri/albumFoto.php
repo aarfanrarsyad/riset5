@@ -1,18 +1,23 @@
 <?= $this->extend('websia/layoutWebsia/templateBerandaLogin.php'); ?>
 
 <?= $this->section('content'); ?>
+
 <!-- Awal Galeri Alumni -->
 <div class="text-center">
-    <div id="coba" class="coba mt-8 text-2xl font-bold font-heading">
-        Galeri Video Kenangan Alumni
+    <div class="mt-8 text-2xl font-bold font-heading">
+        Judul Album 1
     </div>
     <div class="flex items-center justify-center mt-4 mb-8">
-        <button class="mr-4 px-4 py-1 rounded-3xl border border-secondary text-sm bg-secondary text-white hover:bg-secondaryhover hover:text-white transition-colors duration-300 focus:outline-none galeriButton">SEMUA VIDEO</button>
+        <button type="button" class="mr-4 px-4 py-1 rounded-3xl border border-secondary text-sm bg-white text-secondary hover:bg-secondaryhover hover:text-white transition-colors duration-300 focus:outline-none galeriButton">
+            <a href="/User/galeriFoto">
+                SEMUA FOTO
+            </a>
+        </button>
         <div class="album-btn rounded-3xl text-sm bg-white text-secondary hover:bg-secondaryhover hover:text-white transition-all duration-400 galeriButton">
             <!-- Awal button album -->
             <div class="font-paragraph">
                 <button type="button" class="text-center rounded-3xl px-4 py-1 border border-secondary focus:outline-none">
-                    <a href="/User/listAlbumVideo">
+                    <a href="/User/listAlbumFoto">
                         ALBUM
                     </a>
                 </button>
@@ -23,13 +28,17 @@
 </div>
 <div class="bg-primary">
     <div class="py-4">
-        <div class="p-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-10">
+        <div class="holder p-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-4">
+            <!-- Awal Tampilan Galeri (Buat ditambahkan coding sesuai gambar dari database) -->
             <?php for ($x = 0; $x < 12; $x++) : ?>
-                <!-- 1 video -->
-                <div class="rounded-3xl m-2 relative transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105 cursor-pointer">
-                    <iframe class="h-52 w-full rounded-3xl" src="https://www.youtube.com/embed/0jic-ZWsQqw" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                </div>
+                <!-- 1 gambar -->
+                <a href="#img-1">
+                    <div class="rounded-3xl m-2 relative hover:shadow-xl transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105 cursor-pointer">
+                        <img class="albumImg w-full rounded-3xl mx-auto" src="/img/components/alumni.jpg" alt="" />
+                    </div>
+                </a>
             <?php endfor; ?>
+            <!-- Akhir Tampilan Galeri -->
         </div>
         <!-- Awal Navigasi -->
         <div class="flex justify-center md:justify-end items-center mx-8 p-2 text-secondary font-paragraph">
@@ -60,30 +69,33 @@
     </div>
 </div>
 
-<!-- Awal fitur unggah Video galeri -->
-<div class="flex flex-col-reverse md:grid md:grid-cols-4 lg:grid-cols-5 md:gap-4">
-    <div class="md:col-span-2 lg:col-span-3">
-        <div class="flex flex-col mb-10 mx-6 md:m-10 text-center md:text-left">
-            <div class="mt-5 md:mt-1 text-3xl text-secondary font-bold font-heading">
+<!-- Awal fitur unggah foto galeri -->
+<div class="flex flex-col-reverse md:grid md:grid-cols-4 lg:grid-cols-5 md:gap-4 mb-8">
+    <div class="md:col-span-2 lg:col-span-3 md:mx-8 mb-6">
+        <div class="flex flex-col mx-6 md:m-6">
+            <div class="mt-5 md:mt-1 text-center md:text-left text-3xl text-secondary font-bold font-heading">
                 Mama Lorent
             </div>
-            <div class="my-4 lg:mr-18 md:my-5 font-paragraph italic text-base lg:text-xl">
+            <div class="my-4 md:my-5 font-paragraph italic text-base lg:text-xl">
                 "Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit adipisci sed fuga, earum fugit reiciendis repellendus maxime at quia dolore similique cupiditate inventore accusantium autem exercitationem ratione, natus minus fugiat?"
             </div>
-            <button class="unggahVideo focus:outline-none lg:mr-24 p-1 rounded-3xl bg-secondary border-2 border-secondary text-white hover:bg-white hover:border-2 hover:border-secondary hover:text-secondary transition-colors duration-300 font-paragraph text-base lg:text-xl">UNGGAH VIDEO KENANGANMU</button>
+            <button class="unggahFoto focus:outline-none p-1 rounded-3xl bg-secondary border-2 border-secondary text-white hover:bg-white hover:border-2 hover:border-secondary hover:text-secondary transition-colors duration-300 font-paragraph text-base lg:text-xl">UNGGAH KENANGANMU</button>
         </div>
     </div>
     <div class="md:col-span-2 lg:col-span-2">
         <div class="">
-            <img src="/img/components/galeri.png" alt="" class="w-full md:h-full md:w-auto mb-8">
+            <img src="/img/components/galeri.png" alt="" class="w-full md:h-full md:w-auto">
         </div>
     </div>
-</div>
-</div>
-<!-- Akhir fitur unggah Video  -->
 
-<!-- Catatan : Apabila sukses mengunggah video dapat maka dapat memanggil fungsi js => suksesUnggahVideo ()  -->
+
+</div>
+</div>
+<!-- Akhir fitur unggah foto galeri -->
+
+<!-- Catatan : Apabila sukses mengunggah foto dapat maka dapat memanggil fungsi js => suksesUnggahFoto ()  -->
+<!-- Catatan : Apabila sukses laporkan foto dapat maka dapat memanggil fungsi js => suksesLaporkanFoto ()  -->
+
 
 <!-- Akhir Galeri Alumni -->
-
 <?= $this->endSection(); ?>

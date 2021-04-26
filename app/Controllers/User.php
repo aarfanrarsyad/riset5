@@ -142,15 +142,15 @@ class User extends BaseController
 		// array :
 		// 'name'
 
-		if($model->getAngkatanByIdAlumni(session('id_alumni')) == NULL) {
-			$query4 = $model->getIdAlumniByIdTempatKerja($model->getIdTempatKerjaByIdAlumni(session('id_alumni')),session('id_alumni'))->getResult();
+		if ($model->getAngkatanByIdAlumni(session('id_alumni')) == NULL) {
+			$query4 = $model->getIdAlumniByIdTempatKerja($model->getIdTempatKerjaByIdAlumni(session('id_alumni')), session('id_alumni'))->getResult();
 		} else {
-			$query4 = $model->getIdAlumniByAngkatan($model->getAngkatanByIdAlumni(session('id_alumni'))->angkatan,session('id_alumni'))->getResult();
+			$query4 = $model->getIdAlumniByAngkatan($model->getAngkatanByIdAlumni(session('id_alumni'))->angkatan, session('id_alumni'))->getResult();
 			// dd($query4);
 			//isi :
 			// array :
-				// 'angkatan'
-				// 'id_alumni'
+			// 'angkatan'
+			// 'id_alumni'
 		}
 
 		$query5 = $model->getPrestasiByIdAlumni(session('id_alumni'))->getResult();
@@ -166,16 +166,16 @@ class User extends BaseController
 		// dd($query6);
 		//isi :
 		// array :
-			// 'id_pendidikan'
-			// 'jenjang'
-			// 'instansi'
-			// 'tahun_lulus'
-			// 'tahun_masuk'
-			// 'angkatan'
-			// 'id_alumni'
-			// 'program_studi'
-			// 'nim'
-			// 'judul_tulisan'
+		// 'id_pendidikan'
+		// 'jenjang'
+		// 'instansi'
+		// 'tahun_lulus'
+		// 'tahun_masuk'
+		// 'angkatan'
+		// 'id_alumni'
+		// 'program_studi'
+		// 'nim'
+		// 'judul_tulisan'
 
 		$query7 = $model->getUsersById(session('id_user'))->getRow();
 		// dd($query7);
@@ -285,42 +285,42 @@ class User extends BaseController
 		// dd($query3);
 		//isi :
 		// array :
-			// 'name'
+		// 'name'
 
-		if($model->getAngkatanByIdAlumni(session('id_alumni')) == NULL || $model->getAngkatanByIdAlumni(session('id_alumni'))->angkatan == 0 ) {
-			$query4 = $model->getIdAlumniByIdTempatKerja($model->getIdTempatKerjaByIdAlumni(session('id_alumni')),session('id_alumni'))->getResult();
+		if ($model->getAngkatanByIdAlumni(session('id_alumni')) == NULL || $model->getAngkatanByIdAlumni(session('id_alumni'))->angkatan == 0) {
+			$query4 = $model->getIdAlumniByIdTempatKerja($model->getIdTempatKerjaByIdAlumni(session('id_alumni')), session('id_alumni'))->getResult();
 		} else {
-			$query4 = $model->getIdAlumniByAngkatan($model->getAngkatanByIdAlumni(session('id_alumni'))->angkatan,session('id_alumni'))->getResult();
+			$query4 = $model->getIdAlumniByAngkatan($model->getAngkatanByIdAlumni(session('id_alumni'))->angkatan, session('id_alumni'))->getResult();
 			// dd($query4);
 			//isi :
 			// array :
-				// 'angkatan'
-				// 'id_alumni'
+			// 'angkatan'
+			// 'id_alumni'
 		}
 
 		$query5 = $model->getPrestasiByIdAlumni($kunci)->getResult();
 		// dd($query5);
 		//isi :
 		// array :
-			// 'id_prestasi'
-			// 'nama_prestasi'
-			// 'tahun_prestasi'
-			// 'id_alumni'
+		// 'id_prestasi'
+		// 'nama_prestasi'
+		// 'tahun_prestasi'
+		// 'id_alumni'
 
 		$query6 = $model->getPendidikanByIdAlumni($kunci)->getResult();
 		// dd($query6);
 		//isi :
 		// array :
-			// 'id_pendidikan'
-			// 'jenjang'
-			// 'instansi'
-			// 'tahun_lulus'
-			// 'tahun_masuk'
-			// 'angkatan'
-			// 'id_alumni'
-			// 'program_studi'
-			// 'nim'
-			// 'judul_tulisan'
+		// 'id_pendidikan'
+		// 'jenjang'
+		// 'instansi'
+		// 'tahun_lulus'
+		// 'tahun_masuk'
+		// 'angkatan'
+		// 'id_alumni'
+		// 'program_studi'
+		// 'nim'
+		// 'judul_tulisan'
 
 		$query7 = $model->getUsersById(session('id_user'))->getRow();
 		// dd($query7);
@@ -333,7 +333,7 @@ class User extends BaseController
 		// 'user_image'
 
 		$status = 'bukan user';
-		if ($kunci == session('id_alumni')){
+		if ($kunci == session('id_alumni')) {
 			$status = 'user';
 		}
 		$jk = $query1->jenis_kelamin;
@@ -451,12 +451,12 @@ class User extends BaseController
 			}
 
 			$image = \Config\Services::image()
-				->withFile(ROOTPATH . '/public/img/user/userid_' . session('id_user').'/' .$avatar->getName())
+				->withFile(ROOTPATH . '/public/img/user/userid_' . session('id_user') . '/' . $avatar->getName())
 				->fit(350, 350, 'center')
 				->convert(IMAGETYPE_JPEG)
-				->save(ROOTPATH . '/public/img/user/userid_' . session('id_user').'/foto_profil.jpeg', 70);
+				->save(ROOTPATH . '/public/img/user/userid_' . session('id_user') . '/foto_profil.jpeg', 70);
 
-			unlink(ROOTPATH . '/public/img/user/userid_' . session('id_user').'/' .$avatar->getName());
+			unlink(ROOTPATH . '/public/img/user/userid_' . session('id_user') . '/' . $avatar->getName());
 
 			$data = [
 				'foto_profil' => 'user/userid_' . session('id_user') . '/foto_profil.jpeg'
@@ -511,7 +511,7 @@ class User extends BaseController
 		$cig = 0;
 		$ctw = 0;
 		$cfb = 0;
-    
+
 		if (isset($_POST['checkTanggalLahir'])) {
 			$cttl = 1;
 		}
@@ -594,7 +594,7 @@ class User extends BaseController
 	{
 		$model = new AlumniModel();
 
-		$cpendidikan=0;
+		$cpendidikan = 0;
 		if (isset($_POST['checkPendidikan'])) {
 			$cpendidikan = 1;
 		}
@@ -604,7 +604,7 @@ class User extends BaseController
 		];
 
 		$model->db->table('alumni')->set($data)->where('id_alumni', session('id_alumni'))->update();
-	
+
 		return redirect()->to(base_url('User/editPendidikan'));
 	}
 
@@ -612,7 +612,7 @@ class User extends BaseController
 	{
 
 		$model = new AlumniModel();
-    
+
 		$data = [
 			'jenjang'    => htmlspecialchars($_POST['jenjang']),
 			'instansi'	 => htmlspecialchars($_POST['instansi']),
@@ -635,7 +635,7 @@ class User extends BaseController
 		} else {
 			$model->db->table('pendidikan')->insert($data);
 
-			$query = "SELECT id_pendidikan FROM pendidikan WHERE id_alumni = ".session('id_alumni')." ORDER BY id_pendidikan DESC";
+			$query = "SELECT id_pendidikan FROM pendidikan WHERE id_alumni = " . session('id_alumni') . " ORDER BY id_pendidikan DESC";
 			$id_pendidikan = $model->query($query)->getRow()->id_pendidikan;
 			$data2 = [
 				'id_pendidikan'		=> $id_pendidikan,
@@ -789,7 +789,7 @@ class User extends BaseController
 	{
 		$model = new AlumniModel();
 
-		$cprestasi=0;
+		$cprestasi = 0;
 		if (isset($_POST['checkPrestasi'])) {
 			$cprestasi = 1;
 		}
@@ -802,7 +802,7 @@ class User extends BaseController
 
 		return redirect()->to(base_url('User/editPrestasi'));
 	}
-	
+
 	public function addPrestasi()
 	{
 
@@ -934,11 +934,39 @@ class User extends BaseController
 		return view('websia/kontenWebsia/galeri/galeriAlumni', $data);
 	}
 
+	function listAlbumFoto()
+	{
+		$data['judulHalaman'] = 'Album Galeri Kenangan Alumni';
+		$data['active'] = 'galeri';
+		return view('websia/kontenWebsia/galeri/listAlbumFoto', $data);
+	}
+
+	function albumFoto()
+	{
+		$data['judulHalaman'] = 'Album Galeri Kenangan Alumni';
+		$data['active'] = 'galeri';
+		return view('websia/kontenWebsia/galeri/albumFoto', $data);
+	}
+
 	public function galeriVideo()
 	{
 		$data['judulHalaman'] = 'Galeri Video Kegiatan Alumni';
 		$data['active'] = 'galeri';
 		return view('websia/kontenWebsia/galeri/galeriVidAlumni', $data);
+	}
+
+	function listAlbumVideo()
+	{
+		$data['judulHalaman'] = 'Album Galeri Video Kenangan Alumni';
+		$data['active'] = 'galeri';
+		return view('websia/kontenWebsia/galeri/listAlbumVideo', $data);
+	}
+
+	function albumVideo()
+	{
+		$data['judulHalaman'] = 'Album Video Galeri Kenangan Alumni';
+		$data['active'] = 'galeri';
+		return view('websia/kontenWebsia/galeri/albumVideo', $data);
 	}
 
 	public function galeriWisuda()
