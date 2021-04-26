@@ -16,7 +16,7 @@ if ($login == 'belum') {
 
 <?php
 if (session()->getFlashdata('role')) { ?>
-    <!-- GAGAL ubah foto -->
+    <!-- Kalo belom login atau redirect karna role -->
     <div id="alert">
         <div class="fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40">
             <div class="duration-700 transition-all p-3 rounded-lg flex items-center" style="background-color: #FF7474;">
