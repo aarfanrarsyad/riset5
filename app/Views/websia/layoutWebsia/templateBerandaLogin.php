@@ -72,9 +72,8 @@
                                     GALERI
                                 </div>
                                 <div class="dropdown-content ml-1 w-max text-sm">
-                                    <a href="/User/galeriFoto" class="bg-primaryDark hover:bg-primary text-white hover:text-secondary text-left w-full px-2 border-b-2 border-primary transition duration-300"> Galeri Kenangan Alumni </a>
-                                    <a href="/User/galeriVideo" class="bg-primaryDark hover:bg-primary text-white hover:text-secondary text-left w-full px-2 border-b-2 border-primary transition duration-300"> Galeri Video Kegiatan HAISTIS </a>
-                                    <a href="/User/galeriWisuda" class="bg-primaryDark hover:bg-primary text-white hover:text-secondary text-left w-full px-2 transition duration-300"> Galeri Video Wisuda AIS/STIS/Polstat STIS </a>
+                                    <a href="/User/galeriFoto" class="bg-primaryDark hover:bg-primary text-white hover:text-secondary text-left w-full px-2 border-b-2 border-primary transition duration-300"> Galeri Foto </a>
+                                    <a href="/User/galeriVideo" class="bg-primaryDark hover:bg-primary text-white hover:text-secondary text-left w-full px-2 transition duration-300"> Galeri Video </a>
                                 </div>
                             </div>
                             <a href="/User/berita">
