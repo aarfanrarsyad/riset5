@@ -53,17 +53,5 @@ class Alumni extends Seeder
 			'id_tempat_kerja' => 1,
 		];
 		$this->db->table('alumni_tempat_kerja')->insert($data);
-
-		$data = [
-			'angkatan'     	=> 58,
-			'id_alumni' 	=> "0110160",
-		];
-		$this->db->table('angkatan_alumni')->insert($data);
-
-		$data = [
-			'angkatan'     	=> 52,
-			'id_alumni' 	=> "0110160",
-		];
-		$this->db->table('angkatan_alumni')->insert($data);
 	}
 }

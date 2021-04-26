@@ -233,29 +233,6 @@ class Alumni extends Migration
 		// create table
 		$this->forge->createTable('alumni_tempat_kerja');
 
-		//==================================================================
-		// tabel angkatan_alumni
-		$this->forge->addField([
-			'angkatan' => [
-				'type' => 'INT',
-				'constraint' => '4',
-			],
-			'id_alumni' => [
-				'type' => 'INT',
-				'constraint' => 6,
-				
-				'constraint' => '7',
-			],
-		]);
-
-		//primary key
-		$this->forge->addKey('angkatan', TRUE);
-		$this->forge->addKey('id_alumni', TRUE);
-		//foreign key
-		$this->forge->addForeignKey('id_alumni', 'alumni', 'id_alumni', 'CASCADE', 'CASCADE');
-		// create table
-		$this->forge->createTable('angkatan_alumni');
-
 		//==================================================================    
 		// tabel prestasi
 		$this->forge->addField([
@@ -309,6 +286,10 @@ class Alumni extends Migration
 			],
 			'tahun_masuk' => [
 				'type' => 'YEAR',
+			],
+			'angkatan' => [
+				'type' => 'INT',
+				'constraint' => '4',
 			],
 			'id_alumni' => [
 				'type' => 'INT',

@@ -142,12 +142,16 @@ class User extends BaseController
 		// array :
 		// 'name'
 
-		$query4 = $model->getIdAlumniByAngkatan($model->getAngkatanByIdAlumni(session('id_alumni')), session('id_alumni'))->getResult();
-		// dd($query4);
-		//isi :
-		// array :
-		// 'angkatan'
-		// 'id_alumni'
+		if($model->getAngkatanByIdAlumni(session('id_alumni')) == NULL) {
+			$query4 = $model->getIdAlumniByIdTempatKerja($model->getIdTempatKerjaByIdAlumni(session('id_alumni')),session('id_alumni'))->getResult();
+		} else {
+			$query4 = $model->getIdAlumniByAngkatan($model->getAngkatanByIdAlumni(session('id_alumni'))->angkatan,session('id_alumni'))->getResult();
+			// dd($query4);
+			//isi :
+			// array :
+				// 'angkatan'
+				// 'id_alumni'
+		}
 
 		$query5 = $model->getPrestasiByIdAlumni(session('id_alumni'))->getResult();
 		// dd($query5);
@@ -167,6 +171,7 @@ class User extends BaseController
 		// 'instansi'
 		// 'tahun_lulus'
 		// 'tahun_masuk'
+		// 'angkatan'
 		// 'id_alumni'
 		// 'program_studi'
 		// 'nim'
@@ -187,7 +192,7 @@ class User extends BaseController
 		$sb = $query1->status_bekerja;
 		$ap = $query1->aktif_pns;
 		//angkatan terakhir yang diambil
-		$angkatan = $model->getAngkatanByIdAlumni(session('id_alumni'));
+		// $angkatan = $model->getAngkatanByIdAlumni(session('id_alumni'));
 
 
 
@@ -205,6 +210,9 @@ class User extends BaseController
 
 		if ($ap == 0) {
 			$ap = "Tidak aktif sebagai PNS";
+			session()->set([	//cek BPS atau bukan
+				'BPS' => 'no',
+			]);
 		} else {
 			$ap = "Aktif sebagai PNS";
 		}
@@ -214,7 +222,6 @@ class User extends BaseController
 			'judulHalaman' 		=> 'Profil User | Website Riset 5',
 			'active' 		=> 'profil',
 			'alumni'      => $query1,
-			'angkatan'	  => $angkatan,
 			'jenis_kelamin'  => $jk,
 			'status_bekerja'	=> $sb,
 			'aktif_pns'		=> $ap,
@@ -298,12 +305,16 @@ class User extends BaseController
 		// array :
 			// 'name'
 
-		$query4 = $model->getIdAlumniByAngkatan($model->getAngkatanByIdAlumni(session('id_alumni')),session('id_alumni'))->getResult();
-		// dd($query4);
-		//isi :
-		// array :
-			// 'angkatan'
-			// 'id_alumni'
+			if($model->getAngkatanByIdAlumni(session('id_alumni')) == NULL) {
+				$query4 = $model->getIdAlumniByIdTempatKerja($model->getIdTempatKerjaByIdAlumni(session('id_alumni')),session('id_alumni'))->getResult();
+			} else {
+				$query4 = $model->getIdAlumniByAngkatan($model->getAngkatanByIdAlumni(session('id_alumni'))->angkatan,session('id_alumni'))->getResult();
+				// dd($query4);
+				//isi :
+				// array :
+					// 'angkatan'
+					// 'id_alumni'
+			}
 
 		$query5 = $model->getPrestasiByIdAlumni($kunci)->getResult();
 		// dd($query5);
@@ -323,6 +334,7 @@ class User extends BaseController
 			// 'instansi'
 			// 'tahun_lulus'
 			// 'tahun_masuk'
+			// 'angkatan'
 			// 'id_alumni'
 			// 'program_studi'
 			// 'nim'
@@ -346,7 +358,7 @@ class User extends BaseController
 		$sb = $query1->status_bekerja;
 		$ap = $query1->aktif_pns;
 		//angkatan terakhir yang diambil
-		$angkatan = $model->getAngkatanByIdAlumni($kunci);
+		// $angkatan = $model->getAngkatanByIdAlumni($kunci);
 
 
 
@@ -373,7 +385,6 @@ class User extends BaseController
 			'judulHalaman' 		=> 'Profil User | Website Riset 5',
 			'active' 		=> 'profil',
 			'alumni'      => $query1,
-			'angkatan'	  => $angkatan,
 			'jenis_kelamin'  => $jk,
 			'status_bekerja'	=> $sb,
 			'aktif_pns'		=> $ap,
