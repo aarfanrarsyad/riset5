@@ -108,29 +108,26 @@ if ($status == 'bukan user') {
                 <?php endif ?>
             </p>
             <p class="font-heading text-center md:text-left text-base mb-5 md:mb-3 lg:mb-5">
-                <!-- Angkatan -->
-                Angkatan <span class="text-primary">ke-<?php //$angkatan; 
-                                                        ?> </span><br />
                 <!-- Akademi Ilmu Statistik / STIS/ POLSTAT STIS  ========>  Harusnya diatur di BE -->
-                <?php foreach ($pendidikan as $row) :
-                    if ($row->instansi == "Akademi Ilmu Statistik" || $row->instansi == "STIS" || $row->instansi == "POLSTAT STIS") :
+                <?php foreach ($pendidikan as $row) {
+                    if ($row->instansi == "Akademi Ilmu Statistik" || $row->instansi == "STIS" || $row->instansi == "POLSTAT STIS") {
                         echo $row->instansi; ?>
                         <br />
-                        <?php if ($row->nim != NULL and $row->angkatan != NULL) : ?>
+                        <?php if ($row->nim != NULL and $row->angkatan != NULL) { ?>
                             <!-- NIM -->
                             NIM <span class="text-primary"><?= $row->nim; ?></span>
                             <!-- Angkatan -->
                             Angkatan <span class="text-primary">ke-<?= $row->angkatan; ?> </span><br />
-                <?php endif;
-                    endif;
-                endforeach; ?>
+                <?php }
+                    }
+                } ?>
             </p>
             <!-- Instansi tempat bekerja dan jabatan -->
             <p class="font-heading text-base text-center md:text-left">
                 Bekerja di <span class="text-primary"> <?= $tempat_kerja->nama_instansi; ?> </span></br>
                 <?php if ($cjab == "") : ?>
                     Jabatan terakhir di BPS sebagai <span class="text-primary"> <?= $alumni->jabatan_terakhir; ?> </span>
-                <?php endif; ?>
+                <?php endif ?>
             </p>
         </div>
     </div>
@@ -146,11 +143,11 @@ if ($status == 'bukan user') {
             <?php if ($calamat == "") : ?>
                 <p class="font-heading text-primary text-xs px-5 md:px-0 mt-6">Lokasi Tempat Tinggal Saat Ini</p>
                 <span class="font-heading flex justify-start px-3 md:px-0 text-base text-left mb-5 md:mb-2">
-                    <img class="my-2 mt-2 mr-0 md:mr-2 ml-1 md:ml-0 w-6 h-6 md:w-6 float-left" src="/img/components/icon/maps_flag.png" alt="">
+                    <img class="my-2 mt-2 mr-0 md:mr-2 ml-1 md:ml-0 w-6 h-6 md:w-6 float-left" src="/img/icon/maps_flag.png" alt="">
                     <!-- Lokasi tempat tinggal -->
                     <p class="font-heading my-2 mt-2"> <?= $alumni->alamat_alumni ?> </p>
                 </span>
-            <?php endif; ?>
+            <?php endif ?>
             <!-- Awal media sosial dan telepon -->
             <?php
             if ($alumni->email == "") {
@@ -180,14 +177,14 @@ if ($status == 'bukan user') {
                         <!-- Email -->
                         <?php if ($cemail == "") : ?>
                             <div <?= $cemail ?> class="inline-block mb-2 flex flex-row">
-                                <img src="/img/components/icon/message.png" alt="" class="float-left w-5">
+                                <img src="/img/icon/message.png" alt="" class="float-left w-5">
                                 <span class="font-heading text-xs text-primary text-center ml-1 md:ml-2"><?= $alumni->email ?></span>
                             </div>
                         <?php endif ?>
                         <!-- Facebook -->
                         <?php if ($cfb == "") : ?>
                             <div <?= $cfb ?> class="inline-block flex flex-row">
-                                <img src="/img/components/icon/facebook.png" alt="" class="float-left ml-1 w-2 h-4">
+                                <img src="/img/icon/facebook.png" alt="" class="float-left ml-1 w-2 h-4">
                                 <span class="font-heading text-xs text-primary text-left flex items-center ml-3 md:ml-4"><?= $fb ?></span>
                             </div>
                         <?php endif ?>
@@ -198,14 +195,14 @@ if ($status == 'bukan user') {
                         <!-- Twitter -->
                         <?php if ($ctw == "") : ?>
                             <div <?= $ctw ?> class="inline-block mb-2 flex flex-row">
-                                <img src="/img/components/icon/twitter.png" alt="" class="float-left w-4 w-4">
+                                <img src="/img/icon/twitter.png" alt="" class="float-left w-4 w-4">
                                 <span class="font-heading text-xs text-primary text-center ml-2 md:ml-3"><?= $twitter ?></span>
                             </div>
                         <?php endif ?>
                         <!-- Instagram -->
                         <?php if ($cig == "") : ?>
                             <div <?= $cig ?> class="inline-block flex flex-row">
-                                <img src="/img/components/icon/instagram.png" alt="" class="float-left w-4">
+                                <img src="/img/icon/instagram.png" alt="" class="float-left w-4">
                                 <span class="font-heading text-xs text-primary text-center flex items-center ml-2 md:ml-3"><?= $ig ?></span>
                             </div>
                         <?php endif ?>
@@ -236,7 +233,7 @@ if ($status == 'bukan user') {
                 <div class="card shadow border-gray-800 hover:bg-gray-200 hover:shadow-inner transition duration-700 bg-white relative" data-aos="zoom-in">
                     <a href="/User/profilAlumni?id_alumni=<?= $row->id_alumni; ?>" target="_new">
                         <div class="">
-                            <img class="w-16 md:w-20 lg:w-24 mx-auto mt-4" src="/img/avatar.png" alt="" /> <!-- Hilangin padding klo dah ada gambar, dan pake w-full aja -->
+                            <img class="w-full md:w-20 lg:w-24 mx-auto mt-4" src="/img/<?= $row->foto_profil ?>" alt="" /> <!-- Hilangin padding klo dah ada gambar, dan pake w-full aja -->
                         </div>
                         <div>
                             <span class="title mt-4 font-heading text-sm md:text-base lg:text-lg font-semibold text-primary block px-2 md:px-0 text-center"><?= $row->nama; ?></span>
@@ -251,7 +248,7 @@ if ($status == 'bukan user') {
         <div class="visible sm:invisible">
             <a class="bg-secondary mb-8 mt-1 md:mt-0 float-right font-paragraph text-sm text-white text-center py-1 px-4 mx-auto rounded-full cursor-pointer hover:bg-secondaryhover transition-colors duration-300" href="/User/rekomendasi">
                 Lihat Semua Rekomendasi
-                <img src="/img/components/icon/g" alt="" class="float-right pl-2">
+                <img src="/img/icon/g" alt="" class="float-right pl-2">
             </a>
         </div>
     </div>
@@ -317,29 +314,29 @@ if ($status == 'bukan user') {
 </div>
 <!-- Akhir Informasi Intsansi -->
 
-<?php if ($cprestasi == 1) : ?>
+<?php if ($cprestasi == 1) { ?>
     <!-- Awal Riwayat Prestasi -->
     <div class="w-full my-8 lg:px-20 md:px-8 px-2">
         <h3 class="font-heading font-bold text-xl text-secondary">Riwayat Prestasi</h3>
         <div class="md:shadow-lg lg:shadow-xl rounded-2xl px-0 py-1 md:px-5 md:py-5 lg:mx-14 lg:p-8 mb-1 md:mt-3">
-            <?php if ($prestasi == NULL) : ?>
-                <p>Riwayat Prestasi tidak ditemukan.</p>
-            <?php else : ?>
+            <?php if ($prestasi == NULL) {
+                echo "<p>Riwayat Prestasi tidak ditemukan.</p>";
+            } else { ?>
                 <?php foreach ($prestasi as $row) : ?>
                     <div class="flex justify-between px-3 font-heading text-primary mt-2 md:mt-2 lg:mt-3">
                         <div class=""><span class="text-black"><?= $row->nama_prestasi; ?></span> </div>
                         <div class="font-bold"><?= $row->tahun_prestasi; ?></div>
                     </div>
             <?php endforeach;
-            endif; ?>
+            } ?>
             <!-- Jika data prestasi belum diinput, ditampilkan "belum ada riwayat prestasi" -->
         </div>
         <hr class="visible sm:invisible border-primary border-opacity-75 w-4/5 object-center mx-auto mt-8">
     </div>
     <!-- Akhir Riwayat Prestasi -->
-<?php endif; ?>
+<?php } ?>
 
-<?php if ($cpendidikan == 1) : ?>
+<?php if ($cpendidikan == 1) { ?>
     <!-- Awal Riwayat Pendidikan -->
     <div class="w-full my-8 lg:px-20 md:px-8 px-2 mb-6 md:mb-12">
         <h3 class="font-heading font-bold text-xl text-secondary">Riwayat Pendidikan</h3>
@@ -364,8 +361,9 @@ if ($status == 'bukan user') {
                                 <tr>
                                     <td colspan="6" class="text-sm text-center border-b-2 border-gray-200 px-3 lg:px-5 py-2 md:py-3 lg:py-4">Riwayat prestasi tidak ditemukan.</td>
                                 </tr>
-                                <?php } else {
-                                foreach ($pendidikan as $row) :
+                            <?php } else { ?>
+                                <?php foreach ($pendidikan as $row) : ?>
+                                    <?php
                                     if ($row->jenjang == "") {
                                         $jenjang = "belum terisi";
                                     } else {
@@ -395,7 +393,8 @@ if ($status == 'bukan user') {
                                         $judul_tulisan = "belum terisi";
                                     } else {
                                         $judul_tulisan = $row->judul_tulisan;
-                                    } ?>
+                                    }
+                                    ?>
                                     <tr>
                                         <td class="text-sm text-left border-b-2 border-gray-200 px-3 lg:px-5 py-2 md:py-3 lg:py-4"><?= $jenjang; ?></td>
                                         <td class="text-sm text-left border-b-2 border-gray-200 px-3 lg:px-5 py-2 md:py-3 lg:py-4"><?= $instansi; ?></td>
@@ -421,6 +420,6 @@ if ($status == 'bukan user') {
         </div>
     </div>
     <!-- Akhir Riwayat Pendidikan -->
-<?php endif ?>
+<?php } ?>
 
 <?= $this->endSection(); ?>
