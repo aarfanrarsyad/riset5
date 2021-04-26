@@ -68,7 +68,7 @@ if ($alumni->cfb == 0) {
                         <button class="updateFotoProfil bg-secondary rounded-full font-paragraph text-white px-3 py-1 hover:bg-secondaryhover lg:text-base text-sm focus:outline-none">Ubah foto profil</button>
                     </div>
                 </div>
-                <div class="mt-8 flex justify-center editTampilan hidden lg:absolute lg:top-80">
+                <div class="mt-8 justify-center editTampilan hidden lg:absolute lg:top-80">
                     <div>
                         <div class="shadow-xl rounded-lg p-3">
                             <p class="font-heading font-medium text-sm mb-1">Keterangan:</p>

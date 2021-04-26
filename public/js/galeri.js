@@ -16,17 +16,17 @@ $('.albumImg').click(function () {
         <div class="hidden m-auto opacity-0 duration-700 transition-all bg-gray bg-opacity-0 w-11/12 sm:w-9/12 md:w-8/12 lg:w-7/12">
 
             <!-- Awal Tombol Laporkan foto -->
-            <button onClick="laporkanFoto()"><img src="/img/danger-sign.png" alt="" class="absolute top-3 right-3"></button>
+            <button onClick="laporkanFoto()"><img src="/img/components/icon/danger-sign.png" alt="" class="absolute top-3 right-3"></button>
             <!-- Akhir Tombol Laporkan foto -->
 
             <div class="flex flex-col justify-center items-center">
                 <div class="flex flex-row justify-center items-center gap-x-4 mt-8 mb-6">
                     <a href="#img-1">
-                        <img src="/img/left-on.png" alt="" class="">
+                        <img src="/img/components/icon/left-on.png" alt="" class="">
                     </a>
                     <img src="/img/alumni.jpg" alt="" class="w-3/4">
                     <a href="">
-                        <img src="/img/right-on.png" alt="" class="">
+                        <img src="/img/components/icon/right-on.png" alt="" class="">
                     </a>
                 </div>
 

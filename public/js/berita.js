@@ -74,7 +74,7 @@ $('#formUnggahBerita').submit(function (e) {
   $('#kirimBerita').click(function (e) {
     $('#konfirUnggahBerita').html(`
       <div class="hidden opacity-0 duration-700 transition-all p-3 rounded-lg flex items-center" style="background-color: #B1FF66;">
-          <img src="/img/icon/check.png" class="h-5 mr-2" style="color: #54AC00;">
+          <img src="/img/components/icon/check.png" class="h-5 mr-2" style="color: #54AC00;">
           <p class="sm:text-base text-sm font-heading font-bold" style="color: #54AC00;">Berita Berhasil Dikirim</p>
       </div>
       `)

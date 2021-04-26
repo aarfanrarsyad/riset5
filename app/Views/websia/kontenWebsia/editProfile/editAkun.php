@@ -36,7 +36,7 @@
 
 <!-- BERHASIL edit akun -->
 <div id="berhasilEditAkun">
-    <div class="hidden opacity-0 fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40">
+    <div class="hidden opacity-0 fixed top-0 bottom-0 right-0 left-0 z-50 justify-center items-center bg-black bg-opacity-40">
         <div class="duration-700 transition-all p-3 rounded-lg flex items-center" style="background-color: #B1FF66;">
             <img src="/img/components/icon/check.png" class="h-5 mr-2" style="color: #54AC00;">
             <p class="sm:text-base text-sm font-heading font-bold text-success">Akun Berhasil Disimpan</p>
@@ -50,7 +50,7 @@
 </script>
 <!-- GAGAL edit akun -->
 <div id="gagalEditAkun">
-    <div class="hidden opacity-0 fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40">
+    <div class="hidden opacity-0 fixed top-0 bottom-0 right-0 left-0 z-50 justify-center items-center bg-black bg-opacity-40">
         <div class="duration-700 transition-all p-3 rounded-lg flex items-center" style="background-color: #FF7474;">
             <img src="/img/components/icon/warning.png" class="h-5 mr-2">
             <p class="sm:text-base text-sm font-heading font-bold" style="color: #C51800;">Akun Tidak Berhasil Disimpan</p>

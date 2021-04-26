@@ -140,13 +140,13 @@ if ($login == 'belum') {
                 <div class="text-sm font-heading font-semibold">Keterangan :</div>
                 <div class="flex items-center text-xs font-paragraph">
                     <span class="font-heading flex justify-start text-left">
-                        <img class="mr-0 md:mr-2 ml-1 md:ml-0 w-4 h-4 md:w-4 float-left" src="/img/icon/peta_lokasi.png" alt="">
+                        <img class="mr-0 md:mr-2 ml-1 md:ml-0 w-4 h-4 md:w-4 float-left" src="/img/components/icon/peta_lokasi.png" alt="">
                         <p class="font-heading text-xs">Terdapat total 2000 Alumni yang berada di luar Indonesia</p>
                     </span>
                 </div>
                 <div class="flex items-center text-xs font-paragraph">
                     <span class="font-heading flex justify-start text-left">
-                        <img class="mr-0 md:mr-2 ml-1 md:ml-0 w-4 h-4 md:w-4 float-left" src="/img/icon/peta_beluminput.png" alt="">
+                        <img class="mr-0 md:mr-2 ml-1 md:ml-0 w-4 h-4 md:w-4 float-left" src="/img/components/icon/peta_beluminput.png" alt="">
                         <p class="font-heading text-xs">Terdapat total 300 Alumni yang belum menginput data</p>
                     </span>
                 </div>

@@ -9,7 +9,7 @@
         <div id="sidebarDok" class="md:top-20 sm:top-16 top-11 bottom-0 xl:w-80 lg:w-64 lg:left-0 -left-64 w-64 transition-all duration-700 easy-out md:-mt-20 sm:-mt-16 -mt-11 z-20 fixed bg-primarySidebar">
             <!-- start sidebar posisi buka -->
 
-            <img src="/img/components/logo/logoSIA.png" class="md:w-20 sm:w-16 w-10 md:mb-1.5 md:mt-2.5 my-2 mx-auto" alt="Logo SIA">
+            <img src="/img/components/logo/logo_sia.png" class="md:w-20 sm:w-16 w-10 md:mb-1.5 md:mt-2.5 my-2 mx-auto" alt="Logo SIA">
             <div class="text-secondary text-xl font-bold mb-3 text-center">DOKUMENTASI</div>
             <div class="flex justify-center mt-2 mb-5 h-9 relative w-full">
                 <input type="text" name="search" class="input w-5/6 pl-2 pr-8 border-2 rounded-lg border-gray-400 md:text-base outline-none text-black focus:border-secondary" spellcheck="false" id="search" placeholder="Pencarian">
