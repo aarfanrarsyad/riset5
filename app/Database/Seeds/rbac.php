@@ -14,7 +14,7 @@ class Rbac extends Seeder
 			[
 				'email'             => 'dummy@stis.ac.id',
 				'username'          => 'Dummy',
-				'id_alumni'         => '0110160',
+				'id_alumni'         => '1',
 				'fullname'          => 'Dummy_dummy',
 				'user_image'        => 'default.svg',
 				'password_hash'     => '$2y$10$yLFu3bK0s5cHqd1VLT6Eh.GjA3H2GJzwqb6o/gjrhKXTWGkMsh3IS',
