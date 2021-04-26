@@ -14,8 +14,8 @@
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right text-sm">
-                        <li class="breadcrumb-item"><a href="<?= base_url('/') ?>">Home</a></li>
-                        <li class="breadcrumb-item text-muted"><span>Group permission</span></li>
+                        <li class="breadcrumb-item text-primaryHover"><a href="<?= base_url('/') ?>">Home</a></li>
+                        <li class="breadcrumb-item text-muted text-gray-100"><span>Group permission</span></li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -26,14 +26,14 @@
             <div class="card card-secondary elevation-3 card-outline">
                 <div class="card-body">
                     <div class="row">
-                        <div class="col">
-                            <h5><i class="fas fa-cogs text-secondary"></i>&ensp;Group permission</h5>
+                        <div class="col text-primaryHover font-heading">
+                            <h5><i class="fas fa-cogs text-primaryHover"></i>&ensp;Group permission</h5>
                         </div>
                     </div>
                     <br>
                     <div class="row">
                         <div class="col-md-12">
-                            <table class="table table-hover table-sm text-sm" id="permissions-index">
+                            <table class="table table-hover table-sm text-sm text-black" id="permissions-index">
                                 <thead>
                                     <tr>
                                         <td class="text-center">No.</td>
@@ -48,7 +48,7 @@
                                             <td class="text-center"><?= $i ?></td>
                                             <td><?= $group->name ?></td>
                                             <td class="text-center">
-                                                <a href="<?= base_url('/admin/permissions/' . $group->id) ?>" class="btn btn-xs btn-outline-primary"><i class="fas fa-user-cog"></i>&ensp;<span class="text-xs">Set permissions</span></button>
+                                                <a href="<?= base_url('/admin/permissions/' . $group->id) ?>" class="btn btn-xs text-primary border-primary hover:text-white hover:bg-primary"><i class="fas fa-user-cog text-primaryHover"></i>&ensp;<span class="text-xs">Set permissions</span></button>
                                             </td>
                                         </tr>
                                         <?php $i++ ?>

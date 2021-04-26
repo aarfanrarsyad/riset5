@@ -9,11 +9,11 @@
   }
 </script>
 <!-- Main Sidebar Container -->
-<aside class="main-sidebar elevation-4 sidebar-light-indigo">
+<aside class="main-sidebar elevation-4 sidebar-light-indigo bg-primarySidebar text-white">
   <!-- Brand Logo -->
-  <a href="<?= base_url() ?>" class="brand-link navbar-white">
-    <img src="<?= base_url('/img/components/logo/logo_pkl.png') ?>" alt="logo PKL" class="brand-image img-circle elevation-2">
-    <span class="brand-text font-weight-light">Admin Dashboard</span>
+  <a href="<?= base_url() ?>" class="brand-link bg-primaryHover py-4">
+    <img src="<?= base_url('/img/components/logo/logo_sia.png') ?>" alt="logo PKL" class="h-14 float-left -mt-3 py-auto">
+    <span class="font-heading text-sm font-medium text-white mx-3">Admin Dashboard</span>
   </a>
 
   <!-- Sidebar -->
@@ -24,7 +24,7 @@
         <img src="<?= base_url() ?>/vendor/AdminLTE/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
       </div>
       <div class="info">
-        <a href="#" class="d-block"><?php if (userdata()) echo (userdata()['fullname']) ?></a>
+        <a href="#" class="d-block text-white"><?php if (userdata()) echo (userdata()['fullname']) ?></a>
       </div>
     </div>
 
@@ -60,20 +60,20 @@
           } ?>
 
           <li class="nav-item">
-            <a href="javascript:void(0)" class="nav-link" onclick="active_menu(event)" id="menu-<?= $menu['menu_id'] ?>">
+            <a href="javascript:void(0)" class="nav-link text-white" onclick="active_menu(event)" id="menu-<?= $menu['menu_id'] ?>">
               <i class="<?= $menu['menu_icon'] ?>" onclick="stop(event)"></i>&ensp;
               <p>
                 <?= $menu['menu_name'] ?>
                 <i class="fas fa-angle-left right"></i>
-                <span class="badge badge-info right"><?= count($data_resources) ?></span>
+                <span class="badge badge-info right text-white"><?= count($data_resources) ?></span>
               </p>
             </a>
 
             <ul class="nav nav-treeview">
               <?php foreach ($data_resources as $data_resource) : ?>
                 <li class="nav-item">
-                  <a href="<?= base_url($data_resource['url']) ?>" id="<?= str_replace(' ', '-', strtolower($data_resource['title'])) ?>" data-menu="<?= $menu['menu_id'] ?>" class="nav-link">
-                    <i class="far fa-circle nav-icon text-sm icon-list"></i>&ensp;<i class="<?= $data_resource['icon'] ?>"></i>
+                  <a href="<?= base_url($data_resource['url']) ?>" id="<?= str_replace(' ', '-', strtolower($data_resource['title'])) ?>" data-menu="<?= $menu['menu_id'] ?>" class="nav-link text-white">
+                    <i class="far fa-circle nav-icon text-sm icon-list text-white"></i>&ensp;<i class="<?= $data_resource['icon'] ?>"></i>
                     <p><?= $data_resource['title'] ?></p>
                   </a>
                 </li>
@@ -83,7 +83,7 @@
         <?php endforeach; ?>
         <br>
         <li class="nav-item">
-          <a href="<?= base_url('auth/logout') ?>" id="logout" class="nav-link">
+          <a href="<?= base_url('auth/logout') ?>" id="logout" class="nav-link text-white">
             <i class="fas fa-sign-out-alt"></i>&ensp;
             <p>Logout</p>
           </a>

@@ -28,8 +28,8 @@
       icon: 'question',
       text: 'Are you sure to delete the ' + menu + ' menu?',
       showCancelButton: true,
-      confirmButtonColor: '#4248ED',
-      cancelButtonColor: '#33A1C4',
+      confirmButtonColor: '#54AC00',
+      cancelButtonColor: '#D81B01',
       confirmButtonText: 'Yes, delete it!'
     }).then((result) => {
       if (result.isConfirmed) {
@@ -53,8 +53,8 @@
               })
             } else {
               if (result !== false) {
-                let html = '<div class="alert alert-danger text-sm"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>' +
-                  '<span style="font-weight:bold">Something went wrong !</span>&ensp;' +
+                let html = '<div class="alert text-sm" style="background-color: #FF7474;"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>' +
+                  '<span style="font-weight:bold text-black">Something went wrong !</span>&ensp;' +
                   'The ' + menu + ' menu is currently being used by resource ' + result +
                   '</div>';
                 $('.response').append(html);
@@ -79,8 +79,8 @@
       icon: 'question',
       text: 'Are you sure to delete the ' + resource + ' resource?',
       showCancelButton: true,
-      confirmButtonColor: '#4248ED',
-      cancelButtonColor: '#33A1C4',
+      confirmButtonColor: '#54AC00',
+      cancelButtonColor: '#D81B01',
       confirmButtonText: 'Yes, delete it!'
     }).then((result) => {
       if (result.isConfirmed) {
@@ -128,8 +128,8 @@
         </div><!-- /.col -->
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right text-sm">
-            <li class="breadcrumb-item"><a href="<?= base_url('admin') ?>">Home</a></li>
-            <li class="breadcrumb-item text-muted"><span>Resources Management</span></li>
+            <li class="breadcrumb-item text-primaryHover"><a href="<?= base_url('admin') ?>">Home</a></li>
+            <li class="breadcrumb-item text-muted text-gray-100"><span>Resources Management</span></li>
           </ol>
         </div><!-- /.col -->
       </div><!-- /.row -->
@@ -144,8 +144,8 @@
       <div class="card card-secondary elevation-3 card-outline">
         <div class="card-body">
           <div class="row">
-            <div class="col">
-              <h5><i class="fas fa-chevron-circle-down text-secondary"></i>&ensp;Management Menu</h5>
+            <div class="col text-primaryHover font-heading">
+              <h5><i class="fas fa-chevron-circle-down text-primaryHover"></i>&ensp;Management Menu</h5>
             </div>
             <div class="col d-flex justify-content-end">
               <button type="button" class="btn btn-outline-secondary btn-xs" onclick="insert_menu()"><i class=" fas fa-user-plus"></i>&ensp;Add new menu</button>
@@ -154,7 +154,7 @@
           <br>
           <div class="row">
             <div class="col-md-12">
-              <table class="table table-hover table-sm text-sm" id="menu-table">
+              <table class="table table-hover table-sm text-sm text-black" id="menu-table">
                 <thead>
                   <tr>
                     <td class="text-center">No.</td>
@@ -171,8 +171,8 @@
                       <td><?= $dataset['menu_name'] ?></td>
                       <td><i class="<?= $dataset['menu_icon'] ?> text-secondary"></i></td>
                       <td class="text-center">
-                        <button type="button" class="btn btn-xs btn-outline-primary mr-1" onclick="edit_menu(<?= $dataset['menu_id'] ?>,'<?= $dataset['menu_name'] ?>','<?= $dataset['menu_icon'] ?>')"><i class="fas fa-edit"></i>&ensp;<span class="text-xs">Update</span></button>
-                        <button type="button" class="btn btn-xs btn-outline-primary" onclick="delete_menu(<?= $dataset['menu_id'] ?>, '<?= $dataset['menu_name'] ?>')"><i class="fas fa-trash"></i>&ensp;<span class="text-xs">Delete</span></button>
+                        <button type="button" class="btn btn-xs  text-primary border-primary hover:text-white hover:bg-primary mr-1" onclick="edit_menu(<?= $dataset['menu_id'] ?>,'<?= $dataset['menu_name'] ?>','<?= $dataset['menu_icon'] ?>')"><i class="fas fa-edit"></i>&ensp;<span class="text-xs">Update</span></button>
+                        <button type="button" class="btn btn-xs  text-primary border-primary hover:text-white hover:bg-primary" onclick="delete_menu(<?= $dataset['menu_id'] ?>, '<?= $dataset['menu_name'] ?>')"><i class="fas fa-trash"></i>&ensp;<span class="text-xs">Delete</span></button>
                       </td>
                     </tr>
                     <?php $i++ ?>
@@ -222,14 +222,14 @@
                       <td><i class="<?= $dataset['icon'] ?> text-secondary"></i></td>
                       <td class="text-center">
                         <?php if ($dataset['active'] == 1) : ?>
-                          <span class="badge badge-pill badge-primary">Active</span>
+                          <span class="badge badge-pill bg-secondaryhover">Active</span>
                         <?php else : ?>
                           <span class="badge badge-pill badge-danger">Not Active</span>
                         <?php endif; ?>
                       </td>
                       <td class="text-center">
-                        <a href="<?= base_url('/admin/resources/update/' . $dataset['submenu_id']) ?>" class="btn btn-xs btn-outline-primary mr-1"><i class="fas fa-edit"></i>&ensp;<span class="text-xs">Update</span></a>
-                        <button onclick="delete_resource(<?= $dataset['submenu_id'] ?>, '<?= $dataset['title'] ?>')" class="btn btn-xs btn-outline-primary"><i class="fas fa-trash"></i>&ensp;<span class="text-xs">Delete</span></button>
+                        <a href="<?= base_url('/admin/resources/update/' . $dataset['submenu_id']) ?>" class="btn btn-xs  text-primary border-primary hover:text-white hover:bg-primary mr-1"><i class="fas fa-edit"></i>&ensp;<span class="text-xs">Update</span></a>
+                        <button onclick="delete_resource(<?= $dataset['submenu_id'] ?>, '<?= $dataset['title'] ?>')" class="btn btn-xs  text-primary border-primary hover:text-white hover:bg-primary"><i class="fas fa-trash"></i>&ensp;<span class="text-xs">Delete</span></button>
                       </td>
                     </tr>
                     <?php $i++ ?>
@@ -261,7 +261,7 @@
             <input type="text" class="form-control text-sm border-top-0 border-right-0 border-left-0" name="icon" id="icon" placeholder="Insert icon" style="border-radius:0" autocomplete="off" required>
           </div>
           <div class="d-flex justify-content-end">
-            <button type="submit" id="btn-submit" name="insert_menu" class="btn btn-sm btn-outline-primary"><i class="fas fa-paper-plane"></i>&ensp;Send data</button>
+            <button type="submit" id="btn-submit" name="insert_menu" class="btn btn-sm  text-primary border-primary hover:text-white hover:bg-primary"><i class="fas fa-paper-plane"></i>&ensp;Send data</button>
           </div>
         </form>
       </div>

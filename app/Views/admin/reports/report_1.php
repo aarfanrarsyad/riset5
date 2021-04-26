@@ -13,8 +13,8 @@
         </div><!-- /.col -->
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right text-sm">
-            <li class="breadcrumb-item"><a href="<?= base_url('/') ?>">Home</a></li>
-            <li class="breadcrumb-item text-muted"><span>Admin Report</span></li>
+            <li class="breadcrumb-item text-primaryHover"><a href="<?= base_url('/') ?>">Home</a></li>
+            <li class="breadcrumb-item text-muted text-gray-100"><span>Admin Report</span></li>
           </ol>
         </div><!-- /.col -->
       </div><!-- /.row -->
@@ -27,14 +27,14 @@
       <div class="card card-secondary elevation-3 card-outline">
         <div class="card-body">
           <div class="row">
-            <div class="col">
-              <h5><i class="fas fa-chart-pie text-secondary"></i>&ensp;Reports 1</h5>
+            <div class="col font-heading text-primaryHover font-heading">
+              <h5><i class="fas fa-chart-pie text-primaryHover"></i>&ensp;Reports 1</h5>
             </div>
           </div>
           <br>
           <div class="row">
             <div class="col-md-12">
-             
+
               <!-- Put your content in here -->
 
             </div>
