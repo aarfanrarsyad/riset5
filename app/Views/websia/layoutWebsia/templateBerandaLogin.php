@@ -252,5 +252,6 @@
 <script type="text/javascript" src="/js/editProfil.js"></script>
 <script type="text/javascript" src="/js/rekomendasi.js"></script>
 <script type="text/javascript" src="/js/berita.js"></script>
+<script type="text/javascript" src="/js/galeri.js"></script>
 
 </html>
