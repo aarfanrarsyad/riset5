@@ -20,11 +20,11 @@ if ($checked->pendidikan == 0) {
             <div>
                 Edit Tampilan
             </div>
-            <img src="/img/icon/edit.png" alt="" class="w-4 h-4">
+            <img src="/img/components/icon/edit.png" alt="" class="w-4 h-4">
         </div>
     </div>
     <div class="editTampilanPendidikan hidden">
-        <form action="/User/updateTampilanPendidikan" method="POST" >
+        <form action="/User/updateTampilanPendidikan" method="POST">
             <div class="flex justify-between mb-4">
                 <label for="checkPendidikan" id="labelCheckPendidikan" class="text-gray-500 font-bold">Tampilkan Pendidikan</label>
                 <input type="checkbox" <?= $cpendidikan ?> name="checkPendidikan" id="checkPendidikan" class="cursor-pointer outline-none" onclick="checkPendidikan()">
@@ -131,7 +131,7 @@ if ($checked->pendidikan == 0) {
 <div id="berhasilEditPendidikan">
     <div class="hidden opacity-0 fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40">
         <div class="duration-700 transition-all p-3 rounded-lg flex items-center" style="background-color: #B1FF66;">
-            <img src="/img/icon/check.png" class="h-5 mr-2" style="color: #54AC00;">
+            <img src="/img/components/icon/check.png" class="h-5 mr-2" style="color: #54AC00;">
             <p class="sm:text-base text-sm font-heading font-bold text-success">Pendidikan Berhasil Disimpan</p>
         </div>
     </div>
@@ -146,7 +146,7 @@ if ($checked->pendidikan == 0) {
 <div id="gagalEditPendidikan">
     <div class="hidden opacity-0 fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40">
         <div class="duration-700 transition-all p-3 rounded-lg flex items-center" style="background-color: #FF7474;">
-            <img src="/img/icon/warning.png" class="h-5 mr-2">
+            <img src="/img/components/icon/warning.png" class="h-5 mr-2">
             <p class="sm:text-base text-sm font-heading font-bold" style="color: #C51800;">Pendidikan Tidak Berhasil Disimpan</p>
         </div>
     </div>
@@ -161,7 +161,7 @@ if ($checked->pendidikan == 0) {
 <div id="berhasilTambahPendidikan">
     <div class="hidden opacity-0 fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40">
         <div class="duration-700 transition-all p-3 rounded-lg flex items-center" style="background-color: #B1FF66;">
-            <img src="/img/icon/check.png" class="h-5 mr-2" style="color: #54AC00;">
+            <img src="/img/components/icon/check.png" class="h-5 mr-2" style="color: #54AC00;">
             <p class="sm:text-base text-sm font-heading font-bold text-success">Pendidikan Berhasil Ditambahkan</p>
         </div>
     </div>
@@ -176,7 +176,7 @@ if ($checked->pendidikan == 0) {
 <div id="gagalTambahPendidikan">
     <div class="hidden opacity-0 fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40">
         <div class="duration-700 transition-all p-3 rounded-lg flex items-center" style="background-color: #FF7474;">
-            <img src="/img/icon/warning.png" class="h-5 mr-2">
+            <img src="/img/components/icon/warning.png" class="h-5 mr-2">
             <p class="sm:text-base text-sm font-heading font-bold" style="color: #C51800;">Pendidikan Tidak Berhasil Ditambahkan</p>
         </div>
     </div>

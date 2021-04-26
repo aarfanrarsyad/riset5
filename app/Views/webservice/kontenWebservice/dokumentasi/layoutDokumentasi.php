@@ -47,7 +47,7 @@
                 <li class="text-secondary relative mb-1">
                     <div class="itemSideDok pl-5 rounded-r-lg flex justify-between items-center pr-4 md:text-xl font-semibold">
                         <a href="#data" class="py-0.5 px-2 cursor-pointer select-none">Data</a>
-                        <img src="/img/icon/drop-down.svg" class="text-red-500 cursor-pointer transform transition-all duration-300">
+                        <img src="/img/components/icon/drop-down.svg" class="text-red-500 cursor-pointer transform transition-all duration-300">
                     </div>
                     <ul class="text-white text-white transition-all duration-300 easy-out absolute overflow-hidden open-submenu w-full">
                         <li class="itemSideDok pl-12 py-0.5 rounded-r-lg md:text-lg">
@@ -62,7 +62,7 @@
                 <li class="text-secondary relative transform translate-y-16 duration-300">
                     <div class="itemSideDok pl-5 rounded-r-lg flex justify-between items-center pr-4 md:text-xl font-semibold">
                         <a href="#judul" class="py-0.5 px-2 cursor-pointer select-none">Judul</a>
-                        <img src="/img/icon/drop-down.svg" class="text-red-500 cursor-pointer transform transition-all duration-300">
+                        <img src="/img/components/icon/drop-down.svg" class="text-red-500 cursor-pointer transform transition-all duration-300">
                     </div>
                     <ul class="text-white text-white transition-all duration-300 easy-out absolute overflow-hidden open-submenu w-full">
                         <li class="itemSideDok pl-12 py-0.5 rounded-r-lg md:text-lg">
