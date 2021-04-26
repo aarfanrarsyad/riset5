@@ -169,10 +169,10 @@
                     <tr>
                       <td class="text-center"><?= $i ?></td>
                       <td><?= $dataset['menu_name'] ?></td>
-                      <td><i class="<?= $dataset['menu_icon'] ?> text-secondary"></i></td>
+                      <td><i class="<?= $dataset['menu_icon'] ?> text-primaryHover"></i></td>
                       <td class="text-center">
-                        <button type="button" class="btn btn-xs  text-primary border-primary hover:text-white hover:bg-primary mr-1" onclick="edit_menu(<?= $dataset['menu_id'] ?>,'<?= $dataset['menu_name'] ?>','<?= $dataset['menu_icon'] ?>')"><i class="fas fa-edit"></i>&ensp;<span class="text-xs">Update</span></button>
-                        <button type="button" class="btn btn-xs  text-primary border-primary hover:text-white hover:bg-primary" onclick="delete_menu(<?= $dataset['menu_id'] ?>, '<?= $dataset['menu_name'] ?>')"><i class="fas fa-trash"></i>&ensp;<span class="text-xs">Delete</span></button>
+                        <button type="button" class="btn btn-xs  text-primaryHover border-primaryHover hover:text-white hover:bg-primaryHover mr-1" onclick="edit_menu(<?= $dataset['menu_id'] ?>,'<?= $dataset['menu_name'] ?>','<?= $dataset['menu_icon'] ?>')"><i class="fas fa-edit"></i>&ensp;<span class="text-xs">Update</span></button>
+                        <button type="button" class="btn btn-xs  text-primaryHover border-primaryHover hover:text-white hover:bg-primaryHover" onclick="delete_menu(<?= $dataset['menu_id'] ?>, '<?= $dataset['menu_name'] ?>')"><i class="fas fa-trash"></i>&ensp;<span class="text-xs">Delete</span></button>
                       </td>
                     </tr>
                     <?php $i++ ?>
@@ -189,8 +189,8 @@
       <div class="card card-secondary elevation-3 card-outline mt-3">
         <div class="card-body">
           <div class="row">
-            <div class="col">
-              <h5><i class="fas fa-bars text-secondary"></i>&ensp;Management Resources</h5>
+            <div class="col text-primaryHover font-heading">
+              <h5><i class="fas fa-bars"></i>&ensp;Management Resources</h5>
             </div>
             <div class="col d-flex justify-content-end">
               <button type="button" class="btn btn-outline-secondary btn-xs" onclick="window.location = '<?= base_url('/admin/resources/insert') ?>' "><i class=" fas fa-user-plus"></i>&ensp;Add new resource</button>
@@ -219,7 +219,7 @@
                       <td><?= $dataset['title'] ?></td>
                       <td><?= $dataset['menu_name'] ?></td>
                       <td><?= $dataset['url'] ?></td>
-                      <td><i class="<?= $dataset['icon'] ?> text-secondary"></i></td>
+                      <td><i class="<?= $dataset['icon'] ?> text-primaryHover"></i></td>
                       <td class="text-center">
                         <?php if ($dataset['active'] == 1) : ?>
                           <span class="badge badge-pill bg-secondaryhover">Active</span>
@@ -228,8 +228,8 @@
                         <?php endif; ?>
                       </td>
                       <td class="text-center">
-                        <a href="<?= base_url('/admin/resources/update/' . $dataset['submenu_id']) ?>" class="btn btn-xs  text-primary border-primary hover:text-white hover:bg-primary mr-1"><i class="fas fa-edit"></i>&ensp;<span class="text-xs">Update</span></a>
-                        <button onclick="delete_resource(<?= $dataset['submenu_id'] ?>, '<?= $dataset['title'] ?>')" class="btn btn-xs  text-primary border-primary hover:text-white hover:bg-primary"><i class="fas fa-trash"></i>&ensp;<span class="text-xs">Delete</span></button>
+                        <a href="<?= base_url('/admin/resources/update/' . $dataset['submenu_id']) ?>" class="btn btn-xs  text-primaryHover border-primaryHover hover:text-white hover:bg-primaryHover mr-1"><i class="fas fa-edit"></i>&ensp;<span class="text-xs">Update</span></a>
+                        <button onclick="delete_resource(<?= $dataset['submenu_id'] ?>, '<?= $dataset['title'] ?>')" class="btn btn-xs  text-primaryHover border-primaryHover hover:text-white hover:bg-primaryHover"><i class="fas fa-trash"></i>&ensp;<span class="text-xs">Delete</span></button>
                       </td>
                     </tr>
                     <?php $i++ ?>
@@ -254,14 +254,14 @@
           <input type="hidden" name="id" id="id">
           <div class="form-group">
             <label for="menu"><span class="text-sm text-secondary">Name Menu :</span></label>
-            <input type="text" name="menu" class="form-control text-sm border-top-0 border-right-0 border-left-0" id="menu" placeholder="Ex : Dashboard" style="border-radius:0" autocomplete="off" required>
+            <input type="text" name="menu" class="inputForm" id="menu" placeholder="Ex : Dashboard" autocomplete="off" required>
           </div>
           <div class="form-group">
             <label for="icon"><span class="text-sm text-secondary">Icon :</span></label>
-            <input type="text" class="form-control text-sm border-top-0 border-right-0 border-left-0" name="icon" id="icon" placeholder="Insert icon" style="border-radius:0" autocomplete="off" required>
+            <input type="text" class="inputForm" name="icon" id="icon" placeholder="Insert icon" autocomplete="off" required>
           </div>
           <div class="d-flex justify-content-end">
-            <button type="submit" id="btn-submit" name="insert_menu" class="btn btn-sm  text-primary border-primary hover:text-white hover:bg-primary"><i class="fas fa-paper-plane"></i>&ensp;Send data</button>
+            <button type="submit" id="btn-submit" name="insert_menu" class="btn btn-sm  text-primaryHover border-primaryHover hover:text-white hover:bg-primaryHover"><i class="fas fa-paper-plane"></i>&ensp;Send data</button>
           </div>
         </form>
       </div>
