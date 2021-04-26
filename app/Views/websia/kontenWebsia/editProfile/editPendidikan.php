@@ -1,5 +1,5 @@
 <?php
-if ($checked->pendidikan == 0) {
+if ($checked->cpendidikan == 0) {
     $cpendidikan = "";
 } else {
     $cpendidikan = "checked";
@@ -92,7 +92,7 @@ if ($checked->pendidikan == 0) {
                         <td><?= $row->judul_tulisan ?></td>
                         <td>
                             <div class="flex justify-center pl-1 pr-3">
-                                <div class="editPendidikan cursor-pointer mr-1" onclick="formPendidikan('<?= $row->id_pendidikan ?>', '<?= $row->jenjang ?>', '<?= $row->instansi ?>', '<?= $row->program_studi ?>', '<?= $row->tahun_masuk ?>', '<?= $row->tahun_lulus ?>', '<?= $row->judul_tulisan ?>')"><svg class="lg:w-5 lg:h-5 w-4 h-4" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <div class="editPendidikan cursor-pointer mr-1" onclick="formPendidikan('<?= $row->id_pendidikan ?>', '<?= $row->jenjang ?>', '<?= $row->instansi ?>', '<?= $row->program_studi ?>', '<?= $row->tahun_masuk ?>', '<?= $row->tahun_lulus ?>', '<?= $row->angkatan ?>', '<?= $row->nim ?>', '<?= $row->judul_tulisan ?>')"><svg class="lg:w-5 lg:h-5 w-4 h-4" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M16.1536 9.99923C15.6928 9.99923 15.3203 10.3726 15.3203 10.8325V17.4992C15.3203 17.9584 14.9469 18.3325 14.487 18.3325H2.82031C2.36026 18.3325 1.98703 17.9584 1.98703 17.4992V5.83252C1.98703 5.37338 2.36026 4.99924 2.82031 4.99924H9.48702C9.94783 4.99924 10.3203 4.62585 10.3203 4.16595C10.3203 3.7059 9.94783 3.33252 9.48702 3.33252H2.82031C1.44198 3.33252 0.320312 4.45419 0.320312 5.83252V17.4992C0.320312 18.8775 1.44198 19.9992 2.82031 19.9992H14.487C15.8653 19.9992 16.987 18.8775 16.987 17.4992V10.8325C16.987 10.3717 16.6144 9.99923 16.1536 9.99923Z" fill="black" />
                                         <path d="M8.13522 9.24029C8.07693 9.29858 8.03771 9.37273 8.02108 9.45269L7.43194 12.3995C7.40447 12.536 7.44781 12.6769 7.54607 12.7761C7.62527 12.8552 7.73193 12.8977 7.84118 12.8977C7.86773 12.8977 7.89535 12.8952 7.92281 12.8894L10.8687 12.3003C10.9503 12.2835 11.0245 12.2444 11.082 12.186L17.6753 5.59268L14.7294 2.64697L8.13522 9.24029Z" fill="black" />
                                         <path d="M19.7124 0.609397C18.9 -0.203132 17.5783 -0.203132 16.7665 0.609397L15.6133 1.76266L18.5591 4.70851L19.7124 3.5551C20.1058 3.16265 20.3224 2.63927 20.3224 2.08263C20.3224 1.52599 20.1058 1.00262 19.7124 0.609397Z" fill="black" />
@@ -114,6 +114,12 @@ if ($checked->pendidikan == 0) {
                         <div class="ml-auto mr-3 bg-secondary text-white rounded-full w-28 py-1 text-center cursor-pointer hover:bg-secondaryhover transition-colors duration-300 my-2 tambahPendidikan">TAMBAH</div>
                     </td>
                 </tr>
+                <?php if($pendidikan == NULL){ ?>
+                     <!-- Tampilan jika data semua kolom belum diisi -->
+                        <tr>
+                            <td colspan="8" class="text-sm text-center border-b-2 border-gray-200 px-3 lg:px-5 py-2 md:py-3 lg:py-4">Riwayat pendidikan tidak ditemukan.</td>
+                        </tr>
+                    <?php } ?>
                 <tr class="h-5 formEdit">
                     <td colspan="8" class="rounded-b-3xl"></td>
                 </tr>
@@ -126,13 +132,13 @@ if ($checked->pendidikan == 0) {
 
 <!-- dialog box di edit pendidikan -->
 <!-- kalau mau ngecek hilangin kelas hidden sama opacity-0 nya-->
-
+<?php if (session()->getFlashdata('edit-pendidikan-success')) { ?>
 <!-- BERHASIL edit pendidikan -->
 <div id="berhasilEditPendidikan">
-    <div class="hidden opacity-0 fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40">
+    <div class="fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40">
         <div class="duration-700 transition-all p-3 rounded-lg flex items-center" style="background-color: #B1FF66;">
             <img src="/img/icon/check.png" class="h-5 mr-2" style="color: #54AC00;">
-            <p class="sm:text-base text-sm font-heading font-bold text-success">Pendidikan Berhasil Disimpan</p>
+            <p class="sm:text-base text-sm font-heading font-bold text-success"><?= session()->getFlashdata('edit-pendidikan-success') ?></p>
         </div>
     </div>
 </div>
@@ -141,13 +147,14 @@ if ($checked->pendidikan == 0) {
         $('#berhasilEditPendidikan').fadeOut();
     }, 1500);
 </script>
-
+<?php }
+if (session()->getFlashdata('edit-pendidikan-fail')) { ?>
 <!-- GAGAL edit pendidikan -->
 <div id="gagalEditPendidikan">
-    <div class="hidden opacity-0 fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40">
+    <div class="fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40">
         <div class="duration-700 transition-all p-3 rounded-lg flex items-center" style="background-color: #FF7474;">
             <img src="/img/icon/warning.png" class="h-5 mr-2">
-            <p class="sm:text-base text-sm font-heading font-bold" style="color: #C51800;">Pendidikan Tidak Berhasil Disimpan</p>
+            <p class="sm:text-base text-sm font-heading font-bold" style="color: #C51800;"><?= session()->getFlashdata('edit-pendidikan-fail') ?> : <?= session('error-nim') ?></p>
         </div>
     </div>
 </div>
@@ -156,13 +163,15 @@ if ($checked->pendidikan == 0) {
         $('#gagalEditPendidikan').fadeOut();
     }, 1500);
 </script>
+<?php } 
+if (session()->getFlashdata('add-pendidikan-success')) { ?>
 
 <!-- BERHASIL tambah pendidikan -->
 <div id="berhasilTambahPendidikan">
-    <div class="hidden opacity-0 fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40">
+    <div class="fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40">
         <div class="duration-700 transition-all p-3 rounded-lg flex items-center" style="background-color: #B1FF66;">
             <img src="/img/icon/check.png" class="h-5 mr-2" style="color: #54AC00;">
-            <p class="sm:text-base text-sm font-heading font-bold text-success">Pendidikan Berhasil Ditambahkan</p>
+            <p class="sm:text-base text-sm font-heading font-bold text-success"><?= session()->getFlashdata('add-pendidikan-success') ?></p>
         </div>
     </div>
 </div>
@@ -171,13 +180,14 @@ if ($checked->pendidikan == 0) {
         $('#berhasilTambahPendidikan').fadeOut();
     }, 1500);
 </script>
-
+<?php } 
+if (session()->getFlashdata('add-pendidikan-fail')) { ?>
 <!-- GAGAL tambah pendidikan -->
 <div id="gagalTambahPendidikan">
-    <div class="hidden opacity-0 fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40">
+    <div class="fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40">
         <div class="duration-700 transition-all p-3 rounded-lg flex items-center" style="background-color: #FF7474;">
             <img src="/img/icon/warning.png" class="h-5 mr-2">
-            <p class="sm:text-base text-sm font-heading font-bold" style="color: #C51800;">Pendidikan Tidak Berhasil Ditambahkan</p>
+            <p class="sm:text-base text-sm font-heading font-bold" style="color: #C51800;"><?= session()->getFlashdata('add-pendidikan-fail') ?> : <?= session('error-nim') ?></p>
         </div>
     </div>
 </div>
@@ -186,6 +196,6 @@ if ($checked->pendidikan == 0) {
         $('#gagalTambahPendidikan').fadeOut();
     }, 1500);
 </script>
-
+<?php } ?>
 <!-- end dialog box -->
 <?= $this->endSection(); ?>

@@ -109,4 +109,16 @@ class Validation
 			'is_unique'	=> 'alamat email telah digunakan alumni lain',
 		]
 	];
+
+	public $editPendidikan = [
+		'nim'   => [
+			'rules' =>'numeric',
+		],
+	];
+
+	public $editPendidikan_errors  = [
+		'nim'   => [
+			'numeric'	=> 'kolom angkatan harus berisi angka',
+		]
+	];
 }

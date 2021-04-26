@@ -108,16 +108,18 @@ if ($status == 'bukan user') {
                 <?php endif ?>
             </p>
             <p class="font-heading text-center md:text-left text-base mb-5 md:mb-3 lg:mb-5">
-                <!-- Angkatan -->
-                Angkatan <span class="text-primary">ke-<?= $angkatan; ?> </span><br />
                 <!-- Akademi Ilmu Statistik / STIS/ POLSTAT STIS  ========>  Harusnya diatur di BE -->
                 <?php foreach ($pendidikan as $row) {
                     if($row->instansi == "Akademi Ilmu Statistik" || $row->instansi == "STIS" || $row->instansi == "POLSTAT STIS" ) {
                         echo $row->instansi; ?>
                         <br/>
+                        <?php if($row->nim !=NULL and $row->angkatan != NULL){ ?>
                         <!-- NIM -->
                         NIM <span class="text-primary"><?= $row->nim; ?></span>
+                        <!-- Angkatan -->
+                        Angkatan <span class="text-primary">ke-<?= $row->angkatan; ?> </span><br />
                     <?php }
+                    }
                 } ?>
             </p>
             <!-- Instansi tempat bekerja dan jabatan -->
@@ -236,9 +238,9 @@ if ($status == 'bukan user') {
                         <div>
                             <span class="title mt-4 font-heading text-sm md:text-base lg:text-lg font-semibold text-primary block px-2 md:px-0 text-center"><?= $row->nama; ?></span>
                         </div>
-                        <div>
-                            <span class="description font-paragraph text-primary text-center md:text-base block pt-2 pb-2 border-gray-400 mb-2">Angkatan <?= $row->angkatan; ?></span>
-                        </div>
+                        <!-- <div>
+                            <span class="description font-paragraph text-primary text-center md:text-base block pt-2 pb-2 border-gray-400 mb-2">Angkatan <= $row->angkatan; ?></span>
+                        </div> -->
                     </a>
                 </div>
             <?php endforeach; ?>
@@ -357,7 +359,7 @@ if ($status == 'bukan user') {
                      <!-- Tampilan jika data semua kolom belum diisi -->
 
                         <tr>
-                            <td colspan="6" class="text-sm text-center border-b-2 border-gray-200 px-3 lg:px-5 py-2 md:py-3 lg:py-4">Riwayat pendidikan tidak ditemukan.</td>
+                            <td colspan="6" class="text-sm text-center border-b-2 border-gray-200 px-3 lg:px-5 py-2 md:py-3 lg:py-4">Riwayat prestasi tidak ditemukan.</td>
                         </tr>
                     <?php } else { ?>
                         <?php foreach ($pendidikan as $row) : ?>

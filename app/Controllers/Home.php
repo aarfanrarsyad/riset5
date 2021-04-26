@@ -136,12 +136,6 @@ class Home extends BaseController
 									];
 									$this->modelAlumni->db->table('alumni_tempat_kerja')->insert($data);
 
-									$data = [
-										'angkatan'     	=> $faker->numberBetween($min = 1, $max = 62),
-										'id_alumni' 	=> $data['id_alumni'],
-									];
-									$this->modelAlumni->db->table('angkatan_alumni')->insert($data);
-
 									// $data = [
 									// 	'id_alumni'          => $user->getNip(),
 									// 	'nama'               => $user->getName(),
@@ -361,12 +355,6 @@ class Home extends BaseController
 							'id_tempat_kerja' => 1,
 						];
 						$this->modelAlumni->db->table('alumni_tempat_kerja')->insert($data);
-
-						$data = [
-							'angkatan'     	=> $faker->numberBetween($min = 1, $max = 62),
-							'id_alumni' 	=> $data['id_alumni'],
-						];
-						$this->modelAlumni->db->table('angkatan_alumni')->insert($data);
 
 						// $data = [
 						// 	'nim'                => $user['nim'],
