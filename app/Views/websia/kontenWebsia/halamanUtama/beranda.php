@@ -14,6 +14,23 @@ if ($login == 'belum') {
 
 <?= $this->section('content'); ?>
 
+<?php
+if (session()->getFlashdata('belumLogin')) { ?>
+    <!-- GAGAL ubah foto -->
+    <div id="alert-belum-login">
+        <div class="fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40">
+            <div class="duration-700 transition-all p-3 rounded-lg flex items-center" style="background-color: #FF7474;">
+                <img src="/img/components/icon/warning.png" class="h-5 mr-2" style="color: #C51800;">
+                <p class="sm:text-base text-sm font-heading font-bold"><?= session()->belumLogin; ?></p>
+            </div>
+        </div>
+    </div>
+    <script>
+        setTimeout(function() {
+            $('#alert-belum-login').fadeOut();
+        }, 1500);
+    </script>
+<?php } ?>
 
 <script type="text/javascript" src="/js/leaflet.js"></script>
 <!-- Awal Carousel -->
