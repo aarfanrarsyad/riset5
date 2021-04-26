@@ -53,8 +53,8 @@
               })
             } else {
               if (result !== false) {
-                let html = '<div class="alert alert-danger text-sm"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>' +
-                  '<span style="font-weight:bold">Something went wrong !</span>&ensp;' +
+                let html = '<div class="alert text-sm" style="background-color: #FF7474;"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>' +
+                  '<span style="font-weight:bold text-black">Something went wrong !</span>&ensp;' +
                   'The ' + menu + ' menu is currently being used by resource ' + result +
                   '</div>';
                 $('.response').append(html);

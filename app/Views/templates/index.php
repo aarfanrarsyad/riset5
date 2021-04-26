@@ -109,23 +109,23 @@
         </footer>
 
         <!-- Control Sidebar -->
-        <aside class="control-sidebar control-sidebar-light" style="display: block;">
+        <aside class="control-sidebar control-sidebar-light bg-primarySidebar text-white" style="display: block;">
             <!-- Control sidebar content goes here -->
             <div class="p-3 control-sidebar-content">
                 <div class="profile text-center">
-                    <img class="img-circle" src=" <?= base_url('/img/components/logo/logo_pkl.png') ?>" style="width:100px; height:100px" alt="logo PKL">
+                    <img class="img-circle mx-auto" src=" <?= base_url('/img/components/logo/logo_pkl.png') ?>" style="width:100px; height:auto;" alt="logo PKL">
                     <div class="text-xs mt-3">
-                        <h5 class="widget-user-username text-center"><?php if (userdata()) echo (userdata()['fullname']) ?></h5>
+                        <h5 class="widget-user-username text-center text-secondaryhover text-lg mb-2"><?php if (userdata()) echo (userdata()['fullname']) ?></h5>
                         <h6 class="widget-user-desc text-center"><?= array_to_string(role_user(), 2, 'name') ?></h6>
                     </div>
                 </div>
                 <br>
                 <hr class="mb-3">
-                <div class="mb-2 text-sm px-2"><span><a href="#" class="text-dark"><i class="fas fa-user-circle"></i>&ensp;Change profile</span></a></div>
-                <div class="mb-2 text-sm px-2"><span><a href="#" class="text-dark"><i class="fas fa-unlock"></i>&ensp;Change password</span></a> </div>
-                <div class="mb-2 text-sm px-2"><a href="#" class="text-dark"><span><i class="fas fa-user-shield"></i>&ensp;Activity of all groups</span></a> </div>
+                <div class="mb-2 text-sm px-2"><span><a href="#" class="hover:text-secondaryhover"><i class="fas fa-user-circle"></i>&ensp;Change profile</span></a></div>
+                <div class="mb-2 text-sm px-2"><span><a href="#" class="hover:text-secondaryhover"><i class="fas fa-unlock"></i>&ensp;Change password</span></a> </div>
+                <div class="mb-2 text-sm px-2"><a href="#" class="hover:text-secondaryhover"><span><i class="fas fa-user-shield"></i>&ensp;Activity of all groups</span></a> </div>
                 <hr class="mb-3">
-                <div class="mb-2 text-sm px-2 "><a href="<?= base_url("auth/logout") ?>" class="text-dark"><span><i class="fas fa-sign-out-alt"></i>&ensp;Logout</span></a> </div>
+                <div class="mb-2 text-sm px-2 "><a href="<?= base_url("auth/logout") ?>" class="hover:text-secondaryhover"><span><i class="fas fa-sign-out-alt"></i>&ensp;Logout</span></a> </div>
             </div>
         </aside>
         <!-- /.control-sidebar -->
