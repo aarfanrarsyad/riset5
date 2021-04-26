@@ -287,7 +287,7 @@ class User extends BaseController
 		// array :
 			// 'name'
 
-		if($model->getAngkatanByIdAlumni(session('id_alumni')) == NULL) {
+		if($model->getAngkatanByIdAlumni(session('id_alumni')) == NULL || $model->getAngkatanByIdAlumni(session('id_alumni'))->angkatan == 0 ) {
 			$query4 = $model->getIdAlumniByIdTempatKerja($model->getIdTempatKerjaByIdAlumni(session('id_alumni')),session('id_alumni'))->getResult();
 		} else {
 			$query4 = $model->getIdAlumniByAngkatan($model->getAngkatanByIdAlumni(session('id_alumni'))->angkatan,session('id_alumni'))->getResult();
@@ -449,14 +449,6 @@ class User extends BaseController
 				if (is_file($url))
 					unlink($url);
 			}
-			
-			$image = \Config\Services::image()
-				->withFile(ROOTPATH . '/public/img/user/userid_' . session('id_user').'/' .$avatar->getName())
-				->fit(350, 350, 'center')
-				->convert(IMAGETYPE_JPEG)
-				->save(ROOTPATH . '/public/img/user/userid_' . session('id_user').'/foto_profil.jpeg', 70);
-			
-			unlink(ROOTPATH . '/public/img/user/userid_' . session('id_user').'/' .$avatar->getName());
 
 			$image = \Config\Services::image()
 				->withFile(ROOTPATH . '/public/img/user/userid_' . session('id_user').'/' .$avatar->getName())
@@ -612,15 +604,8 @@ class User extends BaseController
 		];
 
 		$model->db->table('alumni')->set($data)->where('id_alumni', session('id_alumni'))->update();
-
-			$data = [
-				'cpendidikan' => $cpendidikan,
-			];
 	
-			$model->db->table('alumni')->set($data)->where('id_alumni', session('id_alumni'))->update();
-	
-			return redirect()->to(base_url('User/editPendidikan'));
-		}
+		return redirect()->to(base_url('User/editPendidikan'));
 	}
 
 	public function addPendidikan()

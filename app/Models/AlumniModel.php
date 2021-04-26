@@ -173,15 +173,6 @@ class AlumniModel extends Model
         return $this->db->query($query);
     }
 
-     // Sudah diubah <Mochi>
-     public function getIdAlumniByIdTempatKerja($id_tempat_kerja, $id_alumni)
-     {
-         $query = "SELECT * FROM alumni JOIN alumni_tempat_kerja 
-         ON alumni.id_alumni=alumni_tempat_kerja.id_alumni WHERE id_tempat_kerja = $id_tempat_kerja 
-         AND NOT alumni.id_alumni=$id_alumni";
-         return $this->db->query($query);
-     }
-
     public function getTempatKerja()
     {
         $query = "SELECT * FROM tempat_kerja";
