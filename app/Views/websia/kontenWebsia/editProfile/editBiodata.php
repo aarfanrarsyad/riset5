@@ -16,37 +16,37 @@ if ($alumni->aktif_pns == '1') {
 } else if ($alumni->aktif_pns == '0') {
     $aktif_pns = "Tidak aktif sebagai PNS";
 }
-if ($checked->ttl == 0) {
+if ($alumni->cttl == 0) {
     $cttl = "";
 } else {
     $cttl = "checked";
 }
-if ($checked->email == 0) {
+if ($alumni->cemail == 0) {
     $cemail = "";
 } else {
     $cemail = "checked";
 }
-if ($checked->alamat == 0) {
+if ($alumni->calamat == 0) {
     $calamat = "";
 } else {
     $calamat = "checked";
 }
-if ($checked->jabatan_terakhir == 0) {
+if ($alumni->cjabatan_terakhir == 0) {
     $cjab = "";
 } else {
     $cjab = "checked";
 }
-if ($checked->ig == 0) {
+if ($alumni->cig == 0) {
     $cig = "";
 } else {
     $cig = "checked";
 }
-if ($checked->twitter == 0) {
+if ($alumni->ctwitter == 0) {
     $ctw = "";
 } else {
     $ctw = "checked";
 }
-if ($checked->fb == 0) {
+if ($alumni->cfb == 0) {
     $cfb = "";
 } else {
     $cfb = "checked";
@@ -108,10 +108,25 @@ if ($checked->fb == 0) {
                         <div class="font-medium">Angkatan:</div>
                         <div class="text-black font-heading font-normal mb-2">?= $alumni->angkatan ?></div>
                     </div>
+                </div> -->
+                <div class="mb-2">
+                    <div class="flex justify-between items-center">
+                        <div class="font-medium" id="labelJenisKelamin">Jenis Kelamin:</div>
+                    </div>
+                    <div class="text-black font-heading font-normal mb-2"><?= $jk ?></div>
                 </div>
-                <div class="mb-2"> -->
-                <div class="flex justify-between items-center">
-                    <div class="font-medium" id="labelJenisKelamin">Jenis Kelamin:</div>
+                <div class="md:grid md:grid-cols-2 md:gap-x-4">
+                    <div class="mr-1">
+                        <div class="font-medium" id="labelTempatLahir">Tempat Lahir:</div>
+                        <input type="text" name="tempatLahir" id="tempatLahir" class="inputForm" placeholder="Tempat Lahir" value="<?= $alumni->tempat_lahir ?>">
+                    </div>
+                    <div>
+                        <div class="flex justify-between items-center">
+                            <div class="font-medium" id="labelTanggalLahir">Tanggal Lahir:</div>
+                            <input type="checkbox" <?= $cttl ?> name="checkTanggalLahir" id="checkTanggalLahir" class="cursor-pointer focus:outline-none editTampilan hidden">
+                        </div>
+                        <input type="date" name="tanggalLahir" data-id="TanggalLahir" id="tanggalLahir" class="inputForm" value="<?= $alumni->tanggal_lahir ?>">
+                    </div>
                 </div>
                 <div class="text-black font-heading font-normal mb-2"><?= $jk ?></div>
         </div>
@@ -245,13 +260,40 @@ if ($checked->fb == 0) {
                     <div class="md:w-1/4 w-1/3">
                         <label for="twitter" class="font-medium" id="labelTwitter">Twitter</label>
                     </div>
-                    <div class="md:w-3/4 w-2/3 gap-x-3 flex justify-between items-center">
+                    <<<<<<< HEAD <div class="md:w-3/4 w-2/3 gap-x-3 flex justify-between items-center">
                         <?php if (session('inputs')) { ?>
                             <input type="text" name="twitter" id="twitter" class="w-full md:p-2 p-1 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-primary text-black" placeholder="Username Twitter" value="<?= session('inputs')['twitter'] ?>">
                         <?php } else { ?>
                             <input type="text" name="twitter" id="twitter" class="w-full md:p-2 p-1 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-primary text-black" placeholder="Username Twitter" value="<?= $alumni->twitter ?>">
                         <?php } ?>
                         <input type="checkbox" <?= $ctw ?> name="checkTwitter" data-id="Twitter" id="checkTwitter" class="cursor-pointer focus:outline-none editTampilan hidden">
+                        =======
+                        <div>
+                            <label for="kabkota" class="font-medium" id="labelKabkot">Kabupaten/Kota:</label>
+                            <input list="daftarKabkota" name="kabkota" id="kabkota" placeholder="Masukkan nama kabupaten/kota" value="" class="inputForm">
+                            <datalist id="daftarKabkota" class="font-paragraph">
+                                <option data-value="Kota Jakarta Timur">Kota Jakarta Timur</option>
+                            </datalist>
+                        </div>
+                </div>
+                <label for="alamat" class="font-medium" id="labelAlamat">Alamat:</label>
+                <div>
+                    <?php if (session('inputs')) { ?>
+                        <textarea name="alamat" id="alamat" cols="50" rows="3" placeholder="Alamat saat ini" class="inputForm resize-none" required><?= htmlspecialchars(session('inputs')['alamat']) ?></textarea>
+                    <?php } else { ?>
+                        <textarea name="alamat" id="alamat" cols="50" rows="3" placeholder="Alamat saat ini" class="inputForm resize-none" required><?= $alumni->alamat_alumni ?></textarea>
+                    <?php } ?>
+                </div>
+                <hr class="border-gray-300 mb-3 mt-1">
+                <div class="md:grid md:grid-cols-2 md:gap-x-4 md:mr-6">
+                    <div>
+                        <div class="font-medium">Status Bekerja di BPS:</div>
+                        <div class="text-black font-heading font-normal mb-2"><?= $status_bekerja ?></div>
+                    </div>
+                    <div>
+                        <div class="font-medium">Aktif PNS:</div>
+                        <div class="text-black font-heading font-normal mb-2"><?= $aktif_pns ?></div>
+                        >>>>>>> ea6749b46c02bb608e2518ca6489cf23cd1bbd91
                     </div>
                 </div>
                 <div class="flex items-center mb-2">
@@ -267,23 +309,38 @@ if ($checked->fb == 0) {
                         <input type="checkbox" <?= $cfb ?> name="checkFacebook" data-id="Facebook" id="checkFacebook" class="cursor-pointer focus:outline-none editTampilan hidden">
                     </div>
                 </div>
+                <<<<<<< HEAD </div>
             </div>
+            <div>
+                <label for="biografi" class="font-medium">Biografi:</label>
+                <?php if (session('inputs')) { ?>
+                    <textarea name="biografi" id="biografi" cols="30" rows="5" placeholder="Tambahkan biografi Anda di sini" class="inputForm resize-none" required><?= htmlspecialchars(session('inputs')['biografi']) ?></textarea>
+                <?php } else { ?>
+                    <textarea name="biografi" id="biografi" cols="30" rows="5" placeholder="Tambahkan biografi Anda di sini" class="inputForm resize-none" required><?= $alumni->biografi ?></textarea>
+                <?php } ?>
+                =======
+                <div>
+                    <label for="biografi" class="font-medium">Biografi:</label>
+                    <?php if (session('inputs')) { ?>
+                        <textarea name="biografi" id="biografi" cols="30" rows="5" placeholder="Tambahkan biografi Anda di sini" class="inputForm resize-none" required><?= htmlspecialchars(session('inputs')['biografi']) ?></textarea>
+                    <?php } else { ?>
+                        <textarea name="biografi" id="biografi" cols="30" rows="5" placeholder="Tambahkan biografi Anda di sini" class="inputForm resize-none" required><?= $alumni->deskripsi ?></textarea>
+                    <?php } ?>
+                </div>
+                <div class="flex justify-end mt-8 mb-6">
+                    <input type="submit" value="SIMPAN" class="w-24 text-center py-1 bg-secondary hover:bg-secondaryhover text-white rounded-full cursor-pointer mb-6 focus:outline-none" id="submitBiodata">
+                </div>
+                </form>
+                <!-- end form edit -->
+                >>>>>>> ea6749b46c02bb608e2518ca6489cf23cd1bbd91
+            </div>
+            <div class="flex justify-end mt-8 mb-6">
+                <input type="submit" value="SIMPAN" class="w-24 text-center py-1 bg-secondary hover:bg-secondaryhover text-white rounded-full cursor-pointer mb-6 focus:outline-none" id="submitBiodata">
+            </div>
+            </form>
+            <!-- end form edit -->
         </div>
-        <div>
-            <label for="biografi" class="font-medium">Biografi:</label>
-            <?php if (session('inputs')) { ?>
-                <textarea name="biografi" id="biografi" cols="30" rows="5" placeholder="Tambahkan biografi Anda di sini" class="inputForm resize-none" required><?= htmlspecialchars(session('inputs')['biografi']) ?></textarea>
-            <?php } else { ?>
-                <textarea name="biografi" id="biografi" cols="30" rows="5" placeholder="Tambahkan biografi Anda di sini" class="inputForm resize-none" required><?= $alumni->biografi ?></textarea>
-            <?php } ?>
-        </div>
-        <div class="flex justify-end mt-8 mb-6">
-            <input type="submit" value="SIMPAN" class="w-24 text-center py-1 bg-secondary hover:bg-secondaryhover text-white rounded-full cursor-pointer mb-6 focus:outline-none" id="submitBiodata">
-        </div>
-        </form>
-        <!-- end form edit -->
     </div>
-</div>
 </div>
 
 <!-- dialog box di edit biodata -->

@@ -112,21 +112,25 @@ if ($status == 'bukan user') {
                 Angkatan <span class="text-primary">ke-<?php //$angkatan; 
                                                         ?> </span><br />
                 <!-- Akademi Ilmu Statistik / STIS/ POLSTAT STIS  ========>  Harusnya diatur di BE -->
-                <?php foreach ($pendidikan as $row) {
-                    if ($row->instansi == "Akademi Ilmu Statistik" || $row->instansi == "STIS" || $row->instansi == "POLSTAT STIS") {
+                <?php foreach ($pendidikan as $row) :
+                    if ($row->instansi == "Akademi Ilmu Statistik" || $row->instansi == "STIS" || $row->instansi == "POLSTAT STIS") :
                         echo $row->instansi; ?>
                         <br />
-                        <!-- NIM -->
-                        NIM <span class="text-primary"><?= $row->nim; ?></span>
-                <?php }
-                } ?>
+                        <?php if ($row->nim != NULL and $row->angkatan != NULL) : ?>
+                            <!-- NIM -->
+                            NIM <span class="text-primary"><?= $row->nim; ?></span>
+                            <!-- Angkatan -->
+                            Angkatan <span class="text-primary">ke-<?= $row->angkatan; ?> </span><br />
+                <?php endif;
+                    endif;
+                endforeach; ?>
             </p>
             <!-- Instansi tempat bekerja dan jabatan -->
             <p class="font-heading text-base text-center md:text-left">
                 Bekerja di <span class="text-primary"> <?= $tempat_kerja->nama_instansi; ?> </span></br>
                 <?php if ($cjab == "") : ?>
                     Jabatan terakhir di BPS sebagai <span class="text-primary"> <?= $alumni->jabatan_terakhir; ?> </span>
-                <?php endif ?>
+                <?php endif; ?>
             </p>
         </div>
     </div>
@@ -146,7 +150,7 @@ if ($status == 'bukan user') {
                     <!-- Lokasi tempat tinggal -->
                     <p class="font-heading my-2 mt-2"> <?= $alumni->alamat_alumni ?> </p>
                 </span>
-            <?php endif ?>
+            <?php endif; ?>
             <!-- Awal media sosial dan telepon -->
             <?php
             if ($alumni->email == "") {
@@ -237,10 +241,9 @@ if ($status == 'bukan user') {
                         <div>
                             <span class="title mt-4 font-heading text-sm md:text-base lg:text-lg font-semibold text-primary block px-2 md:px-0 text-center"><?= $row->nama; ?></span>
                         </div>
-                        <div>
-                            <span class="description font-paragraph text-primary text-center md:text-base block pt-2 pb-2 border-gray-400 mb-2">Angkatan <?php //$row->angkatan; 
-                                                                                                                                                            ?></span>
-                        </div>
+                        <!-- <div>
+                            <span class="description font-paragraph text-primary text-center md:text-base block pt-2 pb-2 border-gray-400 mb-2">Angkatan <= $row->angkatan; ?></span>
+                        </div> -->
                     </a>
                 </div>
             <?php endforeach; ?>
@@ -314,29 +317,29 @@ if ($status == 'bukan user') {
 </div>
 <!-- Akhir Informasi Intsansi -->
 
-<?php if ($cprestasi == 1) { ?>
+<?php if ($cprestasi == 1) : ?>
     <!-- Awal Riwayat Prestasi -->
     <div class="w-full my-8 lg:px-20 md:px-8 px-2">
         <h3 class="font-heading font-bold text-xl text-secondary">Riwayat Prestasi</h3>
         <div class="md:shadow-lg lg:shadow-xl rounded-2xl px-0 py-1 md:px-5 md:py-5 lg:mx-14 lg:p-8 mb-1 md:mt-3">
-            <?php if ($prestasi == NULL) {
-                echo "<p>Riwayat Prestasi tidak ditemukan.</p>";
-            } else { ?>
+            <?php if ($prestasi == NULL) : ?>
+                <p>Riwayat Prestasi tidak ditemukan.</p>
+            <?php else : ?>
                 <?php foreach ($prestasi as $row) : ?>
                     <div class="flex justify-between px-3 font-heading text-primary mt-2 md:mt-2 lg:mt-3">
                         <div class=""><span class="text-black"><?= $row->nama_prestasi; ?></span> </div>
                         <div class="font-bold"><?= $row->tahun_prestasi; ?></div>
                     </div>
             <?php endforeach;
-            } ?>
+            endif; ?>
             <!-- Jika data prestasi belum diinput, ditampilkan "belum ada riwayat prestasi" -->
         </div>
         <hr class="visible sm:invisible border-primary border-opacity-75 w-4/5 object-center mx-auto mt-8">
     </div>
     <!-- Akhir Riwayat Prestasi -->
-<?php } ?>
+<?php endif; ?>
 
-<?php if ($cpendidikan == 1) { ?>
+<?php if ($cpendidikan == 1) : ?>
     <!-- Awal Riwayat Pendidikan -->
     <div class="w-full my-8 lg:px-20 md:px-8 px-2 mb-6 md:mb-12">
         <h3 class="font-heading font-bold text-xl text-secondary">Riwayat Pendidikan</h3>
@@ -359,11 +362,10 @@ if ($status == 'bukan user') {
                                 <!-- Tampilan jika data semua kolom belum diisi -->
 
                                 <tr>
-                                    <td colspan="6" class="text-sm text-center border-b-2 border-gray-200 px-3 lg:px-5 py-2 md:py-3 lg:py-4">Riwayat pendidikan tidak ditemukan.</td>
+                                    <td colspan="6" class="text-sm text-center border-b-2 border-gray-200 px-3 lg:px-5 py-2 md:py-3 lg:py-4">Riwayat prestasi tidak ditemukan.</td>
                                 </tr>
-                            <?php } else { ?>
-                                <?php foreach ($pendidikan as $row) : ?>
-                                    <?php
+                                <?php } else {
+                                foreach ($pendidikan as $row) :
                                     if ($row->jenjang == "") {
                                         $jenjang = "belum terisi";
                                     } else {
@@ -393,8 +395,7 @@ if ($status == 'bukan user') {
                                         $judul_tulisan = "belum terisi";
                                     } else {
                                         $judul_tulisan = $row->judul_tulisan;
-                                    }
-                                    ?>
+                                    } ?>
                                     <tr>
                                         <td class="text-sm text-left border-b-2 border-gray-200 px-3 lg:px-5 py-2 md:py-3 lg:py-4"><?= $jenjang; ?></td>
                                         <td class="text-sm text-left border-b-2 border-gray-200 px-3 lg:px-5 py-2 md:py-3 lg:py-4"><?= $instansi; ?></td>
@@ -420,6 +421,6 @@ if ($status == 'bukan user') {
         </div>
     </div>
     <!-- Akhir Riwayat Pendidikan -->
-<?php } ?>
+<?php endif ?>
 
 <?= $this->endSection(); ?>

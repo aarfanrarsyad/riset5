@@ -118,7 +118,7 @@ class Validation
 
 	public $editPendidikan_errors  = [
 		'nim'   => [
-			'numeric'	=> 'kolom angkatan harus berisi angka',
+			'numeric'	=> 'kolom nim harus berisi angka',
 		]
 	];
 }
