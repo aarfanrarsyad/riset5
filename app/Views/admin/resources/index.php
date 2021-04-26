@@ -171,8 +171,8 @@
                       <td><?= $dataset['menu_name'] ?></td>
                       <td><i class="<?= $dataset['menu_icon'] ?> text-secondary"></i></td>
                       <td class="text-center">
-                        <button type="button" class="btn btn-xs btn-outline-primary mr-1" onclick="edit_menu(<?= $dataset['menu_id'] ?>,'<?= $dataset['menu_name'] ?>','<?= $dataset['menu_icon'] ?>')"><i class="fas fa-edit"></i>&ensp;<span class="text-xs">Update</span></button>
-                        <button type="button" class="btn btn-xs btn-outline-primary" onclick="delete_menu(<?= $dataset['menu_id'] ?>, '<?= $dataset['menu_name'] ?>')"><i class="fas fa-trash"></i>&ensp;<span class="text-xs">Delete</span></button>
+                        <button type="button" class="btn btn-xs  text-primary border-primary hover:text-white hover:bg-primary mr-1" onclick="edit_menu(<?= $dataset['menu_id'] ?>,'<?= $dataset['menu_name'] ?>','<?= $dataset['menu_icon'] ?>')"><i class="fas fa-edit"></i>&ensp;<span class="text-xs">Update</span></button>
+                        <button type="button" class="btn btn-xs  text-primary border-primary hover:text-white hover:bg-primary" onclick="delete_menu(<?= $dataset['menu_id'] ?>, '<?= $dataset['menu_name'] ?>')"><i class="fas fa-trash"></i>&ensp;<span class="text-xs">Delete</span></button>
                       </td>
                     </tr>
                     <?php $i++ ?>
@@ -228,8 +228,8 @@
                         <?php endif; ?>
                       </td>
                       <td class="text-center">
-                        <a href="<?= base_url('/admin/resources/update/' . $dataset['submenu_id']) ?>" class="btn btn-xs btn-outline-primary mr-1"><i class="fas fa-edit"></i>&ensp;<span class="text-xs">Update</span></a>
-                        <button onclick="delete_resource(<?= $dataset['submenu_id'] ?>, '<?= $dataset['title'] ?>')" class="btn btn-xs btn-outline-primary"><i class="fas fa-trash"></i>&ensp;<span class="text-xs">Delete</span></button>
+                        <a href="<?= base_url('/admin/resources/update/' . $dataset['submenu_id']) ?>" class="btn btn-xs  text-primary border-primary hover:text-white hover:bg-primary mr-1"><i class="fas fa-edit"></i>&ensp;<span class="text-xs">Update</span></a>
+                        <button onclick="delete_resource(<?= $dataset['submenu_id'] ?>, '<?= $dataset['title'] ?>')" class="btn btn-xs  text-primary border-primary hover:text-white hover:bg-primary"><i class="fas fa-trash"></i>&ensp;<span class="text-xs">Delete</span></button>
                       </td>
                     </tr>
                     <?php $i++ ?>
@@ -261,7 +261,7 @@
             <input type="text" class="form-control text-sm border-top-0 border-right-0 border-left-0" name="icon" id="icon" placeholder="Insert icon" style="border-radius:0" autocomplete="off" required>
           </div>
           <div class="d-flex justify-content-end">
-            <button type="submit" id="btn-submit" name="insert_menu" class="btn btn-sm btn-outline-primary"><i class="fas fa-paper-plane"></i>&ensp;Send data</button>
+            <button type="submit" id="btn-submit" name="insert_menu" class="btn btn-sm  text-primary border-primary hover:text-white hover:bg-primary"><i class="fas fa-paper-plane"></i>&ensp;Send data</button>
           </div>
         </form>
       </div>

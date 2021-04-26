@@ -61,7 +61,7 @@
                             <h5><i class="fas fa-users text-primaryHover"></i>&ensp;Register User</h5>
                         </div>
                         <div class="col d-flex justify-content-end">
-                            <button onclick="submit()" class="btn btn-sm btn-outline-primary btn-user">
+                            <button onclick="submit()" class="btn btn-sm  text-primary border-primary hover:text-white hover:bg-primary btn-user">
                                 <i class="fas fa-paper-plane"></i>&ensp;
                                 Register User
                             </button>

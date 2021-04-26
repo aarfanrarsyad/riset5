@@ -129,7 +129,7 @@
                                 </div>
                                 <br>
                                 <div class="form-group row pl-4">
-                                    <button type="submit" name="update_resources" class="btn btn-outline-primary"><i class="fas fa-paper-plane"></i>&ensp;Submit</button>
+                                    <button type="submit" name="update_resources" class="btn  text-primary border-primary hover:text-white hover:bg-primary"><i class="fas fa-paper-plane"></i>&ensp;Submit</button>
                                 </div>
                             </form>
                         </div>

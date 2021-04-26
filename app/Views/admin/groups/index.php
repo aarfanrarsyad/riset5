@@ -120,8 +120,8 @@
                       <td><?= $dataset->name ?></td>
                       <td><?= $dataset->description ?></td>
                       <td class=" text-center">
-                        <button class="btn btn-xs btn-outline-primary mr-1" onclick="edit_group(<?= $dataset->id ?>,'<?= $dataset->name ?>','<?= $dataset->description ?>')"><i class="fas fa-edit"></i>&ensp;<span class="text-xs">Update</span></button>
-                        <button class="btn btn-xs btn-outline-primary" onclick="delete_group(<?= $dataset->id ?>,'<?= $dataset->name ?>')"><i class="fas fa-trash"></i>&ensp;<span class="text-xs">Delete</span></button>
+                        <button class="btn btn-xs text-primary border-primary hover:text-white hover:bg-primary mr-1" onclick="edit_group(<?= $dataset->id ?>,'<?= $dataset->name ?>','<?= $dataset->description ?>')"><i class="fas fa-edit"></i>&ensp;<span class="text-xs">Update</span></button>
+                        <button class="btn btn-xs text-primary border-primary hover:text-white hover:bg-primary" onclick="delete_group(<?= $dataset->id ?>,'<?= $dataset->name ?>')"><i class="fas fa-trash"></i>&ensp;<span class="text-xs">Delete</span></button>
                       </td>
                     </tr>
                     <?php $i++; ?>
@@ -153,7 +153,7 @@
             <input type="text" class="form-control text-sm border-top-0 border-right-0 border-left-0" name="description" id="description" placeholder="Ex : this role will be used for ...." style="border-radius:0" autocomplete="off">
           </div>
           <div class="d-flex justify-content-end">
-            <button type="submit" id="btn-submit" name="insert_group" class="btn btn-sm btn-outline-primary"><i class="fas fa-paper-plane"></i>&ensp;Send data</button>
+            <button type="submit" id="btn-submit" name="insert_group" class="btn btn-sm text-primary border-primary hover:text-white hover:bg-primary"><i class="fas fa-paper-plane"></i>&ensp;Send data</button>
           </div>
         </form>
       </div>
