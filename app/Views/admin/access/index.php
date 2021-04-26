@@ -25,8 +25,8 @@
             icon: 'question',
             text: text_alert,
             showCancelButton: true,
-            confirmButtonColor: '#4248ED',
-            cancelButtonColor: '#33A1C4',
+            confirmButtonColor: '#54AC00',
+            cancelButtonColor: '#D81B01',
             confirmButtonText: text_button
         }).then((result) => {
             if (result.isConfirmed) {
@@ -98,8 +98,8 @@
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right text-sm">
-                        <li class="breadcrumb-item"><a href="<?= base_url('admin') ?>">Home</a></li>
-                        <li class="breadcrumb-item text-muted"><span>Access Management</span></li>
+                        <li class="breadcrumb-item text-primaryHover"><a href="<?= base_url('admin') ?>">Home</a></li>
+                        <li class="breadcrumb-item text-muted text-gray-100"><span>Access Management</span></li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -114,14 +114,14 @@
                     <div class="card card-secondary elevation-3 card-outline">
                         <div class="card-body">
                             <div class="row">
-                                <div class="col">
-                                    <h5><i class="fas fa-tools text-secondary"></i>&ensp;Access Management</h5>
+                                <div class="col text-primaryHover font-heading">
+                                    <h5><i class="fas fa-tools text-primaryHover"></i>&ensp;Access Management</h5>
                                 </div>
                             </div>
                             <br>
                             <div class="row">
                                 <div class="col-md-12">
-                                    <table class="table table-hover table-sm text-sm" id="access-table">
+                                    <table class="table table-hover table-sm text-sm text-black" id="access-table">
                                         <thead>
                                             <tr>
                                                 <td class="text-center">No.</td>

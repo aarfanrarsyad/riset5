@@ -25,6 +25,10 @@
     <link rel="stylesheet" href="<?= base_url() ?>/vendor/AdminLTE/plugins/daterangepicker/daterangepicker.css">
     <!-- summernote -->
     <link rel="stylesheet" href="<?= base_url() ?>/vendor/AdminLTE/plugins/summernote/summernote-bs4.min.css">
+    <!-- Tailwind -->
+    <link rel="stylesheet" href="/css/tailwind.css">
+    <link rel="stylesheet" href="/css/navbar.css">
+
 
     <!-- jQuery -->
     <script src="<?= base_url() ?>/vendor/AdminLTE/plugins/jquery/jquery.min.js"></script>
@@ -72,6 +76,12 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
     <script src="/js/admin-dashboard.js"></script>
+
+
+    <!-- Font -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -90,8 +100,8 @@
         <!-- /.container-fluid -->
 
         <!-- Ini wilayah footer -->
-        <footer class="main-footer text-sm">
-            <strong>Copyright &copy; 2020-2022 <a href="https://adminlte.io">PKL Politeknik STIS - Sistem Database Alumni</a></strong>
+        <footer class="main-footer text-sm text-primaryHover">
+            <strong>Copyright &copy; 2020-2022 <a href="https://pkl.stis.ac.id/60">PKL Politeknik STIS - Sistem Database Alumni</a></strong>
             .All rights reserved.
             <div class="float-right d-none d-sm-inline-block mr-4">
                 <b>Version</b> 1.1.0-alpha
@@ -99,23 +109,23 @@
         </footer>
 
         <!-- Control Sidebar -->
-        <aside class="control-sidebar control-sidebar-light" style="display: block;">
+        <aside class="control-sidebar control-sidebar-light bg-primarySidebar text-white" style="display: block;">
             <!-- Control sidebar content goes here -->
             <div class="p-3 control-sidebar-content">
                 <div class="profile text-center">
-                    <img class="img-circle" src=" <?= base_url('/img/components/logo/logo_pkl.png') ?>" style="width:100px; height:100px" alt="logo PKL">
+                    <img class="img-circle mx-auto" src=" <?= base_url('/img/components/logo/logo_pkl.png') ?>" style="width:100px; height:auto;" alt="logo PKL">
                     <div class="text-xs mt-3">
-                        <h5 class="widget-user-username text-center"><?php if (userdata()) echo (userdata()['fullname']) ?></h5>
+                        <h5 class="widget-user-username text-center text-secondaryhover text-lg mb-2"><?php if (userdata()) echo (userdata()['fullname']) ?></h5>
                         <h6 class="widget-user-desc text-center"><?= array_to_string(role_user(), 2, 'name') ?></h6>
                     </div>
                 </div>
                 <br>
                 <hr class="mb-3">
-                <div class="mb-2 text-sm px-2"><span><a href="#" class="text-dark"><i class="fas fa-user-circle"></i>&ensp;Change profile</span></a></div>
-                <div class="mb-2 text-sm px-2"><span><a href="#" class="text-dark"><i class="fas fa-unlock"></i>&ensp;Change password</span></a> </div>
-                <div class="mb-2 text-sm px-2"><a href="#" class="text-dark"><span><i class="fas fa-user-shield"></i>&ensp;Activity of all groups</span></a> </div>
+                <div class="mb-2 text-sm px-2"><span><a href="#" class="hover:text-secondaryhover"><i class="fas user-circle"></i>&ensp;Change profile</span></a></div>
+                <div class="mb-2 text-sm px-2"><span><a href="#" class="hover:text-secondaryhover"><i class="fas fa-unlock"></i>&ensp;Change password</span></a> </div>
+                <div class="mb-2 text-sm px-2"><a href="#" class="hover:text-secondaryhover"><span><i class="fas fa-user-shield"></i>&ensp;Activity of all groups</span></a> </div>
                 <hr class="mb-3">
-                <div class="mb-2 text-sm px-2 "><a href="<?= base_url("auth/logout") ?>" class="text-dark"><span><i class="fas fa-sign-out-alt"></i>&ensp;Logout</span></a> </div>
+                <div class="mb-2 text-sm px-2 "><a href="<?= base_url("auth/logout") ?>" class="hover:text-secondaryhover"><span><i class="fas fa-sign-out-alt"></i>&ensp;Logout</span></a> </div>
             </div>
         </aside>
         <!-- /.control-sidebar -->

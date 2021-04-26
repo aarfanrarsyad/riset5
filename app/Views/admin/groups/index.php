@@ -8,7 +8,7 @@
   function edit_group(id, name, desc) {
     $('#form-input-group').attr('action', '<?= base_url('/admin/groups/update') ?>');
     $('#id').val(id);
-    $('.modal-title').html('<i class="fas fa-layer-group text-secondary"></i>&ensp;Update group ' + name);
+    $('.modal-title').html('<i class="fas fa-layer-group text-primaryHover"></i>&ensp;Update group ' + name);
     $('#name').val(name);
     $('#description').val(desc);
     $('.modal').modal('show')
@@ -16,7 +16,7 @@
 
   function insert_group() {
     $('#form-input-group').attr('action', '<?= base_url('/admin/groups/insert') ?>');
-    $('.modal-title').html('<i class="fas fa-layer-group text-secondary"></i>&ensp;Insert new group');
+    $('.modal-title').html('<i class="fas fa-layer-group text-primaryHover"></i>&ensp;Insert new group');
     $('#id').val('');
     $('#name').val('');
     $('#description').val('');
@@ -28,8 +28,8 @@
       icon: 'question',
       text: 'Are you sure to delete the ' + role + ' role?',
       showCancelButton: true,
-      confirmButtonColor: '#4248ED',
-      cancelButtonColor: '#33A1C4',
+      confirmButtonColor: '#54AC00',
+      cancelButtonColor: '#D81B01',
       confirmButtonText: 'Yes, delete it!'
     }).then((result) => {
       if (result.isConfirmed) {
@@ -78,8 +78,8 @@
         </div><!-- /.col -->
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right text-sm">
-            <li class="breadcrumb-item"><a href="<?= base_url('admin') ?>">Home</a></li>
-            <li class="breadcrumb-item text-muted"><span>Groups Managment</span></li>
+            <li class="breadcrumb-item text-primaryHover"><a href="<?= base_url('admin') ?>">Home</a></li>
+            <li class="breadcrumb-item text-muted text-gray-100"><span>Groups Managment</span></li>
           </ol>
         </div>
       </div>
@@ -93,8 +93,8 @@
       <div class="card card-secondary elevation-3 card-outline">
         <div class="card-body">
           <div class="row">
-            <div class="col">
-              <h5><i class="fas fa-layer-group text-secondary"></i>&ensp;Groups Managment</h5>
+            <div class="col text-primaryHover font-heading">
+              <h5><i class="fas fa-layer-group  text-primaryHover"></i>&ensp;Groups Managment</h5>
             </div>
             <div class="col d-flex justify-content-end">
               <button class="btn btn-outline-secondary btn-xs" onclick="insert_group()"><i class=" fas fa-user-plus"></i>&ensp;Add new group</button>
@@ -103,7 +103,7 @@
           <br>
           <div class="row">
             <div class="col-md-12">
-              <table class="table table-hover table-sm text-sm" id="group-table">
+              <table class="table table-hover table-sm text-sm text-black" id="group-table">
                 <thead>
                   <tr>
                     <td class="text-center">No.</td>
@@ -120,8 +120,8 @@
                       <td><?= $dataset->name ?></td>
                       <td><?= $dataset->description ?></td>
                       <td class=" text-center">
-                        <button class="btn btn-xs btn-outline-primary mr-1" onclick="edit_group(<?= $dataset->id ?>,'<?= $dataset->name ?>','<?= $dataset->description ?>')"><i class="fas fa-edit"></i>&ensp;<span class="text-xs">Update</span></button>
-                        <button class="btn btn-xs btn-outline-primary" onclick="delete_group(<?= $dataset->id ?>,'<?= $dataset->name ?>')"><i class="fas fa-trash"></i>&ensp;<span class="text-xs">Delete</span></button>
+                        <button class="btn btn-xs text-primary border-primary hover:text-white hover:bg-primary mr-1" onclick="edit_group(<?= $dataset->id ?>,'<?= $dataset->name ?>','<?= $dataset->description ?>')"><i class="fas fa-edit text-primaryHover"></i>&ensp;<span class="text-xs">Update</span></button>
+                        <button class="btn btn-xs text-primary border-primary hover:text-white hover:bg-primary" onclick="delete_group(<?= $dataset->id ?>,'<?= $dataset->name ?>')"><i class="fas fa-trash text-primaryHover"></i>&ensp;<span class="text-xs">Delete</span></button>
                       </td>
                     </tr>
                     <?php $i++; ?>
@@ -153,7 +153,7 @@
             <input type="text" class="form-control text-sm border-top-0 border-right-0 border-left-0" name="description" id="description" placeholder="Ex : this role will be used for ...." style="border-radius:0" autocomplete="off">
           </div>
           <div class="d-flex justify-content-end">
-            <button type="submit" id="btn-submit" name="insert_group" class="btn btn-sm btn-outline-primary"><i class="fas fa-paper-plane"></i>&ensp;Send data</button>
+            <button type="submit" id="btn-submit" name="insert_group" class="btn btn-sm text-primary border-primary hover:text-white hover:bg-primary"><i class="fas fa-paper-plane text-primaryHover"></i>&ensp;Send data</button>
           </div>
         </form>
       </div>

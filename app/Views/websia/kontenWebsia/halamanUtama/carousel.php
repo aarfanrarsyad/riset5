@@ -4,13 +4,13 @@
 <div class="w-full bg-primary">
     <div id="slider" class="swiper-container w-full">
         <div class="swiper-wrapper">
-            <div class="swiper-slide bg-cover bg-center w-full py-20 md:py-32 lg:py-56" style="background-image: url('/img/components/carousel/carousel-01.png');">
+            <div class="swiper-slide bg-cover bg-center w-full py-20 md:py-32 lg:py-56 cursor-pointer" style="background-image: url('/img/components/carousel/carousel-01.png');" onclick="location.href='/User/profil';">
             </div>
-            <div class="swiper-slide bg-cover bg-left w-full py-20 md:py-32 lg:py-56" style="background-image: url('/img/components/carousel/carousel-02.png');">
+            <div class="swiper-slide bg-cover bg-left w-full py-20 md:py-32 lg:py-56 cursor-pointer" style="background-image: url('/img/components/carousel/carousel-02.png');" onclick="location.href='/User/galeriFoto';">
             </div>
-            <div class="swiper-slide bg-cover bg-left w-full py-20 md:py-32 lg:py-56" style="background-image: url('/img/components/carousel/carousel-03.png');">
+            <div class="swiper-slide bg-cover bg-left w-full py-20 md:py-32 lg:py-56 cursor-pointer" style="background-image: url('/img/components/carousel/carousel-03.png');" onclick="location.href='/User/berita';">
             </div>
-            <div class="swiper-slide bg-cover bg-left w-full py-20 md:py-32 lg:py-56" style="background-image: url('/img/components/carousel/carousel-04.png');">
+            <div class="swiper-slide bg-cover bg-left w-full py-20 md:py-32 lg:py-56 cursor-pointer" style="background-image: url('/img/components/carousel/carousel-04.png');" onclick="location.href='#';">
             </div>
         </div>
         <div class="hidden md:flex">

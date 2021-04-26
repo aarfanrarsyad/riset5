@@ -44,7 +44,7 @@ body div.loading {
 }
 
 .list:hover {
-  background-color: #FF8A00;
+  background-color: #ff8a00;
 }
 
 #utama {
@@ -65,7 +65,6 @@ body div.loading {
 }
 
 @media (max-width: 460px) {
-
   #divKosong,
   #burgerDok {
     top: 4rem;
@@ -86,14 +85,14 @@ body div.loading {
 }
 
 #menu1:hover,
-#menu1+ul>li>div:hover,
-#menu1+ul>li>ul>li:hover {
+#menu1 + ul > li > div:hover,
+#menu1 + ul > li > ul > li:hover {
   background-color: rgb(1, 89, 152);
 }
 
-#menuDok>li:first-child:hover,
-#menuDok>li>div:hover,
-#menuDok>li>ul>li:hover,
+#menuDok > li:first-child:hover,
+#menuDok > li > div:hover,
+#menuDok > li > ul > li:hover,
 #menuDok .activeSideDok {
   background-color: rgb(1, 89, 152);
 }
@@ -108,20 +107,20 @@ body div.loading {
 
 /* style layoutDokumentasi */
 
-#nav ul li:hover>ul {
+#nav ul li:hover > ul {
   max-height: 9em;
 }
 
 @media screen and (max-width: 640px) {
   #utama::before {
-    content: ' ';
+    content: " ";
     display: block;
     position: absolute;
     top: 25px;
     width: 100%;
     height: 100%;
-    opacity: .15;
-    background-image: url('/img/components/logo/logo_api.png');
+    opacity: 0.15;
+    background-image: url("/img/components/logo/logo_api.png");
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;
@@ -130,7 +129,7 @@ body div.loading {
 
 /* style editProfi */
 .formEdit {
-  background-color: #F9F9F9;
+  background-color: #f9f9f9;
 }
 
 .layoutEdit {
@@ -139,8 +138,8 @@ body div.loading {
 
 @media screen and (max-width: 1024px) {
   #pagePendidikan table tbody tr td {
-    padding-left: .25rem;
-    padding-right: .25rem;
+    padding-left: 0.25rem;
+    padding-right: 0.25rem;
   }
 }
 
@@ -151,13 +150,13 @@ body div.loading {
 }
 
 #pagePendidikan table tr td {
-  padding-left: .5rem;
-  padding-right: .5rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
 }
 
 #pagePrestasi table tr td {
-  padding-left: .5rem;
-  padding-right: .5rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
 }
 
 @media screen and (max-width: 640px) {
@@ -168,21 +167,35 @@ body div.loading {
 
 @media screen and (max-width: 1024px) {
   #pagePrestasi table tbody tr td {
-    padding-left: .25rem;
-    padding-right: .25rem;
+    padding-left: 0.25rem;
+    padding-right: 0.25rem;
   }
 }
 
-input[type=checkbox] {
+input[type="checkbox"] {
   transform: scale(1.25);
 }
 
 /* style unggah berita */
-#infoBerita~div {
+#infoBerita ~ div {
   background-color: #6cf;
 }
 
-#infoBerita~div:before {
+#infoBerita ~ div:before {
+  position: absolute;
+  top: -10px;
+  content: "";
+  right: 10px;
+  border-style: solid;
+  border-width: 0 10px 10px 10px;
+  border-color: transparent transparent #6cf transparent;
+}
+
+#notif ~ div {
+  background-color: #6cf;
+}
+
+#notif ~ div:before {
   position: absolute;
   top: -10px;
   content: "";
@@ -193,6 +206,6 @@ input[type=checkbox] {
 }
 
 /* style proyek WS */
-.proyek+div {
+.proyek + div {
   box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.1), 0 0px 3px 3px rgba(0, 0, 0, 0.06);
 }

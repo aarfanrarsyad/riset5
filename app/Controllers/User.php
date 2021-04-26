@@ -140,7 +140,7 @@ class User extends BaseController
 		// dd($query3);
 		//isi :
 		// array :
-			// 'name'
+		// 'name'
 
 		if($model->getAngkatanByIdAlumni(session('id_alumni')) == NULL) {
 			$query4 = $model->getIdAlumniByIdTempatKerja($model->getIdTempatKerjaByIdAlumni(session('id_alumni')),session('id_alumni'))->getResult();
@@ -157,10 +157,10 @@ class User extends BaseController
 		// dd($query5);
 		//isi :
 		// array :
-			// 'id_prestasi'
-			// 'nama_prestasi'
-			// 'tahun_prestasi'
-			// 'id_alumni'
+		// 'id_prestasi'
+		// 'nama_prestasi'
+		// 'tahun_prestasi'
+		// 'id_alumni'
 
 		$query6 = $model->getPendidikanByIdAlumni(session('id_alumni'))->getResult();
 		// dd($query6);
@@ -458,6 +458,14 @@ class User extends BaseController
 			
 			unlink(ROOTPATH . '/public/img/user/userid_' . session('id_user').'/' .$avatar->getName());
 
+			$image = \Config\Services::image()
+				->withFile(ROOTPATH . '/public/img/user/userid_' . session('id_user').'/' .$avatar->getName())
+				->fit(350, 350, 'center')
+				->convert(IMAGETYPE_JPEG)
+				->save(ROOTPATH . '/public/img/user/userid_' . session('id_user').'/foto_profil.jpeg', 70);
+
+			unlink(ROOTPATH . '/public/img/user/userid_' . session('id_user').'/' .$avatar->getName());
+
 			$data = [
 				'foto_profil' => 'user/userid_' . session('id_user') . '/foto_profil.jpeg'
 			];
@@ -470,7 +478,6 @@ class User extends BaseController
 
 	public function hapusFotoProfil()
 	{
-
 		$model = new AlumniModel();
 		$query1 = $model->bukaProfile(session('id_alumni'))->getRow();
 		$foto = $query1->foto_profil;
@@ -512,6 +519,7 @@ class User extends BaseController
 		$cig = 0;
 		$ctw = 0;
 		$cfb = 0;
+    
 		if (isset($_POST['checkTanggalLahir'])) {
 			$cttl = 1;
 		}
@@ -592,7 +600,6 @@ class User extends BaseController
 
 	public function updateTampilanPendidikan()
 	{
-
 		$model = new AlumniModel();
 
 		$cpendidikan=0;
@@ -606,14 +613,21 @@ class User extends BaseController
 
 		$model->db->table('alumni')->set($data)->where('id_alumni', session('id_alumni'))->update();
 
-		return redirect()->to(base_url('User/editPendidikan'));
+			$data = [
+				'cpendidikan' => $cpendidikan,
+			];
+	
+			$model->db->table('alumni')->set($data)->where('id_alumni', session('id_alumni'))->update();
+	
+			return redirect()->to(base_url('User/editPendidikan'));
+		}
 	}
 
 	public function addPendidikan()
 	{
 
 		$model = new AlumniModel();
-		
+    
 		$data = [
 			'jenjang'    => htmlspecialchars($_POST['jenjang']),
 			'instansi'	 => htmlspecialchars($_POST['instansi']),
@@ -648,7 +662,6 @@ class User extends BaseController
 			session()->setFlashdata('add-pendidikan-success', 'Pendidikan berhasil ditambahkan');
 			return redirect()->to(base_url('User/editPendidikan'));
 		}
-		
 	}
 
 	public function updatePendidikan()
@@ -789,7 +802,6 @@ class User extends BaseController
 
 	public function updateTampilanPrestasi()
 	{
-
 		$model = new AlumniModel();
 
 		$cprestasi=0;
@@ -951,5 +963,14 @@ class User extends BaseController
 		$data['login'] = 'sudah';
 
 		return view('websia/kontenWebsia/galeri/galeriWisuda', $data);
+	}
+
+	public function berita()
+	{
+		$data['judulHalaman'] = 'Berita';
+		$data['active'] = 'berita';
+		$data['login'] = 'sudah';
+
+		return view('websia/kontenWebsia/beritaArtikel/berandaBerita', $data);
 	}
 }

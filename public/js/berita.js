@@ -84,3 +84,17 @@ $('#formUnggahBerita').submit(function (e) {
     }, 10);
   })
 })
+
+$('#notif').click(function () {
+  if ($(this).next().hasClass('hidden')) {
+    $(this).next().removeClass('hidden')
+    setTimeout(() => {
+      $(this).next().removeClass('opacity-0')
+    }, 5);
+  } else {
+    setTimeout(() => {
+      $(this).next().addClass('hidden')
+    }, 300);
+    $(this).next().addClass('opacity-0')
+  }
+})

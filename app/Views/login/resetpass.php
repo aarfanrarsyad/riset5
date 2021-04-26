@@ -5,7 +5,7 @@
 <div class="xl:w-7/12 md:w-10/12 flex items-center">
     <form method="POST" action="" class="rounded-3xl shadow-2xl xl:px-16 md:px-8 px-4 sm:mx-0 mx-4 w-full" data-aos="zoom-in">
         <h2 class="sm:text-2xl text-lg mb-3 font-bold text-center pt-8 text-primary">ATUR ULANG KATA SANDI</h2>
-        <div class="pl-3 rounded-full flex items-center <?php if (!session('errors.email')) : ?>hidden<?php endif; ?>" style="background-color: #B1FF66;">>
+        <div class="pl-3 rounded-full flex items-center <?php if (!session('errors.email')) : ?>hidden<?php endif; ?>" style="background-color: #B1FF66;">
             <img src="/img/components/icon/check.png" class="h-5 mr-1" alt="icon check">
             <p class="sm:text-base text-sm" style="color: #54AC00;">Kata sandi baru telah dikirim.</p>
         </div>

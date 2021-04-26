@@ -77,6 +77,11 @@
                                     <a href="/User/galeriWisuda" class="bg-primaryDark hover:bg-primary text-white hover:text-secondary text-left w-full px-2 transition duration-300"> Galeri Video Wisuda AIS/STIS/Polstat STIS </a>
                                 </div>
                             </div>
+                            <a href="/User/berita">
+                                <div class="nav-menu transition-colors duration-300 <?= ($active == 'berita') ? 'active' : ''; ?>">
+                                    BERITA
+                                </div>
+                            </a>
                             <!-- Navbar admin -->
                             <?php if (in_array("1", session('role'))) : ?>
                                 <a href="/admin">
@@ -85,7 +90,7 @@
                                     </div>
                                 </a>
                             <?php endif; ?>
-                            <div class="flex items-end text-sm relative text-white ml-1 p-1 bg-primaryLight cursor-pointer transition-colors duration-300">
+                            <div class="flex items-end text-sm relative text-white ml-1 p-1 bg-primaryLight cursor-pointer transition-colors duration-300 md:w-32 lg:w-48 w-full">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="absolute h-5 w-5 m-1 text-white">
                                     <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
                                 </svg>
@@ -134,6 +139,9 @@
                                 <a href="/User/galeriVideo" class="nav-menu-relative py-2"> Galeri Video Kegiatan HAISSTIS </a>
                                 <a href="/User/galeriWisuda" class="nav-menu-relative py-2"> Galeri Video Wisuda AIS/STIS/Polstat STIS </a>
                             </div>
+                        </div>
+                        <div class="nav-menu-relative px-2 py-2 <?= ($active == 'berita') ? 'active' : ''; ?>">
+                            <a href="/User/berita"> BERITA</a>
                         </div>
                         <?php if (in_array("1", session('role'))) : ?>
                             <div class="nav-menu-relative px-2 py-2">
