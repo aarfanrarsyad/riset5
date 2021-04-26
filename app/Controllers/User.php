@@ -235,24 +235,6 @@ class User extends BaseController
 		return view('websia/kontenWebsia/userProfile/userProfile', $data);
 	}
 
-	public function rekomendasi()
-	{
-		$model = new AlumniModel();
-
-		$query = $model->getAlumniByAngkatan($model->bukaProfile(session('nim'))->getRow()->angkatan);
-		// dd($query->orderBy('nama', $direction = 'asc')->get()->getResult());
-
-		$data = [
-			'judulHalaman'  => 'Rekomendasi',
-			'active' 		=> 'rekomendasi',
-			'jumlah'        => $query->countAllResults(false),
-			'alumni'          => $query->orderBy('nama', $direction = 'asc')->paginate(16),
-			'pager'		=> $query->orderBy('nama', $direction = 'asc')->pager
-		];
-
-		return view('websia/kontenWebsia/userProfile/rekomendasi', $data);
-	}
-
 	public function profilAlumni()
 	{
 		$model = new AlumniModel();
@@ -398,11 +380,29 @@ class User extends BaseController
 		return view('websia/kontenWebsia/userProfile/userProfile', $data);
 	}
 
+	public function rekomendasi()
+	{
+		$model = new AlumniModel();
+
+		$query = $model->getAlumniByAngkatan($model->bukaProfile(session('nim'))->getRow()->angkatan);
+		// dd($query->orderBy('nama', $direction = 'asc')->get()->getResult());
+
+		$data = [
+			'judulHalaman'  => 'Rekomendasi',
+			'active' 		=> 'rekomendasi',
+			'jumlah'        => $query->countAllResults(false),
+			'alumni'          => $query->orderBy('nama', $direction = 'asc')->paginate(16),
+			'pager'		=> $query->orderBy('nama', $direction = 'asc')->pager
+		];
+
+		return view('websia/kontenWebsia/userProfile/rekomendasi', $data);
+	}
+
 	public function editProfil()
 	{
 
 		$model = new AlumniModel();
-		$query = $model->bukaProfile(session('nim'));
+		$query = $model->bukaProfile(session('id_alumni'));
 		$sql = "SELECT * FROM tampilan where nim = " . session('nim');
 		$tampilan = $model->query($sql);
 
@@ -433,7 +433,7 @@ class User extends BaseController
 	{
 
 		$model = new AlumniModel();
-		$query1 = $model->bukaProfile(session('nim'))->getRow();
+		$query1 = $model->bukaProfile(session('id_alumni'))->getRow();
 		$foto = $query1->foto_profil;
 
 		$validated = $this->validate([
@@ -447,17 +447,26 @@ class User extends BaseController
 		} else {
 			$avatar = $this->request->getFile('file_upload');
 			$avatar->move(ROOTPATH . '/public/img/user/userid_' . session('id_user'));
+
 			if ($foto != 'default.svg') {
 				$url = ROOTPATH . '/public/img/' . $foto;
 				if (is_file($url))
 					unlink($url);
 			}
 
+			$image = \Config\Services::image()
+				->withFile(ROOTPATH . '/public/img/user/userid_' . session('id_user').'/' .$avatar->getName())
+				->fit(350, 350, 'center')
+				->convert(IMAGETYPE_JPEG)
+				->save(ROOTPATH . '/public/img/user/userid_' . session('id_user').'/foto_profil.jpeg', 70);
+
+			unlink(ROOTPATH . '/public/img/user/userid_' . session('id_user').'/' .$avatar->getName());
+
 			$data = [
-				'foto_profil' => 'user/userid_' . session('id_user') . '/' . htmlspecialchars($avatar->getName())
+				'foto_profil' => 'user/userid_' . session('id_user') . '/foto_profil.jpeg'
 			];
 
-			$model->db->table('alumni')->set($data)->where('nim', session('nim'))->update();
+			$model->db->table('alumni')->set($data)->where('id_alumni', session('id_alumni'))->update();
 			session()->setFlashdata('edit-foto-success', 'Foto Profil Berhasil Diubah');
 			return redirect()->to(base_url('User/editProfil'));
 		}
@@ -465,9 +474,8 @@ class User extends BaseController
 
 	public function hapusFotoProfil()
 	{
-
 		$model = new AlumniModel();
-		$query1 = $model->bukaProfile(session('nim'))->getRow();
+		$query1 = $model->bukaProfile(session('id_alumni'))->getRow();
 		$foto = $query1->foto_profil;
 
 		if ($foto != 'default.svg') {
@@ -481,7 +489,7 @@ class User extends BaseController
 		];
 
 
-		$model->db->table('alumni')->set($data)->where('nim', session('nim'))->update();
+		$model->db->table('alumni')->set($data)->where('id_alumni', session('id_alumni'))->update();
 		session()->setFlashdata('hapus-foto', 'Foto berhasil dihapus');
 		return redirect()->to(base_url('User/editProfil'));
 	}
@@ -493,14 +501,14 @@ class User extends BaseController
 		$telp_alumni   	= htmlspecialchars($_POST['telp_alumni']);
 		$email			= htmlspecialchars($_POST['email']);
 		$alamat       	= htmlspecialchars($_POST['alamat']);
+		$negara       	= htmlspecialchars($_POST['negara']);
+		$provinsi       	= htmlspecialchars($_POST['provinsi']);
+		$kota       	= htmlspecialchars($_POST['kabkota']);
 		$ig				= htmlspecialchars($_POST['ig']);
 		$fb				= htmlspecialchars($_POST['fb']);
 		$twitter		= htmlspecialchars($_POST['twitter']);
-		$biografi		= htmlspecialchars($_POST['biografi']);
-		$cjk = 0;
-		$cteml = 0;
-		$ctl = 0;
-		$cnt = 0;
+		$deskripsi		= htmlspecialchars($_POST['biografi']);
+		$cttl = 0;
 		$cemail = 0;
 		$calamat = 0;
 		$cjab = 0;
@@ -508,17 +516,8 @@ class User extends BaseController
 		$ctw = 0;
 		$cfb = 0;
 
-		if (isset($_POST['checkJenisKelamin'])) {
-			$cjk = 1;
-		}
-		if (isset($_POST['checkTempatLahir'])) {
-			$cteml = 1;
-		}
 		if (isset($_POST['checkTanggalLahir'])) {
-			$ctl = 1;
-		}
-		if (isset($_POST['checkTelepon'])) {
-			$cnt = 1;
+			$cttl = 1;
 		}
 		if (isset($_POST['checkEmail'])) {
 			$cemail = 1;
@@ -540,32 +539,30 @@ class User extends BaseController
 		}
 
 		$data = [
-			'nim'		=> session('nim'),
+			'id_alumni' => session('id_alumni'),
 			'telp_alumni'    => $telp_alumni,
 			'email'			=> $email,
-			'alamat'        => $alamat,
+			'alamat_alumni'        => $alamat,
+			'kota'			=> $kota,
+			'provinsi'		=> $provinsi,
+			'negara'		=> $negara,
 			'ig'			=> $ig,
 			'fb'			=> $fb,
 			'twitter'		=> $twitter,
-			'biografi'		=> $biografi,
-		];
-
-		$data2 = [
-			'jenis_kelamin' => $cjk,
-			'tempat_lahir' => $cteml,
-			'tanggal_lahir' => $ctl,
-			'no_telp' => $cnt,
-			'email' => $cemail,
-			'alamat' => $calamat,
-			'jabatan' => $cjab,
-			'instagram' => $cig,
-			'twitter' => $ctw,
-			'facebook' => $cfb,
+			'deskripsi'		=> $deskripsi,
+			'cttl' => $cttl,
+			'cemail' => $cemail,
+			'calamat' => $calamat,
+			'cjabatan_terakhir' => $cjab,
+			'cig' => $cig,
+			'ctwitter' => $ctw,
+			'cfb' => $cfb,
 		];
 
 		// dd($this->form_validation->run($data, 'editProfil'));
 
 		if ($this->form_validation->run($data, 'editProfil') === FALSE) {
+			// dd($this->form_validation->getError('email'));
 			session()->setFlashdata('edit-bio-fail', 'Biodata gagal Disimpan');
 			session()->setFlashdata('inputs', $this->request->getPost());
 			session()->setFlashdata('errors', $this->form_validation->getErrors());
@@ -574,8 +571,7 @@ class User extends BaseController
 			// dd(session('errors'));
 			return redirect()->to(base_url('User/editProfil'));
 		} else {
-			$model->db->table('alumni')->set($data)->where('nim', session('nim'))->update();
-			$model->db->table('tampilan')->set($data2)->where('nim', session('nim'))->update();
+			$model->db->table('alumni')->set($data)->where('id_alumni', session('id_alumni'))->update();
 			session()->setFlashdata('edit-bio-success', 'Biodata Berhasil Disimpan');
 			return redirect()->to(base_url('User/editProfil'));
 		}
@@ -585,64 +581,36 @@ class User extends BaseController
 	{
 
 		$model = new AlumniModel();
-		$query = $model->getPendidikanByNIM(session('id_alumni'));
-		$sql = "SELECT * FROM akses where id_alumni = " . session('id_alumni');
-		$tampilan = $model->query($sql);
-		// dd($query->getResult());
+		$query = $model->getPendidikanByIdAlumni(session('id_alumni'))->getResult();
+		$tampilan = $model->bukaProfile(session('id_alumni'))->getRow();
 
 		$data = [
 			'judulHalaman' => 'Edit Profil',
 			'login' => 'sudah',
 			'activeEditProfil' => 'pendidikan',
 			'active' 		=> 'profil',
-			'pendidikan'      => $query->getResult(),
-			'checked'	=> $tampilan->getRow(),
+			'pendidikan'      => $query,
+			'checked'	=> $tampilan,
 		];
 		return view('websia/kontenWebsia/editProfile/editPendidikan.php', $data);
 	}
 
-	public function updatePendidikan()
-	{
-
-		$model = new AlumniModel();
-
-		$data1 = [
-			'program_studi'     => htmlspecialchars($_POST['program_studi']),
-			'judul_tulisan'		=> htmlspecialchars($_POST['judul_tulisan']),
-		];
-
-		$data2 = [
-			'jenjang'    => htmlspecialchars($_POST['jenjang']),
-			'instansi'	 => htmlspecialchars($_POST['instansi']),
-			'tahun_masuk'  => htmlspecialchars($_POST['tahun_masuk']),
-			'tahun_lulus'  => htmlspecialchars($_POST['tahun_lulus'])
-		];
-
-		$model->db->table('pendidikan_tinggi')->set($data1)->where('id_pendidikan', $_POST['id_pendidikan'])->update();
-		$model->db->table('pendidikan')->set($data2)->where('id_pendidikan', $_POST['id_pendidikan'])->update();
-
-		return redirect()->to(base_url('User/editPendidikan'));
-	}
-
 	public function updateTampilanPendidikan()
-	{
-		if (!session()->has('id_user'))
-			return redirect()->to('/');
-
+	{ 
 		$model = new AlumniModel();
 
 		$cpendidikan=0;
 		if (isset($_POST['checkPendidikan'])) {
 			$cpendidikan = 1;
+
+			$data = [
+				'cpendidikan' => $cpendidikan,
+			];
+	
+			$model->db->table('alumni')->set($data)->where('id_alumni', session('id_alumni'))->update();
+	
+			return redirect()->to(base_url('User/editPendidikan'));
 		}
-
-		$data = [
-			'pendidikan' => $cpendidikan,
-		];
-
-		$model->db->table('tampilan')->set($data)->where('nim', session('nim'))->update();
-
-		return redirect()->to(base_url('User/editPendidikan'));
 	}
 
 	public function addPendidikan()
@@ -650,24 +618,72 @@ class User extends BaseController
 
 		$model = new AlumniModel();
 
-		$data2 = [
+		$data = [
 			'jenjang'    => htmlspecialchars($_POST['jenjang']),
 			'instansi'	 => htmlspecialchars($_POST['instansi']),
-			'tahun_masuk'  => htmlspecialchars($_POST['tahun_masuk']),
 			'tahun_lulus'  => htmlspecialchars($_POST['tahun_lulus']),
-			'nim'		=> session('nim'),
+			'tahun_masuk'  => htmlspecialchars($_POST['tahun_masuk']),
+			'angkatan'		=> htmlspecialchars($_POST['angkatan']),
+			'id_alumni'	=> session('id_alumni'),
 		];
 
-		$model->db->table('pendidikan')->insert($data2);
-
-		$data1 = [
+		$data2 = [
 			'program_studi'     => htmlspecialchars($_POST['program_studi']),
+			'nim'				=> htmlspecialchars($_POST['nim']),
 			'judul_tulisan'		=> htmlspecialchars($_POST['judul_tulisan']),
 		];
 
-		$model->db->table('pendidikan_tinggi')->insert($data1);
+		if ($this->form_validation->run($data2, 'editPendidikan') === FALSE) {
+			session()->setFlashdata('add-pendidikan-fail', 'Pendidikan gagal ditambahkan');
+			session()->setFlashdata('error-nim', $this->form_validation->getError('nim'));
+			return redirect()->to(base_url('User/editPendidikan'));
+		} else {
+			$model->db->table('pendidikan')->insert($data);
 
-		return redirect()->to(base_url('User/editPendidikan'));
+			$query = "SELECT id_pendidikan FROM pendidikan WHERE id_alumni = ".session('id_alumni')." ORDER BY id_pendidikan DESC";
+			$id_pendidikan = $model->query($query)->getRow()->id_pendidikan;
+			$data2 = [
+				'id_pendidikan'		=> $id_pendidikan,
+				'program_studi'     => htmlspecialchars($_POST['program_studi']),
+				'nim'				=> htmlspecialchars($_POST['nim']),
+				'judul_tulisan'		=> htmlspecialchars($_POST['judul_tulisan']),
+			];
+			$model->db->table('pendidikan_tinggi')->insert($data2);
+			session()->setFlashdata('add-pendidikan-success', 'Pendidikan berhasil ditambahkan');
+			return redirect()->to(base_url('User/editPendidikan'));
+		}
+	}
+
+	public function updatePendidikan()
+	{
+
+		$model = new AlumniModel();
+
+		$data = [
+			'jenjang'    => htmlspecialchars($_POST['jenjang']),
+			'instansi'	 => htmlspecialchars($_POST['instansi']),
+			'tahun_lulus'  => htmlspecialchars($_POST['tahun_lulus']),
+			'tahun_masuk'  => htmlspecialchars($_POST['tahun_masuk']),
+			'angkatan'		=> htmlspecialchars($_POST['angkatan']),
+			'id_alumni'	=> session('id_alumni'),
+		];
+
+		$data2 = [
+			'program_studi'     => htmlspecialchars($_POST['program_studi']),
+			'nim'				=> htmlspecialchars($_POST['nim']),
+			'judul_tulisan'		=> htmlspecialchars($_POST['judul_tulisan']),
+		];
+
+		if ($this->form_validation->run($data2, 'editPendidikan') === FALSE) {
+			session()->setFlashdata('edit-pendidikan-fail', 'Pendidikan gagal diperbaharui');
+			session()->setFlashdata('error-nim', $this->form_validation->getError('nim'));
+			return redirect()->to(base_url('User/editPendidikan'));
+		} else {
+			$model->db->table('pendidikan')->set($data)->where('id_pendidikan', $_POST['id_pendidikan'])->update();
+			$model->db->table('pendidikan_tinggi')->set($data2)->where('id_pendidikan', $_POST['id_pendidikan'])->update();
+			session()->setFlashdata('edit-pendidikan-success', 'Pendidikan berhasil diperbaharui');
+			return redirect()->to(base_url('User/editPendidikan'));
+		}
 	}
 
 	public function deletePendidikan()
@@ -776,9 +792,6 @@ class User extends BaseController
 
 	public function updateTampilanPrestasi()
 	{
-		if (!session()->has('id_user'))
-			return redirect()->to('/');
-
 		$model = new AlumniModel();
 
 		$cprestasi=0;
