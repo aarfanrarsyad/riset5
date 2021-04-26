@@ -12,7 +12,7 @@
             <img src="/img/logo/logoSIA.png" class="md:w-20 sm:w-16 w-10 md:mb-1.5 md:mt-2.5 my-2 mx-auto" alt="Logo SIA">
             <div class="text-secondary text-xl font-bold mb-3 text-center">DOKUMENTASI</div>
             <div class="flex justify-center mt-2 mb-5 h-9 relative w-full">
-                <input type="text" name="search" class="input w-5/6 pl-2 pr-8 border-2 rounded-lg border-gray-400 md:text-base outline-none text-gray-400" spellcheck="false" id="search" placeholder="Pencarian">
+                <input type="text" name="search" class="input w-5/6 pl-2 pr-8 border-2 rounded-lg border-gray-400 md:text-base outline-none text-black focus:border-secondary" spellcheck="false" id="search" placeholder="Pencarian">
                 <div class="relative right-8 flex items-center text-gray-500">
                     <svg class="absolute text-gray-500 hover:text-gray-600 w-7 cursor-pointer" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                         <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
@@ -21,7 +21,7 @@
             </div>
 
             <div class="flex justify-center items-center text-secondary bg-primaryHover md:text-xl font-bold py-3">
-                <div class="flex items-center">
+                <div class="flex items-center cursor-pointer" onclick="location.href='/developer';">
                     <svg width="19" height="18" viewBox="0 0 19 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g clip-path="url(#clip0)">
                             <path d="M0.778756 9.95506C0.626631 9.95354 0.478292 9.90744 0.352104 9.82246C0.225917 9.73749 0.127423 9.61737 0.068816 9.47698C0.0102093 9.33658 -0.00593613 9.18209 0.0223786 9.03261C0.0506934 8.88314 0.122225 8.74525 0.228117 8.63602L8.6277 0.236433C8.77022 0.0897825 8.96457 0.00489081 9.16901 7.13166e-09C9.37535 -2.78609e-05 9.57332 0.081619 9.71965 0.2271L18.1192 8.62669C18.2653 8.77272 18.3473 8.9708 18.3473 9.17733C18.3473 9.38385 18.2653 9.58193 18.1192 9.72797C17.9732 9.874 17.7751 9.95605 17.5686 9.95605C17.3621 9.95605 17.164 9.874 17.018 9.72797L9.16901 1.86657L1.3294 9.73419C1.18225 9.87768 0.984278 9.95709 0.778756 9.95506Z" fill="#FFAA00" />
