@@ -103,21 +103,22 @@ if ($status == 'bukan user') {
             </div>
             <!-- tempat dan tanggal lahir -->
             <p class="font-heading text-primary text-center md:text-left text-sm mb-5 md:mb-3 lg:mb-5">
-            <?php if ($cttl == "") : ?>
+                <?php if ($cttl == "") : ?>
                     <?= $alumni->tempat_lahir ?>, <?= strftime("%d %B %Y", strtotime($alumni->tanggal_lahir)); ?>
                 <?php endif ?>
             </p>
             <p class="font-heading text-center md:text-left text-base mb-5 md:mb-3 lg:mb-5">
                 <!-- Angkatan -->
-                Angkatan <span class="text-primary">ke-<?= $angkatan; ?> </span><br />
+                Angkatan <span class="text-primary">ke-<?php //$angkatan; 
+                                                        ?> </span><br />
                 <!-- Akademi Ilmu Statistik / STIS/ POLSTAT STIS  ========>  Harusnya diatur di BE -->
                 <?php foreach ($pendidikan as $row) {
-                    if($row->instansi == "Akademi Ilmu Statistik" || $row->instansi == "STIS" || $row->instansi == "POLSTAT STIS" ) {
+                    if ($row->instansi == "Akademi Ilmu Statistik" || $row->instansi == "STIS" || $row->instansi == "POLSTAT STIS") {
                         echo $row->instansi; ?>
-                        <br/>
+                        <br />
                         <!-- NIM -->
                         NIM <span class="text-primary"><?= $row->nim; ?></span>
-                    <?php }
+                <?php }
                 } ?>
             </p>
             <!-- Instansi tempat bekerja dan jabatan -->
@@ -237,7 +238,8 @@ if ($status == 'bukan user') {
                             <span class="title mt-4 font-heading text-sm md:text-base lg:text-lg font-semibold text-primary block px-2 md:px-0 text-center"><?= $row->nama; ?></span>
                         </div>
                         <div>
-                            <span class="description font-paragraph text-primary text-center md:text-base block pt-2 pb-2 border-gray-400 mb-2">Angkatan <?= $row->angkatan; ?></span>
+                            <span class="description font-paragraph text-primary text-center md:text-base block pt-2 pb-2 border-gray-400 mb-2">Angkatan <?php //$row->angkatan; 
+                                                                                                                                                            ?></span>
                         </div>
                     </a>
                 </div>
@@ -313,111 +315,111 @@ if ($status == 'bukan user') {
 <!-- Akhir Informasi Intsansi -->
 
 <?php if ($cprestasi == 1) { ?>
-<!-- Awal Riwayat Prestasi -->
-<div class="w-full my-8 lg:px-20 md:px-8 px-2">
-    <h3 class="font-heading font-bold text-xl text-secondary">Riwayat Prestasi</h3>
-    <div class="md:shadow-lg lg:shadow-xl rounded-2xl px-0 py-1 md:px-5 md:py-5 lg:mx-14 lg:p-8 mb-1 md:mt-3">
-    <?php if($prestasi == NULL){
-        echo "<p>Riwayat Prestasi tidak ditemukan.</p>";
-    } else { ?>
-        <?php foreach ($prestasi as $row) : ?>
-            <div class="flex justify-between px-3 font-heading text-primary mt-2 md:mt-2 lg:mt-3">
-                <div class=""><span class="text-black"><?= $row->nama_prestasi; ?></span> </div>
-                <div class="font-bold"><?= $row->tahun_prestasi; ?></div>
-            </div>
-        <?php endforeach; 
-    } ?>
-        <!-- Jika data prestasi belum diinput, ditampilkan "belum ada riwayat prestasi" -->
+    <!-- Awal Riwayat Prestasi -->
+    <div class="w-full my-8 lg:px-20 md:px-8 px-2">
+        <h3 class="font-heading font-bold text-xl text-secondary">Riwayat Prestasi</h3>
+        <div class="md:shadow-lg lg:shadow-xl rounded-2xl px-0 py-1 md:px-5 md:py-5 lg:mx-14 lg:p-8 mb-1 md:mt-3">
+            <?php if ($prestasi == NULL) {
+                echo "<p>Riwayat Prestasi tidak ditemukan.</p>";
+            } else { ?>
+                <?php foreach ($prestasi as $row) : ?>
+                    <div class="flex justify-between px-3 font-heading text-primary mt-2 md:mt-2 lg:mt-3">
+                        <div class=""><span class="text-black"><?= $row->nama_prestasi; ?></span> </div>
+                        <div class="font-bold"><?= $row->tahun_prestasi; ?></div>
+                    </div>
+            <?php endforeach;
+            } ?>
+            <!-- Jika data prestasi belum diinput, ditampilkan "belum ada riwayat prestasi" -->
+        </div>
+        <hr class="visible sm:invisible border-primary border-opacity-75 w-4/5 object-center mx-auto mt-8">
     </div>
-    <hr class="visible sm:invisible border-primary border-opacity-75 w-4/5 object-center mx-auto mt-8">
-</div>
-<!-- Akhir Riwayat Prestasi -->
+    <!-- Akhir Riwayat Prestasi -->
 <?php } ?>
 
 <?php if ($cpendidikan == 1) { ?>
-<!-- Awal Riwayat Pendidikan -->
-<div class="w-full my-8 lg:px-20 md:px-8 px-2 mb-6 md:mb-12">
-    <h3 class="font-heading font-bold text-xl text-secondary">Riwayat Pendidikan</h3>
-    <div class="lg:px-16">
-        <div class="md:shadow-lg lg:shadow-xl rounded-3xl w-full mx-auto mt-5">
-            <div class="overflow-x-scroll md:overflow-x-hidden">
-                <table class="table-fixed font-paragraph text-black">
-                    <thead>
-                        <tr>
-                            <th class="w-1/12 bg-gray-100 border-b-2 border-gray-200 rounded-tl-xl lg:rounded-tl-3xl text-sm text-left pl-3 lg:pl-5 py-2 md:py-3 lg:py-4">Jenjang Pendidikan</th>
-                            <th class="w-2/12 bg-gray-100 border-b-2 border-gray-200 text-sm text-left pl-3 lg:pl-5 py-2 md:py-3 lg:py-4">Univeristas</th>
-                            <th class="w-2/12 bg-gray-100 border-b-2 border-gray-200 text-sm text-left pl-3 lg:pl-5 py-2 md:py-3 lg:py-4">Program Studi</th>
-                            <th class="w-1/12 bg-gray-100 border-b-2 border-gray-200 text-sm text-left pl-3 lg:pl-5 py-2 md:py-3 lg:py-4">Tahun Masuk</th>
-                            <th class="w-1/12 bg-gray-100 border-b-2 border-gray-200 text-sm text-left pl-3 lg:pl-5 py-2 md:py-3 lg:py-4">Tahun Lulus</th>
-                            <th class="w-3/12 bg-gray-100 border-b-2 border-gray-200 rounded-tr-xl lg:rounded-tr-3xl text-sm text-left pl-3 lg:pl-5 py-2 md:py-3 lg:py-4">Judul Tulisan</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    <?php if($prestasi == NULL){ ?>
-                     <!-- Tampilan jika data semua kolom belum diisi -->
-
-                        <tr>
-                            <td colspan="6" class="text-sm text-center border-b-2 border-gray-200 px-3 lg:px-5 py-2 md:py-3 lg:py-4">Riwayat pendidikan tidak ditemukan.</td>
-                        </tr>
-                    <?php } else { ?>
-                        <?php foreach ($pendidikan as $row) : ?>
-                            <?php
-                            if ($row->jenjang == "") {
-                                $jenjang = "belum terisi";
-                            } else {
-                                $jenjang = $row->jenjang;
-                            }
-                            if ($row->instansi == "") {
-                                $instansi = "belum terisi";
-                            } else {
-                                $instansi = $row->instansi;
-                            }
-                            if ($row->program_studi == "") {
-                                $program_studi = "belum terisi";
-                            } else {
-                                $program_studi = $row->program_studi;
-                            }
-                            if ($row->tahun_masuk == "0000") {
-                                $tahun_masuk = "belum terisi";
-                            } else {
-                                $tahun_masuk = $row->tahun_masuk;
-                            }
-                            if ($row->tahun_lulus == "0000") {
-                                $tahun_lulus = "belum terisi";
-                            } else {
-                                $tahun_lulus = $row->tahun_lulus;
-                            }
-                            if ($row->judul_tulisan == "") {
-                                $judul_tulisan = "belum terisi";
-                            } else {
-                                $judul_tulisan = $row->judul_tulisan;
-                            }
-                            ?>
+    <!-- Awal Riwayat Pendidikan -->
+    <div class="w-full my-8 lg:px-20 md:px-8 px-2 mb-6 md:mb-12">
+        <h3 class="font-heading font-bold text-xl text-secondary">Riwayat Pendidikan</h3>
+        <div class="lg:px-16">
+            <div class="md:shadow-lg lg:shadow-xl rounded-3xl w-full mx-auto mt-5">
+                <div class="overflow-x-scroll md:overflow-x-hidden">
+                    <table class="table-fixed font-paragraph text-black">
+                        <thead>
                             <tr>
-                                <td class="text-sm text-left border-b-2 border-gray-200 px-3 lg:px-5 py-2 md:py-3 lg:py-4"><?= $jenjang; ?></td>
-                                <td class="text-sm text-left border-b-2 border-gray-200 px-3 lg:px-5 py-2 md:py-3 lg:py-4"><?= $instansi; ?></td>
-                                <td class="text-sm text-left border-b-2 border-gray-200 px-3 lg:px-5 py-2 md:py-3 lg:py-4"><?= $program_studi; ?></td>
-                                <td class="text-sm text-left border-b-2 border-gray-200 px-3 lg:px-5 py-2 md:py-3 lg:py-4"><?= $tahun_masuk; ?></td>
-                                <td class="text-sm text-left border-b-2 border-gray-200 px-3 lg:px-5 py-2 md:py-3 lg:py-4"><?= $tahun_lulus; ?></td>
-                                <td class="text-sm text-left border-b-2 border-gray-200 px-3 lg:px-5 py-2 md:py-3 lg:py-4"><?= $judul_tulisan; ?></td>
+                                <th class="w-1/12 bg-gray-100 border-b-2 border-gray-200 rounded-tl-xl lg:rounded-tl-3xl text-sm text-left pl-3 lg:pl-5 py-2 md:py-3 lg:py-4">Jenjang Pendidikan</th>
+                                <th class="w-2/12 bg-gray-100 border-b-2 border-gray-200 text-sm text-left pl-3 lg:pl-5 py-2 md:py-3 lg:py-4">Univeristas</th>
+                                <th class="w-2/12 bg-gray-100 border-b-2 border-gray-200 text-sm text-left pl-3 lg:pl-5 py-2 md:py-3 lg:py-4">Program Studi</th>
+                                <th class="w-1/12 bg-gray-100 border-b-2 border-gray-200 text-sm text-left pl-3 lg:pl-5 py-2 md:py-3 lg:py-4">Tahun Masuk</th>
+                                <th class="w-1/12 bg-gray-100 border-b-2 border-gray-200 text-sm text-left pl-3 lg:pl-5 py-2 md:py-3 lg:py-4">Tahun Lulus</th>
+                                <th class="w-3/12 bg-gray-100 border-b-2 border-gray-200 rounded-tr-xl lg:rounded-tr-3xl text-sm text-left pl-3 lg:pl-5 py-2 md:py-3 lg:py-4">Judul Tulisan</th>
                             </tr>
-                        <?php endforeach; 
-                        }?>
-                        <tr>
-                            <td class="bg-gray-100 rounded-bl-xl lg:rounded-bl-3xl text-sm text-left px-3 lg:px-5 py-2 md:py-3 lg:py-4"></td>
-                            <td class="bg-gray-100 text-sm text-left px-3 lg:px-5 py-2 md:py-3 lg:py-4"></td>
-                            <td class="bg-gray-100 text-sm text-left px-3 lg:px-5 py-2 md:py-3 lg:py-4"></td>
-                            <td class="bg-gray-100 text-sm text-left px-3 lg:px-5 py-2 md:py-3 lg:py-4"></td>
-                            <td class="bg-gray-100 text-sm text-left px-3 lg:px-5 py-2 md:py-3 lg:py-4"></td>
-                            <td class="bg-gray-100 rounded-br-xl lg:rounded-br-3xl text-sm text-left px-3 lg:px-5 py-2 md:py-3 lg:py-4"></td>
-                        </tr>
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            <?php if ($prestasi == NULL) { ?>
+                                <!-- Tampilan jika data semua kolom belum diisi -->
+
+                                <tr>
+                                    <td colspan="6" class="text-sm text-center border-b-2 border-gray-200 px-3 lg:px-5 py-2 md:py-3 lg:py-4">Riwayat pendidikan tidak ditemukan.</td>
+                                </tr>
+                            <?php } else { ?>
+                                <?php foreach ($pendidikan as $row) : ?>
+                                    <?php
+                                    if ($row->jenjang == "") {
+                                        $jenjang = "belum terisi";
+                                    } else {
+                                        $jenjang = $row->jenjang;
+                                    }
+                                    if ($row->instansi == "") {
+                                        $instansi = "belum terisi";
+                                    } else {
+                                        $instansi = $row->instansi;
+                                    }
+                                    if ($row->program_studi == "") {
+                                        $program_studi = "belum terisi";
+                                    } else {
+                                        $program_studi = $row->program_studi;
+                                    }
+                                    if ($row->tahun_masuk == "0000") {
+                                        $tahun_masuk = "belum terisi";
+                                    } else {
+                                        $tahun_masuk = $row->tahun_masuk;
+                                    }
+                                    if ($row->tahun_lulus == "0000") {
+                                        $tahun_lulus = "belum terisi";
+                                    } else {
+                                        $tahun_lulus = $row->tahun_lulus;
+                                    }
+                                    if ($row->judul_tulisan == "") {
+                                        $judul_tulisan = "belum terisi";
+                                    } else {
+                                        $judul_tulisan = $row->judul_tulisan;
+                                    }
+                                    ?>
+                                    <tr>
+                                        <td class="text-sm text-left border-b-2 border-gray-200 px-3 lg:px-5 py-2 md:py-3 lg:py-4"><?= $jenjang; ?></td>
+                                        <td class="text-sm text-left border-b-2 border-gray-200 px-3 lg:px-5 py-2 md:py-3 lg:py-4"><?= $instansi; ?></td>
+                                        <td class="text-sm text-left border-b-2 border-gray-200 px-3 lg:px-5 py-2 md:py-3 lg:py-4"><?= $program_studi; ?></td>
+                                        <td class="text-sm text-left border-b-2 border-gray-200 px-3 lg:px-5 py-2 md:py-3 lg:py-4"><?= $tahun_masuk; ?></td>
+                                        <td class="text-sm text-left border-b-2 border-gray-200 px-3 lg:px-5 py-2 md:py-3 lg:py-4"><?= $tahun_lulus; ?></td>
+                                        <td class="text-sm text-left border-b-2 border-gray-200 px-3 lg:px-5 py-2 md:py-3 lg:py-4"><?= $judul_tulisan; ?></td>
+                                    </tr>
+                            <?php endforeach;
+                            } ?>
+                            <tr>
+                                <td class="bg-gray-100 rounded-bl-xl lg:rounded-bl-3xl text-sm text-left px-3 lg:px-5 py-2 md:py-3 lg:py-4"></td>
+                                <td class="bg-gray-100 text-sm text-left px-3 lg:px-5 py-2 md:py-3 lg:py-4"></td>
+                                <td class="bg-gray-100 text-sm text-left px-3 lg:px-5 py-2 md:py-3 lg:py-4"></td>
+                                <td class="bg-gray-100 text-sm text-left px-3 lg:px-5 py-2 md:py-3 lg:py-4"></td>
+                                <td class="bg-gray-100 text-sm text-left px-3 lg:px-5 py-2 md:py-3 lg:py-4"></td>
+                                <td class="bg-gray-100 rounded-br-xl lg:rounded-br-3xl text-sm text-left px-3 lg:px-5 py-2 md:py-3 lg:py-4"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
-</div>
-<!-- Akhir Riwayat Pendidikan -->
+    <!-- Akhir Riwayat Pendidikan -->
 <?php } ?>
 
 <?= $this->endSection(); ?>
