@@ -42,8 +42,8 @@
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="<?= base_url('/') ?>">Home</a></li>
-                        <li class="breadcrumb-item"><a href="<?= base_url('/management-users') ?>">Register User</a></li>
+                        <li class="breadcrumb-item text-primaryHover"><a href="<?= base_url('/') ?>">Home</a></li>
+                        <li class="breadcrumb-item text-gray-100"><a href="<?= base_url('/management-users') ?>">Register User</a></li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -57,8 +57,8 @@
             <div class="card card-secondary card-outline elevation-3">
                 <div class="card-body">
                     <div class="row">
-                        <div class="col">
-                            <h5><i class="fas fa-users text-secondary"></i>&ensp;Register User</h5>
+                        <div class="col text-primaryHover font-heading">
+                            <h5><i class="fas fa-users text-primaryHover"></i>&ensp;Register User</h5>
                         </div>
                         <div class="col d-flex justify-content-end">
                             <button onclick="submit()" class="btn btn-sm btn-outline-primary btn-user">

@@ -12,8 +12,8 @@
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right text-sm">
-                        <li class="breadcrumb-item"><a href="<?= base_url('/') ?>">Home</a></li>
-                        <li class="breadcrumb-item text-muted"><span>Activity Log</span></li>
+                        <li class="breadcrumb-item text-primaryHover"><a href="<?= base_url('/') ?>">Home</a></li>
+                        <li class="breadcrumb-item text-muted text-gray-100"><span>Activity Log</span></li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -25,14 +25,14 @@
             <div class="card card-secondary elevation-3 card-outline">
                 <div class="card-body">
                     <div class="row">
-                        <div class="col">
-                            <h5><i class="fas fa-user-clock text-secondary"></i>&ensp;Activity Log</h5>
+                        <div class="col text-primaryHover font-heading">
+                            <h5><i class="fas fa-user-clock text-primaryHover"></i>&ensp;Activity Log</h5>
                         </div>
                     </div>
                     <br>
                     <div class="row">
                         <div class="col-md-12">
-                            <table class="table table-hover table-sm text-sm" id="activity-table">
+                            <table class="table table-hover table-sm text-sm text-black" id="activity-table">
                                 <thead>
                                     <tr>
                                         <td class="text-center">No.</td>

@@ -10,12 +10,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="h3 mb-4 text-gray-800">Admin Index</h1>
+                        <h1 class="h3 mb-4 text-black font-heading">Admin Index</h1>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right text-sm">
-                            <li class="breadcrumb-item"><a href="<?= base_url('/') ?>">Home</a></li>
-                            <li class="breadcrumb-item text-muted"><span>Home Page</span></li>
+                            <li class="breadcrumb-item text-primaryHover"><a href="<?= base_url('/') ?>">Home</a></li>
+                            <li class="breadcrumb-item text-muted text-gray-100"><span>Home Page</span></li>
                         </ol>
                     </div><!-- /.col -->
                 </div><!-- /.row -->

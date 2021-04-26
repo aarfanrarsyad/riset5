@@ -14,8 +14,8 @@
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right text-sm">
-              <li class="breadcrumb-item"><a href="<?= base_url('/') ?>">Home</a></li>
-              <li class="breadcrumb-item text-muted"><span>Activation Tokens</span></li>
+              <li class="breadcrumb-item text-primaryHover"><a href="<?= base_url('/') ?>">Home</a></li>
+              <li class="breadcrumb-item text-muted text-gray-100"><span>Activation Tokens</span></li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -29,14 +29,14 @@
         <div class="card card-secondary card-outline elevation-3">
           <div class="card-body">
             <div class="row">
-              <div class="col">
-                <h5><i class="fas fa-qrcode text-secondary"></i>&ensp;Activation Tokens</h5>
+              <div class="col text-primaryHover font-heading">
+                <h5><i class="fas fa-qrcode text-primaryHover"></i>&ensp;Activation Tokens</h5>
               </div>
             </div>
             <br>
             <div class="row">
               <div class="col-md-12">
-                <table class="table table-hover table-sm text-sm" id="activations-table">
+                <table class="table table-hover table-sm text-sm text-black" id="activations-table">
                   <thead>
                     <tr>
                       <td class="text-center">No.</td>

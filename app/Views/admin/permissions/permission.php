@@ -109,8 +109,8 @@ $failed = session()->getFlashdata('failed');
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right text-sm">
-                        <li class="breadcrumb-item"><a href="<?= base_url('admin') ?>">Home</a></li>
-                        <li class="breadcrumb-item text-muted"><span><?= $group->name ?> permission table</span></li>
+                        <li class="breadcrumb-item text-primaryHover"><a href="<?= base_url('admin') ?>">Home</a></li>
+                        <li class="breadcrumb-item text-muted text-gray-100"><span><?= $group->name ?> permission table</span></li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -123,14 +123,14 @@ $failed = session()->getFlashdata('failed');
                     <div class="card card-secondary elevation-3 card-outline">
                         <div class="card-body">
                             <div class="row">
-                                <div class="col">
-                                    <h5><i class="fas fa-cogs text-secondary"></i>&ensp;<?= $group->name ?> permission table</h5>
+                                <div class="col text-primaryHover font-heading">
+                                    <h5><i class="fas fa-cogs text-primaryHover"></i>&ensp;<?= $group->name ?> permission table</h5>
                                 </div>
                             </div>
                             <br>
                             <div class="row">
                                 <div class="col-md-12 px-3">
-                                    <table class="table table-hover table-sm text-sm" id="permission-table">
+                                    <table class="table table-hover table-sm text-sm text-black" id="permission-table">
                                         <thead>
                                             <tr>
                                                 <td class="text-center">No.</td>

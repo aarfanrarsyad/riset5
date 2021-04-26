@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/aos.css" />
     <link rel="stylesheet" href="/css/leaflet.css">
-    <link rel="stylesheet" href="/css/output.css">
+    <link rel="stylesheet" href="/css/tailwind.css">
     <link rel="stylesheet" href="/css/scrollbar.css">
     <script type="text/javascript" src="/js/jquery.js"></script>
     <title><?php echo $judulHalaman ?></title>

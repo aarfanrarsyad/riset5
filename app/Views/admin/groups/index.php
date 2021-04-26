@@ -78,8 +78,8 @@
         </div><!-- /.col -->
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right text-sm">
-            <li class="breadcrumb-item"><a href="<?= base_url('admin') ?>">Home</a></li>
-            <li class="breadcrumb-item text-muted"><span>Groups Managment</span></li>
+            <li class="breadcrumb-item text-primaryHover"><a href="<?= base_url('admin') ?>">Home</a></li>
+            <li class="breadcrumb-item text-muted text-gray-100"><span>Groups Managment</span></li>
           </ol>
         </div>
       </div>
@@ -93,8 +93,8 @@
       <div class="card card-secondary elevation-3 card-outline">
         <div class="card-body">
           <div class="row">
-            <div class="col">
-              <h5><i class="fas fa-layer-group text-secondary"></i>&ensp;Groups Managment</h5>
+            <div class="col text-primaryHover font-heading">
+              <h5><i class="fas fa-layer-group  text-primaryHover"></i>&ensp;Groups Managment</h5>
             </div>
             <div class="col d-flex justify-content-end">
               <button class="btn btn-outline-secondary btn-xs" onclick="insert_group()"><i class=" fas fa-user-plus"></i>&ensp;Add new group</button>
@@ -103,7 +103,7 @@
           <br>
           <div class="row">
             <div class="col-md-12">
-              <table class="table table-hover table-sm text-sm" id="group-table">
+              <table class="table table-hover table-sm text-sm text-black" id="group-table">
                 <thead>
                   <tr>
                     <td class="text-center">No.</td>

@@ -25,6 +25,10 @@
     <link rel="stylesheet" href="<?= base_url() ?>/vendor/AdminLTE/plugins/daterangepicker/daterangepicker.css">
     <!-- summernote -->
     <link rel="stylesheet" href="<?= base_url() ?>/vendor/AdminLTE/plugins/summernote/summernote-bs4.min.css">
+    <!-- Tailwind -->
+    <link rel="stylesheet" href="/css/tailwind.css">
+    <link rel="stylesheet" href="/css/navbar.css">
+
 
     <!-- jQuery -->
     <script src="<?= base_url() ?>/vendor/AdminLTE/plugins/jquery/jquery.min.js"></script>
@@ -72,6 +76,12 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
     <script src="/js/admin-dashboard.js"></script>
+
+
+    <!-- Font -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -90,8 +100,8 @@
         <!-- /.container-fluid -->
 
         <!-- Ini wilayah footer -->
-        <footer class="main-footer text-sm">
-            <strong>Copyright &copy; 2020-2022 <a href="https://adminlte.io">PKL Politeknik STIS - Sistem Database Alumni</a></strong>
+        <footer class="main-footer text-sm text-primaryHover">
+            <strong>Copyright &copy; 2020-2022 <a href="https://pkl.stis.ac.id/60">PKL Politeknik STIS - Sistem Database Alumni</a></strong>
             .All rights reserved.
             <div class="float-right d-none d-sm-inline-block mr-4">
                 <b>Version</b> 1.1.0-alpha
