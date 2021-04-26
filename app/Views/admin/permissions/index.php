@@ -48,7 +48,7 @@
                                             <td class="text-center"><?= $i ?></td>
                                             <td><?= $group->name ?></td>
                                             <td class="text-center">
-                                                <a href="<?= base_url('/admin/permissions/' . $group->id) ?>" class="btn btn-xs text-primary border-primary hover:text-white hover:bg-primary"><i class="fas fa-user-cog"></i>&ensp;<span class="text-xs">Set permissions</span></button>
+                                                <a href="<?= base_url('/admin/permissions/' . $group->id) ?>" class="btn btn-xs text-primary border-primary hover:text-white hover:bg-primary"><i class="fas fa-user-cog text-primaryHover"></i>&ensp;<span class="text-xs">Set permissions</span></button>
                                             </td>
                                         </tr>
                                         <?php $i++ ?>

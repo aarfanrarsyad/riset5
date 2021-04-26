@@ -28,8 +28,8 @@
       icon: 'question',
       text: 'Are you sure to delete the ' + menu + ' menu?',
       showCancelButton: true,
-      confirmButtonColor: '#4248ED',
-      cancelButtonColor: '#33A1C4',
+      confirmButtonColor: '#54AC00',
+      cancelButtonColor: '#D81B01',
       confirmButtonText: 'Yes, delete it!'
     }).then((result) => {
       if (result.isConfirmed) {
@@ -79,8 +79,8 @@
       icon: 'question',
       text: 'Are you sure to delete the ' + resource + ' resource?',
       showCancelButton: true,
-      confirmButtonColor: '#4248ED',
-      cancelButtonColor: '#33A1C4',
+      confirmButtonColor: '#54AC00',
+      cancelButtonColor: '#D81B01',
       confirmButtonText: 'Yes, delete it!'
     }).then((result) => {
       if (result.isConfirmed) {
@@ -222,7 +222,7 @@
                       <td><i class="<?= $dataset['icon'] ?> text-secondary"></i></td>
                       <td class="text-center">
                         <?php if ($dataset['active'] == 1) : ?>
-                          <span class="badge badge-pill badge-primary">Active</span>
+                          <span class="badge badge-pill bg-secondaryhover">Active</span>
                         <?php else : ?>
                           <span class="badge badge-pill badge-danger">Not Active</span>
                         <?php endif; ?>

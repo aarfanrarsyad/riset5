@@ -121,7 +121,7 @@
                 </div>
                 <br>
                 <hr class="mb-3">
-                <div class="mb-2 text-sm px-2"><span><a href="#" class="hover:text-secondaryhover"><i class="fas fa-user-circle"></i>&ensp;Change profile</span></a></div>
+                <div class="mb-2 text-sm px-2"><span><a href="#" class="hover:text-secondaryhover"><i class="fas user-circle"></i>&ensp;Change profile</span></a></div>
                 <div class="mb-2 text-sm px-2"><span><a href="#" class="hover:text-secondaryhover"><i class="fas fa-unlock"></i>&ensp;Change password</span></a> </div>
                 <div class="mb-2 text-sm px-2"><a href="#" class="hover:text-secondaryhover"><span><i class="fas fa-user-shield"></i>&ensp;Activity of all groups</span></a> </div>
                 <hr class="mb-3">
