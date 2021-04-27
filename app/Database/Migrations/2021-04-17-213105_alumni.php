@@ -290,6 +290,7 @@ class Alumni extends Migration
 			'angkatan' => [
 				'type' => 'INT',
 				'constraint' => '4',
+				'default' => 0,
 			],
 			'id_alumni' => [
 				'type' => 'INT',
@@ -513,9 +514,6 @@ class Alumni extends Migration
 
 		//tabel alumni_tempat_kerja
 		$this->forge->dropTable('alumni_tempat_kerja');
-
-		//tabel angkatan_alumni
-		$this->forge->dropTable('angkatan_alumni');
 
 		//tabel prestasi
 		$this->forge->dropTable('prestasi');
