@@ -286,6 +286,7 @@ class Alumni extends Migration
 			],
 			'tahun_masuk' => [
 				'type' => 'YEAR',
+				'null'	=> true,
 			],
 			'angkatan' => [
 				'type' => 'INT',
