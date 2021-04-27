@@ -275,7 +275,7 @@ class Alumni extends Migration
 			],
 			'jenjang' => [
 				'type' => 'VARCHAR',
-				'constraint' => '3',
+				'constraint' => '6',
 			],
 			'instansi' => [
 				'type' => 'VARCHAR',
