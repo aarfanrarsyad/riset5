@@ -134,9 +134,8 @@
                                 </div>
                             </div>
                             <div class="flex flex-col hidden" id="listGaleri">
-                                <a href="/User/galeriFoto" class="nav-menu-relative py-2"> Galeri Kenangan Alumni </a>
-                                <a href="/User/galeriVideo" class="nav-menu-relative py-2"> Galeri Video Kegiatan HAISSTIS </a>
-                                <a href="/User/galeriWisuda" class="nav-menu-relative py-2"> Galeri Video Wisuda AIS/STIS/Polstat STIS </a>
+                                <a href="/User/galeriFoto" class="nav-menu-relative py-2"> Galeri Foto </a>
+                                <a href="/User/galeriVidAlumni" class="nav-menu-relative py-2"> Galeri Video </a>
                             </div>
                         </div>
                         <div class="nav-menu-relative px-2 py-2 <?= ($active == 'berita') ? 'active' : ''; ?>">

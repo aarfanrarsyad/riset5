@@ -65,7 +65,7 @@
                                     <label for="fullname" class="col-sm-2 col-form-label text-secondary"><span class="text-center">Menu</span></label>
                                     <div class="col-sm-1 d-flex justify-content-end align-items-center">:</div>
                                     <div class="col-sm-3">
-                                        <select class="form-control form-control-sm border border-secondary border-top-0 border-right-0 border-left-0" name="menu" id="menu" style="border-radius: 0;">
+                                        <select class="inputForm" name="menu" id="menu">
                                             <option value="">Pilih Menu</option>
                                             <?php foreach ($menus as $menu) : ?>
                                                 <?php if ($menu['menu_id'] == $data['menu_id']) : ?>
@@ -81,21 +81,21 @@
                                     <label for="email" class="col-sm-2 col-form-label text-secondary">Title</label>
                                     <div class="col-sm-1 d-flex justify-content-end align-items-center">:</div>
                                     <div class="col-sm-5">
-                                        <input type="text" name="title" value="<?= $data['title'] ?>" class="form-control form-control-sm border border-secondary border-top-0 border-right-0 border-left-0" placeholder="Enter a resource title" id="title" style="border-radius: 0;" autocomplete="off">
+                                        <input type="text" name="title" value="<?= $data['title'] ?>" class="inputForm" placeholder="Enter a resource title" id="title" autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="form-group row pl-4">
                                     <label for="nim" class="col-sm-2 col-form-label text-secondary">URL</label>
                                     <div class="col-sm-1 d-flex justify-content-end align-items-center">:</div>
                                     <div class="col-sm-5">
-                                        <input type="text" name="url" value="<?= $data['url'] ?>" class="form-control form-control-sm border border-secondary border-top-0 border-right-0 border-left-0" id="url" placeholder="Enter the resource url" style="border-radius: 0;" autocomplete="off">
+                                        <input type="text" name="url" value="<?= $data['url'] ?>" class="inputForm" id="url" placeholder="Enter the resource url" autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="form-group row pl-4">
                                     <label for="password" class="col-sm-2 col-form-label text-secondary">Icon</label>
                                     <div class="col-sm-1 d-flex justify-content-end align-items-center">:</div>
                                     <div class="col-sm-5">
-                                        <input type="text" name="icon" value="<?= $data['icon'] ?>" class="form-control form-control-sm border border-top-0 border-right-0 border-left-0 border-secondary" placeholder="Enter the resource icon" id="icon" style="border-radius: 0;" autocomplete="off">
+                                        <input type="text" name="icon" value="<?= $data['icon'] ?>" class="inputForm" placeholder="Enter the resource icon" id="icon" autocomplete="off">
                                     </div>
                                 </div>
 
@@ -129,7 +129,7 @@
                                 </div>
                                 <br>
                                 <div class="form-group row pl-4">
-                                    <button type="submit" name="update_resources" class="btn  text-primary border-primary hover:text-white hover:bg-primary"><i class="fas fa-paper-plane"></i>&ensp;Submit</button>
+                                    <button type="submit" name="update_resources" class="btn  text-primaryHover border-primaryHover hover:text-white hover:bg-primaryHover"><i class="fas fa-paper-plane"></i>&ensp;Submit</button>
                                 </div>
                             </form>
                         </div>
