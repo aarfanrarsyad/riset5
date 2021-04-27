@@ -328,6 +328,7 @@ class Alumni extends Migration
 			'judul_tulisan' => [
 				'type'           => 'VARCHAR',
 				'constraint'     => 100,
+				'null'			 => true,
 			],
 		]);
 
