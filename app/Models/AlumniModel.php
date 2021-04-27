@@ -9,6 +9,11 @@ class AlumniModel extends Model
 
     protected $table = 'alumni';
 
+    public function getForTags()
+    {
+        return $this->builder()->select('nama, id_alumni')->get();
+    }
+
     // Sudah diubah
     public function getAlumniById($id_alumni)
     {
@@ -143,7 +148,7 @@ class AlumniModel extends Model
 
     // Sudah diubah <Mochi>
     // gatau nih sistem rekomendasi
-    public function getIdAlumniByAngkatan($angkatan,$id_alumni)
+    public function getIdAlumniByAngkatan($angkatan, $id_alumni)
     {
         $query = "SELECT * FROM pendidikan WHERE angkatan = $angkatan AND NOT id_alumni=$id_alumni
                     ORDER BY RAND() LIMIT 4";
@@ -185,7 +190,7 @@ class AlumniModel extends Model
         return $this->db->query($query);
     }
 
-    
+
 
     public function getCountPendidikanByNIM($nim)
     {
@@ -193,7 +198,7 @@ class AlumniModel extends Model
         return $this->db->query($query);
     }
 
-    
+
 
     // gakepake
     // public function getCountPrestasiByNIM($nim)
@@ -214,7 +219,7 @@ class AlumniModel extends Model
         return $this->db->query($query);
     }
 
-    
+
 
     public function getUsersByNIM($nim)
     {
@@ -222,7 +227,7 @@ class AlumniModel extends Model
         return $this->db->query($query);
     }
 
-    
+
 
     // FOR API REQUEST
     public function getUserApi($nim = false)

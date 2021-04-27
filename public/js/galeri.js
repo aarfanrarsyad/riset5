@@ -1,13 +1,13 @@
 // awal js unggah foto suksesLaporkanFoto
-function tutupFormUnggahFoto() {
-    $('#formUnggahFoto').children().first().addClass('opacity-0')
-    $('#formUnggahFoto').children().first().on('transitionend MSTransitionEnd webkitTransitionEnd oTransitionEnd', function () {
-        $('#formUnggahFoto').children().first().addClass('hidden')
-    });
-    setTimeout(function () {
-        $('#formUnggahFoto').remove()
-    }, 400);
-}
+// function tutupFormUnggahFoto() {
+//     $('#formUnggahFoto').children().first().addClass('opacity-0')
+//     $('#formUnggahFoto').children().first().on('transitionend MSTransitionEnd webkitTransitionEnd oTransitionEnd', function () {
+//         $('#formUnggahFoto').children().first().addClass('hidden')
+//     });
+//     setTimeout(function () {
+//         $('#formUnggahFoto').remove()
+//     }, 400);
+// }
 
 // awal js image viewer
 $('.albumImg').click(function () {
@@ -84,95 +84,95 @@ $(window).click(function (e) {
 })
 // akhir js image viewer
 
-// awal js unggah foto
-$('.unggahFoto').click(function () {
-    $('body').prepend(`
-    <div class="fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40 font-paragraph" id='formUnggahFoto'>
-        <div class="hidden opacity-0 duration-700 transition-all xl:w-1/2 lg:w-7/12 md:w-2/3 sm:w-3/4 w-11/12 bg-gray bg-opacity-0">
-            <div class="bg-primary py-4 px-6 rounded-t-2xl flex items-center justify-between text-secondary text-2xl">
-                <p class="font-heading font-bold">Unggah Foto</p>
-                <svg class="closeFormUnggahFoto lg:w-10 md:w-8 sm:w-7 w-6 fill-current cursor-pointer" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                        </svg>
-            </div>
-            <form action="" method="post" class="flex flex-col bg-gray-100 sm:px-12 px-4 rounded-b-2xl text-sm">
-                <div class="flex mt-5">
-                    <div class="flex justify-start items-center mb-2 w-full relative">
-                    <input type="file" hidden accept=".jpg, .jpeg, .img, .png" title="Pilih File" id='pilihFile'>
-                    <label for="pilihFile" title="Harus Diisi" class="pilihFile bg-secondary text-white rounded-full w-24 py-1 text-center cursor-pointer hover:bg-secondaryhover transition-colors duration-300 text-sm mr-4 outline-none" >Pilih File</label>
-                    <span class="text-primary absolute md:left-28 left-28 select-none cursor-default cursor md:text-sm text-sm">Tidak ada foto yang dipilih</span>
-                    </div>
-                </div>
-                <label for="albumFoto" class="text-primary font-medium mt-2">Album Foto:</label>
-                <select name="albumFoto" id="albumFoto" class="inputForm font-heading text-xs">
-                    <option label="pilih album foto:" class="text-gray-500">
-                    <option value="album1">Album Foto 1</option>
-                    <option value="album2">Album Foto 2</option>
-                    </option>
-                </select>
-                <label for="deskripsi" class="text-primary font-medium">*Deskripsi</label>
-                <textarea name="deskripsi" id="deskripsi" rows="2" class="inputForm resize-none font-heading text-xs" placeholder="Penggunaan Jutsu Air dalam Mengatasi Permasalahan Banjir yang Sering Terjadi di Wilayah Pemukiman Rawan Longsor" required></textarea>
-                <label for="angkatan" class="text-primary font-medium">*Angkatan :</label>
-                <input name="angkatan" id="angkatan" type="number" min="1" max="63" step="1" value="60" size="6" class="inputForm font-heading text-xs" required>
-                <label for="tags" class="text-primary font-medium">Tags :</label>
-                <select name="tags" id="tags" class="inputForm font-heading text-xs">
-                    <option value="album1">Album Foto 1</option>
-                    <option value="album2">Album Foto 2</option>
-                    </option>
-                </select>
-                <div class="font-heading text-xs text-primary">
-                    <p class="mb-2"> *Required </p>
-                    <p> Format file harus .jpg/.jpeg/.png </p>
-                    <p> Ukuran file maksimum 2 MB </p>
-                </div>
-                <div class="flex justify-end my-4">
-                    <input type="button" value="BATAL" class="closeFormUnggahFoto bg-secondary text-white rounded-full w-24 py-1 text-center cursor-pointer hover:bg-secondaryhover transition-colors duration-300 text-sm mr-4 outline-none" id='backUnggahFoto'>
-                    <input type="submit" value="UNGGAH" class="suksesUnggahFoto bg-secondary text-white rounded-full w-24 py-1 text-center cursor-pointer hover:bg-secondaryhover transition-colors duration-300 text-sm outline-none">
-                </div>
+// // awal js unggah foto
+// $('.unggahFoto').click(function () {
+//     $('body').prepend(`
+//     <div class="fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40 font-paragraph" id='formUnggahFoto'>
+//         <div class="hidden opacity-0 duration-700 transition-all xl:w-1/2 lg:w-7/12 md:w-2/3 sm:w-3/4 w-11/12 bg-gray bg-opacity-0">
+//             <div class="bg-primary py-4 px-6 rounded-t-2xl flex items-center justify-between text-secondary text-2xl">
+//                 <p class="font-heading font-bold">Unggah Foto</p>
+//                 <svg class="closeFormUnggahFoto lg:w-10 md:w-8 sm:w-7 w-6 fill-current cursor-pointer" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+//                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+//                         </svg>
+//             </div>
+//             <form action="" method="post" class="flex flex-col bg-gray-100 sm:px-12 px-4 rounded-b-2xl text-sm">
+//                 <div class="flex mt-5">
+//                     <div class="flex justify-start items-center mb-2 w-full relative">
+//                     <input type="file" hidden accept=".jpg, .jpeg, .img, .png" title="Pilih File" id='pilihFile'>
+//                     <label for="pilihFile" title="Harus Diisi" class="pilihFile bg-secondary text-white rounded-full w-24 py-1 text-center cursor-pointer hover:bg-secondaryhover transition-colors duration-300 text-sm mr-4 outline-none" >Pilih File</label>
+//                     <span class="text-primary absolute md:left-28 left-28 select-none cursor-default cursor md:text-sm text-sm">Tidak ada foto yang dipilih</span>
+//                     </div>
+//                 </div>
+//                 <label for="albumFoto" class="text-primary font-medium mt-2">Album Foto:</label>
+//                 <select name="albumFoto" id="albumFoto" class="inputForm font-heading text-xs">
+//                     <option label="pilih album foto:" class="text-gray-500">
+//                     <option value="album1">Album Foto 1</option>
+//                     <option value="album2">Album Foto 2</option>
+//                     </option>
+//                 </select>
+//                 <label for="deskripsi" class="text-primary font-medium">*Deskripsi</label>
+//                 <textarea name="deskripsi" id="deskripsi" rows="2" class="inputForm resize-none font-heading text-xs" placeholder="Penggunaan Jutsu Air dalam Mengatasi Permasalahan Banjir yang Sering Terjadi di Wilayah Pemukiman Rawan Longsor" required></textarea>
+//                 <label for="angkatan" class="text-primary font-medium">*Angkatan :</label>
+//                 <input name="angkatan" id="angkatan" type="number" min="1" max="63" step="1" value="60" size="6" class="inputForm font-heading text-xs" required>
+//                 <label for="tags" class="text-primary font-medium">Tags :</label>
+//                 <select name="tags" id="tags" class="inputForm font-heading text-xs">
+//                     <option value="album1">Album Foto 1</option>
+//                     <option value="album2">Album Foto 2</option>
+//                     </option>
+//                 </select>
+//                 <div class="font-heading text-xs text-primary">
+//                     <p class="mb-2"> *Required </p>
+//                     <p> Format file harus .jpg/.jpeg/.png </p>
+//                     <p> Ukuran file maksimum 2 MB </p>
+//                 </div>
+//                 <div class="flex justify-end my-4">
+//                     <input type="button" value="BATAL" class="closeFormUnggahFoto bg-secondary text-white rounded-full w-24 py-1 text-center cursor-pointer hover:bg-secondaryhover transition-colors duration-300 text-sm mr-4 outline-none" id='backUnggahFoto'>
+//                     <input type="submit" value="UNGGAH" class="suksesUnggahFoto bg-secondary text-white rounded-full w-24 py-1 text-center cursor-pointer hover:bg-secondaryhover transition-colors duration-300 text-sm outline-none">
+//                 </div>
 
-            </form>
+//             </form>
 
-        </div>
-    </div>
-`)
-    $('#pilihFile').change(function() {
-        $(this).next().next().text(this.files[0].name)
-    });
+//         </div>
+//     </div>
+// `)
+//     $('#pilihFile').change(function() {
+//         $(this).next().next().text(this.files[0].name)
+//     });
 
-    $('#formUnggahFoto').children().first().removeClass('hidden')
-    setTimeout(function () {
-        $('#formUnggahFoto').children().first().removeClass('opacity-0')
-    }, 10);
+//     $('#formUnggahFoto').children().first().removeClass('hidden')
+//     setTimeout(function () {
+//         $('#formUnggahFoto').children().first().removeClass('opacity-0')
+//     }, 10);
 
-    $('.closeFormUnggahFoto').click(function () {
-        tutupFormUnggahFoto();
-    })
+//     $('.closeFormUnggahFoto').click(function () {
+//         tutupFormUnggahFoto();
+//     })
 
-    var modal = document.getElementById('formUnggahFoto')
-    $(window).click(function (e) {
-        if (e.target === modal) {
-            tutupFormUnggahFoto();
-        }
-    })
+//     var modal = document.getElementById('formUnggahFoto')
+//     $(window).click(function (e) {
+//         if (e.target === modal) {
+//             tutupFormUnggahFoto();
+//         }
+//     })
 
-    $('#backUnggahFoto').click(function (e) {
-        e.preventDefault()
-        $('#formUnggahFoto').children().first().addClass('hidden')
-        $('#formUnggahFoto').children().first().removeClass('hidden')
-        setTimeout(function () {
-            $('#formUnggahFoto').children().first().removeClass('opacity-0')
-        }, 10);
-        setTimeout(function () {
-            $('#formUnggahFoto').children().eq(1).children().eq(1).submit()
-        }, 700);
-    })
-})
+//     $('#backUnggahFoto').click(function (e) {
+//         e.preventDefault()
+//         $('#formUnggahFoto').children().first().addClass('hidden')
+//         $('#formUnggahFoto').children().first().removeClass('hidden')
+//         setTimeout(function () {
+//             $('#formUnggahFoto').children().first().removeClass('opacity-0')
+//         }, 10);
+//         setTimeout(function () {
+//             $('#formUnggahFoto').children().eq(1).children().eq(1).submit()
+//         }, 700);
+//     })
+// })
 //Akhir Unggah Foto
 
 //Awal apabila Unggah Foto Sukses
 function suksesUnggahFoto () {
     
-    tutupFormUnggahFoto();
+    // tutupFormUnggahFoto();
 
     $('body').prepend(`
     <div class="fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40 font-paragraph" id='suksesUnggahFoto'>
@@ -187,7 +187,7 @@ function suksesUnggahFoto () {
             </div>
         </div>
     </div>
-`)
+`);
 
     $('#suksesUnggahFoto').children().first().removeClass('hidden')
     setTimeout(function () {

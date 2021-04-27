@@ -929,9 +929,99 @@ class User extends BaseController
 
 	public function galeriFoto()
 	{
-		$data['judulHalaman'] = 'Galeri Kenangan Alumni';
-		$data['active'] = 'galeri';
+		$model = new \App\Models\AlumniModel;
+		$pendidikan = new \App\Models\PendidikanModel();
+		$fotoModel = new \App\Models\FotoModel;
+
+		$alumni = $model->getForTags()->getResult();
+		foreach ($alumni as $dt) {
+			$alumni_angktn = array();
+			$angkatan = $pendidikan->getAngkatan($dt->id_alumni);
+			if ($angkatan != null) {
+				foreach ($angkatan as $aktn) {
+					array_push($alumni_angktn, $aktn->angkatan);
+				}
+				$dt->angkatan = $alumni_angktn[0];
+			} else {
+				$dt->angkatan = 0;
+			}
+		}
+		$data = [
+			'alumni' 		=> $alumni,
+			'galeri'		=> $fotoModel->findAll(),
+			'judulHalaman'	=> 'Galeri Kenangan Alumni',
+			'active' 		=> 'galeri'
+		];
 		return view('websia/kontenWebsia/galeri/galeriAlumni', $data);
+	}
+
+	public function uploadGaleri()
+	{
+		date_default_timezone_set("Asia/Bangkok");
+		$model = new \App\Models\FotoModel;
+
+		$foto = $this->request->getFile('file_upload');
+		$caption = $this->request->getPost('deskripsi');
+		$album = $this->request->getPost('albumFoto');
+		$tags = $this->request->getPost('tags');
+		$now = date("Y-m-d H:i:s");
+
+		$year = date("Y");
+		$path = ROOTPATH . '/public/img/galeri/' . $year;
+
+		//cek apakah sudah terdapat foldernya
+		if (!is_dir($path))
+			mkdir($path, 0700, true);
+
+		//cek apakah sudah terdapat nama file yang sama, jika sudah maka akan direname
+		$file = $path . "/" . $foto->getName();
+		$ext = "." . $foto->guessExtension();
+		$file = str_replace($ext, "", $file);
+		if (is_file($file . $ext)) {
+			$new_name = $file;
+			while (is_file($new_name . $ext)) {
+				$time = date("Ymdhis");
+				$new_name = $new_name . "-" . $time;
+			}
+			rename($file . $ext, $new_name . $ext);
+		}
+
+		$foto->move($path);
+
+		if (!isset($new_name)) {
+			$file = str_replace(ROOTPATH . '/public/img/galeri/', "", $file);
+			$data = [
+				'nama_file'		=> $file,
+				'caption'		=> $caption,
+				'created_at'	=> $now,
+				'album' 		=> $album,
+				'approval' 		=> 1,
+				'id_alumni' 	=> session('id_alumni'),
+			];
+			$model->db->table('foto')->insert($data);
+		} else {
+			$new_name = str_replace(ROOTPATH . '/public/img/galeri/', "", $new_name);
+			$data = [
+				'nama_file'		=> $new_name . $ext,
+				'album' 		=> $album,
+				'caption'		=> $caption,
+				'created_at'	=> $now,
+				'album' 		=> $album,
+				'approval' 		=> 1,
+				'id_alumni' 	=> session('id_alumni'),
+			];
+			$model->db->table('foto')->insert($data);
+		}
+
+		$foto = $model->getByName($data['nama_file']);
+
+		$data = [
+			'id_foto'	=> $foto[0]->id_foto,
+			'tag'		=> $tags
+		];
+		$model->db->table('tag_foto')->insert($data);
+
+		return redirect()->to(base_url('user/galeriFoto'));
 	}
 
 	function listAlbumFoto()
