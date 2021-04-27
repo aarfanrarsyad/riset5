@@ -143,7 +143,7 @@ if ($status == 'bukan user') {
             <?php if ($calamat == "") : ?>
                 <p class="font-heading text-primary text-xs px-5 md:px-0 mt-6">Lokasi Tempat Tinggal Saat Ini</p>
                 <span class="font-heading flex justify-start px-3 md:px-0 text-base text-left mb-5 md:mb-2">
-                    <img class="my-2 mt-2 mr-0 md:mr-2 ml-1 md:ml-0 w-6 h-6 md:w-6 float-left" src="/img/icon/maps_flag.png" alt="">
+                    <img class="my-2 mt-2 mr-0 md:mr-2 ml-1 md:ml-0 w-6 h-6 md:w-6 float-left" src="/img/components/icon/maps_flag.png" alt="">
                     <!-- Lokasi tempat tinggal -->
                     <p class="font-heading my-2 mt-2"> <?= $alumni->alamat_alumni ?> </p>
                 </span>
@@ -177,14 +177,14 @@ if ($status == 'bukan user') {
                         <!-- Email -->
                         <?php if ($cemail == "") : ?>
                             <div <?= $cemail ?> class="inline-block mb-2 flex flex-row">
-                                <img src="/img/icon/message.png" alt="" class="float-left w-5">
+                                <img src="/img/components/icon/message.png" alt="" class="float-left w-5">
                                 <span class="font-heading text-xs text-primary text-center ml-1 md:ml-2"><?= $alumni->email ?></span>
                             </div>
                         <?php endif ?>
                         <!-- Facebook -->
                         <?php if ($cfb == "") : ?>
                             <div <?= $cfb ?> class="inline-block flex flex-row">
-                                <img src="/img/icon/facebook.png" alt="" class="float-left ml-1 w-2 h-4">
+                                <img src="/img/components/icon/facebook.png" alt="" class="float-left ml-1 w-2 h-4">
                                 <span class="font-heading text-xs text-primary text-left flex items-center ml-3 md:ml-4"><?= $fb ?></span>
                             </div>
                         <?php endif ?>
@@ -195,14 +195,14 @@ if ($status == 'bukan user') {
                         <!-- Twitter -->
                         <?php if ($ctw == "") : ?>
                             <div <?= $ctw ?> class="inline-block mb-2 flex flex-row">
-                                <img src="/img/icon/twitter.png" alt="" class="float-left w-4 w-4">
+                                <img src="/img/components/icon/twitter.png" alt="" class="float-left w-4 w-4">
                                 <span class="font-heading text-xs text-primary text-center ml-2 md:ml-3"><?= $twitter ?></span>
                             </div>
                         <?php endif ?>
                         <!-- Instagram -->
                         <?php if ($cig == "") : ?>
                             <div <?= $cig ?> class="inline-block flex flex-row">
-                                <img src="/img/icon/instagram.png" alt="" class="float-left w-4">
+                                <img src="/img/components/icon/instagram.png" alt="" class="float-left w-4">
                                 <span class="font-heading text-xs text-primary text-center flex items-center ml-2 md:ml-3"><?= $ig ?></span>
                             </div>
                         <?php endif ?>
@@ -248,7 +248,7 @@ if ($status == 'bukan user') {
         <div class="visible sm:invisible">
             <a class="bg-secondary mb-8 mt-1 md:mt-0 float-right font-paragraph text-sm text-white text-center py-1 px-4 mx-auto rounded-full cursor-pointer hover:bg-secondaryhover transition-colors duration-300" href="/User/rekomendasi">
                 Lihat Semua Rekomendasi
-                <img src="/img/icon/g" alt="" class="float-right pl-2">
+                <img src="/img/components/icon/g" alt="" class="float-right pl-2">
             </a>
         </div>
     </div>
