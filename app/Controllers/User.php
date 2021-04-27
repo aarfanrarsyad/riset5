@@ -955,6 +955,57 @@ class User extends BaseController
 		return view('websia/kontenWebsia/galeri/galeriVidAlumni', $data);
 	}
 
+	public function uploadVideo()
+	{
+		$video = $this->request->getPost('linkVideo');
+		$album = $this->request->getPost('albumVideo');
+
+		if (strpos($video, 'youtu.be/') || strpos($video, 'youtube.com/')) {
+			if (strpos($video, '?v=')) {
+				$v_link = explode('v=', $video);
+				if (strpos($v_link[1], '&')) {
+					$v_link = explode('&', $v_link[1]);
+					$link = $v_link[0];
+				} else {
+					$link = $v_link[1];
+				}
+			} else {
+				if (strpos($video, '/channel/')) {
+					echo $video . "<br>";
+					echo "bukan yutub";
+					die();
+				}
+				$v_link = explode('/', $video);
+				if (strpos($v_link[3], '?')) {
+					$v_link = explode('?', $v_link[3]);
+					$link = $v_link[0];
+				} else {
+					$link = $v_link[3];
+				}
+			}
+			date_default_timezone_set("Asia/Bangkok");
+			$now = date("Y-m-d");
+
+			$model = new \App\Models\AlumniModel();
+
+			$data = [
+				'link'			=> $link,
+				'album'			=> $album,
+				'created_at'	=> $now,
+				'approval' 		=> 0,
+				'id_alumni' 	=> session('id_alumni'),
+			];
+			// dd($data);
+			$model->db->table('video')->insert($data);
+			echo "sukses";
+		} else {
+			// buat upload yang bukan link youtube
+			echo $video . "<br>";
+			echo "bukan yutub";
+		}
+		die();
+	}
+
 	function listAlbumVideo()
 	{
 		$data['judulHalaman'] = 'Album Galeri Video Kenangan Alumni';

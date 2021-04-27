@@ -365,15 +365,16 @@ $('.unggahVideo').click(function () {
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
                 </svg>
             </div>
-            <form action="" method="post" class="flex flex-col bg-gray-100 sm:px-12 px-4 rounded-b-2xl text-sm">
-                <label for="linkVideo" class="text-primary font-medium mt-8">Link Video Youtube</label>
-                <input type="text" placeholder="Link video" class="inputForm" required>
+            <form action="uploadVideo" method="post" class="flex flex-col bg-gray-100 sm:px-12 px-4 rounded-b-2xl text-sm">
+            <label for="linkVideo" class="text-primary font-medium mt-8">Link Video Youtube</label>
+            <input name="linkVideo" id="linkVideo" type="text" placeholder="Link video" class="inputForm" required>
 
                 <label for="albumVideo" class="text-primary font-medium mt-4">Album Video :</label>
-                <select name="albumVideo" id="albumVideo" class="inputForm" value="album0">
-                    <option class="text-gray-500" value="album0">Pilih Album Video</option>
-                    <option value="album1">Album Foto 1</option>
-                    <option value="album2">Album Foto 2</option>
+                <select name="albumVideo" id="albumVideo" class="inputForm" value="">
+                    <option class="text-gray-500" value="" disabled selected>Pilih Album Video</option>
+                    <option value="alumni">Album Alumni</option>
+                    <option value="wisuda">Album Wisuda</option>
+                    <option value="kenangan">Album Kenangan</option>
                 </select>
                 <div class="flex justify-end my-4">
                     <input type="button" value="BATAL" class="closeFormUnggahVideo bg-secondary text-white rounded-full w-24 py-1 text-center cursor-pointer hover:bg-secondaryhover transition-colors duration-300 text-sm mr-4 outline-none" id='backUnggahVideo'>
