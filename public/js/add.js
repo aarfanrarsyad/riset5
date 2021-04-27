@@ -32,15 +32,9 @@ var jsonTest = new L.GeoJSON.AJAX(["/geojson/provinsi.geojson"], {
 function popUpProvinsi(f, l) {
     var out = [];
     if (f.properties) {
-        out.push(`
-        <div class='font-semibold md:text-base text-xs text-primary text-center uppercase font-heading px-3'>` + f.properties["NAME_1"] + `</div>
-        <hr class='my-2 px-2'>
-        <div class="overflow-auto h-32 px-2">
-        `);
-        for (i = 0; i < 10; i++) {
-            out.push("<div class='text-center font-semibold text-primary uppercase font-paragraph mb-1'>" + f.properties["NAME_1"] + " : <span class='font-bold'>" + f.properties["ID_1"] + "</span> Alumni </div>");
-        }
-        out.push("</div>");
+        out.push("<div class='md:text-base text-xs text-primary font-semibold text-center uppercase font-heading'> " + f.properties["NAME_1"] +"</div> <hr class='my-2'>");
+        out.push("<div class='font-bold text-center md:text-base text-xs text-primary uppercase font-paragraph'>" + f.properties["ID_1"] + "</div>");
+        out.push("<div class='text-center md:text-base text-xs font-semibold text-primary font-paragraph'> Alumni</div>");
         l.bindPopup(out.join(""));
     }
 
