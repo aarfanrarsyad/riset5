@@ -924,7 +924,7 @@ class User extends BaseController
 		$data['judulHalaman'] = 'Unggah Berita/Artikel';
 		// $data['login'] = 'sudah';
 		$data['active'] = '';
-		return view('websia/kontenWebsia/beritaArtikel/unggahBerita.php', $data);
+		return view('websia/kontenWebsia/beritaArtikel/unggahBerita', $data);
 	}
 
 	public function galeriFoto()
@@ -985,5 +985,14 @@ class User extends BaseController
 		$data['login'] = 'sudah';
 
 		return view('websia/kontenWebsia/beritaArtikel/berandaBerita', $data);
+	}
+
+	public function judulBerita()
+	{
+		$data['judulHalaman'] = 'Berita';
+		$data['active'] = 'berita';
+		$data['login'] = 'sudah';
+
+		return view('websia/kontenWebsia/beritaArtikel/berita', $data);
 	}
 }
