@@ -182,18 +182,16 @@ class AlumniModel extends Model
     {
         return $this->table('alumni')->join('alumni_tempat_kerja', 'alumni.id_alumni = alumni_tempat_kerja.id_alumni')
         ->join('tempat_kerja', 'tempat_kerja.id_tempat_kerja = alumni_tempat_kerja.id_tempat_kerja')
-        ->where('alumni_tempat_kerja.id_tempat_kerja', $id_tempat_kerja);
-        // belum nemuin caranya gimana 
-        // ->whereNot('alumni.id_alumni',$id_alumni);
+        ->where('alumni_tempat_kerja.id_tempat_kerja', $id_tempat_kerja)
+        ->where('alumni.id_alumni !=',$id_alumni);
     }
 
     // Sudah diubah <Mochi>
     public function getRekomendasiAngkatan($angkatan, $id_alumni)
     {
         return $this->table('alumni')->join('pendidikan', 'pendidikan.id_alumni = alumni.id_alumni')
-        ->where('pendidikan.angkatan', $angkatan);
-        // belum nemuin caranya gimana 
-        // ->notGroupStart(' alumni.id_alumni',$id_alumni);
+        ->where('pendidikan.angkatan', $angkatan)
+        ->where(' alumni.id_alumni !=',$id_alumni);
     }
 
     public function getTempatKerja()
