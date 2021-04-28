@@ -121,4 +121,25 @@ class Validation
 			'numeric'	=> 'kolom nim harus berisi angka',
 		]
 	];
+
+	public $editAkun = [
+		'new_password'   => [
+			'rules' =>'required|regex_match[/^[a-z0-9]+$/]|min_length[8]',
+		],
+		'conf_password'   => [
+			'rules' =>'required|matches[new_password]',
+		],
+	];
+
+	public $editAkun_errors  = [
+		'new_password'   => [
+			'required' =>'kolom ini harus diisi',
+			'regex_match'=>'Kata sandi harus terdiri dari huruf dan angka',
+			'min_length'=> 'minimal memiliki panjang 8 karakter',
+		],
+		'conf_password'   => [
+			'required' =>'kolom ini harus diisi',
+			'matches'=>'Konfirmasi kata sandi tidak cocok',
+		],
+	];
 }

@@ -10,17 +10,26 @@
                 <div class="font-medium">Email:</div>
                 <div class="text-black font-heading font-normal mb-2"><?= $user->email ?></div>
                 <label for="passbaru" class="font-medium">Kata Sandi Baru:</label>
+                <?php if (session()->getFlashdata('error-new_password') != "") { ?>
                 <p class="text-xs text-red-500 text-justify" id="errorPassBaru">
-                    Kata sandi harus terdiri dari huruf dan angka.
+                <?= session('error-new_password') ?>
                 </p>
-                <input type="password" name="passbaru" id="passbaru" class="inputForm" placeholder="🞄🞄🞄🞄🞄🞄🞄🞄">
+                <?php } ?>
+                <input type="password" name="passbaru" id="passbaru" class="inputForm" placeholder="🞄🞄🞄🞄🞄🞄🞄🞄" required>
                 <label for="ulangpassbaru" class="font-medium">Ketik Ulang Kata Sandi Baru:</label>
+                <?php if (session()->getFlashdata('error-conf_password') != "") { ?>
                 <p class="text-xs text-red-500 text-justify" id="errorValidPasss">
-                    Kata sandi tidak sesuai.
+                <?= session('error-conf_password') ?>
                 </p>
-                <input type="password" name="ulangpassbaru" id="ulangpassbaru" class="inputForm" placeholder="🞄🞄🞄🞄🞄🞄🞄🞄">
+                <?php } ?>
+                <input type="password" name="ulangpassbaru" id="ulangpassbaru" class="inputForm" placeholder="🞄🞄🞄🞄🞄🞄🞄🞄" required>
                 <div class="text-secondary text-xs mt-6 mb-2 text-justify">Silakan Masukkan Kata Sandi Lama Anda untuk Verifikasi!</div>
                 <label for="passlama" class="font-medium">Kata Sandi Lama:</label>
+                <?php if (session()->getFlashdata('edit-pass-fail')) { ?>
+                <p class="text-xs text-red-500 text-justify" id="errorValidPasss">
+                <?= session()->getFlashdata('edit-pass-fail') ?>
+                </p>
+                <?php } ?>
                 <input type="password" name="passlama" id="passlama" class="inputForm" placeholder="🞄🞄🞄🞄🞄🞄🞄🞄" required>
             </div>
             <div class="flex justify-end md:mb-6 mt-48">
@@ -34,12 +43,13 @@
 <!-- dialog box edit akun -->
 <!-- kalau mau ngecek hilangin kelas hidden sama opacity-0 nya-->
 
+<?php if (session()->getFlashdata('edit-pass-success')) { ?>
 <!-- BERHASIL edit akun -->
 <div id="berhasilEditAkun">
-    <div class="hidden opacity-0 fixed top-0 bottom-0 right-0 left-0 z-50 justify-center items-center bg-black bg-opacity-40">
+    <div class="fixed top-0 bottom-0 right-0 left-0 z-50 justify-center items-center bg-black bg-opacity-40">
         <div class="duration-700 transition-all p-3 rounded-lg flex items-center" style="background-color: #B1FF66;">
             <img src="/img/components/icon/check.png" class="h-5 mr-2" style="color: #54AC00;">
-            <p class="sm:text-base text-sm font-heading font-bold text-success">Akun Berhasil Disimpan</p>
+            <p class="sm:text-base text-sm font-heading font-bold text-success"><?= session()->getFlashdata('edit-pass-success') ?></p>
         </div>
     </div>
 </div>
@@ -48,12 +58,14 @@
         $('#berhasilEditAkun').fadeOut();
     }, 1500);
 </script>
+<?php }
+if (session()->getFlashdata('edit-pass-fail')||session()->getFlashdata('edit-pass2-fail')) { ?>
 <!-- GAGAL edit akun -->
 <div id="gagalEditAkun">
-    <div class="hidden opacity-0 fixed top-0 bottom-0 right-0 left-0 z-50 justify-center items-center bg-black bg-opacity-40">
+    <div class="fixed top-0 bottom-0 right-0 left-0 z-50 justify-center items-center bg-black bg-opacity-40">
         <div class="duration-700 transition-all p-3 rounded-lg flex items-center" style="background-color: #FF7474;">
             <img src="/img/components/icon/warning.png" class="h-5 mr-2">
-            <p class="sm:text-base text-sm font-heading font-bold" style="color: #C51800;">Akun Tidak Berhasil Disimpan</p>
+            <p class="sm:text-base text-sm font-heading font-bold" style="color: #C51800;">Kata sandi baru gagal diperbaharui</p>
         </div>
     </div>
 </div>
@@ -63,4 +75,5 @@
     }, 1500);
 </script>
 <!-- end dialog box -->
+<?php } ?>
 <?= $this->endSection(); ?>

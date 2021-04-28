@@ -535,21 +535,16 @@ class User extends BaseController
 			'calamat' => $calamat,
 		];
 
-		// dd($this->form_validation->run($data, 'editProfil'));
-
 		if ($this->form_validation->run($data, 'editProfil') === FALSE) {
-			// dd($this->form_validation->getError('email'));
 			session()->setFlashdata('edit-bio-fail', 'Biodata gagal Disimpan');
 			session()->setFlashdata('inputs', $this->request->getPost());
 			session()->setFlashdata('error-email', $this->form_validation->getError('email'));
 			session()->setFlashdata('error-telp_alumni', $this->form_validation->getError('telp_alumni'));
-			// dd(session('errors'));
-			return redirect()->to(base_url('User/editProfil'));
 		} else {
 			$model->db->table('alumni')->set($data)->where('id_alumni', session('id_alumni'))->update();
 			session()->setFlashdata('edit-bio-success', 'Biodata Berhasil Disimpan');
-			return redirect()->to(base_url('User/editProfil'));
 		}
+		return redirect()->to(base_url('User/editProfil'));
 	}
 
 	public function editPendidikan()
@@ -869,34 +864,36 @@ class User extends BaseController
 		return view('websia/kontenWebsia/editProfile/editAkun.php', $data);
 	}
 
-	// BELOM KELAR FUNGSINYA ``````````````````````````````````````````````````````````````````````
 	public function updateAkun()
 	{
 
 		$model = new AlumniModel();
-		$curpass = $model->getUser(session('id_user'))->getRow()->password_hash;
-		$inputpass = $_POST['passlama'];
-		// dd($curpass);
-		// dd($inputpass);
-		dd(password_verify($inputpass, $curpass));
-		// dd($model->getUser(session('id_user'))->getRow());
-		// dd($pass,$passlama);
+		$curpass = $model->getAlumni(session('id_user'))->getRow()->password_hash;
+		$inputpass = htmlspecialchars($_POST['passlama']);
+		$newpass = htmlspecialchars($_POST['passbaru']) ;
+		$renewpass = htmlspecialchars($_POST['ulangpassbaru']);
 
-		// bingung validasinya
-		if (password_verify($inputpass, $curpass)) {
-			if ($_POST['passbaru'] == $_POST['ulangpassbaru']) {
-				$data = [
-					'password_hash' => password_hash($_POST['passbaru'], PASSWORD_DEFAULT),
-				];
+		if (password_verify(base64_encode(hash('sha384', $inputpass, true)), $curpass)) {
+			$validate=[
+				'new_password'	=> $newpass,
+				'conf_password' => $renewpass,
+			];
 
-				$model->db->table('users')->set($data)->where('id', session('id_user'))->update();
-				return redirect()->to(base_url('User/editAkun'));
+			if ($this->form_validation->run($validate, 'editAkun') === FALSE) {
+				session()->setFlashdata('edit-pass2-fail', 'Kata sandi baru gagal diperbaharui');
+				session()->setFlashdata('error-new_password', $this->form_validation->getError('new_password'));
+				session()->setFlashdata('error-conf_password', $this->form_validation->getError('conf_password'));
 			} else {
-				echo "password baru tidak cocok";
+				$data = [
+					'password_hash' => password_hash(base64_encode(hash('sha384', $newpass, true)), PASSWORD_DEFAULT),
+				];
+				$model->db->table('users')->set($data)->where('id', session('id_user'))->update();
+				session()->setFlashdata('edit-pass-success', 'Kata sandi baru berhasil diperbaharui');
 			}
 		} else {
-			echo "Password lama salah";
+			session()->setFlashdata('edit-pass-fail', 'Kata sandi lama tidak sesuai.');
 		}
+		return redirect()->to(base_url('User/editAkun'));
 	}
 
 	public function unggahBerita()
