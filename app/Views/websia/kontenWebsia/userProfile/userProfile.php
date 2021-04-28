@@ -177,9 +177,16 @@ if ($status == 'bukan user') {
                         <div>
                             <span class="title mt-4 font-heading text-sm md:text-base lg:text-lg font-semibold text-primary block px-2 md:px-0 text-center"><?= $row->nama; ?></span>
                         </div>
-                        <!-- <div>
-                            <span class="description font-paragraph text-primary text-center md:text-base block pt-2 pb-2 border-gray-400 mb-2">Angkatan <= $row->angkatan; ?></span>
-                        </div> -->
+                        <?php if(isset($row['id_tempat_kerja'])){ ?>
+                        <div>
+                            <span class="description font-paragraph text-primary text-center md:text-base block pt-2 pb-2 border-gray-400 mb-2"><?= $row->nama_instansi; ?></span>
+                        </div>
+                        <?php } 
+                            if(isset($row['angkatan'])) { ?>
+                        <div>
+                            <span class="description font-paragraph text-primary text-center md:text-base block pt-2 pb-2 border-gray-400 mb-2">Angkatan <?= $row->angkatan; ?></span>
+                        </div>
+                        <?php } ?>
                     </a>
                 </div>
             <?php endforeach; ?>

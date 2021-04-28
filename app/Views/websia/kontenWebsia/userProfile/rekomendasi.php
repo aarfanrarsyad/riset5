@@ -16,13 +16,17 @@
                 <?php foreach ($alumni as $row) :  ?>
                     <!-- 1 card -->
                     <div class="rekomendasi hidden shadow my-2 border border-gray-200 bg-white hover:bg-gray-200">
-                        <a href="/User/profilAlumni?nim=<?= $row['nim'] ?>" target="_new">
+                        <a href="/User/profilAlumni?id_alumni=<?= $row['id_alumni'] ?>" target="_new">
                             <div class="gambar flex flex-row items-center">
-                                <img class="w-24 md:w-24 lg:w-24 rounded-full m-4 md:m-65" src="/img/avatar.png" alt="" />
+                                <img class="w-24 md:w-24 lg:w-24 rounded-full m-4 md:m-65" src="/img/<?= $row['foto_profil'] ?>" alt="" />
                                 <div class="text-left">
-                                    <div class="pr-4 mb-1 sm:mb-2 font-heading font-bold text-primary"><?= $row['nama'] ?>
-                                    </div>
+                                    <div class="pr-4 mb-1 sm:mb-2 font-heading font-bold text-primary"><?= $row['nama'] ?></div>
+                                    <?php if(isset($row['id_tempat_kerja'])){ ?>
+                                    <div class="pr-4 font-paragraph text-primary text-base block"><?= $row['nama_instansi'] ?></div>
+                                    <?php } 
+                                    if(isset($row['angkatan'])) { ?>
                                     <div class="pr-4 font-paragraph text-primary text-base block">Angkatan <?= $row['angkatan'] ?></div>
+                                    <?php } ?>
                                 </div>
                             </div>
                         </a>

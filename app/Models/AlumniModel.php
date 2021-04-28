@@ -134,7 +134,6 @@ class AlumniModel extends Model
     }
 
     // Sudah diubah <Mochi>
-    // gatau nih sistem rekomendasi
     public function getAngkatanByIdAlumni($id_alumni)
     {
         $query = "SELECT * FROM pendidikan WHERE id_alumni = $id_alumni ORDER BY 'angkatan' DESC";
@@ -142,10 +141,12 @@ class AlumniModel extends Model
     }
 
     // Sudah diubah <Mochi>
-    // gatau nih sistem rekomendasi
     public function getIdAlumniByAngkatan($angkatan,$id_alumni)
     {
-        $query = "SELECT * FROM pendidikan WHERE angkatan = $angkatan AND NOT id_alumni=$id_alumni
+        $query = "SELECT * FROM alumni JOIN pendidikan 
+        ON alumni.id_alumni = pendidikan.id_alumni
+        WHERE pendidikan.angkatan = $angkatan
+        AND NOT alumni.id_alumni=$id_alumni
                     ORDER BY RAND() LIMIT 4";
         return $this->db->query($query);
     }
@@ -168,9 +169,31 @@ class AlumniModel extends Model
     public function getIdAlumniByIdTempatKerja($id_tempat_kerja, $id_alumni)
     {
         $query = "SELECT * FROM alumni JOIN alumni_tempat_kerja 
-        ON alumni.id_alumni=alumni_tempat_kerja.id_alumni WHERE id_tempat_kerja = $id_tempat_kerja 
-        AND NOT alumni.id_alumni=$id_alumni";
+        ON alumni_tempat_kerja.id_alumni=alumni.id_alumni 
+        JOIN tempat_kerja ON tempat_kerja.id_tempat_kerja=alumni_tempat_kerja.id_tempat_kerja
+        WHERE alumni_tempat_kerja.id_tempat_kerja = $id_tempat_kerja 
+        AND NOT alumni.id_alumni=$id_alumni
+                    ORDER BY RAND() LIMIT 4";
         return $this->db->query($query);
+    }
+
+    // Sudah diubah <Mochi>
+    public function getRekomendasiTK($id_tempat_kerja, $id_alumni)
+    {
+        return $this->table('alumni')->join('alumni_tempat_kerja', 'alumni.id_alumni = alumni_tempat_kerja.id_alumni')
+        ->join('tempat_kerja', 'tempat_kerja.id_tempat_kerja = alumni_tempat_kerja.id_tempat_kerja')
+        ->where('alumni_tempat_kerja.id_tempat_kerja', $id_tempat_kerja);
+        // belum nemuin caranya gimana 
+        // ->whereNot('alumni.id_alumni',$id_alumni);
+    }
+
+    // Sudah diubah <Mochi>
+    public function getRekomendasiAngkatan($angkatan, $id_alumni)
+    {
+        return $this->table('alumni')->join('pendidikan', 'pendidikan.id_alumni = alumni.id_alumni')
+        ->where('pendidikan.angkatan', $angkatan);
+        // belum nemuin caranya gimana 
+        // ->notGroupStart(' alumni.id_alumni',$id_alumni);
     }
 
     public function getTempatKerja()

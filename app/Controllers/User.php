@@ -383,11 +383,16 @@ class User extends BaseController
 	//belum selesai nich
 	public function rekomendasi()
 	{
+		$pager = \Config\Services::pager();
 		$model = new AlumniModel();
 
-		$query = $model->getAlumniByAngkatan($model->bukaProfile(session('nim'))->getRow()->angkatan);
-		// dd($query->orderBy('nama', $direction = 'asc')->get()->getResult());
+		if ($model->getAngkatanByIdAlumni(session('id_alumni')) == NULL || $model->getAngkatanByIdAlumni(session('id_alumni'))->angkatan == 0) {
+			$query = $model->getRekomendasiTK($model->getIdTempatKerjaByIdAlumni(session('id_alumni')), session('id_alumni'));
+		} else {
+			$query = $model->getRekomendasiAngkatan($model->getAngkatanByIdAlumni(session('id_alumni'))->angkatan, session('id_alumni'));
+		}
 
+		// dd($query->orderBy('nama', $direction = 'asc')->paginate(16));
 		$data = [
 			'judulHalaman'  => 'Rekomendasi',
 			'active' 		=> 'rekomendasi',
