@@ -127,24 +127,40 @@ if ($status == 'bukan user') {
                         <!-- Email -->
                             <div class="inline-block mb-2 flex flex-row">
                                 <img src="/img/components/icon/message.png" alt="" class="float-left w-5">
+                                <?php if($alumni->email == NULL){ ?>
+                                <span class="font-heading text-xs text-primary text-center ml-1 md:ml-2"><i>belum terisi</i></span>
+                                <?php } else { ?>
                                 <span class="font-heading text-xs text-primary text-center ml-1 md:ml-2"><?= $alumni->email ?></span>
+                                <?php } ?>
                             </div>
                         <!-- Facebook -->
                             <div class="inline-block flex flex-row">
                                 <img src="/img/components/icon/facebook.png" alt="" class="float-left ml-1 w-2 h-4">
+                                <?php if($alumni->fb == NULL){ ?>
+                                <span class="font-heading text-xs text-primary text-left flex items-center ml-3 md:ml-4"><i>belum terisi</i></span>
+                                <?php } else { ?>
                                 <span class="font-heading text-xs text-primary text-left flex items-center ml-3 md:ml-4"><?= $alumni->fb ?></span>
+                                <?php } ?>
                             </div>
                     </div>
                     <div class="w-full md:w-1/2 mt-2 md:mt-0">
                         <!-- Twitter -->
                             <div class="inline-block mb-2 flex flex-row">
                                 <img src="/img/components/icon/twitter.png" alt="" class="float-left w-4 w-4">
+                                <?php if($alumni->twitter == NULL){ ?>
+                                <span class="font-heading text-xs text-primary text-center ml-2 md:ml-3"><i>belum terisi</i></span>
+                                <?php } else { ?>
                                 <span class="font-heading text-xs text-primary text-center ml-2 md:ml-3"><?= $alumni->twitter ?></span>
+                                <?php } ?>
                             </div>
                         <!-- Instagram -->
                             <div class="inline-block flex flex-row">
                                 <img src="/img/components/icon/instagram.png" alt="" class="float-left w-4">
+                                <?php if($alumni->ig == NULL){ ?>
+                                <span class="font-heading text-xs text-primary text-center flex items-center ml-2 md:ml-3"><i>belum terisi</i></span>
+                                <?php } else { ?>
                                 <span class="font-heading text-xs text-primary text-center flex items-center ml-2 md:ml-3"><?= $alumni->ig ?></span>
+                                <?php } ?>
                             </div>
                     </div>
             </div>
