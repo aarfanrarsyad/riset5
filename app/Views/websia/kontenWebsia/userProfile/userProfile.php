@@ -177,12 +177,12 @@ if ($status == 'bukan user') {
                         <div>
                             <span class="title mt-4 font-heading text-sm md:text-base lg:text-lg font-semibold text-primary block px-2 md:px-0 text-center"><?= $row->nama; ?></span>
                         </div>
-                        <?php if(isset($row['id_tempat_kerja'])){ ?>
+                        <?php if(isset($row->id_tempat_kerja)){ ?>
                         <div>
                             <span class="description font-paragraph text-primary text-center md:text-base block pt-2 pb-2 border-gray-400 mb-2"><?= $row->nama_instansi; ?></span>
                         </div>
                         <?php } 
-                            if(isset($row['angkatan'])) { ?>
+                            if(isset($row->angkatan)) { ?>
                         <div>
                             <span class="description font-paragraph text-primary text-center md:text-base block pt-2 pb-2 border-gray-400 mb-2">Angkatan <?= $row->angkatan; ?></span>
                         </div>
@@ -305,7 +305,7 @@ if ($status == 'bukan user') {
                                 <!-- Tampilan jika data semua kolom belum diisi -->
 
                                 <tr>
-                                    <td colspan="6" class="text-sm text-center border-b-2 border-gray-200 px-3 lg:px-5 py-2 md:py-3 lg:py-4">Riwayat prestasi tidak ditemukan.</td>
+                                    <td colspan="6" class="text-sm text-center border-b-2 border-gray-200 px-3 lg:px-5 py-2 md:py-3 lg:py-4">Riwayat pendidikan tidak ditemukan.</td>
                                 </tr>
                             <?php } else { ?>
                                 <?php foreach ($pendidikan as $row) : ?>
