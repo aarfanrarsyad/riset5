@@ -447,7 +447,7 @@ class User extends BaseController
 			return redirect()->to(base_url('User/editProfil'));
 		} else {
 			$avatar = $this->request->getFile('file_upload');
-			$avatar->move(ROOTPATH . '/public/img/user/userid_' . session('id_user'));
+			$avatar->move(ROOTPATH . '/public/img/component/user/userid_' . session('id_user'));
 
 			if ($foto != 'default.svg') {
 				$url = ROOTPATH . '/public/img/' . $foto;
@@ -456,15 +456,15 @@ class User extends BaseController
 			}
 
 			$image = \Config\Services::image()
-				->withFile(ROOTPATH . '/public/img/user/userid_' . session('id_user') . '/' . $avatar->getName())
+				->withFile(ROOTPATH . '/public/img/component/user/userid_' . session('id_user') . '/' . $avatar->getName())
 				->fit(350, 350, 'center')
 				->convert(IMAGETYPE_JPEG)
-				->save(ROOTPATH . '/public/img/user/userid_' . session('id_user') . '/foto_profil.jpeg', 70);
+				->save(ROOTPATH . '/public/img/component/user/userid_' . session('id_user') . '/foto_profil.jpeg', 70);
 
-			unlink(ROOTPATH . '/public/img/user/userid_' . session('id_user') . '/' . $avatar->getName());
+			unlink(ROOTPATH . '/public/img/component/user/userid_' . session('id_user') . '/' . $avatar->getName());
 
 			$data = [
-				'foto_profil' => 'user/userid_' . session('id_user') . '/foto_profil.jpeg'
+				'foto_profil' => 'component/user/userid_' . session('id_user') . '/foto_profil.jpeg'
 			];
 
 			$model->db->table('alumni')->set($data)->where('id_alumni', session('id_alumni'))->update();
