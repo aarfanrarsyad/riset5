@@ -21,35 +21,10 @@ if ($alumni->cttl == 0) {
 } else {
     $cttl = "checked";
 }
-if ($alumni->cemail == 0) {
-    $cemail = "";
-} else {
-    $cemail = "checked";
-}
 if ($alumni->calamat == 0) {
     $calamat = "";
 } else {
     $calamat = "checked";
-}
-if ($alumni->cjabatan_terakhir == 0) {
-    $cjab = "";
-} else {
-    $cjab = "checked";
-}
-if ($alumni->cig == 0) {
-    $cig = "";
-} else {
-    $cig = "checked";
-}
-if ($alumni->ctwitter == 0) {
-    $ctw = "";
-} else {
-    $ctw = "checked";
-}
-if ($alumni->cfb == 0) {
-    $cfb = "";
-} else {
-    $cfb = "checked";
 }
 ?>
 <?= $this->extend('websia/kontenWebsia/editProfile/layoutEdit.php'); ?>
@@ -149,7 +124,6 @@ if ($alumni->cfb == 0) {
                 </div>
                 <div class="flex justify-between items-center md:mr-6">
                     <label for="email" class="font-medium" id="labelEmail">Email:</label>
-                    <input type="checkbox" <?= $cemail ?> name="checkEmail" data-id="Email" id="checkEmail" class="cursor-pointer focus:outline-none md:-mr-6 editTampilan hidden">
                 </div>
 
                 <div class="lg:w-1/2">
@@ -215,7 +189,6 @@ if ($alumni->cfb == 0) {
                 <div>
                     <div class="flex justify-between items-center">
                         <div class="font-medium" id="labelJabatan">Jabatan Terakhir:</div>
-                        <input type="checkbox" <?= $cjab ?> name="checkJabatan" data-id="Jabatan" id="checkJabatan" class="cursor-pointer focus:outline-none editTampilan hidden">
                     </div>
                     <div class="text-black font-heading font-normal mb-2"><?= $alumni->jabatan_terakhir ?></div>
                 </div>
@@ -238,7 +211,6 @@ if ($alumni->cfb == 0) {
                                 <?php } else { ?>
                                     <input type="text" name="ig" id="instagram" class="w-full md:p-2 p-1 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-primary text-black" placeholder="Username Instagram tanpa tanda (@)" value="<?= $alumni->ig ?>">
                                 <?php } ?>
-                                <input type="checkbox" <?= $cig ?> name="checkInstagram" data-id="Instagram" id="checkInstagram" class="cursor-pointer focus:outline-none editTampilan hidden">
                             </div>
                         </div>
                         <div class="flex items-center mb-2">
@@ -251,7 +223,6 @@ if ($alumni->cfb == 0) {
                                 <?php } else { ?>
                                     <input type="text" name="twitter" id="twitter" class="w-full md:p-2 p-1 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-primary text-black" placeholder="Username Twitter" value="<?= $alumni->twitter ?>">
                                 <?php } ?>
-                                <input type="checkbox" <?= $ctw ?> name="checkTwitter" data-id="Twitter" id="checkTwitter" class="cursor-pointer focus:outline-none editTampilan hidden">
                             </div>
                         </div>
                         <div class="flex items-center mb-2">
@@ -264,7 +235,6 @@ if ($alumni->cfb == 0) {
                                 <?php } else { ?>
                                     <input type="text" name="fb" id="facebook" class="w-full md:p-2 p-1 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-primary text-black" placeholder="Nama Akun Facebook" value="<?= $alumni->fb ?>">
                                 <?php } ?>
-                                <input type="checkbox" <?= $cfb ?> name="checkFacebook" data-id="Facebook" id="checkFacebook" class="cursor-pointer focus:outline-none editTampilan hidden">
                             </div>
                         </div>
                     </div>

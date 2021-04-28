@@ -505,33 +505,13 @@ class User extends BaseController
 		$twitter		= htmlspecialchars($_POST['twitter']);
 		$deskripsi		= htmlspecialchars($_POST['biografi']);
 		$cttl = 0;
-		$cemail = 0;
 		$calamat = 0;
-		$cjab = 0;
-		$cig = 0;
-		$ctw = 0;
-		$cfb = 0;
 
 		if (isset($_POST['checkTanggalLahir'])) {
 			$cttl = 1;
 		}
-		if (isset($_POST['checkEmail'])) {
-			$cemail = 1;
-		}
 		if (isset($_POST['checkAlamat'])) {
 			$calamat = 1;
-		}
-		if (isset($_POST['checkJabatan'])) {
-			$cjab = 1;
-		}
-		if (isset($_POST['checkInstagram'])) {
-			$cig = 1;
-		}
-		if (isset($_POST['checkTwitter'])) {
-			$ctw = 1;
-		}
-		if (isset($_POST['checkFacebook'])) {
-			$cfb = 1;
 		}
 
 		$data = [
@@ -547,12 +527,7 @@ class User extends BaseController
 			'twitter'		=> $twitter,
 			'deskripsi'		=> $deskripsi,
 			'cttl' => $cttl,
-			'cemail' => $cemail,
 			'calamat' => $calamat,
-			'cjabatan_terakhir' => $cjab,
-			'cig' => $cig,
-			'ctwitter' => $ctw,
-			'cfb' => $cfb,
 		];
 
 		// dd($this->form_validation->run($data, 'editProfil'));

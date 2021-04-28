@@ -116,27 +116,7 @@ class Alumni extends Migration
 				'type' => 'BOOLEAN',
 				'default' => '0',
 			],
-			'cemail' => [
-				'type' => 'BOOLEAN',
-				'default' => '0',
-			],
 			'calamat' => [
-				'type' => 'BOOLEAN',
-				'default' => '0',
-			],
-			'cjabatan_terakhir' => [
-				'type' => 'BOOLEAN',
-				'default' => '0',
-			],
-			'cig' => [
-				'type' => 'BOOLEAN',
-				'default' => '0',
-			],
-			'ctwitter' => [
-				'type' => 'BOOLEAN',
-				'default' => '0',
-			],
-			'cfb' => [
 				'type' => 'BOOLEAN',
 				'default' => '0',
 			],

@@ -11,35 +11,10 @@ if ($status == 'bukan user') {
     } else {
         $cttl = "hidden";
     }
-    if ($alumni->cemail == 1) {
-        $cemail = "";
-    } else {
-        $cemail = "hidden";
-    }
     if ($alumni->calamat == 1) {
         $calamat = "";
     } else {
         $calamat = "hidden";
-    }
-    if ($alumni->cjabatan_terakhir == 1) {
-        $cjab = "";
-    } else {
-        $cjab = "hidden";
-    }
-    if ($alumni->cig == 1) {
-        $cig = "";
-    } else {
-        $cig = "hidden";
-    }
-    if ($alumni->ctwitter == 1) {
-        $ctw = "";
-    } else {
-        $ctw = "hidden";
-    }
-    if ($alumni->cfb == 1) {
-        $cfb = "";
-    } else {
-        $cfb = "hidden";
     }
     if ($alumni->cpendidikan == 1) {
         $cpendidikan = "1";
@@ -125,9 +100,7 @@ if ($status == 'bukan user') {
             <!-- Instansi tempat bekerja dan jabatan -->
             <p class="font-heading text-base text-center md:text-left">
                 Bekerja di <span class="text-primary"> <?= $tempat_kerja->nama_instansi; ?> </span></br>
-                <?php if ($cjab == "") : ?>
-                    Jabatan terakhir di BPS sebagai <span class="text-primary"> <?= $alumni->jabatan_terakhir; ?> </span>
-                <?php endif ?>
+                Jabatan terakhir di BPS sebagai <span class="text-primary"> <?= $alumni->jabatan_terakhir; ?> </span>
             </p>
         </div>
     </div>
@@ -149,65 +122,31 @@ if ($status == 'bukan user') {
                 </span>
             <?php endif ?>
             <!-- Awal media sosial dan telepon -->
-            <?php
-            if ($alumni->email == "") {
-                $alumni->email = "belum terisi";
-            } else {
-                $alumni->email = $alumni->email;
-            }
-            if ($alumni->fb == "") {
-                $fb = "belum terisi";
-            } else {
-                $fb = $alumni->fb;
-            }
-            if ($alumni->twitter == "") {
-                $twitter = "belum terisi";
-            } else {
-                $twitter = $alumni->twitter;
-            }
-            if ($alumni->ig == "") {
-                $ig = "belum terisi";
-            } else {
-                $ig = $alumni->ig;
-            }
-            ?>
             <div class="md:space-x-4 md:flex md:flex-row items-start justify-center lg:justify-start md:py-2 px-5 md:px-0">
-                <?php if ($cemail == "" || $cfb == "") : ?>
                     <div class="w-full md:w-1/2 mr-10">
                         <!-- Email -->
-                        <?php if ($cemail == "") : ?>
-                            <div <?= $cemail ?> class="inline-block mb-2 flex flex-row">
+                            <div class="inline-block mb-2 flex flex-row">
                                 <img src="/img/components/icon/message.png" alt="" class="float-left w-5">
                                 <span class="font-heading text-xs text-primary text-center ml-1 md:ml-2"><?= $alumni->email ?></span>
                             </div>
-                        <?php endif ?>
                         <!-- Facebook -->
-                        <?php if ($cfb == "") : ?>
-                            <div <?= $cfb ?> class="inline-block flex flex-row">
+                            <div class="inline-block flex flex-row">
                                 <img src="/img/components/icon/facebook.png" alt="" class="float-left ml-1 w-2 h-4">
-                                <span class="font-heading text-xs text-primary text-left flex items-center ml-3 md:ml-4"><?= $fb ?></span>
+                                <span class="font-heading text-xs text-primary text-left flex items-center ml-3 md:ml-4"><?= $alumni->fb ?></span>
                             </div>
-                        <?php endif ?>
                     </div>
-                <?php endif ?>
-                <?php if ($cig == "" || $ctw == "") : ?>
                     <div class="w-full md:w-1/2 mt-2 md:mt-0">
                         <!-- Twitter -->
-                        <?php if ($ctw == "") : ?>
-                            <div <?= $ctw ?> class="inline-block mb-2 flex flex-row">
+                            <div class="inline-block mb-2 flex flex-row">
                                 <img src="/img/components/icon/twitter.png" alt="" class="float-left w-4 w-4">
-                                <span class="font-heading text-xs text-primary text-center ml-2 md:ml-3"><?= $twitter ?></span>
+                                <span class="font-heading text-xs text-primary text-center ml-2 md:ml-3"><?= $alumni->twitter ?></span>
                             </div>
-                        <?php endif ?>
                         <!-- Instagram -->
-                        <?php if ($cig == "") : ?>
-                            <div <?= $cig ?> class="inline-block flex flex-row">
+                            <div class="inline-block flex flex-row">
                                 <img src="/img/components/icon/instagram.png" alt="" class="float-left w-4">
-                                <span class="font-heading text-xs text-primary text-center flex items-center ml-2 md:ml-3"><?= $ig ?></span>
+                                <span class="font-heading text-xs text-primary text-center flex items-center ml-2 md:ml-3"><?= $alumni->ig ?></span>
                             </div>
-                        <?php endif ?>
                     </div>
-                <?php endif ?>
             </div>
             <!--  Akhir media sosial-->
         </div>
@@ -355,7 +294,7 @@ if ($status == 'bukan user') {
                             </tr>
                         </thead>
                         <tbody>
-                            <?php if ($prestasi == NULL) { ?>
+                            <?php if ($pendidikan == NULL) { ?>
                                 <!-- Tampilan jika data semua kolom belum diisi -->
 
                                 <tr>
