@@ -40,6 +40,11 @@
                     <div class="bg-primary text-white rounded-full py-1 px-3 text-center cursor-pointer hover:bg-primaryHover transition-colors duration-300 my-2 kembaliInstansi">DAFTAR INSTANSI</div>
                 </div>
                 <label for="nama" class="font-medium">Nama Instansi:</label>
+                <?php if (session()->getFlashdata('error-nama_instansi') != "") { ?>
+                            <p class="text-xs text-red-500 text-justify" id="errorNamaInstansi">
+                                <?= session('error-nama_instansi') ?>
+                            </p>
+                <?php } ?>
                 <input type="text" name="nama_instansi" id="nama" class="inputForm" placeholder="Masukkan nama Instansi">
                 <label for="alamat" class="font-medium">Alamat Instansi:</label>
                 <textarea type="text" name="alamat_instansi" id="alamat" class="inputForm resize-none" placeholder="Masukkan alamat instansi"></textarea>
@@ -49,7 +54,12 @@
                     <label for="faks" class="font-medium">Faks Instansi:</label>
                     <input type="text" name="faks_instansi" id="faks" class="inputForm" placeholder="Masukkan faks instansi">
                     <label for="email" class="font-medium">Email:</label>
-                    <input type="text" name="email_instansi" id="email" class="inputForm" placeholder="Masukkan email instansi">
+                    <?php if (session()->getFlashdata('error-email_instansi') != "") { ?>
+                            <p class="text-xs text-red-500 text-justify" id="errorEmailInstansi">
+                                <?= session('error-email_instansi') ?>
+                            </p>
+                    <?php } ?>
+                    <input type="email" name="email_instansi" id="email" class="inputForm" placeholder="Masukkan email instansi">
                 </div>
                 <div class="flex justify-end md:mb-6 mt-12">
                     <input type="submit" value="SIMPAN" class="w-24 text-center py-1 bg-secondary hover:bg-secondaryhover text-white rounded-full cursor-pointer focus:outline-none" id="tambahTempatKerja">
@@ -63,12 +73,13 @@
 <!-- dialog box edit tempat kerja -->
 <!-- kalau mau ngecek hilangin kelas hidden sama opacity-0 nya-->
 
+<?php if (session()->getFlashdata('edit-tk-success')) { ?>
 <!-- BERHASIL edit instansi -->
 <div id="berhasilEditInstansi">
-    <div class="hidden opacity-0 fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40">
+    <div class="fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40">
         <div class="duration-700 transition-all p-3 rounded-lg flex items-center" style="background-color: #B1FF66;">
             <img src="/img/components/icon/check.png" class="h-5 mr-2" style="color: #54AC00;">
-            <p class="sm:text-base text-sm font-heading font-bold text-success">Tempat Kerja Berhasil Disimpan</p>
+            <p class="sm:text-base text-sm font-heading font-bold text-success"><?= session()->getFlashdata('edit-tk-success') ?></p>
         </div>
     </div>
 </div>
@@ -77,9 +88,11 @@
         $('#berhasilEditInstansi').fadeOut();
     }, 1500);
 </script>
-<!-- GAGAL edit instansi -->
-<div id="gagalEditInstansi">
-    <div class="hidden opacity-0 fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40">
+<?php }
+if (session()->getFlashdata('add-tk-success')) { ?>
+<!-- GAGAL edit instansi KAYAKNYA GAPERLU -->
+<!-- <div id="gagalEditInstansi">
+    <div class="fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40">
         <div class="duration-700 transition-all p-3 rounded-lg flex items-center" style="background-color: #FF7474;">
             <img src="/img/components/icon/warning.png" class="h-5 mr-2">
             <p class="sm:text-base text-sm font-heading font-bold" style="color: #C51800;">Tempat Kerja Tidak Berhasil Disimpan</p>
@@ -90,13 +103,13 @@
     setTimeout(function() {
         $('#gagalEditInstansi').fadeOut();
     }, 1500);
-</script>
+</script> -->
 <!-- BERHASIL tambah instansi -->
 <div id="berhasilTambahInstansi">
-    <div class="hidden opacity-0 fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40">
+    <div class="fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40">
         <div class="duration-700 transition-all p-3 rounded-lg flex items-center" style="background-color: #B1FF66;">
             <img src="/img/components/icon/check.png" class="h-5 mr-2" style="color: #54AC00;">
-            <p class="sm:text-base text-sm font-heading font-bold text-success">Tempat Kerja Berhasil Ditambahkan</p>
+            <p class="sm:text-base text-sm font-heading font-bold text-success"><?= session()->getFlashdata('add-tk-success') ?></p>
         </div>
     </div>
 </div>
@@ -105,12 +118,14 @@
         $('#berhasilTambahInstansi').fadeOut();
     }, 1500);
 </script>
+<?php }
+if (session()->getFlashdata('add-tk-fail')) { ?>
 <!-- GAGAL tambah instansi -->
 <div id="gagalTambahInstansi">
-    <div class="hidden opacity-0 fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40">
+    <div class="fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40">
         <div class="duration-700 transition-all p-3 rounded-lg flex items-center" style="background-color: #FF7474;">
             <img src="/img/components/icon/warning.png" class="h-5 mr-2">
-            <p class="sm:text-base text-sm font-heading font-bold" style="color: #C51800;">Tempat Kerja Tidak Berhasil Ditambahkan</p>
+            <p class="sm:text-base text-sm font-heading font-bold" style="color: #C51800;"><?= session()->getFlashdata('add-tk-fail') ?></p>
         </div>
     </div>
 </div>
@@ -120,4 +135,5 @@
     }, 1500);
 </script>
 <!-- end dialog box-->
+<?php } ?>
 <?= $this->endSection(); ?>
