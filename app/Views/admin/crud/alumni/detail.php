@@ -72,14 +72,11 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="d-flex flex-column align-items-center text-center">
-                                    <img src="https://demos.creative-tim.com/tailwindcss-starter-project/_next/static/images/team-1-800x800-fa5a7ac2c81a43925586ea85f2fea332.jpg" alt="Admin" class="rounded-circle" width="150">
+                                    <img src="/img/<?= $alumni['foto_profil']; ?>" alt="Admin" class="rounded-circle" width="150">
                                     <div class="mt-3">
                                         <h4><?= $alumni['nama']; ?></h4>
-                                        <p class="text-secondary mb-1">
-                                            Angkatan <span class="text-primary">ke-<?= $alumni['angkatan']; ?></span><br />
-                                        </p>
                                         <button type="button" class="btn btn-xs btn-outline-primary mr-1" onclick=""><i class="fas fa-edit"></i>&ensp;<span class="text-xs">Update</span></button>
-                                        <button type="button" class="btn btn-xs btn-outline-primary" onclick="CRUD_deleteAlumni(<?= $alumni['id']; ?>, '<?= $alumni['nama']; ?>')"><i class="fas fa-trash"></i>&ensp;<span class="text-xs">Delete</span></button>
+                                        <button type="button" class="btn btn-xs btn-outline-primary" onclick="CRUD_deleteAlumni(<?= $alumni['id_alumni']; ?>, '<?= $alumni['nama']; ?>')"><i class="fas fa-trash"></i>&ensp;<span class="text-xs">Delete</span></button>
                                     </div>
                                 </div>
                             </div>
@@ -90,7 +87,7 @@
                                     <h6 class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-twitter mr-2 icon-inline text-info">
                                             <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
                                         </svg>Twitter</h6>
-                                    <span class="text-secondary">@bootdey</span>
+                                    <span class="text-secondary"> <?= $alumni['twitter']; ?></span>
                                 </li>
                                 <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                                     <h6 class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-instagram mr-2 icon-inline text-danger">
@@ -98,13 +95,13 @@
                                             <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
                                             <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
                                         </svg>Instagram</h6>
-                                    <span class="text-secondary">bootdey</span>
+                                    <span class="text-secondary"><?= $alumni['ig']; ?></span>
                                 </li>
                                 <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                                     <h6 class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-facebook mr-2 icon-inline text-primary">
                                             <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
                                         </svg>Facebook</h6>
-                                    <span class="text-secondary">bootdey</span>
+                                    <span class="text-secondary"><?= $alumni['fb']; ?></span>
                                 </li>
                             </ul>
                         </div>
@@ -114,10 +111,28 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-sm-3">
-                                        <h6 class="mb-0">NIM</h6>
+                                        <h6 class="mb-0">ID Alumni</h6>
                                     </div>
                                     <div class="col-sm-9 text-secondary">
-                                        <?= $alumni['nim']; ?>
+                                        <?= $alumni['id_alumni']; ?>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">NIP</h6>
+                                    </div>
+                                    <div class="col-sm-9 text-secondary">
+                                        <?= $alumni['nip']; ?>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">NIP BPS</h6>
+                                    </div>
+                                    <div class="col-sm-9 text-secondary">
+                                        <?= $alumni['nip_bps']; ?>
                                     </div>
                                 </div>
                                 <hr>
@@ -141,16 +156,70 @@
                                 <hr>
                                 <div class="row">
                                     <div class="col-sm-3">
-                                        <h6 class="mb-0">Alamat</h6>
+                                        <h6 class="mb-0">Telepon</h6>
                                     </div>
                                     <div class="col-sm-9 text-secondary">
-                                        <?= $alumni['alamat']; ?>
+                                        <?= $alumni['telp_alumni']; ?>
                                     </div>
                                 </div>
                                 <hr>
                                 <div class="row">
                                     <div class="col-sm-3">
-                                        <h6 class="mb-0">Jabatan</h6>
+                                        <h6 class="mb-0">Alamat</h6>
+                                    </div>
+                                    <div class="col-sm-9 text-secondary">
+                                        <?= $alumni['alamat_alumni']; ?>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Kota</h6>
+                                    </div>
+                                    <div class="col-sm-9 text-secondary">
+                                        <?= $alumni['kota']; ?>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Provinsi</h6>
+                                    </div>
+                                    <div class="col-sm-9 text-secondary">
+                                        <?= $alumni['provinsi']; ?>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Negara</h6>
+                                    </div>
+                                    <div class="col-sm-9 text-secondary">
+                                        <?= $alumni['negara']; ?>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Status Bekerja</h6>
+                                    </div>
+                                    <div class="col-sm-9 text-secondary">
+                                        <?= $alumni['status_bekerja']; ?>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Perkiraan Pensiun</h6>
+                                    </div>
+                                    <div class="col-sm-9 text-secondary">
+                                        <?= $alumni['perkiraan_pensiun']; ?>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Jabatan Terakhir</h6>
                                     </div>
                                     <div class="col-sm-9 text-secondary">
                                         <?= $alumni['jabatan_terakhir']; ?>
@@ -159,10 +228,19 @@
                                 <hr>
                                 <div class="row">
                                     <div class="col-sm-3">
-                                        <h6 class="mb-0">Tempat Kerja</h6>
+                                        <h6 class="mb-0">Aktif PNS</h6>
                                     </div>
                                     <div class="col-sm-9 text-secondary">
-                                        <?= $alumni['nama_instansi']; ?>
+                                        <?= $alumni['aktif_pns']; ?>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Deskripsi</h6>
+                                    </div>
+                                    <div class="col-sm-9 text-secondary">
+                                        <?= $alumni['deskripsi']; ?>
                                     </div>
                                 </div>
                             </div>

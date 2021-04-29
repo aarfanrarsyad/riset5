@@ -3,10 +3,10 @@
 <?= $this->section('page-content'); ?>
 
 <script>
-    function CRUD_deletePublikasi(id, publikasi) {
+    function CRUD_deletePendidikanTinggi(id, pendidikantinggi) {
         Swal.fire({
             icon: 'question',
-            text: 'Are you sure to delete ' + publikasi + '?',
+            text: 'Are you sure to delete ' + pendidikantinggi + '?',
             showCancelButton: true,
             confirmButtonColor: '#4248ED',
             cancelButtonColor: '#33A1C4',
@@ -14,7 +14,7 @@
         }).then((result) => {
             if (result.isConfirmed) {
                 $.ajax({
-                    url: '<?= base_url('/admin/publikasi/delete') ?>',
+                    url: '<?= base_url('/admin/pendidikan-tinggi/delete') ?>',
                     method: 'POST',
                     dataType: 'json',
                     data: {
@@ -25,11 +25,11 @@
                             Swal.fire({
                                 icon: 'success',
                                 title: 'Success',
-                                text: publikasi + ' deleted successfully',
+                                text: pendidikantinggi + ' deleted successfully',
                                 showConfirmButton: false,
                                 timer: 1500
                             }).then(function() {
-                                window.location = "<?= base_url('admin/publikasi') ?>";
+                                window.location = "<?= base_url('admin/pendidikan-tinggi') ?>";
                             })
                         } else {
                             Swal.fire({
@@ -69,7 +69,7 @@
         <div class="container">
             <div class="row">
                 <div class="col">
-                    <h1 class="mt-2">Daftar Publikasi</h1>
+                    <h1 class="mt-2">Daftar Pendidikan Tinggi</h1>
                     <form action="" method="post">
                         <div class="input-group mb-3">
                             <input type="text" class="form-control" placeholder="Masukkan keyword pencarian..." name="keyword">
@@ -77,7 +77,7 @@
                                 <button class="btn btn-outline-secondary" type="submit" name="submit">Cari</button>
                             </div>
                         </div>
-                        <a href="<?= base_url('') ?>" class="btn btn-primary mt-3">Tambah Publikasi</a>
+                        <a href="<?= base_url('') ?>" class="btn btn-primary mt-3">Tambah Pendidikan Tinggi</a>
                     </form>
                     <?php if (session()->getFlashdata('pesan')) : ?>
                         <div class="alert alert-success" role="alert">
@@ -88,21 +88,23 @@
                         <thead>
                             <tr>
                                 <th scope="col">ID</th>
-                                <th scope="col">ID Alumni</th>
-                                <th scope="col">Publikasi</th>
+                                <th scope="col">NIM</th>
+                                <th scope="col">Program Studi</th>
+                                <th scope="col">Judul Tulisan</th>
                                 <th scope="col">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php $i = 1 + (10 * ($currentPage - 1)); ?>
-                            <?php foreach ($publikasi as $pub) : ?>
+                            <?php foreach ($pendidikantinggi as $pendtinggi) : ?>
                                 <tr>
                                     <th scope="row"><?= $i++; ?></th>
-                                    <td><?= $pub->id_alumni ?></td>
-                                    <td><?= $pub->publikasi ?></td>
+                                    <td><?= $pendtinggi->nim ?></td>
+                                    <td><?= $pendtinggi->program_studi ?></td>
+                                    <td><?= $pendtinggi->judul_tulisan ?></td>
                                     <td>
                                         <button type="button" class="btn btn-xs btn-outline-primary mr-1" onclick=""><i class="fas fa-edit"></i>&ensp;<span class="text-xs">Update</span></button>
-                                        <button type="button" class="btn btn-xs btn-outline-primary" onclick="CRUD_deletePublikasi(<?= $pub->id_alumni ?>, '<?= $pub->publikasi ?>')"><i class="fas fa-trash"></i>&ensp;<span class="text-xs">Delete</span></button>
+                                        <button type="button" class="btn btn-xs btn-outline-primary" onclick="CRUD_deletePendidikanTinggi(<?= $pendtinggi->id_pendidikan ?>, '<?= $pendtinggi->nim ?>')"><i class="fas fa-trash"></i>&ensp;<span class="text-xs">Delete</span></button>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>

@@ -1058,8 +1058,8 @@ class admin_model extends Model
     public function getAllAlumni($id)
     {
         $query = "SELECT * FROM alumni 
-         JOIN angkatan_alumni ON angkatan_alumni.id_alumni=alumni.id_alumni 
-         WHERE alumni.id_alumni=$id";
+            JOIN angkatan_alumni ON angkatan_alumni.id_alumni=alumni.id_alumni 
+            WHERE alumni.id_alumni=$id";
         return $this->db->query($query);
     }
 
@@ -1068,9 +1068,9 @@ class admin_model extends Model
         if (!isset($id)) return redirect()->to(base_url('/admin'));
 
         $query = "SELECT *
-         FROM alumni 
-         WHERE alumni.id_alumni = $id
-         ";
+            FROM alumni 
+            WHERE alumni.id_alumni = $id
+            ";
         return $this->db->query($query);
     }
 
@@ -1116,9 +1116,9 @@ class admin_model extends Model
         if (!isset($id)) return redirect()->to(base_url('/admin'));
 
         $query = "SELECT *
-             FROM tempat_kerja 
-             WHERE tempat_kerja.id_tempat_kerja = $id
-             ";
+                FROM tempat_kerja 
+                WHERE tempat_kerja.id_tempat_kerja = $id
+                ";
         return $this->db->query($query);
     }
 
@@ -1158,9 +1158,9 @@ class admin_model extends Model
         if (!isset($id)) return redirect()->to(base_url('/admin'));
 
         $query = "SELECT *
-         FROM publikasi 
-         WHERE publikasi.id_alumni = $id
-         ";
+            FROM publikasi 
+            WHERE publikasi.id_alumni = $id
+            ";
         return $this->db->query($query);
     }
 
@@ -1200,9 +1200,9 @@ class admin_model extends Model
         if (!isset($id)) return redirect()->to(base_url('/admin'));
 
         $query = "SELECT *
-         FROM pendidikan 
-         WHERE pendidikan.id_pendidikan = $id
-         ";
+            FROM pendidikan 
+            WHERE pendidikan.id_pendidikan = $id
+            ";
         return $this->db->query($query);
     }
 
@@ -1242,9 +1242,9 @@ class admin_model extends Model
         if (!isset($id)) return redirect()->to(base_url('/admin'));
 
         $query = "SELECT *
-         FROM pendidikan_tinggi
-         WHERE pendidikan_tinggi.id_pendidikan = $id
-         ";
+            FROM pendidikan_tinggi
+            WHERE pendidikan_tinggi.id_pendidikan = $id
+            ";
         return $this->db->query($query);
     }
 

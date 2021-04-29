@@ -90,9 +90,6 @@
                                 <th scope="col">ID</th>
                                 <th scope="col">Nama Instansi</th>
                                 <th scope="col">Alamat Instansi</th>
-                                <th scope="col">Telepon Instansi</th>
-                                <th scope="col">Faks Instansi</th>
-                                <th scope="col">Email Intansi</th>
                                 <th scope="col">Aksi</th>
                             </tr>
                         </thead>
@@ -103,10 +100,8 @@
                                     <th scope="row"><?= $i++; ?></th>
                                     <td><?= $inst->nama_instansi ?></td>
                                     <td><?= $inst->alamat_instansi ?></td>
-                                    <td><?= $inst->telp_instansi ?></td>
-                                    <td><?= $inst->faks_instansi ?></td>
-                                    <td><?= $inst->email_instansi ?></td>
                                     <td>
+                                        <a href="/admin/instansi/<?= $inst->id_tempat_kerja ?>" class="btn btn-xs btn-outline-primary mr-1"><i class="fas fa-search"></i>&ensp;<span class="text-xs">Detail</span></a>
                                         <button type="button" class="btn btn-xs btn-outline-primary mr-1" onclick=""><i class="fas fa-edit"></i>&ensp;<span class="text-xs">Update</span></button>
                                         <button type="button" class="btn btn-xs btn-outline-primary" onclick="CRUD_deleteInstansi(<?= $inst->id_tempat_kerja ?>, '<?= $inst->nama_instansi ?>')"><i class="fas fa-trash"></i>&ensp;<span class="text-xs">Delete</span></button>
                                     </td>

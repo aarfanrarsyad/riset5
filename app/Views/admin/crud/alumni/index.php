@@ -90,7 +90,8 @@
                             <tr>
                                 <th scope="col">No.</th>
                                 <th scope="col">Foto</th>
-                                <th scope="col">NIM</th>
+                                <th scope="col">NIP</th>
+                                <th scope="col">NIP BPS</th>
                                 <th scope="col">Nama</th>
                                 <th scope="col">Aksi</th>
                             </tr>
@@ -101,12 +102,13 @@
                                 <tr>
                                     <th scope="row"><?= $i++; ?></th>
                                     <td><img src="img/avatar.png" alt="" class="foto"></td>
-                                    <td><?= $alum['nim']; ?></td>
+                                    <td><?= $alum['nip']; ?></td>
+                                    <td><?= $alum['nip_bps']; ?></td>
                                     <td><?= $alum['nama']; ?></td>
                                     <td>
-                                        <a href="/admin/alumni/<?= $alum['nim']; ?>" class="btn btn-xs btn-outline-primary mr-1"><i class="fas fa-search"></i>&ensp;<span class="text-xs">Detail</span></a>
+                                        <a href="/admin/alumni/<?= $alum['id_alumni']; ?>" class="btn btn-xs btn-outline-primary mr-1"><i class="fas fa-search"></i>&ensp;<span class="text-xs">Detail</span></a>
                                         <button type="button" class="btn btn-xs btn-outline-primary mr-1" onclick=""><i class="fas fa-edit"></i>&ensp;<span class="text-xs">Update</span></button>
-                                        <button type="button" class="btn btn-xs btn-outline-primary" onclick="CRUD_deleteAlumni(<?= $alum['id']; ?>, '<?= $alum['nama']; ?>')"><i class="fas fa-trash"></i>&ensp;<span class="text-xs">Delete</span></button>
+                                        <button type="button" class="btn btn-xs btn-outline-primary" onclick="CRUD_deleteAlumni(<?= $alum['id_alumni']; ?>, '<?= $alum['nama']; ?>')"><i class="fas fa-trash"></i>&ensp;<span class="text-xs">Delete</span></button>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>

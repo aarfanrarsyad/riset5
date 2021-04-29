@@ -88,7 +88,7 @@
                         <thead>
                             <tr>
                                 <th scope="col">ID</th>
-                                <th scope="col">NIM</th>
+                                <th scope="col">ID Alumni</th>
                                 <th scope="col">Jenjang</th>
                                 <th scope="col">Instansi</th>
                                 <th scope="col">Tahun Masuk</th>
@@ -101,7 +101,7 @@
                             <?php foreach ($pendidikan as $pend) : ?>
                                 <tr>
                                     <th scope="row"><?= $i++; ?></th>
-                                    <td><?= $pend->nim ?></td>
+                                    <td><?= $pend->id_alumni ?></td>
                                     <td><?= $pend->jenjang ?></td>
                                     <td><?= $pend->instansi ?></td>
                                     <td><?= $pend->tahun_masuk ?></td>
