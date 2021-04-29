@@ -19,7 +19,7 @@
                     </div>
                 </a>
 
-                <svg class="w-6 cursor-pointer z-20" id="notif" width="42" height="42" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                <svg class="w-6 cursor-pointer z-20 select-none" id="notif" width="42" height="42" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                     <rect width="42" height="42" fill="url(#pattern0)" />
                     <defs>
                         <pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
@@ -43,7 +43,7 @@
                         </div>
                     </div>
                 </div>-->
-                <div class="hidden lg:w-2/5 md:w-2/3 w-3/4 opacity-0 transition-all duration-300 rounded-xl text-primary py-2 text-sm absolute lg:right-18 -lg:right-2 md:right-6 right-1 md:top-48 top-28">
+                <div class="hidden scale-0 lg:w-2/5 md:w-2/3 w-3/4 opacity-0 transition-all duration-300 rounded-xl text-primary py-2 text-sm absolute lg:right-18 -lg:right-2 md:right-6 right-1 md:top-48 top-28 transform origin-top-right">
                     <div class="font-bold px-2">Status Unggah Berita</div>
                     <div class="bg-gray-100 flex p-2 gap-x-2 mb-2">
                         <div class="lg:w-3/4 md:w-4/5 w-2/3">
@@ -98,7 +98,7 @@
                     <div class="lg:w-1/4 w-1/3 lg:h-24 h-20 bg-gray-200">
                     </div>
                     <div class="lg:w-3/4 w-2/3">
-                        <a href="">
+                        <a href="/User/judulBerita">
                             <h3 class="font-heading font-semibold text-primary text-lg">Judul Berita</h3>
                         </a>
                         <div class="flex gap-x-1 items-center">
@@ -117,7 +117,7 @@
                     <div class="lg:w-1/4 w-1/3 lg:h-24 h-20 bg-gray-200">
                     </div>
                     <div class="lg:w-3/4 w-2/3">
-                        <a href="">
+                        <a href="/User/judulBerita">
                             <h3 class="font-heading font-semibold text-primary text-lg">Judul Berita</h3>
                         </a>
                         <div class="flex gap-x-1 items-center">
@@ -136,7 +136,7 @@
                     <div class="lg:w-1/4 w-1/3 lg:h-24 h-20 bg-gray-200">
                     </div>
                     <div class="lg:w-3/4 w-2/3">
-                        <a href="">
+                        <a href="/User/judulBerita">
                             <h3 class="font-heading font-semibold text-primary text-lg">Judul Berita</h3>
                         </a>
                         <div class="flex gap-x-1 items-center">
@@ -155,7 +155,7 @@
                     <div class="lg:w-1/4 w-1/3 lg:h-24 h-20 bg-gray-200">
                     </div>
                     <div class="lg:w-3/4 w-2/3">
-                        <a href="">
+                        <a href="/User/judulBerita">
                             <h3 class="font-heading font-semibold text-primary text-lg">Judul Berita</h3>
                         </a>
                         <div class="flex gap-x-1 items-center">
@@ -176,7 +176,7 @@
                     <div class="lg:w-1/4 w-1/3 lg:h-24 h-20 bg-gray-200">
                     </div>
                     <div class="lg:w-3/4 w-2/3">
-                        <a href="">
+                        <a href="/User/judulBerita">
                             <h3 class="font-heading font-semibold text-primary text-lg">Judul Berita</h3>
                         </a>
                         <div class="flex gap-x-1 items-center">
@@ -195,7 +195,7 @@
                     <div class="lg:w-1/4 w-1/3 lg:h-24 h-20 bg-gray-200">
                     </div>
                     <div class="lg:w-3/4 w-2/3">
-                        <a href="">
+                        <a href="/User/judulBerita">
                             <h3 class="font-heading font-semibold text-primary text-lg">Judul Berita</h3>
                         </a>
                         <div class="flex gap-x-1 items-center">
@@ -214,7 +214,7 @@
                     <div class="lg:w-1/4 w-1/3 lg:h-24 h-20 bg-gray-200">
                     </div>
                     <div class="lg:w-3/4 w-2/3">
-                        <a href="">
+                        <a href="/User/judulBerita">
                             <h3 class="font-heading font-semibold text-primary text-lg">Judul Berita</h3>
                         </a>
                         <div class="flex gap-x-1 items-center">
@@ -233,7 +233,7 @@
                     <div class="lg:w-1/4 w-1/3 lg:h-24 h-20 bg-gray-200">
                     </div>
                     <div class="lg:w-3/4 w-2/3">
-                        <a href="">
+                        <a href="/User/judulBerita">
                             <h3 class="font-heading font-semibold text-primary text-lg">Judul Berita</h3>
                         </a>
                         <div class="flex gap-x-1 items-center">

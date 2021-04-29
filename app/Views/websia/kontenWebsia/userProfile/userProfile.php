@@ -126,46 +126,46 @@ if ($status == 'bukan user') {
             <?php endif ?>
             <!-- Awal media sosial dan telepon -->
             <div class="md:space-x-4 md:flex md:flex-row items-start justify-center lg:justify-start md:py-2 px-5 md:px-0">
-                    <div class="w-full md:w-1/2 mr-10">
-                        <!-- Email -->
-                            <div class="inline-block mb-2 flex flex-row">
-                                <img src="/img/components/icon/message.png" alt="" class="float-left w-5">
-                                <?php if($alumni->email == NULL){ ?>
-                                <span class="font-heading text-xs text-primary text-center ml-1 md:ml-2"><i>belum terisi</i></span>
-                                <?php } else { ?>
-                                <span class="font-heading text-xs text-primary text-center ml-1 md:ml-2"><?= $alumni->email ?></span>
-                                <?php } ?>
-                            </div>
-                        <!-- Facebook -->
-                            <div class="inline-block flex flex-row">
-                                <img src="/img/components/icon/facebook.png" alt="" class="float-left ml-1 w-2 h-4">
-                                <?php if($alumni->fb == NULL){ ?>
-                                <span class="font-heading text-xs text-primary text-left flex items-center ml-3 md:ml-4"><i>belum terisi</i></span>
-                                <?php } else { ?>
-                                <span class="font-heading text-xs text-primary text-left flex items-center ml-3 md:ml-4"><?= $alumni->fb ?></span>
-                                <?php } ?>
-                            </div>
+                <div class="w-full md:w-1/2 mr-10">
+                    <!-- Email -->
+                    <div class="inline-block mb-2 flex flex-row">
+                        <img src="/img/components/icon/message.png" alt="" class="float-left w-5">
+                        <?php if ($alumni->email == NULL) { ?>
+                            <span class="font-heading text-xs text-primary text-center ml-1 md:ml-2"><i>belum terisi</i></span>
+                        <?php } else { ?>
+                            <span class="font-heading text-xs text-primary text-center ml-1 md:ml-2"><?= $alumni->email ?></span>
+                        <?php } ?>
                     </div>
-                    <div class="w-full md:w-1/2 mt-2 md:mt-0">
-                        <!-- Twitter -->
-                            <div class="inline-block mb-2 flex flex-row">
-                                <img src="/img/components/icon/twitter.png" alt="" class="float-left w-4 w-4">
-                                <?php if($alumni->twitter == NULL){ ?>
-                                <span class="font-heading text-xs text-primary text-center ml-2 md:ml-3"><i>belum terisi</i></span>
-                                <?php } else { ?>
-                                <span class="font-heading text-xs text-primary text-center ml-2 md:ml-3"><?= $alumni->twitter ?></span>
-                                <?php } ?>
-                            </div>
-                        <!-- Instagram -->
-                            <div class="inline-block flex flex-row">
-                                <img src="/img/components/icon/instagram.png" alt="" class="float-left w-4">
-                                <?php if($alumni->ig == NULL){ ?>
-                                <span class="font-heading text-xs text-primary text-center flex items-center ml-2 md:ml-3"><i>belum terisi</i></span>
-                                <?php } else { ?>
-                                <span class="font-heading text-xs text-primary text-center flex items-center ml-2 md:ml-3"><?= $alumni->ig ?></span>
-                                <?php } ?>
-                            </div>
+                    <!-- Facebook -->
+                    <div class="inline-block flex flex-row">
+                        <img src="/img/components/icon/facebook.png" alt="" class="float-left ml-1 w-2 h-4">
+                        <?php if ($alumni->fb == NULL) { ?>
+                            <span class="font-heading text-xs text-primary text-left flex items-center ml-3 md:ml-4"><i>belum terisi</i></span>
+                        <?php } else { ?>
+                            <span class="font-heading text-xs text-primary text-left flex items-center ml-3 md:ml-4"><?= $alumni->fb ?></span>
+                        <?php } ?>
                     </div>
+                </div>
+                <div class="w-full md:w-1/2 mt-2 md:mt-0">
+                    <!-- Twitter -->
+                    <div class="inline-block mb-2 flex flex-row">
+                        <img src="/img/components/icon/twitter.png" alt="" class="float-left w-4 w-4">
+                        <?php if ($alumni->twitter == NULL) { ?>
+                            <span class="font-heading text-xs text-primary text-center ml-2 md:ml-3"><i>belum terisi</i></span>
+                        <?php } else { ?>
+                            <span class="font-heading text-xs text-primary text-center ml-2 md:ml-3"><?= $alumni->twitter ?></span>
+                        <?php } ?>
+                    </div>
+                    <!-- Instagram -->
+                    <div class="inline-block flex flex-row">
+                        <img src="/img/components/icon/instagram.png" alt="" class="float-left w-4">
+                        <?php if ($alumni->ig == NULL) { ?>
+                            <span class="font-heading text-xs text-primary text-center flex items-center ml-2 md:ml-3"><i>belum terisi</i></span>
+                        <?php } else { ?>
+                            <span class="font-heading text-xs text-primary text-center flex items-center ml-2 md:ml-3"><?= $alumni->ig ?></span>
+                        <?php } ?>
+                    </div>
+                </div>
             </div>
             <!--  Akhir media sosial-->
         </div>
@@ -196,15 +196,15 @@ if ($status == 'bukan user') {
                         <div>
                             <span class="title mt-4 font-heading text-sm md:text-base lg:text-lg font-semibold text-primary block px-2 md:px-0 text-center"><?= $row->nama; ?></span>
                         </div>
-                        <?php if(isset($row->id_tempat_kerja)){ ?>
-                        <div>
-                            <span class="description font-paragraph text-primary text-center md:text-base block pt-2 pb-2 border-gray-400 mb-2"><?= $row->nama_instansi; ?></span>
-                        </div>
-                        <?php } 
-                            if(isset($row->angkatan)) { ?>
-                        <div>
-                            <span class="description font-paragraph text-primary text-center md:text-base block pt-2 pb-2 border-gray-400 mb-2">Angkatan <?= $row->angkatan; ?></span>
-                        </div>
+                        <?php if (isset($row->id_tempat_kerja)) { ?>
+                            <div>
+                                <span class="description font-paragraph text-primary text-center md:text-base block pt-2 pb-2 border-gray-400 mb-2"><?= $row->nama_instansi; ?></span>
+                            </div>
+                        <?php }
+                        if (isset($row->angkatan)) { ?>
+                            <div>
+                                <span class="description font-paragraph text-primary text-center md:text-base block pt-2 pb-2 border-gray-400 mb-2">Angkatan <?= $row->angkatan; ?></span>
+                            </div>
                         <?php } ?>
                     </a>
                 </div>
@@ -312,7 +312,7 @@ if ($status == 'bukan user') {
                         <thead>
                             <tr>
                                 <th class="w-1/12 bg-gray-100 border-b-2 border-gray-200 rounded-tl-xl lg:rounded-tl-3xl text-sm text-left pl-3 lg:pl-5 py-2 md:py-3 lg:py-4">Jenjang Pendidikan</th>
-                                <th class="w-2/12 bg-gray-100 border-b-2 border-gray-200 text-sm text-left pl-3 lg:pl-5 py-2 md:py-3 lg:py-4">Univeristas</th>
+                                <th class="w-2/12 bg-gray-100 border-b-2 border-gray-200 text-sm text-left pl-3 lg:pl-5 py-2 md:py-3 lg:py-4">Instansi</th>
                                 <th class="w-2/12 bg-gray-100 border-b-2 border-gray-200 text-sm text-left pl-3 lg:pl-5 py-2 md:py-3 lg:py-4">Program Studi</th>
                                 <th class="w-1/12 bg-gray-100 border-b-2 border-gray-200 text-sm text-left pl-3 lg:pl-5 py-2 md:py-3 lg:py-4">Tahun Masuk</th>
                                 <th class="w-1/12 bg-gray-100 border-b-2 border-gray-200 text-sm text-left pl-3 lg:pl-5 py-2 md:py-3 lg:py-4">Tahun Lulus</th>

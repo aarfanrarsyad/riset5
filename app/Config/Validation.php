@@ -142,4 +142,22 @@ class Validation
 			'matches'=>'Konfirmasi kata sandi tidak cocok',
 		],
 	];
+
+	public $editTempatKerja = [
+		'nama_instansi'   => [
+			'rules' =>'required',
+		],
+		'email_instansi'   => [
+			'rules' =>'required',
+		]
+	];
+
+	public $editTempatKerja_errors  = [
+		'nama_instansi'   => [
+			'required'	=> 'kolom ini harus diisi',
+		],
+		'email_instansi'   => [
+			'required'	=> 'kolom ini harus diisi',
+		],
+	];
 }

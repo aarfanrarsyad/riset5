@@ -14,7 +14,7 @@ if ($checked->cpendidikan == 0) {
     }
 </style>
 
-<div class="w-full bg-white min-h-screen" id="pagePendidikan">
+<div class="w-full bg-white mb-8" id="pagePendidikan">
     <div class="flex justify-end w-full mb-4 w-36">
         <div class="bg-secondary hover:bg-secondaryhover text-white lg:py-1.5 py-1 px-3 lg:text-sm text-xs outline-none cursor-pointer rounded-full flex gap-x-2 items-center" id="buttonEditTampilanPendidikan">
             <div>
@@ -42,7 +42,7 @@ if ($checked->cpendidikan == 0) {
                 <tr>
                     <th class="pt-4 lg:px-3 md:px-2 px-1 pb-1 w-1/12">No</th>
                     <th class="pt-4 lg:px-2 px-1 pb-1 w-1/12">Jenjang</th>
-                    <th class="pt-4 lg:px-2 px-1 pb-1 w-2/12">Universitas</th>
+                    <th class="pt-4 lg:px-2 px-1 pb-1 w-2/12">Instansi</th>
                     <th class="pt-4 lg:px-2 px-1 pb-1 w-2/12">Program Studi</th>
                     <th class="pt-4 pb-1 pl-1 w-1/12">
                         <div class="flex">
@@ -179,14 +179,18 @@ if (session()->getFlashdata('add-pendidikan-fail')) { ?>
             $('#gagalTambahPendidikan').fadeOut();
         }, 1500);
     </script>
-<?php } ?>
+<?php } 
+if (session()->getFlashdata('delete-pendidikan-success')) { ?>
+
 
 <!-- BERHASIL hapus pendidikan-->
 <div id="berhasilHapusPendidikan">
     <div class="fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40">
         <div class="duration-700 transition-all p-3 rounded-lg flex items-center" style="background-color: #B1FF66;">
             <img src="/img/components/icon/check.png" class="h-5 mr-2" style="color: #54AC00;">
-            <p class="sm:text-base text-sm font-heading font-bold text-success">Data pendidikan berhasil dihapus.</p>
+
+            <p class="sm:text-base text-sm font-heading font-bold text-success"><?= session()->getFlashdata('delete-pendidikan-success') ?></p>
+
         </div>
     </div>
 </div>
@@ -196,4 +200,7 @@ if (session()->getFlashdata('add-pendidikan-fail')) { ?>
     }, 1500);
 </script>
 <!-- end dialog box -->
+<?php } ?>
+
+
 <?= $this->endSection(); ?>

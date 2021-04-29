@@ -74,7 +74,7 @@ $(".delete-project").click(function () {
     var appID = $(this).attr("data-id")
     $('body').prepend(`
     <div class="fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40 font-paragraph" id='proyekHapus'>
-        <div class="hidden opacity-0 duration-700 transition-all bg-gray bg-opacity-0">
+        <div class="hidden transform scale-0 opacity-0 duration-300 transition-all bg-gray bg-opacity-0">
             <div class="bg-white rounded-2xl flex flex-col justify-center pt-3 pb-4 sm:px-8 px-4 mx-4">
                 <p class="font-bold sm:text-lg text-base mb-6 text-justify">Apakah Anda yakin ingin menghapus proyek ini?</p>
                 <div class="text-white flex justify-end">
@@ -88,10 +88,10 @@ $(".delete-project").click(function () {
 
     $('#proyekHapus').children().first().removeClass('hidden')
     setTimeout(function () {
-        $('#proyekHapus').children().first().removeClass('opacity-0')
+        $('#proyekHapus').children().first().removeClass('opacity-0 scale-0')
     }, 10);
     $('.buttonBatal').click(function () {
-        $('#proyekHapus').children().first().addClass('opacity-0')
+        $('#proyekHapus').children().first().addClass('opacity-0 scale-0')
         $('#proyekHapus').children().first().on('transitionend MSTransitionEnd webkitTransitionEnd oTransitionEnd', function () {
             $('#proyekHapus').children().first().addClass('hidden')
         });
@@ -102,7 +102,7 @@ $(".delete-project").click(function () {
     var modal = document.getElementById('proyekHapus')
     $(window).click(function (e) {
         if (e.target === modal) {
-            $('#proyekHapus').children().first().addClass('opacity-0')
+            $('#proyekHapus').children().first().addClass('opacity-0 scale-0')
             $('#proyekHapus').children().first().on('transitionend MSTransitionEnd webkitTransitionEnd oTransitionEnd', function () {
                 $('#proyekHapus').children().first().addClass('hidden')
             });
@@ -130,9 +130,9 @@ $(window).scroll(function () {
         let section = document.querySelector(`${link.hash}`);
         if (section !== null) {
             if (section.offsetTop <= fromTop && section.offsetTop + section.offsetHeight > fromTop) {
-                link.parentElement.classList.add("activeSideDok");
+                link.parentElement.classList.add("bg-primaryDark");
             } else {
-                link.parentElement.classList.remove("activeSideDok");
+                link.parentElement.classList.remove("bg-primaryDark");
             }
         }
     });
