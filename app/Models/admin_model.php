@@ -1265,4 +1265,46 @@ class admin_model extends Model
             return false;
         }
     }
+
+    #-----------------------------------------------------------------------------------------------------------------------------
+
+    public function getAllPrestasi()
+    {
+        $query = "SELECT * FROM prestasi";
+        return $this->db->query($query);
+    }
+
+    public function searchPrestasi($keyword)
+    {
+        return $this->table('prestasi')->like('nama_prestasi', $keyword)->orLike('tahun_prestasi', $keyword);
+    }
+
+    public function getPrestasiById($id)
+    {
+        if (!isset($id)) return redirect()->to(base_url('/admin'));
+
+        $query = "SELECT *
+             FROM prestasi
+             WHERE prestasi.id_prestasi = $id
+             ";
+        return $this->db->query($query);
+    }
+
+    public function deletePrestasiByid($id)
+    {
+        if (!isset($id)) return false;
+
+        $prestasi_data = $this->getPrestasiById($id)->getRowArray();
+        if (is_null($prestasi_data)) return false;
+
+        $desc = 'menghapus prestasi' . $prestasi_data['nama_prestasi'];
+        $query = "DELETE FROM prestasi WHERE id_prestasi  = $id";
+        if ($this->db->query($query)) {
+            activity_log(3, 3, ucfirst($desc), 1);
+            return true;
+        } else {
+            activity_log(3, 3, 'Gagal ' . ($desc), 0);
+            return false;
+        }
+    }
 }

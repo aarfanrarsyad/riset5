@@ -309,6 +309,13 @@ class Rbac extends Seeder
 				'icon'			=> 'fas fa-school',
 				'active'		=> '1'
 			],
+			[
+				'menu_id'     	=> 7,
+				'title'			=> 'Prestasi',
+				'url'			=> 'admin/prestasi',
+				'icon'			=> 'fas fa-award',
+				'active'		=> '1'
+			],
 		];
 		$this->db->table('submenu')->insertBatch($data);
 
@@ -515,6 +522,22 @@ class Rbac extends Seeder
 			],
 			[
 				'submenu_id'     	=> 19,
+				'crud_id'			=> 4
+			],
+			[
+				'submenu_id'     	=> 20,
+				'crud_id'			=> 1
+			],
+			[
+				'submenu_id'     	=> 20,
+				'crud_id'			=> 2
+			],
+			[
+				'submenu_id'     	=> 20,
+				'crud_id'			=> 3
+			],
+			[
+				'submenu_id'     	=> 20,
 				'crud_id'			=> 4
 			]
 		];
@@ -733,6 +756,22 @@ class Rbac extends Seeder
 				'group_id'     		=> 1,
 				'menu_access_id'	=> 51
 			],
+			[
+				'group_id'     		=> 1,
+				'menu_access_id'	=> 52
+			],
+			[
+				'group_id'     		=> 1,
+				'menu_access_id'	=> 53
+			],
+			[
+				'group_id'     		=> 1,
+				'menu_access_id'	=> 54
+			],
+			[
+				'group_id'     		=> 1,
+				'menu_access_id'	=> 55
+			]
 		];
 		$this->db->table('groups_access')->insertBatch($data);
 	}

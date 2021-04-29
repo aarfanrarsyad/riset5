@@ -1242,4 +1242,45 @@ class Admin extends BaseController
 		$query = $init->deletePendidikanTinggiByid($id);
 		$this->output_json($query);
 	}
+
+	#------------------------------------------------------------------------------------------------------------------------------------------------#
+
+	#method untuk index CRUD Prestasi
+	public function CRUD_indexPrestasi()
+	{
+		$init = new admin_model();
+		$prestasi = $init->getAllPrestasi()->getResult();
+		$currentPage = $this->request->getVar('page_prestasi') ? $this->request->getVar('page_prestasi') : 1;
+
+		$keyword = $this->request->getVar('keyword');
+		if ($keyword) {
+			$prestasi->searchPendidikan($keyword);
+		} else {
+			$prestasi;
+		}
+
+		$data = [
+			'title' => 'Prestasi | Website Riset 5',
+			'prestasi' => $prestasi,
+			'pager' => $init->pager,
+			'currentPage' => $currentPage
+		];
+
+		// dd($data);
+
+		return view('admin' . DIRECTORY_SEPARATOR . 'crud' . DIRECTORY_SEPARATOR . 'prestasi' . DIRECTORY_SEPARATOR . 'index', $data);
+	}
+
+	#method untuk delete CRUD Prestasi
+	public function CRUD_deletePrestasi()
+	{
+		if (!$this->request->isAJAX()) return false;
+
+		$id = $this->request->getPost('id');
+		if (!$id) return false;
+
+		$init = new admin_model();
+		$query = $init->deletePrestasiByid($id);
+		$this->output_json($query);
+	}
 }
