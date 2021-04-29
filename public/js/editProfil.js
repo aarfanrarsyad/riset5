@@ -1,35 +1,27 @@
 // awal js edit biodata 
-$('#buttonEditTampilan').click(function () {
-    if ($('.editTampilan').hasClass('hidden')) {
-        $('.editTampilan').removeClass('hidden');
-        if (!$('#checkTanggalLahir').is(':checked')) {
-            $('#labelTempatLahir').addClass('text-gray-500');
-            $('#labelTanggalLahir').addClass('text-gray-500');
-        }
-        if (!$('#checkEmail').is(':checked')) $('#labelEmail').addClass('text-gray-500');
-        if (!$('#checkAlamat').is(':checked')) {
-            $('#labelAlamat').addClass('text-gray-500');
-            $('#labelNegara').addClass('text-gray-500');
-            $('#labelKabkot').addClass('text-gray-500');
-            $('#labelProvinsi').addClass('text-gray-500');
-        }
-        if (!$('#checkJabatan').is(':checked')) $('#labelJabatan').addClass('text-gray-500');
-        if (!$('#checkInstagram').is(':checked')) $('#labelInstagram').addClass('text-gray-500');
-        if (!$('#checkTwitter').is(':checked')) $('#labelTwitter').addClass('text-gray-500');
-        if (!$('#checkFacebook').is(':checked')) $('#labelFacebook').addClass('text-gray-500');
+
+$('#buttonEditTampilan').click(function (){
+    if ($('.editTampilan').hasClass('hidden')){
+       $('.editTampilan').removeClass('hidden');
+       if(!$('#checkTanggalLahir').is(':checked')){
+           $('#labelTempatLahir').addClass('text-gray-500');    
+           $('#labelTanggalLahir').addClass('text-gray-500');    
+       }  
+       if(!$('#checkAlamat').is(':checked')) {
+           $('#labelAlamat').addClass('text-gray-500');    
+           $('#labelNegara').addClass('text-gray-500');    
+           $('#labelKabkot').addClass('text-gray-500');    
+           $('#labelProvinsi').addClass('text-gray-500');    
+       }   
+
     } else {
         $('.editTampilan').addClass('hidden');
         $('#labelTempatLahir').removeClass('text-gray-500');
         $('#labelTanggalLahir').removeClass('text-gray-500');
-        $('#labelEmail').removeClass('text-gray-500');
         $('#labelAlamat').removeClass('text-gray-500');
         $('#labelNegara').removeClass('text-gray-500');
         $('#labelKabkot').removeClass('text-gray-500');
         $('#labelProvinsi').removeClass('text-gray-500');
-        $('#labelJabatan').removeClass('text-gray-500');
-        $('#labelInstagram').removeClass('text-gray-500');
-        $('#labelTwitter').removeClass('text-gray-500');
-        $('#labelFacebook').removeClass('text-gray-500');
     }
 })
 
@@ -213,23 +205,6 @@ $('.updateFotoProfil').click(function () {
 
 // akhir js edit biodata
 
-// awal js sorting
-
-$(".sort").click(function () {
-    $(".sort").not(this).children().removeClass('invisible text-primary')
-    if ($(this).children().eq(0).hasClass('invisible')) {
-        $(this).children().first().removeClass('invisible')
-        $(this).children().first().removeClass('text-gray-400').addClass('text-primary')
-        $(this).children().eq(1).addClass('invisible')
-    } else {
-        $(this).children().eq(1).removeClass('invisible')
-        $(this).children().first().addClass('invisible')
-        $(this).children().eq(1).removeClass('text-gray-400').addClass('text-primary')
-    }
-})
-
-// akhir js sorting
-
 // awal js edit pendidikan
 $('#buttonEditTampilanPendidikan').click(function () {
     if ($('.editTampilanPendidikan').hasClass('hidden')) {
@@ -247,7 +222,6 @@ $('#checkPendidikan').click(function () {
 })
 
 function formPendidikan(
-<<<<<<< HEAD
   id,
   jenjang,
   instansi,
@@ -257,17 +231,7 @@ function formPendidikan(
   angkatan,
   nim,
   tulisan
-=======
-    id,
-    jenjang,
-    univ,
-    studi,
-    masuk,
-    lulus,
-    angkatan,
-    nim,
-    tulisan
->>>>>>> 8285f30ad27c727955b8d002fad38de1bd201dd3
+
 ) {
     $("body").prepend(`
     <div class="fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40 font-paragraph" id='formEditPendidikan'>
@@ -327,7 +291,6 @@ function formPendidikan(
 
     $("#formEditPendidikan").children().first().removeClass("hidden");
     setTimeout(function () {
-<<<<<<< HEAD
       $("#formEditPendidikan").remove();
     }, 400);
   });
@@ -360,55 +323,6 @@ function formPendidikan(
   $("#editAngkatan").val(angkatan);
   $("#editNIM").val(nim);
   $("#editTulisan").val(tulisan);
-=======
-        $("#formEditPendidikan").children().first().removeClass("opacity-0 scale-0");
-    }, 10);
-
-    $(".closePendidikan").click(function () {
-        $("#formEditPendidikan").children().first().addClass("opacity-0 scale-0");
-        $("#formEditPendidikan")
-            .children()
-            .first()
-            .on(
-                "transitionend MSTransitionEnd webkitTransitionEnd oTransitionEnd",
-                function () {
-                    $("#formEditPendidikan").children().first().addClass("hidden");
-                }
-            );
-        setTimeout(function () {
-            $("#formEditPendidikan").remove();
-        }, 400);
-    });
-
-    var modal = document.getElementById("formEditPendidikan");
-    $(window).click(function (e) {
-        if (e.target === modal) {
-            $("#formEditPendidikan").children().first().addClass("opacity-0 scale-0");
-            $("#formEditPendidikan")
-                .children()
-                .first()
-                .on(
-                    "transitionend MSTransitionEnd webkitTransitionEnd oTransitionEnd",
-                    function () {
-                        $("#formEditPendidikan").children().first().addClass("hidden");
-                    }
-                );
-            setTimeout(function () {
-                $("#formEditPendidikan").remove();
-            }, 400);
-        }
-    });
-
-    $("#editId").val(id);
-    $("#editJenjang").val(jenjang);
-    $("#editUniversitas").val(univ);
-    $("#editStudi").val(studi);
-    $("#editMasuk").val(masuk);
-    $("#editLulus").val(lulus);
-    $("#editAngkatan").val(angkatan);
-    $("#editNIM").val(nim);
-    $("#editTulisan").val(tulisan);
->>>>>>> 8285f30ad27c727955b8d002fad38de1bd201dd3
 }
 
 $('.tambahPendidikan').click(function () {

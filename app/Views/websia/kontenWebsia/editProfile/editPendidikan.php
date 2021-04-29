@@ -47,28 +47,11 @@ if ($checked->cpendidikan == 0) {
                     <th class="pt-4 pb-1 pl-1 w-1/12">
                         <div class="flex">
                             <span class="mr-1">Tahun Masuk</span>
-                            <div class="sort select-none cursor-pointer flex flex-col justify-center gap-y-1">
-                                <svg width="10" height="5" viewBox="0 0 8 4" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M0 4L4 0L8 4H0Z" fill="#B0BAC9" />
-                                </svg>
-                                <svg width="10" height="5" viewBox="0 0 8 4" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M0 0L4 4L8 0H0Z" fill="#B0BAC9" />
-                                </svg>
-                            </div>
-
                         </div>
                     </th>
                     <th class="pt-4 pb-1 pl-1 w-1/12">
                         <div class="flex">
                             <span class="mr-1">Tahun Lulus</span>
-                            <div class="sort select-none cursor-pointer flex flex-col justify-center gap-y-1">
-                                <svg width="10" height="5" viewBox="0 0 8 4" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M0 4L4 0L8 4H0Z" fill="#B0BAC9" />
-                                </svg>
-                                <svg width="10" height="5" viewBox="0 0 8 4" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M0 0L4 4L8 0H0Z" fill="#B0BAC9" />
-                                </svg>
-                            </div>
                         </div>
 
                     </th>
@@ -199,12 +182,15 @@ if (session()->getFlashdata('add-pendidikan-fail')) { ?>
 <?php } 
 if (session()->getFlashdata('delete-pendidikan-success')) { ?>
 
+
 <!-- BERHASIL hapus pendidikan-->
 <div id="berhasilHapusPendidikan">
     <div class="fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40">
         <div class="duration-700 transition-all p-3 rounded-lg flex items-center" style="background-color: #B1FF66;">
             <img src="/img/components/icon/check.png" class="h-5 mr-2" style="color: #54AC00;">
+
             <p class="sm:text-base text-sm font-heading font-bold text-success"><?= session()->getFlashdata('delete-pendidikan-success') ?></p>
+
         </div>
     </div>
 </div>

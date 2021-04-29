@@ -21,14 +21,6 @@
                     <th class="pt-4 pb-1 pl-1">
                         <div class="flex justify-center">
                             <span class="mr-2">Tanggal Publikasi</span>
-                            <div class="sort select-none cursor-pointer flex flex-col justify-center gap-y-1">
-                                <svg width="10" height="5" viewBox="0 0 8 4" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M0 4L4 0L8 4H0Z" fill="#B0BAC9" />
-                                </svg>
-                                <svg width="10" height="5" viewBox="0 0 8 4" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M0 0L4 4L8 0H0Z" fill="#B0BAC9" />
-                                </svg>
-                            </div>
                         </div>
                     </th>
 
@@ -139,6 +131,20 @@
 <script>
     setTimeout(function() {
         $('#gagalTambahPublikasi').fadeOut();
+    }, 1500);
+</script>
+<!-- BERHASIL hapus publiikasi -->
+<div id="berhasilHapusPublikasi">
+    <div class="fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40">
+        <div class="duration-700 transition-all p-3 rounded-lg flex items-center" style="background-color: #B1FF66;">
+            <img src="/img/components/icon/check.png" class="h-5 mr-2" style="color: #54AC00;">
+            <p class="sm:text-base text-sm font-heading font-bold text-success">Data publikasi berhasil dihapus.</p>
+        </div>
+    </div>
+</div>
+<script>
+    setTimeout(function() {
+        $('#berhasilHapusPublikasi').fadeOut();
     }, 1500);
 </script>
 <!-- end dialog box-->

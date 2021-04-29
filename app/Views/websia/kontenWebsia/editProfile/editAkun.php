@@ -9,6 +9,14 @@
             <div class="md:w-1/2 w-full">
                 <div class="font-medium">Email:</div>
                 <div class="text-black font-heading font-normal mb-2"><?= $user->email ?></div>
+                <div class="text-secondary text-xs mt-6 mb-2 text-justify">Silakan masukkan kata sandi lama Anda untuk verifikasi!</div>
+                <label for="passlama" class="font-medium">Kata Sandi Lama:</label>
+                <?php if (session()->getFlashdata('edit-pass-fail')) { ?>
+                    <p class="text-xs text-red-500 text-justify" id="errorValidPasss">
+                        <?= session()->getFlashdata('edit-pass-fail') ?>
+                    </p>
+                <?php } ?>
+                <input type="password" name="passlama" id="passlama" class="inputForm" placeholder="🞄🞄🞄🞄🞄🞄🞄🞄" required>
                 <label for="passbaru" class="font-medium">Kata Sandi Baru:</label>
                 <?php if (session()->getFlashdata('error-new_password') != "") { ?>
                     <p class="text-xs text-red-500 text-justify" id="errorPassBaru">
