@@ -1052,4 +1052,217 @@ class admin_model extends Model
         $query = "INSERT INTO activity_log VALUES ('', '$date','$email','$name_group',$access,$scope,'$desc',$status)";
         return $this->db->query($query);
     }
+
+    #-----------------------------------------------------------------------------------------------------------------------------
+
+    public function getAllAlumni($id)
+    {
+        $query = "SELECT * FROM alumni 
+         JOIN angkatan_alumni ON angkatan_alumni.id_alumni=alumni.id_alumni 
+         WHERE alumni.id_alumni=$id";
+        return $this->db->query($query);
+    }
+
+    public function getAlumniById($id)
+    {
+        if (!isset($id)) return redirect()->to(base_url('/admin'));
+
+        $query = "SELECT *
+         FROM alumni 
+         WHERE alumni.id_alumni = $id
+         ";
+        return $this->db->query($query);
+    }
+
+    public function deleteAlumniByid($id)
+    {
+        if (!isset($id)) return false;
+
+        $alumni_data = $this->getAlumniById($id)->getRowArray();
+        if (is_null($alumni_data)) return false;
+
+        $desc = 'menghapus alumni ' . $alumni_data['nama'];
+        $query = "DELETE FROM alumni WHERE id_alumni  = $id";
+        if ($this->db->query($query)) {
+            activity_log(3, 3, ucfirst($desc), 1);
+            return true;
+        } else {
+            activity_log(3, 3, 'Gagal ' . ($desc), 0);
+            return false;
+        }
+    }
+
+    #-----------------------------------------------------------------------------------------------------------------------------
+
+    public function getAllTempatKerja()
+    {
+        $query = "SELECT * FROM tempat_kerja";
+        return $this->db->query($query);
+    }
+
+    public function getTempatKerja($id)
+    {
+        $query = "SELECT * FROM tempat_kerja WHERE tempat_kerja.id_tempat_kerja = $id";
+        return $this->db->query($query);
+    }
+
+    public function searchInstansi($keyword)
+    {
+        return $this->table('tempat_kerja')->like('nama_instansi', $keyword)->orLike('alamat_instansi', $keyword);
+    }
+
+    public function getTempatKerjaById($id)
+    {
+        if (!isset($id)) return redirect()->to(base_url('/admin'));
+
+        $query = "SELECT *
+             FROM tempat_kerja 
+             WHERE tempat_kerja.id_tempat_kerja = $id
+             ";
+        return $this->db->query($query);
+    }
+
+    public function deleteInstansiByid($id)
+    {
+        if (!isset($id)) return false;
+
+        $instansi_data = $this->getTempatKerjaById($id)->getRowArray();
+        if (is_null($instansi_data)) return false;
+
+        $desc = 'menghapus instansi ' . $instansi_data['nama_instansi'];
+        $query = "DELETE FROM tempat_kerja WHERE id_tempat_kerja  = $id";
+        if ($this->db->query($query)) {
+            activity_log(3, 3, ucfirst($desc), 1);
+            return true;
+        } else {
+            activity_log(3, 3, 'Gagal ' . ($desc), 0);
+            return false;
+        }
+    }
+
+    #-----------------------------------------------------------------------------------------------------------------------------
+
+    public function getAllPublikasi()
+    {
+        $query = "SELECT * FROM publikasi";
+        return $this->db->query($query);
+    }
+
+    public function searchPublikasi($keyword)
+    {
+        return $this->table('publikasi')->like('publikasi', $keyword)->orLike('id_alumni', $keyword);
+    }
+
+    public function getPublikasiById($id)
+    {
+        if (!isset($id)) return redirect()->to(base_url('/admin'));
+
+        $query = "SELECT *
+         FROM publikasi 
+         WHERE publikasi.id_alumni = $id
+         ";
+        return $this->db->query($query);
+    }
+
+    public function deletePublikasiByid($id)
+    {
+        if (!isset($id)) return false;
+
+        $publikasi_data = $this->getPublikasiById($id)->getRowArray();
+        if (is_null($publikasi_data)) return false;
+
+        $desc = 'menghapus publikasi ' . $publikasi_data['publikasi'];
+        $query = "DELETE FROM publikasi WHERE id_alumni   = $id";
+        if ($this->db->query($query)) {
+            activity_log(3, 3, ucfirst($desc), 1);
+            return true;
+        } else {
+            activity_log(3, 3, 'Gagal ' . ($desc), 0);
+            return false;
+        }
+    }
+
+    #-----------------------------------------------------------------------------------------------------------------------------
+
+    public function getAllPendidikan()
+    {
+        $query = "SELECT * FROM pendidikan";
+        return $this->db->query($query);
+    }
+
+    public function searchPendidikan($keyword)
+    {
+        return $this->table('pendidikan')->like('instansi', $keyword)->orLike('jenjang', $keyword);
+    }
+
+    public function getPendidikanById($id)
+    {
+        if (!isset($id)) return redirect()->to(base_url('/admin'));
+
+        $query = "SELECT *
+         FROM pendidikan 
+         WHERE pendidikan.id_pendidikan = $id
+         ";
+        return $this->db->query($query);
+    }
+
+    public function deletePendidikanByid($id)
+    {
+        if (!isset($id)) return false;
+
+        $pendidikan_data = $this->getPendidikanById($id)->getRowArray();
+        if (is_null($pendidikan_data)) return false;
+
+        $desc = 'menghapus pendidikan ' . $pendidikan_data['jenjang'];
+        $query = "DELETE FROM pendidikan WHERE id_pendidikan  = $id";
+        if ($this->db->query($query)) {
+            activity_log(3, 3, ucfirst($desc), 1);
+            return true;
+        } else {
+            activity_log(3, 3, 'Gagal ' . ($desc), 0);
+            return false;
+        }
+    }
+
+    #-----------------------------------------------------------------------------------------------------------------------------
+
+    public function getAllPendidikanTinggi()
+    {
+        $query = "SELECT * FROM pendidikan_tinggi";
+        return $this->db->query($query);
+    }
+
+    public function searchPendidikanTinggi($keyword)
+    {
+        return $this->table('pendidikan_tinggi')->like('nim', $keyword)->orLike('program_studi', $keyword);
+    }
+
+    public function getPendidikanTinggiById($id)
+    {
+        if (!isset($id)) return redirect()->to(base_url('/admin'));
+
+        $query = "SELECT *
+         FROM pendidikan_tinggi
+         WHERE pendidikan_tinggi.id_pendidikan = $id
+         ";
+        return $this->db->query($query);
+    }
+
+    public function deletePendidikanTinggiByid($id)
+    {
+        if (!isset($id)) return false;
+
+        $pendidikantinggi_data = $this->getPendidikanTinggiById($id)->getRowArray();
+        if (is_null($pendidikantinggi_data)) return false;
+
+        $desc = 'menghapus pendidikan tinggi' . $pendidikantinggi_data['nim'];
+        $query = "DELETE FROM pendidikan_tinggi WHERE id_pendidikan  = $id";
+        if ($this->db->query($query)) {
+            activity_log(3, 3, ucfirst($desc), 1);
+            return true;
+        } else {
+            activity_log(3, 3, 'Gagal ' . ($desc), 0);
+            return false;
+        }
+    }
 }

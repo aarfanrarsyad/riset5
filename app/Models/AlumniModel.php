@@ -141,7 +141,7 @@ class AlumniModel extends Model
     }
 
     // Sudah diubah <Mochi>
-    public function getIdAlumniByAngkatan($angkatan,$id_alumni)
+    public function getIdAlumniByAngkatan($angkatan, $id_alumni)
     {
         $query = "SELECT * FROM alumni JOIN pendidikan 
         ON alumni.id_alumni = pendidikan.id_alumni
@@ -181,17 +181,17 @@ class AlumniModel extends Model
     public function getRekomendasiTK($id_tempat_kerja, $id_alumni)
     {
         return $this->table('alumni')->join('alumni_tempat_kerja', 'alumni.id_alumni = alumni_tempat_kerja.id_alumni')
-        ->join('tempat_kerja', 'tempat_kerja.id_tempat_kerja = alumni_tempat_kerja.id_tempat_kerja')
-        ->where('alumni_tempat_kerja.id_tempat_kerja', $id_tempat_kerja)
-        ->where('alumni.id_alumni !=',$id_alumni);
+            ->join('tempat_kerja', 'tempat_kerja.id_tempat_kerja = alumni_tempat_kerja.id_tempat_kerja')
+            ->where('alumni_tempat_kerja.id_tempat_kerja', $id_tempat_kerja)
+            ->where('alumni.id_alumni !=', $id_alumni);
     }
 
     // Sudah diubah <Mochi>
     public function getRekomendasiAngkatan($angkatan, $id_alumni)
     {
         return $this->table('alumni')->join('pendidikan', 'pendidikan.id_alumni = alumni.id_alumni')
-        ->where('pendidikan.angkatan', $angkatan)
-        ->where(' alumni.id_alumni !=',$id_alumni);
+            ->where('pendidikan.angkatan', $angkatan)
+            ->where(' alumni.id_alumni !=', $id_alumni);
     }
 
     public function getTempatKerja()
@@ -206,7 +206,7 @@ class AlumniModel extends Model
         return $this->db->query($query);
     }
 
-    
+
 
     public function getCountPendidikanByNIM($nim)
     {
@@ -214,7 +214,7 @@ class AlumniModel extends Model
         return $this->db->query($query);
     }
 
-    
+
 
     // gakepake
     // public function getCountPrestasiByNIM($nim)
@@ -235,7 +235,7 @@ class AlumniModel extends Model
         return $this->db->query($query);
     }
 
-    
+
 
     public function getUsersByNIM($nim)
     {
@@ -243,7 +243,7 @@ class AlumniModel extends Model
         return $this->db->query($query);
     }
 
-    
+
 
     // FOR API REQUEST
     public function getUserApi($nim = false)
@@ -288,5 +288,10 @@ class AlumniModel extends Model
     {
         $query = "SELECT id_tempat_kerja FROM tempat_kerja WHERE nama_instansi = '$nama'";
         return $this->db->query($query)->getRow()->id_tempat_kerja;
+    }
+
+    public function searchAlumni($keyword)
+    {
+        return $this->table('alumni')->like('nama', $keyword);
     }
 }

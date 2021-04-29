@@ -203,6 +203,29 @@ $routes->group('admin', ['namespace' => 'App\Controllers'], function ($routes) {
 
 
 	#------------------------------------------------------------------------------------------------------------------------------------------------#
+
+	$routes->get('alumni', 'Admin::CRUD_alumniindex', ['filter' => 'permission:2']);
+	$routes->get('alumni/(:any)', 'Admin::CRUD_detailAlumni/$1', ['filter' => 'permission:2']);
+	$routes->post('alumni/delete', 'Admin::CRUD_deleteAlumni', ['filter' => 'permission:4']);
+	$routes->match(['get', 'post'], 'tambah-alumni', 'Admin::CRUD_createAlumni', ['filter' => 'permission:1']);
+	// $routes->match(['get', 'post'], 'resources/update/(:num)', 'Admin::update_resource/$1', ['filter' => 'permission:3']);
+
+	$routes->get('instansi', 'Admin::CRUD_indexInstansi', ['filter' => 'permission:2']);
+	$routes->get('instansi/(:any)', 'Admin::CRUD_detailInstansi/$1', ['filter' => 'permission:2']);
+	$routes->post('instansi/delete', 'Admin::CRUD_deleteInstansi', ['filter' => 'permission:4']);
+	$routes->match(['get', 'post'], 'tambah-instansi', 'Admin::CRUD_createInstansi', ['filter' => 'permission:1']);
+
+	$routes->get('publikasi', 'Admin::CRUD_indexPublikasi', ['filter' => 'permission:2']);
+	$routes->post('publikasi/delete', 'Admin::CRUD_deletePublikasi', ['filter' => 'permission:4']);
+
+	$routes->get('pendidikan', 'Admin::CRUD_indexPendidikan', ['filter' => 'permission:2']);
+	$routes->post('pendidikan/delete', 'Admin::CRUD_deletePendidikan', ['filter' => 'permission:4']);
+
+	$routes->get('pendidikan-tinggi', 'Admin::CRUD_indexPendidikanTinggi', ['filter' => 'permission:2']);
+	$routes->post('pendidikan-tinggi/delete', 'Admin::CRUD_deletePendidikanTinggi', ['filter' => 'permission:4']);
+
+
+	#------------------------------------------------------------------------------------------------------------------------------------------------#
 });
 /**
  * --------------------------------------------------------------------
