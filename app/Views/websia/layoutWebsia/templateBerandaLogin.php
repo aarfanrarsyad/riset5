@@ -217,10 +217,10 @@
             <!-- awal link ke webservice  -->
             <div class="flex flex-col text-white font-heading mx-auto md:mx-5 mt-4 md:mt-0">
                 <a href="https://pkl.stis.ac.id/60/" class="mb-2 hover:text-secondary">
-                    <h3>Website PKL60</h3>
+                    <h3 class="underline md:no-underline">Website PKL60</h3>
                 </a>
                 <a href="/developer/" class="hover:text-secondary">
-                    <h3>Webservice(API)</h3>
+                    <h3 class="underline md:no-underline">Webservice(API)</h3>
                 </a>
             </div>
             <!-- akhir link ke webservice  -->

@@ -248,7 +248,7 @@ $('#checkPendidikan').click(function(){
 function formPendidikan(
   id,
   jenjang,
-  univ,
+  instansi,
   studi,
   masuk,
   lulus,
@@ -269,8 +269,18 @@ function formPendidikan(
                 <input type="hidden" name="id_pendidikan" id="editId">
                 <label for="editJenjang" class="text-primary font-medium mt-2">Jenjang:</label>
                 <input type="text" placeholder="Masukkan nama Jenjang" class="inputForm" name="jenjang" id="editJenjang" required>
-                <label for="editUniversitas" class="text-primary font-medium">Universitas:</label>
-                <input type="text" placeholder="Masukkan nama Universitas" class="inputForm" name="instansi" id="editUniversitas" required>
+                <label for="editInstansi" class="text-primary font-medium">Instansi Pendidikan:</label>
+                
+                <select name="instansi" id="editInstansi" class="inputForm" required>
+                    <option label="Pilih instansi pendidikan" class="text-gray-500" disabled selected value>
+                    <option value="ais">Akademi Ilmu Statistik</option>
+                    <option value="stis">Sekolah Tinggi Ilmu Statistik</option>
+                    <option value="polstat">Politeknik Statistika STIS</option>
+                    <option value="instansi_lainnya">Lainnya...</option>
+                </select>
+
+
+
                 <label for="editStudi" class="text-primary font-medium">Program Studi:</label>
                 <input type="text" placeholder="Masukkan nama Program Studi" class="inputForm" name="program_studi" id="editStudi">
                 <div class="flex">
@@ -344,7 +354,7 @@ function formPendidikan(
 
   $("#editId").val(id);
   $("#editJenjang").val(jenjang);
-  $("#editUniversitas").val(univ);
+  $("#editInstansi").val(instansi);
   $("#editStudi").val(studi);
   $("#editMasuk").val(masuk);
   $("#editLulus").val(lulus);
@@ -366,8 +376,14 @@ $('.tambahPendidikan').click(function () {
             <form action="/User/addPendidikan" method="post" class="flex flex-col bg-gray-100 sm:px-12 px-4 rounded-b-2xl text-sm">
                 <label for="editJenjang" class="text-primary font-medium mt-2">Jenjang:</label>
                 <input type="text" placeholder="Masukkan nama Jenjang" class="inputForm" name="jenjang" id="editJenjang" required>
-                <label for="editUniversitas" class="text-primary font-medium">Universitas:</label>
-                <input type="text" placeholder="Masukkan nama Universitas" class="inputForm" name="instansi" id="editUniversitas" required>
+                <label for="editInstansi" class="text-primary font-medium">Instansi Pendidikan:</label>
+                <select name="instansi" id="editInstansi" class="inputForm" required>
+                    <option label="Pilih instansi pendidikan" class="text-gray-500" disabled selected value>
+                    <option value="ais">Akademi Ilmu Statistik</option>
+                    <option value="stis">Sekolah Tinggi Ilmu Statistik</option>
+                    <option value="polstat">Politeknik Statistika STIS</option>
+                    <option value="instansi_lainnya">Lainnya...</option>
+                </select>
                 <label for="editStudi" class="text-primary font-medium">Program Studi:</label>
                 <input type="text" placeholder="Masukkan nama Program Studi" class="inputForm" name="program_studi" id="editStudi">
                 <div class="flex">
