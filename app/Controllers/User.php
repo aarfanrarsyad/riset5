@@ -661,7 +661,7 @@ class User extends BaseController
 
 		$model = new AlumniModel();
 		$model->deletePendidikanById($_POST['id_pendidikan']);
-
+		session()->setFlashdata('delete-pendidikan-success', 'Data pendidikan berhasil dihapus');
 		return redirect()->to(base_url('User/editPendidikan'));
 	}
 
@@ -669,10 +669,8 @@ class User extends BaseController
 	{
 
 		$model = new AlumniModel();
-		$query = $model->getTempatKerjaByNIM(session('nim'));
+		$query = $model->getTempatKerjaByNIM(session('id_alumni'));
 		$listtk = $model->getTempatKerja()->getResult();
-		// dd($listtk);
-		// dd($query->getRow());
 		$data = [
 			'judulHalaman' => 'Edit Profil',
 			'login' => 'sudah',
@@ -693,33 +691,59 @@ class User extends BaseController
 			'id_tempat_kerja'      => $_POST['id_tempat_kerja'],
 		];
 
-		$model->db->table('alumni_tempat_kerja')->set($data)->where('nim', session('nim'))->update();
-
+		$model->db->table('alumni_tempat_kerja')->set($data)->where('id_alumni', session('id_alumni'))->update();
+		session()->setFlashdata('edit-tk-success', 'Tempat Kerja berhasil diperbaharui');
 		return redirect()->to(base_url('User/editTempatKerja'));
 	}
 
 	public function addTempatKerja()
 	{
 		$model = new AlumniModel();
+		$alamat = NULL;
+		$telp = NULL;
+		$faks = NULL;
+		if(isset($_POST['alamat_instansi'])){
+			$alamat = htmlspecialchars($_POST['alamat_instansi']);
+		}
+		if(isset($_POST['telp_instansi'])){
+			$telp = htmlspecialchars($_POST['telp_instansi']);
+		}
+		if(isset($_POST['faks_instansi'])){
+			$faks = htmlspecialchars($_POST['faks_instansi']);
+		}
+		$instansi = htmlspecialchars($_POST['nama_instansi']);
+		$email = htmlspecialchars($_POST['email_instansi']);
+
 
 		$data1 = [
-			'nama_instansi'      => htmlspecialchars($_POST['nama_instansi']),
-			'alamat_instansi'  		=> htmlspecialchars($_POST['alamat_instansi']),
-			'telp_instansi'  => htmlspecialchars($_POST['telp_instansi']),
-			'faks_instansi'   => htmlspecialchars($_POST['faks_instansi']),
-			'email_instansi'  => htmlspecialchars($_POST['email_instansi']),
+			'nama_instansi'      => $instansi,
+			'alamat_instansi'  		=> $alamat,
+			'telp_instansi'  => $telp,
+			'faks_instansi'   => $faks,
+			'email_instansi'  => $email,
 		];
-
-		$model->db->table('tempat_kerja')->insert($data1);
-
-
-		$data2 = [
-			'id_tempat_kerja'      => $model->getIdTempatKerja(htmlspecialchars($_POST['nama_instansi'])),
-		];
-
-		$model->db->table('alumni_tempat_kerja')->set($data2)->where('nim', session('nim'))->update();
-
-		return redirect()->to(base_url('User/editTempatKerja'));
+		
+		if ($this->form_validation->run($data1, 'editTempatKerja') === FALSE) {
+			session()->setFlashdata('add-tk-fail', 'Tempat Kerja gagal ditambahkan');
+			session()->setFlashdata('error-nama_instansi', $this->form_validation->getError('nama_instansi'));
+			session()->setFlashdata('error-email_instansi', $this->form_validation->getError('email_instansi'));
+			return redirect()->to(base_url('User/editTempatKerja'));
+		} else {
+			$data1 = [
+				'nama_instansi'      => $instansi,
+				'alamat_instansi'  		=> $alamat,
+				'telp_instansi'  => $telp,
+				'faks_instansi'   => $faks,
+				'email_instansi'  => $email,
+			];
+			$model->db->table('tempat_kerja')->insert($data1);
+			$data2 = [
+				'id_tempat_kerja'      => $model->getIdTempatKerja(htmlspecialchars($_POST['nama_instansi'])),
+			];
+			$model->db->table('alumni_tempat_kerja')->set($data2)->where('id_alumni', session('id_alumni'))->update();
+			session()->setFlashdata('add-tk-success', 'Tempat Kerja berhasil ditambahkan');
+			return redirect()->to(base_url('User/editTempatKerja'));
+		}
 	}
 
 	public function editPrestasi()

@@ -2,7 +2,7 @@
 
 <?= $this->section('content'); ?>
 
-<div class="my-8 lg:px-20 md:px-8 px-3">
+<div class="md:mt-8 mt-4 lg:px-20 md:px-8 px-3">
     <div class="flex justify-between items-end">
         <div class="text-sm text-primary font-medium">
             <div class="flex gap-x-2">
@@ -58,106 +58,123 @@
             </div>
         </div>
     </div>
-    <hr class="mb-12 mt-3 border-t-2 border-b-0 border-primary">
+    <hr class="lg:mb-8 md:mb-6 mb-4 mt-3 border-t-2 border-b-0 border-primary">
 
     <div class="flex justify-between">
         <div class="flex-grow">
             <div class="flex flex-col mr-16">
-                <div class="text-secondary font-heading font-bold text-4xl">Judul Berita</div>
+                <div class="text-secondary font-heading font-bold lg:text-4xl md:text-3xl text-2xl">Judul Berita</div>
 
-                <div class="flex my-3">
+                <div class="flex lg:my-3 my-2">
                     <div class="flex text-primary">
                         <svg class="w-4 h-4 mr-2 my-auto" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path>
                         </svg>
 
-                        <div class="text-sm font-paragraph font-medium ">11 Januari 2021</div>
+                        <div class="lg:text-sm md:text-xs text-xs font-paragraph font-medium my-auto">11 Januari 2021</div>
                     </div>
 
-                    <div class="flex text-primary ml-6">
+                    <div class="flex text-primary lg:ml-6 md:ml-4 ml-2">
                         <svg class="w-4 h-4 mr-2 my-auto" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z" clip-rule="evenodd"></path>
                         </svg>
 
-                        <div class="text-sm font-paragraph font-medium ">David Smith</div>
+                        <div class="lg:text-sm md:text-xs text-xs font-paragraph font-medium my-auto">David Smith</div>
                     </div>
 
-                    <div class="flex text-primary ml-6">
+                    <div class="flex text-primary lg:ml-6 md:ml-4 ml-2">
                         <svg class="w-4 h-4 mr-2 my-auto" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                             <path d="M10 12a2 2 0 100-4 2 2 0 000 4z"></path>
                             <path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd"></path>
                         </svg>
 
-                        <div class="text-sm font-paragraph font-medium ">112</div>
+                        <div class="lg:text-sm md:text-xs text-xs font-paragraph font-medium my-auto">112</div>
                     </div>
                 </div>
 
-                <!-- <img src="/img/sampel.jpeg" alt="" class="w-full" id="gambarBerita"> -->
-                <div class="bg-gray-200 lg:h-72 h-60 p-2 sm:mb-6 mb-2 md:mb-0">
+                <div class="bg-gray-200 lg:h-72 h-60 p-2 mb-2">
                 </div>
 
-                <div class="text-sm text-primary font-paragraph font-medium mt-2 mb-4">Foto oleh : David Smith</div>
+                <div class="lg:text-sm md:text-xs text-xs text-primary font-paragraph font-medium mb-4">Foto oleh : David Smith</div>
 
                 <div class="text-justify break-words font-paragraph w-full">
-                    <p class="mb-4">
+                    <p class="lg:text-base text-sm lg:mb-4 mb-2">
                         Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis impedit temporibus earum nemo odio perspiciatis ut dicta quas ratione quo cum numquam molestias saepe, quisquam aut magni tempore recusandae quibusdam.
                         Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolores facilis dolorum reprehenderit necessitatibus provident velit maxime et quod, neque recusandae illo ullam! Temporibus, sunt repellat dicta eveniet nostrum placeat vitae!
                         Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quae, facere cupiditate laudantium maiores beatae adipisci amet possimus eligendi qui saepe repellat vitae quo distinctio, corporis tenetur dolorum odio iure repudiandae!
                     </p>
 
-                    <p class="mb-4">
+                    <p class="lg:text-base text-sm lg:mb-4 mb-2">
                         Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis impedit temporibus earum nemo odio perspiciatis ut dicta quas ratione quo cum numquam molestias saepe, quisquam aut magni tempore recusandae quibusdam.
                         Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolores facilis dolorum reprehenderit necessitatibus provident velit maxime et quod, neque recusandae illo ullam! Temporibus, sunt repellat dicta eveniet nostrum placeat vitae!
                     </p>
 
-                    <p class="mb-6">
+                    <p class="lg:text-base text-sm lg:mb-6 mb-4">
                         Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis impedit temporibus earum nemo odio perspiciatis ut dicta quas ratione quo cum numquam molestias saepe, quisquam aut magni tempore recusandae quibusdam.
                         Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolores facilis dolorum reprehenderit necessitatibus provident velit maxime et quod, neque recusandae illo ullam! Temporibus, sunt repellat dicta eveniet nostrum placeat vitae!
                     </p>
-                    <hr class="mb-2 border-t-1 border-b-0 border-primary">
+                    <hr class="lg:mb-2 mb-1 border-t-1 border-b-0 border-primary">
 
-                    <div class="text-primary text-center font-heading text-lg">Bagikan:</div>
-                    <div class="flex justify-center mt-3 mb-16">
+                    <div class="text-primary text-center font-heading lg:text-lg md:text-base text-sm">Bagikan:</div>
+                    <div class="flex justify-center lg:mt-3 mt-2 lg:mb-16 md:mb-12 mb-8">
                         <img class="lg:h-6 h-4 mx-1" src="/img/components/icon/facebook.png">
                         <img class="lg:h-6 h-4 mx-1" src="/img/components/icon/twitter.png">
                         <img class="lg:h-6 h-4 mx-1" src="/img/components/icon/whatsapp.png">
                         <img class="lg:h-6 h-4 mx-1" src="/img/components/icon/linkedin.png">
                     </div>
                     <div class="flex items-center font-paragraph text-primary mb-3">
-                        <img class="lg:h-10 h-8 mx-1" src="/img/components/icon/komen.png">
-                        <div class="mx-4 text-xl font-bold">12 Komentar</div>
+                        <img class="lg:h-10 h-6 mx-1" src="/img/components/icon/komen.png">
+                        <div class="lg:mx-4 mx-2 lg:text-xl md:text-lg text-base font-bold">12 Komentar</div>
                     </div>
-                    <div class="flex items-center text-primary mb-4">
-                        <img class="lg:h-14 h-12 mr-4" src="/img/components/icon/female-icon.png">
-                        <div class="bg-gray-200 pl-6 pr-2 py-3 gap-x-2 rounded-lg w-full">
-                            <div class="text-primary text-xl font-bold">Nama Alumni</div>
-                            <div class="text-md">Komentar...</div>
-                            <img class="float-right lg:h-8 h-6" src="/img/components/icon/more.png">
+                    <div class="flex items-center text-primary lg:mb-4 mb-3">
+                        <img class="lg:h-14 md:h-12 h-8 lg:mr-4 mr-2" src="/img/components/icon/female-icon.png">
+                        <div class="bg-gray-200 lg:pl-6 pl-4 py-3 gap-x-2 rounded-lg w-full">
+                            <div class="flex justify-between">
+                                <div class="w-7/8">
+                                    <div class="text-primary lg:text-xl md:text-lg text-base font-bold">Nama Alumni</div>
+                                    <div class="lg:text-base md:text-sm text-xs">Komentar...</div>
+                                </div>
+                                <div class="w-1/8">
+                                    <img class="float-right lg:h-8 h-6" src="/img/components/icon/more.png">
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="flex items-center text-primary mb-4">
-                        <img class="lg:h-14 h-12 mr-4" src="/img/components/icon/male-icon.png">
-                        <div class="bg-gray-200 pl-6 pr-2 py-3 gap-x-2 rounded-lg w-full">
-                            <div class="text-primary text-xl font-bold">Nama Alumni</div>
-                            <div class="text-md">Komentar...</div>
-                            <img class="float-right lg:h-8 h-6" src="/img/components/icon/more.png">
+                    <div class="flex items-center text-primary lg:mb-4 mb-3">
+                        <img class="lg:h-14 md:h-12 h-8 lg:mr-4 mr-2" src="/img/components/icon/male-icon.png">
+                        <div class="bg-gray-200 lg:pl-6 pl-4 py-3 gap-x-2 rounded-lg w-full">
+                            <div class="flex justify-between">
+                                <div class="w-7/8">
+                                    <div class="text-primary lg:text-xl md:text-lg text-base font-bold">Nama Alumni</div>
+                                    <div class="lg:text-base md:text-sm text-xs">Komentar...</div>
+                                </div>
+                                <div class="w-1/8">
+                                    <img class="float-right lg:h-8 h-6" src="/img/components/icon/more.png">
+                                </div>
+                            </div>
                         </div>
                     </div>
+                    <div class="flex items-center text-primary lg:mb-2 mb-1">
+                        <img class="lg:h-14 md:h-12 h-8 lg:mr-4 mr-2" src="/img/components/icon/female-icon.png">
+                        <div class="bg-gray-200 lg:pl-6 pl-4 py-3 gap-x-2 rounded-lg w-full">
+                            <div class="flex justify-between">
+                                <div class="w-7/8">
+                                    <div class="text-primary lg:text-xl md:text-lg text-base font-bold">Nama Alumni</div>
+                                    <div class="lg:text-base md:text-sm text-xs">Komentar...</div>
+                                </div>
+                                <div class="w-1/8">
+                                    <img class="float-right lg:h-8 h-6" src="/img/components/icon/more.png">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex justify-end text-secondary lg:text-xl md:text-lg text-base lg:mb-8 md:mb-6 mb-4">Lihat semua komentar</div>
                     <div class="flex items-center text-primary mb-2">
-                        <img class="lg:h-14 h-12 mr-4" src="/img/components/icon/female-icon.png">
-                        <div class="bg-gray-200 pl-6 pr-2 py-3 gap-x-2 rounded-lg w-full">
-                            <div class="text-primary text-xl font-bold">Nama Alumni</div>
-                            <div class="text-md">Komentar...</div>
-                            <img class="float-right lg:h-8 h-6" src="/img/components/icon/more.png">
-                        </div>
-                    </div>
-                    <div class="flex justify-end text-secondary text-xl mb-8">Lihat semua komentar</div>
-                    <div class="flex items-center text-primary mb-2">
-                        <img class="lg:h-14 h-12 mr-4" src="/img/components/icon/female-icon.png">
+                        <img class="lg:h-14 md:h-12 h-8 lg:mr-4 mr-2" src="/img/components/icon/female-icon.png">
                         <textarea class="border-4 rounded-lg w-full shadow-lg px-4 py-4 mb-4" placeholder="Tambah komentar Anda." name="tambahKomentar" id="tambahKomentar" cols="10" rows="5"></textarea>
                     </div>
-                    <div class="flex justify-end">
-                        <input type="submit" value="Kirim" class="bg-secondary text-white rounded-full w-20 py-1 text-center cursor-pointer hover:bg-secondaryhover transition-colors duration-300 outline-none">
+                    <div class="flex justify-end lg:mb-12 mb-8">
+                        <input type="submit" value="Kirim" class="bg-secondary text-white rounded-full lg:w-20 w-16 py-1 text-center cursor-pointer hover:bg-secondaryhover transition-colors duration-300 outline-none">
                     </div>
                 </div>
 
@@ -165,104 +182,104 @@
         </div>
 
         <div class="flex-grow-0">
-            <div class="flex flex-col w-96">
+            <div class="flex flex-col lg:w-96 md:w-72 w-48">
                 <div>
-                    <div class="text-secondary font-heading font-semibold text-2xl">Berita Terpopuler</div>
-                    <hr class="my-3 border-gray-400">
+                    <div class="text-secondary font-heading font-semibold lg:text-2xl md:text-xl text-lg">Berita Terpopuler</div>
+                    <hr class="lg:my-3 my-2 border-gray-400">
                     <div class="flex justify between">
                         <div class="lg:h-34 h-28 lg:w-3/7 w-2/5 bg-gray-200">
                         </div>
-                        <div class="lg:ml-4 ml:2 lg:w-4/7 w-3/5">
+                        <div class="lg:ml-4 md:ml-3 ml-2 lg:w-4/7 w-3/5">
                             <a href="">
-                                <h3 class="font-heading font-semibold text-primary text-lg">Judul Berita</h3>
+                                <h3 class="font-heading font-semibold text-primary lg:text-lg md:text-base text-sm">Judul Berita</h3>
                             </a>
                             <div class="flex gap-x-1 items-center">
-                                <p class="text-xs text-primary mb-2">11 Januari 2021</p>
+                                <p class="text-xs text-primary lg:mb-2 mb-1">11 Januari 2021</p>
                             </div>
-                            <p class="text-sm text-justify">
+                            <p class="lg:text-sm text-xs text-justify">
                                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras blandit turpis sem, eu laoreet odio pretium ac. Mauris eget aliquet lorem.
                             </p>
                         </div>
                     </div>
-                    <hr class="my-3 border-gray-400">
+                    <hr class="lg:my-3 my-2 border-gray-400">
                     <div class="flex justify between">
                         <div class="lg:h-34 h-28 lg:w-3/7 w-2/5 bg-gray-200">
                         </div>
-                        <div class="lg:ml-4 ml:2 lg:w-4/7 w-3/5">
+                        <div class="lg:ml-4 md:ml-3 ml-2 lg:w-4/7 w-3/5">
                             <a href="">
-                                <h3 class="font-heading font-semibold text-primary text-lg">Judul Berita</h3>
+                                <h3 class="font-heading font-semibold text-primary lg:text-lg md:text-base text-sm">Judul Berita</h3>
                             </a>
                             <div class="flex gap-x-1 items-center">
-                                <p class="text-xs text-primary mb-2">11 Januari 2021</p>
+                                <p class="text-xs text-primary lg:mb-2 mb-1">11 Januari 2021</p>
                             </div>
-                            <p class="text-sm text-justify">
+                            <p class="lg:text-sm text-xs text-justify">
                                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras blandit turpis sem, eu laoreet odio pretium ac. Mauris eget aliquet lorem.
                             </p>
                         </div>
                     </div>
-                    <hr class="my-3 border-gray-400">
+                    <hr class="lg:my-3 my-2 border-gray-400">
                     <div class="flex justify between">
                         <div class="lg:h-34 h-28 lg:w-3/7 w-2/5 bg-gray-200">
                         </div>
-                        <div class="lg:ml-4 ml:2 lg:w-4/7 w-3/5">
+                        <div class="lg:ml-4 md:ml-3 ml-2 lg:w-4/7 w-3/5">
                             <a href="">
-                                <h3 class="font-heading font-semibold text-primary text-lg">Judul Berita</h3>
+                                <h3 class="font-heading font-semibold text-primary lg:text-lg md:text-base text-sm">Judul Berita</h3>
                             </a>
                             <div class="flex gap-x-1 items-center">
-                                <p class="text-xs text-primary mb-2">11 Januari 2021</p>
+                                <p class="text-xs text-primary lg:mb-2 mb-1">11 Januari 2021</p>
                             </div>
-                            <p class="text-sm text-justify">
+                            <p class="lg:text-sm text-xs text-justify">
                                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras blandit turpis sem, eu laoreet odio pretium ac. Mauris eget aliquet lorem.
                             </p>
                         </div>
                     </div>
                 </div>
                 <div>
-                    <div class="text-secondary font-heading font-semibold text-2xl lg:mt-8 mt:4">Berita Terbaru</div>
-                    <hr class="my-3 border-gray-400">
+                    <div class="text-secondary font-heading font-semibold lg:text-2xl md:text-xl text-lg lg:mt-8 mt-6">Berita Terbaru</div>
+                    <hr class="lg:my-3 my-2 border-gray-400">
                     <div class="flex justify between">
                         <div class="lg:h-34 h-28 lg:w-3/7 w-2/5 bg-gray-200">
                         </div>
-                        <div class="lg:ml-4 ml:2 lg:w-4/7 w-3/5">
+                        <div class="lg:ml-4 md:ml-3 ml-2 lg:w-4/7 w-3/5">
                             <a href="">
-                                <h3 class="font-heading font-semibold text-primary text-lg">Judul Berita</h3>
+                                <h3 class="font-heading font-semibold text-primary lg:text-lg md:text-base text-sm">Judul Berita</h3>
                             </a>
                             <div class="flex gap-x-1 items-center">
-                                <p class="text-xs text-primary mb-2">11 Januari 2021</p>
+                                <p class="text-xs text-primary lg:mb-2 mb-1">11 Januari 2021</p>
                             </div>
-                            <p class="text-sm text-justify">
+                            <p class="lg:text-sm text-xs text-justify">
                                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras blandit turpis sem, eu laoreet odio pretium ac. Mauris eget aliquet lorem.
                             </p>
                         </div>
                     </div>
-                    <hr class="my-3 border-gray-400">
+                    <hr class="lg:my-3 my-2 border-gray-400">
                     <div class="flex justify between">
                         <div class="lg:h-34 h-28 lg:w-3/7 w-2/5 bg-gray-200">
                         </div>
-                        <div class="lg:ml-4 ml:2 lg:w-4/7 w-3/5">
+                        <div class="lg:ml-4 md:ml-3 ml-2 lg:w-4/7 w-3/5">
                             <a href="">
-                                <h3 class="font-heading font-semibold text-primary text-lg">Judul Berita</h3>
+                                <h3 class="font-heading font-semibold text-primary lg:text-lg md:text-base text-sm">Judul Berita</h3>
                             </a>
                             <div class="flex gap-x-1 items-center">
-                                <p class="text-xs text-primary mb-2">11 Januari 2021</p>
+                                <p class="text-xs text-primary lg:mb-2 mb-1">11 Januari 2021</p>
                             </div>
-                            <p class="text-sm text-justify">
+                            <p class="lg:text-sm text-xs text-justify">
                                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras blandit turpis sem, eu laoreet odio pretium ac. Mauris eget aliquet lorem.
                             </p>
                         </div>
                     </div>
-                    <hr class="my-3 border-gray-400">
+                    <hr class="lg:my-3 my-2 border-gray-400">
                     <div class="flex justify between">
                         <div class="lg:h-34 h-28 lg:w-3/7 w-2/5 bg-gray-200">
                         </div>
-                        <div class="lg:ml-4 ml:2 lg:w-4/7 w-3/5">
+                        <div class="lg:ml-4 md:ml-3 ml-2 lg:w-4/7 w-3/5">
                             <a href="">
-                                <h3 class="font-heading font-semibold text-primary text-lg">Judul Berita</h3>
+                                <h3 class="font-heading font-semibold text-primary lg:text-lg md:text-base text-sm">Judul Berita</h3>
                             </a>
                             <div class="flex gap-x-1 items-center">
-                                <p class="text-xs text-primary mb-2">11 Januari 2021</p>
+                                <p class="text-xs text-primary lg:mb-2 mb-1">11 Januari 2021</p>
                             </div>
-                            <p class="text-sm text-justify">
+                            <p class="lg:text-sm text-xs text-justify">
                                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras blandit turpis sem, eu laoreet odio pretium ac. Mauris eget aliquet lorem.
                             </p>
                         </div>
