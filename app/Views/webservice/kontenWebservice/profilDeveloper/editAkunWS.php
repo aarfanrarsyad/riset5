@@ -10,6 +10,11 @@
                 <!--kayaknya belum ada fungsi buat simpan sama validasinya juga di controller -->
                 <label for="email" class="font-medium">Email:</label>
                 <div class="text-black font-heading font-normal mb-2">iniemail@stis.ac.id</div>
+                <div class="text-secondary text-justify text-xs mt-6 mb-2">
+                    Silakan masukkan kata sandi lama Anda untuk verifikasi!
+                </div>
+                <label for="passlama" class="font-medium">Kata Sandi Lama:</label>
+                <input type="password" name="passlama" id="passlama" class="inputForm mb-2" placeholder="🞄🞄🞄🞄🞄🞄🞄🞄">
                 <label for="passbaru" class="font-medium">Kata Sandi Baru:</label>
                 <p class="text-xs text-red-500 text-justify" id="errorPassBaru">
                     Kata sandi harus terdiri dari huruf dan angka.
@@ -20,11 +25,6 @@
                     Kata sandi tidak sesuai.
                 </p>
                 <input type="password" name="ulangpassbaru" id="ulangpassbaru" class="inputForm mb-2" placeholder="🞄🞄🞄🞄🞄🞄🞄🞄">
-                <div class="text-secondary text-justify text-xs mt-6 mb-2">
-                    Silakan Masukkan Kata Sandi Lama Anda untuk Verifikasi!
-                </div>
-                <label for="passlama" class="font-medium">Kata Sandi Lama:</label>
-                <input type="password" name="passlama" id="passlama" class="inputForm mb-2" placeholder="🞄🞄🞄🞄🞄🞄🞄🞄">
             </div>
             <div class="flex justify-end">
                 <input type="submit" value="SIMPAN" class="w-24 text-center py-1 bg-secondary hover:bg-secondaryhover text-white rounded-full cursor-pointer focus:outline-none mt-8 text-sm" id="simpanAkun">
