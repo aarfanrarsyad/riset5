@@ -42,7 +42,7 @@ if ($checked->cpendidikan == 0) {
                 <tr>
                     <th class="pt-4 lg:px-3 md:px-2 px-1 pb-1 w-1/12">No</th>
                     <th class="pt-4 lg:px-2 px-1 pb-1 w-1/12">Jenjang</th>
-                    <th class="pt-4 lg:px-2 px-1 pb-1 w-2/12">Universitas</th>
+                    <th class="pt-4 lg:px-2 px-1 pb-1 w-2/12">Instansi</th>
                     <th class="pt-4 lg:px-2 px-1 pb-1 w-2/12">Program Studi</th>
                     <th class="pt-4 pb-1 pl-1 w-1/12">
                         <div class="flex">

@@ -24,7 +24,7 @@
 <div class="bg-primary">
     <div class="py-4">
         <div class="p-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-10">
-            <?php for ($x = 0; $x < 12; $x++) : ?>
+            <?php for ($x = 0; $x < 6; $x++) : ?>
                 <!-- 1 video -->
                 <div class="rounded-3xl m-2 relative transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105 cursor-pointer">
                     <iframe class="h-52 w-full rounded-3xl" src="https://www.youtube.com/embed/0jic-ZWsQqw" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>

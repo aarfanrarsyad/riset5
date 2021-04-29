@@ -184,13 +184,13 @@ if (session()->getFlashdata('role')) { ?>
         <?php for ($x = 0; $x < 3; $x++) : ?>
             <!-- awal card-->
             <div class="mb-6 lg:w-1/4 md:w-1/3 lg:mx-0 md:mx-2 mx-0  w-full md:border-0 border-b-2 border-gray-300" data-aos="zoom-in">
-                <a href="#" class="mb-4">
+                <a href="/User/judulBerita" class="mb-4">
                     <img class="w-full gambarBerita" src="/img/sampel.jpeg">
                 </a>
                 <div class="py-4">
                     <!-- Awal judul berita -->
                     <div>
-                        <a href="#" class="text-black text-xl font-heading font-semibold hover:font-bold">
+                        <a href="/User/judulBerita" class="text-black text-xl font-heading font-semibold hover:font-bold">
                             Pelatihan Kepegawaian di Masa Pandemi
                         </a>
                     </div>
@@ -217,7 +217,7 @@ if (session()->getFlashdata('role')) { ?>
 
 <!-- awal tombol "Lihat Berita Selanjutnya" -->
 <div class="flex w-full justify-end lg:px-20 md:px-8 px-3 mb-8">
-    <div class="text-primary font-paragraph my-auto"><a href="/websia/berandaBerita">Lihat Berita Selanjutnya</a> </div>
+    <div class="text-primary font-paragraph my-auto"><a href="/User/berita">Lihat Berita Selanjutnya</a> </div>
     <div>
         <a href="/websia/berandaBerita">
             <svg class="w-6 h-6 font-bold text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
