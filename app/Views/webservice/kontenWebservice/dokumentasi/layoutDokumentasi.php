@@ -12,7 +12,7 @@
             <img src="/img/components/logo/logo_sia.png" class="md:w-20 sm:w-16 w-10 md:mb-1.5 md:mt-2.5 my-2 mx-auto" alt="Logo SIA">
             <div class="text-secondary text-xl font-bold mb-3 text-center">DOKUMENTASI</div>
             <div class="flex justify-center mt-2 mb-5 h-9 relative w-full">
-                <input type="text" name="search" class="input w-5/6 pl-2 pr-8 border-2 rounded-lg border-gray-400 md:text-base outline-none text-black focus:border-secondary" spellcheck="false" id="search" placeholder="Pencarian">
+                <input type="text" name="search" class="input w-5/6 pl-2 pr-8 border-2 rounded-lg border-gray-400 md:text-base outline-none text-gray-500 focus:border-secondary" spellcheck="false" id="search" placeholder="Pencarian">
                 <div class="relative right-8 flex items-center text-gray-500">
                     <svg class="absolute text-gray-500 hover:text-gray-600 w-7 cursor-pointer" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                         <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
@@ -34,45 +34,44 @@
                             </clipPath>
                         </defs>
                     </svg>
-
                     <p class="ml-2">SIA WEB SERVICE</p>
                 </div>
 
             </div>
 
             <ul class="mr-4 mt-5" id="menuDok">
-                <li class="itemSideDok pl-7 rounded-r-lg md:text-xl text-secondary font-semibold mb-1 py-0.5">
+                <li class="itemSideDok pl-7 rounded-r-lg md:text-xl text-secondary font-semibold mb-1 py-0.5 hover:bg-primary">
                     <a href="#memintaData" class="py-1">Meminta Data</a>
                 </li>
                 <li class="text-secondary relative mb-1">
-                    <div class="itemSideDok pl-5 rounded-r-lg flex justify-between items-center pr-4 md:text-xl font-semibold">
+                    <div class="itemSideDok pl-5 rounded-r-lg flex justify-between items-center pr-4 md:text-xl font-semibold hover:bg-primary">
                         <a href="#data" class="py-0.5 px-2 cursor-pointer select-none">Data</a>
                         <img src="/img/components/icon/drop-down.svg" class="text-red-500 cursor-pointer transform transition-all duration-300">
                     </div>
                     <ul class="text-white text-white transition-all duration-300 easy-out absolute overflow-hidden open-submenu w-full">
-                        <li class="itemSideDok pl-12 py-0.5 rounded-r-lg md:text-lg">
+                        <li class="itemSideDok pl-12 py-0.5 rounded-r-lg md:text-lg hover:bg-primary">
                             <a href="#dataUser" class="py-1">Data User</a>
                         </li>
-                        <li class="itemSideDok pl-12 py-0.5 rounded-r-lg md:text-lg">
+                        <li class="itemSideDok pl-12 py-0.5 rounded-r-lg md:text-lg hover:bg-primary">
                             <a href="#dataAlumni" class="py-1">Data Alumni</a>
                         </li>
                     </ul>
                 </li>
 
-                <li class="text-secondary relative transform translate-y-16 duration-300">
-                    <div class="itemSideDok pl-5 rounded-r-lg flex justify-between items-center pr-4 md:text-xl font-semibold">
+                <!-- <li class="text-secondary relative transform translate-y-16 duration-300">
+                    <div class="itemSideDok pl-5 rounded-r-lg flex justify-between items-center pr-4 md:text-xl font-semibold hover:bg-primary">
                         <a href="#judul" class="py-0.5 px-2 cursor-pointer select-none">Judul</a>
                         <img src="/img/components/icon/drop-down.svg" class="text-red-500 cursor-pointer transform transition-all duration-300">
                     </div>
                     <ul class="text-white text-white transition-all duration-300 easy-out absolute overflow-hidden open-submenu w-full">
-                        <li class="itemSideDok pl-12 py-0.5 rounded-r-lg md:text-lg">
+                        <li class="itemSideDok pl-12 py-0.5 rounded-r-lg md:text-lg hover:bg-primary cursor-pointer">
                             <span class="py-1">Sub-Judul 1.1</span>
                         </li>
-                        <li class="itemSideDok pl-12 py-0.5 rounded-r-lg md:text-lg">
+                        <li class="itemSideDok pl-12 py-0.5 rounded-r-lg md:text-lg hover:bg-primary cursor-pointer">
                             <span class="py-1">Sub-Judul 1.2</span>
                         </li>
                     </ul>
-                </li>
+                </li> -->
             </ul>
 
             <!-- end sidebar posisi buka -->
