@@ -691,6 +691,10 @@ class Rbac extends Seeder
 			],
 			[
 				'group_id'     		=> 1,
+				'menu_access_id'	=> 41
+			],
+			[
+				'group_id'     		=> 1,
 				'menu_access_id'	=> 42
 			],
 			[
