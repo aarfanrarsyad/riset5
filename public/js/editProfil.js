@@ -5,31 +5,21 @@ $('#buttonEditTampilan').click(function (){
        if(!$('#checkTanggalLahir').is(':checked')){
            $('#labelTempatLahir').addClass('text-gray-500');    
            $('#labelTanggalLahir').addClass('text-gray-500');    
-       } 
-       if(!$('#checkEmail').is(':checked')) $('#labelEmail').addClass('text-gray-500');    
+       }  
        if(!$('#checkAlamat').is(':checked')) {
            $('#labelAlamat').addClass('text-gray-500');    
            $('#labelNegara').addClass('text-gray-500');    
            $('#labelKabkot').addClass('text-gray-500');    
            $('#labelProvinsi').addClass('text-gray-500');    
-       }
-       if(!$('#checkJabatan').is(':checked')) $('#labelJabatan').addClass('text-gray-500');    
-       if(!$('#checkInstagram').is(':checked')) $('#labelInstagram').addClass('text-gray-500');    
-       if(!$('#checkTwitter').is(':checked')) $('#labelTwitter').addClass('text-gray-500');    
-       if(!$('#checkFacebook').is(':checked')) $('#labelFacebook').addClass('text-gray-500');    
+       }   
     } else {
         $('.editTampilan').addClass('hidden');
         $('#labelTempatLahir').removeClass('text-gray-500');
         $('#labelTanggalLahir').removeClass('text-gray-500');
-        $('#labelEmail').removeClass('text-gray-500');
         $('#labelAlamat').removeClass('text-gray-500');
         $('#labelNegara').removeClass('text-gray-500');
         $('#labelKabkot').removeClass('text-gray-500');
         $('#labelProvinsi').removeClass('text-gray-500');
-        $('#labelJabatan').removeClass('text-gray-500');
-        $('#labelInstagram').removeClass('text-gray-500');
-        $('#labelTwitter').removeClass('text-gray-500');
-        $('#labelFacebook').removeClass('text-gray-500');
     }
 })
 

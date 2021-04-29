@@ -151,8 +151,8 @@ $('.editTutup').click(function () {
 
 $('.navEdit').prev().click(function () {
     if (window.matchMedia('(min-width: 768px)').matches) {
-        $('.layoutEdit').removeClass('w-1/2 lg:w-16 md:w-14').addClass('lg:w-1/4 md:w-1/5 sm:w-16 w-10')
-        $('.layoutEdit').next().addClass('lg:w-3/4 md:w-4/5')
+        $('.layoutEdit').removeClass('w-1/2 lg:w-16 md:w-14').addClass('md:w-1/5 sm:w-16 w-10')
+        $('.layoutEdit').next().addClass('md:w-4/5')
         if ($('.navEdit').prev().hasClass('md:block')) {
             $('.navEdit').prev().addClass('md:hidden').removeClass('md:block hidden')
         } else {
@@ -166,7 +166,7 @@ $('.navEdit').prev().click(function () {
             }
         }, 300);
         $('.editTutup').html(`
-    <svg class="lg:w-10 md:w-8 sm:w-7 w-6 fill-current cursor-pointer" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <svg class="sm:w-7 w-6 fill-current cursor-pointer" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
     </svg>
     `)
@@ -186,7 +186,7 @@ $('.navEdit').prev().click(function () {
             }
         }, 200);
         $('.editTutup').html(`
-        <svg class="lg:w-10 md:w-8 sm:w-7 w-6 fill-current cursor-pointer" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <svg class="sm:w-7 w-6 fill-current cursor-pointer" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
         </svg>
         `)
