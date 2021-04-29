@@ -876,4 +876,68 @@ class User extends BaseController
 		$data['active'] = '';
 		return view('websia/kontenWebsia/beritaArtikel/unggahBerita.php', $data);
 	}
+
+	protected function getPostComment($id, $all = null)
+	{
+		$init = new BeritaModel();
+		$init_user = model('App\Models\admin_model');
+
+		if ($all) {
+			$query_comments = $init->getPostComments($id, false)->getResultArray();
+		} else {
+			$query_comments = $init->getPostComments($id)->getResultArray();
+		}
+
+		$comments_count = $init->countComments($id)->getRowArray();
+
+		for ($i = 0; $i < count($query_comments); $i++) {
+			$data = $init_user->getUserById($query_comments[$i]['user_id'])->getRowArray();
+
+			$query_comments[$i]['time'] = time_for_comment($query_comments[$i]['time']);
+			if (!$data) {
+				$query_comments[$i]['name'] = 'Unknown';
+				$query_comments[$i]['image'] = 'default.png';
+			} else {
+				$query_comments[$i]['name'] = ucwords($data['fullname']);
+				$query_comments[$i]['image'] = $data['user_image'];
+			}
+		}
+
+		sortByOrder($query_comments, 'id');
+		return [array_values($query_comments), $comments_count];
+	}
+
+	public function viewBerita($id)
+	{
+		$init = new BeritaModel();
+		$data = $init->getNewsById($id)->getRowArray();
+		$data['tanggal_publish'] = date('d F Y', strtotime($data['tanggal_publish']));
+		$data['comments'] = $this->getPostComment($data['id'])[0];
+		$data['count_comments'] = $this->getPostComment($data['id'])[1]['total'];
+		$data['visited'] = $init->getVisitedPage($id)->getRowArray()['visited'];
+
+		$berita = $init->getAllNews()->getResultArray();
+
+		for ($i = 0; $i < count($berita); $i++) {
+			$visited = $init->getVisitedPage($berita[$i]['id'])->getRowArray();
+			$berita[$i]['tanggal_publish'] = date('d F Y', strtotime($berita[$i]['tanggal_publish']));
+			if (!$visited || empty($visited)) {
+				$berita[$i]['visited'] = 0;
+			} else {
+				$berita[$i]['visited'] = $visited['visited'];
+			}
+		}
+
+		$berita_popular = $berita;
+		sortByOrder($berita_popular, 'visited', false);
+
+		record_visits($id);
+		$data['active'] = '';
+		$data['dataset'] =  $data;
+		$data['berita'] =  $berita;
+		$data['berita_popular'] =  $berita_popular;
+		$data['judulHalaman'] = 'Berita';
+
+		return view('websia/kontenWebsia/beritaArtikel/berita.php', $data);
+	}
 }
