@@ -31,14 +31,6 @@
                     </p>
                 <?php } ?>
                 <input type="password" name="ulangpassbaru" id="ulangpassbaru" class="inputForm" placeholder="🞄🞄🞄🞄🞄🞄🞄🞄" required>
-                <div class="text-secondary text-xs mt-6 mb-2 text-justify">Silakan Masukkan Kata Sandi Lama Anda untuk Verifikasi!</div>
-                <label for="passlama" class="font-medium">Kata Sandi Lama:</label>
-                <?php if (session()->getFlashdata('edit-pass-fail')) { ?>
-                    <p class="text-xs text-red-500 text-justify" id="errorValidPasss">
-                        <?= session()->getFlashdata('edit-pass-fail') ?>
-                    </p>
-                <?php } ?>
-                <input type="password" name="passlama" id="passlama" class="inputForm" placeholder="🞄🞄🞄🞄🞄🞄🞄🞄" required>
             </div>
             <div class="flex justify-end md:mt-12 md:mb-8 mt-8 mb-1">
                 <input type="submit" value="SIMPAN" class="w-24 text-center py-1 bg-secondary hover:bg-secondaryhover text-white rounded-full cursor-pointer focus:outline-none" id="submitAkun">
