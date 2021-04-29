@@ -202,23 +202,6 @@ $('.updateFotoProfil').click(function () {
 
 // akhir js edit biodata
 
-// awal js sorting
-
-$(".sort").click(function () {
-    $(".sort").not(this).children().removeClass('invisible text-primary')
-    if ($(this).children().eq(0).hasClass('invisible')) {
-        $(this).children().first().removeClass('invisible')
-        $(this).children().first().removeClass('text-gray-400').addClass('text-primary')
-        $(this).children().eq(1).addClass('invisible')
-    } else {
-        $(this).children().eq(1).removeClass('invisible')
-        $(this).children().first().addClass('invisible')
-        $(this).children().eq(1).removeClass('text-gray-400').addClass('text-primary')
-    }
-})
-
-// akhir js sorting
-
 // awal js edit pendidikan
 $('#buttonEditTampilanPendidikan').click(function(){
     if ($('.editTampilanPendidikan').hasClass('hidden')){
