@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 29, 2021 at 08:40 AM
+-- Generation Time: Apr 29, 2021 at 09:24 AM
 -- Server version: 10.4.14-MariaDB-log
 -- PHP Version: 7.4.9
 
@@ -190,10 +190,17 @@ INSERT INTO `alumni_tempat_kerja` (`id_alumni`, `id_tempat_kerja`) VALUES
 (3, 5),
 (4, 4),
 (5, 3),
+(6, 965),
+(7, 33),
+(8, 2),
 (9, 9),
 (10, 10),
 (11, 11),
 (12, 12),
+(17, 962),
+(18, 963),
+(19, 2),
+(20, 964),
 (21, 210),
 (22, 220),
 (23, 230),
@@ -257,7 +264,8 @@ INSERT INTO `alumni_tempat_kerja` (`id_alumni`, `id_tempat_kerja`) VALUES
 (433, 33),
 (434, 2),
 (435, 35),
-(436, 36);
+(436, 36),
+(555, 961);
 
 -- --------------------------------------------------------
 
@@ -1174,7 +1182,12 @@ INSERT INTO `tempat_kerja` (`id_tempat_kerja`, `nama_instansi`, `kota`, `provins
 (930, 'BPS Kabupaten Rembang', 'Rembang', 'Jawa Tengah', 'Indonesia', 'Jl. Pemuda Km. 1', '0295691040', '0295691040', 'bps3317@bps.go.id'),
 (940, 'BPS Kabupaten Cilacap', 'Cilacap', 'Jawa Tengah', 'Indonesia', 'Jalan Dr. Soetomo No. 16A', '0282534328', '0282535011', 'bps3301@bps.go.id'),
 (950, 'BPS Kabupaten Klaten', 'Klaten', 'Jawa Tengah', 'Indonesia', 'Jl. Merapi No. 6', '62272321689', NULL, 'bps3310@bps.go.id'),
-(960, 'BPS Kota Malang', 'Malang', 'Jawa Timur', 'Indonesia', 'Jl. Janti Barat No. 47', '0341801164', '0341805871', 'bps3573@bps.go.id');
+(960, 'BPS Kota Malang', 'Malang', 'Jawa Timur', 'Indonesia', 'Jl. Janti Barat No. 47', '0341801164', '0341805871', 'bps3573@bps.go.id'),
+(961, 'BPS Kota Banjarmasin', NULL, NULL, NULL, 'Jalan Gatot Subroto No. 5 Banjarmasin 70235', '(0511) 6773031', '(0511) 6773032', 'bps6371@gmail.com'),
+(962, 'BPS Provinsi Riau', NULL, NULL, NULL, 'Jl. Pattimura No. 12 Pekanbaru - Riau, Indonesia', '(62-761) 23042', '(62-761) 21336', 'riau@bps.go.id'),
+(963, 'BPS Kabupaten Tanjung Jabung Barat', NULL, NULL, NULL, 'Jl. Prof.Dr. Sri Soedewi MS, SH.-Kuala Tungkal, Jambi', '(0742) 21738', NULL, 'bps1507@bps.go.id'),
+(964, 'BPS Provinsi Sulawesi Utara', NULL, NULL, NULL, 'Jl. 17 Agustus Manado 95119', '(0431) 847044', '(0431) 862204', 'mailto:sulut@bps.go.id'),
+(965, 'BPS Kabupaten Cirebon', NULL, NULL, NULL, 'Jl. Sunan Kalijaga No.4 Sumber-Cirebon 45611', '+62 231 321445', '+62 231 321445', 'bps3209@bps.go.id');
 
 -- --------------------------------------------------------
 
@@ -1616,7 +1629,7 @@ ALTER TABLE `table_scope`
 -- AUTO_INCREMENT for table `tempat_kerja`
 --
 ALTER TABLE `tempat_kerja`
-  MODIFY `id_tempat_kerja` int(16) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=961;
+  MODIFY `id_tempat_kerja` int(16) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=966;
 
 --
 -- AUTO_INCREMENT for table `token_app`
