@@ -108,7 +108,10 @@ if ($status == 'bukan user') {
         <!-- Awal Deskripsi user profile -->
         <div class="md:p-7 md:shadow-lg md:rounded-xl">
             <p class="px-5 md:px-0 mt-8 md:mt-0 font-heading text-primary text-sm italic text-justify mb-4 md:mb-0 text-center md:text-justify lg:text-left">
-                <?= $alumni->deskripsi ?>
+            <?php if($alumni->deskripsi == NULL){ ?>
+            Biografi alumni belum terisi.
+            <?php } ?>
+            <?= $alumni->deskripsi ?>
             </p>
         </div>
         <!-- Akhir Deskripsi user profile -->
