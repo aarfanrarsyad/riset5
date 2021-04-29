@@ -14,7 +14,7 @@ class Rbac extends Seeder
 			[
 				'email'             => 'dummy@stis.ac.id',
 				'username'          => 'Dummy',
-				'id_alumni'         => '0110160',
+				'id_alumni'         => '1',
 				'fullname'          => 'Dummy_dummy',
 				'user_image'        => 'default.svg',
 				'password_hash'     => '$2y$10$yLFu3bK0s5cHqd1VLT6Eh.GjA3H2GJzwqb6o/gjrhKXTWGkMsh3IS',
@@ -167,6 +167,14 @@ class Rbac extends Seeder
 			[
 				'menu_name'     => 'Setting Aplikasi',
 				'menu_icon'		=> 'fas fa-user-shield'
+			],
+			[
+				'menu_name'     => 'Manajemen Berita',
+				'menu_icon'		=> 'fas fa-book-open'
+			],
+			[
+				'menu_name'     => 'Manajemen API',
+				'menu_icon'		=> 'fab fa-chrome'
 			]
 		];
 		$this->db->table('menu')->insertBatch($data);
@@ -269,6 +277,20 @@ class Rbac extends Seeder
 				'url'			=> 'admin/reports/report-2',
 				'icon'			=> 'far fa-chart-bar',
 				'active'		=> '0'
+			],
+			[
+				'menu_id'     	=> 7,
+				'title'			=> 'Berita',
+				'url'			=> 'admin/berita',
+				'icon'			=> 'fas fa-book-open',
+				'active'		=> '1'
+			],
+			[
+				'menu_id'     	=> 8,
+				'title'			=> 'API',
+				'url'			=> 'admin/request-api',
+				'icon'			=> 'fab fa-chrome',
+				'active'		=> '1'
 			]
 		];
 		$this->db->table('submenu')->insertBatch($data);
@@ -397,6 +419,38 @@ class Rbac extends Seeder
 			[
 				'submenu_id'     	=> 13,
 				'crud_id'			=> 2
+			],
+			[
+				'submenu_id'     	=> 15,
+				'crud_id'			=> 1
+			],
+			[
+				'submenu_id'     	=> 15,
+				'crud_id'			=> 2
+			],
+			[
+				'submenu_id'     	=> 15,
+				'crud_id'			=> 3
+			],
+			[
+				'submenu_id'     	=> 15,
+				'crud_id'			=> 4
+			],
+			[
+				'submenu_id'     	=> 16,
+				'crud_id'			=> 1
+			],
+			[
+				'submenu_id'     	=> 16,
+				'crud_id'			=> 2
+			],
+			[
+				'submenu_id'     	=> 16,
+				'crud_id'			=> 3
+			],
+			[
+				'submenu_id'     	=> 16,
+				'crud_id'			=> 4
 			]
 		];
 		$this->db->table('submenu_access')->insertBatch($data);
@@ -534,6 +588,38 @@ class Rbac extends Seeder
 				'group_id'     		=> 1,
 				'menu_access_id'	=> 12
 			],
+			[
+				'group_id'     		=> 1,
+				'menu_access_id'	=> 32
+			],
+			[
+				'group_id'     		=> 1,
+				'menu_access_id'	=> 33
+			],
+			[
+				'group_id'     		=> 1,
+				'menu_access_id'	=> 34
+			],
+			[
+				'group_id'     		=> 1,
+				'menu_access_id'	=> 35
+			],
+			[
+				'group_id'     		=> 1,
+				'menu_access_id'	=> 36
+			],
+			[
+				'group_id'     		=> 1,
+				'menu_access_id'	=> 37
+			],
+			[
+				'group_id'     		=> 1,
+				'menu_access_id'	=> 38
+			],
+			[
+				'group_id'     		=> 1,
+				'menu_access_id'	=> 39
+			]
 		];
 		$this->db->table('groups_access')->insertBatch($data);
 	}

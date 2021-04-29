@@ -11,7 +11,7 @@ class Alumni extends Seeder
 		$faker = \Faker\Factory::create('id_ID');
 
 		$data = [
-			'id_alumni'          => "0110160",
+			'id_alumni'          => "1",
 			'nama'               => "Dummy_dummy",
 			'jenis_kelamin'      => $faker->randomElement($array = array('Lk', 'Pr')),
 			'tempat_lahir'       => $faker->city,
@@ -48,25 +48,25 @@ class Alumni extends Seeder
 		$this->db->table('tempat_kerja')->insert($data);
 
 		$data = [
-			'id_alumni'       => "0110160",
+			'id_alumni'       => "1",
 			'id_tempat_kerja' => 1,
 		];
 		$this->db->table('alumni_tempat_kerja')->insert($data);
 
 		$data = [
 			'angkatan'     	=> 58,
-			'id_alumni' 	=> "0110160",
+			'id_alumni' 	=> "1",
 		];
 		$this->db->table('angkatan_alumni')->insert($data);
 
 		$data = [
 			'email_alumni'  => "dummy@stis.ac.id",
-			'id_alumni' 	=> "0110160",
+			'id_alumni' 	=> "1",
 		];
 		$this->db->table('email')->insert($data);
 
 		$data = [
-			'id_alumni' 	=> "0110160",
+			'id_alumni' 	=> "1",
 		];
 		$this->db->table('akses')->insert($data);
 	}
