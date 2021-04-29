@@ -256,8 +256,6 @@ function formPendidikan(
                     <option value="instansi_lainnya">Lainnya...</option>
                 </select>
 
-
-
                 <label for="editStudi" class="text-primary font-medium">Program Studi:</label>
                 <input type="text" placeholder="Masukkan nama Program Studi" class="inputForm" name="program_studi" id="editStudi">
                 <div class="flex">
@@ -288,42 +286,52 @@ function formPendidikan(
         </div>
     </div>
     `);
-
-    $("#formEditPendidikan").children().first().removeClass("hidden");
+    $('#formEditPendidikan').children().first().removeClass('hidden')
     setTimeout(function () {
-      $("#formEditPendidikan").remove();
-    }, 400);
-  });
+        $('#formEditPendidikan').children().first().removeClass('opacity-0 scale-0')
+    }, 10);
 
-  var modal = document.getElementById("formEditPendidikan");
-  $(window).click(function (e) {
-    if (e.target === modal) {
-      $("#formEditPendidikan").children().first().addClass("opacity-0");
-      $("#formEditPendidikan")
-        .children()
-        .first()
-        .on(
-          "transitionend MSTransitionEnd webkitTransitionEnd oTransitionEnd",
-          function () {
-            $("#formEditPendidikan").children().first().addClass("hidden");
-          }
-        );
-      setTimeout(function () {
-        $("#formEditPendidikan").remove();
-      }, 400);
-    }
-  });
+    $('.closePendidikan').click(function () {
+        $('#formEditPendidikan').children().first().addClass('opacity-0 scale-0')
+        $('#formEditPendidikan').children().first().on('transitionend MSTransitionEnd webkitTransitionEnd oTransitionEnd', function () {
+            $('#formEditPendidikan').children().first().addClass('hidden')
+        });
+        setTimeout(function () {
+            $('#formEditPendidikan').remove()
+        }, 400);
+    })
 
-  $("#editId").val(id);
-  $("#editJenjang").val(jenjang);
-  $("#editInstansi").val(instansi);
-  $("#editStudi").val(studi);
-  $("#editMasuk").val(masuk);
-  $("#editLulus").val(lulus);
-  $("#editAngkatan").val(angkatan);
-  $("#editNIM").val(nim);
-  $("#editTulisan").val(tulisan);
-}
+    var modal = document.getElementById("formEditPendidikan");
+    $(window).click(function (e) {
+      if (e.target === modal) {
+        $("#formEditPendidikan").children().first().addClass("opacity-0");
+        $("#formEditPendidikan")
+          .children()
+          .first()
+          .on(
+            "transitionend MSTransitionEnd webkitTransitionEnd oTransitionEnd",
+            function () {
+              $("#formEditPendidikan").children().first().addClass("hidden");
+            }
+          );
+        setTimeout(function () {
+          $("#formEditPendidikan").remove();
+        }, 400);
+      }
+    });
+    $("#editId").val(id);
+    $("#editJenjang").val(jenjang);
+    $("#editInstansi").val(instansi);
+    $("#editStudi").val(studi);
+    $("#editMasuk").val(masuk);
+    $("#editLulus").val(lulus);
+    $("#editAngkatan").val(angkatan);
+    $("#editNIM").val(nim);
+    $("#editTulisan").val(tulisan);
+  };
+
+
+
 
 $('.tambahPendidikan').click(function () {
     $("body").prepend(`
