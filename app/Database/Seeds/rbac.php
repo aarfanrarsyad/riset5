@@ -277,7 +277,7 @@ class Rbac extends Seeder
 			[
 				'menu_id'     	=> 7,
 				'title'			=> 'Alumni',
-				'url'			=> 'admin/Alumni',
+				'url'			=> 'admin/alumni',
 				'icon'			=> 'fas fa-user',
 				'active'		=> '1'
 			],
