@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\AlumniModel;
+use App\Models\BeritaModel;
 
 
 class User extends BaseController
@@ -819,14 +820,6 @@ class User extends BaseController
 		}
 	}
 
-	public function unggahBerita()
-	{
-		$data['judulHalaman'] = 'Unggah Berita/Artikel';
-		// $data['login'] = 'sudah';
-		$data['active'] = '';
-		return view('websia/kontenWebsia/beritaArtikel/unggahBerita.php', $data);
-	}
-
 	public function galeriFoto()
 	{
 		$data['judulHalaman'] = 'Galeri Kenangan Alumni';
@@ -852,10 +845,35 @@ class User extends BaseController
 
 	public function berita()
 	{
+		$init = new BeritaModel();
+
+		$dataset = $init->getAllNews()->getResultArray();
+
+		for ($i = 0; $i < count($dataset); $i++) {
+			$visited = $init->getVisitedPage($dataset[$i]['id'])->getRowArray();
+			$dataset[$i]['tanggal_publish'] = date('d F Y', strtotime($dataset[$i]['tanggal_publish']));
+			if (!$visited || empty($visited)) {
+				$dataset[$i]['visited'] = 0;
+			} else {
+				$dataset[$i]['visited'] = $visited['visited'];
+			}
+		}
+
+		sortByOrder($dataset, 'visited', false);
+
+		$data['dataset'] = $dataset;
 		$data['judulHalaman'] = 'Berita';
 		$data['active'] = 'berita';
 		$data['login'] = 'sudah';
 
 		return view('websia/kontenWebsia/beritaArtikel/berandaBerita', $data);
+	}
+
+	public function unggahBerita()
+	{
+		$data['judulHalaman'] = 'Unggah Berita/Artikel';
+		// $data['login'] = 'sudah';
+		$data['active'] = '';
+		return view('websia/kontenWebsia/beritaArtikel/unggahBerita.php', $data);
 	}
 }

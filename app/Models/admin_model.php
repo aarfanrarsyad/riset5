@@ -8,8 +8,6 @@ use Config\Services;
 class admin_model extends Model
 {
 
-    # SECTION USERS MODEL 
-
     protected function userValidation($id)
     {
         if (!isset($id)) return false;
@@ -31,17 +29,21 @@ class admin_model extends Model
 
     /**
      * Get all user data that passes registration
-     * 
      * @return mixed
-     * @author RBAC Tim
-     * 
-     * checked
      */
     public function getAllUsers()
     {
-        $query = "SELECT id,fullname,nim,email,created_at,updated_at,active FROM users";
+        $query = "SELECT id,fullname,email,created_at,updated_at,active FROM users";
         return $this->db->query($query);
     }
+
+    public function createUser($data)
+    {
+        var_dump($data);
+        die;
+        // $query = "INSERT INTO users VALUES "
+    }
+
 
     /**
      * Get all user data that passes registration
@@ -49,12 +51,10 @@ class admin_model extends Model
      * @param int $id
      * @return mixed
      * @author RBAC Tim
-     * 
-     * checked
      */
     public function getUserById($id)
     {
-        $query = "SELECT id,fullname,nim,email,created_at,updated_at,active FROM users WHERE id = $id";
+        $query = "SELECT id,fullname,id_alumni,email,created_at,updated_at,active,user_image FROM users WHERE id = $id";
         return $this->db->query($query);
     }
 
@@ -126,6 +126,7 @@ class admin_model extends Model
         if (!isset($id)) return redirect()->to(base_url('/admin'));
 
         $user_data = $this->userValidation($id);
+
         if (!$user_data) return false;
 
         $desc = 'menghapus user ' . ucwords($user_data['fullname']);
@@ -1051,5 +1052,112 @@ class admin_model extends Model
 
         $query = "INSERT INTO activity_log VALUES ('', '$date','$email','$name_group',$access,$scope,'$desc',$status)";
         return $this->db->query($query);
+    }
+
+    public function getAllApiRequests()
+    {
+        $query = "SELECT client_app.*, token_app.token 
+        FROM client_app 
+        LEFT JOIN token_app ON client_app.id_token = token_app.id";
+        return $this->db->query($query);
+    }
+
+    public function getApiRequest($id)
+    {
+        $query = "SELECT * FROM client_app WHERE id = '$id'";
+        return $this->db->query($query);
+    }
+
+    public function getSelectedScopeRequest($token_id)
+    {
+        if (!$token_id || empty($token_id)) return false;
+        $query = "SELECT scope_app.id
+        FROM token_scope JOIN scope_app ON token_scope.id_scope = scope_app.id
+        WHERE token_scope.id_token = '$token_id'";
+        return $this->db->query($query);
+    }
+
+    public function updateApiRequests($data)
+    {
+        if (!isset($data) || empty($data)) return false;
+        helper('text');
+
+        $id = $data[0];
+        $status = $data[1];
+        $date = $data[2];
+        $admin = $data[3];
+
+        $get_client = $this->getApiRequest($id)->getRowArray();
+        if (!$get_client || !$get_client['id_token'] || empty($get_client['id_token'])) return false;
+        $token_id = $get_client['id_token'];
+
+        $client_update = false;
+        $token_update = false;
+        if (!$data[2] || empty($data[2])) { //it is Review or back to default value
+            $query = "UPDATE client_app SET status ='$status', req_acc = null , uid_admin = null WHERE id = $id";
+            $token_query = "UPDATE token_app SET token = null, count_usage = 0 ,last_access = null WHERE id = '$token_id' ";
+            $client_update = $this->db->query($query);
+            $token_update = $this->db->query($token_query);
+        } else {
+            $query = "UPDATE client_app SET status ='$status', req_acc = '$date' , uid_admin = '$admin' WHERE id = $id";
+            $client_update = $this->db->query($query);
+
+            $token = random_string('alnum', 30);
+            if (strtolower($status) == 'diterima') {
+                $token_query = "UPDATE token_app SET token = '$token', count_usage = count_usage + 1,last_access = '$date' WHERE id = '$token_id' ";
+            } else {
+                $token_query = "UPDATE token_app SET token = null, count_usage = 0 ,last_access = null WHERE id = '$token_id' ";
+            }
+            $token_update = $this->db->query($token_query);
+        }
+
+        return ($client_update && $token_update);
+    }
+
+    public function getAllApiScopes()
+    {
+        $query = "SELECT * FROM scope_app";
+        return $this->db->query($query);
+    }
+
+    public function createScope($data)
+    {
+        if (empty($data) || !isset($data)) return redirect()->to(base_url('/admin'));
+        $scope = $data[0];
+        $detail_scope = $data[1];
+
+        $query = "INSERT INTO scope_app VALUES ('','$scope','$detail_scope')";
+        if ($this->db->query($query)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function updateScope($data)
+    {
+        if (empty($data) || !isset($data)) return redirect()->to(base_url('/admin'));
+        $id = $data[0];
+        $scope = $data[1];
+        $detail_scope = $data[2];
+
+        $query = "UPDATE scope_app set scope = '$scope', scope_dev = '$detail_scope' WHERE id = $id";
+        if ($this->db->query($query)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function deleteScope($id)
+    {
+        if (!isset($id)) return redirect()->to(base_url('/admin'));
+
+        $query = "DELETE FROM scope_app WHERE id = $id";
+        if ($this->db->query($query)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

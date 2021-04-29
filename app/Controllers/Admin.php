@@ -36,7 +36,7 @@ class Admin extends BaseController
 		$this->auth = service('authentication');
 	}
 
-	public function output_json($data = null)
+	protected function output_json($data = null)
 	{
 		echo (json_encode($data));
 	}
@@ -102,10 +102,8 @@ class Admin extends BaseController
 	# Method untuk halaman registrasi
 	public function register()
 	{
-
 		// Check if registration is allowed
 		if (!$this->config->allowRegistration) return redirect()->back()->withInput()->with('error', lang('Auth.registerDisabled'));
-
 		$genr_pass = generate_strong_password(9, false, 'lud');
 		return view($this->config->views['register'], ['config' => $this->config, 'genr_pass' => $genr_pass]);
 	}
@@ -128,20 +126,19 @@ class Admin extends BaseController
 			'pass_confirm' 	=> 'required|matches[password]',
 			// 'username'  	=> 'required|alpha_numeric_space|min_length[3]|is_unique[users.username]',
 		];
+
 		if (!$this->validate($rules)) return redirect()->back()->withInput()->with('errors', service('validation')->getErrors());
 
 		// Save the user
 		$allowedPostFields = array_merge(['password'], $this->config->validFields, $this->config->personalFields);
+
 		$user = new User($this->request->getPost($allowedPostFields));
 
 		$this->config->requireActivation !== false ? $user->generateActivateHash() : $user->activate();
-
 		// Ensure default group gets assigned if set
 		if (!empty($this->config->defaultUserGroup)) $users = $users->withGroup($this->config->defaultUserGroup);
 
-
 		if (!$users->save($user)) return redirect()->back()->withInput()->with('errors', $users->errors());
-
 		$desc = 'Menambahkan user ' . $this->request->getPost('fullname');
 		activity_log(1, 1, ucfirst($desc), 1);
 
@@ -621,5 +618,116 @@ class Admin extends BaseController
 		];
 
 		return view('admin' . DIRECTORY_SEPARATOR . 'security' . DIRECTORY_SEPARATOR . 'activity_log', $this->data);
+	}
+
+	#------------------------------------------------------------------------------------------------------------------------------------------------#
+
+	# Method untuk API activity_log
+	public function management_api_index()
+	{
+		$init = new admin_model();
+		$data = $init->getAllApiRequests()->getResultArray();
+		$scopes = $init->getAllApiScopes()->getResultArray();
+		for ($i = 0; $i < count($data); $i++) {
+			$name_client = $init->getUserById($data[$i]['uid'])->getRowArray();
+			$data[$i]['nama_client'] =  $name_client ? $name_client['fullname'] : 'Unknown';
+			if ($data[$i]['uid_admin']) {
+				$name_admin = $init->getUserById($data[$i]['uid_admin'])->getRowArray();
+				$data[$i]['nama_admin'] = $name_admin ? $name_admin['fullname'] : 'Unknown';
+			} else {
+				$data[$i]['nama_admin'] = null;
+			}
+
+			$data[$i]['selected_scope'] = [];
+			if ($data[$i]['id_token']) $data[$i]['selected_scope'] = $init->getSelectedScopeRequest($data[$i]['id_token'])->getResultArray();
+			if (!$data[$i]['token']) $data[$i]['token'] = 'Belum Diset';
+		}
+
+		$this->data =  [
+			'title' => 'Management API',
+			'data' => $data,
+			'scopes' => $scopes,
+		];
+
+		return view('admin' . DIRECTORY_SEPARATOR . 'api' . DIRECTORY_SEPARATOR . 'index', $this->data);
+	}
+
+	public function getSelectedScopeRequest()
+	{
+		if (!$this->request->isAJAX()) return false;
+
+		$init = new admin_model();
+		$id    = $this->request->getPost('id');
+		$query = $init->getSelectedScopeRequest($id)->getResultArray();
+		$this->output_json($query);
+	}
+
+	public function management_api_update()
+	{
+		if (!$this->request->isAJAX()) return false;
+
+		$id = $this->request->getPost('id');
+		$status = $this->request->getPost('status');
+		if ($status == '1') {
+			$date = get_date();
+			$admin_id = userdata()['id'];
+			$dataset = [$id, 'Diterima', $date, $admin_id];
+		} else if ($status == '2') {
+			$date = get_date();
+			$admin_id = userdata()['id'];
+			$dataset = [$id, 'Ditolak', $date, $admin_id];
+		} else {
+			$dataset = [$id, 'Review', null, null];
+		}
+
+		$init = new admin_model();
+		$query = $init->updateApiRequests($dataset);
+		$this->output_json($query);
+	}
+
+	public function create_scope()
+	{
+		$scope = $this->request->getPost('scope');
+		$detail_scope = $this->request->getPost('detail_scope');
+
+		if (!($scope) || !($detail_scope)) return redirect()->to(base_url('/admin/request-api'));
+
+		$init = new admin_model();
+		$query = $init->createScope([$scope, $detail_scope]);
+		if ($query) {
+			session()->setFlashdata('status', "<script>Swal.fire({icon: 'success',title: 'Success',text: 'Scope $scope berhasil ditambahkan',showConfirmButton: false,timer: 2500})</script>");
+		} else {
+			session()->setFlashdata('status', "<script>Swal.fire({icon: 'info',title: 'Terjadi Kesalahan',text: 'Scope $scope gagal ditambahkan',showConfirmButton: false,timer: 2500})</script>");
+		}
+		return redirect()->to(base_url('/admin/request-api'));
+	}
+
+	public function update_scope()
+	{
+		$id = $this->request->getPost('id');
+		$scope = $this->request->getPost('scope');
+		$detail_scope = $this->request->getPost('detail_scope');
+
+		if (!($id) || !($scope) || !($detail_scope)) return redirect()->to(base_url('/admin/request-api'));
+
+		$init = new admin_model();
+		$query = $init->updateScope([$id, $scope, $detail_scope]);
+		if ($query) {
+			session()->setFlashdata('status', "<script>Swal.fire({icon: 'success',title: 'Success',text: 'Data berhasil diupdate',showConfirmButton: false,timer: 2500})</script>");
+		} else {
+			session()->setFlashdata('status', "<script>Swal.fire({icon: 'info',title: 'Terjadi Kesalahan',text: 'Data gagal diupdate',showConfirmButton: false,timer: 2500})</script>");
+		}
+		return redirect()->to(base_url('/admin/request-api'));
+	}
+
+	public function delete_scope()
+	{
+		if (!$this->request->isAJAX()) return false;
+
+		$id = $this->request->getPost('id');
+
+		$init = new admin_model();
+		$query = $init->deleteScope($id);
+		return $this->output_json($query);
 	}
 }

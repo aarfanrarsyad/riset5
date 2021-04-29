@@ -43,6 +43,7 @@
                         </div>
                     </div>
                 </div>-->
+
                 <div class="hidden lg:w-2/5 md:w-2/3 w-3/4 opacity-0 transition-all duration-300 rounded-xl text-primary py-2 text-sm absolute lg:right-18 -lg:right-2 md:right-6 right-1 md:top-48 top-28">
                     <div class="font-bold px-2">Status Unggah Berita</div>
                     <div class="bg-gray-100 flex p-2 gap-x-2 mb-2">
@@ -72,183 +73,80 @@
         </div>
     </div>
     <hr class="border-primary border-t-2 border-b-0 mt-3">
-    <div class="mt-4 bg-primary md:p-6 p-3">
-        <h2 class="font-bold text-secondary text-center font-heading lg:text-2xl md:text-xl text-lg">Berita Terpopuler</h2>
-        <div class="md:grid md:grid-cols-3 md:gap-x-6 mt-4">
-            <div class="md:col-span-2 bg-gray-200 md:h-full h-32 flex items-end p-2 sm:mb-6 mb-2 md:mb-0">
-                <h1 class="text-white font-heading font-bold text-xl">Judul berita</h1>
-            </div>
-            <div class="md:grid md:grid-rows-2 md:gap-y-6">
-                <div class="bg-gray-200 lg:h-48 h-32 flex items-end p-2 sm:mb-6 mb-2 md:mb-0">
-                    <h1 class="text-white font-heading font-bold text-lg">Judul berita</h1>
+    <?php if (count($dataset) >= 3) : ?>
+        <div class="mt-4 bg-primary md:p-6 p-3">
+            <h2 class="font-bold text-secondary text-center font-heading lg:text-2xl md:text-xl text-lg">Berita Terpopuler</h2>
+            <div class="md:grid md:grid-cols-3 md:gap-x-6 mt-4">
+                <div class="md:col-span-2 md:h-full h-32 flex items-end p-2 sm:mb-6 mb-2 md:mb-0">
+                    <img src="<?= base_url('berita/berita_' . $dataset[0]['id'] . '/' . $dataset[0]['thumbnail']) ?>" alt="">
+                    <h1 class="text-white font-heading font-bold text-xl" style="position:absolute;"><?= $dataset[0]['judul'] ?></h1>
                 </div>
-                <div class="bg-gray-200 lg:h-48 h-32 flex items-end p-2">
-                    <h1 class="text-white font-heading font-bold text-lg">Judul berita</h1>
+                <div class="md:grid md:grid-rows-2 md:gap-y-6">
+                    <div class="lg:h-48 h-32 flex items-end p-2 sm:mb-6 mb-2 md:mb-0">
+                        <img src="<?= base_url('berita/berita_' . $dataset[1]['id'] . '/' . $dataset[1]['thumbnail']) ?>" alt="">
+                        <h1 class="text-white font-heading font-bold text-lg" style="position:absolute;"><?= $dataset[1]['judul'] ?></h1>
+                    </div>
+                    <div class="lg:h-48 h-32 flex items-end p-2">
+                        <img src="<?= base_url('berita/berita_' . $dataset[2]['id'] . '/' . $dataset[2]['thumbnail']) ?>" alt="">
+                        <h1 class="text-white font-heading font-bold text-lg" style="position:absolute;"><?= $dataset[2]['judul'] ?></h1>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <hr class="border-primary border-t-2 border-b-0 mt-4 mb-3">
-    <div>
-        <h2 class="font-bold text-secondary font-heading md:text-xl text-lg mb-4">Berita Lainnya</h2>
+        <hr class="border-primary border-t-2 border-b-0 mt-4 mb-3">
+    <?php endif ?>
+
+    <div class="mt-4">
+        <h2 class="font-bold text-secondary font-heading md:text-xl text-lg mb-4"> <?= count($dataset) >= 3 ? 'Berita Lainnya' : 'Berita Terbaru' ?> </h2>
         <!-- start card berita -->
         <div class="md:grid md:grid-cols-2 md:gap-x-6">
-            <div>
-                <div class="flex gap-x-2 items-center">
-                    <div class="lg:w-1/4 w-1/3 lg:h-24 h-20 bg-gray-200">
-                    </div>
-                    <div class="lg:w-3/4 w-2/3">
-                        <a href="">
-                            <h3 class="font-heading font-semibold text-primary text-lg">Judul Berita</h3>
-                        </a>
-                        <div class="flex gap-x-1 items-center">
-                            <img src="/img/icon/clock.png" class="w-3 h-3" alt="">
-                            <p class="text-xs text-primary">11 Januari 2021</p>
-                            <img src="/img/icon/profile.png" class="w-3 h-3 ml-2" alt="">
-                            <p class="text-xs text-primary">David Smith</p>
+            <?php for ($i = 0; $i < count($dataset); $i++) : ?>
+                <?php if ($i % 2 == 0) : ?>
+                    <div>
+                        <div class="flex gap-x-2 items-center">
+                            <img src="<?= base_url('berita/berita_' . $dataset[$i]['id'] . '/' . $dataset[$i]['thumbnail']) ?>" class="lg:w-1/4 w-1/3 lg:h-24 h-20">
+                            </img>
+                            <div class="lg:w-3/4 w-2/3">
+                                <a href="">
+                                    <h3 class="font-heading font-semibold text-primary text-lg"><?= $dataset[$i]['judul'] ?></h3>
+                                </a>
+                                <div class="flex gap-x-1 items-center">
+                                    <img src="/img/icon/clock.png" class="w-3 h-3" alt="">
+                                    <p class="text-xs text-primary"><?= $dataset[$i]['tanggal_publish'] ?></p>
+                                    <img src="/img/icon/profile.png" class="w-3 h-3 ml-2" alt="">
+                                    <p class="text-xs text-primary"><?= $dataset[$i]['author'] ?></p>
+                                </div>
+                                <p>
+                                    <?= $dataset[$i]['konten'] ?>
+                                </p>
+                            </div>
                         </div>
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras blandit turpis sem, eu laoreet odio pretium ac. Mauris eget aliquet lorem.
-                        </p>
+                        <hr class="my-3 border-gray-400">
                     </div>
-                </div>
-                <hr class="my-3 border-gray-400">
-                <div class="flex gap-x-2 items-center">
-                    <div class="lg:w-1/4 w-1/3 lg:h-24 h-20 bg-gray-200">
-                    </div>
-                    <div class="lg:w-3/4 w-2/3">
-                        <a href="">
-                            <h3 class="font-heading font-semibold text-primary text-lg">Judul Berita</h3>
-                        </a>
-                        <div class="flex gap-x-1 items-center">
-                            <img src="/img/icon/clock.png" class="w-3 h-3" alt="">
-                            <p class="text-xs text-primary">11 Januari 2021</p>
-                            <img src="/img/icon/profile.png" class="w-3 h-3 ml-2" alt="">
-                            <p class="text-xs text-primary">David Smith</p>
+                <?php else : ?>
+                    <div class="md:block hidden">
+                        <div class="flex gap-x-2 items-center">
+                            <img src="<?= base_url('berita/berita_' . $dataset[$i]['id'] . '/' . $dataset[$i]['thumbnail']) ?>" class="lg:w-1/4 w-1/3 lg:h-24 h-20">
+                            </img>
+                            <div class="lg:w-3/4 w-2/3">
+                                <a href="">
+                                    <h3 class="font-heading font-semibold text-primary text-lg"><?= $dataset[$i]['judul'] ?></h3>
+                                </a>
+                                <div class="flex gap-x-1 items-center">
+                                    <img src="/img/icon/clock.png" class="w-3 h-3" alt="">
+                                    <p class="text-xs text-primary"><?= $dataset[$i]['tanggal_publish'] ?></p>
+                                    <img src="/img/icon/profile.png" class="w-3 h-3 ml-2" alt="">
+                                    <p class="text-xs text-primary"><?= $dataset[$i]['author'] ?></p>
+                                </div>
+                                <p>
+                                    <?= $dataset[$i]['konten'] ?>
+                                </p>
+                            </div>
                         </div>
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras blandit turpis sem, eu laoreet odio pretium ac. Mauris eget aliquet lorem.
-                        </p>
+                        <hr class="my-3 border-gray-400">
                     </div>
-                </div>
-                <hr class="my-3 border-gray-400">
-                <div class="flex gap-x-2 items-center">
-                    <div class="lg:w-1/4 w-1/3 lg:h-24 h-20 bg-gray-200">
-                    </div>
-                    <div class="lg:w-3/4 w-2/3">
-                        <a href="">
-                            <h3 class="font-heading font-semibold text-primary text-lg">Judul Berita</h3>
-                        </a>
-                        <div class="flex gap-x-1 items-center">
-                            <img src="/img/icon/clock.png" class="w-3 h-3" alt="">
-                            <p class="text-xs text-primary">11 Januari 2021</p>
-                            <img src="/img/icon/profile.png" class="w-3 h-3 ml-2" alt="">
-                            <p class="text-xs text-primary">David Smith</p>
-                        </div>
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras blandit turpis sem, eu laoreet odio pretium ac. Mauris eget aliquet lorem.
-                        </p>
-                    </div>
-                </div>
-                <hr class="my-3 border-gray-400">
-                <div class="flex gap-x-2 items-center">
-                    <div class="lg:w-1/4 w-1/3 lg:h-24 h-20 bg-gray-200">
-                    </div>
-                    <div class="lg:w-3/4 w-2/3">
-                        <a href="">
-                            <h3 class="font-heading font-semibold text-primary text-lg">Judul Berita</h3>
-                        </a>
-                        <div class="flex gap-x-1 items-center">
-                            <img src="/img/icon/clock.png" class="w-3 h-3" alt="">
-                            <p class="text-xs text-primary">11 Januari 2021</p>
-                            <img src="/img/icon/profile.png" class="w-3 h-3 ml-2" alt="">
-                            <p class="text-xs text-primary">David Smith</p>
-                        </div>
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras blandit turpis sem, eu laoreet odio pretium ac. Mauris eget aliquet lorem.
-                        </p>
-                    </div>
-                </div>
-                <hr class="my-3 border-gray-400">
-            </div>
-            <div class="md:block hidden">
-                <div class="flex gap-x-2 items-center">
-                    <div class="lg:w-1/4 w-1/3 lg:h-24 h-20 bg-gray-200">
-                    </div>
-                    <div class="lg:w-3/4 w-2/3">
-                        <a href="">
-                            <h3 class="font-heading font-semibold text-primary text-lg">Judul Berita</h3>
-                        </a>
-                        <div class="flex gap-x-1 items-center">
-                            <img src="/img/icon/clock.png" class="w-3 h-3" alt="">
-                            <p class="text-xs text-primary">11 Januari 2021</p>
-                            <img src="/img/icon/profile.png" class="w-3 h-3 ml-2" alt="">
-                            <p class="text-xs text-primary">David Smith</p>
-                        </div>
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras blandit turpis sem, eu laoreet odio pretium ac. Mauris eget aliquet lorem.
-                        </p>
-                    </div>
-                </div>
-                <hr class="my-3 border-gray-400">
-                <div class="flex gap-x-2 items-center">
-                    <div class="lg:w-1/4 w-1/3 lg:h-24 h-20 bg-gray-200">
-                    </div>
-                    <div class="lg:w-3/4 w-2/3">
-                        <a href="">
-                            <h3 class="font-heading font-semibold text-primary text-lg">Judul Berita</h3>
-                        </a>
-                        <div class="flex gap-x-1 items-center">
-                            <img src="/img/icon/clock.png" class="w-3 h-3" alt="">
-                            <p class="text-xs text-primary">11 Januari 2021</p>
-                            <img src="/img/icon/profile.png" class="w-3 h-3 ml-2" alt="">
-                            <p class="text-xs text-primary">David Smith</p>
-                        </div>
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras blandit turpis sem, eu laoreet odio pretium ac. Mauris eget aliquet lorem.
-                        </p>
-                    </div>
-                </div>
-                <hr class="my-3 border-gray-400">
-                <div class="flex gap-x-2 items-center">
-                    <div class="lg:w-1/4 w-1/3 lg:h-24 h-20 bg-gray-200">
-                    </div>
-                    <div class="lg:w-3/4 w-2/3">
-                        <a href="">
-                            <h3 class="font-heading font-semibold text-primary text-lg">Judul Berita</h3>
-                        </a>
-                        <div class="flex gap-x-1 items-center">
-                            <img src="/img/icon/clock.png" class="w-3 h-3" alt="">
-                            <p class="text-xs text-primary">11 Januari 2021</p>
-                            <img src="/img/icon/profile.png" class="w-3 h-3 ml-2" alt="">
-                            <p class="text-xs text-primary">David Smith</p>
-                        </div>
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras blandit turpis sem, eu laoreet odio pretium ac. Mauris eget aliquet lorem.
-                        </p>
-                    </div>
-                </div>
-                <hr class="my-3 border-gray-400">
-                <div class="flex gap-x-2 items-center">
-                    <div class="lg:w-1/4 w-1/3 lg:h-24 h-20 bg-gray-200">
-                    </div>
-                    <div class="lg:w-3/4 w-2/3">
-                        <a href="">
-                            <h3 class="font-heading font-semibold text-primary text-lg">Judul Berita</h3>
-                        </a>
-                        <div class="flex gap-x-1 items-center">
-                            <img src="/img/icon/clock.png" class="w-3 h-3" alt="">
-                            <p class="text-xs text-primary">11 Januari 2021</p>
-                            <img src="/img/icon/profile.png" class="w-3 h-3 ml-2" alt="">
-                            <p class="text-xs text-primary">David Smith</p>
-                        </div>
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras blandit turpis sem, eu laoreet odio pretium ac. Mauris eget aliquet lorem.
-                        </p>
-                    </div>
-                </div>
-                <hr class="my-3 border-gray-400">
-            </div>
+                <?php endif; ?>
+            <?php endfor; ?>
         </div>
         <!-- end card berita -->
         <div class="flex gap-x-2 items-center justify-end mb-8">

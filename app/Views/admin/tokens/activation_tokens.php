@@ -21,49 +21,64 @@
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
     </div>
-    <section class="content mx-1 pb-5">
-      <div class="container-fluid">
-        <div class="response">
-        </div>
 
-        <div class="card card-secondary card-outline elevation-3">
-          <div class="card-body">
-            <div class="row">
-              <div class="col">
-                <h5><i class="fas fa-qrcode text-secondary"></i>&ensp;Activation Tokens</h5>
-              </div>
+
+    <div class="container-fluid px-4" style="font-size:small;">
+      <div class="response">
+        <?= session()->getFlashdata('status') ?>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <div class="card card-light card-outline card-outline-tabs elevation-3">
+            <div class="bg-light px-3 py-3">
+              <h5><i class="fas fa-qrcode text-secondary"></i>&ensp;Activation Tokens</h5>
             </div>
-            <br>
-            <div class="row">
-              <div class="col-md-12">
-                <table class="table table-hover table-sm text-sm" id="activations-table">
-                  <thead>
-                    <tr>
-                      <td class="text-center">No.</td>
-                      <td>Name</td>
-                      <td>Email</td>
-                      <td class="text-center">Activation Tokens</td>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <?php $i = 1; ?>
-                    <?php foreach ($data as $dataset) : ?>
-                      <tr>
-                        <td class="text-center"><?= $i ?></td>
-                        <td><?= $dataset['fullname'] ?></td>
-                        <td><?= $dataset['email'] ?></td>
-                        <td><?= $dataset['activate_hash'] ?></td>
-                      </tr>
-                      <?php $i++; ?>
-                    <?php endforeach; ?>
-                  </tbody>
-                </table>
+            <div class="card-header mt-2 p-0 border-bottom-0 ">
+              <ul class="nav nav-tabs" id="custom-tabs-four-tab" role="tablist">
+                <li class="nav-item">
+                  <a class="nav-link active text-secondary" data-toggle="pill" href="#tab1" role="tab" aria-controls="tab1" aria-selected="false">Activation Tokens List &ensp;
+                    <span class="badge bg-indigo right" title="<?= count($data) ?> Data"><i class="far fa-bell"></i>
+                      <?= count($data) ?></span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <div class="card-body">
+              <div class="tab-content">
+                <div class="tab-pane fade active show" id="tab1" role="tabpanel" aria-labelledby="tab1">
+                  <div class="row mt-3">
+                    <div class="col">
+                      <table class="table table-hover table-sm text-sm" id="activations-table">
+                        <thead>
+                          <tr>
+                            <td class="text-center">No.</td>
+                            <td>Name</td>
+                            <td>Email</td>
+                            <td class="text-center">Activation Tokens</td>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <?php $i = 1; ?>
+                          <?php foreach ($data as $dataset) : ?>
+                            <tr>
+                              <td class="text-center"><?= $i ?></td>
+                              <td><?= $dataset['fullname'] ?></td>
+                              <td><?= $dataset['email'] ?></td>
+                              <td><?= $dataset['activate_hash'] ?></td>
+                            </tr>
+                            <?php $i++; ?>
+                          <?php endforeach; ?>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </section>
+    </div>
   </div>
 </div>
 

@@ -87,16 +87,32 @@ class Validation
 		]
 	];
 
+	public $create_news = [
+		'date'     => 'required',
+		'header'   => 'required',
+		'access' => 'required|in_list[public,private,other]',
+		'author' => 'required',
+		// 'thumbnail' => 'uploaded[thumbnail]|max_size[thumbnail,1024]|mime_in[thumbnail,image/png,image/jpg]|ext_in[thumbnail,png,jpg]'
+	];
+
+	public $update_news = [
+		'date'     => 'required',
+		'header'   => 'required',
+		'access' => 'required|in_list[public,private,other]',
+		'author' => 'required',
+	];
+
+
 	public $editProfil = [
 		'telp_alumni'   => [
-			'rules' =>'required|numeric',
+			'rules' => 'required|numeric',
 			'errors' => [
 				'required'	   => 'Nomor harus diisi',
 				'numeric'      => 'Hanya berisi angka',
 			]
 		],
 		'email'			=> [
-			'rules' =>'valid_email|is_unique[alumni.email,nim,{nim}]',
+			'rules' => 'valid_email|is_unique[alumni.email,nim,{nim}]',
 			'errors' => [
 				'valid_email' => 'Tidak sesuai format email',
 				'is_unique[alumni.email]' => 'Alamat email sudah digunakan',

@@ -13,11 +13,81 @@ function format_date($date)
 }
 
 # Helper untuk mengubah format date
-function get_date()
+function get_date($hour = true)
 {
     date_default_timezone_set('Asia/Jakarta');
-    $date =  date('Y-m-d H:i:s');
+    $date = date('Y-m-d H:i:s');
+    if (!$hour) $date = date('Y-m-d');
     return $date;
+}
+
+function date_formats($date, $is_time = null)
+{
+    if (!isset($date)) return;
+    $days = [
+        'Senin',
+        'Selasa',
+        'Rabu',
+        'Kamis',
+        'Jumat',
+        'Sabtu',
+        'Minggu'
+    ];
+
+    $months = [
+        'Januari',
+        'Februari',
+        'Maret',
+        'April',
+        'Mei',
+        'Juni',
+        'Juli',
+        'Agustus',
+        'September',
+        'Oktober',
+        'November',
+        'Desember'
+    ];
+    $component_date = explode(' ', $date);
+    $date = explode('-', $component_date[0]);
+    $time = $component_date[1];
+
+    $tgl_indo = $date[2] . ' ' . $months[(int)$date[1] - 1] . ' ' . $date[0];
+
+    $num = date('N', strtotime($component_date[1]));
+    if ($is_time !== null) {
+        return $days[$num - 1] . ', ' . $tgl_indo . ' ' . $time;
+    } else {
+        return $days[$num - 1] . ', ' . $tgl_indo;
+    }
+}
+
+
+function date_short($arr)
+{
+    function _date_sort($a, $b)
+    {
+        return strtotime($a) - strtotime($b);
+    }
+    usort($arr, "_date_sort");
+    return $arr;
+}
+
+
+function in_array_help($keyword, $array, $validation = false)
+{
+    for ($i = 0; $i < count($array); $i++) {
+        if ($validation !== false) {
+            if ($array[$i] === $keyword) {
+                return $i;
+            }
+        } else {
+            if ($array[$i] == $keyword) {
+                return $i;
+            }
+        }
+    }
+    return false;
 }
 
 # Helper search array tanpa return
@@ -238,4 +308,118 @@ function show_errors($errors)
         $html .= '<li>' . $errors[$i] . '</li>';
     }
     return $html .= '</ul> <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>';
+}
+
+function time_for_comment($time)
+{
+    if (is_null($time)) return;
+    $current = explode(' ', get_date(true));
+    $current_date = explode('-', $current[0]);
+    $current_time = explode(':', $current[1]);
+
+    $comment = explode(' ', $time);
+    $comment_date = explode('-', $comment[0]);
+    $comment_time = explode(':', $comment[1]);
+
+    if ($current_date[2] == $comment_date[2]) {
+        if ($current_time[0] == $comment_time[0]) {
+            if ($current_time[1] == $comment_time[1]) {
+                $second = (int)$current_time[2] - (int)$comment_time[2];
+                if ($second === 0) {
+                    return '<span>Baru saja</span>';
+                } else {
+                    return '<span>' . $second . ' detik yang lalu</span>';
+                }
+            } else {
+                $minute = (int)$current_time[1] - (int)$comment_time[1];
+                return '<span title="Pukul ' . $comment_time[0] . '.' . $comment_time[1] . ' WIB">' . abs($minute) . ' menit yang lalu</span>';
+            }
+        } else {
+            $hour = (int)$current_time[0] - (int)$comment_time[0];
+            return '<span title="Pukul ' . $comment_time[0] . '.' . $comment_time[1] . ' WIB">' . abs($hour) . ' jam yang lalu</span>';
+        }
+    } else if ($current_date[1] == $comment_date[1]) {
+        if ($current_date[2] > $comment_date[2]) {
+            $days = (int)$current_date[2] - (int)$comment_date[2];
+            return '<span title="Tanggal ' . $comment_date[2] . '-' . $comment_date[1] . '-' . $comment_date[0] . ' Pukul ' . $comment_time[0] . '.' . $comment_time[1] . ' WIB' . '">' . $days . ' hari yang lalu</span>';
+        } else {
+            return $comment_date[2] . '-' . $comment_date[1] . '-' . $comment_date[0] . ' Pukul ' . $comment_time[0] . '.' . $comment_time[1] . ' WIB';
+        }
+    } else if ($current_date[0] == $comment_date[0]) {
+        if ($current_date[1] > $comment_date[1]) {
+            $month = (int)$current_date[1] - (int)$comment_date[1];
+            return '<span title="Tanggal ' . $comment_date[2] . '-' . $comment_date[1] . '-' . $comment_date[0] . ' Pukul ' . $comment_time[0] . '.' . $comment_time[1] . ' WIB' . '">' . $month . ' bulan yang lalu</span>';
+        } else {
+            return $comment_date[2] . '-' . $comment_date[1] . '-' . $comment_date[0] . ' Pukul ' . $comment_time[0] . '.' . $comment_time[1] . ' WIB';
+        }
+    } else {
+        if ($current_date[0] > $comment_date[0]) {
+            $year = (int)$current_date[0] - (int)$comment_date[0];
+            return '<span title="' . $comment_date[2] . '-' . $comment_date[1] . '-' . $comment_date[0] . ' Pukul ' . $comment_time[0] . '.' . $comment_time[1] . ' WIB' . '">' . $year . ' tahun yang lalu</span>';
+        } else {
+            return $comment_date[2] . '-' . $comment_date[1] . '-' . $comment_date[0] . ' Pukul ' . $comment_time[0] . '.' . $comment_time[1] . ' WIB';
+        }
+    }
+}
+
+function sortByOrder(&$array, $key, $asc = true)
+{
+    $sorter = array();
+    $ret = array();
+
+    if (!$asc) {
+        $return = array();
+        foreach ($array as $ky => $row) {
+            $return[$ky] = $row[$key];
+        }
+        array_multisort($return, SORT_DESC, $array);
+    } else {
+        reset($array);
+        foreach ($array as $ii => $va) {
+            $sorter[$ii] = $va[$key];
+        }
+        asort($sorter);
+        foreach ($sorter as $ii => $va) {
+            $ret[$ii] = $array[$ii];
+        }
+        $array = $ret;
+    }
+}
+
+function record_visits($id_news)
+{
+    $init    = model('App\Models\BeritaModel');
+    $ip      = $_SERVER['REMOTE_ADDR']; // Mendapatkan IP komputer user
+    $tanggal = get_date(false); // Mendapatkan tanggal sekarang]]['
+
+    // Mencek berdasarkan IPnya, apakah user sudah pernah mengakses hari ini
+    $ip_visit = $init->check_ip_visit($id_news, $ip, $tanggal)->getResultArray();
+    if (count($ip_visit) == 0) {
+        $init->regist_ip_visits($id_news, $ip, $tanggal);
+    } else {
+        $init->push_ip_visits($id_news, $ip, $tanggal);
+    }
+}
+
+function is_connected()
+{
+    $connected = @fsockopen("www.google.com", 80);
+    //website, port  (try 80 or 443)
+    if ($connected) {
+        $is_conn = true; //action when connected
+        fclose($connected);
+    } else {
+        $is_conn = false; //action in connection failure
+    }
+    return $is_conn;
+}
+
+function getRGBColor($num)
+{
+    $hash = md5('color' . $num); // modify 'color' to get a different palette
+    return array(
+        hexdec(substr($hash, 0, 2)), // r
+        hexdec(substr($hash, 2, 2)), // g
+        hexdec(substr($hash, 4, 2))
+    ); //b
 }
