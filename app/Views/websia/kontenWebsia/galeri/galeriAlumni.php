@@ -26,14 +26,72 @@
     <div class="py-4">
         <div class="holder p-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-4">
             <!-- Awal Tampilan Galeri (Buat ditambahkan coding sesuai gambar dari database) -->
-            <?php for ($x = 0; $x < 12; $x++) : ?>
+            <!-- <php for ($x = 0; $x < 12; $x++) : ?> -->
+            <?php $i = 0;
+            foreach ($galeri as $foto) : ?>
                 <!-- 1 gambar -->
-                <a href="#img-1">
+                <a href="#<?= $foto['id_foto']; ?>" id="foto<?= $foto['id_foto']; ?>">
                     <div class="rounded-3xl m-2 relative hover:shadow-xl transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105 cursor-pointer">
-                        <img class="albumImg w-full rounded-3xl mx-auto" src="/img/components/alumni.jpg" alt="" />
+                        <img class="albumImg w-full rounded-3xl mx-auto" src="/img/galeri/<?= $foto['nama_file']; ?>" alt="" />
                     </div>
                 </a>
-            <?php endfor; ?>
+                <!-- <php endfor; ?> -->
+
+                <div class="fixed overflow-auto top-0 bottom-0 right-0 left-0 z-40 bg-black bg-opacity-80 text-center font-paragraph hidden" id="<?= $foto['id_foto']; ?>">
+                    <div class="m-auto duration-700 transition-all bg-gray bg-opacity-0 w-11/12 sm:w-9/12 md:w-8/12 lg:w-7/12">
+
+                        <!-- Awal Tombol Laporkan foto -->
+                        <button onClick="laporkanFoto()"><img src="/img/components/icon/danger-sign.png" alt="" class="absolute top-3 right-3"></button>
+                        <!-- Akhir Tombol Laporkan foto -->
+
+                        <div class="flex flex-col justify-center items-center">
+                            <div class="flex flex-row justify-center items-center gap-x-4 mt-8 mb-6">
+                                <a href="#<?= $foto['id_foto'] - 1; ?>">
+                                    <img src="/img/components/icon/left-on.png" alt="" class="">
+                                </a>
+                                <img src="/img/galeri/<?= $foto['nama_file']; ?>" alt="" class="w-3/4">
+                                <a href="#<?= $foto['id_foto'] + 1; ?>">
+                                    <img src="/img/components/icon/right-on.png" alt="" class="">
+                                </a>
+                            </div>
+
+                            <!-- Awal Caption -->
+                            <div class="text-white w-3/4 mx-2 text-base">
+                                <!-- <p class="mb-2">Oleh : Si Fulan (59)</p> -->
+                                <p class="mb-2">Oleh : <?= $foto['publish'] ?></p>
+                                <!-- <p class="">Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam impedit optio praesentium soluta quasi. Voluptatibus molestias sequi inventore odit voluptas pariatur a ut, totam obcaecati accusamus iure, labore dolorum dolor.</p> -->
+                                <p class=""><?= $foto['caption'] ?></p>
+                            </div>
+                            <!-- Akhir Caption -->
+
+                            <div class="text-white w-3/4 mx-2 mt-10 md:text-xl">
+                                <p class="mb-2">1 dari 13</p>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <script>
+                    $('#foto<?= $foto['id_foto']; ?>').click(function() {
+                        var modal = document.getElementById('<?= $foto['id_foto']; ?>')
+                        $('#<?= $foto['id_foto']; ?>').removeClass('hidden')
+                        $(window).click(function(e) {
+                            if (e.target === modal) {
+                                setTimeout(function() {
+                                    $('#<?= $foto['id_foto']; ?>').addClass('hidden')
+                                }, 100);
+                            }
+                        });
+
+                        // $('.closeFormUnggahFoto').click(function() {
+                        //     setTimeout(function() {
+                        //         $('#formUnggahFoto').addClass('hidden')
+                        //     }, 100);
+                        // });
+                    })
+                </script>
+            <?php $i++;
+            endforeach; ?>
             <!-- Akhir Tampilan Galeri -->
         </div>
         <!-- Awal Navigasi -->

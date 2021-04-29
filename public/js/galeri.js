@@ -9,79 +9,79 @@
 //     }, 400);
 // }
 
-// awal js image viewer
-$('.albumImg').click(function () {
-    $('body').prepend(`
-    <div class="fixed overflow-auto top-0 bottom-0 right-0 left-0 z-40 bg-black bg-opacity-80 text-center font-paragraph" id="img-1">
-        <div class="hidden m-auto opacity-0 duration-700 transition-all bg-gray bg-opacity-0 w-11/12 sm:w-9/12 md:w-8/12 lg:w-7/12">
+// // awal js image viewer
+// $('.albumImg').click(function () {
+//     $('body').prepend(`
+//     <div class="fixed overflow-auto top-0 bottom-0 right-0 left-0 z-40 bg-black bg-opacity-80 text-center font-paragraph" id="img-1">
+//         <div class="hidden m-auto opacity-0 duration-700 transition-all bg-gray bg-opacity-0 w-11/12 sm:w-9/12 md:w-8/12 lg:w-7/12">
 
-            <!-- Awal Tombol Laporkan foto -->
-            <button onClick="laporkanFoto()"><img src="/img/components/icon/danger-sign.png" alt="" class="absolute top-3 right-3"></button>
-            <!-- Akhir Tombol Laporkan foto -->
+//             <!-- Awal Tombol Laporkan foto -->
+//             <button onClick="laporkanFoto()"><img src="/img/components/icon/danger-sign.png" alt="" class="absolute top-3 right-3"></button>
+//             <!-- Akhir Tombol Laporkan foto -->
 
-            <div class="flex flex-col justify-center items-center">
-                <div class="flex flex-row justify-center items-center gap-x-4 mt-8 mb-6">
-                    <a href="#img-1">
-                        <img src="/img/components/icon/left-on.png" alt="" class="">
-                    </a>
-                    <img src="/img/components/alumni.jpg" alt="" class="w-3/4">
-                    <a href="">
-                        <img src="/img/components/icon/right-on.png" alt="" class="">
-                    </a>
-                </div>
+//             <div class="flex flex-col justify-center items-center">
+//                 <div class="flex flex-row justify-center items-center gap-x-4 mt-8 mb-6">
+//                     <a href="#img-1">
+//                         <img src="/img/components/icon/left-on.png" alt="" class="">
+//                     </a>
+//                     <img src="/img/components/alumni.jpg" alt="" class="w-3/4">
+//                     <a href="">
+//                         <img src="/img/components/icon/right-on.png" alt="" class="">
+//                     </a>
+//                 </div>
 
-                <!-- Awal Caption -->
-                <div class="text-white w-3/4 mx-2 text-base">
-                    <p class="mb-2">Oleh : Si Fulan (59)</p>
-                    <p class="">Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam impedit optio praesentium soluta quasi. Voluptatibus molestias sequi inventore odit voluptas pariatur a ut, totam obcaecati accusamus iure, labore dolorum dolor.</p>
-                </div>
-                <!-- Akhir Caption -->
+//                 <!-- Awal Caption -->
+//                 <div class="text-white w-3/4 mx-2 text-base">
+//                     <p class="mb-2">Oleh : Si Fulan (59)</p>
+//                     <p class="">Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam impedit optio praesentium soluta quasi. Voluptatibus molestias sequi inventore odit voluptas pariatur a ut, totam obcaecati accusamus iure, labore dolorum dolor.</p>
+//                 </div>
+//                 <!-- Akhir Caption -->
 
-                <div class="text-white w-3/4 mx-2 mt-10 md:text-xl">
-                <p class="mb-2">1 dari 13</p>
-                </div>
+//                 <div class="text-white w-3/4 mx-2 mt-10 md:text-xl">
+//                 <p class="mb-2">1 dari 13</p>
+//                 </div>
 
-            </div>
-        </div>
-    </div>
-`)
+//             </div>
+//         </div>
+//     </div>
+// `)
 
-    $('#img-1').children().first().removeClass('hidden')
-    setTimeout(function () {
-        $('#img-1').children().first().removeClass('opacity-0')
-    }, 10);
+//     $('#img-1').children().first().removeClass('hidden')
+//     setTimeout(function () {
+//         $('#img-1').children().first().removeClass('opacity-0')
+//     }, 10);
 
-    var modal = document.getElementById('img-1')
-    $(window).click(function (e) {
-        if (e.target === modal) {
-            $('#img-1').children().first().addClass('opacity-0')
-            $('#img-1').children().first().on('transitionend MSTransitionEnd webkitTransitionEnd oTransitionEnd', function () {
-                $('#img-1').children().first().addClass('hidden')
-            });
-            setTimeout(function () {
-                $('#img-1').remove()
-            }, 400);
-        }
-    })
-})
+//     var modal = document.getElementById('img-1')
+//     $(window).click(function (e) {
+//         if (e.target === modal) {
+//             $('#img-1').children().first().addClass('opacity-0')
+//             $('#img-1').children().first().on('transitionend MSTransitionEnd webkitTransitionEnd oTransitionEnd', function () {
+//                 $('#img-1').children().first().addClass('hidden')
+//             });
+//             setTimeout(function () {
+//                 $('#img-1').remove()
+//             }, 400);
+//         }
+//     })
+// })
 
-$('#img-1').children().first().removeClass('hidden')
-setTimeout(function () {
-    $('#img-1').children().first().removeClass('opacity-0')
-}, 10);
+// $('#img-1').children().first().removeClass('hidden')
+// setTimeout(function () {
+//     $('#img-1').children().first().removeClass('opacity-0')
+// }, 10);
 
-var modal = document.getElementById('img-1')
-$(window).click(function (e) {
-    if (e.target === modal) {
-        $('#img-1').children().first().addClass('opacity-0')
-        $('#img-1').children().first().on('transitionend MSTransitionEnd webkitTransitionEnd oTransitionEnd', function () {
-            $('#img-1').children().first().addClass('hidden')
-        });
-        setTimeout(function () {
-            $('#img-1').remove()
-        }, 400);
-    }
-})
+// var modal = document.getElementById('img-1')
+// $(window).click(function (e) {
+//     if (e.target === modal) {
+//         $('#img-1').children().first().addClass('opacity-0')
+//         $('#img-1').children().first().on('transitionend MSTransitionEnd webkitTransitionEnd oTransitionEnd', function () {
+//             $('#img-1').children().first().addClass('hidden')
+//         });
+//         setTimeout(function () {
+//             $('#img-1').remove()
+//         }, 400);
+//     }
+// })
 // akhir js image viewer
 
 // // awal js unggah foto

@@ -24,12 +24,14 @@
 <div class="bg-primary">
     <div class="py-4">
         <div class="p-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-10">
-            <?php for ($x = 0; $x < 12; $x++) : ?>
+            <!-- <php for ($x = 0; $x < 12; $x++) : ?> -->
+            <?php foreach ($video as $vd) : ?>
                 <!-- 1 video -->
                 <div class="rounded-3xl m-2 relative transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105 cursor-pointer">
-                    <iframe class="h-52 w-full rounded-3xl" src="https://www.youtube.com/embed/0jic-ZWsQqw" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <iframe class="h-52 w-full rounded-3xl" src="https://www.youtube.com/embed/<?= $vd['link'] ?>" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </div>
-            <?php endfor; ?>
+                <!-- <php endfor; ?> -->
+            <?php endforeach; ?>
         </div>
         <!-- Awal Navigasi -->
         <div class="flex justify-center md:justify-end items-center mx-8 p-2 text-secondary font-paragraph">

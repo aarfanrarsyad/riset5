@@ -946,12 +946,22 @@ class User extends BaseController
 				$dt->angkatan = 0;
 			}
 		}
+
+		$galeri = $fotoModel->findAll();
+		$i = 0;
+		foreach ($galeri as $foto) {
+			$pub = $model->getAlumniById($foto['id_alumni']);
+			$galeri[$i]['publish'] = $pub['nama'];
+			$i++;
+		}
+
 		$data = [
 			'alumni' 		=> $alumni,
-			'galeri'		=> $fotoModel->findAll(),
+			'galeri'		=> $galeri,
 			'judulHalaman'	=> 'Galeri Kenangan Alumni',
 			'active' 		=> 'galeri'
 		];
+		// dd($data);
 		return view('websia/kontenWebsia/galeri/galeriAlumni', $data);
 	}
 
@@ -991,7 +1001,7 @@ class User extends BaseController
 		if (!isset($new_name)) {
 			$file = str_replace(ROOTPATH . '/public/img/galeri/', "", $file);
 			$data = [
-				'nama_file'		=> $file,
+				'nama_file'		=> $file . $ext,
 				'caption'		=> $caption,
 				'created_at'	=> $now,
 				'album' 		=> $album,
@@ -1040,8 +1050,14 @@ class User extends BaseController
 
 	public function galeriVideo()
 	{
-		$data['judulHalaman'] = 'Galeri Video Kegiatan Alumni';
-		$data['active'] = 'galeri';
+		$videoModel = new \App\Models\VideoModel;
+
+		$data = [
+			'video'			=> $videoModel->findAll(),
+			'judulHalaman'	=> 'Galeri Video Kegiatan Alumni',
+			'active' 		=> 'galeri'
+		];
+		// dd($data);
 		return view('websia/kontenWebsia/galeri/galeriVidAlumni', $data);
 	}
 
@@ -1093,7 +1109,9 @@ class User extends BaseController
 			echo $video . "<br>";
 			echo "bukan yutub";
 		}
-		die();
+		// die();
+
+		return redirect()->to(base_url('user/galeriVideo'));
 	}
 
 	function listAlbumVideo()
