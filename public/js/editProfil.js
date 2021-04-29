@@ -1,22 +1,22 @@
 // awal js edit biodata 
-$('#buttonEditTampilan').click(function (){
-    if ($('.editTampilan').hasClass('hidden')){
-       $('.editTampilan').removeClass('hidden');
-       if(!$('#checkTanggalLahir').is(':checked')){
-           $('#labelTempatLahir').addClass('text-gray-500');    
-           $('#labelTanggalLahir').addClass('text-gray-500');    
-       } 
-       if(!$('#checkEmail').is(':checked')) $('#labelEmail').addClass('text-gray-500');    
-       if(!$('#checkAlamat').is(':checked')) {
-           $('#labelAlamat').addClass('text-gray-500');    
-           $('#labelNegara').addClass('text-gray-500');    
-           $('#labelKabkot').addClass('text-gray-500');    
-           $('#labelProvinsi').addClass('text-gray-500');    
-       }
-       if(!$('#checkJabatan').is(':checked')) $('#labelJabatan').addClass('text-gray-500');    
-       if(!$('#checkInstagram').is(':checked')) $('#labelInstagram').addClass('text-gray-500');    
-       if(!$('#checkTwitter').is(':checked')) $('#labelTwitter').addClass('text-gray-500');    
-       if(!$('#checkFacebook').is(':checked')) $('#labelFacebook').addClass('text-gray-500');    
+$('#buttonEditTampilan').click(function () {
+    if ($('.editTampilan').hasClass('hidden')) {
+        $('.editTampilan').removeClass('hidden');
+        if (!$('#checkTanggalLahir').is(':checked')) {
+            $('#labelTempatLahir').addClass('text-gray-500');
+            $('#labelTanggalLahir').addClass('text-gray-500');
+        }
+        if (!$('#checkEmail').is(':checked')) $('#labelEmail').addClass('text-gray-500');
+        if (!$('#checkAlamat').is(':checked')) {
+            $('#labelAlamat').addClass('text-gray-500');
+            $('#labelNegara').addClass('text-gray-500');
+            $('#labelKabkot').addClass('text-gray-500');
+            $('#labelProvinsi').addClass('text-gray-500');
+        }
+        if (!$('#checkJabatan').is(':checked')) $('#labelJabatan').addClass('text-gray-500');
+        if (!$('#checkInstagram').is(':checked')) $('#labelInstagram').addClass('text-gray-500');
+        if (!$('#checkTwitter').is(':checked')) $('#labelTwitter').addClass('text-gray-500');
+        if (!$('#checkFacebook').is(':checked')) $('#labelFacebook').addClass('text-gray-500');
     } else {
         $('.editTampilan').addClass('hidden');
         $('#labelTempatLahir').removeClass('text-gray-500');
@@ -33,46 +33,43 @@ $('#buttonEditTampilan').click(function (){
     }
 })
 
-$('.editTampilan').click(function() {
+$('.editTampilan').click(function () {
     let id = $(this).attr('data-id');
-      if($('#check'+id).is(':checked') && id != "TanggalLahir")
-    {
-      $('#label'+id).removeClass("text-gray-500");
+    if ($('#check' + id).is(':checked') && id != "TanggalLahir") {
+        $('#label' + id).removeClass("text-gray-500");
     } else {
-      $('#label'+id).addClass("text-gray-500");
+        $('#label' + id).addClass("text-gray-500");
     }
-  });
+});
 
-$('#checkTanggalLahir').click(function(){
-    if($('#checkTanggalLahir').is(':checked'))
-    {
-      $('#labelTempatLahir').removeClass("text-gray-500");
-      $('#labelTanggalLahir').removeClass("text-gray-500");
+$('#checkTanggalLahir').click(function () {
+    if ($('#checkTanggalLahir').is(':checked')) {
+        $('#labelTempatLahir').removeClass("text-gray-500");
+        $('#labelTanggalLahir').removeClass("text-gray-500");
     } else {
-      $('#labelTempatLahir').addClass("text-gray-500");
-      $('#labelTanggalLahir').addClass("text-gray-500");
+        $('#labelTempatLahir').addClass("text-gray-500");
+        $('#labelTanggalLahir').addClass("text-gray-500");
     }
 })
 
-$('#checkAlamat').click(function(){
-    if($('#checkAlamat').is(':checked'))
-    {
-      $('#labelAlamat').removeClass("text-gray-500");
-      $('#labelNegara').removeClass("text-gray-500");
-      $('#labelKabkot').removeClass("text-gray-500");
-      $('#labelProvinsi').removeClass("text-gray-500");
+$('#checkAlamat').click(function () {
+    if ($('#checkAlamat').is(':checked')) {
+        $('#labelAlamat').removeClass("text-gray-500");
+        $('#labelNegara').removeClass("text-gray-500");
+        $('#labelKabkot').removeClass("text-gray-500");
+        $('#labelProvinsi').removeClass("text-gray-500");
     } else {
-      $('#labelAlamat').addClass("text-gray-500");
-      $('#labelNegara').addClass("text-gray-500");
-      $('#labelKabkot').addClass("text-gray-500");
-      $('#labelProvinsi').addClass("text-gray-500");
+        $('#labelAlamat').addClass("text-gray-500");
+        $('#labelNegara').addClass("text-gray-500");
+        $('#labelKabkot').addClass("text-gray-500");
+        $('#labelProvinsi').addClass("text-gray-500");
     }
 })
 
 $('.updateFotoProfil').click(function () {
     $('body').prepend(`
     <div class="fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40" id='formEditFoto'>
-        <div class="hidden opacity-0 duration-700 transition-all md:w-1/4 w-2/3 bg-gray bg-opacity-0"> 
+        <div class="hidden transform scale-0 opacity-0 duration-300 transition-all md:w-1/4 w-2/3 bg-gray bg-opacity-0"> 
         <div class="bg-primary py-2.5 px-6 rounded-t-2xl flex items-center justify-center text-secondary text-sm">
             <p class="font-bold font-heading">Ubah Foto Profil</p>
         </div>
@@ -89,11 +86,11 @@ $('.updateFotoProfil').click(function () {
 
     $('#formEditFoto').children().first().removeClass('hidden')
     setTimeout(function () {
-        $('#formEditFoto').children().first().removeClass('opacity-0')
+        $('#formEditFoto').children().first().removeClass('opacity-0 scale-0')
     }, 10);
 
     $('.closeEditFoto').click(function () {
-        $('#formEditFoto').children().first().addClass('opacity-0')
+        $('#formEditFoto').children().first().addClass('opacity-0 scale-0')
         $('#formEditFoto').children().first().on('transitionend MSTransitionEnd webkitTransitionEnd oTransitionEnd', function () {
             $('#formEditFoto').children().first().addClass('hidden')
         });
@@ -105,7 +102,7 @@ $('.updateFotoProfil').click(function () {
     var modal = document.getElementById('formEditFoto')
     $(window).click(function (e) {
         if (e.target === modal) {
-            $('#formEditFoto').children().first().addClass('opacity-0')
+            $('#formEditFoto').children().first().addClass('opacity-0 scale-0')
             $('#formEditFoto').children().first().on('transitionend MSTransitionEnd webkitTransitionEnd oTransitionEnd', function () {
                 $('#formEditFoto').children().first().addClass('hidden')
             });
@@ -119,7 +116,7 @@ $('.updateFotoProfil').click(function () {
         $('#formEditFoto').remove()
         $('body').prepend(`
          <div class="fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40 font-paragraph grid-cols-none" id='formUnggahFoto'>
-        <div class= "duration-700 transition-all xl:w-1/2 lg:w-7/12 md:w-2/3 sm:w-3/4 w-11/12 bg-gray bg-opacity-0">
+        <div class= "hidden transform scale-0 duration-300 transition-all xl:w-1/2 lg:w-7/12 md:w-2/3 sm:w-3/4 w-11/12 bg-gray bg-opacity-0">
         <div class="bg-primary py-2 px-6 rounded-t-2xl flex items-center justify-between text-secondary md:text-xl sm:text-base">
         <p class="font-heading font-bold">Unggah Foto</p>
         <svg class="closeUnggah lg:w-10 md:w-8 sm:w-7 w-6 fill-current cursor-pointer" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -140,21 +137,25 @@ $('.updateFotoProfil').click(function () {
         </div>
     </div>
          `)
-         var modal = document.getElementById('formUnggahFoto')
-         $(window).click(function (e) {
-             if (e.target === modal) {
-                 $('#formUnggahFoto').children().first().addClass('opacity-0')
-                 $('#formUnggahFoto').children().first().on('transitionend MSTransitionEnd webkitTransitionEnd oTransitionEnd', function () {
-                     $('#formUnggahFoto').children().first().addClass('hidden')
-                 });
-                 setTimeout(function () {
-                     $('#formUnggahFoto').remove()
-                 }, 400);
-             }
-         })
+        $('#formUnggahFoto').children().first().removeClass('hidden')
+        setTimeout(function () {
+            $('#formUnggahFoto').children().first().removeClass('opacity-0 scale-0')
+        }, 10);
+        var modal = document.getElementById('formUnggahFoto')
+        $(window).click(function (e) {
+            if (e.target === modal) {
+                $('#formUnggahFoto').children().first().addClass('opacity-0 scale-0')
+                $('#formUnggahFoto').children().first().on('transitionend MSTransitionEnd webkitTransitionEnd oTransitionEnd', function () {
+                    $('#formUnggahFoto').children().first().addClass('hidden')
+                });
+                setTimeout(function () {
+                    $('#formUnggahFoto').remove()
+                }, 400);
+            }
+        })
 
-         $('.closeUnggah').click(function () {
-            $('#formUnggahFoto').children().first().addClass('opacity-0')
+        $('.closeUnggah').click(function () {
+            $('#formUnggahFoto').children().first().addClass('opacity-0 scale-0')
             $('#formUnggahFoto').children().first().on('transitionend MSTransitionEnd webkitTransitionEnd oTransitionEnd', function () {
                 $('#formUnggahFoto').children().first().addClass('hidden')
             });
@@ -169,7 +170,7 @@ $('.updateFotoProfil').click(function () {
         $('#formEditFoto').remove()
         $("body").prepend(`
         <div class="fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40 font-paragraph" id='formHapus'>
-            <div class="hidden opacity-0 duration-700 transition-all bg-gray bg-opacity-0">
+            <div class="hidden transform scale-0 opacity-0 duration-300 transition-all bg-gray bg-opacity-0">
                 <div class="bg-white rounded-2xl flex flex-col justify-center pt-3 pb-4 sm:px-8 px-3">
                     <p class="font-bold sm:text-lg text-base mb-6">Apakah Anda yakin ingin menghapus foto profil Anda?</p>
                     <form action="/User/hapusFotoProfil" class="text-white flex justify-end">
@@ -182,11 +183,11 @@ $('.updateFotoProfil').click(function () {
         `);
         $('#formHapus').children().first().removeClass('hidden')
         setTimeout(function () {
-            $('#formHapus').children().first().removeClass('opacity-0')
+            $('#formHapus').children().first().removeClass('opacity-0 scale-0')
         }, 10);
-    
+
         $('.buttonBatal').click(function () {
-            $('#formHapus').children().first().addClass('opacity-0')
+            $('#formHapus').children().first().addClass('opacity-0 scale-0')
             $('#formHapus').children().first().on('transitionend MSTransitionEnd webkitTransitionEnd oTransitionEnd', function () {
                 $('#formHapus').children().first().addClass('hidden')
             });
@@ -194,11 +195,11 @@ $('.updateFotoProfil').click(function () {
                 $('#formHapus').remove()
             }, 400);
         })
-    
+
         var modal = document.getElementById('formHapus')
         $(window).click(function (e) {
             if (e.target === modal) {
-                $('#formHapus').children().first().addClass('opacity-0')
+                $('#formHapus').children().first().addClass('opacity-0 scale-0')
                 $('#formHapus').children().first().on('transitionend MSTransitionEnd webkitTransitionEnd oTransitionEnd', function () {
                     $('#formHapus').children().first().addClass('hidden')
                 });
@@ -230,22 +231,23 @@ $(".sort").click(function () {
 // akhir js sorting
 
 // awal js edit pendidikan
-$('#buttonEditTampilanPendidikan').click(function(){
-    if ($('.editTampilanPendidikan').hasClass('hidden')){
+$('#buttonEditTampilanPendidikan').click(function () {
+    if ($('.editTampilanPendidikan').hasClass('hidden')) {
         $('.editTampilanPendidikan').removeClass('hidden');
-        if($('#checkPendidikan').is(':checked')){
+        if ($('#checkPendidikan').is(':checked')) {
             $('#labelCheckPendidikan').addClass('text-primary');
         }
     } else $('.editTampilanPendidikan').addClass('hidden');
 })
 
-$('#checkPendidikan').click(function(){
-    if($('#checkPendidikan').is(':checked')){
+$('#checkPendidikan').click(function () {
+    if ($('#checkPendidikan').is(':checked')) {
         $('#labelCheckPendidikan').addClass('text-primary');
     } else $('#labelCheckPendidikan').removeClass('text-primary');
 })
 
 function formPendidikan(
+<<<<<<< HEAD
   id,
   jenjang,
   instansi,
@@ -255,10 +257,21 @@ function formPendidikan(
   angkatan,
   nim,
   tulisan
+=======
+    id,
+    jenjang,
+    univ,
+    studi,
+    masuk,
+    lulus,
+    angkatan,
+    nim,
+    tulisan
+>>>>>>> 8285f30ad27c727955b8d002fad38de1bd201dd3
 ) {
-  $("body").prepend(`
+    $("body").prepend(`
     <div class="fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40 font-paragraph" id='formEditPendidikan'>
-        <div class="hidden opacity-0 duration-700 transition-all xl:w-1/2 lg:w-7/12 md:w-2/3 sm:w-3/4 w-11/12 bg-gray bg-opacity-0">
+        <div class="hidden transform scale-0 opacity-0 duration-300 transition-all xl:w-1/2 lg:w-7/12 md:w-2/3 sm:w-3/4 w-11/12 bg-gray bg-opacity-0">
             <div class="bg-primary py-4 px-6 rounded-t-2xl flex items-center justify-between text-secondary text-2xl">
                 <p class="font-heading font-bold">Edit Pendidikan</p>
                 <svg class="closePendidikan lg:w-10 md:w-8 sm:w-7 w-6 fill-current cursor-pointer" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -312,23 +325,9 @@ function formPendidikan(
     </div>
     `);
 
-  $("#formEditPendidikan").children().first().removeClass("hidden");
-  setTimeout(function () {
-    $("#formEditPendidikan").children().first().removeClass("opacity-0");
-  }, 10);
-
-  $(".closePendidikan").click(function () {
-    $("#formEditPendidikan").children().first().addClass("opacity-0");
-    $("#formEditPendidikan")
-      .children()
-      .first()
-      .on(
-        "transitionend MSTransitionEnd webkitTransitionEnd oTransitionEnd",
-        function () {
-          $("#formEditPendidikan").children().first().addClass("hidden");
-        }
-      );
+    $("#formEditPendidikan").children().first().removeClass("hidden");
     setTimeout(function () {
+<<<<<<< HEAD
       $("#formEditPendidikan").remove();
     }, 400);
   });
@@ -361,12 +360,61 @@ function formPendidikan(
   $("#editAngkatan").val(angkatan);
   $("#editNIM").val(nim);
   $("#editTulisan").val(tulisan);
+=======
+        $("#formEditPendidikan").children().first().removeClass("opacity-0 scale-0");
+    }, 10);
+
+    $(".closePendidikan").click(function () {
+        $("#formEditPendidikan").children().first().addClass("opacity-0 scale-0");
+        $("#formEditPendidikan")
+            .children()
+            .first()
+            .on(
+                "transitionend MSTransitionEnd webkitTransitionEnd oTransitionEnd",
+                function () {
+                    $("#formEditPendidikan").children().first().addClass("hidden");
+                }
+            );
+        setTimeout(function () {
+            $("#formEditPendidikan").remove();
+        }, 400);
+    });
+
+    var modal = document.getElementById("formEditPendidikan");
+    $(window).click(function (e) {
+        if (e.target === modal) {
+            $("#formEditPendidikan").children().first().addClass("opacity-0 scale-0");
+            $("#formEditPendidikan")
+                .children()
+                .first()
+                .on(
+                    "transitionend MSTransitionEnd webkitTransitionEnd oTransitionEnd",
+                    function () {
+                        $("#formEditPendidikan").children().first().addClass("hidden");
+                    }
+                );
+            setTimeout(function () {
+                $("#formEditPendidikan").remove();
+            }, 400);
+        }
+    });
+
+    $("#editId").val(id);
+    $("#editJenjang").val(jenjang);
+    $("#editUniversitas").val(univ);
+    $("#editStudi").val(studi);
+    $("#editMasuk").val(masuk);
+    $("#editLulus").val(lulus);
+    $("#editAngkatan").val(angkatan);
+    $("#editNIM").val(nim);
+    $("#editTulisan").val(tulisan);
+>>>>>>> 8285f30ad27c727955b8d002fad38de1bd201dd3
 }
 
 $('.tambahPendidikan').click(function () {
     $("body").prepend(`
     <div class="fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40 font-paragraph" id='formTambahPendidikan'>
-        <div class="hidden opacity-0 duration-700 transition-all xl:w-1/2 lg:w-7/12 md:w-2/3 sm:w-3/4 w-11/12 bg-gray bg-opacity-0">
+        <div class="hidden transform scale-0 opacity-0 duration-300 transition-all xl:w-1/2 lg:w-7/12 md:w-2/3 sm:w-3/4 w-11/12 bg-gray bg-opacity-0">
             <div class="bg-primary py-4 px-6 rounded-t-2xl flex items-center justify-between text-secondary text-2xl">
                 <p class="font-heading font-bold">Tambah Pendidikan</p>
                 <svg class="closePendidikan lg:w-10 md:w-8 sm:w-7 w-6 fill-current cursor-pointer" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -417,11 +465,11 @@ $('.tambahPendidikan').click(function () {
 
     $('#formTambahPendidikan').children().first().removeClass('hidden')
     setTimeout(function () {
-        $('#formTambahPendidikan').children().first().removeClass('opacity-0')
+        $('#formTambahPendidikan').children().first().removeClass('opacity-0 scale-0')
     }, 10);
 
     $('.closePendidikan').click(function () {
-        $('#formTambahPendidikan').children().first().addClass('opacity-0')
+        $('#formTambahPendidikan').children().first().addClass('opacity-0 scale-0')
         $('#formTambahPendidikan').children().first().on('transitionend MSTransitionEnd webkitTransitionEnd oTransitionEnd', function () {
             $('#formTambahPendidikan').children().first().addClass('hidden')
         });
@@ -433,7 +481,7 @@ $('.tambahPendidikan').click(function () {
     var modal = document.getElementById('formTambahPendidikan')
     $(window).click(function (e) {
         if (e.target === modal) {
-            $('#formTambahPendidikan').children().first().addClass('opacity-0')
+            $('#formTambahPendidikan').children().first().addClass('opacity-0 scale-0')
             $('#formTambahPendidikan').children().first().on('transitionend MSTransitionEnd webkitTransitionEnd oTransitionEnd', function () {
                 $('#formTambahPendidikan').children().first().addClass('hidden')
             });
@@ -445,10 +493,10 @@ $('.tambahPendidikan').click(function () {
 
 })
 
-function hapusPendidikan(id){
+function hapusPendidikan(id) {
     $('body').prepend(`
     <div class="fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40 font-paragraph" id='formHapus'>
-        <div class="hidden opacity-0 duration-700 transition-all bg-gray bg-opacity-0">
+        <div class="hidden transform scale-0 opacity-0 duration-300 transition-all bg-gray bg-opacity-0">
             <div class="bg-white rounded-2xl flex flex-col justify-center pt-3 pb-4 sm:px-8 px-3">
                 <p class="font-bold sm:text-lg text-base mb-6">Apakah Anda yakin ingin menghapus data pendidikan ini?</p>
                 <form action="/User/deletePendidikan" method="POST" class="text-white flex justify-end">
@@ -464,11 +512,11 @@ function hapusPendidikan(id){
 
     $('#formHapus').children().first().removeClass('hidden')
     setTimeout(function () {
-        $('#formHapus').children().first().removeClass('opacity-0')
+        $('#formHapus').children().first().removeClass('opacity-0 scale-0')
     }, 10);
 
     $('.buttonBatal').click(function () {
-        $('#formHapus').children().first().addClass('opacity-0')
+        $('#formHapus').children().first().addClass('opacity-0 scale-0')
         $('#formHapus').children().first().on('transitionend MSTransitionEnd webkitTransitionEnd oTransitionEnd', function () {
             $('#formHapus').children().first().addClass('hidden')
         });
@@ -480,7 +528,7 @@ function hapusPendidikan(id){
     var modal = document.getElementById('formHapus')
     $(window).click(function (e) {
         if (e.target === modal) {
-            $('#formHapus').children().first().addClass('opacity-0')
+            $('#formHapus').children().first().addClass('opacity-0 scale-0')
             $('#formHapus').children().first().on('transitionend MSTransitionEnd webkitTransitionEnd oTransitionEnd', function () {
                 $('#formHapus').children().first().addClass('hidden')
             });
@@ -493,7 +541,7 @@ function hapusPendidikan(id){
 // akhir js edit pendidikan
 
 // awal js edit tempat kerja
-document.querySelector('input[list]').addEventListener('input', function(e) {
+document.querySelector('input[list]').addEventListener('input', function (e) {
     var input = e.target,
         list = input.getAttribute('list'),
         options = document.querySelectorAll('#' + list + ' option'),
@@ -534,17 +582,17 @@ $('.kembaliInstansi').click(function () {
 // akhir js edit tempat kerja
 
 // awal js edit prestasi
-function buttonEditTampilanPrestasi(){
-    if ($('.editTampilanPrestasi').hasClass('hidden')){
+function buttonEditTampilanPrestasi() {
+    if ($('.editTampilanPrestasi').hasClass('hidden')) {
         $('.editTampilanPrestasi').removeClass('hidden');
-        if($('#checkPrestasi').is(':checked')){
+        if ($('#checkPrestasi').is(':checked')) {
             $('#labelCheckPrestasi').addClass('text-primary');
         }
     } else $('.editTampilanPrestasi').addClass('hidden');
 }
 
-function checkPrestasi(){
-    if($('#checkPrestasi').is(':checked')){
+function checkPrestasi() {
+    if ($('#checkPrestasi').is(':checked')) {
         $('#labelCheckPrestasi').addClass('text-primary');
     } else $('#labelCheckPrestasi').removeClass('text-primary');
 }
@@ -552,7 +600,7 @@ function checkPrestasi(){
 function formPrestasi(id, prestasi, tahun) {
     $('body').prepend(`
     <div class="fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40" id='formEditPrestasi'>
-        <div class="hidden opacity-0 duration-700 transition-all xl:w-1/2 lg:w-7/12 md:w-2/3 sm:w-3/4 w-11/12 bg-gray bg-opacity-0 font-paragraph">
+        <div class="hidden transform scale-0 opacity-0 duration-300 transition-all xl:w-1/2 lg:w-7/12 md:w-2/3 sm:w-3/4 w-11/12 bg-gray bg-opacity-0 font-paragraph">
         <div class="bg-primary py-4 px-6 rounded-t-2xl flex items-center justify-between text-secondary text-2xl">
             <p class="font-heading font-bold">Edit Prestasi</p>
             <svg class="closePrestasi lg:w-10 md:w-8 sm:w-7 w-6 fill-current cursor-pointer" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -578,11 +626,11 @@ function formPrestasi(id, prestasi, tahun) {
 
     $('#formEditPrestasi').children().first().removeClass('hidden')
     setTimeout(function () {
-        $('#formEditPrestasi').children().first().removeClass('opacity-0')
+        $('#formEditPrestasi').children().first().removeClass('opacity-0 scale-0')
     }, 10);
 
     $('.closePrestasi').click(function () {
-        $('#formEditPrestasi').children().first().addClass('opacity-0')
+        $('#formEditPrestasi').children().first().addClass('opacity-0 scale-0')
         $('#formEditPrestasi').children().first().on('transitionend MSTransitionEnd webkitTransitionEnd oTransitionEnd', function () {
             $('#formEditPrestasi').children().first().addClass('hidden')
         });
@@ -594,7 +642,7 @@ function formPrestasi(id, prestasi, tahun) {
     var modal = document.getElementById('formEditPrestasi')
     $(window).click(function (e) {
         if (e.target === modal) {
-            $('#formEditPrestasi').children().first().addClass('opacity-0')
+            $('#formEditPrestasi').children().first().addClass('opacity-0 scale-0')
             $('#formEditPrestasi').children().first().on('transitionend MSTransitionEnd webkitTransitionEnd oTransitionEnd', function () {
                 $('#formEditPrestasi').children().first().addClass('hidden')
             });
@@ -609,10 +657,10 @@ function formPrestasi(id, prestasi, tahun) {
     $('#editTahun').val(tahun);
 }
 
-function tambahPrestasi(){
+function tambahPrestasi() {
     $('body').prepend(`
     <div class="fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40" id='formTambahPrestasi'>
-        <div class="hidden opacity-0 duration-700 transition-all xl:w-1/2 lg:w-7/12 md:w-2/3 sm:w-3/4 w-11/12 bg-gray bg-opacity-0 font-paragraph">
+        <div class="hidden transform scale-0 opacity-0 duration-300 transition-all xl:w-1/2 lg:w-7/12 md:w-2/3 sm:w-3/4 w-11/12 bg-gray bg-opacity-0 font-paragraph">
         <div class="bg-primary py-4 px-6 rounded-t-2xl flex items-center justify-between text-secondary text-2xl">
             <p class="font-heading font-bold">Tambah Prestasi</p>
             <svg class="closePrestasi lg:w-10 md:w-8 sm:w-7 w-6 fill-current cursor-pointer" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -637,11 +685,11 @@ function tambahPrestasi(){
 
     $('#formTambahPrestasi').children().first().removeClass('hidden')
     setTimeout(function () {
-        $('#formTambahPrestasi').children().first().removeClass('opacity-0')
+        $('#formTambahPrestasi').children().first().removeClass('opacity-0 scale-0')
     }, 10);
 
     $('.closePrestasi').click(function () {
-        $('#formTambahPrestasi').children().first().addClass('opacity-0')
+        $('#formTambahPrestasi').children().first().addClass('opacity-0 scale-0')
         $('#formTambahPrestasi').children().first().on('transitionend MSTransitionEnd webkitTransitionEnd oTransitionEnd', function () {
             $('#formTambahPrestasi').children().first().addClass('hidden')
         });
@@ -653,7 +701,7 @@ function tambahPrestasi(){
     var modal = document.getElementById('formTambahPrestasi')
     $(window).click(function (e) {
         if (e.target === modal) {
-            $('#formTambahPrestasi').children().first().addClass('opacity-0')
+            $('#formTambahPrestasi').children().first().addClass('opacity-0 scale-0')
             $('#formTambahPrestasi').children().first().on('transitionend MSTransitionEnd webkitTransitionEnd oTransitionEnd', function () {
                 $('#formTambahPrestasi').children().first().addClass('hidden')
             });
@@ -665,10 +713,10 @@ function tambahPrestasi(){
 
 }
 
-function hapusPrestasi(id){
+function hapusPrestasi(id) {
     $('body').prepend(`
     <div class="fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40 font-paragraph" id='formHapus'>
-        <div class="hidden opacity-0 duration-700 transition-all bg-gray bg-opacity-0">
+        <div class="hidden transform scale-0 opacity-0 duration-300 transition-all bg-gray bg-opacity-0">
             <div class="bg-white rounded-2xl flex flex-col justify-center pt-3 pb-4 sm:px-8 px-3">
                 <p class="font-bold sm:text-lg text-base mb-6">Apakah Anda yakin ingin menghapus data prestasi ini?</p>
                 <form action="/User/deletePrestasi" method="POST" class="text-white flex justify-end">
@@ -684,11 +732,11 @@ function hapusPrestasi(id){
 
     $('#formHapus').children().first().removeClass('hidden')
     setTimeout(function () {
-        $('#formHapus').children().first().removeClass('opacity-0')
+        $('#formHapus').children().first().removeClass('opacity-0 scale-0')
     }, 10);
 
     $('.buttonBatal').click(function () {
-        $('#formHapus').children().first().addClass('opacity-0')
+        $('#formHapus').children().first().addClass('opacity-0 scale-0')
         $('#formHapus').children().first().on('transitionend MSTransitionEnd webkitTransitionEnd oTransitionEnd', function () {
             $('#formHapus').children().first().addClass('hidden')
         });
@@ -700,7 +748,7 @@ function hapusPrestasi(id){
     var modal = document.getElementById('formHapus')
     $(window).click(function (e) {
         if (e.target === modal) {
-            $('#formHapus').children().first().addClass('opacity-0')
+            $('#formHapus').children().first().addClass('opacity-0 scale-0')
             $('#formHapus').children().first().on('transitionend MSTransitionEnd webkitTransitionEnd oTransitionEnd', function () {
                 $('#formHapus').children().first().addClass('hidden')
             });
@@ -716,7 +764,7 @@ function hapusPrestasi(id){
 function formPublikasi(id, topik, publisher, tanggal, deskripsi) {
     $('body').prepend(`
     <div class="fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40 font-paragraph" id='formEditPublikasi'>
-        <div class="hidden opacity-0 duration-700 transition-all xl:w-1/2 lg:w-7/12 md:w-2/3 sm:w-3/4 w-11/12 bg-gray bg-opacity-0">
+        <div class="hidden transform scale-0 opacity-0 duration-300 transition-all xl:w-1/2 lg:w-7/12 md:w-2/3 sm:w-3/4 w-11/12 bg-gray bg-opacity-0">
             <div class="bg-primary py-4 px-6 rounded-t-2xl flex items-center justify-between text-secondary text-2xl">
                 <p class="font-heading font-bold">Edit Publikasi</p>
                 <svg class="closePublikasi lg:w-10 md:w-8 sm:w-7 w-6 fill-current cursor-pointer" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -750,11 +798,11 @@ function formPublikasi(id, topik, publisher, tanggal, deskripsi) {
 
     $('#formEditPublikasi').children().first().removeClass('hidden')
     setTimeout(function () {
-        $('#formEditPublikasi').children().first().removeClass('opacity-0')
+        $('#formEditPublikasi').children().first().removeClass('opacity-0 scale-0')
     }, 10);
 
     $('.closePublikasi').click(function () {
-        $('#formEditPublikasi').children().first().addClass('opacity-0')
+        $('#formEditPublikasi').children().first().addClass('opacity-0 scale-0')
         $('#formEditPublikasi').children().first().on('transitionend MSTransitionEnd webkitTransitionEnd oTransitionEnd', function () {
             $('#formEditPublikasi').children().first().addClass('hidden')
         });
@@ -766,7 +814,7 @@ function formPublikasi(id, topik, publisher, tanggal, deskripsi) {
     var modal = document.getElementById('formEditPublikasi')
     $(window).click(function (e) {
         if (e.target === modal) {
-            $('#formEditPublikasi').children().first().addClass('opacity-0')
+            $('#formEditPublikasi').children().first().addClass('opacity-0 scale-0')
             $('#formEditPublikasi').children().first().on('transitionend MSTransitionEnd webkitTransitionEnd oTransitionEnd', function () {
                 $('#formEditPublikasi').children().first().addClass('hidden')
             });
@@ -785,10 +833,10 @@ function formPublikasi(id, topik, publisher, tanggal, deskripsi) {
 
 }
 
-function tambahPublikasi(){
+function tambahPublikasi() {
     $('body').prepend(`
     <div class="fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40 font-paragraph" id='formTambahPublikasi'>
-        <div class="hidden opacity-0 duration-700 transition-all xl:w-1/2 lg:w-7/12 md:w-2/3 sm:w-3/4 w-11/12 bg-gray bg-opacity-0">
+        <div class="hidden transform scale-0 opacity-0 duration-300 transition-all xl:w-1/2 lg:w-7/12 md:w-2/3 sm:w-3/4 w-11/12 bg-gray bg-opacity-0">
             <div class="bg-primary py-4 px-6 rounded-t-2xl flex items-center justify-between text-secondary text-2xl">
                 <p class="font-heading font-bold">Tambah Publikasi</p>
                 <svg class="closePublikasi lg:w-10 md:w-8 sm:w-7 w-6 fill-current cursor-pointer" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -821,11 +869,11 @@ function tambahPublikasi(){
 
     $('#formTambahPublikasi').children().first().removeClass('hidden')
     setTimeout(function () {
-        $('#formTambahPublikasi').children().first().removeClass('opacity-0')
+        $('#formTambahPublikasi').children().first().removeClass('opacity-0 scale-0')
     }, 10);
 
     $('.closePublikasi').click(function () {
-        $('#formTambahPublikasi').children().first().addClass('opacity-0')
+        $('#formTambahPublikasi').children().first().addClass('opacity-0 scale-0')
         $('#formTambahPublikasi').children().first().on('transitionend MSTransitionEnd webkitTransitionEnd oTransitionEnd', function () {
             $('#formTambahPublikasi').children().first().addClass('hidden')
         });
@@ -837,7 +885,7 @@ function tambahPublikasi(){
     var modal = document.getElementById('formTambahPublikasi')
     $(window).click(function (e) {
         if (e.target === modal) {
-            $('#formTambahPublikasi').children().first().addClass('opacity-0')
+            $('#formTambahPublikasi').children().first().addClass('opacity-0 scale-0')
             $('#formTambahPublikasi').children().first().on('transitionend MSTransitionEnd webkitTransitionEnd oTransitionEnd', function () {
                 $('#formTambahPublikasi').children().first().addClass('hidden')
             });
@@ -849,10 +897,10 @@ function tambahPublikasi(){
 
 }
 
-function hapusPublikasi(){
+function hapusPublikasi() {
     $('body').prepend(`
     <div class="fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40 font-paragraph" id='formHapus'>
-        <div class="hidden opacity-0 duration-700 transition-all bg-gray bg-opacity-0">
+        <div class="hidden transform scale-0 opacity-0 duration-300 transition-all bg-gray bg-opacity-0">
             <div class="bg-white rounded-2xl flex flex-col justify-center pt-3 pb-4 sm:px-8 px-3">
                 <p class="font-bold sm:text-lg text-base mb-6">Apakah Anda yakin ingin menghapus data publikasi ini?</p>
                 <div class="text-white flex justify-end">
@@ -865,11 +913,11 @@ function hapusPublikasi(){
     `)
     $('#formHapus').children().first().removeClass('hidden')
     setTimeout(function () {
-        $('#formHapus').children().first().removeClass('opacity-0')
+        $('#formHapus').children().first().removeClass('opacity-0 scale-0')
     }, 10);
 
     $('.buttonBatal').click(function () {
-        $('#formHapus').children().first().addClass('opacity-0')
+        $('#formHapus').children().first().addClass('opacity-0 scale-0')
         $('#formHapus').children().first().on('transitionend MSTransitionEnd webkitTransitionEnd oTransitionEnd', function () {
             $('#formHapus').children().first().addClass('hidden')
         });
@@ -881,7 +929,7 @@ function hapusPublikasi(){
     var modal = document.getElementById('formHapus')
     $(window).click(function (e) {
         if (e.target === modal) {
-            $('#formHapus').children().first().addClass('opacity-0')
+            $('#formHapus').children().first().addClass('opacity-0 scale-0')
             $('#formHapus').children().first().on('transitionend MSTransitionEnd webkitTransitionEnd oTransitionEnd', function () {
                 $('#formHapus').children().first().addClass('hidden')
             });

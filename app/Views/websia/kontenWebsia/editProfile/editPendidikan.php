@@ -14,7 +14,7 @@ if ($checked->cpendidikan == 0) {
     }
 </style>
 
-<div class="w-full bg-white min-h-screen" id="pagePendidikan">
+<div class="w-full bg-white mb-8" id="pagePendidikan">
     <div class="flex justify-end w-full mb-4 w-36">
         <div class="bg-secondary hover:bg-secondaryhover text-white lg:py-1.5 py-1 px-3 lg:text-sm text-xs outline-none cursor-pointer rounded-full flex gap-x-2 items-center" id="buttonEditTampilanPendidikan">
             <div>

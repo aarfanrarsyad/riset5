@@ -2,7 +2,7 @@
 
 <?= $this->section('contentEdit'); ?>
 <div class="shadow-2xl rounded-3xl mb-8">
-    <div class="p-6 font-paragraph text-primary lg:min-h-screen">
+    <div class="p-6 font-paragraph text-primary">
         <!-- start form edit tempat kerja -->
         <!-- kalau nama instansi ada di database -->
         <div>

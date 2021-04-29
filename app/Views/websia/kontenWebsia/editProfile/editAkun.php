@@ -2,7 +2,7 @@
 
 <?= $this->section('contentEdit'); ?>
 <div class="shadow-2xl rounded-3xl mb-8">
-    <div class="p-6 font-paragraph text-primary lg:min-h-screen">
+    <div class="p-6 font-paragraph text-primary">
         <!-- start form edit akun -->
         <form action="/User/updateAkun" method="POST" id="formEditAkun">
             <!-- tambahin form actionnya ya -->
@@ -11,28 +11,28 @@
                 <div class="text-black font-heading font-normal mb-2"><?= $user->email ?></div>
                 <label for="passbaru" class="font-medium">Kata Sandi Baru:</label>
                 <?php if (session()->getFlashdata('error-new_password') != "") { ?>
-                <p class="text-xs text-red-500 text-justify" id="errorPassBaru">
-                <?= session('error-new_password') ?>
-                </p>
+                    <p class="text-xs text-red-500 text-justify" id="errorPassBaru">
+                        <?= session('error-new_password') ?>
+                    </p>
                 <?php } ?>
                 <input type="password" name="passbaru" id="passbaru" class="inputForm" placeholder="🞄🞄🞄🞄🞄🞄🞄🞄" required>
                 <label for="ulangpassbaru" class="font-medium">Ketik Ulang Kata Sandi Baru:</label>
                 <?php if (session()->getFlashdata('error-conf_password') != "") { ?>
-                <p class="text-xs text-red-500 text-justify" id="errorValidPasss">
-                <?= session('error-conf_password') ?>
-                </p>
+                    <p class="text-xs text-red-500 text-justify" id="errorValidPasss">
+                        <?= session('error-conf_password') ?>
+                    </p>
                 <?php } ?>
                 <input type="password" name="ulangpassbaru" id="ulangpassbaru" class="inputForm" placeholder="🞄🞄🞄🞄🞄🞄🞄🞄" required>
                 <div class="text-secondary text-xs mt-6 mb-2 text-justify">Silakan Masukkan Kata Sandi Lama Anda untuk Verifikasi!</div>
                 <label for="passlama" class="font-medium">Kata Sandi Lama:</label>
                 <?php if (session()->getFlashdata('edit-pass-fail')) { ?>
-                <p class="text-xs text-red-500 text-justify" id="errorValidPasss">
-                <?= session()->getFlashdata('edit-pass-fail') ?>
-                </p>
+                    <p class="text-xs text-red-500 text-justify" id="errorValidPasss">
+                        <?= session()->getFlashdata('edit-pass-fail') ?>
+                    </p>
                 <?php } ?>
                 <input type="password" name="passlama" id="passlama" class="inputForm" placeholder="🞄🞄🞄🞄🞄🞄🞄🞄" required>
             </div>
-            <div class="flex justify-end md:mb-6 mt-48">
+            <div class="flex justify-end md:mt-12 md:mb-8 mt-8 mb-1">
                 <input type="submit" value="SIMPAN" class="w-24 text-center py-1 bg-secondary hover:bg-secondaryhover text-white rounded-full cursor-pointer focus:outline-none" id="submitAkun">
             </div>
         </form>
@@ -44,36 +44,36 @@
 <!-- kalau mau ngecek hilangin kelas hidden sama opacity-0 nya-->
 
 <?php if (session()->getFlashdata('edit-pass-success')) { ?>
-<!-- BERHASIL edit akun -->
-<div id="berhasilEditAkun">
-    <div class="fixed top-0 bottom-0 right-0 left-0 z-50 justify-center items-center bg-black bg-opacity-40">
-        <div class="duration-700 transition-all p-3 rounded-lg flex items-center" style="background-color: #B1FF66;">
-            <img src="/img/components/icon/check.png" class="h-5 mr-2" style="color: #54AC00;">
-            <p class="sm:text-base text-sm font-heading font-bold text-success"><?= session()->getFlashdata('edit-pass-success') ?></p>
+    <!-- BERHASIL edit akun -->
+    <div id="berhasilEditAkun">
+        <div class="fixed top-0 bottom-0 right-0 left-0 z-50 justify-center items-center bg-black bg-opacity-40">
+            <div class="duration-700 transition-all p-3 rounded-lg flex items-center" style="background-color: #B1FF66;">
+                <img src="/img/components/icon/check.png" class="h-5 mr-2" style="color: #54AC00;">
+                <p class="sm:text-base text-sm font-heading font-bold text-success"><?= session()->getFlashdata('edit-pass-success') ?></p>
+            </div>
         </div>
     </div>
-</div>
-<script>
-    setTimeout(function() {
-        $('#berhasilEditAkun').fadeOut();
-    }, 1500);
-</script>
+    <script>
+        setTimeout(function() {
+            $('#berhasilEditAkun').fadeOut();
+        }, 1500);
+    </script>
 <?php }
-if (session()->getFlashdata('edit-pass-fail')||session()->getFlashdata('edit-pass2-fail')) { ?>
-<!-- GAGAL edit akun -->
-<div id="gagalEditAkun">
-    <div class="fixed top-0 bottom-0 right-0 left-0 z-50 justify-center items-center bg-black bg-opacity-40">
-        <div class="duration-700 transition-all p-3 rounded-lg flex items-center" style="background-color: #FF7474;">
-            <img src="/img/components/icon/warning.png" class="h-5 mr-2">
-            <p class="sm:text-base text-sm font-heading font-bold" style="color: #C51800;">Kata sandi baru gagal diperbaharui</p>
+if (session()->getFlashdata('edit-pass-fail') || session()->getFlashdata('edit-pass2-fail')) { ?>
+    <!-- GAGAL edit akun -->
+    <div id="gagalEditAkun">
+        <div class="fixed top-0 bottom-0 right-0 left-0 z-50 justify-center items-center bg-black bg-opacity-40">
+            <div class="duration-700 transition-all p-3 rounded-lg flex items-center" style="background-color: #FF7474;">
+                <img src="/img/components/icon/warning.png" class="h-5 mr-2">
+                <p class="sm:text-base text-sm font-heading font-bold" style="color: #C51800;">Kata sandi baru gagal diperbaharui</p>
+            </div>
         </div>
     </div>
-</div>
-<script>
-    setTimeout(function() {
-        $('#gagalEditAkun').fadeOut();
-    }, 1500);
-</script>
-<!-- end dialog box -->
+    <script>
+        setTimeout(function() {
+            $('#gagalEditAkun').fadeOut();
+        }, 1500);
+    </script>
+    <!-- end dialog box -->
 <?php } ?>
 <?= $this->endSection(); ?>

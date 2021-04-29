@@ -8,7 +8,7 @@
     }
 </style>
 
-<div class="w-full bg-white min-h-screen" id="pagePublikasi">
+<div class="w-full bg-white mb-8" id="pagePublikasi">
     <div class="md:overflow-x-auto overflow-x-scroll shadow-2xl rounded-3xl">
         <!-- start tabel publikasi -->
         <table class="w-full sm:text-sm text-xs rounded-3xl shadow-2xl md:shadow-none font-paragraph">
