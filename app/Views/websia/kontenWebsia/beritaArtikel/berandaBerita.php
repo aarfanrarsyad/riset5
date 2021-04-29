@@ -75,14 +75,14 @@
     <div class="mt-4 bg-primary md:p-6 p-3">
         <h2 class="font-bold text-secondary text-center font-heading lg:text-2xl md:text-xl text-lg">Berita Terpopuler</h2>
         <div class="md:grid md:grid-cols-3 md:gap-x-6 mt-4">
-            <div class="md:col-span-2 bg-gray-200 md:h-full h-32 flex items-end p-2 sm:mb-6 mb-2 md:mb-0">
+            <div class="md:col-span-2 border border-white bg-gray-200 md:h-full h-32 flex items-end p-2 sm:mb-6 mb-2 md:mb-0">
                 <h1 class="text-white font-heading font-bold text-xl">Judul berita</h1>
             </div>
             <div class="md:grid md:grid-rows-2 md:gap-y-6">
-                <div class="bg-gray-200 lg:h-48 h-32 flex items-end p-2 sm:mb-6 mb-2 md:mb-0">
+                <div class="bg-gray-200 border border-white lg:h-48 h-32 flex items-end p-2 sm:mb-6 mb-2 md:mb-0">
                     <h1 class="text-white font-heading font-bold text-lg">Judul berita</h1>
                 </div>
-                <div class="bg-gray-200 lg:h-48 h-32 flex items-end p-2">
+                <div class="bg-gray-200 border border-white lg:h-48 h-32 flex items-end p-2">
                     <h1 class="text-white font-heading font-bold text-lg">Judul berita</h1>
                 </div>
             </div>
@@ -95,7 +95,7 @@
         <div class="md:grid md:grid-cols-2 md:gap-x-6">
             <div>
                 <div class="flex gap-x-2 items-center">
-                    <div class="lg:w-1/4 w-1/3 lg:h-24 h-20 bg-gray-200">
+                    <div class="lg:w-1/4 w-1/3 lg:h-24 h-20 border border-black bg-gray-200">
                     </div>
                     <div class="lg:w-3/4 w-2/3">
                         <a href="/User/judulBerita">
@@ -114,7 +114,7 @@
                 </div>
                 <hr class="my-3 border-gray-400">
                 <div class="flex gap-x-2 items-center">
-                    <div class="lg:w-1/4 w-1/3 lg:h-24 h-20 bg-gray-200">
+                    <div class="lg:w-1/4 w-1/3 lg:h-24 h-20 border border-black bg-gray-200">
                     </div>
                     <div class="lg:w-3/4 w-2/3">
                         <a href="/User/judulBerita">
@@ -133,7 +133,7 @@
                 </div>
                 <hr class="my-3 border-gray-400">
                 <div class="flex gap-x-2 items-center">
-                    <div class="lg:w-1/4 w-1/3 lg:h-24 h-20 bg-gray-200">
+                    <div class="lg:w-1/4 w-1/3 lg:h-24 h-20 border border-black bg-gray-200">
                     </div>
                     <div class="lg:w-3/4 w-2/3">
                         <a href="/User/judulBerita">
@@ -152,7 +152,7 @@
                 </div>
                 <hr class="my-3 border-gray-400">
                 <div class="flex gap-x-2 items-center">
-                    <div class="lg:w-1/4 w-1/3 lg:h-24 h-20 bg-gray-200">
+                    <div class="lg:w-1/4 w-1/3 lg:h-24 h-20 border border-black bg-gray-200">
                     </div>
                     <div class="lg:w-3/4 w-2/3">
                         <a href="/User/judulBerita">
@@ -173,7 +173,7 @@
             </div>
             <div class="md:block hidden">
                 <div class="flex gap-x-2 items-center">
-                    <div class="lg:w-1/4 w-1/3 lg:h-24 h-20 bg-gray-200">
+                    <div class="lg:w-1/4 w-1/3 lg:h-24 h-20 border border-black bg-gray-200">
                     </div>
                     <div class="lg:w-3/4 w-2/3">
                         <a href="/User/judulBerita">
@@ -192,7 +192,7 @@
                 </div>
                 <hr class="my-3 border-gray-400">
                 <div class="flex gap-x-2 items-center">
-                    <div class="lg:w-1/4 w-1/3 lg:h-24 h-20 bg-gray-200">
+                    <div class="lg:w-1/4 w-1/3 lg:h-24 h-20 border border-black bg-gray-200">
                     </div>
                     <div class="lg:w-3/4 w-2/3">
                         <a href="/User/judulBerita">
@@ -211,7 +211,7 @@
                 </div>
                 <hr class="my-3 border-gray-400">
                 <div class="flex gap-x-2 items-center">
-                    <div class="lg:w-1/4 w-1/3 lg:h-24 h-20 bg-gray-200">
+                    <div class="lg:w-1/4 w-1/3 lg:h-24 h-20 border border-black bg-gray-200">
                     </div>
                     <div class="lg:w-3/4 w-2/3">
                         <a href="/User/judulBerita">
@@ -230,7 +230,7 @@
                 </div>
                 <hr class="my-3 border-gray-400">
                 <div class="flex gap-x-2 items-center">
-                    <div class="lg:w-1/4 w-1/3 lg:h-24 h-20 bg-gray-200">
+                    <div class="lg:w-1/4 w-1/3 lg:h-24 h-20 border border-black bg-gray-200">
                     </div>
                     <div class="lg:w-3/4 w-2/3">
                         <a href="/User/judulBerita">
