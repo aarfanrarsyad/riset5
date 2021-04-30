@@ -19,45 +19,57 @@
             </div><!-- /.row -->
         </div><!-- /.container-fluid -->
     </div>
-    <section class="content mx-2 pb-5">
-        <div class="container-fluid">
+
+    <div class="container-fluid px-4" style="font-size:small;">
+        <div class="response">
             <?= session()->getFlashdata('status') ?>
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="card card-secondary elevation-3 card-outline">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col text-primaryHover font-heading">
-                                    <h5><i class="fas fa-key text-primaryHover"></i>&ensp;Activation attempts</h5>
-                                </div>
-                            </div>
-                            <br>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <table class="table table-hover table-sm text-sm text-black" id="activation-attempts-table">
-                                        <thead>
-                                            <tr>
-                                                <td class="text-center">No.</td>
-                                                <td class="text-center">IP Address</td>
-                                                <td class="text-center">User Agent</td>
-                                                <td class="text-center">Token</td>
-                                                <td class="text-center">Time</td>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <?php $i = 1; ?>
-                                            <?php foreach ($activation_attempts as $activation_attempt) : ?>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="card card-light card-outline card-outline-tabs elevation-3">
+                    <div class="bg-light px-3 py-3">
+                        <h5><i class="fas fa-key text-secondary"></i>&ensp;Activation attempts</h5>
+                    </div>
+                    <div class="card-header mt-2 p-0 border-bottom-0 ">
+                        <ul class="nav nav-tabs" id="custom-tabs-four-tab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active text-secondary" data-toggle="pill" href="#tab1" role="tab" aria-controls="tab1" aria-selected="false">Activation Attempts List &ensp;
+                                    <span class="badge bg-indigo right" title="<?= count($activation_attempts) ?> Data"><i class="far fa-bell"></i>
+                                        <?= count($activation_attempts) ?></span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="card-body">
+                        <div class="tab-content">
+                            <div class="tab-pane fade active show" id="tab1" role="tabpanel" aria-labelledby="tab1">
+                                <div class="row mt-3">
+                                    <div class="col">
+                                        <table class="table table-hover table-sm text-sm" id="activation-attempts-table">
+                                            <thead>
                                                 <tr>
-                                                    <td class="text-center"><?= $i ?></td>
-                                                    <td class="text-center"><?= $activation_attempt['ip_address'] ?></td>
-                                                    <td class="text-justify"><?= $activation_attempt['user_agent'] ?></td>
-                                                    <td class="text-justify"><?= $activation_attempt['token'] ?></td>
-                                                    <td class="text-center"><?= format_date($activation_attempt['created_at']) ?></td>
+                                                    <td class="text-center">No.</td>
+                                                    <td class="text-center">IP Address</td>
+                                                    <td class="text-center">User Agent</td>
+                                                    <td class="text-center">Token</td>
+                                                    <td class="text-center">Time</td>
                                                 </tr>
-                                                <?php $i++; ?>
-                                            <?php endforeach; ?>
-                                        </tbody>
-                                    </table>
+                                            </thead>
+                                            <tbody>
+                                                <?php $i = 1; ?>
+                                                <?php foreach ($activation_attempts as $activation_attempt) : ?>
+                                                    <tr>
+                                                        <td class="text-center"><?= $i ?></td>
+                                                        <td class="text-center"><?= $activation_attempt['ip_address'] ?></td>
+                                                        <td class="text-justify"><?= $activation_attempt['user_agent'] ?></td>
+                                                        <td class="text-justify"><?= $activation_attempt['token'] ?></td>
+                                                        <td class="text-center"><?= format_date($activation_attempt['created_at']) ?></td>
+                                                    </tr>
+                                                    <?php $i++; ?>
+                                                <?php endforeach; ?>
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -65,7 +77,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </div>
 </div>
 
 <script>

@@ -1,91 +1,7 @@
 <?= $this->extend('templates/index'); ?>
-
 <?= $this->section('page-content'); ?>
 
-<!-- Content Wrapper. Contains page content -->
-<script>
-    function check_access(event) {
-        event.preventDefault();
-        let text_alert = '';
-        let text_button = '';
-        let resource = $(event.target).data('resource');
-        let access = $(event.target).data('access');
-        let name_resource = $(event.target).data('nameresource');
-        let name_access = $(event.target).data('nameaccess');
-
-        if ($(event.target).is(':checked') === false) {
-            text_alert = 'Are you sure to remove ' + name_access + ' access to the ' + name_resource + ' resource?';
-            text_button = 'Yes, delete it!';
-        } else {
-            text_alert = 'Are you sure to add ' + name_access + ' access to the ' + name_resource + ' resource?';
-            text_button = 'Yes, add it!';
-        }
-
-        Swal.fire({
-            icon: 'question',
-            text: text_alert,
-            showCancelButton: true,
-            confirmButtonColor: '#54AC00',
-            cancelButtonColor: '#D81B01',
-            confirmButtonText: text_button
-        }).then((result) => {
-            if (result.isConfirmed) {
-                $.ajax({
-                    url: '<?= base_url('/admin/access/insert') ?>',
-                    method: 'POST',
-                    dataType: 'json',
-                    data: {
-                        resource: resource,
-                        access: access
-                    },
-                    success: function(result) {
-                        if (result[0] === 'delete') {
-                            if (result[1] === true) {
-                                Swal.fire({
-                                    icon: 'success',
-                                    title: 'Successfully',
-                                    text: 'Successfully removed ' + name_access + ' access to ' + name_resource + ' resource',
-                                    showConfirmButton: false,
-                                    timer: 1500
-                                }).then(function() {
-                                    window.location = "<?= base_url('admin/access') ?>";
-                                })
-                            } else {
-                                Swal.fire({
-                                    icon: 'info',
-                                    title: 'Failed',
-                                    text: 'Failed to remove ' + name_access + ' access to ' + name_resource + ' resource',
-                                    showConfirmButton: false,
-                                    timer: 1500
-                                })
-                            }
-                        } else {
-                            if (result[1] === true) {
-                                Swal.fire({
-                                    icon: 'success',
-                                    title: 'Successfully',
-                                    text: 'Successfully added ' + name_access + ' access to ' + name_resource + ' resource',
-                                    showConfirmButton: false,
-                                    timer: 1500
-                                }).then(function() {
-                                    window.location = "<?= base_url('admin/access') ?>";
-                                })
-                            } else {
-                                Swal.fire({
-                                    icon: 'info',
-                                    title: 'Failed',
-                                    text: 'Failed to add ' + name_access + ' access to ' + name_resource + ' resource',
-                                    showConfirmButton: false,
-                                    timer: 1500
-                                })
-                            }
-                        }
-                    }
-                });
-            }
-        })
-    }
-</script>
+<?= view('admin/access/dist/index/header') ?>
 
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -105,57 +21,68 @@
             </div><!-- /.row -->
         </div><!-- /.container-fluid -->
     </div>
-    <section class="content mx-2 pb-5">
-        <div class="container-fluid">
 
-            <div class="row">
-                <div class="col-md-12">
-
-                    <div class="card card-secondary elevation-3 card-outline">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col text-primaryHover font-heading">
-                                    <h5><i class="fas fa-tools text-primaryHover"></i>&ensp;Access Management</h5>
-                                </div>
-                            </div>
-                            <br>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <table class="table table-hover table-sm text-sm text-black" id="access-table">
-                                        <thead>
-                                            <tr>
-                                                <td class="text-center">No.</td>
-                                                <td>Menu</td>
-                                                <td class="text-center">Access</td>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <?php $i = 1; ?>
-                                            <?php foreach ($resources as $resource) : ?>
-                                                <?php $resource_access = $resource['resource_access'];
-                                                ?>
+    <div class="container-fluid px-4 pb-5" style="font-size:small;">
+        <div class="response">
+            <?= session()->getFlashdata('status'); ?>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="card card-light card-outline card-outline-tabs elevation-3">
+                    <div class="bg-light px-3 py-3">
+                        <h5><i class="fas fa-tools text-secondary"></i>&ensp;Access Management</h5>
+                    </div>
+                    <div class="card-header mt-2 p-0 border-bottom-0 ">
+                        <ul class="nav nav-tabs" id="custom-tabs-four-tab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active text-secondary" data-toggle="pill" href="#tab1" role="tab" aria-controls="tab1" aria-selected="false">Resources List &ensp;
+                                    <span class="badge bg-indigo right" title="<?= count($resources) ?> Data"><i class="far fa-bell"></i>
+                                        <?= count($resources) ?></span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="card-body">
+                        <div class="tab-content">
+                            <div class="tab-pane fade active show" id="tab1" role="tabpanel" aria-labelledby="tab1">
+                                <div class="row">
+                                    <div class="col">
+                                        <table class="table table-hover table-sm text-sm" id="access-table">
+                                            <thead>
                                                 <tr>
-                                                    <td class="text-center"><?= $i ?></td>
-                                                    <td><?= $resource['title'] ?></td>
-                                                    <td class="text-center">
-                                                        <?php foreach ($crud as $_crud) : ?>
-                                                            <div class="form-check form-check-inline">
-                                                                <?php if (search_array_2($resource_access, 'crud_id', $_crud['crud_id']) !== FALSE) : ?>
-                                                                    <input class="form-check-input mr-3" data-resource="<?= $resource['submenu_id'] ?>" data-access="<?= $_crud['crud_id'] ?>" data-nameresource="<?= $resource['title'] ?>" data-nameaccess="<?= $_crud['crud_name'] ?>" onclick="check_access(event)" type="checkbox" value="<?= $_crud['crud_id'] ?>" id="crud-<?= $resource['submenu_id'] ?>-<?= $_crud['crud_id'] ?>" checked>
-                                                                <?php else : ?>
-                                                                    <input class="form-check-input" data-resource="<?= $resource['submenu_id'] ?>" data-access="<?= $_crud['crud_id'] ?>" data-nameresource="<?= $resource['title'] ?>" data-nameaccess="<?= $_crud['crud_name'] ?>" onclick="check_access(event)" type="checkbox" value="<?= $_crud['crud_id'] ?>" id="crud-<?= $resource['submenu_id'] ?>-<?= $_crud['crud_id'] ?>">
-                                                                <?php endif; ?>
-                                                                <label class="form-check-label mr-5" for="crud-<?= $_crud['crud_id'] ?>">
-                                                                    <?= $_crud['crud_name'] ?>
-                                                                </label>
-                                                            </div>
-                                                        <?php endforeach; ?>
-                                                    </td>
+                                                    <td class="text-center">No.</td>
+                                                    <td>Menu</td>
+                                                    <td class="text-center">Access</td>
                                                 </tr>
-                                                <?php $i++; ?>
-                                            <?php endforeach; ?>
-                                        </tbody>
-                                    </table>
+                                            </thead>
+                                            <tbody>
+                                                <?php $i = 1; ?>
+                                                <?php foreach ($resources as $resource) : ?>
+                                                    <?php $resource_access = $resource['resource_access'];
+                                                    ?>
+                                                    <tr>
+                                                        <td class="text-center"><?= $i ?></td>
+                                                        <td><?= $resource['title'] ?></td>
+                                                        <td class="text-center">
+                                                            <?php foreach ($crud as $_crud) : ?>
+                                                                <div class="form-check form-check-inline">
+                                                                    <?php if (search_array_2($resource_access, 'crud_id', $_crud['crud_id']) !== FALSE) : ?>
+                                                                        <input class="form-check-input" data-resource="<?= $resource['submenu_id'] ?>" data-access="<?= $_crud['crud_id'] ?>" data-nameresource="<?= $resource['title'] ?>" data-nameaccess="<?= $_crud['crud_name'] ?>" onclick="check_access(event)" type="checkbox" value="<?= $_crud['crud_id'] ?>" id="crud-<?= $resource['submenu_id'] ?>-<?= $_crud['crud_id'] ?>" checked>
+                                                                    <?php else : ?>
+                                                                        <input class="form-check-input" data-resource="<?= $resource['submenu_id'] ?>" data-access="<?= $_crud['crud_id'] ?>" data-nameresource="<?= $resource['title'] ?>" data-nameaccess="<?= $_crud['crud_name'] ?>" onclick="check_access(event)" type="checkbox" value="<?= $_crud['crud_id'] ?>" id="crud-<?= $resource['submenu_id'] ?>-<?= $_crud['crud_id'] ?>">
+                                                                    <?php endif; ?>
+                                                                    <label class="form-check-label" for="crud-<?= $_crud['crud_id'] ?>">
+                                                                        <?= $_crud['crud_name'] ?>
+                                                                    </label>
+                                                                </div>
+                                                            <?php endforeach; ?>
+                                                        </td>
+                                                    </tr>
+                                                    <?php $i++; ?>
+                                                <?php endforeach; ?>
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -163,11 +90,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </div>
 </div>
-
-<script>
-    initalize_dataTables('#access-table')
-</script>
-
+<?= view('admin/access/dist/index/footer') ?>
 <?= $this->endSection(); ?>

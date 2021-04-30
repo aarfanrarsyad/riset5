@@ -117,15 +117,16 @@ $routes->group('admin', ['namespace' => 'App\Controllers'], function ($routes) {
 		2. http://localhost:8080/admin/menu/update 				=>  URL ini menuju method `insert_menu` untuk mengupdate menu baru.			[5]
 		2. http://localhost:8080/admin/menu/delete 				=>  URL ini untuk request AJAX pada proses delete menu.						[5]
 	*/
-	$routes->post('menu/insert', 'Admin::insert_menu', ['filter' => 'permission:1']);
-	$routes->post('menu/update', 'Admin::update_menu', ['filter' => 'permission:3']);
-	$routes->post('menu/delete', 'Admin::delete_menu', ['filter' => 'permission:4']);
+
+	$routes->post('resources/menu/insert', 'Admin::insert_menu', ['filter' => 'permission:1']);
+	$routes->post('resources/menu/update', 'Admin::update_menu', ['filter' => 'permission:3']);
+	$routes->post('resources/menu/delete', 'Admin::delete_menu', ['filter' => 'permission:4']);
 
 
 	#------------------------------------------------------------------------------------------------------------------------------------------------#
 
 
-	# This is for menus management
+	# This is for resources management
 	/*
 		1. http://localhost:8080/admin/resources 					=>  URL ini menuju halaman index pada resources.							[5]
 		2. http://localhost:8080/admin/resources/insert 			=>  URL ini menuju halaman untuk insert resource baru 					[5]
@@ -137,7 +138,6 @@ $routes->group('admin', ['namespace' => 'App\Controllers'], function ($routes) {
 	$routes->match(['get', 'post'], 'resources/insert', 'Admin::insert_resource', ['filter' => 'permission:1']);
 	$routes->match(['get', 'post'], 'resources/update/(:num)', 'Admin::update_resource/$1', ['filter' => 'permission:3']);
 	$routes->post('resources/delete', 'Admin::delete_resource', ['filter' => 'permission:4']);
-
 
 	#------------------------------------------------------------------------------------------------------------------------------------------------#
 
@@ -194,6 +194,17 @@ $routes->group('admin', ['namespace' => 'App\Controllers'], function ($routes) {
 
 	#------------------------------------------------------------------------------------------------------------------------------------------------#
 
+	$routes->get('request-api', 'Admin::management_api_index');
+	$routes->post('request-api/update', 'Admin::management_api_update');
+	$routes->post('request-api/selected-scope', 'Admin::getSelectedScopeRequest');
+	$routes->post('request-api/create-scope', 'Admin::create_scope');
+	$routes->post('request-api/update-scope', 'Admin::update_scope');
+	$routes->post(
+		'request-api/delete-scope',
+		'Admin::delete_scope',
+	);
+
+
 
 	# This is for activity management
 	/*
@@ -201,6 +212,32 @@ $routes->group('admin', ['namespace' => 'App\Controllers'], function ($routes) {
 	*/
 	$routes->get('activity-log', 'Admin::activity_log_index', ['filter' => 'permission:2']);
 
+	# This is for News management
+	/*
+	1. http://localhost:8080/admin/berita 			=>  URL ini menuju halaman index pada berita.				[5]
+	*/
+
+	$routes->get('berita', 'Berita::news_index');
+	$routes->get('berita/list-berita', 'Berita::news_list');
+	$routes->get('berita/delete/(:num)', 'Berita::delete_news/$1');
+	$routes->match(
+		['get', 'post'],
+		'berita/update/(:num)',
+		'Berita::update_news/$1'
+	);
+
+	$routes->match(['get', 'post'], 'berita/insert', 'Berita::create_news');
+	$routes->post('berita/delete-file', 'Berita::delete_file');
+	$routes->match(['get', 'post'], 'berita/upload-file', 'Berita::upload_file');
+
+	$routes->post('berita/post-comment', 'Berita::post_comment');
+	$routes->post('berita/get-comments', 'Berita::get_comments');
+	$routes->post('berita/delete-comment', 'Berita::delete_comment');
+	$routes->match(['get', 'post'], 'berita/view/(:num)', 'Berita::news_view/$1');
+	$routes->post('berita/get-content', 'Berita::get_content');
+	$routes->post('berita/change-access', 'Berita::change_access');
+	$routes->post('berita/activate', 'Berita::activate_news');
+	$routes->post('berita/analysis', 'Berita::news_analysis');
 
 	#------------------------------------------------------------------------------------------------------------------------------------------------#
 

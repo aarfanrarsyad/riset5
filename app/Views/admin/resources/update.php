@@ -50,14 +50,11 @@
                 </div>
             <?php endif; ?>
 
-            <div class="card card-secondary card-outline elevation-3">
+            <div class="card elevation-3">
+                <div class="card-header bg-light">
+                    <h5><i class="fas fa-tasks text-secondary"></i>&ensp;Insert New Resource</h5>
+                </div>
                 <div class="card-body">
-                    <div class="row">
-                        <div class="col text-primaryHover font-heading">
-                            <h5><i class="fas fa-tasks text-primaryHover"></i>&ensp;Insert New Resource</h5>
-                        </div>
-                    </div>
-                    <br>
                     <div class="row">
                         <div class="col-md-12 text-sm">
                             <form action="" method="post">
@@ -65,7 +62,7 @@
                                     <label for="fullname" class="col-sm-2 col-form-label text-secondary"><span class="text-center">Menu</span></label>
                                     <div class="col-sm-1 d-flex justify-content-end align-items-center">:</div>
                                     <div class="col-sm-3">
-                                        <select class="inputForm" name="menu" id="menu">
+                                        <select class="form-control form-control-sm border border-secondary" name="menu" id="menu">
                                             <option value="">Pilih Menu</option>
                                             <?php foreach ($menus as $menu) : ?>
                                                 <?php if ($menu['menu_id'] == $data['menu_id']) : ?>
@@ -129,7 +126,7 @@
                                 </div>
                                 <br>
                                 <div class="form-group row pl-4">
-                                    <button type="submit" name="update_resources" class="btn  text-primaryHover border-primaryHover hover:text-white hover:bg-primaryHover"><i class="fas fa-paper-plane"></i>&ensp;Submit</button>
+                                    <button type="submit" name="update_resources" class="btn btn-outline-info"><i class="fas fa-paper-plane"></i>&ensp;Submit</button>
                                 </div>
                             </form>
                         </div>

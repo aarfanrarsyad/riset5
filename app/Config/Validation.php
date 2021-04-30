@@ -87,12 +87,28 @@ class Validation
 		]
 	];
 
+	public $create_news = [
+		'date'     => 'required',
+		'header'   => 'required',
+		'access' => 'required|in_list[public,private,other]',
+		'author' => 'required',
+		// 'thumbnail' => 'uploaded[thumbnail]|max_size[thumbnail,1024]|mime_in[thumbnail,image/png,image/jpg]|ext_in[thumbnail,png,jpg]'
+	];
+
+	public $update_news = [
+		'date'     => 'required',
+		'header'   => 'required',
+		'access' => 'required|in_list[public,private,other]',
+		'author' => 'required',
+	];
+
+
 	public $editProfil = [
 		'telp_alumni'   => [
-			'rules' =>'required|numeric|min_length[9]',
+			'rules' => 'required|numeric|min_length[9]',
 		],
 		'email'			=> [
-			'rules' =>'valid_email|is_unique[alumni.email,id_alumni,{id_alumni}]',
+			'rules' => 'valid_email|is_unique[alumni.email,id_alumni,{id_alumni}]',
 		],
 	];
 
@@ -100,10 +116,10 @@ class Validation
 		'telp_alumni'   => [
 			'required'	=> 'kolom nomor harus diisi',
 			'numeric'	=> 'kolom harus berisi angka',
-			'min_length'=> 'minimal memiliki panjang 9 angka',
+			'min_length' => 'minimal memiliki panjang 9 angka',
 		],
 		'email'			=> [
-			'rules' =>'valid_email|is_unique[alumni.email,id_alumni,{id_alumni}]',
+			'rules' => 'valid_email|is_unique[alumni.email,id_alumni,{id_alumni}]',
 			'required'	=> 'kolom email harus diisi',
 			'valid_email'	=> 'harus memiliki format email',
 			'is_unique'	=> 'alamat email telah digunakan alumni lain',
@@ -112,7 +128,7 @@ class Validation
 
 	public $editPendidikan = [
 		'nim'   => [
-			'rules' =>'numeric',
+			'rules' => 'numeric',
 		],
 	];
 
@@ -124,31 +140,31 @@ class Validation
 
 	public $editAkun = [
 		'new_password'   => [
-			'rules' =>'required|regex_match[/^[a-z0-9]+$/]|min_length[8]',
+			'rules' => 'required|regex_match[/^[a-z0-9]+$/]|min_length[8]',
 		],
 		'conf_password'   => [
-			'rules' =>'required|matches[new_password]',
+			'rules' => 'required|matches[new_password]',
 		],
 	];
 
 	public $editAkun_errors  = [
 		'new_password'   => [
-			'required' =>'kolom ini harus diisi',
-			'regex_match'=>'Kata sandi harus terdiri dari huruf dan angka',
-			'min_length'=> 'minimal memiliki panjang 8 karakter',
+			'required' => 'kolom ini harus diisi',
+			'regex_match' => 'Kata sandi harus terdiri dari huruf dan angka',
+			'min_length' => 'minimal memiliki panjang 8 karakter',
 		],
 		'conf_password'   => [
-			'required' =>'kolom ini harus diisi',
-			'matches'=>'Konfirmasi kata sandi tidak cocok',
+			'required' => 'kolom ini harus diisi',
+			'matches' => 'Konfirmasi kata sandi tidak cocok',
 		],
 	];
 
 	public $editTempatKerja = [
 		'nama_instansi'   => [
-			'rules' =>'required',
+			'rules' => 'required',
 		],
 		'email_instansi'   => [
-			'rules' =>'required',
+			'rules' => 'required',
 		]
 	];
 

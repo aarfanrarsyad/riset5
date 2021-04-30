@@ -28,7 +28,6 @@
 
     <section class="content mx-2 pb-5">
         <div class="container-fluid">
-
             <?php if (!empty($errors)) : ?>
                 <div class="alert alert-danger" role="alert">
                     Whoops! There was an error when inputting data :
@@ -48,14 +47,11 @@
                 </div>
             <?php endif; ?>
 
-            <div class="card card-secondary card-outline elevation-3">
+            <div class="card elevation-3">
+                <div class="card-header bg-light">
+                    <h5><i class="fas fa-tasks text-secondary"></i>&ensp;Insert New Resource</h5>
+                </div>
                 <div class="card-body">
-                    <div class="row">
-                        <div class="col text-primaryHover font-heading">
-                            <h5><i class="fas fa-tasks text-primaryHover"></i>&ensp;Insert New Resource</h5>
-                        </div>
-                    </div>
-                    <br>
                     <div class="row">
                         <div class="col-md-12 text-sm">
                             <form action="" method="post">
@@ -63,7 +59,7 @@
                                     <label for="fullname" class="col-sm-2 col-form-label text-secondary"><span class="text-center">Menu</span></label>
                                     <div class="col-sm-1 d-flex justify-content-end align-items-center">:</div>
                                     <div class="col-sm-3">
-                                        <select class="inputForm" name="menu" id="menu">
+                                        <select class="form-control form-control-sm border border-secondary" name="menu" id="menu" required>
                                             <option value="">Pilih Menu</option>
                                             <?php foreach ($data as $dataset) : ?>
                                                 <option value="<?= $dataset['menu_id'] ?>"><?= $dataset['menu_name'] ?></option>
@@ -75,21 +71,21 @@
                                     <label for="email" class="col-sm-2 col-form-label text-secondary">Title</label>
                                     <div class="col-sm-1 d-flex justify-content-end align-items-center">:</div>
                                     <div class="col-sm-5">
-                                        <input type="text" name="title" class="inputForm" placeholder="Enter a resource title" id="title" style="" autocomplete="off">
+                                        <input type="text" name="title" class="form-control form-control-sm border border-secondary border-top-0 border-right-0 border-left-0" placeholder="Enter a resource title" id="title" style="border-radius: 0;" autocomplete="off" required>
                                     </div>
                                 </div>
                                 <div class="form-group row pl-4">
                                     <label for="nim" class="col-sm-2 col-form-label text-secondary">URL</label>
                                     <div class="col-sm-1 d-flex justify-content-end align-items-center">:</div>
                                     <div class="col-sm-5">
-                                        <input type="text" name="url" class="inputForm" id="url" placeholder="Enter the resource url" autocomplete="off">
+                                        <input type="text" name="url" class="form-control form-control-sm border border-secondary border-top-0 border-right-0 border-left-0" id="url" placeholder="Enter the resource url" style="border-radius: 0;" autocomplete="off" required>
                                     </div>
                                 </div>
                                 <div class="form-group row pl-4">
                                     <label for="password" class="col-sm-2 col-form-label text-secondary">Icon</label>
                                     <div class="col-sm-1 d-flex justify-content-end align-items-center">:</div>
                                     <div class="col-sm-5">
-                                        <input type="text" name="icon" class="inputForm" placeholder="Enter the resource icon" id="icon" autocomplete="off">
+                                        <input type="text" name="icon" class="form-control form-control-sm border border-top-0 border-right-0 border-left-0 border-secondary" placeholder="Enter the resource icon" id="icon" style="border-radius: 0;" autocomplete="off" required>
                                     </div>
                                 </div>
                                 <div class="form-group row pl-4">
@@ -97,13 +93,13 @@
                                     <div class="col-sm-1 d-flex justify-content-end align-items-center">:</div>
                                     <div class="col-sm-5 d-flex align-items-center">
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="active" id="is_active" value="1" checked>
+                                            <input class="form-check-input" type="radio" name="active" id="is_active" value="1" checked required>
                                             <label class="form-check-label" for="is_active">
                                                 Active
                                             </label>
                                         </div>
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="active" id="is_inactive" value="0">
+                                            <input class="form-check-input" type="radio" name="active" id="is_inactive" value="0" required>
                                             <label class="form-check-label" for="is_inactive">
                                                 Not Active
                                             </label>
@@ -112,7 +108,7 @@
                                 </div>
                                 <br>
                                 <div class="form-group row pl-4">
-                                    <button type="submit" name="insert_resources" class="btn  text-primaryHover border-primaryHover hover:text-white hover:bg-primaryHover"><i class="fas fa-paper-plane"></i>&ensp;Submit</button>
+                                    <button type="submit" name="insert_resources" class="btn btn-outline-secondary"><i class="fas fa-paper-plane"></i>&ensp;Submit</button>
                                 </div>
                             </form>
                         </div>

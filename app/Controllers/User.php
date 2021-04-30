@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\AlumniModel;
+use App\Models\BeritaModel;
 
 
 class User extends BaseController
@@ -702,13 +703,13 @@ class User extends BaseController
 		$alamat = NULL;
 		$telp = NULL;
 		$faks = NULL;
-		if(isset($_POST['alamat_instansi'])){
+		if (isset($_POST['alamat_instansi'])) {
 			$alamat = htmlspecialchars($_POST['alamat_instansi']);
 		}
-		if(isset($_POST['telp_instansi'])){
+		if (isset($_POST['telp_instansi'])) {
 			$telp = htmlspecialchars($_POST['telp_instansi']);
 		}
-		if(isset($_POST['faks_instansi'])){
+		if (isset($_POST['faks_instansi'])) {
 			$faks = htmlspecialchars($_POST['faks_instansi']);
 		}
 		$instansi = htmlspecialchars($_POST['nama_instansi']);
@@ -722,7 +723,7 @@ class User extends BaseController
 			'faks_instansi'   => $faks,
 			'email_instansi'  => $email,
 		];
-		
+
 		if ($this->form_validation->run($data1, 'editTempatKerja') === FALSE) {
 			session()->setFlashdata('add-tk-fail', 'Tempat Kerja gagal ditambahkan');
 			session()->setFlashdata('error-nama_instansi', $this->form_validation->getError('nama_instansi'));
@@ -894,11 +895,11 @@ class User extends BaseController
 		$model = new AlumniModel();
 		$curpass = $model->getAlumni(session('id_user'))->getRow()->password_hash;
 		$inputpass = htmlspecialchars($_POST['passlama']);
-		$newpass = htmlspecialchars($_POST['passbaru']) ;
+		$newpass = htmlspecialchars($_POST['passbaru']);
 		$renewpass = htmlspecialchars($_POST['ulangpassbaru']);
 
 		if (password_verify(base64_encode(hash('sha384', $inputpass, true)), $curpass)) {
-			$validate=[
+			$validate = [
 				'new_password'	=> $newpass,
 				'conf_password' => $renewpass,
 			];
@@ -918,14 +919,6 @@ class User extends BaseController
 			session()->setFlashdata('edit-pass-fail', 'Kata sandi lama tidak sesuai.');
 		}
 		return redirect()->to(base_url('User/editAkun'));
-	}
-
-	public function unggahBerita()
-	{
-		$data['judulHalaman'] = 'Unggah Berita/Artikel';
-		// $data['login'] = 'sudah';
-		$data['active'] = '';
-		return view('websia/kontenWebsia/beritaArtikel/unggahBerita', $data);
 	}
 
 	public function galeriFoto()
@@ -981,6 +974,23 @@ class User extends BaseController
 
 	public function berita()
 	{
+		$init = new BeritaModel();
+
+		$dataset = $init->getAllNews()->getResultArray();
+
+		for ($i = 0; $i < count($dataset); $i++) {
+			$visited = $init->getVisitedPage($dataset[$i]['id'])->getRowArray();
+			$dataset[$i]['tanggal_publish'] = date('d F Y', strtotime($dataset[$i]['tanggal_publish']));
+			if (!$visited || empty($visited)) {
+				$dataset[$i]['visited'] = 0;
+			} else {
+				$dataset[$i]['visited'] = $visited['visited'];
+			}
+		}
+
+		sortByOrder($dataset, 'visited', false);
+
+		$data['dataset'] = $dataset;
 		$data['judulHalaman'] = 'Berita';
 		$data['active'] = 'berita';
 		$data['login'] = 'sudah';
@@ -988,12 +998,75 @@ class User extends BaseController
 		return view('websia/kontenWebsia/beritaArtikel/berandaBerita', $data);
 	}
 
-	public function judulBerita()
+	public function unggahBerita()
 	{
-		$data['judulHalaman'] = 'Berita';
-		$data['active'] = 'berita';
-		$data['login'] = 'sudah';
+		$data['judulHalaman'] = 'Unggah Berita/Artikel';
+		// $data['login'] = 'sudah';
+		$data['active'] = '';
+		return view('websia/kontenWebsia/beritaArtikel/unggahBerita.php', $data);
+	}
 
-		return view('websia/kontenWebsia/beritaArtikel/berita', $data);
+	protected function getPostComment($id, $all = null)
+	{
+		$init = new BeritaModel();
+		$init_user = model('App\Models\admin_model');
+
+		if ($all) {
+			$query_comments = $init->getPostComments($id, false)->getResultArray();
+		} else {
+			$query_comments = $init->getPostComments($id)->getResultArray();
+		}
+
+		$comments_count = $init->countComments($id)->getRowArray();
+
+		for ($i = 0; $i < count($query_comments); $i++) {
+			$data = $init_user->getUserById($query_comments[$i]['user_id'])->getRowArray();
+
+			$query_comments[$i]['time'] = time_for_comment($query_comments[$i]['time']);
+			if (!$data) {
+				$query_comments[$i]['name'] = 'Unknown';
+				$query_comments[$i]['image'] = 'default.png';
+			} else {
+				$query_comments[$i]['name'] = ucwords($data['fullname']);
+				$query_comments[$i]['image'] = $data['user_image'];
+			}
+		}
+
+		sortByOrder($query_comments, 'id');
+		return [array_values($query_comments), $comments_count];
+	}
+
+	public function viewBerita($id)
+	{
+		$init = new BeritaModel();
+		$data = $init->getNewsById($id)->getRowArray();
+		$data['tanggal_publish'] = date('d F Y', strtotime($data['tanggal_publish']));
+		$data['comments'] = $this->getPostComment($data['id'])[0];
+		$data['count_comments'] = $this->getPostComment($data['id'])[1]['total'];
+		$data['visited'] = $init->getVisitedPage($id)->getRowArray()['visited'];
+
+		$berita = $init->getAllNews()->getResultArray();
+
+		for ($i = 0; $i < count($berita); $i++) {
+			$visited = $init->getVisitedPage($berita[$i]['id'])->getRowArray();
+			$berita[$i]['tanggal_publish'] = date('d F Y', strtotime($berita[$i]['tanggal_publish']));
+			if (!$visited || empty($visited)) {
+				$berita[$i]['visited'] = 0;
+			} else {
+				$berita[$i]['visited'] = $visited['visited'];
+			}
+		}
+
+		$berita_popular = $berita;
+		sortByOrder($berita_popular, 'visited', false);
+
+		record_visits($id);
+		$data['active'] = '';
+		$data['dataset'] =  $data;
+		$data['berita'] =  $berita;
+		$data['berita_popular'] =  $berita_popular;
+		$data['judulHalaman'] = 'Berita';
+
+		return view('websia/kontenWebsia/beritaArtikel/berita.php', $data);
 	}
 }

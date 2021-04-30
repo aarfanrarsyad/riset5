@@ -171,6 +171,14 @@ class Rbac extends Seeder
 			[
 				'menu_name'     => 'Managemen Database',
 				'menu_icon'		=> 'fas fa-user-circle'
+			],
+			[
+				'menu_name'     => 'Manajemen Berita',
+				'menu_icon'		=> 'fas fa-book-open'
+			],
+			[
+				'menu_name'     => 'Manajemen API',
+				'menu_icon'		=> 'fab fa-chrome'
 			]
 		];
 		$this->db->table('menu')->insertBatch($data);
@@ -316,6 +324,20 @@ class Rbac extends Seeder
 				'icon'			=> 'fas fa-award',
 				'active'		=> '1'
 			],
+			[
+				'menu_id'     	=> 8,
+				'title'			=> 'Berita',
+				'url'			=> 'admin/berita',
+				'icon'			=> 'fas fa-book-open',
+				'active'		=> '1'
+			],
+			[
+				'menu_id'     	=> 9,
+				'title'			=> 'API',
+				'url'			=> 'admin/request-api',
+				'icon'			=> 'fab fa-chrome',
+				'active'		=> '1'
+			]
 		];
 		$this->db->table('submenu')->insertBatch($data);
 

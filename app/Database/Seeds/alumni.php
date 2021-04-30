@@ -11,7 +11,7 @@ class Alumni extends Seeder
 		$faker = \Faker\Factory::create('id_ID');
 
 		$data = [
-			'id_alumni'       	 => "1",
+			'id_alumni'          => "1",
 			'nama'               => "Dummy_dummy",
 			'jenis_kelamin'      => $faker->randomElement($array = array('Lk', 'Pr')),
 			'tempat_lahir'       => $faker->city,

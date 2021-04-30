@@ -1,74 +1,9 @@
 <?= $this->extend('templates/index'); ?>
 
 <?= $this->section('page-content'); ?>
+<?= view('admin/groups/dist/index/header') ?>
 
-<!-- Content Wrapper. Contains page content -->
-
-<script>
-  function edit_group(id, name, desc) {
-    $('#form-input-group').attr('action', '<?= base_url('/admin/groups/update') ?>');
-    $('#id').val(id);
-    $('.modal-title').html('<i class="fas fa-layer-group text-primaryHover"></i>&ensp;Update group ' + name);
-    $('#name').val(name);
-    $('#description').val(desc);
-    $('.modal').modal('show')
-  }
-
-  function insert_group() {
-    $('#form-input-group').attr('action', '<?= base_url('/admin/groups/insert') ?>');
-    $('.modal-title').html('<i class="fas fa-layer-group text-primaryHover"></i>&ensp;Insert new group');
-    $('#id').val('');
-    $('#name').val('');
-    $('#description').val('');
-    $('.modal').modal('show')
-  }
-
-  function delete_group(id, role) {
-    Swal.fire({
-      icon: 'question',
-      text: 'Are you sure to delete the ' + role + ' role?',
-      showCancelButton: true,
-      confirmButtonColor: '#54AC00',
-      cancelButtonColor: '#D81B01',
-      confirmButtonText: 'Yes, delete it!'
-    }).then((result) => {
-      if (result.isConfirmed) {
-        $.ajax({
-          url: '<?= base_url('/admin/groups/delete') ?>',
-          method: 'POST',
-          dataType: 'json',
-          data: {
-            id: id
-          },
-          success: function(result) {
-            if (result === true) {
-              Swal.fire({
-                icon: 'success',
-                title: 'Success',
-                text: 'Group deleted successfully',
-                showConfirmButton: false,
-                timer: 2500
-              }).then(function() {
-                window.location = "<?= base_url('admin/groups') ?>";
-              })
-            } else {
-              Swal.fire({
-                icon: 'info',
-                title: 'Oops ...',
-                text: 'Something went wrong',
-                showConfirmButton: false,
-                timer: 2500
-              })
-            }
-          }
-        });
-      }
-    })
-
-  }
-</script>
 <div class="content-wrapper">
-
   <div class="content-header">
     <div class="container-fluid">
       <div class="response">
@@ -77,64 +12,82 @@
         <div class="col-sm-6">
         </div><!-- /.col -->
         <div class="col-sm-6">
-          <ol class="breadcrumb float-sm-right text-sm">
-            <li class="breadcrumb-item text-primaryHover"><a href="<?= base_url('admin') ?>">Home</a></li>
-            <li class="breadcrumb-item text-muted text-gray-100"><span>Groups Managment</span></li>
+          <ol class="breadcrumb float-sm-right text-sm mr-2">
+            <li class="breadcrumb-item"><a href="<?= base_url('admin') ?>">Home</a></li>
+            <li class="breadcrumb-item text-muted"><span>Groups Managment</span></li>
           </ol>
         </div>
       </div>
     </div>
   </div>
 
-  <section class="content mx-2 pb-5">
-    <div class="container-fluid">
+  <div class="container-fluid px-4 pb-5">
+    <div class="alert-content">
       <?= session()->getFlashdata('status') ?>
-
-      <div class="card card-secondary elevation-3 card-outline">
-        <div class="card-body">
-          <div class="row">
-            <div class="col text-primaryHover font-heading">
-              <h5><i class="fas fa-layer-group  text-primaryHover"></i>&ensp;Groups Managment</h5>
-            </div>
-            <div class="col d-flex justify-content-end">
-              <button class="btn btn-outline-secondary btn-xs" onclick="insert_group()"><i class=" fas fa-user-plus"></i>&ensp;Add new group</button>
-            </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <div class="card card-light card-outline card-outline-tabs elevation-3">
+          <div class="bg-light px-3 py-3">
+            <h5><i class="fas fa-layer-group text-secondary"></i>&ensp;Groups Managment</h5>
           </div>
-          <br>
-          <div class="row">
-            <div class="col-md-12">
-              <table class="table table-hover table-sm text-sm text-black" id="group-table">
-                <thead>
-                  <tr>
-                    <td class="text-center">No.</td>
-                    <td>Group Name</td>
-                    <td>Description</td>
-                    <td class="text-center">Actions</td>
-                  </tr>
-                </thead>
-                <tbody>
-                  <?php $i = 1; ?>
-                  <?php foreach ($data as $dataset) : ?>
-                    <tr>
-                      <td class="text-center"><?= $i ?></td>
-                      <td><?= $dataset->name ?></td>
-                      <td><?= $dataset->description ?></td>
-                      <td class=" text-center">
-                        <button class="btn btn-xs text-primaryHover border-primaryHover hover:text-white hover:bg-primaryHover mr-1" onclick="edit_group(<?= $dataset->id ?>,'<?= $dataset->name ?>','<?= $dataset->description ?>')"><i class="fas fa-edit"></i>&ensp;<span class="text-xs hover:text-white">Update</span></button>
-                        <button class="btn btn-xs text-primaryHover border-primaryHover hover:text-white hover:bg-primaryHover" onclick="delete_group(<?= $dataset->id ?>,'<?= $dataset->name ?>')"><i class="fas fa-trash"></i>&ensp;<span class="text-xs">Delete</span></button>
-                      </td>
-                    </tr>
-                    <?php $i++; ?>
-                  <?php endforeach; ?>
-                </tbody>
-              </table>
+          <div class="card-header mt-2 p-0 border-bottom-0 ">
+            <ul class="nav nav-tabs" id="custom-tabs-four-tab" role="tablist">
+              <li class="nav-item">
+                <a class="nav-link active text-secondary" data-toggle="pill" href="#tab1" role="tab" aria-controls="tab1" aria-selected="false">Groups List &ensp;
+                  <span class="badge bg-indigo right" title="<?= count($data) ?> Data ...."><i class="far fa-bell"></i>
+                    <?= count($data) ?></span>
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div class="card-body">
+            <div class="tab-content">
+              <div class="tab-pane fade active show" id="tab1" role="tabpanel" aria-labelledby="tab1">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-ligjt dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-th-list text-muted"></i>&ensp;Pilih Tindakan
+                  </button>
+                  <div class="dropdown-menu text-sm">
+                    <a class="dropdown-item" href="javascript:void(0)" onclick="insert_group()"><i class="fas fa-plus-square"></i>&ensp;Add new group</a>
+                  </div>
+                </div>
+                <div class="row mt-4">
+                  <div class="col">
+                    <table class="table table-hover table-sm text-sm" id="group-table">
+                      <thead>
+                        <tr>
+                          <td class="text-center">No.</td>
+                          <td>Group Name</td>
+                          <td>Description</td>
+                          <td class="text-center">Actions</td>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <?php $i = 1; ?>
+                        <?php foreach ($data as $dataset) : ?>
+                          <tr>
+                            <td class="text-center"><?= $i ?></td>
+                            <td><?= $dataset->name ?></td>
+                            <td><?= $dataset->description ?></td>
+                            <td class=" text-center">
+                              <button class="btn btn-xs bg-teal mr-1" onclick="edit_group(<?= $dataset->id ?>,'<?= $dataset->name ?>','<?= $dataset->description ?>')"><i class="fas fa-edit"></i>&ensp;<span class="text-xs">Update</span></button>
+                              <button class="btn btn-xs bg-maroon" onclick="delete_group(<?= $dataset->id ?>,'<?= $dataset->name ?>')"><i class="fas fa-trash"></i>&ensp;<span class="text-xs">Delete</span></button>
+                            </td>
+                          </tr>
+                          <?php $i++; ?>
+                        <?php endforeach; ?>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
-
     </div>
-  </section>
+  </div>
 </div>
 
 <div class="modal fade" tabindex="-1">
@@ -153,7 +106,7 @@
             <input type="text" class="form-control text-sm border-top-0 border-right-0 border-left-0" name="description" id="description" placeholder="Ex : this role will be used for ...." style="border-radius:0" autocomplete="off">
           </div>
           <div class="d-flex justify-content-end">
-            <button type="submit" id="btn-submit" name="insert_group" class="btn btn-sm text-primaryHover border-primaryHover hover:text-white hover:bg-primaryHover"><i class="fas fa-paper-plane"></i>&ensp;Send data</button>
+            <button type="submit" id="btn-submit" name="insert_group" class="btn btn-sm btn-primary"><i class="fas fa-paper-plane"></i>&ensp;Send data</button>
           </div>
         </form>
       </div>
@@ -161,8 +114,5 @@
   </div>
 </div>
 
-<script>
-  initalize_dataTables('#group-table')
-</script>
-
+<?= view('admin/groups/dist/index/footer') ?>
 <?= $this->endSection(); ?>

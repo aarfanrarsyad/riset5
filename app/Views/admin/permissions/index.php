@@ -1,7 +1,5 @@
 <?= $this->extend('templates/index'); ?>
-
 <?= $this->section('page-content'); ?>
-<!-- Content Wrapper. Contains page content -->
 
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -21,48 +19,65 @@
             </div><!-- /.row -->
         </div><!-- /.container-fluid -->
     </div>
-    <section class="content mx-2 pb-5">
-        <div class="container-fluid">
-            <div class="card card-secondary elevation-3 card-outline">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col text-primaryHover font-heading">
-                            <h5><i class="fas fa-cogs text-primaryHover"></i>&ensp;Group permission</h5>
-                        </div>
+
+    <div class="container-fluid px-4" style="font-size:small;">
+        <div class="response">
+            <?= session()->getFlashdata('status'); ?>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="card card-light card-outline card-outline-tabs elevation-3">
+                    <div class="bg-light px-3 py-3">
+                        <h5><i class="fas fa-cogs text-secondary"></i>&ensp;Group permission</h5>
                     </div>
-                    <br>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <table class="table table-hover table-sm text-sm text-black" id="permissions-index">
-                                <thead>
-                                    <tr>
-                                        <td class="text-center">No.</td>
-                                        <td>Group</td>
-                                        <td class="text-center">Actions</td>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php $i = 1 ?>
-                                    <?php foreach ($groups as $group) : ?>
-                                        <tr>
-                                            <td class="text-center"><?= $i ?></td>
-                                            <td><?= $group->name ?></td>
-                                            <td class="text-center">
-                                                <a href="<?= base_url('/admin/permissions/' . $group->id) ?>" class="btn btn-xs text-primaryHover border-primaryHover hover:text-white hover:bg-primaryHover"><i class="fas fa-user-cog"></i>&ensp;<span class="text-xs">Set permissions</span></button>
-                                            </td>
-                                        </tr>
-                                        <?php $i++ ?>
-                                    <?php endforeach; ?>
-                                </tbody>
-                            </table>
+                    <div class="card-header mt-2 p-0 border-bottom-0 ">
+                        <ul class="nav nav-tabs" id="custom-tabs-four-tab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active text-secondary" data-toggle="pill" href="#tab1" role="tab" aria-controls="tab1" aria-selected="false">Groups List &ensp;
+                                    <span class="badge bg-indigo right" title="<?= count($groups) ?> Data"><i class="far fa-bell"></i>
+                                        <?= count($groups) ?></span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="card-body">
+                        <div class="tab-content">
+                            <div class="tab-pane fade active show" id="tab1" role="tabpanel" aria-labelledby="tab1">
+                                <div class="row">
+                                    <div class="col">
+                                        <table class="table table-hover table-sm text-sm" id="permissions-index">
+                                            <thead>
+                                                <tr>
+                                                    <td class="text-center">No.</td>
+                                                    <td>Group</td>
+                                                    <td class="text-center">Actions</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <?php $i = 1 ?>
+                                                <?php foreach ($groups as $group) : ?>
+                                                    <tr>
+                                                        <td class="text-center"><?= $i ?></td>
+                                                        <td><?= $group->name ?></td>
+                                                        <td class="text-center">
+                                                            <a href="<?= base_url('/admin/permissions/' . $group->id) ?>" class="btn btn-xs bg-teal"><i class="fas fa-user-cog"></i>&ensp;<span class="text-xs">Set permissions</span></button>
+                                                        </td>
+                                                    </tr>
+                                                    <?php $i++ ?>
+                                                <?php endforeach; ?>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+
 </div>
-<script>
-    initalize_dataTables('#permissions-index')
-</script>
+
+<?= view('admin/permissions/dist/index/footer') ?>
 <?= $this->endSection(); ?>
