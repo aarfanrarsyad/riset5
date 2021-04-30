@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use Config\Services;
 use App\Models\admin_model;
+use App\Models\AlumniModel;
 use Config\Email;
 use Myth\Auth\Entities\User;
 
@@ -621,5 +622,665 @@ class Admin extends BaseController
 		];
 
 		return view('admin' . DIRECTORY_SEPARATOR . 'security' . DIRECTORY_SEPARATOR . 'activity_log', $this->data);
+	}
+
+	#------------------------------------------------------------------------------------------------------------------------------------------------#
+
+	# Method untuk index CRUD Alumni
+	public function CRUD_alumniindex()
+	{
+		$init = new AlumniModel();
+		$currentPage = $this->request->getVar('page_alumni') ? $this->request->getVar('page_alumni') : 1;
+
+		$keyword = $this->request->getVar('keyword');
+		if ($keyword) {
+			$alumni = $init->searchAlumni($keyword);
+		} else {
+			$alumni = $init;
+		}
+
+		$data = [
+			'title' => 'Alumni | Website Riset 5',
+			'alumni' => $alumni->paginate(20, 'alumni'),
+			'pager' => $init->pager,
+			'currentPage' => $currentPage
+		];
+
+		return view('admin' . DIRECTORY_SEPARATOR . 'crud' .  DIRECTORY_SEPARATOR . 'alumni' . DIRECTORY_SEPARATOR . 'index', $data);
+	}
+
+	// #method untuk create CRUD Alumni
+	// public function CRUD_createAlumni()
+	// {
+	// 	$model = new AlumniModel();
+	// 	$listtk = $model->getTempatKerja()->getResult();
+
+	// 	$data = [
+	// 		'title' => 'Tambah Alumni | Website Riset 5',
+	// 		'validation' => \Config\Services::validation(),
+	// 		'list'		=> $listtk
+	// 	];
+
+	// 	return view('admin' . DIRECTORY_SEPARATOR . 'crud' . DIRECTORY_SEPARATOR . 'alumni' . DIRECTORY_SEPARATOR . 'create', $data);
+	// }
+
+	// #method untuk save CRUD Alumni
+	// public function CRUD_saveAlumni()
+	// {
+	// 	$init = new AlumniModel();
+
+	// 	if (!$this->validate([
+	// 		'nim' => [
+	// 			'rules' => 'required|is_unique[alumni.nim]',
+	// 			'errors' => [
+	// 				'required' => 'NIM alumni harus diisi.',
+	// 				'is_unique' => 'NIM alumni sudah terdaftar'
+	// 			]
+	// 		],
+	// 		'angkatan' => [
+	// 			'rules' => 'required',
+	// 			'errors' => [
+	// 				'required' => 'Angkatan alumni harus diisi.'
+	// 			]
+	// 		],
+	// 		'nama' => [
+	// 			'rules' => 'required',
+	// 			'errors' => [
+	// 				'required' => 'Nama alumni harus diisi.'
+	// 			]
+	// 		],
+	// 		'jenis_kelamin' => [
+	// 			'rules' => 'required',
+	// 			'errors' => [
+	// 				'required' => 'Jenis Kelamin alumni harus diisi.'
+	// 			]
+	// 		],
+	// 		'tempat_lahir' => [
+	// 			'rules' => 'required',
+	// 			'errors' => [
+	// 				'required' => 'Tempat Lahir alumni harus diisi.'
+	// 			]
+	// 		],
+	// 		'tanggal_lahir' => [
+	// 			'rules' => 'required',
+	// 			'errors' => [
+	// 				'required' => 'Tanggal Lahir alumni harus diisi.'
+	// 			]
+	// 		],
+	// 		'status_bekerja' => [
+	// 			'rules' => 'required',
+	// 			'errors' => [
+	// 				'required' => 'Status Bekerja alumni harus diisi.'
+	// 			]
+	// 		],
+	// 		'jabatan_terakhir' => [
+	// 			'rules' => 'required',
+	// 			'errors' => [
+	// 				'required' => 'Jabatan Terakhir alumni harus diisi.'
+	// 			]
+	// 		],
+	// 		'aktif_pns' => [
+	// 			'rules' => 'required',
+	// 			'errors' => [
+	// 				'required' => 'Aktif PNS alumni harus diisi.'
+	// 			]
+	// 		],
+	// 		'foto_profil' => [
+	// 			'rules' => 'max_size[foto_profil,5120]|is_image[foto_profil]|mime_in[foto_profil,image/jpg,image/jpeg,image/png]',
+	// 			'errors' => [
+	// 				'max_size' => 'Ukuran foto maksimal 5MB',
+	// 				'is_image' => 'Yang anda pilih bukan gambar',
+	// 				'mime_in' => 'Yang anda pilih bukan gambar'
+	// 			]
+	// 		],
+	// 		'nama_instansi' => [
+	// 			'rules' => 'required',
+	// 			'errors' => [
+	// 				'required' => 'Nama Instansi harus diisi.'
+	// 			]
+	// 		],
+	// 		'jenjang' => [
+	// 			'rules' => 'required',
+	// 			'errors' => [
+	// 				'required' => 'Jenjang harus diisi.'
+	// 			]
+	// 		],
+	// 		'instansi' => [
+	// 			'rules' => 'required',
+	// 			'errors' => [
+	// 				'required' => 'Universitas harus diisi.'
+	// 			]
+	// 		],
+	// 		'tahun_masuk' => [
+	// 			'rules' => 'required',
+	// 			'errors' => [
+	// 				'required' => 'Tahun Masuk harus diisi.'
+	// 			]
+	// 		],
+	// 		'tahun_lulus' => [
+	// 			'rules' => 'required',
+	// 			'errors' => [
+	// 				'required' => 'Tahun Lulus harus diisi.'
+	// 			]
+	// 		],
+	// 		'judul_tulisan' => [
+	// 			'rules' => 'required',
+	// 			'errors' => [
+	// 				'required' => 'Judul Tulisan harus diisi.'
+	// 			]
+	// 		],
+	// 		'program_studi' => [
+	// 			'rules' => 'required',
+	// 			'errors' => [
+	// 				'required' => 'Program Studi harus diisi.'
+	// 			]
+	// 		],
+	// 		'nama' => [
+	// 			'rules' => 'required',
+	// 			'errors' => [
+	// 				'required' => 'Nama alumni harus diisi.'
+	// 			]
+	// 		]
+	// 	])) {
+	// 		return redirect()->to('/admin/CRUD_createAlumni')->withInput();
+	// 	}
+
+	// 	// Ambil gambar
+	// 	$fileFotoProfil = $this->request->getFile('foto_profil');
+	// 	// apakah tidak ada gamabr yang diupload
+	// 	if ($fileFotoProfil->getError() == 4) {
+	// 		$namaFotoProfil = 'avatar.jpg';
+	// 	} else {
+	// 		// Genereate nama foto random
+	// 		$namaFotoProfil = $fileFotoProfil->getRandomName();
+	// 		// Pindahkan file ke folder img/alumni
+	// 		$fileFotoProfil->move('img/alumni', $namaFotoProfil);
+	// 	}
+
+
+	// 	$init->save([
+	// 		'nim' => htmlspecialchars($_POST['nim']),
+	// 		'angkatan' => htmlspecialchars($_POST['angkatan']),
+	// 		'nama' => htmlspecialchars($_POST['nama']),
+	// 		'jenis_kelamin' => htmlspecialchars($_POST['jenis_kelamin']),
+	// 		'tempat_lahir' => htmlspecialchars($_POST['tempat_lahir']),
+	// 		'tanggal_lahir' => htmlspecialchars($_POST['tanggal_lahir']),
+	// 		'telp_alumni' => htmlspecialchars($_POST['telp_alumni']),
+	// 		'email' => htmlspecialchars($_POST['email']),
+	// 		'alamat' => htmlspecialchars($_POST['alamat']),
+	// 		'status_bekerja' => htmlspecialchars($_POST['status_bekerja']),
+	// 		'perkiraan_pensiun' => htmlspecialchars($_POST['perkiraan_pensiun']),
+	// 		'jabatan_terakhir' => htmlspecialchars($_POST['jabatan_terakhir']),
+	// 		'aktif_pns' => htmlspecialchars($_POST['aktif_pns']),
+	// 		'ig' => htmlspecialchars($_POST['ig']),
+	// 		'fb' => htmlspecialchars($_POST['fb']),
+	// 		'twitter' => htmlspecialchars($_POST['twitter']),
+	// 		'nip' => htmlspecialchars($_POST['nip']),
+	// 		'nip_bps' => htmlspecialchars($_POST['nip_bps']),
+	// 		'foto_profil' => $namaFotoProfil
+	// 	]);
+
+	// 	$instansi = [
+	// 		'nim'		=> htmlspecialchars($_POST['nim']),
+	// 		'id_tempat_kerja' => $init->getIdTempatKerja(htmlspecialchars($_POST['nama_instansi']))
+	// 	];
+
+	// 	$init->db->table('alumni_tempat_kerja')->insert($instansi);
+
+	// 	$pendidikan = [
+	// 		'jenjang'    => htmlspecialchars($_POST['jenjang']),
+	// 		'instansi'	 => htmlspecialchars($_POST['instansi']),
+	// 		'tahun_masuk'  => htmlspecialchars($_POST['tahun_masuk']),
+	// 		'tahun_lulus'  => htmlspecialchars($_POST['tahun_lulus']),
+	// 		'nim'		=> htmlspecialchars($_POST['nim'])
+	// 	];
+
+	// 	$init->db->table('pendidikan')->insert($pendidikan);
+
+	// 	$pendidikanTinggi = [
+	// 		'program_studi'     => htmlspecialchars($_POST['program_studi']),
+	// 		'judul_tulisan'		=> htmlspecialchars($_POST['judul_tulisan'])
+	// 	];
+
+	// 	$init->db->table('pendidikan_tinggi')->insert($pendidikanTinggi);
+
+	// 	$prestasi = [
+	// 		'nama_prestasi'     => htmlspecialchars($_POST['nama_prestasi']),
+	// 		'tahun_prestasi'		=> htmlspecialchars($_POST['tahun_prestasi']),
+	// 		'nim'				=> htmlspecialchars($_POST['nim'])
+	// 	];
+
+	// 	$init->db->table('prestasi')->insert($prestasi);
+
+	// 	session()->setFlashdata('pesan', 'Data berhasil ditambahkan.');
+
+	// 	return redirect()->to('/admin');
+	// }
+
+
+	#method untuk detail CRUD Alumni
+	public function CRUD_detailAlumni($id)
+	{
+		$init = new admin_model();
+		$alumni = $init->getAllAlumni($id)->getResultArray()[0];
+
+		$data = [
+			'title' => 'Detail Alumni | Website Riset 5',
+			'alumni' => $alumni,
+		];
+
+		// dd($data);
+
+		if (empty($data['alumni'])) {
+			throw new \CodeIgniter\Exceptions\PageNotFoundException('Alumni dengan ID : ' . $id . 'Tidak Ditemukan');
+		}
+		return view('admin' . DIRECTORY_SEPARATOR . 'crud' . DIRECTORY_SEPARATOR . 'alumni' . DIRECTORY_SEPARATOR . 'detail', $data);
+	}
+
+	// #method untuk edit CRUD Alumni
+	// public function CRUD_editAlumni($nim)
+	// {
+	// 	// session();
+	// 	$data = [
+	// 		'title' => 'Edit Alumni | Website Riset 5',
+	// 		'validation' => \Config\Services::validation()
+	// 	];
+
+	// 	return view('admin' . DIRECTORY_SEPARATOR . 'crud' . DIRECTORY_SEPARATOR . 'instansi' . DIRECTORY_SEPARATOR . 'edit', $data);
+	// }
+
+	#method untuk delete CRUD Alumni
+	public function CRUD_deleteAlumni()
+	{
+		if (!$this->request->isAJAX()) return false;
+
+		$id = $this->request->getPost('id');
+		if (!$id) return false;
+
+		$init = new admin_model();
+		$query = $init->deleteAlumniByid($id);
+		$this->output_json($query);
+	}
+
+	#------------------------------------------------------------------------------------------------------------------------------------------------#
+
+	#method untuk index CRUD Instansi
+	public function CRUD_indexInstansi()
+	{
+		$init = new admin_model();
+		$initt = new AlumniModel();
+		$instansi = $init->getAllTempatKerja()->getResult();
+		$currentPage = $this->request->getVar('page_instansi') ? $this->request->getVar('page_instansi') : 1;
+
+		$keyword = $this->request->getVar('keyword');
+		if ($keyword) {
+			$instansi->searchInstansi($keyword);
+		} else {
+			$instansi;
+		}
+
+		$data = [
+			'title' => 'Instansi | Website Riset 5',
+			'instansi' => $instansi,
+			'pager' => $initt->pager,
+			'currentPage' => $currentPage
+		];
+
+		// dd($data);
+
+		return view('admin' . DIRECTORY_SEPARATOR . 'crud' . DIRECTORY_SEPARATOR . 'instansi' . DIRECTORY_SEPARATOR . 'index', $data);
+	}
+
+	// #method untuk create CRUD Instansi
+	// public function CRUD_createInstansi()
+	// {
+	// 	$init = new AlumniModel();
+
+	// 	$data = [
+	// 		'title' => 'Create Instansi | Website Riset 5',
+	// 		'validation' => \Config\Services::validation()
+	// 	];
+
+	// 	return view('admin' . DIRECTORY_SEPARATOR . 'crud' . DIRECTORY_SEPARATOR . 'instansi' . DIRECTORY_SEPARATOR . 'create', $data);
+	// }
+
+	// #method untuk save CRUD Instansi
+	// public function CRUD_saveInstansi()
+	// {
+	// 	$init = new AlumniModel();
+
+	// 	if (!$this->validate([
+	// 		'nama_instansi' => [
+	// 			'rules' => 'required|is_unique[tempat_kerja.nama_instansi]',
+	// 			'errors' => [
+	// 				'required' => 'Nama Instansi harus diisi.',
+	// 				'is_unique' => 'Nama Instansi sudah terdaftar'
+	// 			]
+	// 		],
+	// 		'alamat_instansi' => [
+	// 			'rules' => 'required|is_unique[tempat_kerja.alamat_instansi]',
+	// 			'errors' => [
+	// 				'required' => 'Alamat Instansi harus diisi.',
+	// 				'is_unique' => 'Alamat Instansi sudah terdaftar'
+	// 			]
+	// 		],
+	// 		'telp_instansi' => [
+	// 			'rules' => 'required|is_unique[tempat_kerja.telp_instansi]',
+	// 			'errors' => [
+	// 				'required' => 'Telepon Instansi harus diisi.',
+	// 				'is_unique' => 'Telepon Instansi sudah terdaftar'
+	// 			]
+	// 		],
+	// 		'faks_instansi' => [
+	// 			'rules' => 'required|is_unique[tempat_kerja.faks_instansi]',
+	// 			'errors' => [
+	// 				'required' => 'Faks Instansi harus diisi.',
+	// 				'is_unique' => 'Faks Instansi sudah terdaftar'
+	// 			]
+	// 		],
+	// 		'email_instansi' => [
+	// 			'rules' => 'required|is_unique[tempat_kerja.email_instansi]',
+	// 			'errors' => [
+	// 				'required' => 'Email Instansi harus diisi.',
+	// 				'is_unique' => 'Email Instansi sudah terdaftar'
+	// 			]
+	// 		]
+	// 	])) {
+	// 		return redirect()->to('/admin/CRUD_createInstansi')->withInput();
+	// 	}
+
+	// 	$instansi = [
+	// 		'nama_instansi' => htmlspecialchars($_POST['nama_instansi']),
+	// 		'alamat_instansi' => htmlspecialchars($_POST['alamat_instansi']),
+	// 		'telp_instansi' => htmlspecialchars($_POST['telp_instansi']),
+	// 		'faks_instansi' => htmlspecialchars($_POST['faks_instansi']),
+	// 		'email_instansi' => htmlspecialchars($_POST['email_instansi']),
+	// 	];
+
+	// 	$init->db->table('tempat_kerja')->insert($instansi);
+
+	// 	session()->setFlashdata('pesan', 'Data berhasil ditambahkan.');
+
+	// 	return redirect()->to('/admin/CRUD_indexInstansi');
+	// }
+
+
+	#method untuk detail CRUD Instansi
+	public function CRUD_detailInstansi($id)
+	{
+		$init = new admin_model();
+		$instansi = $init->getTempatKerja($id)->getResultArray()[0];
+
+		$data = [
+			'title' => 'Detail Instansi | Website Riset 5',
+			'instansi' => $instansi,
+		];
+
+		// dd($data);
+
+		if (empty($data['instansi'])) {
+			throw new \CodeIgniter\Exceptions\PageNotFoundException('Instansi dengan ID : ' . $id . 'Tidak Ditemukan');
+		}
+		return view('admin' . DIRECTORY_SEPARATOR . 'crud' . DIRECTORY_SEPARATOR . 'instansi' . DIRECTORY_SEPARATOR . 'detail', $data);
+	}
+
+	#method untuk delete CRUD Instansi
+	public function CRUD_deleteInstansi()
+	{
+		// if ($this->request->isAJAX()) {
+		// 	$id   = $this->request->$_POST('id');
+		// 	$init = new admin_model();
+		// 	$query = $init->deleteInstansiByid($id);
+
+		// 	$this->output_json($query);
+		// }
+
+		if (!$this->request->isAJAX()) return false;
+
+		$id = $this->request->getPost('id');
+		if (!$id) return false;
+
+		$init = new admin_model();
+		$query = $init->deleteInstansiByid($id);
+		$this->output_json($query);
+	}
+
+	#------------------------------------------------------------------------------------------------------------------------------------------------#
+
+	#method untuk index CRUD Publikasi
+	public function CRUD_indexPublikasi()
+	{
+		$init = new admin_model();
+		$publikasi = $init->getAllPublikasi()->getResult();
+		$currentPage = $this->request->getVar('page_publikasi') ? $this->request->getVar('page_publikasi') : 1;
+
+		$keyword = $this->request->getVar('keyword');
+		if ($keyword) {
+			$publikasi->searchPublikasi($keyword);
+		} else {
+			$publikasi;
+		}
+
+		$data = [
+			'title' => 'Publikasi | Website Riset 5',
+			'publikasi' => $publikasi,
+			'pager' => $init->pager,
+			'currentPage' => $currentPage
+		];
+
+		// dd($data);
+
+		return view('admin' . DIRECTORY_SEPARATOR . 'crud' . DIRECTORY_SEPARATOR . 'publikasi' . DIRECTORY_SEPARATOR . 'index', $data);
+	}
+
+	// #method untuk detail CRUD Publikasi
+	// public function CRUD_detailPublikasi($idPublikasi)
+	// {
+	// 	$init = new AlumniModel();
+
+	// 	$data = [
+	// 		'title' => 'Detail Publikasi | Website Riset 5'
+	// 	];
+
+
+	// 	if (empty($data['alumni'])) {
+	// 		throw new \CodeIgniter\Exceptions\PageNotFoundException('Publikasi dengan ID : ' . $idPublikasi . 'Tidak Ditemukan');
+	// 	}
+	// 	return view('admin' . DIRECTORY_SEPARATOR . 'crud' . DIRECTORY_SEPARATOR . 'publikasi' . DIRECTORY_SEPARATOR . 'detail', $data);
+	// }
+
+	// #method untuk create CRUD Publikasi
+	// public function CRUD_createPublikasi()
+	// {
+	// 	$init = new AlumniModel();
+
+	// 	$data = [
+	// 		'title' => 'Create Publikasi | Website Riset 5',
+	// 		'validation' => \Config\Services::validation()
+	// 	];
+
+	// 	return view('admin' . DIRECTORY_SEPARATOR . 'crud' . DIRECTORY_SEPARATOR . 'publikasi' . DIRECTORY_SEPARATOR . 'create', $data);
+	// }
+
+	// #method untuk save CRUD Publikasi
+	// public function CRUD_savePublikasi()
+	// {
+	// 	$init = new AlumniModel();
+
+	// 	session()->setFlashdata('pesan', 'Data berhasil ditambahkan.');
+
+	// 	return redirect()->to('/admin/crud/publikasi');
+	// }
+
+	// #method untuk edit CRUD Publikasi
+	// public function CRUD_editPublikasi($idPublikasi)
+	// {
+	//     // session();
+	// 	$data = [
+	// 		'title' => 'Edit Publikasi | Website Riset 5',
+	// 		'validation' => \Config\Services::validation()
+	// 	];
+
+	//     return view('admin' . DIRECTORY_SEPARATOR . 'crud' . DIRECTORY_SEPARATOR . 'publikasi' . DIRECTORY_SEPARATOR . 'edit', $data);
+	// }
+
+	#method untuk delete CRUD Publikasi
+	public function CRUD_deletePublikasi()
+	{
+		if (!$this->request->isAJAX()) return false;
+
+		$id = $this->request->getPost('id');
+		if (!$id) return false;
+
+		$init = new admin_model();
+		$query = $init->deletePublikasiByid($id);
+		$this->output_json($query);
+	}
+
+	#------------------------------------------------------------------------------------------------------------------------------------------------#
+
+	#method untuk index CRUD Pendidikan
+	public function CRUD_indexPendidikan()
+	{
+		$init = new admin_model();
+		$pendidikan = $init->getAllPendidikan()->getResult();
+		$currentPage = $this->request->getVar('page_pendidikan') ? $this->request->getVar('page_pendidikan') : 1;
+
+		$keyword = $this->request->getVar('keyword');
+		if ($keyword) {
+			$pendidikan->searchPendidikan($keyword);
+		} else {
+			$pendidikan;
+		}
+
+		$data = [
+			'title' => 'Pendidikan | Website Riset 5',
+			'pendidikan' => $pendidikan,
+			'pager' => $init->pager,
+			'currentPage' => $currentPage
+		];
+
+		// dd($data);
+
+		return view('admin' . DIRECTORY_SEPARATOR . 'crud' . DIRECTORY_SEPARATOR . 'pendidikan' . DIRECTORY_SEPARATOR . 'index', $data);
+	}
+
+	// #method untuk edit CRUD Pendidikan
+	// public function CRUD_editPendidikan($idPendidikan)
+	// {
+	// 	// session();
+	// 	$data = [
+	// 		'title' => 'Edit Pendidikan | Website Riset 5',
+	// 		'validation' => \Config\Services::validation()
+	// 	];
+
+	// 	return view('admin' . DIRECTORY_SEPARATOR . 'crud' . DIRECTORY_SEPARATOR . 'pendidikan' . DIRECTORY_SEPARATOR . 'edit', $data);
+	// }
+
+	#method untuk delete CRUD Pendidikan
+	public function CRUD_deletePendidikan()
+	{
+		if (!$this->request->isAJAX()) return false;
+
+		$id = $this->request->getPost('id');
+		if (!$id) return false;
+
+		$init = new admin_model();
+		$query = $init->deletePendidikanByid($id);
+		$this->output_json($query);
+	}
+
+	#------------------------------------------------------------------------------------------------------------------------------------------------#
+
+	#method untuk index CRUD Pendidikan
+	public function CRUD_indexPendidikanTinggi()
+	{
+		$init = new admin_model();
+		$pendidikantinggi = $init->getAllPendidikanTinggi()->getResult();
+		$currentPage = $this->request->getVar('page_pendidikantinggi') ? $this->request->getVar('page_pendidikantinggi') : 1;
+
+		$keyword = $this->request->getVar('keyword');
+		if ($keyword) {
+			$pendidikantinggi->searchPendidikanTinggi($keyword);
+		} else {
+			$pendidikantinggi;
+		}
+
+		$data = [
+			'title' => 'Pendidikan Tinggi | Website Riset 5',
+			'pendidikantinggi' => $pendidikantinggi,
+			'pager' => $init->pager,
+			'currentPage' => $currentPage
+		];
+
+		// dd($data);
+
+		return view('admin' . DIRECTORY_SEPARATOR . 'crud' . DIRECTORY_SEPARATOR . 'pendidikantinggi' . DIRECTORY_SEPARATOR . 'index', $data);
+	}
+
+	// #method untuk edit CRUD Pendidikan
+	// public function CRUD_editPendidikan($idPendidikan)
+	// {
+	// 	// session();
+	// 	$data = [
+	// 		'title' => 'Edit Pendidikan | Website Riset 5',
+	// 		'validation' => \Config\Services::validation()
+	// 	];
+
+	// 	return view('admin' . DIRECTORY_SEPARATOR . 'crud' . DIRECTORY_SEPARATOR . 'pendidikan' . DIRECTORY_SEPARATOR . 'edit', $data);
+	// }
+
+	#method untuk delete CRUD Pendidikan
+	public function CRUD_deletePendidikanTinggi()
+	{
+		if (!$this->request->isAJAX()) return false;
+
+		$id = $this->request->getPost('id');
+		if (!$id) return false;
+
+		$init = new admin_model();
+		$query = $init->deletePendidikanTinggiByid($id);
+		$this->output_json($query);
+	}
+
+	#------------------------------------------------------------------------------------------------------------------------------------------------#
+
+	#method untuk index CRUD Prestasi
+	public function CRUD_indexPrestasi()
+	{
+		$init = new admin_model();
+		$prestasi = $init->getAllPrestasi()->getResult();
+		$currentPage = $this->request->getVar('page_prestasi') ? $this->request->getVar('page_prestasi') : 1;
+
+		$keyword = $this->request->getVar('keyword');
+		if ($keyword) {
+			$prestasi->searchPendidikan($keyword);
+		} else {
+			$prestasi;
+		}
+
+		$data = [
+			'title' => 'Prestasi | Website Riset 5',
+			'prestasi' => $prestasi,
+			'pager' => $init->pager,
+			'currentPage' => $currentPage
+		];
+
+		// dd($data);
+
+		return view('admin' . DIRECTORY_SEPARATOR . 'crud' . DIRECTORY_SEPARATOR . 'prestasi' . DIRECTORY_SEPARATOR . 'index', $data);
+	}
+
+	#method untuk delete CRUD Prestasi
+	public function CRUD_deletePrestasi()
+	{
+		if (!$this->request->isAJAX()) return false;
+
+		$id = $this->request->getPost('id');
+		if (!$id) return false;
+
+		$init = new admin_model();
+		$query = $init->deletePrestasiByid($id);
+		$this->output_json($query);
 	}
 }
