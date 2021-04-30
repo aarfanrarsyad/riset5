@@ -1270,7 +1270,17 @@ class Admin extends BaseController
 
 	#method untuk delete CRUD Prestasi
 	public function CRUD_deletePrestasi()
-# Method untuk API activity_log
+	{
+		if (!$this->request->isAJAX()) return false;
+
+		$id = $this->request->getPost('id');
+		if (!$id) return false;
+
+		$init = new admin_model();
+		$query = $init->deletePrestasiByid($id);
+		$this->output_json($query);
+	}
+	# Method untuk API activity_log
 	public function management_api_index()
 	{
 		$init = new admin_model();
@@ -1368,12 +1378,12 @@ class Admin extends BaseController
 		return redirect()->to(base_url('/admin/request-api'));
 	}
 
-	public function delete_scope()	
-{
+	public function delete_scope()
+
+	{
 		if (!$this->request->isAJAX()) return false;
 
 		$id = $this->request->getPost('id');
-
 		$init = new admin_model();
 		$query = $init->deleteScope($id);
 		return $this->output_json($query);

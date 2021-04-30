@@ -169,16 +169,16 @@ class Rbac extends Seeder
 				'menu_icon'		=> 'fas fa-user-shield'
 			],
 			[
-				'menu_name'     => 'Managemen Database',
-				'menu_icon'		=> 'fas fa-user-circle'
-			],
-			[
 				'menu_name'     => 'Manajemen Berita',
 				'menu_icon'		=> 'fas fa-book-open'
 			],
 			[
 				'menu_name'     => 'Manajemen API',
 				'menu_icon'		=> 'fab fa-chrome'
+			],
+			[
+				'menu_name'     => 'Managemen Database',
+				'menu_icon'		=> 'fas fa-user-circle'
 			]
 		];
 		$this->db->table('menu')->insertBatch($data);
@@ -284,58 +284,58 @@ class Rbac extends Seeder
 			],
 			[
 				'menu_id'     	=> 7,
-				'title'			=> 'Alumni',
-				'url'			=> 'admin/alumni',
-				'icon'			=> 'fas fa-user',
-				'active'		=> '1'
-			],
-			[
-				'menu_id'     	=> 7,
-				'title'			=> 'Instansi',
-				'url'			=> 'admin/instansi',
-				'icon'			=> 'fas fa-landmark',
-				'active'		=> '1'
-			],
-			[
-				'menu_id'     	=> 7,
-				'title'			=> 'Publikasi',
-				'url'			=> 'admin/publikasi',
-				'icon'			=> 'fas fa-file-alt',
-				'active'		=> '1'
-			],
-			[
-				'menu_id'     	=> 7,
-				'title'			=> 'Pendidikan',
-				'url'			=> 'admin/pendidikan',
-				'icon'			=> 'fas fa-school',
-				'active'		=> '1'
-			],
-			[
-				'menu_id'     	=> 7,
-				'title'			=> 'Pendidikan Tinggi',
-				'url'			=> 'admin/pendidikan-tinggi',
-				'icon'			=> 'fas fa-school',
-				'active'		=> '1'
-			],
-			[
-				'menu_id'     	=> 7,
-				'title'			=> 'Prestasi',
-				'url'			=> 'admin/prestasi',
-				'icon'			=> 'fas fa-award',
-				'active'		=> '1'
-			],
-			[
-				'menu_id'     	=> 8,
 				'title'			=> 'Berita',
 				'url'			=> 'admin/berita',
 				'icon'			=> 'fas fa-book-open',
 				'active'		=> '1'
 			],
 			[
-				'menu_id'     	=> 9,
+				'menu_id'     	=> 8,
 				'title'			=> 'API',
 				'url'			=> 'admin/request-api',
 				'icon'			=> 'fab fa-chrome',
+				'active'		=> '1'
+			],
+			[
+				'menu_id'     	=> 9,
+				'title'			=> 'Alumni',
+				'url'			=> 'admin/alumni',
+				'icon'			=> 'fas fa-user',
+				'active'		=> '1'
+			],
+			[
+				'menu_id'     	=> 9,
+				'title'			=> 'Instansi',
+				'url'			=> 'admin/instansi',
+				'icon'			=> 'fas fa-landmark',
+				'active'		=> '1'
+			],
+			[
+				'menu_id'     	=> 9,
+				'title'			=> 'Publikasi',
+				'url'			=> 'admin/publikasi',
+				'icon'			=> 'fas fa-file-alt',
+				'active'		=> '1'
+			],
+			[
+				'menu_id'     	=> 9,
+				'title'			=> 'Pendidikan',
+				'url'			=> 'admin/pendidikan',
+				'icon'			=> 'fas fa-school',
+				'active'		=> '1'
+			],
+			[
+				'menu_id'     	=> 9,
+				'title'			=> 'Pendidikan Tinggi',
+				'url'			=> 'admin/pendidikan-tinggi',
+				'icon'			=> 'fas fa-school',
+				'active'		=> '1'
+			],
+			[
+				'menu_id'     	=> 9,
+				'title'			=> 'Prestasi',
+				'url'			=> 'admin/prestasi',
+				'icon'			=> 'fas fa-award',
 				'active'		=> '1'
 			]
 		];
@@ -560,6 +560,38 @@ class Rbac extends Seeder
 			],
 			[
 				'submenu_id'     	=> 20,
+				'crud_id'			=> 4
+			],
+			[
+				'submenu_id'     	=> 21,
+				'crud_id'			=> 1
+			],
+			[
+				'submenu_id'     	=> 21,
+				'crud_id'			=> 2
+			],
+			[
+				'submenu_id'     	=> 21,
+				'crud_id'			=> 3
+			],
+			[
+				'submenu_id'     	=> 21,
+				'crud_id'			=> 4
+			],
+			[
+				'submenu_id'     	=> 22,
+				'crud_id'			=> 1
+			],
+			[
+				'submenu_id'     	=> 22,
+				'crud_id'			=> 2
+			],
+			[
+				'submenu_id'     	=> 22,
+				'crud_id'			=> 3
+			],
+			[
+				'submenu_id'     	=> 22,
 				'crud_id'			=> 4
 			]
 		];
@@ -793,6 +825,38 @@ class Rbac extends Seeder
 			[
 				'group_id'     		=> 1,
 				'menu_access_id'	=> 55
+			],
+			[
+				'group_id'     		=> 1,
+				'menu_access_id'	=> 56
+			],
+			[
+				'group_id'     		=> 1,
+				'menu_access_id'	=> 57
+			],
+			[
+				'group_id'     		=> 1,
+				'menu_access_id'	=> 58
+			],
+			[
+				'group_id'     		=> 1,
+				'menu_access_id'	=> 59
+			],
+			[
+				'group_id'     		=> 1,
+				'menu_access_id'	=> 60
+			],
+			[
+				'group_id'     		=> 1,
+				'menu_access_id'	=> 61
+			],
+			[
+				'group_id'     		=> 1,
+				'menu_access_id'	=> 62
+			],
+			[
+				'group_id'     		=> 1,
+				'menu_access_id'	=> 63
 			]
 		];
 		$this->db->table('groups_access')->insertBatch($data);
