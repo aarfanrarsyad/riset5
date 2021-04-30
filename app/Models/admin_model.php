@@ -1058,7 +1058,7 @@ class admin_model extends Model
     public function getAllAlumni($id)
     {
         $query = "SELECT * FROM alumni 
-            JOIN angkatan_alumni ON angkatan_alumni.id_alumni=alumni.id_alumni 
+            JOIN angkatan_alumni 
             WHERE alumni.id_alumni=$id";
         return $this->db->query($query);
     }
