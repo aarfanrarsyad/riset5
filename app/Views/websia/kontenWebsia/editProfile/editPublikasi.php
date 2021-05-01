@@ -77,12 +77,13 @@
 <!-- dialog box edit publikasi -->
 <!-- kalau mau ngecek hilangin kelas hidden sama opacity-0 nya-->
 
+<?php if (session()->getFlashdata('edit-publikasi-success')) : ?>
 <!-- BERHASIL edit publikasi -->
 <div id="berhasilEditPublikasi">
-    <div class="hidden opacity-0 fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40">
+    <div class="fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40">
         <div class="duration-700 transition-all p-3 rounded-lg flex items-center" style="background-color: #B1FF66;">
             <img src="/img/components/icon/check.png" class="h-5 mr-2" style="color: #54AC00;">
-            <p class="sm:text-base text-sm font-heading font-bold text-success">Publikasi Berhasil Disimpan</p>
+            <p class="sm:text-base text-sm font-heading font-bold text-success"><?= session()->getFlashdata('edit-publikasi-success') ?></p>
         </div>
     </div>
 </div>
@@ -91,9 +92,10 @@
         $('#berhasilEditPublikasi').fadeOut();
     }, 1500);
 </script>
-<!-- GAGAL edit publikasi -->
+<?php endif; ?>
+<!-- GAGAL edit publikasi
 <div id="gagalEditPublikasi">
-    <div class="hidden opacity-0 fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40">
+    <div class="fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40">
         <div class="duration-700 transition-all p-3 rounded-lg flex items-center" style="background-color: #FF7474;">
             <img src="/img/components/icon/warning.png" class="h-5 mr-2">
             <p class="sm:text-base text-sm font-heading font-bold" style="color: #C51800;">Publikasi Tidak Berhasil Disimpan</p>
@@ -104,13 +106,14 @@
     setTimeout(function() {
         $('#gagalEditPublikasi').fadeOut();
     }, 1500);
-</script>
+</script> -->
+<?php if (session()->getFlashdata('add-publikasi-success')) : ?>
 <!-- BERHASIL tambah publikasi -->
 <div id="berhasilTambahPublikasi">
-    <div class="hidden opacity-0 fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40">
+    <div class="fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40">
         <div class="duration-700 transition-all p-3 rounded-lg flex items-center" style="background-color: #B1FF66;">
             <img src="/img/components/icon/check.png" class="h-5 mr-2" style="color: #54AC00;">
-            <p class="sm:text-base text-sm font-heading font-bold text-success">Publikasi Berhasil Ditambahkan</p>
+            <p class="sm:text-base text-sm font-heading font-bold text-success"><?= session()->getFlashdata('add-publikasi-success') ?></p>
         </div>
     </div>
 </div>
@@ -119,9 +122,10 @@
         $('#berhasilTambahPublikasi').fadeOut();
     }, 1500);
 </script>
-<!-- GAGAL tambah publikasi -->
+<?php endif; ?>
+<!-- GAGAL tambah publikasi
 <div id="gagalTambahPublikasi">
-    <div class="hidden opacity-0 fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40">
+    <div class="fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40">
         <div class="duration-700 transition-all p-3 rounded-lg flex items-center" style="background-color: #FF7474;">
             <img src="/img/components/icon/warning.png" class="h-5 mr-2">
             <p class="sm:text-base text-sm font-heading font-bold" style="color: #C51800;">Publikasi Tidak Berhasil Ditambahkan</p>
@@ -132,13 +136,14 @@
     setTimeout(function() {
         $('#gagalTambahPublikasi').fadeOut();
     }, 1500);
-</script>
+</script> -->
+<?php if (session()->getFlashdata('delete-publikasi-success')) : ?>
 <!-- BERHASIL hapus publiikasi -->
 <div id="berhasilHapusPublikasi">
     <div class="fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40">
         <div class="duration-700 transition-all p-3 rounded-lg flex items-center" style="background-color: #B1FF66;">
             <img src="/img/components/icon/check.png" class="h-5 mr-2" style="color: #54AC00;">
-            <p class="sm:text-base text-sm font-heading font-bold text-success">Data publikasi berhasil dihapus.</p>
+            <p class="sm:text-base text-sm font-heading font-bold text-success"><?= session()->getFlashdata('delete-publikasi-success') ?></p>
         </div>
     </div>
 </div>
@@ -148,4 +153,6 @@
     }, 1500);
 </script>
 <!-- end dialog box-->
+<?php endif; ?>
+
 <?= $this->endSection(); ?>
