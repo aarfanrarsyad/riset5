@@ -169,56 +169,56 @@
 // })
 //Akhir Unggah Foto
 
-//Awal apabila Unggah Foto Sukses
-function suksesUnggahFoto () {
+// //Awal apabila Unggah Foto Sukses
+// function suksesUnggahFoto () {
     
-    // tutupFormUnggahFoto();
+//     // tutupFormUnggahFoto();
 
-    $('body').prepend(`
-    <div class="fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40 font-paragraph" id='suksesUnggahFoto'>
-        <div class="hidden opacity-0 duration-700 transition-all lg:w-1/3 md:w-2/3 sm:w-3/4 w-11/12 bg-gray bg-opacity-0">
-            <div class="flex flex-col items-center bg-white py-8 rounded-2xl shadow-md">
-                <svg class="h-20 w-20 bg-primary text-white rounded-full mb-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
-                </svg>
-                <p class="sm:text-base text-sm font-heading font-bold text-primary mb-2">Foto Berhasil Terunggah</p>
-                <input type="button" value="OKE" class="closeSuksesUnggahFoto bg-secondary text-white rounded-full w-24 py-1 text-center cursor-pointer hover:bg-secondaryhover transition-colors duration-300 text-sm mr-4 outline-none" id='backUnggahFoto'>
+//     $('body').prepend(`
+//     <div class="fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40 font-paragraph" id='suksesUnggahFoto'>
+//         <div class="hidden opacity-0 duration-700 transition-all lg:w-1/3 md:w-2/3 sm:w-3/4 w-11/12 bg-gray bg-opacity-0">
+//             <div class="flex flex-col items-center bg-white py-8 rounded-2xl shadow-md">
+//                 <svg class="h-20 w-20 bg-primary text-white rounded-full mb-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+//                     <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+//                 </svg>
+//                 <p class="sm:text-base text-sm font-heading font-bold text-primary mb-2">Foto Berhasil Terunggah</p>
+//                 <input type="button" value="OKE" class="closeSuksesUnggahFoto bg-secondary text-white rounded-full w-24 py-1 text-center cursor-pointer hover:bg-secondaryhover transition-colors duration-300 text-sm mr-4 outline-none" id='backUnggahFoto'>
 
-            </div>
-        </div>
-    </div>
-`);
+//             </div>
+//         </div>
+//     </div>
+// `);
 
-    $('#suksesUnggahFoto').children().first().removeClass('hidden')
-    setTimeout(function () {
-        $('#suksesUnggahFoto').children().first().removeClass('opacity-0')
-    }, 10);
+//     $('#suksesUnggahFoto').children().first().removeClass('hidden')
+//     setTimeout(function () {
+//         $('#suksesUnggahFoto').children().first().removeClass('opacity-0')
+//     }, 10);
 
-    $('.closeSuksesUnggahFoto').click(function () {
-        $('#suksesUnggahFoto').children().first().addClass('opacity-0')
-        $('#suksesUnggahFoto').children().first().on('transitionend MSTransitionEnd webkitTransitionEnd oTransitionEnd', function () {
-            $('#suksesUnggahFoto').children().first().addClass('hidden')
-        });
-        setTimeout(function () {
-            $('#suksesUnggahFoto').remove()
-        }, 400);
-    })
+//     $('.closeSuksesUnggahFoto').click(function () {
+//         $('#suksesUnggahFoto').children().first().addClass('opacity-0')
+//         $('#suksesUnggahFoto').children().first().on('transitionend MSTransitionEnd webkitTransitionEnd oTransitionEnd', function () {
+//             $('#suksesUnggahFoto').children().first().addClass('hidden')
+//         });
+//         setTimeout(function () {
+//             $('#suksesUnggahFoto').remove()
+//         }, 400);
+//     })
 
-    var modal = document.getElementById('suksesUnggahFoto')
-    $(window).click(function (e) {
-        if (e.target === modal) {
-            $('#suksesUnggahFoto').children().first().addClass('opacity-0')
-            $('#suksesUnggahFoto').children().first().on('transitionend MSTransitionEnd webkitTransitionEnd oTransitionEnd', function () {
-                $('#suksesUnggahFoto').children().first().addClass('hidden')
-            });
-            setTimeout(function () {
-                $('#suksesUnggahFoto').remove()
-            }, 400);
-        }
-    })
+//     var modal = document.getElementById('suksesUnggahFoto')
+//     $(window).click(function (e) {
+//         if (e.target === modal) {
+//             $('#suksesUnggahFoto').children().first().addClass('opacity-0')
+//             $('#suksesUnggahFoto').children().first().on('transitionend MSTransitionEnd webkitTransitionEnd oTransitionEnd', function () {
+//                 $('#suksesUnggahFoto').children().first().addClass('hidden')
+//             });
+//             setTimeout(function () {
+//                 $('#suksesUnggahFoto').remove()
+//             }, 400);
+//         }
+//     })
 
-}
-//Akhir apabila Unggah Foto Sukses
+// }
+// //Akhir apabila Unggah Foto Sukses
 
 //Awal Lapor Foto
 
@@ -232,7 +232,7 @@ function tutupFormLaporFoto() {
     }, 400);
 }
 
-function laporkanFoto(){
+function laporkanFoto(id){
     $('body').prepend(`
     <div class="fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40 font-paragraph" id='formLaporFoto'>
         <div class="hidden opacity-0 duration-700 transition-all xl:w-1/2 lg:w-7/12 md:w-2/3 sm:w-3/4 w-11/12 bg-gray bg-opacity-0">
@@ -242,9 +242,10 @@ function laporkanFoto(){
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
                 </svg>
             </div>
-            <form action="" method="post" class="flex flex-col bg-gray-100 sm:px-12 px-4 rounded-b-2xl text-sm">
+            <form action="reportGaleri" method="post" class="flex flex-col bg-gray-100 sm:px-12 px-4 rounded-b-2xl text-sm">
                 <label for="inputLaporan" class="text-primary font-medium mt-8">Mengapa Anda melaporkan foto ini?</label>
                 <textarea name="inputLaporan" class="inputForm h-36" style="resize: none;" required></textarea>
+                <input type="hidden" name="foto" value="` + id + `">
     
                 <div class="flex justify-end my-4">
                     <input type="button" value="BATAL" class="closeFormLaporFoto bg-secondary text-white rounded-full w-24 py-1 text-center cursor-pointer hover:bg-secondaryhover transition-colors duration-300 text-sm mr-4 outline-none" id='backFormLaporFoto'>
@@ -286,189 +287,182 @@ function laporkanFoto(){
 
 //Akhir Lapor Foto
 
-//Awal apabila Lapor Foto Sukses
-function suksesLaporFoto () {
+// //Awal apabila Lapor Foto Sukses
+// function suksesLaporFoto () {
     
-    tutupFormUnggahVideo();
+//     tutupFormUnggahVideo();
 
-    $('body').prepend(`
-    <div class="fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40 font-paragraph" id='suksesLaporFoto'>
-        <div class=" duration-700 transition-all lg:w-1/3 md:w-2/3 sm:w-3/4 w-11/12 bg-gray bg-opacity-0">
-            <div class="flex flex-col items-center bg-white py-8 rounded-2xl shadow-md">
-                <svg class="h-20 w-20 bg-primary text-white rounded-full mb-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
-                </svg>
-                <p class="sm:text-base text-sm font-heading font-bold text-primary mb-2">Laporan Anda berhasil dikirim</p>
-                <input type="button" value="OKE" class="closeSuksesLaporFoto bg-secondary text-white rounded-full w-24 py-1 text-center cursor-pointer hover:bg-secondaryhover transition-colors duration-300 text-sm mr-4 outline-none" id='backSuksesLaporFoto'>
+//     $('body').prepend(`
+//     <div class="fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40 font-paragraph" id='suksesLaporFoto'>
+//         <div class=" duration-700 transition-all lg:w-1/3 md:w-2/3 sm:w-3/4 w-11/12 bg-gray bg-opacity-0">
+//             <div class="flex flex-col items-center bg-white py-8 rounded-2xl shadow-md">
+//                 <svg class="h-20 w-20 bg-primary text-white rounded-full mb-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+//                     <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+//                 </svg>
+//                 <p class="sm:text-base text-sm font-heading font-bold text-primary mb-2">Laporan Anda berhasil dikirim</p>
+//                 <input type="button" value="OKE" class="closeSuksesLaporFoto bg-secondary text-white rounded-full w-24 py-1 text-center cursor-pointer hover:bg-secondaryhover transition-colors duration-300 text-sm mr-4 outline-none" id='backSuksesLaporFoto'>
 
-            </div>
-        </div>
-    </div>
-`)
+//             </div>
+//         </div>
+//     </div>
+// `)
 
-    $('#suksesLaporFoto').children().first().removeClass('hidden')
-    setTimeout(function () {
-        $('#suksesLaporFoto').children().first().removeClass('opacity-0')
-    }, 10);
+//     $('#suksesLaporFoto').children().first().removeClass('hidden')
+//     setTimeout(function () {
+//         $('#suksesLaporFoto').children().first().removeClass('opacity-0')
+//     }, 10);
 
-    $('.closeSuksesLaporFoto').click(function () {
-        $('#suksesLaporFoto').children().first().addClass('opacity-0')
-        $('#suksesLaporFoto').children().first().on('transitionend MSTransitionEnd webkitTransitionEnd oTransitionEnd', function () {
-            $('#suksesLaporFoto').children().first().addClass('hidden')
-        });
-        setTimeout(function () {
-            $('#suksesLaporFoto').remove()
-        }, 400);
-    })
+//     $('.closeSuksesLaporFoto').click(function () {
+//         $('#suksesLaporFoto').children().first().addClass('opacity-0')
+//         $('#suksesLaporFoto').children().first().on('transitionend MSTransitionEnd webkitTransitionEnd oTransitionEnd', function () {
+//             $('#suksesLaporFoto').children().first().addClass('hidden')
+//         });
+//         setTimeout(function () {
+//             $('#suksesLaporFoto').remove()
+//         }, 400);
+//     })
 
-    var modal = document.getElementById('suksesLaporFoto')
-    $(window).click(function (e) {
-        if (e.target === modal) {
-            $('#suksesLaporFoto').children().first().addClass('opacity-0')
-            $('#suksesLaporFoto').children().first().on('transitionend MSTransitionEnd webkitTransitionEnd oTransitionEnd', function () {
-                $('#suksesLaporFoto').children().first().addClass('hidden')
-            });
-            setTimeout(function () {
-                $('#suksesLaporFoto').remove()
-            }, 400);
-        }
-    })
-
-}
-
-$('.suksesLaporkanFoto').click(function (e) {
-    suksesLaporFoto();
-})
-//Akhir apabila Lapor Foto Sukses
+//     var modal = document.getElementById('suksesLaporFoto')
+//     $(window).click(function (e) {
+//         if (e.target === modal) {
+//             $('#suksesLaporFoto').children().first().addClass('opacity-0')
+//             $('#suksesLaporFoto').children().first().on('transitionend MSTransitionEnd webkitTransitionEnd oTransitionEnd', function () {
+//                 $('#suksesLaporFoto').children().first().addClass('hidden')
+//             });
+//             setTimeout(function () {
+//                 $('#suksesLaporFoto').remove()
+//             }, 400);
+//         }
+//     })
+// }
+// //Akhir apabila Lapor Foto Sukses
 
 
 
-//Awal Unggah Video
+// //Awal Unggah Video
 
-function tutupFormUnggahVideo() {
-    $('#formUnggahVideo').children().first().addClass('opacity-0')
-    $('#formUnggahVideo').children().first().on('transitionend MSTransitionEnd webkitTransitionEnd oTransitionEnd', function () {
-        $('#formUnggahVideo').children().first().addClass('hidden')
-    });
-    setTimeout(function () {
-        $('#formUnggahVideo').remove()
-    }, 400);
-}
+// function tutupFormUnggahVideo() {
+//     $('#formUnggahVideo').children().first().addClass('opacity-0')
+//     $('#formUnggahVideo').children().first().on('transitionend MSTransitionEnd webkitTransitionEnd oTransitionEnd', function () {
+//         $('#formUnggahVideo').children().first().addClass('hidden')
+//     });
+//     setTimeout(function () {
+//         $('#formUnggahVideo').remove()
+//     }, 400);
+// }
 
-$('.unggahVideo').click(function () {
-    $('body').prepend(`
-    <div class="fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40 font-paragraph" id='formUnggahVideo'>
-        <div class="hidden opacity-0 duration-700 transition-all xl:w-1/2 lg:w-7/12 md:w-2/3 sm:w-3/4 w-11/12 bg-gray bg-opacity-0">
-            <div class="bg-primary py-4 px-6 rounded-t-2xl flex items-center justify-between text-secondary text-2xl">
-                <p class="font-heading font-bold">Unggah Video</p>
-                <svg class="closeFormUnggahVideo lg:w-10 md:w-8 sm:w-7 w-6 fill-current cursor-pointer" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                </svg>
-            </div>
-            <form action="uploadVideo" method="post" class="flex flex-col bg-gray-100 sm:px-12 px-4 rounded-b-2xl text-sm">
-            <label for="linkVideo" class="text-primary font-medium mt-8">Link Video Youtube</label>
-            <input name="linkVideo" id="linkVideo" type="text" placeholder="Link video" class="inputForm" required>
+// $('.unggahVideo').click(function () {
+//     $('body').prepend(`
+//     <div class="fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40 font-paragraph" id='formUnggahVideo'>
+//         <div class="hidden opacity-0 duration-700 transition-all xl:w-1/2 lg:w-7/12 md:w-2/3 sm:w-3/4 w-11/12 bg-gray bg-opacity-0">
+//             <div class="bg-primary py-4 px-6 rounded-t-2xl flex items-center justify-between text-secondary text-2xl">
+//                 <p class="font-heading font-bold">Unggah Video</p>
+//                 <svg class="closeFormUnggahVideo lg:w-10 md:w-8 sm:w-7 w-6 fill-current cursor-pointer" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+//                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+//                 </svg>
+//             </div>
+//             <form action="uploadVideo" method="post" class="flex flex-col bg-gray-100 sm:px-12 px-4 rounded-b-2xl text-sm">
+//             <label for="linkVideo" class="text-primary font-medium mt-8">Link Video Youtube</label>
+//             <input name="linkVideo" id="linkVideo" type="text" placeholder="Link video" class="inputForm" required>
 
-                <label for="albumVideo" class="text-primary font-medium mt-4">Album Video :</label>
-                <select name="albumVideo" id="albumVideo" class="inputForm" value="">
-                    <option class="text-gray-500" value="" disabled selected>Pilih Album Video</option>
-                    <option value="alumni">Album Alumni</option>
-                    <option value="wisuda">Album Wisuda</option>
-                    <option value="kenangan">Album Kenangan</option>
-                </select>
-                <div class="flex justify-end my-4">
-                    <input type="button" value="BATAL" class="closeFormUnggahVideo bg-secondary text-white rounded-full w-24 py-1 text-center cursor-pointer hover:bg-secondaryhover transition-colors duration-300 text-sm mr-4 outline-none" id='backUnggahVideo'>
-                    <input type="submit" value="UNGGAH" class="submitUnggahVideo bg-secondary text-white rounded-full w-24 py-1 text-center cursor-pointer hover:bg-secondaryhover transition-colors duration-300 text-sm outline-none">
-                </div>
+//                 <label for="albumVideo" class="text-primary font-medium mt-4">Album Video :</label>
+//                 <select name="albumVideo" id="albumVideo" class="inputForm" value="">
+//                     <option class="text-gray-500" value="" disabled selected>Pilih Album Video</option>
+//                     <option value="alumni">Album Alumni</option>
+//                     <option value="wisuda">Album Wisuda</option>
+//                     <option value="kenangan">Album Kenangan</option>
+//                 </select>
+//                 <div class="flex justify-end my-4">
+//                     <input type="button" value="BATAL" class="closeFormUnggahVideo bg-secondary text-white rounded-full w-24 py-1 text-center cursor-pointer hover:bg-secondaryhover transition-colors duration-300 text-sm mr-4 outline-none" id='backUnggahVideo'>
+//                     <input type="submit" value="UNGGAH" class="submitUnggahVideo bg-secondary text-white rounded-full w-24 py-1 text-center cursor-pointer hover:bg-secondaryhover transition-colors duration-300 text-sm outline-none">
+//                 </div>
 
-            </form>
+//             </form>
 
-        </div>
-    </div>
-`)
+//         </div>
+//     </div>
+// `)
 
-    $('#formUnggahVideo').children().first().removeClass('hidden')
-    setTimeout(function () {
-        $('#formUnggahVideo').children().first().removeClass('opacity-0')
-    }, 10);
+//     $('#formUnggahVideo').children().first().removeClass('hidden')
+//     setTimeout(function () {
+//         $('#formUnggahVideo').children().first().removeClass('opacity-0')
+//     }, 10);
 
-    $('.closeFormUnggahVideo').click(function () {
-        tutupFormUnggahVideo();
-    })
+//     $('.closeFormUnggahVideo').click(function () {
+//         tutupFormUnggahVideo();
+//     })
 
-    var modal = document.getElementById('formUnggahVideo')
-    $(window).click(function (e) {
-        if (e.target === modal) {
-            tutupFormUnggahVideo();
-        }
-    })
+//     var modal = document.getElementById('formUnggahVideo')
+//     $(window).click(function (e) {
+//         if (e.target === modal) {
+//             tutupFormUnggahVideo();
+//         }
+//     })
 
-    $('#backUnggahVideo').click(function (e) {
-        e.preventDefault()
-        $('#formUnggahVideo').children().first().addClass('hidden')
-        $('#formUnggahVideo').children().first().removeClass('hidden')
-        setTimeout(function () {
-            $('#formUnggahVideo').children().first().removeClass('opacity-0')
-        }, 10);
-        setTimeout(function () {
-            $('#formUnggahVideo').children().eq(1).children().eq(1).submit()
-        }, 700);
-    })
+//     $('#backUnggahVideo').click(function (e) {
+//         e.preventDefault()
+//         $('#formUnggahVideo').children().first().addClass('hidden')
+//         $('#formUnggahVideo').children().first().removeClass('hidden')
+//         setTimeout(function () {
+//             $('#formUnggahVideo').children().first().removeClass('opacity-0')
+//         }, 10);
+//         setTimeout(function () {
+//             $('#formUnggahVideo').children().eq(1).children().eq(1).submit()
+//         }, 700);
+//     })
 
-})
+// })
 
 //Akhir Unggah Video
 
-//Awal apabila Unggah Video Sukses
-function suksesUnggahVideo () {
-    
-    tutupFormUnggahVideo();
+// //Awal apabila Unggah Video Sukses
+// function suksesUnggahVideo() {
 
-    $('body').prepend(`
-    <div class="fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40 font-paragraph" id='suksesUnggahVideo'>
-        <div class="hidden opacity-0 duration-700 transition-all lg:w-1/3 md:w-2/3 sm:w-3/4 w-11/12 bg-gray bg-opacity-0">
-            <div class="flex flex-col items-center bg-white py-8 rounded-2xl shadow-md">
-                <svg class="h-20 w-20 bg-primary text-white rounded-full mb-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
-                </svg>
-                <p class="sm:text-base text-sm font-heading font-bold text-primary mb-2">Video Anda Berhasil Diunggah</p>
-                <input type="button" value="OKE" class="closeSuksesUnggahVideo bg-secondary text-white rounded-full w-24 py-1 text-center cursor-pointer hover:bg-secondaryhover transition-colors duration-300 text-sm mr-4 outline-none" id='backUnggahFoto'>
+//     $('body').prepend(`
+//         <div class="fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40 font-paragraph" id='suksesUnggahVideo'>
+//             <div class="hidden opacity-0 duration-700 transition-all lg:w-1/3 md:w-2/3 sm:w-3/4 w-11/12 bg-gray bg-opacity-0">
+//                 <div class="flex flex-col items-center bg-white py-8 rounded-2xl shadow-md">
+//                     <svg class="h-20 w-20 bg-primary text-white rounded-full mb-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+//                         <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+//                     </svg>
+//                     <p class="sm:text-base text-sm font-heading font-bold text-primary mb-2">Video Anda Berhasil Diunggah</p>
+//                     <input type="button" value="OKE" class="closeSuksesUnggahVideo bg-secondary text-white rounded-full w-24 py-1 text-center cursor-pointer hover:bg-secondaryhover transition-colors duration-300 text-sm mr-4 outline-none" id='backUnggahFoto'>
 
-            </div>
-        </div>
-    </div>
-`)
+//                 </div>
+//             </div>
+//         </div>
+//     `);
 
-    $('#suksesUnggahVideo').children().first().removeClass('hidden')
-    setTimeout(function () {
-        $('#suksesUnggahVideo').children().first().removeClass('opacity-0')
-    }, 10);
+//     $('#suksesUnggahVideo').children().first().removeClass('hidden')
+//     setTimeout(function () {
+//         $('#suksesUnggahVideo').children().first().removeClass('opacity-0')
+//     }, 10);
 
-    $('.closeSuksesUnggahVideo').click(function () {
-        $('#suksesUnggahVideo').children().first().addClass('opacity-0')
-        $('#suksesUnggahVideo').children().first().on('transitionend MSTransitionEnd webkitTransitionEnd oTransitionEnd', function () {
-            $('#suksesUnggahVideo').children().first().addClass('hidden')
-        });
-        setTimeout(function () {
-            $('#suksesUnggahVideo').remove()
-        }, 400);
-    })
+//     $('.closeSuksesUnggahVideo').click(function () {
+//         $('#suksesUnggahVideo').children().first().addClass('opacity-0')
+//         $('#suksesUnggahVideo').children().first().on('transitionend MSTransitionEnd webkitTransitionEnd oTransitionEnd', function () {
+//             $('#suksesUnggahVideo').children().first().addClass('hidden')
+//         });
+//         setTimeout(function () {
+//             $('#suksesUnggahVideo').remove()
+//         }, 400);
+//     });
 
-    var modal = document.getElementById('suksesUnggahVideo')
-    $(window).click(function (e) {
-        if (e.target === modal) {
-            $('#suksesUnggahVideo').children().first().addClass('opacity-0')
-            $('#suksesUnggahVideo').children().first().on('transitionend MSTransitionEnd webkitTransitionEnd oTransitionEnd', function () {
-                $('#suksesUnggahVideo').children().first().addClass('hidden')
-            });
-            setTimeout(function () {
-                $('#suksesUnggahVideo').remove()
-            }, 400);
-        }
-    })
+//     var modal = document.getElementById('suksesUnggahVideo')
+//     $(window).click(function (e) {
+//         if (e.target === modal) {
+//             $('#suksesUnggahVideo').children().first().addClass('opacity-0')
+//             $('#suksesUnggahVideo').children().first().on('transitionend MSTransitionEnd webkitTransitionEnd oTransitionEnd', function () {
+//                 $('#suksesUnggahVideo').children().first().addClass('hidden')
+//             });
+//             setTimeout(function () {
+//                 $('#suksesUnggahVideo').remove()
+//             }, 400);
+//         }
+//     });
 
-}
-//Akhir apabila Unggah Video Sukses
+// }
+// //Akhir apabila Unggah Video Sukses
 
 //Akhir Unggah Video
 

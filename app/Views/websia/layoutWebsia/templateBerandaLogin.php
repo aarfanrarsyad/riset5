@@ -236,8 +236,6 @@
             <div class="flex-grow">
                 <hr class="text-white bg-white border my-auto">
             </div>
-
-
         </div>
 
         <h2 class="text-white text-sm text-center mt-1">Copyright &copy; PKL 60 Riset 5</h2>

@@ -39,9 +39,8 @@
 
                 <div class="fixed overflow-auto top-0 bottom-0 right-0 left-0 z-40 bg-black bg-opacity-80 text-center font-paragraph hidden" id="<?= $foto['id_foto']; ?>">
                     <div class="m-auto duration-700 transition-all bg-gray bg-opacity-0 w-11/12 sm:w-9/12 md:w-8/12 lg:w-7/12">
-
                         <!-- Awal Tombol Laporkan foto -->
-                        <button onClick="laporkanFoto()"><img src="/img/components/icon/danger-sign.png" alt="" class="absolute top-3 right-3"></button>
+                        <button onClick="laporkanFoto(<?= $foto['id_foto']; ?>)"><img src="/img/components/icon/danger-sign.png" alt="" class="absolute top-3 right-3"></button>
                         <!-- Akhir Tombol Laporkan foto -->
 
                         <div class="flex flex-col justify-center items-center">
@@ -65,7 +64,7 @@
                             <!-- Akhir Caption -->
 
                             <div class="text-white w-3/4 mx-2 mt-10 md:text-xl">
-                                <p class="mb-2">1 dari 13</p>
+                                <p class="mb-2"><?= ($i + 1) ?> dari 13</p>
                             </div>
 
                         </div>
@@ -124,6 +123,8 @@
 </div>
 
 <!-- Awal fitur unggah foto galeri -->
+<?php $validation = service('validation') ?>
+
 <div class="flex flex-col-reverse md:grid md:grid-cols-4 lg:grid-cols-5 md:gap-4 mb-8">
     <div class="md:col-span-2 lg:col-span-3 md:mx-8 mb-6">
         <div class="flex flex-col mx-6 md:m-6">
@@ -157,6 +158,9 @@
                         <span class="text-primary absolute md:left-28 left-28 select-none cursor-default cursor md:text-sm text-sm" id="textPhoto">Tidak ada foto yang dipilih</span>
                     </div>
                 </div>
+                <div class="text-red-500">
+                    <?= service('validation')->getError('file_upload'); ?>
+                </div>
                 <label for="albumFoto" class="text-primary font-medium mt-2">Album Foto:</label>
                 <select name="albumFoto" id="albumFoto" class="inputForm font-heading text-xs">
                     <option class="text-gray-500" value="" disabled selected>Pilih Album</option>
@@ -164,8 +168,14 @@
                     <option value="wisuda">Album Wisuda</option>
                     <option value="kenangan">Album Kenangan</option>
                 </select>
+                <div class="text-red-500">
+                    <?= service('validation')->getError('albumFoto'); ?>
+                </div>
                 <label for="deskripsi" class="text-primary font-medium">*Deskripsi</label>
                 <textarea name="deskripsi" id="deskripsi" rows="2" class="inputForm resize-none font-heading text-xs" placeholder="Penggunaan Jutsu Air dalam Mengatasi Permasalahan Banjir yang Sering Terjadi di Wilayah Pemukiman Rawan Longsor" maxlength="2200" required></textarea>
+                <div class="text-red-500">
+                    <?= service('validation')->getError('deskripsi'); ?>
+                </div>
                 <!-- <label for="angkatan" class="text-primary font-medium">*Angkatan :</label>
                 <input name="angkatan" id="angkatan" type="number" min="1" max="63" step="1" value="60" size="6" class="inputForm font-heading text-xs" required> -->
                 <label for="tags" class="text-primary font-medium">Tags :</label>
@@ -265,12 +275,109 @@
         $tags = $('#tags').val();
         $('#tags_form').val($tags);
     });
+
+    //Awal apabila Unggah Foto Sukses
+    function suksesUnggahFoto() {
+
+        $('body').prepend(`
+            <div class="fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40 font-paragraph" id='suksesUnggahFoto'>
+                <div class="hidden opacity-0 duration-700 transition-all lg:w-1/3 md:w-2/3 sm:w-3/4 w-11/12 bg-gray bg-opacity-0">
+                    <div class="flex flex-col items-center bg-white py-8 rounded-2xl shadow-md">
+                        <svg class="h-20 w-20 bg-primary text-white rounded-full mb-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                        </svg>
+                        <p class="sm:text-base text-sm font-heading font-bold text-primary mb-2">Foto Berhasil Terunggah</p>
+                        <input type="button" value="OKE" class="closeSuksesUnggahFoto bg-secondary text-white rounded-full w-24 py-1 text-center cursor-pointer hover:bg-secondaryhover transition-colors duration-300 text-sm mr-4 outline-none" id='backUnggahFoto'>
+
+                    </div>
+                </div>
+            </div>
+        `);
+
+        $('#suksesUnggahFoto').children().first().removeClass('hidden')
+        setTimeout(function() {
+            $('#suksesUnggahFoto').children().first().removeClass('opacity-0')
+        }, 10);
+
+        $('.closeSuksesUnggahFoto').click(function() {
+            $('#suksesUnggahFoto').children().first().addClass('opacity-0')
+            $('#suksesUnggahFoto').children().first().on('transitionend MSTransitionEnd webkitTransitionEnd oTransitionEnd', function() {
+                $('#suksesUnggahFoto').children().first().addClass('hidden')
+            });
+            setTimeout(function() {
+                $('#suksesUnggahFoto').remove()
+            }, 400);
+        })
+
+        var modal = document.getElementById('suksesUnggahFoto')
+        $(window).click(function(e) {
+            if (e.target === modal) {
+                $('#suksesUnggahFoto').children().first().addClass('opacity-0')
+                $('#suksesUnggahFoto').children().first().on('transitionend MSTransitionEnd webkitTransitionEnd oTransitionEnd', function() {
+                    $('#suksesUnggahFoto').children().first().addClass('hidden')
+                });
+                setTimeout(function() {
+                    $('#suksesUnggahFoto').remove()
+                }, 400);
+            }
+        })
+
+    }
+    //Akhir apabila Unggah Foto Sukses
+
+    //Awal apabila Lapor Foto Sukses
+    function suksesLaporFoto() {
+
+        $('body').prepend(`
+            <div class="fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40 font-paragraph" id='suksesLaporFoto'>
+                <div class=" duration-700 transition-all lg:w-1/3 md:w-2/3 sm:w-3/4 w-11/12 bg-gray bg-opacity-0">
+                    <div class="flex flex-col items-center bg-white py-8 rounded-2xl shadow-md">
+                        <svg class="h-20 w-20 bg-primary text-white rounded-full mb-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                        </svg>
+                        <p class="sm:text-base text-sm font-heading font-bold text-primary mb-2">Laporan Anda berhasil dikirim</p>
+                        <input type="button" value="OKE" class="closeSuksesLaporFoto bg-secondary text-white rounded-full w-24 py-1 text-center cursor-pointer hover:bg-secondaryhover transition-colors duration-300 text-sm mr-4 outline-none" id='backSuksesLaporFoto'>
+
+                    </div>
+                </div>
+            </div>
+        `)
+
+        $('#suksesLaporFoto').children().first().removeClass('hidden')
+        setTimeout(function() {
+            $('#suksesLaporFoto').children().first().removeClass('opacity-0')
+        }, 10);
+
+        $('.closeSuksesLaporFoto').click(function() {
+            $('#suksesLaporFoto').children().first().addClass('opacity-0')
+            $('#suksesLaporFoto').children().first().on('transitionend MSTransitionEnd webkitTransitionEnd oTransitionEnd', function() {
+                $('#suksesLaporFoto').children().first().addClass('hidden')
+            });
+            setTimeout(function() {
+                $('#suksesLaporFoto').remove()
+            }, 400);
+        })
+
+        var modal = document.getElementById('suksesLaporFoto')
+        $(window).click(function(e) {
+            if (e.target === modal) {
+                $('#suksesLaporFoto').children().first().addClass('opacity-0')
+                $('#suksesLaporFoto').children().first().on('transitionend MSTransitionEnd webkitTransitionEnd oTransitionEnd', function() {
+                    $('#suksesLaporFoto').children().first().addClass('hidden')
+                });
+                setTimeout(function() {
+                    $('#suksesLaporFoto').remove()
+                }, 400);
+            }
+        })
+    }
+    //Akhir apabila Lapor Foto Sukses
 </script>
 <!-- Akhir fitur unggah foto galeri -->
 
 <!-- Catatan : Apabila sukses mengunggah foto dapat maka dapat memanggil fungsi js => suksesUnggahFoto ()  -->
 <!-- Catatan : Apabila sukses laporkan foto dapat maka dapat memanggil fungsi js => suksesLaporkanFoto ()  -->
-
+<?= session()->flash; ?>
 
 <!-- Akhir Galeri Alumni -->
 <?= $this->endSection(); ?>

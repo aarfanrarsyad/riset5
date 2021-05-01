@@ -967,71 +967,95 @@ class User extends BaseController
 
 	public function uploadGaleri()
 	{
-		date_default_timezone_set("Asia/Bangkok");
-		$model = new \App\Models\FotoModel;
+		$validated = $this->validate([
+			'file_upload'   => [
+				'rules' => 'uploaded[file_upload]',
+			],
+			'albumFoto'			=> [
+				'rules' => 'required',
+				'errors' => [
+					'required' => 'album harus dipilih'
+				]
+			],
+			'deskripsi'			=> [
+				'rules' => 'required|max_length[2200]',
+				'errors' => [
+					'required' => 'deskripsi harus diisi',
+					'max_length' => 'maksimal 2200 karakter'
+				]
+			],
+		]);
 
-		$foto = $this->request->getFile('file_upload');
-		$caption = $this->request->getPost('deskripsi');
-		$album = $this->request->getPost('albumFoto');
-		$tags = $this->request->getPost('tags');
-		$now = date("Y-m-d H:i:s");
-
-		$year = date("Y");
-		$path = ROOTPATH . '/public/img/galeri/' . $year;
-
-		//cek apakah sudah terdapat foldernya
-		if (!is_dir($path))
-			mkdir($path, 0700, true);
-
-		//cek apakah sudah terdapat nama file yang sama, jika sudah maka akan direname
-		$file = $path . "/" . $foto->getName();
-		$ext = "." . $foto->guessExtension();
-		$file = str_replace($ext, "", $file);
-		if (is_file($file . $ext)) {
-			$new_name = $file;
-			while (is_file($new_name . $ext)) {
-				$time = date("Ymdhis");
-				$new_name = $new_name . "-" . $time;
-			}
-			rename($file . $ext, $new_name . $ext);
-		}
-
-		$foto->move($path);
-
-		if (!isset($new_name)) {
-			$file = str_replace(ROOTPATH . '/public/img/galeri/', "", $file);
-			$data = [
-				'nama_file'		=> $file . $ext,
-				'caption'		=> $caption,
-				'created_at'	=> $now,
-				'album' 		=> $album,
-				'approval' 		=> 1,
-				'id_alumni' 	=> session('id_alumni'),
-			];
-			$model->db->table('foto')->insert($data);
+		if ($validated == FALSE) {
+			return redirect()->to(base_url('User/galeriFoto'))->withInput();
 		} else {
-			$new_name = str_replace(ROOTPATH . '/public/img/galeri/', "", $new_name);
+			date_default_timezone_set("Asia/Bangkok");
+			$model = new \App\Models\FotoModel;
+
+			$foto = $this->request->getFile('file_upload');
+			$caption = $this->request->getPost('deskripsi');
+			$album = $this->request->getPost('albumFoto');
+			$tags = $this->request->getPost('tags');
+			$now = date("Y-m-d H:i:s");
+
+			$year = date("Y");
+			$path = ROOTPATH . '/public/img/galeri/' . $year;
+
+			//cek apakah sudah terdapat foldernya
+			if (!is_dir($path))
+				mkdir($path, 0700, true);
+
+			//cek apakah sudah terdapat nama file yang sama, jika sudah maka akan direname
+			$file = $path . "/" . $foto->getName();
+			$ext = "." . $foto->guessExtension();
+			$file = str_replace($ext, "", $file);
+			if (is_file($file . $ext)) {
+				$new_name = $file;
+				while (is_file($new_name . $ext)) {
+					$time = date("Ymdhis");
+					$new_name = $new_name . "-" . $time;
+				}
+				rename($file . $ext, $new_name . $ext);
+			}
+
+			$foto->move($path);
+
+			if (!isset($new_name)) {
+				$file = str_replace(ROOTPATH . '/public/img/galeri/', "", $file);
+				$data = [
+					'nama_file'		=> $file . $ext,
+					'caption'		=> $caption,
+					'created_at'	=> $now,
+					'album' 		=> $album,
+					'approval' 		=> 1,
+					'id_alumni' 	=> session('id_alumni'),
+				];
+				$model->db->table('foto')->insert($data);
+			} else {
+				$new_name = str_replace(ROOTPATH . '/public/img/galeri/', "", $new_name);
+				$data = [
+					'nama_file'		=> $new_name . $ext,
+					'album' 		=> $album,
+					'caption'		=> $caption,
+					'created_at'	=> $now,
+					'album' 		=> $album,
+					'approval' 		=> 1,
+					'id_alumni' 	=> session('id_alumni'),
+				];
+				$model->db->table('foto')->insert($data);
+			}
+
+			$foto = $model->getByName($data['nama_file']);
+
 			$data = [
-				'nama_file'		=> $new_name . $ext,
-				'album' 		=> $album,
-				'caption'		=> $caption,
-				'created_at'	=> $now,
-				'album' 		=> $album,
-				'approval' 		=> 1,
-				'id_alumni' 	=> session('id_alumni'),
+				'id_foto'	=> $foto[0]->id_foto,
+				'tag'		=> $tags
 			];
-			$model->db->table('foto')->insert($data);
+			$model->db->table('tag_foto')->insert($data);
+			$flash = "<script> suksesUnggahFoto(); </script>";
+			session()->setFlashdata('flash', $flash);
+			return redirect()->to(base_url('user/galeriFoto'));
 		}
-
-		$foto = $model->getByName($data['nama_file']);
-
-		$data = [
-			'id_foto'	=> $foto[0]->id_foto,
-			'tag'		=> $tags
-		];
-		$model->db->table('tag_foto')->insert($data);
-
-		return redirect()->to(base_url('user/galeriFoto'));
 	}
 
 	function listAlbumFoto()
@@ -1063,55 +1087,91 @@ class User extends BaseController
 
 	public function uploadVideo()
 	{
-		$video = $this->request->getPost('linkVideo');
-		$album = $this->request->getPost('albumVideo');
+		$validated = $this->validate([
+			'linkVideo'   => [
+				'rules' => 'required',
+				'errors' => [
+					'required' => 'link video harus diisi'
+				]
+			],
+			'albumVideo'			=> [
+				'rules' => 'required',
+				'errors' => [
+					'required' => 'album harus dipilih'
+				]
+			],
+		]);
 
-		if (strpos($video, 'youtu.be/') || strpos($video, 'youtube.com/')) {
-			if (strpos($video, '?v=')) {
-				$v_link = explode('v=', $video);
-				if (strpos($v_link[1], '&')) {
-					$v_link = explode('&', $v_link[1]);
-					$link = $v_link[0];
-				} else {
-					$link = $v_link[1];
-				}
-			} else {
-				if (strpos($video, '/channel/')) {
-					echo $video . "<br>";
-					echo "bukan yutub";
-					die();
-				}
-				$v_link = explode('/', $video);
-				if (strpos($v_link[3], '?')) {
-					$v_link = explode('?', $v_link[3]);
-					$link = $v_link[0];
-				} else {
-					$link = $v_link[3];
-				}
-			}
-			date_default_timezone_set("Asia/Bangkok");
-			$now = date("Y-m-d");
-
-			$model = new \App\Models\AlumniModel();
-
-			$data = [
-				'link'			=> $link,
-				'album'			=> $album,
-				'created_at'	=> $now,
-				'approval' 		=> 0,
-				'id_alumni' 	=> session('id_alumni'),
-			];
-			// dd($data);
-			$model->db->table('video')->insert($data);
-			echo "sukses";
+		if ($validated == FALSE) {
+			return redirect()->to(base_url('User/galeriVideo'))->withInput();
 		} else {
-			// buat upload yang bukan link youtube
-			echo $video . "<br>";
-			echo "bukan yutub";
-		}
-		// die();
+			$video = $this->request->getPost('linkVideo');
+			$album = $this->request->getPost('albumVideo');
 
-		return redirect()->to(base_url('user/galeriVideo'));
+			if (strpos($video, 'youtu.be/') || strpos($video, 'youtube.com/')) {
+				if (strpos($video, '?v=')) {
+					$v_link = explode('v=', $video);
+					if (strpos($v_link[1], '&')) {
+						$v_link = explode('&', $v_link[1]);
+						$link = $v_link[0];
+					} else {
+						$link = $v_link[1];
+					}
+				} else {
+					if (strpos($video, '/channel/')) {
+						echo $video . "<br>";
+						echo "bukan yutub";
+						die();
+					}
+					$v_link = explode('/', $video);
+					if (strpos($v_link[3], '?')) {
+						$v_link = explode('?', $v_link[3]);
+						$link = $v_link[0];
+					} else {
+						$link = $v_link[3];
+					}
+				}
+				date_default_timezone_set("Asia/Bangkok");
+				$now = date("Y-m-d");
+
+				$model = new \App\Models\AlumniModel();
+
+				$data = [
+					'link'			=> $link,
+					'album'			=> $album,
+					'created_at'	=> $now,
+					'approval' 		=> 0,
+					'id_alumni' 	=> session('id_alumni'),
+				];
+				$model->db->table('video')->insert($data);
+				$flash = "<script> suksesUnggahVideo(); </script>";
+				session()->setFlashdata('flash', $flash);
+
+				return redirect()->to(base_url('user/galeriVideo'));
+			} else {
+				// buat upload yang bukan link youtube
+				echo $video . "<br>";
+				echo "bukan yutub";
+			}
+		}
+	}
+
+	public function reportGaleri()
+	{
+		$model = new \App\Models\FotoModel;
+		$alasan = $this->request->getPost('inputLaporan');
+		$id_foto = $this->request->getPost('foto');
+
+		$data = [
+			'alasan'		=> $alasan,
+			'id_alumni'		=> session('id_alumni'),
+			'id_foto'		=> $id_foto,
+		];
+		$model->db->table('report')->insert($data);
+
+		$flash = "<script> suksesLaporFoto(); </script>";
+		session()->setFlashdata('flash', $flash);
+		return redirect()->to(base_url('user/galeriFoto'));
 	}
 
 	function listAlbumVideo()
