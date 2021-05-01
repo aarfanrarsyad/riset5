@@ -1158,20 +1158,25 @@ class User extends BaseController
 
 	public function reportGaleri()
 	{
-		$model = new \App\Models\FotoModel;
+		$model = new \App\Models\ReportModel;
 		$alasan = $this->request->getPost('inputLaporan');
 		$id_foto = $this->request->getPost('foto');
 
-		$data = [
-			'alasan'		=> $alasan,
-			'id_alumni'		=> session('id_alumni'),
-			'id_foto'		=> $id_foto,
-		];
-		$model->db->table('report')->insert($data);
+		if ($model->getReport(session('id_alumni'), $id_foto) == NULL) {
+			$data = [
+				'alasan'		=> $alasan,
+				'id_alumni'		=> session('id_alumni'),
+				'id_foto'		=> $id_foto,
+			];
 
-		$flash = "<script> suksesLaporFoto(); </script>";
-		session()->setFlashdata('flash', $flash);
-		return redirect()->to(base_url('user/galeriFoto'));
+			$model->db->table('report')->insert($data);
+
+			$flash = "<script> suksesLaporFoto(); </script>";
+			session()->setFlashdata('flash', $flash);
+			return redirect()->to(base_url('user/galeriFoto'));
+		} else {
+			echo "sudah melakukan report";
+		}
 	}
 
 	function listAlbumVideo()
