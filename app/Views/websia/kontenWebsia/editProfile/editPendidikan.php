@@ -1,9 +1,9 @@
 <?php
-if ($checked->cpendidikan == 0) {
+if ($checked->cpendidikan == 0) :
     $cpendidikan = "";
-} else {
+else :
     $cpendidikan = "checked";
-}
+endif;
 ?>
 <?= $this->extend('websia/kontenWebsia/editProfile/layoutEdit.php'); ?>
 
@@ -97,12 +97,12 @@ if ($checked->cpendidikan == 0) {
                         <div class="ml-auto mr-3 bg-secondary text-white rounded-full w-28 py-1 text-center cursor-pointer hover:bg-secondaryhover transition-colors duration-300 my-2 tambahPendidikan">TAMBAH</div>
                     </td>
                 </tr>
-                <?php if ($pendidikan == NULL) { ?>
+                <?php if ($pendidikan == NULL) : ?>
                     <!-- Tampilan jika data semua kolom belum diisi -->
                     <tr>
                         <td colspan="8" class="text-sm text-center border-b-2 border-gray-200 px-3 lg:px-5 py-2 md:py-3 lg:py-4">Riwayat pendidikan tidak ditemukan.</td>
                     </tr>
-                <?php } ?>
+                <?php endif; ?>
                 <tr class="h-5 formEdit">
                     <td colspan="8" class="rounded-b-3xl"></td>
                 </tr>
@@ -115,7 +115,7 @@ if ($checked->cpendidikan == 0) {
 
 <!-- dialog box di edit pendidikan -->
 <!-- kalau mau ngecek hilangin kelas hidden sama opacity-0 nya-->
-<?php if (session()->getFlashdata('edit-pendidikan-success')) { ?>
+<?php if (session()->getFlashdata('edit-pendidikan-success')) : ?>
     <!-- BERHASIL edit pendidikan -->
     <div id="berhasilEditPendidikan">
         <div class="fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40">
@@ -130,8 +130,8 @@ if ($checked->cpendidikan == 0) {
             $('#berhasilEditPendidikan').fadeOut();
         }, 1500);
     </script>
-<?php }
-if (session()->getFlashdata('edit-pendidikan-fail')) { ?>
+<?php endif;
+if (session()->getFlashdata('edit-pendidikan-fail')) : ?>
     <!-- GAGAL edit pendidikan -->
     <div id="gagalEditPendidikan">
         <div class="fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40">
@@ -146,8 +146,8 @@ if (session()->getFlashdata('edit-pendidikan-fail')) { ?>
             $('#gagalEditPendidikan').fadeOut();
         }, 1500);
     </script>
-<?php }
-if (session()->getFlashdata('add-pendidikan-success')) { ?>
+<?php endif;
+if (session()->getFlashdata('add-pendidikan-success')) : ?>
 
     <!-- BERHASIL tambah pendidikan -->
     <div id="berhasilTambahPendidikan">
@@ -163,8 +163,8 @@ if (session()->getFlashdata('add-pendidikan-success')) { ?>
             $('#berhasilTambahPendidikan').fadeOut();
         }, 1500);
     </script>
-<?php }
-if (session()->getFlashdata('add-pendidikan-fail')) { ?>
+<?php endif;
+if (session()->getFlashdata('add-pendidikan-fail')) : ?>
     <!-- GAGAL tambah pendidikan -->
     <div id="gagalTambahPendidikan">
         <div class="fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40">
@@ -179,8 +179,8 @@ if (session()->getFlashdata('add-pendidikan-fail')) { ?>
             $('#gagalTambahPendidikan').fadeOut();
         }, 1500);
     </script>
-<?php } 
-if (session()->getFlashdata('delete-pendidikan-success')) { ?>
+<?php endif; 
+if (session()->getFlashdata('delete-pendidikan-success')) : ?>
 
 
 <!-- BERHASIL hapus pendidikan-->
@@ -200,7 +200,7 @@ if (session()->getFlashdata('delete-pendidikan-success')) { ?>
     }, 1500);
 </script>
 <!-- end dialog box -->
-<?php } ?>
+<?php endif; ?>
 
 
 <?= $this->endSection(); ?>

@@ -580,7 +580,11 @@ class User extends BaseController
 		];
 
 		$model->db->table('alumni')->set($data)->where('id_alumni', session('id_alumni'))->update();
-
+		if($cpendidikan == 1){
+			session()->setFlashdata('edit-pendidikan-success', 'Tampilan pendidikan diaktifkan');
+		} else {
+			session()->setFlashdata('edit-pendidikan-success', 'Tampilan pendidikan dinon-aktifkan');
+		}
 		return redirect()->to(base_url('User/editPendidikan'));
 	}
 
@@ -751,9 +755,8 @@ class User extends BaseController
 	{
 
 		$model = new AlumniModel();
-		$query = $model->getPrestasiByNIM(session('id_alumni'));
-		$sql = "SELECT * FROM akses where id_alumni = " . session('id_alumni');
-		$tampilan = $model->query($sql);
+		$query = $model->getPrestasiByIdAlumni(session('id_alumni'))->getResult();
+		$tampilan = $model->bukaProfile(session('id_alumni'))->getRow();
 
 		// dd($query->getResult());
 
@@ -762,8 +765,8 @@ class User extends BaseController
 			'login' => 'sudah',
 			'activeEditProfil' => 'prestasi',
 			'active' 		=> 'profil',
-			'prestasi'      => $query->getResult(),
-			'checked'	=> $tampilan->getRow(),
+			'prestasi'      => $query,
+			'checked'	=> $tampilan,
 		];
 
 		return view('websia/kontenWebsia/editProfile/editPrestasi.php', $data);
@@ -777,11 +780,11 @@ class User extends BaseController
 		$data = [
 			'nama_prestasi'     => htmlspecialchars($_POST['nama_prestasi']),
 			'tahun_prestasi'		=> htmlspecialchars($_POST['tahun_prestasi']),
-			'nim'				=> session('nim'),
+			'id_alumni'				=> session('id_alumni'),
 		];
 
 		$model->db->table('prestasi')->set($data)->where('id_prestasi', $_POST['id_prestasi'])->update();
-
+		session()->setFlashdata('edit-prestasi-success', 'Prestasi berhasil diperbaharui');
 		return redirect()->to(base_url('User/editPrestasi'));
 	}
 
@@ -795,11 +798,15 @@ class User extends BaseController
 		}
 
 		$data = [
-			'prestasi' => $cprestasi,
+			'cprestasi' => $cprestasi,
 		];
 
-		$model->db->table('tampilan')->set($data)->where('nim', session('nim'))->update();
-
+		$model->db->table('alumni')->set($data)->where('id_alumni', session('id_alumni'))->update();
+		if($cprestasi == 1){
+			session()->setFlashdata('edit-prestasi-success', 'Tampilan prestasi diaktifkan');
+		} else {
+			session()->setFlashdata('edit-prestasi-success', 'Tampilan prestasi dinon-aktifkan');
+		}
 		return redirect()->to(base_url('User/editPrestasi'));
 	}
 
@@ -811,11 +818,11 @@ class User extends BaseController
 		$data = [
 			'nama_prestasi'     => htmlspecialchars($_POST['nama_prestasi']),
 			'tahun_prestasi'		=> htmlspecialchars($_POST['tahun_prestasi']),
-			'nim'				=> session('nim'),
+			'id_alumni'				=> session('id_alumni'),
 		];
 
 		$model->db->table('prestasi')->insert($data);
-
+		session()->setFlashdata('add-prestasi-success', 'Prestasi berhasil ditambahkan');
 		return redirect()->to(base_url('User/editPrestasi'));
 	}
 
@@ -824,7 +831,7 @@ class User extends BaseController
 
 		$model = new AlumniModel();
 		$model->deletePrestasiById($_POST['id_prestasi']);
-
+		session()->setFlashdata('delete-prestasi-success', 'Prestasi berhasil dihapus');
 		return redirect()->to(base_url('User/editPrestasi'));
 	}
 
@@ -832,24 +839,32 @@ class User extends BaseController
 	{
 
 		$model = new AlumniModel();
-		$query = $model->getPublikasiByNIM(session('nim'));
-
-		// dd($query->getResult());
+		$query = $model->getPublikasiByIdAlumni(session('id_alumni'))->getResult();
 
 		$data = [
 			'judulHalaman' => 'Edit Profil',
 			'login' => 'sudah',
 			'activeEditProfil' => 'publikasi',
 			'active' 		=> 'profil',
-			'publikasi'      => $query->getResult(),
+			'publikasi'      => $query,
 		];
-
 		return view('websia/kontenWebsia/editProfile/editPublikasi.php', $data);
 	}
 
 	// LOGICNYAA BELUMM MASUKKK````````````````````````````````````````````````````
 	// public function updatePublikasi()
-	// {}
+	// {
+	// 	$model = new AlumniModel();
+
+	// 	$data = [
+	// 		'publikasi'		=> htmlspecialchars($_POST['publikasi']),
+	// 		'id_alumni'				=> session('id_alumni'),
+	// 	];
+
+	// 	$model->db->table('publikasi')->set($data)->where('id_publikasi', $_POST['id_publikasi'])->update();
+	// 	session()->setFlashdata('edit-publikasi-success', 'Publikasi berhasil diperbaharui');
+	// 	return redirect()->to(base_url('User/editPublikasi'));
+	// }
 
 	// DATABASENYAA KURANG MASHOOKKKK BOSQUE
 	public function addPublikasi()
@@ -858,18 +873,24 @@ class User extends BaseController
 		$model = new AlumniModel();
 
 		$data = [
-			'judul'     => htmlspecialchars($_POST['judul']),
-			'topik'     => htmlspecialchars($_POST['topik']),
-			'deskripsi'     => htmlspecialchars($_POST['deskripsi']),
-			'publisher'     => htmlspecialchars($_POST['publisher']),
-			'tanggal_disahkan'     => htmlspecialchars($_POST['tanggal_disahkan']),
-			'author'     => htmlspecialchars($_POST['author']),
+			'publikasi'     => htmlspecialchars($_POST['publikasi']),
+			'id_alumni'     => session('id_alumni'),
 		];
 
 		$model->db->table('publikasi')->insert($data);
-
+		session()->setFlashdata('add-publikasi-success', 'Publikasi berhasil ditambahkan');
 		return redirect()->to(base_url('User/editPublikasi'));
 	}
+
+	// kureng nih
+	// public function deletePublikasi()
+	// {
+
+	// 	$model = new AlumniModel();
+	// 	$model->deletePublikasiById($_POST['id_publikasi']);
+	// 	session()->setFlashdata('delete-publikasi-success', 'Publikasi berhasil dihapus');
+	// 	return redirect()->to(base_url('User/editPublikasi'));
+	// }
 
 	public function editAkun()
 	{

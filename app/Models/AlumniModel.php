@@ -207,12 +207,12 @@ class AlumniModel extends Model
     }
 
 
-
-    public function getCountPendidikanByNIM($nim)
-    {
-        $query = "SELECT COUNT(*) FROM pendidikan WHERE nim = $nim";
-        return $this->db->query($query);
-    }
+    // gakepake
+    // public function getCountPendidikanByNIM($nim)
+    // {
+    //     $query = "SELECT COUNT(*) FROM pendidikan WHERE nim = $nim";
+    //     return $this->db->query($query);
+    // }
 
 
 
@@ -223,25 +223,26 @@ class AlumniModel extends Model
     //     return $this->db->query($query);
     // }
 
-    public function getPublikasiByNIM($nim)
+    public function getPublikasiByIdAlumni($id_alumni)
     {
-        $query = "SELECT * FROM alumni_publikasi JOIN publikasi ON alumni_publikasi.id_publikasi=publikasi.id_publikasi WHERE alumni_publikasi.nim = $nim";
+        $query = "SELECT * FROM publikasi WHERE id_alumni = $id_alumni";
         return $this->db->query($query);
     }
 
-    public function getCountPublikasiByNIM($nim)
-    {
-        $query = "SELECT COUNT(*) FROM alumni_publikasi JOIN publikasi ON alumni_publikasi.id_publikasi=publikasi.id_publikasi WHERE alumni_publikasi.nim = $nim";
-        return $this->db->query($query);
-    }
+    // gakepake
+    // public function getCountPublikasiByNIM($nim)
+    // {
+    //     $query = "SELECT COUNT(*) FROM alumni_publikasi JOIN publikasi ON alumni_publikasi.id_publikasi=publikasi.id_publikasi WHERE alumni_publikasi.nim = $nim";
+    //     return $this->db->query($query);
+    // }
 
 
-
-    public function getUsersByNIM($nim)
-    {
-        $query = "SELECT * FROM users WHERE nim = $nim";
-        return $this->db->query($query);
-    }
+    // gakepake
+    // public function getUsersByNIM($nim)
+    // {
+    //     $query = "SELECT * FROM users WHERE nim = $nim";
+    //     return $this->db->query($query);
+    // }
 
 
 
@@ -283,6 +284,13 @@ class AlumniModel extends Model
         $query = "DELETE FROM pendidikan WHERE id_pendidikan= $id";
         return $this->db->query($query);
     }
+
+    // kureng nih DBnya keknya ada yang kurang
+    // public function deletePublikasi($id)
+    // {
+    //     $query = "DELETE FROM publikasi WHERE id_publikasi= $id";
+    //     return $this->db->query($query);
+    // }
 
     public function getIdTempatKerja($nama)
     {

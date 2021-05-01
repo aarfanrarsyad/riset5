@@ -1,5 +1,5 @@
 <?php
-if ($checked->prestasi == 0) {
+if ($checked->cprestasi == 0) {
     $cprestasi = "";
 } else {
     $cprestasi = "checked";
@@ -98,13 +98,13 @@ if ($checked->prestasi == 0) {
 
 <!-- dialog box edit prestasi -->
 <!-- kalau mau ngecek hilangin kelas hidden sama opacity-0 nya-->
-
+<?php if (session()->getFlashdata('edit-prestasi-success')) : ?>
 <!-- BERHASIL edit prestasi -->
 <div id="berhasilEditPrestasi">
-    <div class="hidden opacity-0 fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40">
+    <div class="fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40">
         <div class="duration-700 transition-all p-3 rounded-lg flex items-center" style="background-color: #B1FF66;">
             <img src="/img/components/icon/check.png" class="h-5 mr-2" style="color: #54AC00;">
-            <p class="sm:text-base text-sm font-heading font-bold text-success">Prestasi Berhasil Disimpan</p>
+            <p class="sm:text-base text-sm font-heading font-bold text-success"><?= session()->getFlashdata('edit-prestasi-success') ?></p>
         </div>
     </div>
 </div>
@@ -113,7 +113,8 @@ if ($checked->prestasi == 0) {
         $('#berhasilEditPrestasi').fadeOut();
     }, 1500);
 </script>
-<!-- GAGAL edit prestasi -->
+<?php endif; ?>
+<!-- GAGAL edit prestasi SEPERTINYA TIDAK DIPERLUKAN
 <div id="gagalEditPrestasi">
     <div class="hidden opacity-0 fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40">
         <div class="duration-700 transition-all p-3 rounded-lg flex items-center" style="background-color: #FF7474;">
@@ -126,13 +127,14 @@ if ($checked->prestasi == 0) {
     setTimeout(function() {
         $('#gagalEditPrestasi').fadeOut();
     }, 1500);
-</script>
+</script> -->
+<?php if (session()->getFlashdata('add-prestasi-success')) : ?>
 <!-- BERHASIL tambah prestasi -->
 <div id="berhasilTambahPrestasi">
     <div class="hidden opacity-0 fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40">
         <div class="duration-700 transition-all p-3 rounded-lg flex items-center" style="background-color: #B1FF66;">
             <img src="/img/components/icon/check.png" class="h-5 mr-2" style="color: #54AC00;">
-            <p class="sm:text-base text-sm font-heading font-bold text-success">Pretasi Berhasil Ditambahkan</p>
+            <p class="sm:text-base text-sm font-heading font-bold text-success"><?= session()->getFlashdata('add-prestasi-success') ?></p>
         </div>
     </div>
 </div>
@@ -141,7 +143,9 @@ if ($checked->prestasi == 0) {
         $('#berhasilTambahPrestasi').fadeOut();
     }, 1500);
 </script>
-<!-- GAGAL tambah prestasi -->
+<?php endif; ?>
+
+<!-- GAGAL tambah prestasi GAPERLU KEKNYA
 <div id="gagalTambahPrestasi">
     <div class="hidden opacity-0 fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40">
         <div class="duration-700 transition-all p-3 rounded-lg flex items-center" style="background-color: #FF7474;">
@@ -154,13 +158,15 @@ if ($checked->prestasi == 0) {
     setTimeout(function() {
         $('#gagalTambahPrestasi').fadeOut();
     }, 1500);
-</script>
+</script> -->
+
+<?php if (session()->getFlashdata('delete-prestasi-success')) : ?>
 <!-- BERHASIL hapus prestasi-->
 <div id="berhasilHapusPrestasi">
     <div class="fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40">
         <div class="duration-700 transition-all p-3 rounded-lg flex items-center" style="background-color: #B1FF66;">
             <img src="/img/components/icon/check.png" class="h-5 mr-2" style="color: #54AC00;">
-            <p class="sm:text-base text-sm font-heading font-bold text-success">Data prestasi berhasil dihapus.</p>
+            <p class="sm:text-base text-sm font-heading font-bold text-success"><?= session()->getFlashdata('delete-prestasi-success') ?></p>
         </div>
     </div>
 </div>
@@ -170,4 +176,6 @@ if ($checked->prestasi == 0) {
     }, 1500);
 </script>
 <!-- end dialog box-->
+<?php endif; ?>
+
 <?= $this->endSection(); ?>
