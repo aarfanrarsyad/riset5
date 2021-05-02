@@ -200,11 +200,11 @@ class AlumniModel extends Model
         return $this->db->query($query);
     }
 
-    public function getIdPublikasi()
-    {
-        $query = "SELECT id_publikasi FROM publikasi";
-        return $this->db->query($query);
-    }
+    // public function getIdPublikasi()
+    // {
+    //     $query = "SELECT id_publikasi FROM publikasi";
+    //     return $this->db->query($query);
+    // }
 
 
     // gakepake
@@ -223,11 +223,11 @@ class AlumniModel extends Model
     //     return $this->db->query($query);
     // }
 
-    public function getPublikasiByIdAlumni($id_alumni)
-    {
-        $query = "SELECT * FROM publikasi WHERE id_alumni = $id_alumni";
-        return $this->db->query($query);
-    }
+    // public function getPublikasiByIdAlumni($id_alumni)
+    // {
+    //     $query = "SELECT * FROM publikasi WHERE id_alumni = $id_alumni";
+    //     return $this->db->query($query);
+    // }
 
     // gakepake
     // public function getCountPublikasiByNIM($nim)

@@ -835,21 +835,22 @@ class User extends BaseController
 		return redirect()->to(base_url('User/editPrestasi'));
 	}
 
-	public function editPublikasi()
-	{
+	// TIDAKKK DIPERLUKANNN
+	// public function editPublikasi()
+	// {
 
-		$model = new AlumniModel();
-		$query = $model->getPublikasiByIdAlumni(session('id_alumni'))->getResult();
+	// 	$model = new AlumniModel();
+	// 	$query = $model->getPublikasiByIdAlumni(session('id_alumni'))->getResult();
 
-		$data = [
-			'judulHalaman' => 'Edit Profil',
-			'login' => 'sudah',
-			'activeEditProfil' => 'publikasi',
-			'active' 		=> 'profil',
-			'publikasi'      => $query,
-		];
-		return view('websia/kontenWebsia/editProfile/editPublikasi.php', $data);
-	}
+	// 	$data = [
+	// 		'judulHalaman' => 'Edit Profil',
+	// 		'login' => 'sudah',
+	// 		'activeEditProfil' => 'publikasi',
+	// 		'active' 		=> 'profil',
+	// 		'publikasi'      => $query,
+	// 	];
+	// 	return view('websia/kontenWebsia/editProfile/editPublikasi.php', $data);
+	// }
 
 	// LOGICNYAA BELUMM MASUKKK````````````````````````````````````````````````````
 	// public function updatePublikasi()
@@ -867,20 +868,20 @@ class User extends BaseController
 	// }
 
 	// DATABASENYAA KURANG MASHOOKKKK BOSQUE
-	public function addPublikasi()
-	{
+	// public function addPublikasi()
+	// {
 
-		$model = new AlumniModel();
+	// 	$model = new AlumniModel();
 
-		$data = [
-			'publikasi'     => htmlspecialchars($_POST['publikasi']),
-			'id_alumni'     => session('id_alumni'),
-		];
+	// 	$data = [
+	// 		'publikasi'     => htmlspecialchars($_POST['publikasi']),
+	// 		'id_alumni'     => session('id_alumni'),
+	// 	];
 
-		$model->db->table('publikasi')->insert($data);
-		session()->setFlashdata('add-publikasi-success', 'Publikasi berhasil ditambahkan');
-		return redirect()->to(base_url('User/editPublikasi'));
-	}
+	// 	$model->db->table('publikasi')->insert($data);
+	// 	session()->setFlashdata('add-publikasi-success', 'Publikasi berhasil ditambahkan');
+	// 	return redirect()->to(base_url('User/editPublikasi'));
+	// }
 
 	// kureng nih
 	// public function deletePublikasi()
