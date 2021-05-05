@@ -203,6 +203,11 @@ $routes->group('admin', ['namespace' => 'App\Controllers'], function ($routes) {
 
 
 	#------------------------------------------------------------------------------------------------------------------------------------------------#
+
+
+	# Manajemen Galeri
+	$routes->get('galeri-foto', 'Admin::management_galeri_foto');
+	$routes->get('galeri-video', 'Admin::management_galeri_video');
 });
 /**
  * --------------------------------------------------------------------

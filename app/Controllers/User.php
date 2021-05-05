@@ -987,6 +987,21 @@ class User extends BaseController
 		]);
 
 		if ($validated == FALSE) {
+			$flash = '<strong>Upload gagal!</strong> format upload tidak sesuai ketentuan.';
+			$alert = "<div id=\"alert\">
+				<div class=\"fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40\">
+					<div class=\"duration-700 transition-all p-3 rounded-lg flex items-center\" style=\"background-color: #FF7474;\">
+						<img src=\"/img/components/icon/warning.png\" class=\"h-5 mr-2\" style=\"color: #C51800;\">
+						<p class=\"sm:text-base text-sm font-heading font-bold\">" . $flash . "</p>
+					</div>
+				</div>
+			</div>
+			<script>
+				setTimeout(function() {
+					$('#alert').fadeOut();
+				}, 1500);
+			</script>";
+			session()->setFlashdata('flash', $alert);
 			return redirect()->to(base_url('User/galeriFoto'))->withInput();
 		} else {
 			date_default_timezone_set("Asia/Bangkok");
@@ -1103,6 +1118,21 @@ class User extends BaseController
 		]);
 
 		if ($validated == FALSE) {
+			$flash = '<strong>Upload gagal!</strong> format upload tidak sesuai ketentuan.';
+			$alert = "<div id=\"alert\">
+				<div class=\"fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40\">
+					<div class=\"duration-700 transition-all p-3 rounded-lg flex items-center\" style=\"background-color: #FF7474;\">
+						<img src=\"/img/components/icon/warning.png\" class=\"h-5 mr-2\" style=\"color: #C51800;\">
+						<p class=\"sm:text-base text-sm font-heading font-bold\">" . $flash . "</p>
+					</div>
+				</div>
+			</div>
+			<script>
+				setTimeout(function() {
+					$('#alert').fadeOut();
+				}, 1500);
+			</script>";
+			session()->setFlashdata('flash', $alert);
 			return redirect()->to(base_url('User/galeriVideo'))->withInput();
 		} else {
 			$video = $this->request->getPost('linkVideo');
@@ -1150,8 +1180,22 @@ class User extends BaseController
 				return redirect()->to(base_url('user/galeriVideo'));
 			} else {
 				// buat upload yang bukan link youtube
-				echo $video . "<br>";
-				echo "bukan yutub";
+				$flash = 'Link yang anda upload bukan link youtube.';
+				$alert = "<div id=\"alert\">
+					<div class=\"fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40\">
+						<div class=\"duration-700 transition-all p-3 rounded-lg flex items-center\" style=\"background-color: #FF7474;\">
+							<img src=\"/img/components/icon/warning.png\" class=\"h-5 mr-2\" style=\"color: #C51800;\">
+							<p class=\"sm:text-base text-sm font-heading font-bold\">" . $flash . "</p>
+						</div>
+					</div>
+				</div>
+				<script>
+					setTimeout(function() {
+						$('#alert').fadeOut();
+					}, 1500);
+				</script>";
+				session()->setFlashdata('flash', $alert);
+				return redirect()->to(base_url('user/galeriVideo'));
 			}
 		}
 	}
@@ -1175,7 +1219,22 @@ class User extends BaseController
 			session()->setFlashdata('flash', $flash);
 			return redirect()->to(base_url('user/galeriFoto'));
 		} else {
-			echo "sudah melakukan report";
+			$flash = 'Anda sudah melakukan report terhadap foto tersebut.';
+			$alert = "<div id=\"alert\">
+				<div class=\"fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40\">
+					<div class=\"duration-700 transition-all p-3 rounded-lg flex items-center\" style=\"background-color: #FF7474;\">
+						<img src=\"/img/components/icon/warning.png\" class=\"h-5 mr-2\" style=\"color: #C51800;\">
+						<p class=\"sm:text-base text-sm font-heading font-bold\">" . $flash . "</p>
+					</div>
+				</div>
+			</div>
+			<script>
+				setTimeout(function() {
+					$('#alert').fadeOut();
+				}, 1500);
+			</script>";
+			session()->setFlashdata('flash', $alert);
+			return redirect()->to(base_url('user/galeriFoto'));
 		}
 	}
 

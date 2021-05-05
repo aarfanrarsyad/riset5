@@ -622,4 +622,46 @@ class Admin extends BaseController
 
 		return view('admin' . DIRECTORY_SEPARATOR . 'security' . DIRECTORY_SEPARATOR . 'activity_log', $this->data);
 	}
+
+	# Method untuk Manajemen Galeri Foto
+	public function management_galeri_foto()
+	{
+		$init = new admin_model();
+		$data = $init->getAllApiRequests()->getResultArray();
+		$scopes = $init->getAllApiScopes()->getResultArray();
+		for ($i = 0; $i < count($data); $i++) {
+			$name_client = $init->getUserById($data[$i]['uid'])->getRowArray();
+			$data[$i]['nama_client'] =  $name_client ? $name_client['fullname'] : 'Unknown';
+			if ($data[$i]['uid_admin']) {
+				$name_admin = $init->getUserById($data[$i]['uid_admin'])->getRowArray();
+				$data[$i]['nama_admin'] = $name_admin ? $name_admin['fullname'] : 'Unknown';
+			} else {
+				$data[$i]['nama_admin'] = null;
+			}
+
+			$data[$i]['selected_scope'] = [];
+			if ($data[$i]['id_token']) $data[$i]['selected_scope'] = $init->getSelectedScopeRequest($data[$i]['id_token'])->getResultArray();
+			if (!$data[$i]['token']) $data[$i]['token'] = 'Belum Diset';
+		}
+
+		$this->data =  [
+			'title' => 'Management Galeri Foto',
+			'data' => $data,
+			'scopes' => $scopes,
+		];
+
+		return view('admin' . DIRECTORY_SEPARATOR . 'galeri' . DIRECTORY_SEPARATOR . 'foto', $this->data);
+	}
+
+	# Method untuk Manajemen Galeri Video
+	public function management_galeri_video()
+	{
+		$init = new admin_model();
+		$query = $init->getAllUsers()->getResultArray();
+
+		$this->data =  ['data' => $query];
+
+
+		return view('admin' . DIRECTORY_SEPARATOR . 'galeri' . DIRECTORY_SEPARATOR . 'video', $this->data);
+	}
 }

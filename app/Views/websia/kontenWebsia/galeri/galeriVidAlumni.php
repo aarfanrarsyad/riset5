@@ -1,6 +1,7 @@
 <?= $this->extend('websia/layoutWebsia/templateBerandaLogin.php'); ?>
 
 <?= $this->section('content'); ?>
+
 <!-- Awal Galeri Alumni -->
 <div class="text-center">
     <div id="coba" class="coba mt-8 text-2xl font-bold font-heading">

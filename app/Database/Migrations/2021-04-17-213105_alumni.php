@@ -67,7 +67,7 @@ class Alumni extends Migration
 			],
 			'jabatan_terakhir' => [
 				'type' => 'VARCHAR',
-				'constraint' => '50',
+				'constraint' => '255',
 				'null' => true,
 			],
 			'aktif_pns' => [
@@ -116,27 +116,7 @@ class Alumni extends Migration
 				'type' => 'BOOLEAN',
 				'default' => '0',
 			],
-			'cemail' => [
-				'type' => 'BOOLEAN',
-				'default' => '0',
-			],
 			'calamat' => [
-				'type' => 'BOOLEAN',
-				'default' => '0',
-			],
-			'cjabatan_terakhir' => [
-				'type' => 'BOOLEAN',
-				'default' => '0',
-			],
-			'cig' => [
-				'type' => 'BOOLEAN',
-				'default' => '0',
-			],
-			'ctwitter' => [
-				'type' => 'BOOLEAN',
-				'default' => '0',
-			],
-			'cfb' => [
 				'type' => 'BOOLEAN',
 				'default' => '0',
 			],
@@ -275,7 +255,7 @@ class Alumni extends Migration
 			],
 			'jenjang' => [
 				'type' => 'VARCHAR',
-				'constraint' => '3',
+				'constraint' => '6',
 			],
 			'instansi' => [
 				'type' => 'VARCHAR',
@@ -286,10 +266,12 @@ class Alumni extends Migration
 			],
 			'tahun_masuk' => [
 				'type' => 'YEAR',
+				'null'	=> true,
 			],
 			'angkatan' => [
 				'type' => 'INT',
 				'constraint' => '4',
+				'default' => 0,
 			],
 			'id_alumni' => [
 				'type' => 'INT',
@@ -326,6 +308,7 @@ class Alumni extends Migration
 			'judul_tulisan' => [
 				'type'           => 'VARCHAR',
 				'constraint'     => 100,
+				'null'			 => true,
 			],
 		]);
 
@@ -336,29 +319,29 @@ class Alumni extends Migration
 		//create table
 		$this->forge->createTable('pendidikan_tinggi');
 
-		//================================================================== 
-		// tabel publikasi
-		$this->forge->addField([
-			'publikasi' => [
-				'type'           => 'VARCHAR',
-				'constraint'     => 255,
-				'null'			 => true,
-			],
-			'id_alumni' => [
-				'type' => 'INT',
-				'constraint' => 6,
+		//======================TIDAK BERGUNA================================ 
+		// // tabel publikasi
+		// $this->forge->addField([
+		// 	'publikasi' => [
+		// 		'type'           => 'VARCHAR',
+		// 		'constraint'     => 255,
+		// 		'null'			 => true,
+		// 	],
+		// 	'id_alumni' => [
+		// 		'type' => 'INT',
+		// 		'constraint' => 6,
 				
-				'constraint' => '7',
-			],
-		]);
+		// 		'constraint' => '7',
+		// 	],
+		// ]);
 
-		//primary key
-		$this->forge->addKey('publikasi', TRUE);
-		$this->forge->addKey('id_alumni', TRUE);
-		//foreign key
-		$this->forge->addForeignKey('id_alumni', 'alumni', 'id_alumni', 'CASCADE', 'CASCADE');
-		//create table
-		$this->forge->createTable('publikasi');
+		// //primary key
+		// $this->forge->addKey('publikasi', TRUE);
+		// $this->forge->addKey('id_alumni', TRUE);
+		// //foreign key
+		// $this->forge->addForeignKey('id_alumni', 'alumni', 'id_alumni', 'CASCADE', 'CASCADE');
+		// //create table
+		// $this->forge->createTable('publikasi');
 
 		//================================================================== 
 		// tabel foto
@@ -514,9 +497,6 @@ class Alumni extends Migration
 		//tabel alumni_tempat_kerja
 		$this->forge->dropTable('alumni_tempat_kerja');
 
-		//tabel angkatan_alumni
-		$this->forge->dropTable('angkatan_alumni');
-
 		//tabel prestasi
 		$this->forge->dropTable('prestasi');
 
@@ -530,7 +510,7 @@ class Alumni extends Migration
 		$this->forge->dropTable('pendidikan_tinggi');
 
 		//tabel publikasi
-		$this->forge->dropTable('publikasi');
+		// $this->forge->dropTable('publikasi');
 
 		//tabel galeri
 		$this->forge->dropTable('galeri');
