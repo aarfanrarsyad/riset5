@@ -99,6 +99,15 @@ foreach($da as $item)
 		$init2->updateTokenReq($apiKey);
 
 		if($cek == 1){
+			if(!$email){
+				$respond = [
+					'status' => 401,
+					'message'=> 'Please input an email!',
+					'data' => []
+				];
+	
+				return $this->respond($respond,401);
+			};
 			$alumni = $init->getUserApi($email)->getResult();
 			$respond = [
 				'status' => 200,
@@ -178,6 +187,15 @@ foreach($da as $item)
 		} else {
 
 			if ($scp2 == 1) {
+				if(!$nim){
+					$respond = [
+						'status' => 401,
+						'message'=> 'Please input an nim!',
+						'data' => []
+					];
+		
+					return $this->respond($respond,401);
+				};
 				$alumni = $init->getDetailUserApi($nim);
 	
 				$respond = [

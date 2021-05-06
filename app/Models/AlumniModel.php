@@ -286,8 +286,12 @@ class AlumniModel extends Model
                 };
             return $data;
         } else {
-            $id = $this->db->table('pendidikan')->join('pendidikan_tinggi', 'pendidikan_tinggi.id_pendidikan = pendidikan.id_pendidikan')
-                ->getWhere(['nim'=>$nim])->getRow()->id_alumni;
+            $sqlid = "SELECT p.id_alumni as id FROM pendidikan p JOIN pendidikan_tinggi t ON t.id_pendidikan = p.id_pendidikan  WHERE nim =?";
+            $id_a =$this->db->query($sqlid, [$nim])->getResult();
+            if($id_a){
+                $id=$id_a[0]->id;    
+            } else return NULL;
+            
             $sql = "SELECT nama, jenis_kelamin, status_bekerja, jabatan_terakhir, aktif_pns FROM alumni WHERE id_alumni =?";
             $data = $this->db->query($sql, [$id])->getResult();
             $sql2 = "SELECT p.instansi AS instansi, p.jenjang AS jenjang, t.program_studi AS prodi,t.nim AS nim, p.angkatan AS angkatan, p.tahun_masuk AS tahun_masuk, p.tahun_lulus AS tahun_lulus FROM pendidikan p JOIN pendidikan_tinggi t ON p.id_pendidikan = t.id_pendidikan AND id_alumni=?";
