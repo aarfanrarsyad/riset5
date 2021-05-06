@@ -4,6 +4,7 @@
 
 <?= view('admin/galeri/dist/index/header') ?>
 
+
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
   <div class="content-header">
@@ -27,7 +28,10 @@
       <?= view('Myth\Auth\Views\_message_block') ?>
     </div>
     <div class="row">
+
       <div class="col-12">
+        <?= session()->flash; ?>
+
         <div class="card card-light card-outline card-outline-tabs elevation-3">
           <div class="bg-light px-3 py-3">
             <h5><i class="fab fa-youtube"></i>&ensp;Management Galeri Video</h5>
@@ -36,8 +40,8 @@
             <ul class="nav nav-tabs" id="custom-tabs-four-tab" role="tablist">
               <li class="nav-item">
                 <a class="nav-link active text-secondary" data-toggle="pill" href="#tab1" role="tab" aria-controls="tab1" aria-selected="false">Galeri Video &ensp;
-                  <span class="badge bg-indigo right" title="<?= count($data) ?> Data User"><i class="far fa-bell"></i>
-                    <?= count($data) ?></span>
+                  <span class="badge bg-indigo right" title="<?= count($video) ?> Data User"><i class="far fa-bell"></i>
+                    <?= count($video) ?></span>
                 </a>
               </li>
             </ul>
@@ -60,26 +64,28 @@
                       <thead>
                         <tr>
                           <td class="text-center">No.</td>
-                          <td>Name</td>
-                          <td>Email</td>
-                          <td class="text-center">Dibuat</td>
+                          <td>Link</td>
+                          <td>Album</td>
+                          <td class="text-center">Diupload</td>
+                          <td class="text-center">Uploader</td>
                           <td class="text-center">Status</td>
                           <td class="text-center">Tindakan</td>
                         </tr>
                       </thead>
                       <tbody>
                         <?php $i = 1; ?>
-                        <?php foreach ($data as $dataset) : ?>
+                        <?php foreach ($video as $data) : ?>
                           <tr>
                             <td class="text-center"><?= $i ?></td>
-                            <td><?= $dataset['fullname'] ?></td>
-                            <td><?= $dataset['email'] ?></td>
-                            <td class="text-center"><?= format_date($dataset['created_at']) ?></td>
+                            <td><a href="https://youtu.be/<?= $data['link'] ?>" target="_blank">https://youtu.be/<?= $data['link'] ?></a></td>
+                            <td><?= $data['album'] ?></td>
+                            <td class="text-center"><?= date('d-m-Y', strtotime($data['created_at'])); ?></td>
+                            <td><?= $data['uploader']['nama'] ?></td>
                             <td class="text-center">
-                              <?php if ($dataset['active'] == 1) : ?>
-                                <span class="badge badge-pill badge-primary">Aktif</span>
+                              <?php if ($data['approval'] == 1) : ?>
+                                <span class="badge badge-pill badge-primary">disetujui</span>
                               <?php else : ?>
-                                <span class="badge badge-pill badge-info">Tidak Aktif</span>
+                                <span class="badge badge-pill badge-danger">belum disetujui</span>
                               <?php endif; ?>
                             </td>
                             <td class="text-center">
@@ -88,14 +94,12 @@
                                   <span class="text-xs">Tindakan</span>
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                                  <?php if ($dataset['active'] == 1) : ?>
-                                    <button class="dropdown-item" type="button" onclick="change_active_status(event)" data-id="<?= $dataset['id'] ?>" data-user="<?= $dataset['fullname'] ?>" data-active="0"><i class="fas fa-toggle-off text-secondary"></i>&ensp;Nonaktifkan user</button>
+                                  <?php if ($data['approval'] == 1) : ?>
+                                    <button class="dropdown-item" type="button" onclick="change_approval(event)" data-id="<?= $data['id_video'] ?>" data-active="0"><i class="fas fa-toggle-off text-secondary"></i>&ensp;Batalkan persetujuan</button>
                                   <?php else : ?>
-                                    <button class="dropdown-item" type="button" onclick="change_active_status(event)" data-id="<?= $dataset['id'] ?>" data-active="1" data-user="<?= $dataset['fullname'] ?>"><i class="fas fa-toggle-on text-secondary"></i>&ensp;Aktifkan user</button>
+                                    <button class="dropdown-item" type="button" onclick="change_approval(event)" data-id="<?= $data['id_video'] ?>" data-active="1"><i class="fas fa-toggle-on text-secondary"></i>&ensp;Setujui video</button>
                                   <?php endif; ?>
-                                  <button class="dropdown-item" type="button"><i class="far fa-eye text-secondary"></i>&ensp;Detail User</button>
-                                  <button class="dropdown-item" type="button"><i class="fas fa-edit text-secondary"></i>&ensp;Update User</button>
-                                  <button class="dropdown-item" type="button" onclick="delete_user('<?= $dataset['id'] ?>','<?= $dataset['fullname'] ?>')"><i class="fas fa-trash text-secondary"></i>&ensp;Hapus User</button>
+                                  <button class="dropdown-item" type="button" onclick="delete_video(event)" data-id="<?= $data['id_video'] ?>"><i class="fas fa-trash text-secondary"></i>&ensp;Hapus video</button>
                                 </div>
                               </div>
                             </td>
@@ -120,15 +124,22 @@
     <div class="modal-content card card-white card-outline px-2 py-2">
       <h5 class="modal-title text-secondary mx-2"><i class="fas fa-qrcode"></i>&ensp;Tambah Scope Baru</h5>
       <div class="modal-body mt-2">
-        <form id="form-input-scope" action="<?= base_url('admin/request-api/create-scope') ?>" method="POST">
-          <input type="hidden" name="id" id="id">
+        <form id="form-input-upload" action="<?= base_url('admin/video_upload') ?>" method="POST">
           <div class="form-group">
-            <label for="scope"><span class="text-sm text-secondary">Scope :</span></label>
-            <input type="text" name="scope" class="form-control text-sm border-top-0 border-right-0 border-left-0" id="scope" placeholder="Ex : Mengakses informasi dasar pengguna." style="border-radius:0" autocomplete="off" required>
+            <label for="link"><span class="text-sm text-secondary">Link Video Youtube :</span></label>
+            <input type="text" name="link" class="form-control text-sm border-top-0 border-right-0 border-left-0" id="link" placeholder="Ex : https://www.youtube.com/watch?v=FhQxf3pen7c" style="border-radius:0" autocomplete="off" required>
           </div>
           <div class="form-group">
-            <label for="detail_scope"><span class="text-sm text-secondary">Detail Scope :</span></label>
-            <input type="text" class="form-control text-sm border-top-0 border-right-0 border-left-0" name="detail_scope" id="detail_scope" placeholder="Contoh : user:profile:read." style="border-radius:0" autocomplete="off" required>
+            <label for="albumVideo"><span class="text-sm text-secondary">Album Video :</span></label>
+            <input list="album" class="form-control text-sm border-top-0 border-right-0 border-left-0" name="albumVideo" id="albumVideo">
+            <div class="text-red-500">
+              <?= service('validation')->getError('albumVideo'); ?>
+            </div>
+            <datalist id="album">
+              <option value="alumni">Album Alumni</option>
+              <option value="wisuda">Album Wisuda</option>
+              <option value="kenangan">Album Kenangan</option>
+            </datalist>
           </div>
           <div class="d-flex justify-content-end">
             <button type="submit" id="btn-submit" class="btn btn-sm btn-outline-primary"><i class="fas fa-paper-plane"></i>&ensp;Send data</button>
@@ -138,5 +149,15 @@
     </div>
   </div>
 </div>
+
+<form id="form-approval" action="<?= base_url('admin/change_approval') ?>" method="POST">
+  <input type="hidden" name="id_video" id="id_video">
+  <input type="hidden" name="approval" id="approval">
+</form>
+
+<form id="form-delete" action="<?= base_url('admin/video_delete') ?>" method="POST">
+  <input type="hidden" name="id_video" id="del_video">
+</form>
+
 <?= view('admin/galeri/dist/index/footer') ?>
 <?= $this->endSection(); ?>

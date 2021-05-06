@@ -9,8 +9,14 @@ class VideoModel extends Model
 
     protected $table = 'video';
 
-    // public function getByName($name)
-    // {
-    //     return $this->builder()->getWhere(['nama_file' => $name])->getResult();
-    // }
+    public function getApproveVideo()
+    {
+        // return $this->builder()->where('approval', 1)->limit(9)->get();
+        return $this->builder()->where('approval', 1)->get();
+    }
+
+    public function getVideo($link)
+    {
+        return $this->builder()->where('link', $link)->get()->getFirstRow('array');
+    }
 }

@@ -4,6 +4,8 @@ namespace App\Controllers;
 
 use Config\Services;
 use App\Models\admin_model;
+use App\Models\AlumniModel;
+use App\Models\VideoModel;
 use Config\Email;
 use Myth\Auth\Entities\User;
 
@@ -656,12 +658,198 @@ class Admin extends BaseController
 	# Method untuk Manajemen Galeri Video
 	public function management_galeri_video()
 	{
-		$init = new admin_model();
-		$query = $init->getAllUsers()->getResultArray();
+		$alumni = new AlumniModel();
+		$model = new VideoModel();
+		$video = $model->findAll();
 
-		$this->data =  ['data' => $query];
+		$i = 0;
+		foreach ($video as $dt) {
+			$uploader = $alumni->getAlumniById($dt['id_alumni']);
+			$video[$i]['uploader'] = $uploader;
+			$i++;
+		}
 
+		$data =  [
+			'video' => $video,
+		];
 
-		return view('admin' . DIRECTORY_SEPARATOR . 'galeri' . DIRECTORY_SEPARATOR . 'video', $this->data);
+		return view('admin' . DIRECTORY_SEPARATOR . 'galeri' . DIRECTORY_SEPARATOR . 'video', $data);
+	}
+
+	public function video_upload()
+	{
+		$validated = $this->validate([
+			'link'   => [
+				'rules' => 'required',
+				'errors' => [
+					'required' => 'link video harus diisi'
+				]
+			],
+			'albumVideo'			=> [
+				'rules' => 'required',
+				'errors' => [
+					'required' => 'album harus dipilih'
+				]
+			],
+		]);
+
+		if ($validated == FALSE) {
+			$error = "";
+			foreach ($this->form_validation->getErrors() as $e) {
+				$error .= $e;
+			}
+			$flash = '<div class="mx-5 alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong>Upload video gagal!</strong> ' . $error . '
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>';
+			session()->setFlashdata('flash', $flash);
+
+			return redirect()->to(base_url('admin/galeri-video'))->withInput();
+		} else {
+			$video = $this->request->getPost('link');
+			$album = $this->request->getPost('albumVideo');
+
+			if (strpos($video, 'youtu.be/') || strpos($video, 'youtube.com/')) {
+				if (strpos($video, '?v=')) {
+					$v_link = explode('v=', $video);
+					if (strpos($v_link[1], '&')) {
+						$v_link = explode('&', $v_link[1]);
+						$link = $v_link[0];
+					} else {
+						$link = $v_link[1];
+					}
+				} else {
+					if (strpos($video, '/channel/')) {
+						echo $video . "<br>";
+						echo "bukan yutub";
+						die();
+					}
+					$v_link = explode('/', $video);
+					if (strpos($v_link[3], '?')) {
+						$v_link = explode('?', $v_link[3]);
+						$link = $v_link[0];
+					} else {
+						$link = $v_link[3];
+					}
+				}
+				date_default_timezone_set("Asia/Bangkok");
+				$now = date("Y-m-d");
+
+				$model = new \App\Models\VideoModel();
+
+				if ($model->getVideo($link) == null) {
+					$data = [
+						'link'			=> $link,
+						'album'			=> $album,
+						'created_at'	=> $now,
+						'approval' 		=> 0,
+						'id_alumni' 	=> session('id_alumni'),
+					];
+					$model->db->table('video')->insert($data);
+
+					$flash = '<div class="mx-5 alert alert-success alert-dismissible fade show" role="alert">
+						<strong>Upload video sukses!</strong>
+						<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>';
+					session()->setFlashdata('flash', $flash);
+				} else {
+					$flash = '<div class="mx-5 alert alert-danger alert-dismissible fade show" role="alert">
+						<strong>Upload video gagal!</strong> link video sudah terdaftar.
+						<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>';
+					session()->setFlashdata('flash', $flash);
+				}
+			} else {
+				// buat upload yang bukan link youtube
+				$text = 'link yang anda upload bukan link youtube.';
+				$flash = '<div class="mx-5 alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong>Upload video gagal!</strong> ' . $text . '
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>';
+				session()->setFlashdata('flash', $flash);
+			}
+			return redirect()->to(base_url('admin/galeri-video'));
+		}
+	}
+
+	public function change_approval()
+	{
+		$id = $this->request->getPost('id_video');
+		$approval = $this->request->getPost('approval');
+
+		$model = new VideoModel();
+
+		if ($model->db->table('video')
+			->set('approval', $approval)
+			->where('id_video', $id)
+			->update()
+		) {
+
+			if ($approval == 1)
+				$text = "Persetujuan";
+			else
+				$text = "Pembatalan persetujuan";
+
+			$flash = '<div class="mx-5 alert alert-success alert-dismissible fade show" role="alert">
+		            <strong>' . $text . ' sukses!</strong>
+		            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+		                <span aria-hidden="true">&times;</span>
+		            </button>
+		        </div>';
+			session()->setFlashdata('flash', $flash);
+			return redirect()->to(base_url('admin/galeri-video'));
+		} else {
+			if ($approval == 1)
+				$text = "Persetujuan";
+			else
+				$text = "Pembatalan persetujuan";
+
+			$flash = '<div class="mx-5 alert alert-danger alert-dismissible fade show" role="alert">
+		            <strong>' . $text . ' gagal!</strong>
+		            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+		                <span aria-hidden="true">&times;</span>
+		            </button>
+		        </div>';
+			session()->setFlashdata('flash', $flash);
+			return redirect()->to(base_url('admin/galeri-video'));
+		}
+	}
+
+	public function video_delete()
+	{
+		$id = $this->request->getPost('id_video');
+
+		$model = new VideoModel();
+
+		if ($model->db->table('video')
+			->where('id_video', $id)
+			->delete()
+		) {
+			$flash = '<div class="mx-5 alert alert-success alert-dismissible fade show" role="alert">
+		            <strong>Penghapusan video sukses!</strong>
+		            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+		                <span aria-hidden="true">&times;</span>
+		            </button>
+		        </div>';
+			session()->setFlashdata('flash', $flash);
+			return redirect()->to(base_url('admin/galeri-video'));
+		} else {
+			$flash = '<div class="mx-5 alert alert-danger alert-dismissible fade show" role="alert">
+		            <strong>Penghapusan video gagal!</strong>
+		            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+		                <span aria-hidden="true">&times;</span>
+		            </button>
+		        </div>';
+			session()->setFlashdata('flash', $flash);
+			return redirect()->to(base_url('admin/galeri-video'));
+		}
 	}
 }

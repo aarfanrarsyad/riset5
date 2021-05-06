@@ -1089,10 +1089,9 @@ class User extends BaseController
 
 	public function galeriVideo()
 	{
-		$videoModel = new \App\Models\VideoModel;
-
+		$model = new \App\Models\VideoModel;
 		$data = [
-			'video'			=> $videoModel->findAll(),
+			'video'			=> $model->getApproveVideo()->getResult("array"),
 			'judulHalaman'	=> 'Galeri Video Kegiatan Alumni',
 			'active' 		=> 'galeri'
 		];
