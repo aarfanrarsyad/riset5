@@ -247,29 +247,54 @@ class AlumniModel extends Model
 
 
     // FOR API REQUEST
-    public function getUserApi($nim = false)
+    public function getUserApi($email = false)
     {
-        if ($nim === false) {
-            $sql = "SELECT alumni.nama, alumni.nim , users.username FROM alumni JOIN users ON alumni.nim = users.nim";
+        if ($email === false) {
+            $sql = "SELECT email , fullname ,username  FROM users";
 
             return $this->db->query($sql);
         } else {
-            $sql = "SELECT alumni.nama AS fullname, alumni.nim , users.username FROM alumni JOIN users ON alumni.nim = users.nim AND alumni.nim =?";
+            $sql = "SELECT email, fullname , username FROM users WHERE email =?";
 
-            return $this->db->query($sql, [$nim]);
+            return $this->db->query($sql, [$email]);
         }
     }
 
     public function getDetailUserApi($nim = false)
     {
         if ($nim === false) {
-            $sql = "SELECT angkatan, nama, nim, jenis_kelamin, status_bekerja, jabatan_terakhir, aktif_pns FROM alumni";
+            $sql = "SELECT a.id_alumni, a.nama, a.jenis_kelamin, a.status_bekerja, a.jabatan_terakhir, a.aktif_pns, p.instansi AS instansi, p.jenjang AS jenjang, t.program_studi AS prodi,t.nim AS nim, p.angkatan AS angkatan, p.tahun_masuk AS tahun_masuk, p.tahun_lulus AS tahun_lulus FROM alumni a LEFT JOIN pendidikan p ON p.id_alumni = a.id_alumni LEFT JOIN pendidikan_tinggi t ON p.id_pendidikan = t.id_pendidikan";
 
-            return $this->db->query($sql);
+            $alumni = $this->db->query($sql)->getResultArray();
+            $data =[];
+            foreach($alumni as $item)
+                {
+                    $data[$item['id_alumni']]['nama'] = $item['nama'];
+                    $data[$item['id_alumni']]['jenis_kelamin'] = $item['jenis_kelamin'];
+                    $data[$item['id_alumni']]['status_bekerja'] = $item['status_bekerja'];
+                    $data[$item['id_alumni']]['jabatan_terakhir'] = $item['jabatan_terakhir'];
+                    $data[$item['id_alumni']]['aktif_pns'] = $item['aktif_pns'];
+                    $data[$item['id_alumni']]['pendidikan_tinggi'][] = [
+                            "instansi" => $item['instansi'],
+	                        "jenjang" => $item['jenjang'],
+	                        "prodi" => $item['prodi'],
+	                        "nim" => $item['nim'],
+	                        "angkatan" => $item['angkatan'],
+	                        "tahun_masuk" => $item['tahun_masuk'],
+	                        "tahun_lulus" => $item['tahun_lulus'] 
+                    ];
+                };
+            return $data;
         } else {
-            $sql = "SELECT angkatan, nama, nim, jenis_kelamin, status_bekerja, jabatan_terakhir, aktif_pns FROM alumni WHERE nim =?";
-
-            return $this->db->query($sql, [$nim]);
+            $id = $this->db->table('pendidikan')->join('pendidikan_tinggi', 'pendidikan_tinggi.id_pendidikan = pendidikan.id_pendidikan')
+                ->getWhere(['nim'=>$nim])->getRow()->id_alumni;
+            $sql = "SELECT nama, jenis_kelamin, status_bekerja, jabatan_terakhir, aktif_pns FROM alumni WHERE id_alumni =?";
+            $data = $this->db->query($sql, [$id])->getResult();
+            $sql2 = "SELECT p.instansi AS instansi, p.jenjang AS jenjang, t.program_studi AS prodi,t.nim AS nim, p.angkatan AS angkatan, p.tahun_masuk AS tahun_masuk, p.tahun_lulus AS tahun_lulus FROM pendidikan p JOIN pendidikan_tinggi t ON p.id_pendidikan = t.id_pendidikan AND id_alumni=?";
+            $data2 = $this->db->query($sql2, [$id])->getResult();
+            $datum['alumni'] = $data;
+            $datum['pendidikan_tinggi'] = $data2;
+            return $datum;
         }
     }
 

@@ -7,6 +7,29 @@ class Api extends ResourceController
 {
 	public function index() //project list + form create
 	{
+		$init = new AlumniModel();
+		
+		$da=$init->getDetailUserApi();
+		$data = [];
+foreach($da as $item)
+{
+  $data[$item['id_alumni']]['nama'] = $item['nama'];
+  $data[$item['id_alumni']]['jenis_kelamin'] = $item['jenis_kelamin'];
+  $data[$item['id_alumni']]['status_bekerja'] = $item['status_bekerja'];
+  $data[$item['id_alumni']]['jabatan_terakhir'] = $item['jabatan_terakhir'];
+  $data[$item['id_alumni']]['aktif_pns'] = $item['aktif_pns'];
+  $data[$item['id_alumni']]['pendidikan_tinggi'][] = [
+      "instansi" => $item['instansi'],
+	  "jenjang" => $item['jenjang'],
+	  "prodi" => $item['prodi'],
+	  "nim" => $item['nim'],
+	  "angkatan" => $item['angkatan'],
+	  "tahun_masuk" => $item['tahun_masuk'],
+	  "tahun_lulus" => $item['tahun_lulus'] 
+  ];
+ };
+ dd($data);
+		die();
 		$curl = curl_init();
 		curl_setopt_array($curl, [
 			CURLOPT_RETURNTRANSFER => 1,
@@ -51,7 +74,7 @@ class Api extends ResourceController
 		$init = new AlumniModel();
 		$init2 = new WebserviceModel();
 		$apiKey = $this->request->getPost('api-key');
-		$nim = $this->request->getPost('nim');
+		$email = $this->request->getPost('email');
 
 		if ($apiKey==NULL) {
 			$respond = [
@@ -76,7 +99,7 @@ class Api extends ResourceController
 		$init2->updateTokenReq($apiKey);
 
 		if($cek == 1){
-			$alumni = $init->getUserApi($nim)->getResult();
+			$alumni = $init->getUserApi($email)->getResult();
 			$respond = [
 				'status' => 200,
 				'message'=> 'Successful!',
@@ -135,7 +158,7 @@ class Api extends ResourceController
 
 		if ($list==1) {
 			if ($scp3 == 1) {
-				$alumni = $init->getDetailUserApi()->getResult();
+				$alumni = $init->getDetailUserApi();
 
 				$respond = [
 					'status' => 200,
@@ -155,7 +178,7 @@ class Api extends ResourceController
 		} else {
 
 			if ($scp2 == 1) {
-				$alumni = $init->getDetailUserApi($nim)->getResult();
+				$alumni = $init->getDetailUserApi($nim);
 	
 				$respond = [
 					'status' => 200,
