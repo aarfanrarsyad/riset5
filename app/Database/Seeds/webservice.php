@@ -19,7 +19,7 @@ class Webservice extends Seeder
 			],
 			[
 				'scope'       	  => 'alumni:profile:list',
-				'scope_dev'       => 'Mengakses informasi pribadi dasar alumni atas nama pengguna',
+				'scope_dev'       => 'Mengakses list informasi pribadi dasar alumni atas nama pengguna',
 			]
 		];
 		$this->db->table('scope_app')->insertBatch($data);
