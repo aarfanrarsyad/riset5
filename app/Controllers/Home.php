@@ -221,14 +221,45 @@ class Home extends BaseController
 								$this->recordLoginAttempt($hasil['email'], $ipAddress, session('id_user') ?? null, true);
 
 								setcookie('login', 'yes', time() + 60, $_SERVER['SERVER_NAME']);
-
-								session()->setFlashdata('pesan', 'Login berhasil. Hai, <b>' . session('username') . '!</b>');
-								session()->setFlashdata('warna', 'success');
 								echo '<script>window.close();</script>';
 
+								$flash = '<strong>Login berhasil!</strong> selamat datang <b>' . session('nama') . '</b>.';
+								$alert = "<div id=\"alert\">
+									<div class=\"fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40\">
+										<div class=\"duration-700 transition-all p-3 rounded-lg flex items-center\" style=\"background-color: #34eb52;\">
+											<p class=\"sm:text-base text-sm font-heading font-bold\">" . $flash . "</p>
+										</div>
+									</div>
+								</div>
+								<script>
+									setTimeout(function() {
+										$('#alert').fadeOut();
+									}, 1800);
+								</script>";
+								session()->set([
+									'login_notif' => $alert
+								]);
+
 								die();
-							} else
-								echo "Bukan Alumni";
+							} else {
+								$flash = '<strong>Login gagal!</strong> silahkan gunakan akun alumni AIS/STIS/Polstat STIS.';
+								$alert = "<div id=\"alert\">
+									<div class=\"fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40\">
+										<div class=\"duration-700 transition-all p-3 rounded-lg flex items-center\" style=\"background-color: #FF7474;\">
+											<img src=\"/img/components/icon/warning.png\" class=\"h-5 mr-2\" style=\"color: #C51800;\">
+											<p class=\"sm:text-base text-sm font-heading font-bold\">" . $flash . "</p>
+										</div>
+									</div>
+								</div>
+								<script>
+									setTimeout(function() {
+										$('#alert').fadeOut();
+									}, 1500);
+								</script>";
+								session()->set([
+									'login_notif' => $alert
+								]);
+							}
 						}
 
 						// echo "Id : " . $user->getId();
@@ -433,20 +464,51 @@ class Home extends BaseController
 
 					$ipAddress = Services::request()->getIPAddress();
 					$this->recordLoginAttempt(session('nim') . '@stis.ac.id', $ipAddress, session('id_user') ?? null, true);	//insert ke tabel auth_login untuk log login
+					setcookie('login', 'yes', time() + 60, $_SERVER['SERVER_NAME']);
+					echo '<script>window.close();</script>';
+
+					$flash = '<strong>Login berhasil!</strong> selamat datang <b>' . session('nama') . '</b>.';
+					$alert = "<div id=\"alert\">
+									<div class=\"fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40\">
+										<div class=\"duration-700 transition-all p-3 rounded-lg flex items-center\" style=\"background-color: #34eb52;\">
+											<p class=\"sm:text-base text-sm font-heading font-bold\">" . $flash . "</p>
+										</div>
+									</div>
+								</div>
+								<script>
+									setTimeout(function() {
+										$('#alert').fadeOut();
+									}, 1800);
+								</script>";
+					session()->set([
+						'login_notif' => $alert
+					]);
+
+					die();
 				} else {	//apabila alumni memakai akun dosen
 					/* KATANYA LANGSUNG ALERT AJA */
 					// session()->setFlashdata('pesan', 'Silahkan gunakan akun Sipadu Mahasiswa atau akun BPS, atau hubungi admin website');
-					echo '<script>alert(\'Silahkan gunakan akun Sipadu Mahasiswa atau akun BPS, atau hubungi admin website\')</script>';
+					// echo '<script>alert(\'Silahkan gunakan akun Sipadu Mahasiswa atau akun BPS, atau hubungi admin website\')</script>';
+					$flash = '<strong>Login gagal!</strong> silahkan gunakan akun Sipadu Mahasiswa atau akun BPS, atau hubungi admin website.';
+					$alert = "<div id=\"alert\">
+									<div class=\"fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40\">
+										<div class=\"duration-700 transition-all p-3 rounded-lg flex items-center\" style=\"background-color: #FF7474;\">
+											<img src=\"/img/components/icon/warning.png\" class=\"h-5 mr-2\" style=\"color: #C51800;\">
+											<p class=\"sm:text-base text-sm font-heading font-bold\">" . $flash . "</p>
+										</div>
+									</div>
+								</div>
+								<script>
+									setTimeout(function() {
+										$('#alert').fadeOut();
+									}, 1500);
+								</script>";
+					session()->set([
+						'login_notif' => $alert
+					]);
+
 					die();
 				}
-
-				setcookie('login', 'yes', time() + 60, $_SERVER['SERVER_NAME']);
-
-				echo '<script>window.close();</script>';
-
-				session()->setFlashdata('pesan', 'Login berhasil. Hai, <b>' . session('username') . '!</b>');
-				session()->setFlashdata('warna', 'success');
-				die();
 			}
 		}
 

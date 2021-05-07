@@ -14,6 +14,9 @@ if ($login == 'belum') {
 
 <?= $this->section('content'); ?>
 
+<!-- <php dd(session()->flash); ?> -->
+<?= session()->login_notif; ?>
+
 <?php
 if (session()->getFlashdata('role')) { ?>
     <!-- Kalo belom login atau redirect karna role -->
@@ -228,9 +231,9 @@ if (session()->getFlashdata('role')) { ?>
 </div>
 <!-- akhir tombol "Lihat Berita Selanjutnya" -->
 
-</div>
 <!-- akhir card -->
 
+<?php session()->remove(['login_notif']) ?>
 <script type="text/javascript" src="/js/leaflet.ajax.js"></script>
 <script type="text/javascript" src="/js/add.js"></script>
 <?= $this->endSection(); ?>
