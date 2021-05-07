@@ -6,6 +6,7 @@ use Config\Services;
 use App\Models\admin_model;
 use App\Models\AlumniModel;
 use App\Models\VideoModel;
+use App\Models\FotoModel;
 use Config\Email;
 use Myth\Auth\Entities\User;
 
@@ -628,31 +629,45 @@ class Admin extends BaseController
 	# Method untuk Manajemen Galeri Foto
 	public function management_galeri_foto()
 	{
-		$init = new admin_model();
-		$data = $init->getAllApiRequests()->getResultArray();
-		$scopes = $init->getAllApiScopes()->getResultArray();
-		for ($i = 0; $i < count($data); $i++) {
-			$name_client = $init->getUserById($data[$i]['uid'])->getRowArray();
-			$data[$i]['nama_client'] =  $name_client ? $name_client['fullname'] : 'Unknown';
-			if ($data[$i]['uid_admin']) {
-				$name_admin = $init->getUserById($data[$i]['uid_admin'])->getRowArray();
-				$data[$i]['nama_admin'] = $name_admin ? $name_admin['fullname'] : 'Unknown';
-			} else {
-				$data[$i]['nama_admin'] = null;
-			}
+		$alumni_model = new \App\Models\AlumniModel;
+		$report_model = new \App\Models\ReportModel;
+		$pendidikan = new \App\Models\PendidikanModel();
+		$model = new \App\Models\FotoModel;
 
-			$data[$i]['selected_scope'] = [];
-			if ($data[$i]['id_token']) $data[$i]['selected_scope'] = $init->getSelectedScopeRequest($data[$i]['id_token'])->getResultArray();
-			if (!$data[$i]['token']) $data[$i]['token'] = 'Belum Diset';
+		$alumni = $alumni_model->getForTags()->getResult();
+		foreach ($alumni as $dt) {
+			$alumni_angktn = array();
+			$angkatan = $pendidikan->getAngkatan($dt->id_alumni);
+			if ($angkatan != null) {
+				foreach ($angkatan as $aktn) {
+					array_push($alumni_angktn, $aktn->angkatan);
+				}
+				$dt->angkatan = $alumni_angktn[0];
+			} else {
+				$dt->angkatan = 0;
+			}
 		}
 
-		$this->data =  [
-			'title' => 'Management Galeri Foto',
-			'data' => $data,
-			'scopes' => $scopes,
+		$foto = $model->findAll();
+
+		$i = 0;
+		foreach ($foto as $dt) {
+			$uploader = $alumni_model->getAlumniById($dt['id_alumni']);
+			$report = $report_model->getById($dt['id_foto']);
+
+			$foto[$i]['uploader'] = $uploader;
+			$foto[$i]['report'] = $report;
+			$i++;
+		}
+
+		$data =  [
+			'foto' 		=> $foto,
+			'alumni' 	=> $alumni,
+			'isGalery'	=> TRUE
 		];
 
-		return view('admin' . DIRECTORY_SEPARATOR . 'galeri' . DIRECTORY_SEPARATOR . 'foto', $this->data);
+		// dd($data);
+		return view('admin' . DIRECTORY_SEPARATOR . 'galeri' . DIRECTORY_SEPARATOR . 'foto', $data);
 	}
 
 	# Method untuk Manajemen Galeri Video
@@ -671,9 +686,85 @@ class Admin extends BaseController
 
 		$data =  [
 			'video' => $video,
+			'isGalery'	=> TRUE
 		];
 
 		return view('admin' . DIRECTORY_SEPARATOR . 'galeri' . DIRECTORY_SEPARATOR . 'video', $data);
+	}
+
+
+	public function change_approval_foto()
+	{
+		// dd($_POST);
+		$id = $this->request->getPost('id_foto');
+		$approval = $this->request->getPost('approval');
+
+		$model = new FotoModel();
+
+		if ($model->db->table('foto')
+			->set('approval', $approval)
+			->where('id_foto', $id)
+			->update()
+		) {
+
+			if ($approval == 1)
+				$text = "Persetujuan";
+			else
+				$text = "Pembatalan persetujuan";
+
+			$flash = '<div class="mx-5 alert alert-success alert-dismissible fade show" role="alert">
+		            <strong>' . $text . ' sukses!</strong>
+		            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+		                <span aria-hidden="true">&times;</span>
+		            </button>
+		        </div>';
+			session()->setFlashdata('flash', $flash);
+			return redirect()->to(base_url('admin/galeri-foto'));
+		} else {
+			if ($approval == 1)
+				$text = "Persetujuan";
+			else
+				$text = "Pembatalan persetujuan";
+
+			$flash = '<div class="mx-5 alert alert-danger alert-dismissible fade show" role="alert">
+		            <strong>' . $text . ' gagal!</strong>
+		            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+		                <span aria-hidden="true">&times;</span>
+		            </button>
+		        </div>';
+			session()->setFlashdata('flash', $flash);
+			return redirect()->to(base_url('admin/galeri-foto'));
+		}
+	}
+
+	public function foto_delete()
+	{
+		$id = $this->request->getPost('id_video');
+
+		$model = new FotoModel();
+
+		if ($model->db->table('video')
+			->where('id_video', $id)
+			->delete()
+		) {
+			$flash = '<div class="mx-5 alert alert-success alert-dismissible fade show" role="alert">
+		            <strong>Penghapusan video sukses!</strong>
+		            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+		                <span aria-hidden="true">&times;</span>
+		            </button>
+		        </div>';
+			session()->setFlashdata('flash', $flash);
+			return redirect()->to(base_url('admin/galeri-video'));
+		} else {
+			$flash = '<div class="mx-5 alert alert-danger alert-dismissible fade show" role="alert">
+		            <strong>Penghapusan video gagal!</strong>
+		            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+		                <span aria-hidden="true">&times;</span>
+		            </button>
+		        </div>';
+			session()->setFlashdata('flash', $flash);
+			return redirect()->to(base_url('admin/galeri-video'));
+		}
 	}
 
 	public function video_upload()
@@ -780,7 +871,7 @@ class Admin extends BaseController
 		}
 	}
 
-	public function change_approval()
+	public function change_approval_video()
 	{
 		$id = $this->request->getPost('id_video');
 		$approval = $this->request->getPost('approval');

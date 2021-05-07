@@ -244,7 +244,7 @@ function laporkanFoto(id){
             </div>
             <form action="reportGaleri" method="post" class="flex flex-col bg-gray-100 sm:px-12 px-4 rounded-b-2xl text-sm">
                 <label for="inputLaporan" class="text-primary font-medium mt-8">Mengapa Anda melaporkan foto ini?</label>
-                <textarea name="inputLaporan" class="inputForm h-36" style="resize: none;" required></textarea>
+                <textarea name="inputLaporan" class="inputForm h-36" style="resize: none;" maxlength="300" required></textarea>
                 <input type="hidden" name="foto" value="` + id + `">
     
                 <div class="flex justify-end my-4">

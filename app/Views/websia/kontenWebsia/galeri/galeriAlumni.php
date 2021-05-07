@@ -190,7 +190,7 @@ if (session()->getFlashdata('failed')) { ?>
                     <?= service('validation')->getError('albumFoto'); ?>
                 </div>
                 <label for="deskripsi" class="text-primary font-medium">*Deskripsi</label>
-                <textarea name="deskripsi" id="deskripsi" rows="2" class="inputForm resize-none font-heading text-xs" placeholder="Penggunaan Jutsu Air dalam Mengatasi Permasalahan Banjir yang Sering Terjadi di Wilayah Pemukiman Rawan Longsor" maxlength="2200" required></textarea>
+                <textarea name="deskripsi" id="deskripsi" rows="4" class="inputForm resize-none font-heading text-xs" placeholder="Penggunaan Jutsu Air dalam Mengatasi Permasalahan Banjir yang Sering Terjadi di Wilayah Pemukiman Rawan Longsor" maxlength="2200" required></textarea>
                 <div class="text-red-500">
                     <?= service('validation')->getError('deskripsi'); ?>
                 </div>

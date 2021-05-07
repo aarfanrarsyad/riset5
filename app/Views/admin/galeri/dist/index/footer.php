@@ -1,3 +1,3 @@
 <script>
-    initalize_dataTables('#users-table')
+    dataTables_galleries('#gallery-table');
 </script>

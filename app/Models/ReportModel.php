@@ -16,4 +16,9 @@ class ReportModel extends Model
             ->where('id_foto', $id_foto)
             ->get()->getResult();
     }
+
+    public function getById($id)
+    {
+        return $this->builder()->where('id_foto', $id)->get()->getResultArray();
+    }
 }

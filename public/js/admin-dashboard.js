@@ -47,3 +47,13 @@ function initalize_dataTables(element, config = null) {
         'display': 'inline-block',
     });
 }
+
+function dataTables_galleries(element, config = null) {
+    $(element).DataTable({
+        dom: "<'row'<'col-md-4 text-xs pl-3 d-flex justify-content-start'f><'col-md-4 text-center'B><'col-md-4 text-xs d-flex justify-content-end'l>>" +
+            "<'row mt-2'<'col-md-12'tr>>" +
+            "<'row mt-4'<'col-md-5 text-sm'i><'col-md-7 text-xs d-flex justify-content-end'p>>",
+        "iDisplayLength": 10,
+        "info": false
+    });
+}

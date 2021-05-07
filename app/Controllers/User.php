@@ -947,7 +947,7 @@ class User extends BaseController
 			}
 		}
 
-		$galeri = $fotoModel->findAll();
+		$galeri = $fotoModel->getApprovePhotos();
 		$i = 0;
 		foreach ($galeri as $foto) {
 			$pub = $model->getAlumniById($foto['id_alumni']);
@@ -1018,7 +1018,7 @@ class User extends BaseController
 
 			//cek apakah sudah terdapat foldernya
 			if (!is_dir($path))
-				mkdir($path, 0700, true);
+				mkdir($path, 0755, true);
 
 			//cek apakah sudah terdapat nama file yang sama, jika sudah maka akan direname
 			$file = $path . "/" . $foto->getName();

@@ -60,7 +60,7 @@
                 </div>
                 <div class="row mt-4">
                   <div class="col">
-                    <table class="table table-hover table-sm text-sm" id="users-table">
+                    <table class="table table-hover table-sm text-sm" id="gallery-table">
                       <thead>
                         <tr>
                           <td class="text-center">No.</td>
@@ -80,7 +80,7 @@
                             <td><a href="https://youtu.be/<?= $data['link'] ?>" target="_blank">https://youtu.be/<?= $data['link'] ?></a></td>
                             <td><?= $data['album'] ?></td>
                             <td class="text-center"><?= date('d-m-Y', strtotime($data['created_at'])); ?></td>
-                            <td><?= $data['uploader']['nama'] ?></td>
+                            <td class="text-center"><?= $data['uploader']['nama'] ?></td>
                             <td class="text-center">
                               <?php if ($data['approval'] == 1) : ?>
                                 <span class="badge badge-pill badge-primary">disetujui</span>
@@ -95,11 +95,11 @@
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
                                   <?php if ($data['approval'] == 1) : ?>
-                                    <button class="dropdown-item" type="button" onclick="change_approval(event)" data-id="<?= $data['id_video'] ?>" data-active="0"><i class="fas fa-toggle-off text-secondary"></i>&ensp;Batalkan persetujuan</button>
+                                    <button class="dropdown-item" type="button" onclick="change_approval(event)" data-id="<?= $data['id_video'] ?>" data-active="0"><i class="fas fa-toggle-on text-secondary"></i>&ensp;Batalkan persetujuan</button>
                                   <?php else : ?>
-                                    <button class="dropdown-item" type="button" onclick="change_approval(event)" data-id="<?= $data['id_video'] ?>" data-active="1"><i class="fas fa-toggle-on text-secondary"></i>&ensp;Setujui video</button>
+                                    <button class="dropdown-item" type="button" onclick="change_approval(event)" data-id="<?= $data['id_video'] ?>" data-active="1"><i class="fas fa-toggle-off text-secondary"></i>&ensp;Setujui video</button>
                                   <?php endif; ?>
-                                  <button class="dropdown-item" type="button" onclick="delete_video(event)" data-id="<?= $data['id_video'] ?>"><i class="fas fa-trash text-secondary"></i>&ensp;Hapus video</button>
+                                  <button class="dropdown-item" type="button" onclick="delete_gallery(event)" data-id="<?= $data['id_video'] ?>"><i class="fas fa-trash text-secondary"></i>&ensp;Hapus video</button>
                                 </div>
                               </div>
                             </td>
@@ -122,7 +122,7 @@
 <div class="modal fade" id="token-modal" tabindex="-1">
   <div class="modal-dialog">
     <div class="modal-content card card-white card-outline px-2 py-2">
-      <h5 class="modal-title text-secondary mx-2"><i class="fas fa-qrcode"></i>&ensp;Tambah Scope Baru</h5>
+      <h5 class="modal-title text-secondary mx-2"><i class="fas fa-qrcode"></i>&ensp;Tambah Video Baru</h5>
       <div class="modal-body mt-2">
         <form id="form-input-upload" action="<?= base_url('admin/video_upload') ?>" method="POST">
           <div class="form-group">
@@ -142,7 +142,7 @@
             </datalist>
           </div>
           <div class="d-flex justify-content-end">
-            <button type="submit" id="btn-submit" class="btn btn-sm btn-outline-primary"><i class="fas fa-paper-plane"></i>&ensp;Send data</button>
+            <button type="submit" id="btn-submit" class="btn btn-sm btn-outline-primary"><i class="fas fa-paper-plane"></i>&ensp;Submit</button>
           </div>
         </form>
       </div>
@@ -150,13 +150,13 @@
   </div>
 </div>
 
-<form id="form-approval" action="<?= base_url('admin/change_approval') ?>" method="POST">
-  <input type="hidden" name="id_video" id="id_video">
+<form id="form-approval" action="<?= base_url('admin/change_approval_video') ?>" method="POST">
+  <input type="hidden" name="id_video" id="id_approval">
   <input type="hidden" name="approval" id="approval">
 </form>
 
 <form id="form-delete" action="<?= base_url('admin/video_delete') ?>" method="POST">
-  <input type="hidden" name="id_video" id="del_video">
+  <input type="hidden" name="id_video" id="del">
 </form>
 
 <?= view('admin/galeri/dist/index/footer') ?>
