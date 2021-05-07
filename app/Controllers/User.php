@@ -580,7 +580,7 @@ class User extends BaseController
 		];
 
 		$model->db->table('alumni')->set($data)->where('id_alumni', session('id_alumni'))->update();
-		if($cpendidikan == 1){
+		if ($cpendidikan == 1) {
 			session()->setFlashdata('edit-pendidikan-success', 'Tampilan pendidikan diaktifkan');
 		} else {
 			session()->setFlashdata('edit-pendidikan-success', 'Tampilan pendidikan dinon-aktifkan');
@@ -802,7 +802,7 @@ class User extends BaseController
 		];
 
 		$model->db->table('alumni')->set($data)->where('id_alumni', session('id_alumni'))->update();
-		if($cprestasi == 1){
+		if ($cprestasi == 1) {
 			session()->setFlashdata('edit-prestasi-success', 'Tampilan prestasi diaktifkan');
 		} else {
 			session()->setFlashdata('edit-prestasi-success', 'Tampilan prestasi dinon-aktifkan');
@@ -1029,6 +1029,7 @@ class User extends BaseController
 			$tags = $this->request->getPost('tags');
 			$now = date("Y-m-d H:i:s");
 
+			$caption = str_replace(array("\r", "\n"), ' ', $caption);
 			$year = date("Y");
 			$path = ROOTPATH . '/public/img/galeri/' . $year;
 

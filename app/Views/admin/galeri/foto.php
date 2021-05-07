@@ -79,7 +79,7 @@
                           <tr>
                             <td class="text-center"><?= $i ?></td>
                             <td>
-                              <a data-toggle="modal" data-target="#imgpreview" onclick="imgPreview('<?= $data['caption'] ?>', '<?= base_url() ?>/img/galeri/<?= $data['nama_file'] ?>')">
+                              <a data-toggle="modal" data-target="#imgpreview" onclick='galleryPreview("<?= $data["caption"] ?>", "<?= base_url() ?>/img/galeri/<?= $data["nama_file"] ?>")'>
                                 <img style="width: 15em" src="<?= base_url() ?>/img/galeri/<?= $data['nama_file'] ?>">
                               </a>
 
@@ -250,6 +250,13 @@
 </form>
 
 <script>
+  function galleryPreview(desc, src) {
+    $("#imagepreview").attr("src", src);
+
+    $('#captionPreview').empty();
+    $('#captionPreview').html(desc);
+  }
+
   $('#pilihFile').change(function() {
     string = $('#pilihFile').val().split("\\");
     $('#textPhoto').html(string[string.length - 1]);

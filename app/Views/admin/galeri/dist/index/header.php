@@ -23,14 +23,6 @@
         $('#token-modal').modal('show');
     }
 
-    function imgPreview(desc, src) {
-
-        $("#imagepreview").attr("src", src);
-
-        $('#captionPreview').empty();
-        $('#captionPreview').html(desc);
-    }
-
     function add_photo(event) {
         $('.modal-title').html('<i class="far fa-images"></i>&ensp;Tambah Foto Baru');
         $('#pilihFile').val('');
