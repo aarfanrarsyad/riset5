@@ -77,6 +77,11 @@
 
     <script src="/js/admin-dashboard.js"></script>
 
+    <?php if (isset($isGalery))
+        if ($isGalery) : ?>
+        <link rel="stylesheet" href="/css/tags.css">
+        <script src="/js/selectize.js"></script>
+    <?php endif; ?>
 
     <!-- Font -->
     <link rel="preconnect" href="https://fonts.gstatic.com">

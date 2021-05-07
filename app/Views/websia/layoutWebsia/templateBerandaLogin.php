@@ -27,6 +27,11 @@
     <link rel="stylesheet" href="<?= base_url() ?>/vendor/AdminLTE/plugins/summernote/summernote-bs4.min.css">
     <script src="<?= base_url() ?>/vendor/AdminLTE/plugins/summernote/summernote-bs4.min.js"></script>
 
+    <?php if ($judulHalaman == "Galeri Kenangan Alumni") : ?>
+        <link rel="stylesheet" href="/css/tags.css">
+        <script src="/js/selectize.js"></script>
+    <?php endif; ?>
+
     <title><?php echo $judulHalaman ?></title>
 </head>
 
@@ -235,8 +240,6 @@
             <div class="flex-grow">
                 <hr class="text-white bg-white border my-auto">
             </div>
-
-
         </div>
 
         <h2 class="text-white text-sm text-center mt-1">Copyright &copy; PKL 60 Riset 5</h2>

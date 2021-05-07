@@ -265,6 +265,11 @@ $routes->group('admin', ['namespace' => 'App\Controllers'], function ($routes) {
 	$routes->post('prestasi/delete', 'Admin::CRUD_deletePrestasi', ['filter' => 'permission:4']);
 
 	#------------------------------------------------------------------------------------------------------------------------------------------------#
+
+
+	# Manajemen Galeri
+	$routes->get('galeri-foto', 'Admin::management_galeri_foto');
+	$routes->get('galeri-video', 'Admin::management_galeri_video');
 });
 /**
  * --------------------------------------------------------------------

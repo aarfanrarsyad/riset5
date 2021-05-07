@@ -9,6 +9,11 @@ class AlumniModel extends Model
 
     protected $table = 'alumni';
 
+    public function getForTags()
+    {
+        return $this->builder()->select('nama, id_alumni')->get();
+    }
+
     // Sudah diubah
     public function getAlumniById($id_alumni)
     {
@@ -266,32 +271,31 @@ class AlumniModel extends Model
             $sql = "SELECT a.id_alumni, a.nama, a.jenis_kelamin, a.status_bekerja, a.jabatan_terakhir, a.aktif_pns, p.instansi AS instansi, p.jenjang AS jenjang, t.program_studi AS prodi,t.nim AS nim, p.angkatan AS angkatan, p.tahun_masuk AS tahun_masuk, p.tahun_lulus AS tahun_lulus FROM alumni a LEFT JOIN pendidikan p ON p.id_alumni = a.id_alumni LEFT JOIN pendidikan_tinggi t ON p.id_pendidikan = t.id_pendidikan";
 
             $alumni = $this->db->query($sql)->getResultArray();
-            $data =[];
-            foreach($alumni as $item)
-                {
-                    $data[$item['id_alumni']]['nama'] = $item['nama'];
-                    $data[$item['id_alumni']]['jenis_kelamin'] = $item['jenis_kelamin'];
-                    $data[$item['id_alumni']]['status_bekerja'] = $item['status_bekerja'];
-                    $data[$item['id_alumni']]['jabatan_terakhir'] = $item['jabatan_terakhir'];
-                    $data[$item['id_alumni']]['aktif_pns'] = $item['aktif_pns'];
-                    $data[$item['id_alumni']]['pendidikan_tinggi'][] = [
-                            "instansi" => $item['instansi'],
-	                        "jenjang" => $item['jenjang'],
-	                        "prodi" => $item['prodi'],
-	                        "nim" => $item['nim'],
-	                        "angkatan" => $item['angkatan'],
-	                        "tahun_masuk" => $item['tahun_masuk'],
-	                        "tahun_lulus" => $item['tahun_lulus'] 
-                    ];
-                };
+            $data = [];
+            foreach ($alumni as $item) {
+                $data[$item['id_alumni']]['nama'] = $item['nama'];
+                $data[$item['id_alumni']]['jenis_kelamin'] = $item['jenis_kelamin'];
+                $data[$item['id_alumni']]['status_bekerja'] = $item['status_bekerja'];
+                $data[$item['id_alumni']]['jabatan_terakhir'] = $item['jabatan_terakhir'];
+                $data[$item['id_alumni']]['aktif_pns'] = $item['aktif_pns'];
+                $data[$item['id_alumni']]['pendidikan_tinggi'][] = [
+                    "instansi" => $item['instansi'],
+                    "jenjang" => $item['jenjang'],
+                    "prodi" => $item['prodi'],
+                    "nim" => $item['nim'],
+                    "angkatan" => $item['angkatan'],
+                    "tahun_masuk" => $item['tahun_masuk'],
+                    "tahun_lulus" => $item['tahun_lulus']
+                ];
+            };
             return $data;
         } else {
             $sqlid = "SELECT p.id_alumni as id FROM pendidikan p JOIN pendidikan_tinggi t ON t.id_pendidikan = p.id_pendidikan  WHERE nim =?";
-            $id_a =$this->db->query($sqlid, [$nim])->getResult();
-            if($id_a){
-                $id=$id_a[0]->id;    
+            $id_a = $this->db->query($sqlid, [$nim])->getResult();
+            if ($id_a) {
+                $id = $id_a[0]->id;
             } else return NULL;
-            
+
             $sql = "SELECT nama, jenis_kelamin, status_bekerja, jabatan_terakhir, aktif_pns FROM alumni WHERE id_alumni =?";
             $data = $this->db->query($sql, [$id])->getResult();
             $sql2 = "SELECT p.instansi AS instansi, p.jenjang AS jenjang, t.program_studi AS prodi,t.nim AS nim, p.angkatan AS angkatan, p.tahun_masuk AS tahun_masuk, p.tahun_lulus AS tahun_lulus FROM pendidikan p JOIN pendidikan_tinggi t ON p.id_pendidikan = t.id_pendidikan AND id_alumni=?";

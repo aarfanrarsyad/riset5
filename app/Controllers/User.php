@@ -945,9 +945,148 @@ class User extends BaseController
 
 	public function galeriFoto()
 	{
-		$data['judulHalaman'] = 'Galeri Kenangan Alumni';
-		$data['active'] = 'galeri';
+		$model = new \App\Models\AlumniModel;
+		$pendidikan = new \App\Models\PendidikanModel();
+		$fotoModel = new \App\Models\FotoModel;
+
+		$alumni = $model->getForTags()->getResult();
+		foreach ($alumni as $dt) {
+			$alumni_angktn = array();
+			$angkatan = $pendidikan->getAngkatan($dt->id_alumni);
+			if ($angkatan != null) {
+				foreach ($angkatan as $aktn) {
+					array_push($alumni_angktn, $aktn->angkatan);
+				}
+				$dt->angkatan = $alumni_angktn[0];
+			} else {
+				$dt->angkatan = 0;
+			}
+		}
+
+		$galeri = $fotoModel->getApprovePhotos();
+		$i = 0;
+		foreach ($galeri as $foto) {
+			$pub = $model->getAlumniById($foto['id_alumni']);
+			$galeri[$i]['publish'] = $pub['nama'];
+			$i++;
+		}
+
+		$data = [
+			'alumni' 		=> $alumni,
+			'galeri'		=> $galeri,
+			'judulHalaman'	=> 'Galeri Kenangan Alumni',
+			'active' 		=> 'galeri'
+		];
+		// dd($data);
 		return view('websia/kontenWebsia/galeri/galeriAlumni', $data);
+	}
+
+	public function uploadGaleri()
+	{
+		$validated = $this->validate([
+			'file_upload'   => [
+				'rules' => 'uploaded[file_upload]',
+			],
+			'albumFoto'			=> [
+				'rules' => 'required',
+				'errors' => [
+					'required' => 'album harus dipilih'
+				]
+			],
+			'deskripsi'			=> [
+				'rules' => 'required|max_length[2200]',
+				'errors' => [
+					'required' => 'deskripsi harus diisi',
+					'max_length' => 'maksimal 2200 karakter'
+				]
+			],
+		]);
+
+		if ($validated == FALSE) {
+			$flash = '<strong>Upload gagal!</strong> format upload tidak sesuai ketentuan.';
+			$alert = "<div id=\"alert\">
+				<div class=\"fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40\">
+					<div class=\"duration-700 transition-all p-3 rounded-lg flex items-center\" style=\"background-color: #FF7474;\">
+						<img src=\"/img/components/icon/warning.png\" class=\"h-5 mr-2\" style=\"color: #C51800;\">
+						<p class=\"sm:text-base text-sm font-heading font-bold\">" . $flash . "</p>
+					</div>
+				</div>
+			</div>
+			<script>
+				setTimeout(function() {
+					$('#alert').fadeOut();
+				}, 1500);
+			</script>";
+			session()->setFlashdata('flash', $alert);
+			return redirect()->to(base_url('User/galeriFoto'))->withInput();
+		} else {
+			date_default_timezone_set("Asia/Bangkok");
+			$model = new \App\Models\FotoModel;
+
+			$foto = $this->request->getFile('file_upload');
+			$caption = $this->request->getPost('deskripsi');
+			$album = $this->request->getPost('albumFoto');
+			$tags = $this->request->getPost('tags');
+			$now = date("Y-m-d H:i:s");
+
+			$year = date("Y");
+			$path = ROOTPATH . '/public/img/galeri/' . $year;
+
+			//cek apakah sudah terdapat foldernya
+			if (!is_dir($path))
+				mkdir($path, 0755, true);
+
+			//cek apakah sudah terdapat nama file yang sama, jika sudah maka akan direname
+			$file = $path . "/" . $foto->getName();
+			$ext = "." . $foto->guessExtension();
+			$file = str_replace($ext, "", $file);
+			if (is_file($file . $ext)) {
+				$new_name = $file;
+				while (is_file($new_name . $ext)) {
+					$time = date("Ymdhis");
+					$new_name = $new_name . "-" . $time;
+				}
+				rename($file . $ext, $new_name . $ext);
+			}
+
+			$foto->move($path);
+
+			if (!isset($new_name)) {
+				$file = str_replace(ROOTPATH . '/public/img/galeri/', "", $file);
+				$data = [
+					'nama_file'		=> $file . $ext,
+					'caption'		=> $caption,
+					'created_at'	=> $now,
+					'album' 		=> $album,
+					'approval' 		=> 1,
+					'id_alumni' 	=> session('id_alumni'),
+				];
+				$model->db->table('foto')->insert($data);
+			} else {
+				$new_name = str_replace(ROOTPATH . '/public/img/galeri/', "", $new_name);
+				$data = [
+					'nama_file'		=> $new_name . $ext,
+					'album' 		=> $album,
+					'caption'		=> $caption,
+					'created_at'	=> $now,
+					'album' 		=> $album,
+					'approval' 		=> 1,
+					'id_alumni' 	=> session('id_alumni'),
+				];
+				$model->db->table('foto')->insert($data);
+			}
+
+			$foto = $model->getByName($data['nama_file']);
+
+			$data = [
+				'id_foto'	=> $foto[0]->id_foto,
+				'tag'		=> $tags
+			];
+			$model->db->table('tag_foto')->insert($data);
+			$flash = "<script> suksesUnggahFoto(); </script>";
+			session()->setFlashdata('flash', $flash);
+			return redirect()->to(base_url('user/galeriFoto'));
+		}
 	}
 
 	function listAlbumFoto()
@@ -966,9 +1105,152 @@ class User extends BaseController
 
 	public function galeriVideo()
 	{
-		$data['judulHalaman'] = 'Galeri Video Kegiatan Alumni';
-		$data['active'] = 'galeri';
+		$model = new \App\Models\VideoModel;
+		$data = [
+			'video'			=> $model->getApproveVideo()->getResult("array"),
+			'judulHalaman'	=> 'Galeri Video Kegiatan Alumni',
+			'active' 		=> 'galeri'
+		];
+		// dd($data);
 		return view('websia/kontenWebsia/galeri/galeriVidAlumni', $data);
+	}
+
+	public function uploadVideo()
+	{
+		$validated = $this->validate([
+			'linkVideo'   => [
+				'rules' => 'required',
+				'errors' => [
+					'required' => 'link video harus diisi'
+				]
+			],
+			'albumVideo'			=> [
+				'rules' => 'required',
+				'errors' => [
+					'required' => 'album harus dipilih'
+				]
+			],
+		]);
+
+		if ($validated == FALSE) {
+			$flash = '<strong>Upload gagal!</strong> format upload tidak sesuai ketentuan.';
+			$alert = "<div id=\"alert\">
+				<div class=\"fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40\">
+					<div class=\"duration-700 transition-all p-3 rounded-lg flex items-center\" style=\"background-color: #FF7474;\">
+						<img src=\"/img/components/icon/warning.png\" class=\"h-5 mr-2\" style=\"color: #C51800;\">
+						<p class=\"sm:text-base text-sm font-heading font-bold\">" . $flash . "</p>
+					</div>
+				</div>
+			</div>
+			<script>
+				setTimeout(function() {
+					$('#alert').fadeOut();
+				}, 1500);
+			</script>";
+			session()->setFlashdata('flash', $alert);
+			return redirect()->to(base_url('User/galeriVideo'))->withInput();
+		} else {
+			$video = $this->request->getPost('linkVideo');
+			$album = $this->request->getPost('albumVideo');
+
+			if (strpos($video, 'youtu.be/') || strpos($video, 'youtube.com/')) {
+				if (strpos($video, '?v=')) {
+					$v_link = explode('v=', $video);
+					if (strpos($v_link[1], '&')) {
+						$v_link = explode('&', $v_link[1]);
+						$link = $v_link[0];
+					} else {
+						$link = $v_link[1];
+					}
+				} else {
+					if (strpos($video, '/channel/')) {
+						echo $video . "<br>";
+						echo "bukan yutub";
+						die();
+					}
+					$v_link = explode('/', $video);
+					if (strpos($v_link[3], '?')) {
+						$v_link = explode('?', $v_link[3]);
+						$link = $v_link[0];
+					} else {
+						$link = $v_link[3];
+					}
+				}
+				date_default_timezone_set("Asia/Bangkok");
+				$now = date("Y-m-d");
+
+				$model = new \App\Models\AlumniModel();
+
+				$data = [
+					'link'			=> $link,
+					'album'			=> $album,
+					'created_at'	=> $now,
+					'approval' 		=> 0,
+					'id_alumni' 	=> session('id_alumni'),
+				];
+				$model->db->table('video')->insert($data);
+				$flash = "<script> suksesUnggahVideo(); </script>";
+				session()->setFlashdata('flash', $flash);
+
+				return redirect()->to(base_url('user/galeriVideo'));
+			} else {
+				// buat upload yang bukan link youtube
+				$flash = 'Link yang anda upload bukan link youtube.';
+				$alert = "<div id=\"alert\">
+					<div class=\"fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40\">
+						<div class=\"duration-700 transition-all p-3 rounded-lg flex items-center\" style=\"background-color: #FF7474;\">
+							<img src=\"/img/components/icon/warning.png\" class=\"h-5 mr-2\" style=\"color: #C51800;\">
+							<p class=\"sm:text-base text-sm font-heading font-bold\">" . $flash . "</p>
+						</div>
+					</div>
+				</div>
+				<script>
+					setTimeout(function() {
+						$('#alert').fadeOut();
+					}, 1500);
+				</script>";
+				session()->setFlashdata('flash', $alert);
+				return redirect()->to(base_url('user/galeriVideo'));
+			}
+		}
+	}
+
+	public function reportGaleri()
+	{
+		$model = new \App\Models\ReportModel;
+		$alasan = $this->request->getPost('inputLaporan');
+		$id_foto = $this->request->getPost('foto');
+
+		if ($model->getReport(session('id_alumni'), $id_foto) == NULL) {
+			$data = [
+				'alasan'		=> $alasan,
+				'id_alumni'		=> session('id_alumni'),
+				'id_foto'		=> $id_foto,
+			];
+
+			$model->db->table('report')->insert($data);
+
+			$flash = "<script> suksesLaporFoto(); </script>";
+			session()->setFlashdata('flash', $flash);
+			return redirect()->to(base_url('user/galeriFoto'));
+		} else {
+			$flash = 'Anda sudah melakukan report terhadap foto tersebut.';
+			$alert = "<div id=\"alert\">
+				<div class=\"fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40\">
+					<div class=\"duration-700 transition-all p-3 rounded-lg flex items-center\" style=\"background-color: #FF7474;\">
+						<img src=\"/img/components/icon/warning.png\" class=\"h-5 mr-2\" style=\"color: #C51800;\">
+						<p class=\"sm:text-base text-sm font-heading font-bold\">" . $flash . "</p>
+					</div>
+				</div>
+			</div>
+			<script>
+				setTimeout(function() {
+					$('#alert').fadeOut();
+				}, 1500);
+			</script>";
+			session()->setFlashdata('flash', $alert);
+			return redirect()->to(base_url('user/galeriFoto'));
+		}
 	}
 
 	function listAlbumVideo()

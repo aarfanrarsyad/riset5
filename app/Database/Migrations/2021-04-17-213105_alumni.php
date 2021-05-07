@@ -78,7 +78,7 @@ class Alumni extends Migration
 				'constraint' => '300',
 				'null' => true,
 			],
-			'email' =>[
+			'email' => [
 				'type' => 'VARCHAR',
 				'constraint' => '50',
 			],
@@ -194,7 +194,7 @@ class Alumni extends Migration
 			'id_alumni' => [
 				'type' => 'INT',
 				'constraint' => 6,
-				
+
 				'constraint' => '7',
 			],
 			'id_tempat_kerja' => [
@@ -232,7 +232,7 @@ class Alumni extends Migration
 			'id_alumni' => [
 				'type' => 'INT',
 				'constraint' => 6,
-				
+
 				'constraint' => '12',
 			],
 		]);
@@ -276,7 +276,7 @@ class Alumni extends Migration
 			'id_alumni' => [
 				'type' => 'INT',
 				'constraint' => 6,
-				
+
 				'constraint' => '7',
 			],
 		]);
@@ -330,7 +330,6 @@ class Alumni extends Migration
 		// 	'id_alumni' => [
 		// 		'type' => 'INT',
 		// 		'constraint' => 6,
-				
 		// 		'constraint' => '7',
 		// 	],
 		// ]);
@@ -354,7 +353,7 @@ class Alumni extends Migration
 			],
 			'nama_file' => [
 				'type' => 'VARCHAR',
-				'constraint' => '50',
+				'constraint' => '255',
 			],
 			'caption' => [
 				'type' => 'VARCHAR',
@@ -375,7 +374,7 @@ class Alumni extends Migration
 			'id_alumni' => [
 				'type' => 'INT',
 				'constraint' => 6,
-				
+
 				'constraint' => '7',
 			],
 		]);
@@ -426,7 +425,7 @@ class Alumni extends Migration
 			'id_alumni' => [
 				'type' => 'INT',
 				'constraint' => 6,
-				
+
 				'constraint' => '7',
 			],
 			'id_foto' => [
@@ -464,14 +463,14 @@ class Alumni extends Migration
 			'created_at' => [
 				'type'           => 'DATE',
 			],
-			'approval'=>[
+			'approval' => [
 				'type'           => 'Boolean',
 				'default'	=> 0,
 			],
 			'id_alumni' => [
 				'type' => 'INT',
 				'constraint' => 6,
-				
+
 				'constraint' => '7',
 			],
 		]);
