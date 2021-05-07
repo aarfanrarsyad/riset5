@@ -97,9 +97,9 @@
                 <label for="albumVideo" class="text-primary font-medium mt-4">Album Video :</label>
                 <select name="albumVideo" id="albumVideo" class="inputForm" value="">
                     <option class="text-gray-500" value="" disabled selected>Pilih Album Video</option>
-                    <option value="alumni">Album Alumni</option>
-                    <option value="wisuda">Album Wisuda</option>
-                    <option value="kenangan">Album Kenangan</option>
+                    <?php foreach ($album as $alb) : ?>
+                        <option value="<?= $alb['album'] ?>">Album <?= $alb['album'] ?></option>
+                    <?php endforeach; ?>
                 </select>
                 <div class="text-red-500">
                     <?= service('validation')->getError('albumVideo'); ?>
@@ -108,9 +108,7 @@
                     <input type="button" value="BATAL" class="closeFormUnggahVideo bg-secondary text-white rounded-full w-24 py-1 text-center cursor-pointer hover:bg-secondaryhover transition-colors duration-300 text-sm mr-4 outline-none" id='backUnggahVideo'>
                     <input type="submit" value="UNGGAH" class="submitUnggahVideo bg-secondary text-white rounded-full w-24 py-1 text-center cursor-pointer hover:bg-secondaryhover transition-colors duration-300 text-sm outline-none">
                 </div>
-
             </form>
-
         </div>
     </div>
     <script>

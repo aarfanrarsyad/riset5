@@ -949,6 +949,15 @@ class User extends BaseController
 		$pendidikan = new \App\Models\PendidikanModel();
 		$fotoModel = new \App\Models\FotoModel;
 
+		$album = $fotoModel->getAlbum();
+		if (count($album) > 3) {
+			$out_album = $album;
+		} else {
+			$out_album[0] = ['album' => 'Alumni'];
+			$out_album[1] = ['album' => 'Wisuda'];
+			$out_album[2] = ['album' => 'Kenangan'];
+		}
+
 		$alumni = $model->getForTags()->getResult();
 		foreach ($alumni as $dt) {
 			$alumni_angktn = array();
@@ -974,6 +983,7 @@ class User extends BaseController
 		$data = [
 			'alumni' 		=> $alumni,
 			'galeri'		=> $galeri,
+			'album'			=> $out_album,
 			'judulHalaman'	=> 'Galeri Kenangan Alumni',
 			'active' 		=> 'galeri'
 		];
@@ -1092,6 +1102,10 @@ class User extends BaseController
 
 	function listAlbumFoto()
 	{
+		$model = new \App\Models\FotoModel;
+
+		dd($model->getAlbum());
+
 		$data['judulHalaman'] = 'Album Galeri Kenangan Alumni';
 		$data['active'] = 'galeri';
 		return view('websia/kontenWebsia/galeri/listAlbumFoto', $data);
@@ -1107,12 +1121,22 @@ class User extends BaseController
 	public function galeriVideo()
 	{
 		$model = new \App\Models\VideoModel;
+
+		$album = $model->getAlbum();
+		if (count($album) > 3) {
+			$out_album = $album;
+		} else {
+			$out_album[0] = ['album' => 'Alumni'];
+			$out_album[1] = ['album' => 'Wisuda'];
+			$out_album[2] = ['album' => 'Kenangan'];
+		}
+
 		$data = [
 			'video'			=> $model->getApproveVideo()->getResult("array"),
+			'album'			=> $out_album,
 			'judulHalaman'	=> 'Galeri Video Kegiatan Alumni',
 			'active' 		=> 'galeri'
 		];
-		// dd($data);
 		return view('websia/kontenWebsia/galeri/galeriVidAlumni', $data);
 	}
 
@@ -1228,8 +1252,15 @@ class User extends BaseController
 				'id_alumni'		=> session('id_alumni'),
 				'id_foto'		=> $id_foto,
 			];
-
 			$model->db->table('report')->insert($data);
+
+			$report = $model->getById($id_foto);
+			if (count($report) > 10) {
+				$model->db->table('foto')
+					->set('approval', 0)
+					->where('id_foto', $id_foto)
+					->update();
+			}
 
 			$flash = "<script> suksesLaporFoto(); </script>";
 			session()->setFlashdata('flash', $flash);

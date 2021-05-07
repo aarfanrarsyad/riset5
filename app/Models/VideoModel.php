@@ -19,4 +19,9 @@ class VideoModel extends Model
     {
         return $this->builder()->where('link', $link)->get()->getFirstRow('array');
     }
+
+    public function getAlbum()
+    {
+        return $this->builder()->select('album')->distinct('album')->get()->getResultArray();
+    }
 }

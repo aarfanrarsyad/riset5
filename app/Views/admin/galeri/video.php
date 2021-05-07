@@ -131,14 +131,14 @@
           </div>
           <div class="form-group">
             <label for="albumVideo"><span class="text-sm text-secondary">Album Video :</span></label>
-            <input list="album" class="form-control text-sm border-top-0 border-right-0 border-left-0" name="albumVideo" id="albumVideo">
+            <input list="album" class="form-control text-sm border-top-0 border-right-0 border-left-0" name="albumVideo" id="albumVideo" autocomplete="off">
             <div class="text-red-500">
               <?= service('validation')->getError('albumVideo'); ?>
             </div>
             <datalist id="album">
-              <option value="alumni">Album Alumni</option>
-              <option value="wisuda">Album Wisuda</option>
-              <option value="kenangan">Album Kenangan</option>
+              <?php foreach ($album as $alb) : ?>
+                <option value="<?= $alb['album'] ?>">Album <?= $alb['album'] ?></option>
+              <?php endforeach; ?>
             </datalist>
           </div>
           <div class="d-flex justify-content-end">

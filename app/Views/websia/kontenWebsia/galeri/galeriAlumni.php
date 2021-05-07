@@ -182,9 +182,9 @@ if (session()->getFlashdata('failed')) { ?>
                 <label for="albumFoto" class="text-primary font-medium mt-2">Album Foto:</label>
                 <select name="albumFoto" id="albumFoto" class="inputForm font-heading text-xs">
                     <option class="text-gray-500" value="" disabled selected>Pilih Album</option>
-                    <option value="alumni">Album Alumni</option>
-                    <option value="wisuda">Album Wisuda</option>
-                    <option value="kenangan">Album Kenangan</option>
+                    <?php foreach ($album as $alb) : ?>
+                        <option value="<?= $alb['album'] ?>">Album <?= $alb['album'] ?></option>
+                    <?php endforeach; ?>
                 </select>
                 <div class="text-red-500">
                     <?= service('validation')->getError('albumFoto'); ?>

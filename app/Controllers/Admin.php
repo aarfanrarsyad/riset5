@@ -1399,6 +1399,15 @@ class Admin extends BaseController
 		$pendidikan = new \App\Models\PendidikanModel();
 		$model = new \App\Models\FotoModel;
 
+		$album = $model->getAlbum();
+		if (count($album) > 3) {
+			$out_album = $album;
+		} else {
+			$out_album[0] = ['album' => 'Alumni'];
+			$out_album[1] = ['album' => 'Wisuda'];
+			$out_album[2] = ['album' => 'Kenangan'];
+		}
+
 		$alumni = $alumni_model->getForTags()->getResult();
 		foreach ($alumni as $dt) {
 			$alumni_angktn = array();
@@ -1428,6 +1437,7 @@ class Admin extends BaseController
 		$data =  [
 			'foto' 		=> $foto,
 			'alumni' 	=> $alumni,
+			'album'		=> $out_album,
 			'isGalery'	=> TRUE
 		];
 
@@ -1442,6 +1452,15 @@ class Admin extends BaseController
 		$model = new VideoModel();
 		$video = $model->findAll();
 
+		$album = $model->getAlbum();
+		if (count($album) > 3) {
+			$out_album = $album;
+		} else {
+			$out_album[0] = ['album' => 'Alumni'];
+			$out_album[1] = ['album' => 'Wisuda'];
+			$out_album[2] = ['album' => 'Kenangan'];
+		}
+
 		$i = 0;
 		foreach ($video as $dt) {
 			$uploader = $alumni->getAlumniById($dt['id_alumni']);
@@ -1451,16 +1470,124 @@ class Admin extends BaseController
 
 		$data =  [
 			'video' => $video,
+			'album'	=> $out_album,
 			'isGalery'	=> TRUE
 		];
 
 		return view('admin' . DIRECTORY_SEPARATOR . 'galeri' . DIRECTORY_SEPARATOR . 'video', $data);
 	}
 
+	public function foto_upload()
+	{
+		$validated = $this->validate([
+			'file_upload'   => [
+				'rules' => 'uploaded[file_upload]',
+			],
+			'albumFoto'			=> [
+				'rules' => 'required',
+				'errors' => [
+					'required' => 'album harus dipilih'
+				]
+			],
+			'deskripsi'			=> [
+				'rules' => 'required|max_length[2200]',
+				'errors' => [
+					'required' => 'deskripsi harus diisi',
+					'max_length' => 'maksimal 2200 karakter'
+				]
+			],
+		]);
+
+		if ($validated == FALSE) {
+			$flash = '<strong>Upload gagal!</strong> format upload tidak sesuai ketentuan.';
+			$alert = "<div id=\"alert\">
+				<div class=\"fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40\">
+					<div class=\"duration-700 transition-all p-3 rounded-lg flex items-center\" style=\"background-color: #FF7474;\">
+						<img src=\"/img/components/icon/warning.png\" class=\"h-5 mr-2\" style=\"color: #C51800;\">
+						<p class=\"sm:text-base text-sm font-heading font-bold\">" . $flash . "</p>
+					</div>
+				</div>
+			</div>
+			<script>
+				setTimeout(function() {
+					$('#alert').fadeOut();
+				}, 1500);
+			</script>";
+			session()->setFlashdata('flash', $alert);
+			return redirect()->to(base_url('admin/galeri-foto'))->withInput();
+		} else {
+			date_default_timezone_set("Asia/Bangkok");
+			$model = new \App\Models\FotoModel;
+
+			$foto = $this->request->getFile('file_upload');
+			$caption = $this->request->getPost('deskripsi');
+			$album = $this->request->getPost('albumFoto');
+			$tags = $this->request->getPost('tags');
+			$now = date("Y-m-d H:i:s");
+
+			$caption = str_replace(array("\r", "\n"), ' ', $caption);
+			$year = date("Y");
+			$path = ROOTPATH . '/public/img/galeri/' . $year;
+
+			//cek apakah sudah terdapat foldernya
+			if (!is_dir($path))
+				mkdir($path, 0755, true);
+
+			//cek apakah sudah terdapat nama file yang sama, jika sudah maka akan direname
+			$file = $path . "/" . $foto->getName();
+			$ext = "." . $foto->guessExtension();
+			$file = str_replace($ext, "", $file);
+			if (is_file($file . $ext)) {
+				$new_name = $file;
+				while (is_file($new_name . $ext)) {
+					$time = date("Ymdhis");
+					$new_name = $new_name . "-" . $time;
+				}
+				rename($file . $ext, $new_name . $ext);
+			}
+
+			$foto->move($path);
+
+			if (!isset($new_name)) {
+				$file = str_replace(ROOTPATH . '/public/img/galeri/', "", $file);
+				$data = [
+					'nama_file'		=> $file . $ext,
+					'caption'		=> $caption,
+					'created_at'	=> $now,
+					'album' 		=> $album,
+					'approval' 		=> 1,
+					'id_alumni' 	=> session('id_alumni'),
+				];
+				$model->db->table('foto')->insert($data);
+			} else {
+				$new_name = str_replace(ROOTPATH . '/public/img/galeri/', "", $new_name);
+				$data = [
+					'nama_file'		=> $new_name . $ext,
+					'album' 		=> $album,
+					'caption'		=> $caption,
+					'created_at'	=> $now,
+					'album' 		=> $album,
+					'approval' 		=> 1,
+					'id_alumni' 	=> session('id_alumni'),
+				];
+				$model->db->table('foto')->insert($data);
+			}
+
+			$foto = $model->getByName($data['nama_file']);
+
+			$data = [
+				'id_foto'	=> $foto[0]->id_foto,
+				'tag'		=> $tags
+			];
+			$model->db->table('tag_foto')->insert($data);
+			$flash = "<script> suksesUnggahFoto(); </script>";
+			session()->setFlashdata('flash', $flash);
+			return redirect()->to(base_url('admin/galeri-foto'));
+		}
+	}
 
 	public function change_approval_foto()
 	{
-		// dd($_POST);
 		$id = $this->request->getPost('id_foto');
 		$approval = $this->request->getPost('approval');
 
@@ -1504,12 +1631,18 @@ class Admin extends BaseController
 
 	public function foto_delete()
 	{
-		$id = $this->request->getPost('id_video');
+		$id = $this->request->getPost('id_foto');
 
 		$model = new FotoModel();
 
-		if ($model->db->table('video')
-			->where('id_video', $id)
+		$foto = $model->getById($id);
+		$path = ROOTPATH . '/public/img/galeri/' . $foto['nama_file'];
+		if (is_file($path)) {
+			unlink($path);
+		}
+
+		if ($model->db->table('foto')
+			->where('id_foto', $id)
 			->delete()
 		) {
 			$flash = '<div class="mx-5 alert alert-success alert-dismissible fade show" role="alert">
@@ -1519,7 +1652,7 @@ class Admin extends BaseController
 		            </button>
 		        </div>';
 			session()->setFlashdata('flash', $flash);
-			return redirect()->to(base_url('admin/galeri-video'));
+			return redirect()->to(base_url('admin/galeri-foto'));
 		} else {
 			$flash = '<div class="mx-5 alert alert-danger alert-dismissible fade show" role="alert">
 		            <strong>Penghapusan video gagal!</strong>
@@ -1528,7 +1661,7 @@ class Admin extends BaseController
 		            </button>
 		        </div>';
 			session()->setFlashdata('flash', $flash);
-			return redirect()->to(base_url('admin/galeri-video'));
+			return redirect()->to(base_url('admin/galeri-foto'));
 		}
 	}
 

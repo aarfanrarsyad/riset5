@@ -27,7 +27,7 @@
         $('.modal-title').html('<i class="far fa-images"></i>&ensp;Tambah Foto Baru');
         $('#pilihFile').val('');
         $('#textPhoto').html("Tidak ada foto yang dipilih");
-        $('#albumVideo').val('');
+        $('#albumFoto').val('');
         $('#deskripsi').val('');
         var $select = $('#tags').selectize();
         var control = $select[0].selectize;

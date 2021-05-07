@@ -142,7 +142,7 @@
     <div class="modal-content card card-white card-outline px-2 py-2">
       <h5 class="modal-title text-secondary mx-2"><i class="fas fa-qrcode"></i>&ensp;Tambah Foto Baru</h5>
       <div class="modal-body mt-2">
-        <form id="form-input-upload" action="<?= base_url('/user/uploadGaleri') ?>" method="post" enctype="multipart/form-data" class="flex flex-col text-sm">
+        <form id="form-input-upload" action="<?= base_url('/admin/foto_upload') ?>" method="post" enctype="multipart/form-data" class="flex flex-col text-sm">
           <div class="flex mt-5">
             <div class="flex justify-start items-center mb-2 w-full relative">
               <input type="file" hidden accept=".jpg, .jpeg, .img, .png" title="Pilih File" id='pilihFile' name="file_upload">
@@ -154,15 +154,15 @@
             <?= service('validation')->getError('file_upload'); ?>
           </div>
           <div class="form-group">
-            <label for="albumVideo"><span class="text-sm text-secondary">Album Video :</span></label>
-            <input list="album" class="form-control text-sm border-top-0 border-right-0 border-left-0" name="albumVideo" id="albumVideo">
+            <label for="albumFoto"><span class="text-sm text-secondary">Album Foto :</span></label>
+            <input list="album" class="form-control text-sm border-top-0 border-right-0 border-left-0" name="albumFoto" id="albumFoto" autocomplete="off">
             <div class="text-red-500">
-              <?= service('validation')->getError('albumVideo'); ?>
+              <?= service('validation')->getError('albumFoto'); ?>
             </div>
             <datalist id="album">
-              <option value="alumni">Album Alumni</option>
-              <option value="wisuda">Album Wisuda</option>
-              <option value="kenangan">Album Kenangan</option>
+              <?php foreach ($album as $alb) : ?>
+                <option value="<?= $alb['album'] ?>">Album <?= $alb['album'] ?></option>
+              <?php endforeach; ?>
             </datalist>
           </div>
           <div class="form-group">
@@ -306,6 +306,11 @@
           '</div>';
       }
     }
+  });
+
+  $('#tags').change(function() {
+    $tags = $('#tags').val();
+    $('#tags_form').val($tags);
   });
 </script>
 <?= view('admin/galeri/dist/index/footer') ?>
