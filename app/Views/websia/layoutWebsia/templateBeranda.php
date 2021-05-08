@@ -46,9 +46,7 @@
                     </div>
                 </div>
 
-                <button type="button" class="font-paragraph font-medium flex px-3 md:px-5 md:py-2 py-1 my-auto rounded-3xl shadow-sm md:text-base text-xs text-white bg-secondary hover:bg-secondaryhover transition-colors duration-200">
-                    <a href="/login">MASUK</a>
-                </button>
+                <div class="font-medium cursor-pointer flex px-3 md:px-5 md:py-2 py-1 my-auto rounded-3xl shadow-sm md:text-base text-xs text-white bg-secondary hover:bg-secondaryhover transition-colors duration-200" onclick="location.href='/login';">MASUK</div>
             </div>
         </header>
     </div>
