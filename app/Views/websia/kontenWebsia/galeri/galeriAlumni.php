@@ -46,7 +46,7 @@ if (session()->getFlashdata('failed')) { ?>
             <!-- Awal Tampilan Galeri (Buat ditambahkan coding sesuai gambar dari database) -->
             <!-- <php for ($x = 0; $x < 12; $x++) : ?> -->
             <?php $i = 0;
-            foreach ($galeri as $foto) : ?>
+            foreach ($galeri['foto'] as $foto) : ?>
                 <!-- 1 gambar -->
                 <a href="#<?= $foto['id_foto']; ?>" id="foto<?= $foto['id_foto']; ?>">
                     <div class="rounded-3xl m-2 relative hover:shadow-xl transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105 cursor-pointer">
@@ -75,7 +75,7 @@ if (session()->getFlashdata('failed')) { ?>
                             <!-- Awal Caption -->
                             <div class="text-white w-3/4 mx-2 text-base">
                                 <!-- <p class="mb-2">Oleh : Si Fulan (59)</p> -->
-                                <p class="mb-2">Oleh : <?= $foto['publish'] ?></p>
+                                <p class="mb-2">Oleh : <?= $foto['nama'] ?></p>
                                 <!-- <p class="">Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam impedit optio praesentium soluta quasi. Voluptatibus molestias sequi inventore odit voluptas pariatur a ut, totam obcaecati accusamus iure, labore dolorum dolor.</p> -->
                                 <p class=""><?= $foto['caption'] ?></p>
                             </div>
@@ -113,28 +113,7 @@ if (session()->getFlashdata('failed')) { ?>
         </div>
         <!-- Awal Navigasi -->
         <div class="flex justify-center md:justify-end items-center mx-8 p-2 text-secondary font-paragraph">
-            <a href="" class="p-1 rounded-full w-7 transform hover:scale-110">
-                <img src="/img/components/icon/left-double.png" alt="">
-            </a>
-            <a href="" class="p-1 rounded-full w-7 transform hover:scale-110">
-                <img src="/img/components/icon/left-on.png" alt="">
-            </a>
-            <a href="" class="p-1 hover:text-white">
-                1
-            </a>
-            <a href="" class="p-1 hover:text-white">
-                2
-            </a>
-            <a href="" class="p-1 hover:text-white">
-                ..
-            </a>
-            <a href="" class="p-1 hover:text-white">
-                45
-            </a>
-            <a href="" class="p-1 rounded-full w-7 transform hover:scale-110">
-                <img src="/img/components/icon/right-on.png" alt=""></a>
-            <a href="" class="p-1 rounded-full w-7 transform hover:scale-110">
-                <img src="/img/components/icon/right-double.png" alt=""></a>
+            <?= $galeri['pager'] ?>
         </div>
         <!-- Akhir Navigasi -->
     </div>

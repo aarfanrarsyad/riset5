@@ -973,12 +973,6 @@ class User extends BaseController
 		}
 
 		$galeri = $fotoModel->getApprovePhotos();
-		$i = 0;
-		foreach ($galeri as $foto) {
-			$pub = $model->getAlumniById($foto['id_alumni']);
-			$galeri[$i]['publish'] = $pub['nama'];
-			$i++;
-		}
 
 		$data = [
 			'alumni' 		=> $alumni,
@@ -987,7 +981,6 @@ class User extends BaseController
 			'judulHalaman'	=> 'Galeri Kenangan Alumni',
 			'active' 		=> 'galeri'
 		];
-		// dd($data);
 		return view('websia/kontenWebsia/galeri/galeriAlumni', $data);
 	}
 
@@ -1132,11 +1125,12 @@ class User extends BaseController
 		}
 
 		$data = [
-			'video'			=> $model->getApproveVideo()->getResult("array"),
+			'video'			=> $model->getApproveVideo(),
 			'album'			=> $out_album,
 			'judulHalaman'	=> 'Galeri Video Kegiatan Alumni',
 			'active' 		=> 'galeri'
 		];
+		// dd($data);
 		return view('websia/kontenWebsia/galeri/galeriVidAlumni', $data);
 	}
 
@@ -1204,19 +1198,37 @@ class User extends BaseController
 				date_default_timezone_set("Asia/Bangkok");
 				$now = date("Y-m-d");
 
-				$model = new \App\Models\AlumniModel();
+				$model = new \App\Models\VideoModel();
 
-				$data = [
-					'link'			=> $link,
-					'album'			=> $album,
-					'created_at'	=> $now,
-					'approval' 		=> 0,
-					'id_alumni' 	=> session('id_alumni'),
-				];
-				$model->db->table('video')->insert($data);
-				$flash = "<script> suksesUnggahVideo(); </script>";
-				session()->setFlashdata('flash', $flash);
+				if ($model->getVideo($link) == null) {
+					$data = [
+						'link'			=> $link,
+						'album'			=> $album,
+						'created_at'	=> $now,
+						'approval' 		=> 0,
+						'id_alumni' 	=> session('id_alumni'),
+					];
+					$model->db->table('video')->insert($data);
 
+					$flash = "<script> suksesUnggahVideo(); </script>";
+					session()->setFlashdata('flash', $flash);
+				} else {
+					$flash = 'Link yang anda upload sudah terdaftar.';
+					$alert = "<div id=\"alert\">
+						<div class=\"fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40\">
+							<div class=\"duration-700 transition-all p-3 rounded-lg flex items-center\" style=\"background-color: #FF7474;\">
+								<img src=\"/img/components/icon/warning.png\" class=\"h-5 mr-2\" style=\"color: #C51800;\">
+								<p class=\"sm:text-base text-sm font-heading font-bold\">" . $flash . "</p>
+							</div>
+						</div>
+					</div>
+					<script>
+						setTimeout(function() {
+							$('#alert').fadeOut();
+						}, 1500);
+					</script>";
+					session()->setFlashdata('flash', $alert);
+				}
 				return redirect()->to(base_url('user/galeriVideo'));
 			} else {
 				// buat upload yang bukan link youtube

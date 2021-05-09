@@ -26,7 +26,8 @@ class Pager extends BaseConfig
 		'pagination_alumni' => 'App\Views\admin\crud\pager\pagination',
 		'pagination_instansi' => 'App\Views\admin\crud\pager\pagination',
 		'pagination_pendidikan' => 'App\Views\admin\crud\pager\pagination',
-		'pagination_publikasi' => 'App\Views\admin\crud\pager\pagination'
+		'pagination_publikasi' => 'App\Views\admin\crud\pager\pagination',
+		'galeri_pager' => 'App\Views\websia\kontenWebsia\galeri\galeri_pager'
 	];
 
 	/*
