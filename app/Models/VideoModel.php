@@ -11,17 +11,15 @@ class VideoModel extends Model
 
     public function getApproveVideo()
     {
-        // return $this->builder()->where('approval', 1)->limit(9)->get();
         $this->builder()
             ->select('*')
             ->where('approval', 1)
             ->orderBy('created_at', 'DESC')
             ->orderBy('id_video', 'DESC');
         return [
-            'video'  => $this->paginate(6, 'foto'),
-            'pager'     => $this->pager->links('foto', 'galeri_pager')
+            'video'  => $this->paginate(6, 'video'),
+            'pager'     => $this->pager->links('video', 'galeri_pager')
         ];
-        // return $this->builder()->where('approval', 1)->get();
     }
 
     public function getVideo($link)
@@ -32,5 +30,26 @@ class VideoModel extends Model
     public function getAlbum()
     {
         return $this->builder()->select('album')->distinct('album')->get()->getResultArray();
+    }
+
+    public function getOrderAlbum()
+    {
+        $this->builder()->select('album, max(link) AS link, approval, max(id_video) AS id_video')->groupBy('album')->where('approval', 1);
+        return $this->builder()->get()->getResultArray();
+    }
+
+    public function getByAlbum($key)
+    {
+        $this->builder()
+            ->select('*')
+            ->where('approval', 1)
+            ->where('album', $key)
+            ->orderBy('created_at', 'DESC')
+            ->orderBy('id_video', 'DESC');
+
+        return [
+            'video'  => $this->paginate(6, 'video'),
+            'pager'     => $this->pager->links('video', 'galeri_pager')
+        ];
     }
 }

@@ -11,7 +11,6 @@ class FotoModel extends Model
 
     public function getApprovePhotos()
     {
-        // return $this->builder()->where('approval', 1)->limit(9)->get();
         $this->builder()
             ->select('foto.id_foto AS id_foto, foto.nama_file AS nama_file, foto.caption AS caption, foto.album AS album, foto.created_at AS created_at, foto.approval AS approval, alumni.nama AS nama')
             ->join('alumni', 'alumni.id_alumni = foto.id_alumni', 'left')
@@ -22,6 +21,11 @@ class FotoModel extends Model
             'foto'  => $this->paginate(16, 'foto'),
             'pager'     => $this->pager->links('foto', 'galeri_pager')
         ];
+    }
+
+    public function getCountPhotos()
+    {
+        return $this->builder()->where('approval', 1)->countAllResults();
     }
 
     public function getByName($name)
@@ -37,5 +41,31 @@ class FotoModel extends Model
     public function getAlbum()
     {
         return $this->builder()->select('album')->distinct('album')->get()->getResultArray();
+    }
+
+    public function getOrderAlbum()
+    {
+        $this->builder()->select('album, max(nama_file) AS nama_file, approval, max(id_foto) AS id_foto')->groupBy('album')->where('approval', 1);
+        return $this->builder()->get()->getResultArray();
+    }
+
+    public function getByAlbum($key)
+    {
+        $this->builder()
+            ->select('foto.id_foto AS id_foto, foto.nama_file AS nama_file, foto.caption AS caption, foto.album AS album, foto.created_at AS created_at, foto.approval AS approval, alumni.nama AS nama')
+            ->join('alumni', 'alumni.id_alumni = foto.id_alumni', 'left')
+            ->where('approval', 1)
+            ->where('album', $key)
+            ->orderBy('created_at', 'DESC')
+            ->orderBy('id_foto', 'DESC');
+        return [
+            'foto'  => $this->paginate(16, 'foto'),
+            'pager'     => $this->pager->links('foto', 'galeri_pager')
+        ];
+    }
+
+    public function getCountAlbum($key)
+    {
+        return $this->builder()->where('approval', 1)->where('album', $key)->countAllResults();
     }
 }

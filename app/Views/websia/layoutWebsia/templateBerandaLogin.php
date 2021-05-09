@@ -27,7 +27,7 @@
     <link rel="stylesheet" href="<?= base_url() ?>/vendor/AdminLTE/plugins/summernote/summernote-bs4.min.css">
     <script src="<?= base_url() ?>/vendor/AdminLTE/plugins/summernote/summernote-bs4.min.js"></script>
 
-    <?php if ($judulHalaman == "Galeri Kenangan Alumni") : ?>
+    <?php if ($judulHalaman == "Galeri Kenangan Alumni" || $judulHalaman == "Album Galeri Kenangan Alumni") : ?>
         <link rel="stylesheet" href="/css/tags.css">
         <script src="/js/selectize.js"></script>
     <?php endif; ?>

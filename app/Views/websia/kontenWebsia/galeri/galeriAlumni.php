@@ -2,24 +2,6 @@
 
 <?= $this->section('content'); ?>
 
-<?php
-if (session()->getFlashdata('failed')) { ?>
-    <!-- Kalo belom login atau redirect karna role -->
-    <div id="alert">
-        <div class="fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40">
-            <div class="duration-700 transition-all p-3 rounded-lg flex items-center" style="background-color: #FF7474;">
-                <img src="/img/components/icon/warning.png" class="h-5 mr-2" style="color: #C51800;">
-                <p class="sm:text-base text-sm font-heading font-bold"><?= session()->failed; ?></p>
-            </div>
-        </div>
-    </div>
-    <script>
-        setTimeout(function() {
-            $('#alert').fadeOut();
-        }, 1500);
-    </script>
-<?php } ?>
-
 <!-- Awal Galeri Alumni -->
 <div class="text-center">
     <div class="mt-8 text-2xl font-bold font-heading">
@@ -50,7 +32,7 @@ if (session()->getFlashdata('failed')) { ?>
                 <!-- 1 gambar -->
                 <a href="#<?= $foto['id_foto']; ?>" id="foto<?= $foto['id_foto']; ?>">
                     <div class="rounded-3xl m-2 relative hover:shadow-xl transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105 cursor-pointer">
-                        <img class="albumImg w-full rounded-3xl mx-auto" src="/img/galeri/<?= $foto['nama_file']; ?>" alt="" />
+                        <img class="albumImg w-full rounded-3xl mx-auto" src="<?= base_url() ?>/img/galeri/<?= $foto['nama_file']; ?>" alt="" />
                     </div>
                 </a>
                 <!-- <php endfor; ?> -->
@@ -58,17 +40,17 @@ if (session()->getFlashdata('failed')) { ?>
                 <div class="fixed overflow-auto top-0 bottom-0 right-0 left-0 z-40 bg-black bg-opacity-80 text-center font-paragraph hidden" id="<?= $foto['id_foto']; ?>">
                     <div class="m-auto duration-700 transition-all bg-gray bg-opacity-0 w-11/12 sm:w-9/12 md:w-8/12 lg:w-7/12">
                         <!-- Awal Tombol Laporkan foto -->
-                        <button onClick="laporkanFoto(<?= $foto['id_foto']; ?>)"><img src="/img/components/icon/danger-sign.png" alt="" class="absolute top-3 right-3"></button>
+                        <button onClick="laporkanFoto(<?= $foto['id_foto']; ?>)"><img src="<?= base_url() ?>/img/components/icon/danger-sign.png" alt="" class="absolute top-3 right-3"></button>
                         <!-- Akhir Tombol Laporkan foto -->
 
                         <div class="flex flex-col justify-center items-center">
                             <div class="flex flex-row justify-center items-center gap-x-4 mt-8 mb-6">
                                 <a href="#<?= $foto['id_foto'] - 1; ?>">
-                                    <img src="/img/components/icon/left-on.png" alt="" class="">
+                                    <img src="<?= base_url() ?>/img/components/icon/left-on.png" alt="" class="">
                                 </a>
                                 <img src="/img/galeri/<?= $foto['nama_file']; ?>" alt="" class="w-3/4">
                                 <a href="#<?= $foto['id_foto'] + 1; ?>">
-                                    <img src="/img/components/icon/right-on.png" alt="" class="">
+                                    <img src="<?= base_url() ?>/img/components/icon/right-on.png" alt="" class="">
                                 </a>
                             </div>
 
@@ -82,7 +64,15 @@ if (session()->getFlashdata('failed')) { ?>
                             <!-- Akhir Caption -->
 
                             <div class="text-white w-3/4 mx-2 mt-10 md:text-xl">
-                                <p class="mb-2"><?= ($i + 1) ?> dari 13</p>
+                                <p class="mb-2">
+                                    <?php
+                                    //rumus no = (jumlah_paginate * halaman) - ((jumlah_paginate - 1) - $i)
+                                    if (isset($_GET['page_foto']))
+                                        $n = (16 * $_GET['page_foto']) - (15 - $i);
+                                    else
+                                        $n = ($i + 1);
+                                    echo $n;
+                                    ?> dari <?= $count ?></p>
                             </div>
 
                         </div>
@@ -136,7 +126,7 @@ if (session()->getFlashdata('failed')) { ?>
     </div>
     <div class="md:col-span-2 lg:col-span-2">
         <div class="">
-            <img src="/img/components/galeri.png" alt="" class="w-full md:h-full md:w-auto">
+            <img src="<?= base_url() ?>/img/components/galeri.png" alt="" class="w-full md:h-full md:w-auto">
         </div>
     </div>
     <div class="fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40 font-paragraph hidden" id='formUnggahFoto'>
@@ -194,7 +184,6 @@ if (session()->getFlashdata('failed')) { ?>
             </form>
         </div>
     </div>
-
 </div>
 
 <script>

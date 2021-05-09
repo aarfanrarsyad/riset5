@@ -233,6 +233,8 @@ function tutupFormLaporFoto() {
 }
 
 function laporkanFoto(id){
+    var base_url = window.location.origin;
+
     $('body').prepend(`
     <div class="fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40 font-paragraph" id='formLaporFoto'>
         <div class="hidden opacity-0 duration-700 transition-all xl:w-1/2 lg:w-7/12 md:w-2/3 sm:w-3/4 w-11/12 bg-gray bg-opacity-0">
@@ -242,7 +244,7 @@ function laporkanFoto(id){
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
                 </svg>
             </div>
-            <form action="reportGaleri" method="post" class="flex flex-col bg-gray-100 sm:px-12 px-4 rounded-b-2xl text-sm">
+            <form action="`+base_url+ `/User/reportGaleri" method="post" class="flex flex-col bg-gray-100 sm:px-12 px-4 rounded-b-2xl text-sm">
                 <label for="inputLaporan" class="text-primary font-medium mt-8">Mengapa Anda melaporkan foto ini?</label>
                 <textarea name="inputLaporan" class="inputForm h-36" style="resize: none;" maxlength="300" required></textarea>
                 <input type="hidden" name="foto" value="` + id + `">

@@ -107,7 +107,6 @@
         })
     </script>
 </div>
-</div>
 <!-- Akhir fitur unggah Video  -->
 
 <!-- Catatan : Apabila sukses mengunggah video dapat maka dapat memanggil fungsi js => suksesUnggahVideo ()  -->

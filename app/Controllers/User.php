@@ -973,10 +973,12 @@ class User extends BaseController
 		}
 
 		$galeri = $fotoModel->getApprovePhotos();
+		$count = $fotoModel->getCountPhotos();
 
 		$data = [
 			'alumni' 		=> $alumni,
 			'galeri'		=> $galeri,
+			'count'			=> $count,
 			'album'			=> $out_album,
 			'judulHalaman'	=> 'Galeri Kenangan Alumni',
 			'active' 		=> 'galeri'
@@ -1021,7 +1023,7 @@ class User extends BaseController
 				}, 1500);
 			</script>";
 			session()->setFlashdata('flash', $alert);
-			return redirect()->to(base_url('User/galeriFoto'))->withInput();
+			return redirect()->back()->withInput();
 		} else {
 			date_default_timezone_set("Asia/Bangkok");
 			$model = new \App\Models\FotoModel;
@@ -1089,25 +1091,90 @@ class User extends BaseController
 			$model->db->table('tag_foto')->insert($data);
 			$flash = "<script> suksesUnggahFoto(); </script>";
 			session()->setFlashdata('flash', $flash);
-			return redirect()->to(base_url('user/galeriFoto'));
+			return redirect()->back();
 		}
 	}
 
 	function listAlbumFoto()
 	{
-		$model = new \App\Models\FotoModel;
+		$model = new \App\Models\AlumniModel;
+		$pendidikan = new \App\Models\PendidikanModel();
+		$fotoModel = new \App\Models\FotoModel;
 
-		dd($model->getAlbum());
+		$album = $fotoModel->getAlbum();
+		if (count($album) > 3) {
+			$out_album = $album;
+		} else {
+			$out_album[0] = ['album' => 'Alumni'];
+			$out_album[1] = ['album' => 'Wisuda'];
+			$out_album[2] = ['album' => 'Kenangan'];
+		}
+		$alumni = $model->getForTags()->getResult();
+		foreach ($alumni as $dt) {
+			$alumni_angktn = array();
+			$angkatan = $pendidikan->getAngkatan($dt->id_alumni);
+			if ($angkatan != null) {
+				foreach ($angkatan as $aktn) {
+					array_push($alumni_angktn, $aktn->angkatan);
+				}
+				$dt->angkatan = $alumni_angktn[0];
+			} else {
+				$dt->angkatan = 0;
+			}
+		}
 
-		$data['judulHalaman'] = 'Album Galeri Kenangan Alumni';
-		$data['active'] = 'galeri';
+		$data = [
+			'alumni' 		=> $alumni,
+			'album'			=> $out_album,
+			'list'			=> $fotoModel->getOrderAlbum(),
+			'judulHalaman'	=> 'Album Galeri Kenangan Alumni',
+			'active'		=> 'galeri'
+		];
+
 		return view('websia/kontenWebsia/galeri/listAlbumFoto', $data);
 	}
 
-	function albumFoto()
+	function albumFoto($key)
 	{
-		$data['judulHalaman'] = 'Album Galeri Kenangan Alumni';
-		$data['active'] = 'galeri';
+		$model = new \App\Models\AlumniModel;
+		$pendidikan = new \App\Models\PendidikanModel();
+		$fotoModel = new \App\Models\FotoModel;
+
+		$album = $fotoModel->getAlbum();
+		if (count($album) > 3) {
+			$out_album = $album;
+		} else {
+			$out_album[0] = ['album' => 'Alumni'];
+			$out_album[1] = ['album' => 'Wisuda'];
+			$out_album[2] = ['album' => 'Kenangan'];
+		}
+		$alumni = $model->getForTags()->getResult();
+		foreach ($alumni as $dt) {
+			$alumni_angktn = array();
+			$angkatan = $pendidikan->getAngkatan($dt->id_alumni);
+			if ($angkatan != null) {
+				foreach ($angkatan as $aktn) {
+					array_push($alumni_angktn, $aktn->angkatan);
+				}
+				$dt->angkatan = $alumni_angktn[0];
+			} else {
+				$dt->angkatan = 0;
+			}
+		}
+
+		$galeri = $fotoModel->getByAlbum($key);
+		$count = $fotoModel->getCountAlbum($key);
+
+		$data = [
+			'alumni' 		=> $alumni,
+			'count'			=> $count,
+			'album'			=> $out_album,
+			'current_album'	=> $key,
+			'galeri'		=> $galeri,
+			'judulHalaman'	=> 'Album Galeri Kenangan Alumni',
+			'active'		=> 'galeri'
+		];
+
 		return view('websia/kontenWebsia/galeri/albumFoto', $data);
 	}
 
@@ -1130,7 +1197,7 @@ class User extends BaseController
 			'judulHalaman'	=> 'Galeri Video Kegiatan Alumni',
 			'active' 		=> 'galeri'
 		];
-		// dd($data);
+
 		return view('websia/kontenWebsia/galeri/galeriVidAlumni', $data);
 	}
 
@@ -1276,7 +1343,7 @@ class User extends BaseController
 
 			$flash = "<script> suksesLaporFoto(); </script>";
 			session()->setFlashdata('flash', $flash);
-			return redirect()->to(base_url('user/galeriFoto'));
+			return redirect()->back();
 		} else {
 			$flash = 'Anda sudah melakukan report terhadap foto tersebut.';
 			$alert = "<div id=\"alert\">
@@ -1293,31 +1360,57 @@ class User extends BaseController
 				}, 1500);
 			</script>";
 			session()->setFlashdata('flash', $alert);
-			return redirect()->to(base_url('user/galeriFoto'));
+			return redirect()->back();
 		}
 	}
 
 	function listAlbumVideo()
 	{
-		$data['judulHalaman'] = 'Album Galeri Video Kenangan Alumni';
-		$data['active'] = 'galeri';
+		$model = new \App\Models\VideoModel;
+
+		$album = $model->getAlbum();
+		if (count($album) > 3) {
+			$out_album = $album;
+		} else {
+			$out_album[0] = ['album' => 'Alumni'];
+			$out_album[1] = ['album' => 'Wisuda'];
+			$out_album[2] = ['album' => 'Kenangan'];
+		}
+
+		$data = [
+			'list'			=> $model->getOrderAlbum(),
+			'album'			=> $out_album,
+			'judulHalaman'	=> 'Album Galeri Video Kenangan Alumni',
+			'active' 		=> 'galeri'
+		];
+
 		return view('websia/kontenWebsia/galeri/listAlbumVideo', $data);
 	}
 
-	function albumVideo()
+	function albumVideo($key)
 	{
+		$model = new \App\Models\VideoModel;
+
+		$album = $model->getAlbum();
+		if (count($album) > 3) {
+			$out_album = $album;
+		} else {
+			$out_album[0] = ['album' => 'Alumni'];
+			$out_album[1] = ['album' => 'Wisuda'];
+			$out_album[2] = ['album' => 'Kenangan'];
+		}
+
+		$data = [
+			'video'			=> $model->getByAlbum($key),
+			'current_album'	=> $key,
+			'album'			=> $out_album,
+			'judulHalaman'	=> 'Album Galeri Video Kenangan Alumni',
+			'active' 		=> 'galeri'
+		];
+
 		$data['judulHalaman'] = 'Album Video Galeri Kenangan Alumni';
 		$data['active'] = 'galeri';
 		return view('websia/kontenWebsia/galeri/albumVideo', $data);
-	}
-
-	public function galeriWisuda()
-	{
-		$data['judulHalaman'] = 'Galeri Video Wisuda';
-		$data['active'] = 'galeri';
-		$data['login'] = 'sudah';
-
-		return view('websia/kontenWebsia/galeri/galeriWisuda', $data);
 	}
 
 	public function berita()
