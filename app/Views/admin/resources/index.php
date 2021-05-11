@@ -28,8 +28,8 @@
     <div class="row">
       <div class="col-12">
         <div class="card card-light card-outline card-outline-tabs elevation-3">
-          <div class="bg-light px-3 py-3">
-            <h5><i class="fas fa-bars text-secondary"></i>&ensp;Management Resources</h5>
+          <div class="text-primaryHover text-lg px-3 py-3">
+            <h5><i class="fas fa-bars"></i>&ensp;Management Resources</h5>
           </div>
           <div class="card-header mt-2 p-0 border-bottom-0 ">
             <ul class="nav nav-tabs" id="custom-tabs-four-tab" role="tablist">
@@ -162,7 +162,7 @@
             <input type="text" class="form-control text-sm border-top-0 border-right-0 border-left-0" name="icon" id="icon" placeholder="Insert class from font awesome icon. Ex : 'fa-user'" style="border-radius:0" autocomplete="off" required>
           </div>
           <div class="d-flex justify-content-end">
-            <button type="submit" id="btn-submit" name="insert_menu" class="btn btn-sm btn-primary"><i class="fas fa-paper-plane"></i>&ensp;Send data</button>
+            <button type="submit" id="btn-submit" name="insert_menu" class="btn btn-sm  text-secondaryhover border-secondaryhover hover:text-white hover:bg-secondaryhover"><i class="fas fa-paper-plane"></i>&ensp;Send data</button>
           </div>
         </form>
       </div>

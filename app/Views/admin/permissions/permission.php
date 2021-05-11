@@ -37,8 +37,8 @@ $failed = session()->getFlashdata('failed');
         <div class="row">
             <div class="col-12">
                 <div class="card card-light card-outline card-outline-tabs elevation-3">
-                    <div class="bg-light px-3 py-3">
-                        <h5><a href="<?= base_url('/admin/permissions') ?>" title="Kembali ke halaman sebelumnya"><i class="fas fa-chevron-left text-secondary"></i></a>&emsp;<i class="fas fa-cogs text-secondary"></i>&ensp;<?= $group->name ?> Permission Table</h5>
+                    <div class="text-primaryHover text-lg px-3 py-3">
+                        <h5><a href="<?= base_url('/admin/permissions') ?>" title="Kembali ke halaman sebelumnya"><i class="fas fa-chevron-left"></i></a>&emsp;<i class="fas fa-cogs"></i>&ensp;<?= $group->name ?> Permission Table</h5>
                     </div>
                     <div class="card-header mt-2 p-0 border-bottom-0 ">
                         <ul class="nav nav-tabs" id="custom-tabs-four-tab" role="tablist">

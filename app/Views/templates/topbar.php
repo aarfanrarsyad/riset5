@@ -14,7 +14,7 @@
     </ul>
     <ul class="navbar-nav ml-auto">
       <a class="nav-link " data-widget="control-sidebar" data-slide="true" href="#" role="button">
-        <i class="fas fa-user-circle" style="color:#003C75 !important;"></i> <i class="fas fa-caret-down" style="color:#003C75 !important;"></i>
+        <i class="fas fa-user-circle text-lg" style="color:#003C75 !important;"></i> <i class="fas fa-caret-down" style="color:#003C75 !important;"></i>
       </a>
     </ul>
   </nav>

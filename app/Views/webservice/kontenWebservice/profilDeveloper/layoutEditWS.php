@@ -28,10 +28,10 @@
                 </div>
                 <ul>
                     <a href="/developer/edit/biodata">
-                        <li id="profilDev" class="button bg-primarySidebar font-heading lg:p-3 p-2 pl-3 lg:pl-7 my-2 mr-2 rounded-r-lg text-sm text-white <?= ($active == 'biodataDev') ? 'active' : ''; ?> hover:text-secondary hover:bg-primaryDark font-semibold">Biodata</li>
+                        <li id="profilDev" class="button bg-primarySidebar font-heading lg:p-3 p-2 pl-3 lg:pl-7 my-2 mr-2 rounded-r-lg text-sm text-white <?= ($active == 'biodataDev') ? 'activeMenu' : ''; ?> hover:text-secondary hover:bg-primaryDark font-semibold">Biodata</li>
                     </a>
                     <a href="/developer/edit/akun">
-                        <li id="akunDev" class="button bg-primarySidebar font-heading lg:p-3 p-2 pl-3 lg:pl-7 my-2 mr-2 rounded-r-lg text-sm text-white <?= ($active == 'akunDev') ? 'active' : ''; ?> hover:text-secondary hover:bg-primaryDark font-semibold">Akun</li>
+                        <li id="akunDev" class="button bg-primarySidebar font-heading lg:p-3 p-2 pl-3 lg:pl-7 my-2 mr-2 rounded-r-lg text-sm text-white <?= ($active == 'akunDev') ? 'activeMenu' : ''; ?> hover:text-secondary hover:bg-primaryDark font-semibold">Akun</li>
                     </a>
                 </ul>
 

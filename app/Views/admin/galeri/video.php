@@ -33,7 +33,7 @@
         <?= session()->flash; ?>
 
         <div class="card card-light card-outline card-outline-tabs elevation-3">
-          <div class="bg-light px-3 py-3">
+          <div class="text-primaryHover text-lg px-3 py-3">
             <h5><i class="fab fa-youtube"></i>&ensp;Management Galeri Video</h5>
           </div>
           <div class="card-header mt-2 p-0 border-bottom-0 ">

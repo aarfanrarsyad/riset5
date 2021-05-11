@@ -106,8 +106,7 @@
 
         <!-- Ini wilayah footer -->
         <footer class="main-footer text-sm text-primaryHover">
-            <strong>Copyright &copy; 2020-2022 <a href="https://pkl.stis.ac.id/60">PKL Politeknik STIS - Sistem Database Alumni</a></strong>
-            .All rights reserved.
+            <strong>Copyright &copy; 2020-2022 <a href="https://pkl.stis.ac.id/60">PKL Politeknik Statistika STIS - Sistem Database Alumni</a></strong>
             <div class="float-right d-none d-sm-inline-block mr-4">
                 <b>Version</b> 1.1.0-alpha
             </div>
@@ -117,7 +116,7 @@
         <aside class="control-sidebar control-sidebar-light bg-primarySidebar text-white" style="display: block;">
             <!-- Control sidebar content goes here -->
             <div class="p-3 control-sidebar-content">
-                <div class="profile text-center">
+                <div class="profile text-center my-3">
                     <img class="img-circle mx-auto" src=" <?= base_url('/img/components/logo/logo_pkl.png') ?>" style="width:100px; height:auto;" alt="logo PKL">
                     <div class="text-xs mt-3">
                         <h5 class="widget-user-username text-center text-secondaryhover text-lg mb-2"><?php if (userdata()) echo (userdata()['fullname']) ?></h5>
@@ -125,11 +124,11 @@
                     </div>
                 </div>
                 <br>
-                <hr class="mb-3">
-                <div class="mb-2 text-sm px-2"><span><a href="#" class="hover:text-secondaryhover"><i class="fas user-circle"></i>&ensp;Change profile</span></a></div>
+                <hr class="mb-3 border-primaryDark">
+                <div class="mb-2 text-sm px-2"><span><a href="#" class="hover:text-secondaryhover"><i class="fas fa-user-circle"></i>&ensp;Change profile</span></a></div>
                 <div class="mb-2 text-sm px-2"><span><a href="#" class="hover:text-secondaryhover"><i class="fas fa-unlock"></i>&ensp;Change password</span></a> </div>
                 <div class="mb-2 text-sm px-2"><a href="#" class="hover:text-secondaryhover"><span><i class="fas fa-user-shield"></i>&ensp;Activity of all groups</span></a> </div>
-                <hr class="mb-3">
+                <hr class="mt-3 mb-3 border-primaryDark">
                 <div class="mb-2 text-sm px-2 "><a href="<?= base_url("auth/logout") ?>" class="hover:text-secondaryhover"><span><i class="fas fa-sign-out-alt"></i>&ensp;Logout</span></a> </div>
             </div>
         </aside>

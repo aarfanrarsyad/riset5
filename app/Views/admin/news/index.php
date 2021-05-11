@@ -49,8 +49,8 @@
             icon: 'question',
             text: 'Are you sure to delete news ?',
             showCancelButton: true,
-            confirmButtonColor: '#4248ED',
-            cancelButtonColor: '#33A1C4',
+            confirmButtonColor: '#54AC00',
+            cancelButtonColor: '#D81B01',
             confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
             if (result.isConfirmed) {
@@ -224,8 +224,8 @@
         <div class="row">
             <div class="col-12">
                 <div class="card card-light card-outline card-outline-tabs elevation-3">
-                    <div class="bg-light px-3 py-3">
-                        <h5><i class="fas fa-book-reader text-secondary"></i>&ensp;Management Berita</h5>
+                    <div class="text-primaryHover text-lg px-3 py-3">
+                        <h5><i class="fas fa-book-reader"></i>&ensp;Management Berita</h5>
                     </div>
                     <div class="card-header mt-2 p-0 border-bottom-0 ">
                         <ul class="nav nav-tabs" id="custom-tabs-four-tab" role="tablist">
