@@ -1334,7 +1334,7 @@ class User extends BaseController
 			$model->db->table('report')->insert($data);
 
 			$report = $model->getById($id_foto);
-			if (count($report) > 10) {
+			if (count($report) != 0 && count($report) % 10 == 0) {
 				$model->db->table('foto')
 					->set('approval', 0)
 					->where('id_foto', $id_foto)
