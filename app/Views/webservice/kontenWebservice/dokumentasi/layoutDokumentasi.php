@@ -50,10 +50,13 @@
                     </div>
                     <ul class="text-white text-white transition-all duration-300 easy-out absolute overflow-hidden open-submenu w-full">
                         <li class="itemSideDok pl-12 py-0.5 rounded-r-lg md:text-lg hover:bg-primary">
-                            <a href="#dataUser" class="py-1">Data User</a>
+                            <a href="#dataUser" class="py-1">Detail User</a>
                         </li>
                         <li class="itemSideDok pl-12 py-0.5 rounded-r-lg md:text-lg hover:bg-primary">
-                            <a href="#dataAlumni" class="py-1">Data Alumni</a>
+                            <a href="#dataAlumni" class="py-1">Detail Alumni</a>
+                        </li>
+                        <li class="itemSideDok pl-12 py-0.5 rounded-r-lg md:text-lg hover:bg-primary">
+                            <a href="#dataListAlumni" class="py-1">List Detail Alumni</a>
                         </li>
                     </ul>
                 </li>
