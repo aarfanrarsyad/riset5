@@ -510,7 +510,7 @@
         <section id="dataListAlumni">
             <div class="shadow-2xl w-full mt-0 rounded-xl">
                 <div class="text-primary lg:mx-4 sm:mx-2.5 mx-1 px-4 py-4">
-                    <h1 class="font-bold text-black lg:text-2xl md:text-xl text-lg">List Detail Alumni</h1>
+                    <h1 class="font-bold text-black lg:text-2xl md:text-xl text-lg">Daftar Detail Alumni</h1>
                     <p class="text-black mt-2">Layanan ini digunakan untuk menampilkan semua daftar detail alumni</p>
                     <h1 class="font-bold text-black lg:text-lg md:text-base text-sm mt-4 mb-1">Alumni Profile List</h1>
                     <div class="bg-black p-3 rounded-xl w-full sm:text-sm text-xs overflow-auto">
