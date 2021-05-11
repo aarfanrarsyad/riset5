@@ -111,15 +111,13 @@ class Webservice extends BaseController
 		$data['judul'] = 'Profil Web Service | SIA';
 		return view('webservice/kontenWebservice/profilDeveloper/profilDeveloper.php', $data);
 	}
+	// public function editBiodata()
+	// {
 
-	public function editBiodata()
-	{
-
-		$data['judul'] = 'Edit Profil | SIA';
-		$data['active'] = 'biodataDev';
-		return view('webservice/kontenWebservice/profilDeveloper/editBiodataWS.php', $data);
-	}
-
+	// 	$data['judul'] = 'Edit Profil | SIA';
+	// 	$data['active'] = 'biodataDev';
+	// 	return view('webservice/kontenWebservice/profilDeveloper/editBiodataWS.php', $data);
+	// }
 	public function editAkun()
 	{
 
