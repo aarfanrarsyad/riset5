@@ -67,24 +67,26 @@
                 </div><!-- /.row -->
             </div><!-- /.container-fluid -->
         </div>
+
         <div class="container">
             <div class="row">
                 <div class="col">
                     <h1 class="mt-2">Daftar Alumni</h1>
                     <form action="" method="post">
                         <div class="input-group mb-3">
-                            <input type="text" class="form-control" placeholder="Masukkan keyword pencarian..." name="keyword">
+                            <input type="text" class="form-control" placeholder="sss" name="keyword">
                             <div class="input-group-append">
                                 <button class="btn btn-outline-secondary" type="submit" name="submit">Cari</button>
                             </div>
                         </div>
-                        <a href="<?= base_url('/admin/tambah-alumni') ?>" class="btn btn-primary mt-3">Tambah Alumni</a>
                     </form>
-                    <?php if (session()->getFlashdata('pesan')) : ?>
-                        <div class="alert alert-success" role="alert">
-                            <?= session()->getFlashdata('pesan'); ?>
-                        </div>
-                    <?php endif; ?>
+                </div><!-- /.row -->
+            </div><!-- /.container-fluid -->
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col">
                     <table class="table">
                         <thead>
                             <tr>
@@ -97,6 +99,7 @@
                             </tr>
                         </thead>
                         <tbody>
+                            <a href="<?= base_url('/admin/tambah-alumni') ?>" class="btn btn-primary mt-3">Tambah Alumni</a>
                             <?php $i = 1 + (10 * ($currentPage - 1)); ?>
                             <?php foreach ($alumni as $alum) : ?>
                                 <tr>

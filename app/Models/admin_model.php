@@ -1191,7 +1191,7 @@ class admin_model extends Model
 
     public function searchPendidikan($keyword)
     {
-        return $this->table('pendidikan')->like('instansi', $keyword)->orLike('jenjang', $keyword);
+        return $this->table('pendidikan')->like('instansi', $keyword)->orLike('jenjang', $keyword)->orLike('id_alumni', $keyword);
     }
 
     public function getPendidikanById($id)
@@ -1275,7 +1275,7 @@ class admin_model extends Model
 
     public function searchPrestasi($keyword)
     {
-        return $this->table('prestasi')->like('nama_prestasi', $keyword)->orLike('tahun_prestasi', $keyword);
+        return $this->table('prestasi')->like('nama_prestasi', $keyword)->orLike('id_alumni', $keyword);
     }
 
     public function getPrestasiById($id)

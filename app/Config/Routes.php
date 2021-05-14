@@ -207,7 +207,6 @@ $routes->group('admin', ['namespace' => 'App\Controllers'], function ($routes) {
 	$routes->get('alumni', 'Admin::CRUD_alumniindex', ['filter' => 'permission:2']);
 	$routes->get('alumni/(:any)', 'Admin::CRUD_detailAlumni/$1', ['filter' => 'permission:2']);
 	$routes->post('alumni/delete', 'Admin::CRUD_deleteAlumni', ['filter' => 'permission:4']);
-	$routes->match(['get', 'post'], 'tambah-alumni', 'Admin::CRUD_createAlumni', ['filter' => 'permission:1']);
 	// $routes->match(['get', 'post'], 'resources/update/(:num)', 'Admin::update_resource/$1', ['filter' => 'permission:3']);
 
 	$routes->get('instansi', 'Admin::CRUD_indexInstansi', ['filter' => 'permission:2']);
