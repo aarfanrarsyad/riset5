@@ -189,7 +189,7 @@ if ($status == 'bukan user') {
         <div class="holder mx-auto w-11/12 md:w-full lg:w-11/12 grid grid-cols-2 md:grid-cols-4 gap-x-4 md:gap-x-0 lg:gap-x-8" data-aos="zoom-in">
             <?php foreach ($rekomendasi as $row) :  ?>
                 <div class="card shadow border-gray-800 hover:bg-gray-200 hover:shadow-inner transition duration-700 bg-white relative" data-aos="zoom-in">
-                    <a href="/User/profilAlumni?id_alumni=<?= $row->id_alumni; ?>" target="_new">
+                    <a href="/User/profilAlumni/<?= $row->id_alumni ?>" target="_new">
                         <div class="">
                             <img class="w-full md:w-20 lg:w-24 mx-auto mt-4" src="/img/<?= $row->foto_profil ?>" alt="" /> <!-- Hilangin padding klo dah ada gambar, dan pake w-full aja -->
                         </div>

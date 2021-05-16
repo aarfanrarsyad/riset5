@@ -143,15 +143,10 @@ class User extends BaseController
 		// array :
 		// 'name'
 
-		if ($model->getAngkatanByIdAlumni(session('id_alumni')) == NULL) {
-			$query4 = $model->getIdAlumniByIdTempatKerja($model->getIdTempatKerjaByIdAlumni(session('id_alumni')), session('id_alumni'))->getResult();
-		} else {
+		if ($model->getIdTempatKerjaByIdAlumni(session('id_alumni')) == NULL) {
 			$query4 = $model->getIdAlumniByAngkatan($model->getAngkatanByIdAlumni(session('id_alumni'))->angkatan, session('id_alumni'))->getResult();
-			// dd($query4);
-			//isi :
-			// array :
-			// 'angkatan'
-			// 'id_alumni'
+		} else {
+			$query4 = $model->getIdAlumniByIdTempatKerja($model->getIdTempatKerjaByIdAlumni(session('id_alumni')), session('id_alumni'))->getResult();
 		}
 
 		$query5 = $model->getPrestasiByIdAlumni(session('id_alumni'))->getResult();
@@ -236,10 +231,12 @@ class User extends BaseController
 		return view('websia/kontenWebsia/userProfile/userProfile', $data);
 	}
 
-	public function profilAlumni()
+	public function profilAlumni($id)
 	{
 		$model = new AlumniModel();
-		$kunci = $_GET['id_alumni'];
+		// $kunci = $_GET['id_alumni'];
+		// $kunci = get_alumni_by_nim($nim);
+		$kunci = htmlspecialchars($id);
 		$query1 = $model->bukaProfile($kunci)->getRow();
 		// dd($query1);
 		//isi :
@@ -288,15 +285,10 @@ class User extends BaseController
 		// array :
 		// 'name'
 
-		if ($model->getAngkatanByIdAlumni(session('id_alumni')) == NULL || $model->getAngkatanByIdAlumni(session('id_alumni'))->angkatan == 0) {
-			$query4 = $model->getIdAlumniByIdTempatKerja($model->getIdTempatKerjaByIdAlumni(session('id_alumni')), session('id_alumni'))->getResult();
-		} else {
+		if ($model->getIdTempatKerjaByIdAlumni(session('id_alumni')) == NULL) {
 			$query4 = $model->getIdAlumniByAngkatan($model->getAngkatanByIdAlumni(session('id_alumni'))->angkatan, session('id_alumni'))->getResult();
-			// dd($query4);
-			//isi :
-			// array :
-			// 'angkatan'
-			// 'id_alumni'
+		} else {
+			$query4 = $model->getIdAlumniByIdTempatKerja($model->getIdTempatKerjaByIdAlumni(session('id_alumni')), session('id_alumni'))->getResult();
 		}
 
 		$query5 = $model->getPrestasiByIdAlumni($kunci)->getResult();
@@ -387,10 +379,10 @@ class User extends BaseController
 		$pager = \Config\Services::pager();
 		$model = new AlumniModel();
 
-		if ($model->getAngkatanByIdAlumni(session('id_alumni')) == NULL || $model->getAngkatanByIdAlumni(session('id_alumni'))->angkatan == 0) {
-			$query = $model->getRekomendasiTK($model->getIdTempatKerjaByIdAlumni(session('id_alumni')), session('id_alumni'));
-		} else {
+		if ($model->getIdTempatKerjaByIdAlumni(session('id_alumni')) == NULL) {
 			$query = $model->getRekomendasiAngkatan($model->getAngkatanByIdAlumni(session('id_alumni'))->angkatan, session('id_alumni'));
+		} else {
+			$query = $model->getRekomendasiTK($model->getIdTempatKerjaByIdAlumni(session('id_alumni')), session('id_alumni'));
 		}
 
 		// dd($query->orderBy('nama', $direction = 'asc')->paginate(16));
@@ -1334,7 +1326,7 @@ class User extends BaseController
 			$model->db->table('report')->insert($data);
 
 			$report = $model->getById($id_foto);
-			if (count($report) > 10) {
+			if (count($report) != 0 && count($report) % 10 == 0) {
 				$model->db->table('foto')
 					->set('approval', 0)
 					->where('id_foto', $id_foto)

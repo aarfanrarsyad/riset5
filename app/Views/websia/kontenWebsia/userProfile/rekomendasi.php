@@ -16,7 +16,7 @@
                 <?php foreach ($alumni as $row) :  ?>
                     <!-- 1 card -->
                     <div class="rekomendasi hidden shadow my-2 border border-gray-200 bg-white hover:bg-gray-200">
-                        <a href="/User/profilAlumni?id_alumni=<?= $row['id_alumni'] ?>" target="_new">
+                        <a href="/User/profilAlumni/<?= $row['id_alumni'] ?>" target="_new">
                             <div class="gambar flex flex-row items-center">
                                 <img class="w-24 md:w-24 lg:w-24 rounded-full m-4 md:m-65" src="/img/<?= $row['foto_profil'] ?>" alt="" />
                                 <div class="text-left">
