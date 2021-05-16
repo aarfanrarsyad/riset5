@@ -91,15 +91,8 @@ body div.loading {
   background-color: rgb(1, 89, 152);
 }
 
-/* #menuDok>li:first-child:hover,
-#menuDok>li>div:hover,
-#menuDok>li>ul>li:hover,
-#menuDok .activeSideDok {
-  background-color: rgb(1, 89, 152);
-} */
-
 .open-submenu {
-  max-height: 65px;
+  max-height: 90px;
 }
 
 .close-submenu {

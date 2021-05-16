@@ -1,10 +1,11 @@
-<?= $this->extend('webservice/kontenWebservice/profilDeveloper/layoutEditWS.php'); ?>
+<?= $this->extend('webservice/layoutWebservice/templateWebserviceLogin.php'); ?>
 
-<?= $this->section('contentEdit'); ?>
-<div class="flex justify-center mb-8">
-    <div class="shadow-2xl rounded-xl md:p-16 p-4 lg:w-full w-5/6">
+<?= $this->section('content'); ?>
+<div class="w-full">
+    <div class="shadow-2xl rounded-xl md:p-12 md:pt-4 p-4 pb-6 xl:w-1/2 sm:w-3/4 my-12 sm:mx-auto mx-4">
         <form action="" method="POST" class="font-paragraph text-primary" id="formEditAkunDev">
-            <div class="lg:w-1/2 w-full">
+            <h2 class="flex justify-center lg:text-4xl md:text-3xl sm:text-2xl text-xl text-secondary font-bold md:mb-4 mb-2">EDIT AKUN</h2>
+            <div class="2xl:px-20 md:px-12 sm:px-8 px-0 w-full">
                 <label for="email" class="font-medium">Email:</label>
                 <input type="text" name="email" id="email" class="inputForm mb-2" placeholder="mail@example.com">
                 <label for="passbaru" class="font-medium">Kata Sandi Baru:</label>
@@ -18,6 +19,12 @@
                 <input type="password" name="passlama" id="passlama" class="inputForm mb-2" placeholder="🞄🞄🞄🞄🞄🞄🞄🞄">
             </div>
             <div class="flex justify-end">
+                <a href="/developer/profil" class="mt-8 flex items-center mr-4">
+                    <div class="flex items-center gap-x-2">
+                        <img src="/img/components/icon/left-on.png" class="w-3 h-3" alt="icon panah kiri on">
+                        <div class="text-secondary">KEMBALI</div>
+                    </div>
+                </a>
                 <input type="submit" value="SIMPAN" class="w-24 text-center py-1 bg-secondary hover:bg-secondaryhover text-white rounded-full cursor-pointer focus:outline-none mt-8 md:text-base text-sm" id="simpanAkun">
             </div>
         </form>

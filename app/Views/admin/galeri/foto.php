@@ -100,7 +100,7 @@
                             <td class="text-center">
                               <?php if ($data['approval'] == 1) : ?>
                                 <span class="badge badge-pill badge-primary">disetujui</span>
-                              <?php elseif ($data['approval'] == 0 && count($data['report']) > 10) : ?>
+                              <?php elseif ($data['approval'] == 0 && count($data['report']) !== 0 && count($data['report']) % 10 == 0) : ?>
                                 <span class="badge badge-pill badge-warning">suspend</span>
                               <?php else : ?>
                                 <span class="badge badge-pill badge-danger">belum disetujui</span>

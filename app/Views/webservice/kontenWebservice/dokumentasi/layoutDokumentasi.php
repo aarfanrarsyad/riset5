@@ -50,15 +50,17 @@
                     </div>
                     <ul class="text-white text-white transition-all duration-300 easy-out absolute overflow-hidden open-submenu w-full">
                         <li class="itemSideDok pl-12 py-0.5 rounded-r-lg md:text-lg hover:bg-primary">
-                            <a href="#dataUser" class="py-1">Data User</a>
+                            <a href="#dataUser" class="py-1">Detail User</a>
                         </li>
                         <li class="itemSideDok pl-12 py-0.5 rounded-r-lg md:text-lg hover:bg-primary">
-                            <a href="#dataAlumni" class="py-1">Data Alumni</a>
+                            <a href="#dataAlumni" class="py-1">Detail Alumni</a>
+                        </li>
+                        <li class="itemSideDok pl-12 py-0.5 rounded-r-lg md:text-lg hover:bg-primary">
+                            <a href="#dataListAlumni" class="py-1">Daftar Detail Alumni</a>
                         </li>
                     </ul>
                 </li>
-
-                <!-- <li class="text-secondary relative transform translate-y-16 duration-300">
+                <!-- <li class="text-secondary relative transform translate-y-24 duration-300">
                     <div class="itemSideDok pl-5 rounded-r-lg flex justify-between items-center pr-4 md:text-xl font-semibold hover:bg-primary">
                         <a href="#judul" class="py-0.5 px-2 cursor-pointer select-none">Judul</a>
                         <img src="/img/components/icon/drop-down.svg" class="text-red-500 cursor-pointer transform transition-all duration-300">
@@ -71,10 +73,9 @@
                             <span class="py-1">Sub-Judul 1.2</span>
                         </li>
                     </ul>
-                </li> -->
-            </ul>
-
-            <!-- end sidebar posisi buka -->
+                </li>
+            </ul> -->
+                <!-- end sidebar posisi buka -->
 
         </div>
 
