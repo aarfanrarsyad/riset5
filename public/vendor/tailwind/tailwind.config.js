@@ -16,6 +16,9 @@ module.exports = {
         secondaryhover: "#FFBB34",
         success: "#54AC00",
         successHover: "#458E00",
+        danger: "#C41800",
+        redAlert: "#FF7474",
+        greenAlert: "#B1FF66",
       },
       fontFamily: {
         heading: ['Poppins'],

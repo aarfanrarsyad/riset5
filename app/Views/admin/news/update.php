@@ -60,7 +60,7 @@ $errors = session()->getFlashdata('errors');
     <div class="container-fluid px-4" style="font-size: small;">
         <div class="alert-content">
             <?php if (!empty($errors)) : ?>
-                <div class="alert alert-danger" role="alert">
+                <div class="alert  bg-redAlert text-danger" role="alert">
                     Whoops! There was an error when inputting data :
                     <ul>
                         <?php foreach ($errors as $error) : ?>

@@ -81,7 +81,7 @@
                         <a href="<?= base_url('/admin/tambah-alumni') ?>" class="btn btn-primary mt-3">Tambah Alumni</a>
                     </form>
                     <?php if (session()->getFlashdata('pesan')) : ?>
-                        <div class="alert alert-success" role="alert">
+                        <div class="alert bg-greenAlert text-success" role="alert">
                             <?= session()->getFlashdata('pesan'); ?>
                         </div>
                     <?php endif; ?>

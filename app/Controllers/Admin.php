@@ -1604,7 +1604,7 @@ class Admin extends BaseController
 			else
 				$text = "Pembatalan persetujuan";
 
-			$flash = '<div class="mx-5 alert alert-success alert-dismissible fade show" role="alert">
+			$flash = '<div class="mx-5 alert bg-greenAlert text-success alert-dismissible fade show" role="alert">
 		            <strong>' . $text . ' sukses!</strong>
 		            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
 		                <span aria-hidden="true">&times;</span>
@@ -1618,7 +1618,7 @@ class Admin extends BaseController
 			else
 				$text = "Pembatalan persetujuan";
 
-			$flash = '<div class="mx-5 alert alert-danger alert-dismissible fade show" role="alert">
+			$flash = '<div class="mx-5 alert bg-redAlert text-danger alert-dismissible fade show" role="alert">
 		            <strong>' . $text . ' gagal!</strong>
 		            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
 		                <span aria-hidden="true">&times;</span>
@@ -1645,7 +1645,7 @@ class Admin extends BaseController
 			->where('id_foto', $id)
 			->delete()
 		) {
-			$flash = '<div class="mx-5 alert alert-success alert-dismissible fade show" role="alert">
+			$flash = '<div class="mx-5 alert bg-greenAlert text-success alert-dismissible fade show" role="alert">
 		            <strong>Penghapusan video sukses!</strong>
 		            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
 		                <span aria-hidden="true">&times;</span>
@@ -1654,7 +1654,7 @@ class Admin extends BaseController
 			session()->setFlashdata('flash', $flash);
 			return redirect()->to(base_url('admin/galeri-foto'));
 		} else {
-			$flash = '<div class="mx-5 alert alert-danger alert-dismissible fade show" role="alert">
+			$flash = '<div class="mx-5 alert bg-redAlert text-danger alert-dismissible fade show" role="alert">
 		            <strong>Penghapusan video gagal!</strong>
 		            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
 		                <span aria-hidden="true">&times;</span>
@@ -1687,7 +1687,7 @@ class Admin extends BaseController
 			foreach ($this->form_validation->getErrors() as $e) {
 				$error .= $e;
 			}
-			$flash = '<div class="mx-5 alert alert-danger alert-dismissible fade show" role="alert">
+			$flash = '<div class="mx-5 alert bg-redAlert text-danger alert-dismissible fade show" role="alert">
                     <strong>Upload video gagal!</strong> ' . $error . '
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
@@ -1738,7 +1738,7 @@ class Admin extends BaseController
 					];
 					$model->db->table('video')->insert($data);
 
-					$flash = '<div class="mx-5 alert alert-success alert-dismissible fade show" role="alert">
+					$flash = '<div class="mx-5 alert bg-greenAlert text-success alert-dismissible fade show" role="alert">
 						<strong>Upload video sukses!</strong>
 						<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 							<span aria-hidden="true">&times;</span>
@@ -1746,7 +1746,7 @@ class Admin extends BaseController
 					</div>';
 					session()->setFlashdata('flash', $flash);
 				} else {
-					$flash = '<div class="mx-5 alert alert-danger alert-dismissible fade show" role="alert">
+					$flash = '<div class="mx-5 alert bg-redAlert text-danger alert-dismissible fade show" role="alert">
 						<strong>Upload video gagal!</strong> link video sudah terdaftar.
 						<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 							<span aria-hidden="true">&times;</span>
@@ -1757,7 +1757,7 @@ class Admin extends BaseController
 			} else {
 				// buat upload yang bukan link youtube
 				$text = 'link yang anda upload bukan link youtube.';
-				$flash = '<div class="mx-5 alert alert-danger alert-dismissible fade show" role="alert">
+				$flash = '<div class="mx-5 alert bg-redAlert text-danger alert-dismissible fade show" role="alert">
                     <strong>Upload video gagal!</strong> ' . $text . '
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
@@ -1787,7 +1787,7 @@ class Admin extends BaseController
 			else
 				$text = "Pembatalan persetujuan";
 
-			$flash = '<div class="mx-5 alert alert-success alert-dismissible fade show" role="alert">
+			$flash = '<div class="mx-5 alert bg-greenAlert text-success alert-dismissible fade show" role="alert">
 		            <strong>' . $text . ' sukses!</strong>
 		            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
 		                <span aria-hidden="true">&times;</span>
@@ -1801,7 +1801,7 @@ class Admin extends BaseController
 			else
 				$text = "Pembatalan persetujuan";
 
-			$flash = '<div class="mx-5 alert alert-danger alert-dismissible fade show" role="alert">
+			$flash = '<div class="mx-5 alert bg-redAlert text-danger alert-dismissible fade show" role="alert">
 		            <strong>' . $text . ' gagal!</strong>
 		            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
 		                <span aria-hidden="true">&times;</span>
@@ -1822,7 +1822,7 @@ class Admin extends BaseController
 			->where('id_video', $id)
 			->delete()
 		) {
-			$flash = '<div class="mx-5 alert alert-success alert-dismissible fade show" role="alert">
+			$flash = '<div class="mx-5 alert bg-greenAlert text-success alert-dismissible fade show" role="alert">
 		            <strong>Penghapusan video sukses!</strong>
 		            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
 		                <span aria-hidden="true">&times;</span>
@@ -1831,7 +1831,7 @@ class Admin extends BaseController
 			session()->setFlashdata('flash', $flash);
 			return redirect()->to(base_url('admin/galeri-video'));
 		} else {
-			$flash = '<div class="mx-5 alert alert-danger alert-dismissible fade show" role="alert">
+			$flash = '<div class="mx-5 alert bg-redAlert text-danger alert-dismissible fade show" role="alert">
 		            <strong>Penghapusan video gagal!</strong>
 		            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
 		                <span aria-hidden="true">&times;</span>
