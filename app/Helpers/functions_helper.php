@@ -423,3 +423,39 @@ function getRGBColor($num)
         hexdec(substr($hash, 4, 2))
     ); //b
 }
+
+function get_alumni_by_nim($nim=null,$select='id_alumni')
+{
+    $db = \Config\Database::connect();
+    $id = $db->table('pendidikan')->join('pendidikan_tinggi', 'pendidikan_tinggi.id_pendidikan = pendidikan.id_pendidikan')
+                ->getWhere(['nim'=>$nim])->getRow()->id_alumni;
+
+    if (!is_null($nim)) {
+        $return = $db->table('alumni')->select($select)->getWhere(['id_alumni'=>$id]);
+    } else {
+        $return = $db->table('alumni')->select($select)->get();
+    }
+
+    if (count(explode(',', $select))==1 && $select !== '*') {
+        return $return->getRowArray()[$select];
+    } else {
+        return $return->getRow();
+    }    
+}
+
+function get_nim_by_id_alumni($id=null,$select='nim')
+{
+    $db = \Config\Database::connect();
+    if(!is_null($id)){
+        $query = "SELECT $select FROM pendidikan_tinggi AS A JOIN pendidikan AS B
+        ON A.id_pendidikan=B.id_pendidikan JOIN alumni AS C 
+        ON B.id_alumni = C.id_alumni WHERE C.id_alumni = $id ORDER BY A.nim DESC";
+        $result = $db->query($query)->getRow()->nim;
+    } else {
+        $query = "SELECT $select FROM pendidikan_tinggi AS A JOIN pendidikan AS B
+        ON A.id_pendidikan=B.id_pendidikan JOIN alumni AS C 
+        ON B.id_alumni = C.id_alumni WHERE C.id_alumni = 1 ORDER BY A.nim DESC";
+        $result = $db->query($query)->getRow()->nim;
+    }
+    return $result;
+}
