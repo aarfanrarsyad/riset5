@@ -214,18 +214,6 @@ $routes->group('admin', ['namespace' => 'App\Controllers'], function ($routes) {
 	$routes->post('instansi/delete', 'Admin::CRUD_deleteInstansi', ['filter' => 'permission:4']);
 	$routes->match(['get', 'post'], 'tambah-instansi', 'Admin::CRUD_createInstansi', ['filter' => 'permission:1']);
 
-	$routes->get('publikasi', 'Admin::CRUD_indexPublikasi', ['filter' => 'permission:2']);
-	$routes->post('publikasi/delete', 'Admin::CRUD_deletePublikasi', ['filter' => 'permission:4']);
-
-	$routes->get('pendidikan', 'Admin::CRUD_indexPendidikan', ['filter' => 'permission:2']);
-	$routes->post('pendidikan/delete', 'Admin::CRUD_deletePendidikan', ['filter' => 'permission:4']);
-
-	$routes->get('pendidikan-tinggi', 'Admin::CRUD_indexPendidikanTinggi', ['filter' => 'permission:2']);
-	$routes->post('pendidikan-tinggi/delete', 'Admin::CRUD_deletePendidikanTinggi', ['filter' => 'permission:4']);
-
-	$routes->get('prestasi', 'Admin::CRUD_indexPrestasi', ['filter' => 'permission:2']);
-	$routes->post('prestasi/delete', 'Admin::CRUD_deletePrestasi', ['filter' => 'permission:4']);
-
 	#------------------------------------------------------------------------------------------------------------------------------------------------#
 });
 /**

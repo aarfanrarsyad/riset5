@@ -1057,8 +1057,49 @@ class admin_model extends Model
 
     public function getAllAlumni($id)
     {
-        $query = "SELECT * FROM alumni 
+        $query = "SELECT * FROM alumni
             WHERE alumni.id_alumni=$id";
+        return $this->db->query($query);
+    }
+
+    public function getTempatKerjabyIdAlumni($id)
+    {
+        $query = "SELECT * FROM alumni_tempat_kerja
+        JOIN tempat_kerja ON alumni_tempat_kerja.id_tempat_kerja=tempat_kerja.id_tempat_kerja
+        WHERE alumni_tempat_kerja.id_alumni = $id";
+        return $this->db->query($query);
+    }
+
+    public function getPublikasiById($id)
+    {
+        if (!isset($id)) return redirect()->to(base_url('/admin'));
+
+        $query = "SELECT *
+            FROM publikasi 
+            WHERE publikasi.id_alumni = $id
+            ";
+        return $this->db->query($query);
+    }
+
+    public function getPendidikanById($id)
+    {
+        if (!isset($id)) return redirect()->to(base_url('/admin'));
+
+        $query = "SELECT * FROM pendidikan 
+            JOIN pendidikan_tinggi ON pendidikan.id_pendidikan=pendidikan_tinggi.id_pendidikan
+            WHERE pendidikan.id_alumni = $id
+            ";
+        return $this->db->query($query);
+    }
+
+    public function getPrestasiById($id)
+    {
+        if (!isset($id)) return redirect()->to(base_url('/admin'));
+
+        $query = "SELECT *
+             FROM prestasi
+             WHERE prestasi.id_alumni = $id
+             ";
         return $this->db->query($query);
     }
 
@@ -1066,10 +1107,13 @@ class admin_model extends Model
     {
         if (!isset($id)) return redirect()->to(base_url('/admin'));
 
-        $query = "SELECT *
-            FROM alumni 
-            WHERE alumni.id_alumni = $id
-            ";
+        $query = "SELECT * FROM alumni
+        JOIN alumni_tempat_kerja ON alumni.id_alumni=alumni_tempat_kerja.id_alumni
+        JOIN publikasi ON alumni.id_alumni=publikasi.id_alumni
+        JOIN pendidikan ON alumni.id_alumni=pendidikan.id_alumni
+        JOIN pendidikan_tinggi ON pendidikan.id_pendidikan=pendidikan_tinggi.id_pendidikan
+        JOIN prestasi ON alumni.id_alumni=prestasi.id_alumni
+        WHERE alumni.id_alumni=$id";
         return $this->db->query($query);
     }
 
@@ -1081,7 +1125,13 @@ class admin_model extends Model
         if (is_null($alumni_data)) return false;
 
         $desc = 'menghapus alumni ' . $alumni_data['nama'];
-        $query = "DELETE FROM alumni WHERE id_alumni  = $id";
+        $query = "DELETE alumni, publikasi, pendidikan, pendidikan_tinggi, prestasi, alumni_tempat_kerja FROM alumni
+        JOIN alumni_tempat_kerja ON alumni.id_alumni=alumni_tempat_kerja.id_alumni
+        JOIN publikasi ON alumni.id_alumni=publikasi.id_alumni
+        JOIN pendidikan ON alumni.id_alumni=pendidikan.id_alumni
+        JOIN pendidikan_tinggi ON pendidikan.id_pendidikan=pendidikan_tinggi.id_pendidikan
+        JOIN prestasi ON alumni.id_alumni=prestasi.id_alumni 
+        WHERE alumni.id_alumni=$id";
         if ($this->db->query($query)) {
             activity_log(3, 3, ucfirst($desc), 1);
             return true;
@@ -1130,174 +1180,6 @@ class admin_model extends Model
 
         $desc = 'menghapus instansi ' . $instansi_data['nama_instansi'];
         $query = "DELETE FROM tempat_kerja WHERE id_tempat_kerja  = $id";
-        if ($this->db->query($query)) {
-            activity_log(3, 3, ucfirst($desc), 1);
-            return true;
-        } else {
-            activity_log(3, 3, 'Gagal ' . ($desc), 0);
-            return false;
-        }
-    }
-
-    #-----------------------------------------------------------------------------------------------------------------------------
-
-    public function getAllPublikasi()
-    {
-        $query = "SELECT * FROM publikasi";
-        return $this->db->query($query);
-    }
-
-    public function searchPublikasi($keyword)
-    {
-        return $this->table('publikasi')->like('publikasi', $keyword)->orLike('id_alumni', $keyword);
-    }
-
-    public function getPublikasiById($id)
-    {
-        if (!isset($id)) return redirect()->to(base_url('/admin'));
-
-        $query = "SELECT *
-            FROM publikasi 
-            WHERE publikasi.id_alumni = $id
-            ";
-        return $this->db->query($query);
-    }
-
-    public function deletePublikasiByid($id)
-    {
-        if (!isset($id)) return false;
-
-        $publikasi_data = $this->getPublikasiById($id)->getRowArray();
-        if (is_null($publikasi_data)) return false;
-
-        $desc = 'menghapus publikasi ' . $publikasi_data['publikasi'];
-        $query = "DELETE FROM publikasi WHERE id_alumni   = $id";
-        if ($this->db->query($query)) {
-            activity_log(3, 3, ucfirst($desc), 1);
-            return true;
-        } else {
-            activity_log(3, 3, 'Gagal ' . ($desc), 0);
-            return false;
-        }
-    }
-
-    #-----------------------------------------------------------------------------------------------------------------------------
-
-    public function getAllPendidikan()
-    {
-        $query = "SELECT * FROM pendidikan";
-        return $this->db->query($query);
-    }
-
-    public function searchPendidikan($keyword)
-    {
-        return $this->table('pendidikan')->like('instansi', $keyword)->orLike('jenjang', $keyword)->orLike('id_alumni', $keyword);
-    }
-
-    public function getPendidikanById($id)
-    {
-        if (!isset($id)) return redirect()->to(base_url('/admin'));
-
-        $query = "SELECT *
-            FROM pendidikan 
-            WHERE pendidikan.id_pendidikan = $id
-            ";
-        return $this->db->query($query);
-    }
-
-    public function deletePendidikanByid($id)
-    {
-        if (!isset($id)) return false;
-
-        $pendidikan_data = $this->getPendidikanById($id)->getRowArray();
-        if (is_null($pendidikan_data)) return false;
-
-        $desc = 'menghapus pendidikan ' . $pendidikan_data['jenjang'];
-        $query = "DELETE FROM pendidikan WHERE id_pendidikan  = $id";
-        if ($this->db->query($query)) {
-            activity_log(3, 3, ucfirst($desc), 1);
-            return true;
-        } else {
-            activity_log(3, 3, 'Gagal ' . ($desc), 0);
-            return false;
-        }
-    }
-
-    #-----------------------------------------------------------------------------------------------------------------------------
-
-    public function getAllPendidikanTinggi()
-    {
-        $query = "SELECT * FROM pendidikan_tinggi";
-        return $this->db->query($query);
-    }
-
-    public function searchPendidikanTinggi($keyword)
-    {
-        return $this->table('pendidikan_tinggi')->like('nim', $keyword)->orLike('program_studi', $keyword);
-    }
-
-    public function getPendidikanTinggiById($id)
-    {
-        if (!isset($id)) return redirect()->to(base_url('/admin'));
-
-        $query = "SELECT *
-            FROM pendidikan_tinggi
-            WHERE pendidikan_tinggi.id_pendidikan = $id
-            ";
-        return $this->db->query($query);
-    }
-
-    public function deletePendidikanTinggiByid($id)
-    {
-        if (!isset($id)) return false;
-
-        $pendidikantinggi_data = $this->getPendidikanTinggiById($id)->getRowArray();
-        if (is_null($pendidikantinggi_data)) return false;
-
-        $desc = 'menghapus pendidikan tinggi' . $pendidikantinggi_data['nim'];
-        $query = "DELETE FROM pendidikan_tinggi WHERE id_pendidikan  = $id";
-        if ($this->db->query($query)) {
-            activity_log(3, 3, ucfirst($desc), 1);
-            return true;
-        } else {
-            activity_log(3, 3, 'Gagal ' . ($desc), 0);
-            return false;
-        }
-    }
-
-    #-----------------------------------------------------------------------------------------------------------------------------
-
-    public function getAllPrestasi()
-    {
-        $query = "SELECT * FROM prestasi";
-        return $this->db->query($query);
-    }
-
-    public function searchPrestasi($keyword)
-    {
-        return $this->table('prestasi')->like('nama_prestasi', $keyword)->orLike('id_alumni', $keyword);
-    }
-
-    public function getPrestasiById($id)
-    {
-        if (!isset($id)) return redirect()->to(base_url('/admin'));
-
-        $query = "SELECT *
-             FROM prestasi
-             WHERE prestasi.id_prestasi = $id
-             ";
-        return $this->db->query($query);
-    }
-
-    public function deletePrestasiByid($id)
-    {
-        if (!isset($id)) return false;
-
-        $prestasi_data = $this->getPrestasiById($id)->getRowArray();
-        if (is_null($prestasi_data)) return false;
-
-        $desc = 'menghapus prestasi' . $prestasi_data['nama_prestasi'];
-        $query = "DELETE FROM prestasi WHERE id_prestasi  = $id";
         if ($this->db->query($query)) {
             activity_log(3, 3, ucfirst($desc), 1);
             return true;

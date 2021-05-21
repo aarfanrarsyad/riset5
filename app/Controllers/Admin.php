@@ -639,8 +639,6 @@ class Admin extends BaseController
 			$alumni = $init;
 		}
 
-		d($this->request->getVar('keyword'));
-
 		$data = [
 			'title' => 'Alumni | Website Riset 5',
 			'alumni' => $alumni->paginate(20, 'alumni'),
@@ -656,10 +654,18 @@ class Admin extends BaseController
 	{
 		$init = new admin_model();
 		$alumni = $init->getAllAlumni($id)->getResultArray()[0];
+		$instansi = $init->getTempatKerjabyIdAlumni($id)->getResultArray()[0];
+		$publikasi = $init->getPublikasiById($id)->getResult();
+		$pendidikan = $init->getPendidikanById($id)->getResult();
+		$prestasi = $init->getPrestasiById($id)->getResult();
 
 		$data = [
 			'title' => 'Detail Alumni | Website Riset 5',
 			'alumni' => $alumni,
+			'instansi' => $instansi,
+			'publikasi' => $publikasi,
+			'pendidikan' => $pendidikan,
+			'prestasi' => $prestasi
 		];
 
 		// dd($data);
@@ -750,166 +756,6 @@ class Admin extends BaseController
 
 		$init = new admin_model();
 		$query = $init->deleteInstansiByid($id);
-		$this->output_json($query);
-	}
-
-	#------------------------------------------------------------------------------------------------------------------------------------------------#
-
-	#method untuk index CRUD Publikasi
-	public function CRUD_indexPublikasi()
-	{
-		$init = new admin_model();
-		$currentPage = $this->request->getVar('page_publikasi') ? $this->request->getVar('page_publikasi') : 1;
-
-		$keyword = $this->request->getVar('keyword');
-		if ($keyword) {
-			$publikasi = $init->searchPublikasi($keyword);
-		} else {
-			$publikasi = $init->getAllPublikasi()->getResult();
-		}
-
-		$data = [
-			'title' => 'Publikasi | Website Riset 5',
-			'publikasi' => $publikasi,
-			'pager' => $init->pager,
-			'currentPage' => $currentPage
-		];
-
-		// dd($data);
-
-		return view('admin' . DIRECTORY_SEPARATOR . 'crud' . DIRECTORY_SEPARATOR . 'publikasi' . DIRECTORY_SEPARATOR . 'index', $data);
-	}
-
-	#method untuk delete CRUD Publikasi
-	public function CRUD_deletePublikasi()
-	{
-		if (!$this->request->isAJAX()) return false;
-
-		$id = $this->request->getPost('id');
-		if (!$id) return false;
-
-		$init = new admin_model();
-		$query = $init->deletePublikasiByid($id);
-		$this->output_json($query);
-	}
-
-	#------------------------------------------------------------------------------------------------------------------------------------------------#
-
-	#method untuk index CRUD Pendidikan
-	public function CRUD_indexPendidikan()
-	{
-		$init = new admin_model();
-		$currentPage = $this->request->getVar('page_pendidikan') ? $this->request->getVar('page_pendidikan') : 1;
-
-		$keyword = $this->request->getVar('keyword');
-		if ($keyword) {
-			$pendidikan = $init->searchPendidikan($keyword);
-		} else {
-			$pendidikan = $init->getAllPendidikan()->getResult();
-		}
-
-		$data = [
-			'title' => 'Pendidikan | Website Riset 5',
-			'pendidikan' => $pendidikan,
-			'pager' => $init->pager,
-			'currentPage' => $currentPage
-		];
-
-		// dd($data);
-
-		return view('admin' . DIRECTORY_SEPARATOR . 'crud' . DIRECTORY_SEPARATOR . 'pendidikan' . DIRECTORY_SEPARATOR . 'index', $data);
-	}
-
-	#method untuk delete CRUD Pendidikan
-	public function CRUD_deletePendidikan()
-	{
-		if (!$this->request->isAJAX()) return false;
-
-		$id = $this->request->getPost('id');
-		if (!$id) return false;
-
-		$init = new admin_model();
-		$query = $init->deletePendidikanByid($id);
-		$this->output_json($query);
-	}
-
-	#------------------------------------------------------------------------------------------------------------------------------------------------#
-
-	#method untuk index CRUD Pendidikan
-	public function CRUD_indexPendidikanTinggi()
-	{
-		$init = new admin_model();
-		$currentPage = $this->request->getVar('page_pendidikantinggi') ? $this->request->getVar('page_pendidikantinggi') : 1;
-
-		$keyword = $this->request->getVar('keyword');
-		if ($keyword) {
-			$pendidikantinggi = $init->searchPendidikanTinggi($keyword);
-		} else {
-			$pendidikantinggi = $init->getAllPendidikanTinggi()->getResult();
-		}
-
-		$data = [
-			'title' => 'Pendidikan Tinggi | Website Riset 5',
-			'pendidikantinggi' => $pendidikantinggi,
-			'pager' => $init->pager,
-			'currentPage' => $currentPage
-		];
-
-		// dd($data);
-
-		return view('admin' . DIRECTORY_SEPARATOR . 'crud' . DIRECTORY_SEPARATOR . 'pendidikantinggi' . DIRECTORY_SEPARATOR . 'index', $data);
-	}
-
-	#method untuk delete CRUD Pendidikan
-	public function CRUD_deletePendidikanTinggi()
-	{
-		if (!$this->request->isAJAX()) return false;
-
-		$id = $this->request->getPost('id');
-		if (!$id) return false;
-
-		$init = new admin_model();
-		$query = $init->deletePendidikanTinggiByid($id);
-		$this->output_json($query);
-	}
-
-	#------------------------------------------------------------------------------------------------------------------------------------------------#
-
-	#method untuk index CRUD Prestasi
-	public function CRUD_indexPrestasi()
-	{
-		$init = new admin_model();
-		$currentPage = $this->request->getVar('page_prestasi') ? $this->request->getVar('page_prestasi') : 1;
-
-		$keyword = $this->request->getVar('keyword');
-		if ($keyword) {
-			$prestasi = $init->searchPendidikan($keyword);
-		} else {
-			$prestasi = $init->getAllPrestasi()->getResult();
-		}
-
-		$data = [
-			'title' => 'Prestasi | Website Riset 5',
-			'prestasi' => $prestasi,
-			'pager' => $init->pager,
-			'currentPage' => $currentPage
-		];
-
-		// dd($data);
-
-		return view('admin' . DIRECTORY_SEPARATOR . 'crud' . DIRECTORY_SEPARATOR . 'prestasi' . DIRECTORY_SEPARATOR . 'index', $data);
-	}
-
-	#method untuk delete CRUD Prestasi
-	public function CRUD_deletePrestasi()
-	{
-		if (!$this->request->isAJAX()) return false;
-
-		$id = $this->request->getPost('id');
-		if (!$id) return false;
-
-		$init = new admin_model();
-		$query = $init->deletePrestasiByid($id);
 		$this->output_json($query);
 	}
 }
