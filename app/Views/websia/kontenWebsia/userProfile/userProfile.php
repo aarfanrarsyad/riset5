@@ -108,24 +108,24 @@ if ($status == 'bukan user') {
         <!-- Awal Deskripsi user profile -->
         <div class="md:p-7 md:shadow-lg md:rounded-xl">
             <p class="px-5 md:px-0 mt-8 md:mt-0 font-heading text-primary text-sm italic text-justify mb-4 md:mb-0 text-center md:text-justify lg:text-left">
-            <?php if($alumni->deskripsi == NULL){ ?>
-            Biografi alumni belum terisi.
-            <?php } ?>
-            <?= $alumni->deskripsi ?>
+                <?php if ($alumni->deskripsi == NULL) { ?>
+                    Biografi alumni belum terisi.
+                <?php } ?>
+                <?= $alumni->deskripsi ?>
             </p>
         </div>
         <!-- Akhir Deskripsi user profile -->
         <div class="md:pl-5 lg:pl-6">
             <?php if ($calamat == "") : ?>
                 <p class="font-heading text-primary text-xs px-5 md:px-0 mt-6">Lokasi Tempat Tinggal Saat Ini</p>
-                <span class="font-heading flex justify-start px-3 md:px-0 text-base text-left mb-5 md:mb-2">
+                <span class="font-heading flex justify-start px-3 md:px-0 text-base text-left mb-5 md:mb-0">
                     <img class="my-2 mt-2 mr-0 md:mr-2 ml-1 md:ml-0 w-6 h-6 md:w-6 float-left" src="/img/components/icon/maps_flag.png" alt="">
                     <!-- Lokasi tempat tinggal -->
                     <p class="font-heading my-2 mt-2"> <?= $alumni->alamat_alumni ?> </p>
                 </span>
             <?php endif ?>
-            <!-- Awal media sosial dan telepon -->
-            <div class="md:space-x-4 md:flex md:flex-row items-start justify-center lg:justify-start md:py-2 px-5 md:px-0">
+            <!-- Awal media sosial-->
+            <div class="md:space-x-4 md:flex md:flex-row items-start justify-center lg:justify-start md:py-4 px-5 md:px-0">
                 <div class="w-full md:w-1/2 mr-10">
                     <!-- Email -->
                     <div class="inline-block mb-2 flex flex-row">
@@ -136,40 +136,69 @@ if ($status == 'bukan user') {
                             <span class="font-heading text-xs text-primary text-center ml-1 md:ml-2"><?= $alumni->email ?></span>
                         <?php } ?>
                     </div>
-                    <!-- Facebook -->
-                    <div class="inline-block flex flex-row">
-                        <img src="/img/components/icon/facebook.png" alt="" class="float-left ml-1 w-2 h-4">
-                        <?php if ($alumni->fb == NULL) { ?>
-                            <span class="font-heading text-xs text-primary text-left flex items-center ml-3 md:ml-4"><i>belum terisi</i></span>
-                        <?php } else { ?>
-                            <span class="font-heading text-xs text-primary text-left flex items-center ml-3 md:ml-4"><?= $alumni->fb ?></span>
-                        <?php } ?>
-                    </div>
-                </div>
-                <div class="w-full md:w-1/2 mt-2 md:mt-0">
                     <!-- Twitter -->
-                    <div class="inline-block mb-2 flex flex-row">
-                        <img src="/img/components/icon/twitter.png" alt="" class="float-left w-4 w-4">
-                        <?php if ($alumni->twitter == NULL) { ?>
-                            <span class="font-heading text-xs text-primary text-center ml-2 md:ml-3"><i>belum terisi</i></span>
-                        <?php } else { ?>
-                            <span class="font-heading text-xs text-primary text-center ml-2 md:ml-3"><?= $alumni->twitter ?></span>
-                        <?php } ?>
-                    </div>
+                    <a href="https://www.twitter.com/<?= $alumni->twitter ?>" target="_new">
+                        <div class="inline-block mb-2 flex flex-row">
+                            <img src="/img/components/icon/tiny_twitter.png" alt="" class="float-left w-4 w-4">
+                            <?php if ($alumni->twitter == NULL) { ?>
+                                <span class="font-heading text-xs text-primary text-center ml-2 md:ml-3"><i>belum terisi</i></span>
+                            <?php } else { ?>
+                                <span class="font-heading text-xs text-primary text-center ml-2 md:ml-3"><?= $alumni->twitter ?></span>
+                            <?php } ?>
+                        </div>
+                    </a>
                     <!-- Instagram -->
-                    <div class="inline-block flex flex-row">
-                        <img src="/img/components/icon/instagram.png" alt="" class="float-left w-4">
-                        <?php if ($alumni->ig == NULL) { ?>
-                            <span class="font-heading text-xs text-primary text-center flex items-center ml-2 md:ml-3"><i>belum terisi</i></span>
-                        <?php } else { ?>
-                            <span class="font-heading text-xs text-primary text-center flex items-center ml-2 md:ml-3"><?= $alumni->ig ?></span>
-                        <?php } ?>
-                    </div>
+                    <a href="https://www.instagram.com/<?= $alumni->ig ?>" target="_new">
+                        <div class="inline-block flex flex-row">
+                            <img src="/img/components/icon/tiny_instagram.png" alt="" class="float-left w-4">
+                            <?php if ($alumni->ig == NULL) { ?>
+                                <span class="font-heading text-xs text-primary text-center flex items-center ml-2 md:ml-3"><i>belum terisi</i></span>
+                            <?php } else { ?>
+                                <span class="font-heading text-xs text-primary text-center flex items-center ml-2 md:ml-3"><?= $alumni->ig ?></span>
+                            <?php } ?>
+                        </div>
+                    </a>
                 </div>
+                <?php if ($alumni->fb == NULL) : ?>
+                    <a href="https://www.facebook.com/" target="_new">
+                    <?php else : ?>
+                        <a href="<?= $alumni->fb ?>" target="_new">
+                        <?php endif; ?>
+                        <div class="w-full md:w-1/2 mt-2 md:mt-0">
+                            <!-- Facebook -->
+                            <div class="inline-block mb-2 flex flex-row">
+                                <img src="/img/components/icon/fb.png" alt="" class="float-left ml-0 md:ml-1 w-4 h-4">
+                                <span class="font-heading text-xs text-primary text-left flex items-center ml-2 md:ml-3">Facebook</span>
+                            </div>
+                        </a>
+                        <!-- LinkedIn -->
+                        <?php if ($alumni->linkedin == NULL) : ?>
+                            <a href="https://www.linkedin.com/" target="_new">
+                            <?php else : ?>
+                                <a href="<?= $alumni->linkedin ?>" target="_new">
+                                <?php endif; ?>
+                                <div class="inline-block mb-2 flex flex-row">
+                                    <img src="/img/components/icon/linkedin.png" alt="" class="float-left w-5">
+                                    <span class="font-heading text-xs text-primary text-center flex items-center ml-2 md:ml-3">LinkedIn</span>
+                                </div>
+                                </a>
+                                <!-- Google Scholar -->
+
+                                <?php if ($alumni->gscholar == NULL) : ?>
+                                    <a href="https://scholar.google.com/" target="_new">
+                                    <?php else : ?>
+                                        <a href="<?= $alumni->gscholar ?>" target="_new">
+                                        <?php endif; ?>
+                                        <div class="inline-block flex flex-row">
+                                            <img src="/img/components/icon/google.png" alt="" class="float-left w-5">
+                                            <span class="font-heading text-xs text-primary text-center flex items-center ml-2 md:ml-3">Google Scholar</span>
+                                        </div>
+                                        </a>
             </div>
-            <!--  Akhir media sosial-->
         </div>
+        <!--  Akhir media sosial-->
     </div>
+</div>
 </div>
 <!-- Akhir User Profile-->
 
