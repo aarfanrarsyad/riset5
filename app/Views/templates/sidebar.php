@@ -1,7 +1,7 @@
 <script>
   function active_menu(event) {
-    $('.active').removeClass('active');
-    $(event.target).addClass('active');
+    $('.activeMenu').removeClass('activeMenu');
+    $(event.target).addClass('activeMenu');
   }
 
   function stop(event) {
@@ -101,15 +101,15 @@ $uri_segment = strtolower(trim($uri->getSegment(2)));
 ?>
 
 <script>
-  $('.nav-link .active').removeClass('active');
+  $('.nav-link .activeMenu').removeClass('activeMenu');
   $('.menu-open').removeClass('menu-open');
   $('.fa-dot-circle').removeClass('fa-dot-circle');
-  $('#<?= $uri_segment ?>').addClass('active');
+  $('#<?= $uri_segment ?>').addClass('activeMenu');
 
   $('#<?= $uri_segment ?> .icon-list').removeClass('fa-circle');
   $('#<?= $uri_segment ?> .icon-list').addClass('fa-dot-circle');
   let menu_id = $('#<?= $uri_segment ?>').data('menu');
 
-  $('#menu-' + menu_id).addClass('active')
+  $('#menu-' + menu_id).addClass('activeMenu')
   $('#menu-' + menu_id).parent().addClass('menu-open')
 </script>

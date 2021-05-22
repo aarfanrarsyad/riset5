@@ -24,8 +24,8 @@
             icon: 'question',
             text: text_alert,
             showCancelButton: true,
-            confirmButtonColor: '#4248ED',
-            cancelButtonColor: '#33A1C4',
+            confirmButtonColor: '#54AC00',
+            cancelButtonColor: '#D81B01',
             confirmButtonText: text_button
         }).then((result) => {
             if (result.isConfirmed) {

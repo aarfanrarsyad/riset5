@@ -67,17 +67,17 @@
                         </div>
                         <div class="font-paragraph hidden md:flex items-end justify-start pt-1">
                             <a href="<?= base_url(); ?>">
-                                <div class="nav-menu transition-colors duration-300 <?= ($active == 'beranda') ? 'active' : ''; ?>">
+                                <div class="nav-menu transition-colors duration-300 <?= ($active == 'beranda') ? 'activeMenu' : ''; ?>">
                                     BERANDA
                                 </div>
                             </a>
                             <a href="/User/profil">
-                                <div class="nav-menu transition-colors duration-300 <?= ($active == 'profil') ? 'active' : ''; ?>">
+                                <div class="nav-menu transition-colors duration-300 <?= ($active == 'profil') ? 'activeMenu' : ''; ?>">
                                     PROFIL
                                 </div>
                             </a>
                             <div class="dropdown menuGaleri">
-                                <div class="nav-menu cursor-pointer transition-colors duration-300 <?= ($active == 'galeri') ? 'active' : ''; ?>">
+                                <div class="nav-menu cursor-pointer transition-colors duration-300 <?= ($active == 'galeri') ? 'activeMenu' : ''; ?>">
                                     GALERI
                                 </div>
                                 <div class="dropdown-content ml-1 w-max text-sm">
@@ -86,14 +86,14 @@
                                 </div>
                             </div>
                             <a href="/User/berita">
-                                <div class="nav-menu transition-colors duration-300 <?= ($active == 'berita') ? 'active' : ''; ?>">
+                                <div class="nav-menu transition-colors duration-300 <?= ($active == 'berita') ? 'activeMenu' : ''; ?>">
                                     BERITA
                                 </div>
                             </a>
                             <!-- Navbar admin -->
                             <?php if (in_array("1", session('role'))) : ?>
                                 <a href="/admin">
-                                    <div class="nav-menu transition-colors duration-300 <?= ($active == 'admin') ? 'active' : ''; ?>">
+                                    <div class="nav-menu transition-colors duration-300 <?= ($active == 'admin') ? 'activeMenu' : ''; ?>">
                                         ADMIN
                                     </div>
                                 </a>
@@ -124,14 +124,14 @@
 
                 <div class="md:hidden">
                     <div class="flex flex-col hidden w-full border-t border-b border-white py-2 font-paragraph" id="menu">
-                        <div class="nav-menu-relative px-2 py-2 <?= ($active == 'beranda') ? 'active' : ''; ?>">
+                        <div class="nav-menu-relative px-2 py-2 <?= ($active == 'beranda') ? 'activeMenu' : ''; ?>">
                             <a href="<?= base_url(); ?>">BERANDA </a>
                         </div>
-                        <div class="nav-menu-relative px-2 py-2 <?= ($active == 'profil') ? 'active' : ''; ?>">
+                        <div class="nav-menu-relative px-2 py-2 <?= ($active == 'profil') ? 'activeMenu' : ''; ?>">
                             <a href="/User/profil"> PROFIL</a>
                         </div>
                         <div class="flex flex-col">
-                            <div class="nav-menu-relative flex px-2 py-2 <?= ($active == 'galeri') ? 'active' : ''; ?>" id="galeri">
+                            <div class="nav-menu-relative flex px-2 py-2 <?= ($active == 'galeri') ? 'activeMenu' : ''; ?>" id="galeri">
                                 <div class="mx-auto">
                                     GALERI
                                     <svg class="inline w-4 h-4 my-auto ml-1" fill="none" id="downGaleri" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -147,7 +147,7 @@
                                 <a href="/User/galeriVidAlumni" class="nav-menu-relative py-2"> Galeri Video </a>
                             </div>
                         </div>
-                        <div class="nav-menu-relative px-2 py-2 <?= ($active == 'berita') ? 'active' : ''; ?>">
+                        <div class="nav-menu-relative px-2 py-2 <?= ($active == 'berita') ? 'activeMenu' : ''; ?>">
                             <a href="/User/berita"> BERITA</a>
                         </div>
                         <?php if (in_array("1", session('role'))) : ?>

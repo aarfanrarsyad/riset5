@@ -32,7 +32,7 @@
         <div class="container-fluid">
 
             <?php if (!empty($errors)) : ?>
-                <div class="alert alert-danger" role="alert">
+                <div class="alert bg-redAlert text-danger" role="alert">
                     Whoops! There was an error when inputting data :
                     <ul>
                         <?php foreach ($errors as $error) : ?>
@@ -41,11 +41,11 @@
                     </ul>
                 </div>
             <?php elseif (!empty($success)) : ?>
-                <div class="alert alert-success" role="alert">
+                <div class="alert bg-greenAlert text-success" role="alert">
                     Success! User data has been successfully registered.
                 </div>
             <?php elseif (!empty($failed)) : ?>
-                <div class="alert alert-danger" role="alert">
+                <div class="alert bg-redAlert text-danger" role="alert">
                     Failed! User data was not registered successfully.
                 </div>
             <?php endif; ?>

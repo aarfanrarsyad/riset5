@@ -22,7 +22,7 @@ body {
 }
 
 /* menu aktif halamannya */
-.active {
+.activeMenu {
   @apply text-secondary bg-primary !important;
 }
 

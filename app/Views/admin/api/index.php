@@ -28,8 +28,8 @@
         <div class="row">
             <div class="col-12">
                 <div class="card card-light card-outline card-outline-tabs elevation-3">
-                    <div class="bg-light px-3 py-3">
-                        <h5><i class="fas fa-chevron-circle-down text-secondary"></i>&ensp;Management API</h5>
+                    <div class="text-primaryHover text-lg px-3 py-3">
+                        <h5><i class="fas fa-chevron-circle-down"></i>&ensp;Management API</h5>
                     </div>
                     <div class="card-header mt-2 p-0 border-bottom-0 ">
                         <ul class="nav nav-tabs" id="custom-tabs-four-tab" role="tablist">
@@ -173,7 +173,7 @@
 <div class="modal fade" id="scope-app" tabindex="-1">
     <div class="modal-dialog">
         <div class="modal-content card card-white card-outline px-2 py-2">
-            <h5 class="modal-title text-secondary mx-2"><i class="fas fa-qrcode"></i>&ensp;Scope Requested</h5>
+            <h5 class="modal-title text-primaryHover mx-2"><i class="fas fa-qrcode"></i>&ensp;Scope Requested</h5>
             <div class="modal-body mt-2">
                 <?php foreach ($scopes as $scope) : ?>
                     <div class="form-check">
@@ -210,7 +210,7 @@
                         <input type="text" class="form-control text-sm border-top-0 border-right-0 border-left-0" name="detail_scope" id="detail_scope" placeholder="Contoh : user:profile:read." style="border-radius:0" autocomplete="off" required>
                     </div>
                     <div class="d-flex justify-content-end">
-                        <button type="submit" id="btn-submit" class="btn btn-sm btn-outline-primary"><i class="fas fa-paper-plane"></i>&ensp;Send data</button>
+                        <button type="submit" id="btn-submit" class="btn btn-sm text-secondaryhover border-secondaryhover hover:text-white hover:bg-secondaryhover"><i class="fas fa-paper-plane"></i>&ensp;Send data</button>
                     </div>
                 </form>
             </div>

@@ -24,8 +24,8 @@
             icon: 'question',
             text: 'Are you sure to delete the ' + menu + ' menu?',
             showCancelButton: true,
-            confirmButtonColor: '#4248ED',
-            cancelButtonColor: '#33A1C4',
+            confirmButtonColor: '#54AC00',
+            cancelButtonColor: '#D81B01',
             confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
             if (result.isConfirmed) {
@@ -49,7 +49,7 @@
                             })
                         } else {
                             if (result !== false) {
-                                let html = '<div class="alert alert-danger text-sm"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>' +
+                                let html = '<div class="alert bg-redAlert text-danger text-sm"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>' +
                                     '<span style="font-weight:bold">Something went wrong !</span>&ensp;' +
                                     'The ' + menu + ' menu is currently being used by resource ' + result +
                                     '</div>';
@@ -75,8 +75,8 @@
             icon: 'question',
             text: 'Are you sure to delete the ' + resource + ' resource?',
             showCancelButton: true,
-            confirmButtonColor: '#4248ED',
-            cancelButtonColor: '#33A1C4',
+            confirmButtonColor: '#54AC00',
+            cancelButtonColor: '#D81B01',
             confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
             if (result.isConfirmed) {

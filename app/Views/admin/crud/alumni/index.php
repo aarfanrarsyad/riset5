@@ -8,8 +8,8 @@
             icon: 'question',
             text: 'Are you sure to delete ' + alumni + '?',
             showCancelButton: true,
-            confirmButtonColor: '#4248ED',
-            cancelButtonColor: '#33A1C4',
+            confirmButtonColor: '#54AC00',
+            cancelButtonColor: '#D81B01',
             confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
             if (result.isConfirmed) {
@@ -81,7 +81,7 @@
                         <a href="<?= base_url('/admin/tambah-alumni') ?>" class="btn btn-primary mt-3">Tambah Alumni</a>
                     </form>
                     <?php if (session()->getFlashdata('pesan')) : ?>
-                        <div class="alert alert-success" role="alert">
+                        <div class="alert bg-greenAlert text-success" role="alert">
                             <?= session()->getFlashdata('pesan'); ?>
                         </div>
                     <?php endif; ?>

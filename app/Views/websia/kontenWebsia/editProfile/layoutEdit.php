@@ -25,28 +25,28 @@
             </div>
             <ul>
                 <a href="/User/editProfil">
-                    <li id="profil" class="button font-heading lg:p-3 p-2 pl-3 lg:pl-7 mt-4 mr-4 rounded-r-lg text-sm text-white <?= ($activeEditProfil == 'biodata') ? 'active' : ''; ?> hover:text-secondary hover:bg-primaryDark font-semibold">Biodata</li>
+                    <li id="profil" class="button font-heading lg:p-3 p-2 pl-3 lg:pl-7 mt-4 mr-4 rounded-r-lg text-sm text-white <?= ($activeEditProfil == 'biodata') ? 'activeMenu' : ''; ?> hover:text-secondary hover:bg-primaryDark font-semibold">Biodata</li>
                 </a>
                 <?php if (session('manual') == "yes") : ?>
                     <a href="/User/editPendidikan">
-                        <li id="pendidikan" class="button font-heading lg:p-3 p-2 pl-3 lg:pl-7 mr-4 rounded-r-lg text-sm text-white <?= ($activeEditProfil == 'pendidikan') ? 'active' : ''; ?> hover:text-secondary hover:bg-primaryDark font-semibold">Pendidikan</li>
+                        <li id="pendidikan" class="button font-heading lg:p-3 p-2 pl-3 lg:pl-7 mr-4 rounded-r-lg text-sm text-white <?= ($activeEditProfil == 'pendidikan') ? 'activeMenu' : ''; ?> hover:text-secondary hover:bg-primaryDark font-semibold">Pendidikan</li>
                     </a>
                 <?php endif ?>
                 <?php if (session('BPS') == "no" || session('manual') == "yes") : ?>
                     <a href="/User/editTempatKerja">
-                        <li id="tempatkerja" class="button font-heading lg:p-3 p-2 pl-3 lg:pl-7 mr-4 rounded-r-lg text-sm text-white <?= ($activeEditProfil == 'tempatKerja') ? 'active' : ''; ?> hover:text-secondary hover:bg-primaryDark font-semibold">Tempat Kerja</li>
+                        <li id="tempatkerja" class="button font-heading lg:p-3 p-2 pl-3 lg:pl-7 mr-4 rounded-r-lg text-sm text-white <?= ($activeEditProfil == 'tempatKerja') ? 'activeMenu' : ''; ?> hover:text-secondary hover:bg-primaryDark font-semibold">Tempat Kerja</li>
                     </a>
                 <?php endif ?>
                 <a href="/User/editPrestasi">
-                    <li id="prestasi" class="button font-heading lg:p-3 p-2 pl-3 lg:pl-7 mr-4 rounded-r-lg text-sm text-white <?= ($activeEditProfil == 'prestasi') ? 'active' : ''; ?> hover:text-secondary hover:bg-primaryDark font-semibold">Prestasi</li>
+                    <li id="prestasi" class="button font-heading lg:p-3 p-2 pl-3 lg:pl-7 mr-4 rounded-r-lg text-sm text-white <?= ($activeEditProfil == 'prestasi') ? 'activeMenu' : ''; ?> hover:text-secondary hover:bg-primaryDark font-semibold">Prestasi</li>
                 </a>
                 <!-- EDIT PUBLIKASI TIDAK DIGUNAKAN
                 <a href="/User/editPublikasi">
-                    <li id="publikasi" class="button font-heading lg:p-3 p-2 pl-3 lg:pl-7 mr-4 rounded-r-lg text-sm text-white <= ($activeEditProfil == 'publikasi') ? 'active' : ''; ?> hover:text-secondary hover:bg-primaryDark font-semibold">Publikasi</li>
+                    <li id="publikasi" class="button font-heading lg:p-3 p-2 pl-3 lg:pl-7 mr-4 rounded-r-lg text-sm text-white <= ($activeEditProfil == 'publikasi') ? 'activeMenu' : ''; ?> hover:text-secondary hover:bg-primaryDark font-semibold">Publikasi</li>
                 </a> -->
                 <?php if (session('manual') == "yes") : ?>
                     <a href="/User/editAkun">
-                        <li id="akun" class="button font-heading lg:p-3 p-2 pl-3 lg:pl-7 mr-4 rounded-r-lg text-sm text-white <?= ($activeEditProfil == 'akun') ? 'active' : ''; ?> hover:text-secondary hover:bg-primaryDark font-semibold">Akun</li>
+                        <li id="akun" class="button font-heading lg:p-3 p-2 pl-3 lg:pl-7 mr-4 rounded-r-lg text-sm text-white <?= ($activeEditProfil == 'akun') ? 'activeMenu' : ''; ?> hover:text-secondary hover:bg-primaryDark font-semibold">Akun</li>
                     </a>
                 <?php endif ?>
             </ul>

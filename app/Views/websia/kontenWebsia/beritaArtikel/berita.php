@@ -95,8 +95,8 @@
             icon: 'question',
             text: 'Are you sure to delete news ?',
             showCancelButton: true,
-            confirmButtonColor: '#4248ED',
-            cancelButtonColor: '#33A1C4',
+            confirmButtonColor: '#54AC00',
+            cancelButtonColor: '#D81B01',
             confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
             if (result.isConfirmed) {
@@ -142,7 +142,7 @@
         })
     }
 </script>
-<div class="md:mt-8 mt-4 lg:px-20 md:px-8 px-3">
+<div class="lg:mt-12 md:mt-8 mt-4 lg:px-20 md:px-8 px-3">
     <div class="flex justify-between items-end">
         <div class="text-sm text-primary font-medium">
             <div class="flex gap-x-2">
@@ -200,9 +200,9 @@
     </div>
     <hr class="lg:mb-8 md:mb-6 mb-4 mt-3 border-t-2 border-b-0 border-primary">
 
-    <div class="flex justify-between">
+    <div class="md:flex lg:flex justify-between">
         <div class="flex-grow">
-            <div class="flex flex-col mr-16">
+            <div class="flex flex-col lg:mr-8 md:mr-4 sm:mr-8 lg:ml-0 md:ml-0 sm:ml-4">
                 <div class="text-secondary font-heading font-bold lg:text-4xl md:text-3xl text-2xl"><?= ucwords(strtolower($dataset['judul'])) ?></div>
                 <div class="flex lg:my-3 my-2">
                     <div class="flex text-primary">
@@ -287,7 +287,7 @@
         </div>
 
         <div class="flex-grow-0">
-            <div class="flex flex-col lg:w-96 md:w-72 w-48">
+            <div class="flex flex-col lg:w-96 md:w-64 sm:w-50 lg:mr-0 md:mr-0 sm:ml-4 sm:mr-8">
                 <div>
                     <div class="text-secondary font-heading font-semibold lg:text-2xl md:text-xl text-lg">Berita Terpopuler</div>
                     <?php for ($i = 0; $i < count($berita_popular); $i++) : ?>
