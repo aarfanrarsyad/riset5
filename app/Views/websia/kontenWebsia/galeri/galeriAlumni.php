@@ -32,7 +32,7 @@
                 <!-- 1 gambar -->
                 <a href="#<?= $foto['id_foto']; ?>" id="foto<?= $foto['id_foto']; ?>">
                     <div class="rounded-3xl m-2 relative hover:shadow-xl transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105 cursor-pointer">
-                        <img class="albumImg w-full rounded-3xl mx-auto" src="<?= base_url() ?>/img/galeri/<?= $foto['nama_file']; ?>" alt="" />
+                        <img id="slide" class="object-cover w-full h-48 object-fit rounded-3xl mx-auto" src="<?= base_url() ?>/img/galeri/<?= $foto['nama_file']; ?>" alt="" />
                     </div>
                 </a>
                 <!-- <php endfor; ?> -->
@@ -46,20 +46,43 @@
                         <div class="flex flex-col justify-center items-center">
                             <div class="flex flex-row justify-center items-center gap-x-4 mt-8 mb-6">
                                 <a href="#<?= $foto['id_foto'] - 1; ?>">
-                                    <img src="<?= base_url() ?>/img/components/icon/left-on.png" alt="" class="">
+                                    <img src="<?= base_url() ?>/img/components/icon/left-on.png" alt="" class="" onclick="prev()" id="prev">
                                 </a>
-                                <img src="/img/galeri/<?= $foto['nama_file']; ?>" alt="" class="w-3/4">
+                                <img src="/img/galeri/<?= $foto['nama_file']; ?>" alt="" class="slider-img w-3/4">
                                 <a href="#<?= $foto['id_foto'] + 1; ?>">
-                                    <img src="<?= base_url() ?>/img/components/icon/right-on.png" alt="" class="">
+                                    <img src="<?= base_url() ?>/img/components/icon/right-on.png" alt="" class="" onclick="next()" id="next">
                                 </a>
                             </div>
 
                             <!-- Awal Caption -->
-                            <div class="text-white w-3/4 mx-2 text-base">
+                            <div class="text-white w-3/4 h-3/4 mx-2 text-base">
                                 <!-- <p class="mb-2">Oleh : Si Fulan (59)</p> -->
                                 <p class="mb-2">Oleh : <?= $foto['nama'] ?></p>
                                 <!-- <p class="">Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam impedit optio praesentium soluta quasi. Voluptatibus molestias sequi inventore odit voluptas pariatur a ut, totam obcaecati accusamus iure, labore dolorum dolor.</p> -->
-                                <p class=""><?= $foto['caption'] ?></p>
+                                <p class="mt-4"><?= $foto['caption'] ?></p>
+                                <div class="mt-5 text-gray-400 text-center">
+                                    <span> <img src="/img/components/icon/line.png" alt="" class="inline mr-1"> bersama </span> <span class=" text-white">Nama1 </span> <span> dan</span> <span class="text-white"> 10 lainnya</span> <span><img src="/img/components/icon/down.png" alt="" class="daftarTag inline ml-1 rounded-full w-4 hover:bg-secondary cursor-pointer" onclick="daftarTag()">
+                                    </span>
+                                    <!-- Awal Tampilan Daftar Tag -->
+                                    <div class="tampilTag hidden relative" id="tampilTag">
+                                        <div class="static mt-2 p-2 rounded-2xl overflow-y-auto h-64 ml-80 bg-primary w-1/4 position-right text-white">
+                                            <ul class="bg-primary">
+                                                <li>Nama2</li>
+                                                <li>Nama3</li>
+                                                <li>Nama4</li>
+                                                <li>Nama5</li>
+                                                <li>Nama6</li>
+                                                <li>Nama7</li>
+                                                <li>Nama8</li>
+                                                <li>Nama9</li>
+                                                <li>Nama10</li>
+                                                <li>Nama11</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <!-- Akhir Tampilan Daftar Tag -->
+                                </div>
+
                             </div>
                             <!-- Akhir Caption -->
 
