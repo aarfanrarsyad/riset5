@@ -252,7 +252,7 @@ if ($status == 'bukan user') {
 <!-- Atribut pada section ini belum ditentukan -->
 <!-- Awal Informasi Instansi -->
 <div class="w-full my-8 lg:px-20 md:px-8 px-2">
-    <h3 class="font-heading font-bold text-xl text-secondary">Informasi Instansi</h3>
+    <h3 class="font-heading font-bold text-xl text-center md:text-left text-secondary">Informasi Instansi</h3>
     <div class="md:shadow-lg lg:shadow-xl rounded-2xl px-3 py-3 md:px-7 md:py-5 lg:mx-14 lg:py-8 lg:px-11 md:mt-3">
         <div class="font-heading">
             <?php
@@ -311,10 +311,10 @@ if ($status == 'bukan user') {
 <?php if ($cprestasi == 1) { ?>
     <!-- Awal Riwayat Prestasi -->
     <div class="w-full my-8 lg:px-20 md:px-8 px-2">
-        <h3 class="font-heading font-bold text-xl text-secondary">Riwayat Prestasi</h3>
+        <h3 class="font-heading font-bold text-xl text-secondary text-center md:text-left ">Riwayat Prestasi</h3>
         <div class="md:shadow-lg lg:shadow-xl rounded-2xl px-0 py-1 md:px-5 md:py-5 lg:mx-14 lg:p-8 mb-1 md:mt-3">
             <?php if ($prestasi == NULL) {
-                echo "<p>Riwayat Prestasi tidak ditemukan.</p>";
+                echo "<p class='text-center md:text-left '>Riwayat Prestasi tidak ditemukan.</p>";
             } else { ?>
                 <?php foreach ($prestasi as $row) : ?>
                     <div class="flex justify-between px-3 font-heading text-primary mt-2 md:mt-2 lg:mt-3">
@@ -333,7 +333,7 @@ if ($status == 'bukan user') {
 <?php if ($cpendidikan == 1) { ?>
     <!-- Awal Riwayat Pendidikan -->
     <div class="w-full my-8 lg:px-20 md:px-8 px-2 mb-6 md:mb-12">
-        <h3 class="font-heading font-bold text-xl text-secondary">Riwayat Pendidikan</h3>
+        <h3 class="font-heading font-bold text-xl text-secondary text-center md:text-left ">Riwayat Pendidikan</h3>
         <div class="lg:px-16">
             <div class="md:shadow-lg lg:shadow-xl rounded-3xl w-full mx-auto mt-5">
                 <div class="overflow-x-scroll md:overflow-x-hidden">
