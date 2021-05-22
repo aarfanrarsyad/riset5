@@ -52,7 +52,7 @@ if ($status == 'bukan user') {
             <div class="flex flex-wrap justify-center">
                 <div class="w-2/3 sm:w-full px-4">
                     <!-- syarat foto disini harus persegi (solusi : object fit) -->
-                    <img src="/img/<?= $alumni->foto_profil ?>" alt="..." class="rounded-full max-w-full h-auto align-middle border-none" />
+                    <img src="/img/<?= $alumni->foto_profil ?>" alt="..." class="rounded-full min-w-full max-w-full h-auto align-middle border-none" />
                     <!-- <img src="/img/tes/download.jpg" alt="..." class="shadow rounded-full max-w-full h-auto align-middle border-none" /> -->
                 </div>
             </div>
