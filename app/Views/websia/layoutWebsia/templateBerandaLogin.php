@@ -208,18 +208,7 @@
 
             <!-- awal footer haistis -->
             <div class="flex items-center mt-4 gap-x-2 md:mt-0 mx-auto md:mx-0">
-                <a href="https://haisstis.org/"><img class="lg:h-24 h-20 w-36 lg:w-auto" src="/img/components/logo/logo_haisstis.png" alt="logo HAISSTIS"></a>
-                <div class="text-white font-heading">
-                    <h3>Jl. Otto Iskandardinata No.64C Jakarta 13330</h3>
-                    <h3>Telp. (021) 8191437, 8508812</h3>
-                    <h3>Fax. (021) 8197577</h3>
-                    <div class="flex gap-x-2 mt-2">
-                        <a href=""><img class="lg:h-6 h-4" src="/img/components/icon/facebook.png" alt="icon facebook"></a>
-                        <a href=""><img class="lg:h-6 h-4" src="/img/components/icon/youtube.png" alt="icon youtube"></a>
-                        <a href="https://twitter.com/haisstis"><img class="lg:h-6 h-4" src="/img/components/icon/twitter.png" alt="icon twitter"></a>
-                        <a href=""><img class="lg:h-6 h-4" src="/img/components/icon/instagram.png" alt="icon instagram"></a>
-                    </div>
-                </div>
+                <a href="https://haisstis.org/"><img class="lg:h-28 h-20 w-36 lg:w-auto" src="/img/components/logo/logo_haisstis.png" alt="logo HAISSTIS"></a>
             </div>
             <!-- akhir footer haistis -->
 

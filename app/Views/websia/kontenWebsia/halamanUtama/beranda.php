@@ -176,7 +176,7 @@ if (session()->getFlashdata('role')) { ?>
     </div>
     <!-- akhir gambar peta alumni -->
 </div>
-<div class="w-full font-heading text-xs text-white italic px-16 py-2 bg-gradient-to-r from-primaryHover mb-8 to bg-primary">Data sebaran alumni diambil berdasarkan lokasi tempat instansi alumni tersebut bekerja (baik itu di BPS maupun di luar BPS)</div>
+<div class="md:text-sm text-xs w-full font-heading text-xs text-white italic lg:px-16 md:px-8 px-2 py-2 bg-gradient-to-r from-primaryHover mb-8 to bg-primary">Data sebaran alumni diambil berdasarkan lokasi tempat instansi alumni tersebut bekerja (baik itu di BPS maupun di luar BPS)</div>
 
 <!-- Akhir Peta Sebaran ALUMNI -->
 
