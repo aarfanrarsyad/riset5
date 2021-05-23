@@ -425,7 +425,7 @@ class Home extends BaseController
 							'username'			=> $user['nim'],
 							'id_alumni'			=> $cek['id_alumni'],
 							'fullname'			=> $user['nama'],
-							'user_image'		=> "default.svg"
+							'user_image'		=> "default.svg",
 							'active'			=> 1,
 							'force_pass_reset'	=> 0,
 							'created_at'		=> $now,

@@ -14,6 +14,12 @@ class AlumniModel extends Model
         return $this->builder()->select('nama, id_alumni')->get();
     }
 
+    public function getTags($id_alumni)
+    {
+        return $this->builder()->select('nama')->where('id_alumni', $id_alumni)->get()->getFirstRow('array');
+    }
+
+
     // Sudah diubah
     public function getAlumniById($id_alumni)
     {
@@ -334,5 +340,10 @@ class AlumniModel extends Model
     public function searchAlumni($keyword)
     {
         return $this->table('alumni')->like('nama', $keyword);
+    }
+
+    public function getAlumniByEmail($email)
+    {
+        return $this->builder()->where('email', $email)->get()->getFirstRow('array');
     }
 }

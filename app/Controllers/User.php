@@ -967,6 +967,19 @@ class User extends BaseController
 		$galeri = $fotoModel->getApprovePhotos();
 		$count = $fotoModel->getCountPhotos();
 
+		$i = 0;
+
+		foreach ($galeri['foto'] as $foto) {
+			$tag = explode(',', $foto['tag']);
+			$j = 0;
+			foreach ($tag as $t) {
+				$galeri['foto'][$i]['tag_name'][$j] = $model->getTags($t);
+				$j++;
+			}
+			$i++;
+		}
+		// dd($galeri['foto']);
+
 		$data = [
 			'alumni' 		=> $alumni,
 			'galeri'		=> $galeri,
@@ -1021,8 +1034,8 @@ class User extends BaseController
 			$model = new \App\Models\FotoModel;
 
 			$foto = $this->request->getFile('file_upload');
-			$caption = $this->request->getPost('deskripsi');
-			$album = $this->request->getPost('albumFoto');
+			$caption = htmlspecialchars($this->request->getPost('deskripsi'));
+			$album = htmlspecialchars($this->request->getPost('albumFoto'));
 			$tags = $this->request->getPost('tags');
 			$now = date("Y-m-d H:i:s");
 
