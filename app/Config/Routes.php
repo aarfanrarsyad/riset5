@@ -204,15 +204,24 @@ $routes->group('admin', ['namespace' => 'App\Controllers'], function ($routes) {
 
 	#------------------------------------------------------------------------------------------------------------------------------------------------#
 
+	// CRUD Index
 	$routes->get('alumni', 'Admin::CRUD_alumniindex', ['filter' => 'permission:2']);
-	$routes->get('alumni/(:any)', 'Admin::CRUD_detailAlumni/$1', ['filter' => 'permission:2']);
-	$routes->post('alumni/delete', 'Admin::CRUD_deleteAlumni', ['filter' => 'permission:4']);
+	$routes->get('instansi', 'Admin::CRUD_indexInstansi', ['filter' => 'permission:2']);
+
+	// CRUD Create
+	$routes->match(['get', 'post'], 'alumni/tambah-alumni', 'Admin::CRUD_createAlumni', ['filter' => 'permission:1']);
+	$routes->match(['get', 'post'], 'alumni/tambah-instansi', 'Admin::CRUD_createInstansi', ['filter' => 'permission:1']);
+
+	// CRUD Update
 	// $routes->match(['get', 'post'], 'resources/update/(:num)', 'Admin::update_resource/$1', ['filter' => 'permission:3']);
 
-	$routes->get('instansi', 'Admin::CRUD_indexInstansi', ['filter' => 'permission:2']);
+	// CRUD Detail
+	$routes->get('alumni/(:any)', 'Admin::CRUD_detailAlumni/$1', ['filter' => 'permission:2']);
 	$routes->get('instansi/(:any)', 'Admin::CRUD_detailInstansi/$1', ['filter' => 'permission:2']);
+
+	// CRUD Delete
+	$routes->post('alumni/delete', 'Admin::CRUD_deleteAlumni', ['filter' => 'permission:4']);
 	$routes->post('instansi/delete', 'Admin::CRUD_deleteInstansi', ['filter' => 'permission:4']);
-	$routes->match(['get', 'post'], 'tambah-instansi', 'Admin::CRUD_createInstansi', ['filter' => 'permission:1']);
 
 	#------------------------------------------------------------------------------------------------------------------------------------------------#
 });

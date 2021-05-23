@@ -56,72 +56,84 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="h3 mb-4 text-gray-800">Admin Index</h1>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right text-sm">
                             <li class="breadcrumb-item"><a href="<?= base_url('/') ?>">Home</a></li>
-                            <li class="breadcrumb-item text-muted"><span>Home Page</span></li>
+                            <li class="breadcrumb-item text-muted"><span>Alumni</span></li>
                         </ol>
                     </div><!-- /.col -->
                 </div><!-- /.row -->
             </div><!-- /.container-fluid -->
         </div>
 
-        <div class="container">
-            <div class="row">
-                <div class="col">
-                    <h1 class="mt-2">Daftar Alumni</h1>
-                    <form action="" method="post">
-                        <div class="input-group mb-3">
-                            <input type="text" class="form-control" placeholder="sss" name="keyword">
-                            <div class="input-group-append">
-                                <button class="btn btn-outline-secondary" type="submit" name="submit">Cari</button>
+        <section class="content mx-1 pb-5">
+            <div class="container-fluid">
+                <div class="response">
+                </div>
+
+                <div class="card card-secondary card-outline elevation-3">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col text-primaryHover font-heading">
+                                <h5><i class="fas fa-qrcode text-primaryHover"></i>&ensp;Daftar Alumni</h5>
                             </div>
                         </div>
-                    </form>
-                </div><!-- /.row -->
-            </div><!-- /.container-fluid -->
-        </div>
+                        <br>
 
-        <div class="container">
-            <div class="row">
-                <div class="col">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th scope="col">No.</th>
-                                <th scope="col">Foto</th>
-                                <th scope="col">NIP</th>
-                                <th scope="col">NIP BPS</th>
-                                <th scope="col">Nama</th>
-                                <th scope="col">Aksi</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <a href="<?= base_url('/admin/tambah-alumni') ?>" class="btn btn-primary mt-3">Tambah Alumni</a>
-                            <?php $i = 1 + (10 * ($currentPage - 1)); ?>
-                            <?php foreach ($alumni as $alum) : ?>
-                                <tr>
-                                    <th scope="row"><?= $i++; ?></th>
-                                    <td><img src="img/avatar.png" alt="" class="foto"></td>
-                                    <td><?= $alum['nip']; ?></td>
-                                    <td><?= $alum['nip_bps']; ?></td>
-                                    <td><?= $alum['nama']; ?></td>
-                                    <td>
-                                        <a href="/admin/alumni/<?= $alum['id_alumni']; ?>" class="btn btn-xs btn-outline-primary mr-1"><i class="fas fa-search"></i>&ensp;<span class="text-xs">Detail</span></a>
-                                        <button type="button" class="btn btn-xs btn-outline-primary mr-1" onclick=""><i class="fas fa-edit"></i>&ensp;<span class="text-xs">Update</span></button>
-                                        <button type="button" class="btn btn-xs btn-outline-primary" onclick="CRUD_deleteAlumni(<?= $alum['id_alumni']; ?>, '<?= $alum['nama']; ?>')"><i class="fas fa-trash"></i>&ensp;<span class="text-xs">Delete</span></button>
-                                    </td>
-                                </tr>
-                            <?php endforeach; ?>
-                        </tbody>
-                    </table>
-                    <?= $pager->links('alumni', 'pagination_alumni'); ?>
+                        <form action="" method="post">
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" placeholder="Masukkan keyword pencarian..." name="keyword">
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-secondary" type="submit" name="submit">Cari</button>
+                                </div>
+                            </div>
+                            <a href="<?= base_url('/admin/alumni/tambah-alumni') ?>" class="btn btn-primary mb-1">Tambah Alumni</a>
+
+                            <?php if (session()->getFlashdata('pesan')) : ?>
+                                <div class="alert alert-success" role="alert">
+                                    <?= session()->getFlashdata('pesan'); ?>
+                                </div>
+                            <?php endif; ?>
+
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">No.</th>
+                                        <th scope="col">Foto</th>
+                                        <th scope="col">NIP</th>
+                                        <th scope="col">NIP BPS</th>
+                                        <th scope="col">Nama</th>
+                                        <th scope="col">Aksi</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    <?php $i = 1 + (10 * ($currentPage - 1)); ?>
+                                    <?php foreach ($alumni as $alum) : ?>
+                                        <tr>
+                                            <th scope="row"><?= $i++; ?></th>
+                                            <td><img src="img/<?= $alum['foto_profil']; ?>" alt="" class="foto"></td>
+                                            <td><?= $alum['nip']; ?></td>
+                                            <td><?= $alum['nip_bps']; ?></td>
+                                            <td><?= $alum['nama']; ?></td>
+                                            <td>
+                                                <a href="/admin/alumni/<?= $alum['id_alumni']; ?>" class="btn btn-xs btn-outline-primary mr-1"><i class="fas fa-search"></i>&ensp;<span class="text-xs">Detail</span></a>
+                                                <button type="button" class="btn btn-xs btn-outline-primary mr-1" onclick=""><i class="fas fa-edit"></i>&ensp;<span class="text-xs">Update</span></button>
+                                                <button type="button" class="btn btn-xs btn-outline-primary" onclick="CRUD_deleteAlumni(<?= $alum['id_alumni']; ?>, '<?= $alum['nama']; ?>')"><i class="fas fa-trash"></i>&ensp;<span class="text-xs">Delete</span></button>
+                                            </td>
+                                        </tr>
+                                    <?php endforeach; ?>
+                                </tbody>
+                            </table>
+                        </form>
+                        <?= $pager->links('alumni', 'pagination_alumni'); ?>
+                    </div>
                 </div>
             </div>
-        </div>
+        </section>
     </div>
 </div>
+
 
 <?= $this->endSection(); ?>

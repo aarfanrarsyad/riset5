@@ -626,6 +626,13 @@ class Admin extends BaseController
 
 	#------------------------------------------------------------------------------------------------------------------------------------------------#
 
+	/**
+	 * Instance of the main Request object.
+	 *
+	 * @var HTTP\IncomingRequest
+	 */
+	protected $request;
+
 	# Method untuk index CRUD Alumni
 	public function CRUD_alumniindex()
 	{
@@ -647,6 +654,217 @@ class Admin extends BaseController
 		];
 
 		return view('admin' . DIRECTORY_SEPARATOR . 'crud' .  DIRECTORY_SEPARATOR . 'alumni' . DIRECTORY_SEPARATOR . 'index', $data);
+	}
+
+	#method untuk create CRUD Alumni
+	public function CRUD_createAlumni()
+	{
+		$model = new AlumniModel();
+		$listtk = $model->getTempatKerja()->getResult();
+
+		$data = [
+			'title' => 'Tambah Alumni | Website Riset 5',
+			'validation' => \Config\Services::validation(),
+			'list'		=> $listtk
+		];
+
+		return view('admin' . DIRECTORY_SEPARATOR . 'crud' . DIRECTORY_SEPARATOR . 'alumni' . DIRECTORY_SEPARATOR . 'create', $data);
+	}
+
+	#method untuk save CRUD Alumni
+	public function CRUD_saveAlumni()
+	{
+		$init = new AlumniModel();
+
+		if (!$this->validate([
+			'nama' => [
+				'rules' => 'required',
+				'errors' => [
+					'required' => 'Nama alumni harus diisi.'
+				]
+			],
+			'jenis_kelamin' => [
+				'rules' => 'required',
+				'errors' => [
+					'required' => 'Jenis Kelamin alumni harus diisi.'
+				]
+			],
+			'tempat_lahir' => [
+				'rules' => 'required',
+				'errors' => [
+					'required' => 'Tempat Lahir alumni harus diisi.'
+				]
+			],
+			'tanggal_lahir' => [
+				'rules' => 'required',
+				'errors' => [
+					'required' => 'Tanggal Lahir alumni harus diisi.'
+				]
+			],
+			'status_bekerja' => [
+				'rules' => 'required',
+				'errors' => [
+					'required' => 'Status Bekerja alumni harus diisi.'
+				]
+			],
+			'jabatan_terakhir' => [
+				'rules' => 'required',
+				'errors' => [
+					'required' => 'Jabatan Terakhir alumni harus diisi.'
+				]
+			],
+			'aktif_pns' => [
+				'rules' => 'required',
+				'errors' => [
+					'required' => 'Aktif PNS alumni harus diisi.'
+				]
+			],
+			'email' => [
+				'rules' => 'required',
+				'errors' => [
+					'required' => 'Email alumni harus diisi.'
+				]
+			],
+			'foto_profil' => [
+				'rules' => 'max_size[foto_profil,5120]|is_image[foto_profil]|mime_in[foto_profil,image/jpg,image/jpeg,image/png]',
+				'errors' => [
+					'max_size' => 'Ukuran foto maksimal 5MB',
+					'is_image' => 'Yang anda pilih bukan gambar',
+					'mime_in' => 'Yang anda pilih bukan gambar'
+				]
+			],
+			'nama_instansi' => [
+				'rules' => 'required',
+				'errors' => [
+					'required' => 'Nama Instansi harus diisi.'
+				]
+			],
+			'jenjang' => [
+				'rules' => 'required',
+				'errors' => [
+					'required' => 'Jenjang harus diisi.'
+				]
+			],
+			'instansi' => [
+				'rules' => 'required',
+				'errors' => [
+					'required' => 'Universitas harus diisi.'
+				]
+			],
+			'tahun_lulus' => [
+				'rules' => 'required',
+				'errors' => [
+					'required' => 'Tahun Lulus harus diisi.'
+				]
+			],
+			'angkatan' => [
+				'rules' => 'required',
+				'errors' => [
+					'required' => 'Angkatan alumni harus diisi.'
+				]
+			],
+			'program_studi' => [
+				'rules' => 'required',
+				'errors' => [
+					'required' => 'Program Studi harus diisi.'
+				]
+			]
+		])) {
+			return redirect()->to('/admin/CRUD_createAlumni')->withInput();
+		}
+
+		// Ambil gambar
+		$fileFotoProfil = $this->request->getFile('foto_profil');
+		// Jika tidak ada gambar yang diupload
+		if ($fileFotoProfil->getError() == 4) {
+			$namaFotoProfil = 'default.svg';
+		} else {
+			// Genereate nama foto random
+			$namaFotoProfil = $fileFotoProfil->getRandomName();
+			// Pindahkan file ke folder img/alumni
+			$fileFotoProfil->move('img', $namaFotoProfil);
+		}
+
+
+		$alumni = [
+			'nama' => htmlspecialchars($_POST['nama']),
+			'jenis_kelamin' => htmlspecialchars($_POST['jenis_kelamin']),
+			'tempat_lahir' => htmlspecialchars($_POST['tempat_lahir']),
+			'tanggal_lahir' => htmlspecialchars($_POST['tanggal_lahir']),
+			'telp_alumni' => htmlspecialchars($_POST['telp_alumni']),
+			'alamat_alumni' => htmlspecialchars($_POST['alamat']),
+			'kota' => htmlspecialchars($_POST['kota']),
+			'provinsi' => htmlspecialchars($_POST['provinsi']),
+			'negara' => htmlspecialchars($_POST['negara']),
+			'status_bekerja' => htmlspecialchars($_POST['status_bekerja']),
+			'perkiraan_pensiun' => htmlspecialchars($_POST['perkiraan_pensiun']),
+			'jabatan_terakhir' => htmlspecialchars($_POST['jabatan_terakhir']),
+			'aktif_pns' => htmlspecialchars($_POST['aktif_pns']),
+			'deskripsi' => htmlspecialchars($_POST['deskripsi']),
+			'email' => htmlspecialchars($_POST['email']),
+			'ig' => htmlspecialchars($_POST['ig']),
+			'fb' => htmlspecialchars($_POST['fb']),
+			'twitter' => htmlspecialchars($_POST['twitter']),
+			'nip' => htmlspecialchars($_POST['nip']),
+			'nip_bps' => htmlspecialchars($_POST['nip_bps']),
+			'foto_profil' => $namaFotoProfil
+		];
+
+		$init->db->table('alumni')->insert($alumni);
+
+		$id_alumni = $init->table('alumni')->getWhere($alumni)->getRow()->id_alumni;
+
+		$instansi = [
+			'id_tempat_kerja' => $init->getIdTempatKerja(htmlspecialchars($_POST['nama_instansi'])),
+			'id_alumni'	=> $id_alumni
+		];
+
+		$init->db->table('alumni_tempat_kerja')->insert($instansi);
+
+		$pendidikan = [
+			'jenjang'    => htmlspecialchars($_POST['jenjang']),
+			'instansi'	 => htmlspecialchars($_POST['instansi']),
+			'tahun_lulus'  => htmlspecialchars($_POST['tahun_lulus']),
+			'tahun_masuk'  => htmlspecialchars($_POST['tahun_masuk']),
+			'angkatan'  => htmlspecialchars($_POST['angkatan']),
+			'id_alumni'	=> $id_alumni
+		];
+
+		$pendidikanTinggi = [
+			'program_studi'	=> htmlspecialchars($_POST['program_studi']),
+			'nim'			=> htmlspecialchars($_POST['nim']),
+			'judul_tulisan'	=> htmlspecialchars($_POST['judul_tulisan'])
+		];
+
+		$init->db->table('pendidikan')->insert($pendidikan);
+
+		$query = "SELECT id_pendidikan FROM pendidikan WHERE id_alumni = " . $id_alumni . " ORDER BY id_pendidikan DESC";
+		$id_pendidikan = $init->query($query)->getRow()->id_pendidikan;
+		$pendidikanTinggi = [
+			'id_pendidikan'		=> $id_pendidikan,
+			'program_studi'     => htmlspecialchars($_POST['program_studi']),
+			'nim'				=> htmlspecialchars($_POST['nim']),
+			'judul_tulisan'		=> htmlspecialchars($_POST['judul_tulisan']),
+		];
+		$init->db->table('pendidikan_tinggi')->insert($pendidikanTinggi);
+
+		$prestasi = [
+			'nama_prestasi'     => htmlspecialchars($_POST['nama_prestasi']),
+			'tahun_prestasi'		=> htmlspecialchars($_POST['tahun_prestasi']),
+			'id_alumni'	=> $id_alumni
+		];
+
+		$init->db->table('prestasi')->insert($prestasi);
+
+		$publikasi = [
+			'publikasi'     => htmlspecialchars($_POST['publikasi']),
+			'id_alumni'	=> $id_alumni
+		];
+		$init->db->table('publikasi')->insert($publikasi);
+
+		session()->setFlashdata('pesan', 'Data berhasil ditambahkan.');
+
+		return redirect()->to('/admin/CRUD_alumniindex');
 	}
 
 	#method untuk detail CRUD Alumni
@@ -689,26 +907,26 @@ class Admin extends BaseController
 		$this->output_json($query);
 	}
 
-
-
 	#------------------------------------------------------------------------------------------------------------------------------------------------#
 
 	#method untuk index CRUD Instansi
 	public function CRUD_indexInstansi()
 	{
 		$init = new admin_model();
+		// $init = new AlumniModel();
+		$instansi = $init->getAllTempatKerja()->getResultArray();
 		$currentPage = $this->request->getVar('page_instansi') ? $this->request->getVar('page_instansi') : 1;
 
-		$keyword = $this->request->getVar('keyword');
-		if ($keyword) {
-			$instansi = $init->searchInstansi($keyword);
-		} else {
-			$instansi = $init->getAllTempatKerja()->getResult();
-		}
+		// $keyword = $this->request->getVar('keyword');
+		// if ($keyword) {
+		// 	$instansi = $init->searchInstansi($keyword);
+		// } else {
+		// 	$instansi = $init;
+		// }
 
 		$data = [
 			'title' => 'Instansi | Website Riset 5',
-			'instansi' => $instansi,
+			'instansi' => $instansi, //->paginate(20, 'instansi'),
 			'pager' => $init->pager,
 			'currentPage' => $currentPage
 		];
@@ -716,6 +934,82 @@ class Admin extends BaseController
 		// dd($data);
 
 		return view('admin' . DIRECTORY_SEPARATOR . 'crud' . DIRECTORY_SEPARATOR . 'instansi' . DIRECTORY_SEPARATOR . 'index', $data);
+	}
+
+	#method untuk create CRUD Instansi
+	public function CRUD_createInstansi()
+	{
+		$init = new AlumniModel();
+
+		$data = [
+			'title' => 'Create Instansi | Website Riset 5',
+			'validation' => \Config\Services::validation()
+		];
+
+		return view('admin' . DIRECTORY_SEPARATOR . 'crud' . DIRECTORY_SEPARATOR . 'instansi' . DIRECTORY_SEPARATOR . 'create', $data);
+	}
+
+	#method untuk save CRUD Instansi
+	public function CRUD_saveInstansi()
+	{
+		$init = new AlumniModel();
+
+		if (!$this->validate([
+			'nama_instansi' => [
+				'rules' => 'required|is_unique[tempat_kerja.nama_instansi]',
+				'errors' => [
+					'required' => 'Nama Instansi harus diisi.',
+					'is_unique' => 'Nama Instansi sudah terdaftar'
+				]
+			],
+			// 'alamat_instansi' => [
+			// 	'rules' => 'required|is_unique[tempat_kerja.alamat_instansi]',
+			// 	'errors' => [
+			// 		'required' => 'Alamat Instansi harus diisi.',
+			// 		'is_unique' => 'Alamat Instansi sudah terdaftar'
+			// 	]
+			// ],
+			// 'telp_instansi' => [
+			// 	'rules' => 'required|is_unique[tempat_kerja.telp_instansi]',
+			// 	'errors' => [
+			// 		'required' => 'Telepon Instansi harus diisi.',
+			// 		'is_unique' => 'Telepon Instansi sudah terdaftar'
+			// 	]
+			// ],
+			// 'faks_instansi' => [
+			// 	'rules' => 'required|is_unique[tempat_kerja.faks_instansi]',
+			// 	'errors' => [
+			// 		'required' => 'Faks Instansi harus diisi.',
+			// 		'is_unique' => 'Faks Instansi sudah terdaftar'
+			// 	]
+			// ],
+			'email_instansi' => [
+				'rules' => 'required|is_unique[tempat_kerja.email_instansi]',
+				'errors' => [
+					'required' => 'Email Instansi harus diisi.',
+					'is_unique' => 'Email Instansi sudah terdaftar'
+				]
+			]
+		])) {
+			return redirect()->to('/admin/CRUD_createInstansi')->withInput();
+		}
+
+		$instansi = [
+			'nama_instansi' => htmlspecialchars($_POST['nama_instansi']),
+			'kota' => htmlspecialchars($_POST['kota']),
+			'provinsi' => htmlspecialchars($_POST['provinsi']),
+			'negara' => htmlspecialchars($_POST['negara']),
+			'alamat_instansi' => htmlspecialchars($_POST['alamat_instansi']),
+			'telp_instansi' => htmlspecialchars($_POST['telp_instansi']),
+			'faks_instansi' => htmlspecialchars($_POST['faks_instansi']),
+			'email_instansi' => htmlspecialchars($_POST['email_instansi']),
+		];
+
+		$init->db->table('tempat_kerja')->insert($instansi);
+
+		session()->setFlashdata('pesan', 'Data berhasil ditambahkan.');
+
+		return redirect()->to('/admin/CRUD_indexInstansi');
 	}
 
 
