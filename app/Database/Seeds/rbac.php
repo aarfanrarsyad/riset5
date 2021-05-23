@@ -93,7 +93,7 @@ class Rbac extends Seeder
 				'group_name'       	=> 'Administrator,Alumni',
 				'access_name'       => 1,
 				'target_scope_id'   => 2,
-				'description'       => 'MMenambahkan role/group Alumni untuk user Dummy_dummy',
+				'description'       => 'Menambahkan role/group Alumni untuk user Dummy_dummy',
 				'status'       		=> 1
 			]
 		];
@@ -309,34 +309,6 @@ class Rbac extends Seeder
 				'url'			=> 'admin/instansi',
 				'icon'			=> 'fas fa-landmark',
 				'active'		=> '1'
-			],
-			[
-				'menu_id'     	=> 9,
-				'title'			=> 'Publikasi',
-				'url'			=> 'admin/publikasi',
-				'icon'			=> 'fas fa-file-alt',
-				'active'		=> '1'
-			],
-			[
-				'menu_id'     	=> 9,
-				'title'			=> 'Pendidikan',
-				'url'			=> 'admin/pendidikan',
-				'icon'			=> 'fas fa-school',
-				'active'		=> '1'
-			],
-			[
-				'menu_id'     	=> 9,
-				'title'			=> 'Pendidikan Tinggi',
-				'url'			=> 'admin/pendidikan-tinggi',
-				'icon'			=> 'fas fa-school',
-				'active'		=> '1'
-			],
-			[
-				'menu_id'     	=> 9,
-				'title'			=> 'Prestasi',
-				'url'			=> 'admin/prestasi',
-				'icon'			=> 'fas fa-award',
-				'active'		=> '1'
 			]
 		];
 		$this->db->table('submenu')->insertBatch($data);
@@ -528,70 +500,6 @@ class Rbac extends Seeder
 			],
 			[
 				'submenu_id'     	=> 18,
-				'crud_id'			=> 4
-			],
-			[
-				'submenu_id'     	=> 19,
-				'crud_id'			=> 1
-			],
-			[
-				'submenu_id'     	=> 19,
-				'crud_id'			=> 2
-			],
-			[
-				'submenu_id'     	=> 19,
-				'crud_id'			=> 3
-			],
-			[
-				'submenu_id'     	=> 19,
-				'crud_id'			=> 4
-			],
-			[
-				'submenu_id'     	=> 20,
-				'crud_id'			=> 1
-			],
-			[
-				'submenu_id'     	=> 20,
-				'crud_id'			=> 2
-			],
-			[
-				'submenu_id'     	=> 20,
-				'crud_id'			=> 3
-			],
-			[
-				'submenu_id'     	=> 20,
-				'crud_id'			=> 4
-			],
-			[
-				'submenu_id'     	=> 21,
-				'crud_id'			=> 1
-			],
-			[
-				'submenu_id'     	=> 21,
-				'crud_id'			=> 2
-			],
-			[
-				'submenu_id'     	=> 21,
-				'crud_id'			=> 3
-			],
-			[
-				'submenu_id'     	=> 21,
-				'crud_id'			=> 4
-			],
-			[
-				'submenu_id'     	=> 22,
-				'crud_id'			=> 1
-			],
-			[
-				'submenu_id'     	=> 22,
-				'crud_id'			=> 2
-			],
-			[
-				'submenu_id'     	=> 22,
-				'crud_id'			=> 3
-			],
-			[
-				'submenu_id'     	=> 22,
 				'crud_id'			=> 4
 			]
 		];

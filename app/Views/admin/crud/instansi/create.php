@@ -38,6 +38,27 @@
                             <?= $validation->getError('alamat_instansi'); ?>
                         </div>
                     </div>
+                    <div class="col-12">
+                        <label for="negara" class="col-sm-2 col-form-label">Negara</label>
+                        <input type="text" class="form-control <?= ($validation->hasError('negara')) ? 'is-invalid' : ''; ?>" id="negara" name="negara">
+                        <div class="invalid-feedback">
+                            <?= $validation->getError('negara'); ?>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <label for="provinsi" class="col-sm-2 col-form-label">Provinsi</label>
+                        <input type="text" class="form-control <?= ($validation->hasError('provinsi')) ? 'is-invalid' : ''; ?>" id="provinsi" name="provinsi">
+                        <div class="invalid-feedback">
+                            <?= $validation->getError('provinsi'); ?>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <label for="kota" class="col-sm-2 col-form-label">Kota/Kabupaten</label>
+                        <input type="text" class="form-control <?= ($validation->hasError('kota')) ? 'is-invalid' : ''; ?>" id="kota" name="kota">
+                        <div class="invalid-feedback">
+                            <?= $validation->getError('kota'); ?>
+                        </div>
+                    </div>
                     <div class="col-md-6">
                         <label for="telp_instansi" class="col-sm-6 col-form-label">No Telepon Instansi</label>
                         <input type="text" class="form-control <?= ($validation->hasError('telp_instansi')) ? 'is-invalid' : ''; ?>" id="telp_instansi" name="telp_instansi">
@@ -59,7 +80,7 @@
                             <?= $validation->getError('email_instansi'); ?>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-primary row mt-3">Tambah Instansi</button>
+                    <button type="submit" class="btn btn-primary row my-3 ml-2">Tambah Instansi</button>
                 </form>
             </div>
         </div>

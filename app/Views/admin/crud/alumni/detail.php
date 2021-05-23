@@ -8,8 +8,8 @@
             icon: 'question',
             text: 'Are you sure to delete ' + alumni + '?',
             showCancelButton: true,
-            confirmButtonColor: '#54AC00',
-            cancelButtonColor: '#D81B01',
+            confirmButtonColor: '#4248ED',
+            cancelButtonColor: '#33A1C4',
             confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
             if (result.isConfirmed) {
@@ -103,21 +103,30 @@
                                         </svg>Facebook</h6>
                                     <span class="text-secondary"><?= $alumni['fb']; ?></span>
                                 </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                    <h6 class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-linkedin mr-2 icon-inline text-primary">
+                                            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                                        </svg>LinkedIn</h6>
+                                    <span class="text-secondary"><?= $alumni['fb']; ?></span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                    <h6 class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-book mr-2 icon-inline text-primary">
+                                            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                                        </svg>Google Scholar</h6>
+                                    <span class="text-secondary"><?= $alumni['fb']; ?></span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                    <h6 class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-mail mr-2 icon-inline text-primary">
+                                            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                                        </svg>Email</h6>
+                                    <span class="text-secondary"><?= $alumni['fb']; ?></span>
+                                </li>
                             </ul>
                         </div>
                     </div>
                     <div class="col-md-8">
                         <div class="card mb-3">
                             <div class="card-body">
-                                <div class="row">
-                                    <div class="col-sm-3">
-                                        <h6 class="mb-0">ID Alumni</h6>
-                                    </div>
-                                    <div class="col-sm-9 text-secondary">
-                                        <?= $alumni['id_alumni']; ?>
-                                    </div>
-                                </div>
-                                <hr>
                                 <div class="row">
                                     <div class="col-sm-3">
                                         <h6 class="mb-0">NIP</h6>
@@ -237,6 +246,24 @@
                                 <hr>
                                 <div class="row">
                                     <div class="col-sm-3">
+                                        <h6 class="mb-0">Tempat Kerja</h6>
+                                    </div>
+                                    <div class="col-sm-9 text-secondary">
+                                        <?= $instansi['nama_instansi']; ?>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Alamat Tempat Kerja</h6>
+                                    </div>
+                                    <div class="col-sm-9 text-secondary">
+                                        <?= $instansi['alamat_instansi']; ?>, <?= $instansi['kota']; ?> , <?= $instansi['provinsi']; ?>, <?= $instansi['negara']; ?>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-sm-3">
                                         <h6 class="mb-0">Deskripsi</h6>
                                     </div>
                                     <div class="col-sm-9 text-secondary">
@@ -246,6 +273,119 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="col-md-12">
+                        <div class="card mb-3">
+                            <h1 class="card-title">Pendidikan</h1>
+                            <div class="card-body">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">Jenjang</th>
+                                            <th scope="col">Instansi</th>
+                                            <th scope="col">Tahun Masuk</th>
+                                            <th scope="col">Tahun Lulus</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php $i = 1; ?>
+                                        <?php foreach ($pendidikan as $pend) : ?>
+                                            <tr>
+                                                <th scope="row"><?= $i++; ?></th>
+                                                <td><?= $pend->jenjang ?></td>
+                                                <td><?= $pend->instansi ?></td>
+                                                <td><?= $pend->tahun_masuk ?></td>
+                                                <td><?= $pend->tahun_lulus ?></td>
+                                            </tr>
+                                        <?php endforeach; ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <div class="card mb-3">
+                            <h1 class="card-title">Pendidikan Tinggi</h1>
+                            <div class="card-body">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">NIM</th>
+                                            <th scope="col">Program Studi</th>
+                                            <th scope="col">Judul Tulisan</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php $i = 1; ?>
+                                        <?php foreach ($pendidikan as $pend) : ?>
+                                            <tr>
+                                                <th scope="row"><?= $i++; ?></th>
+                                                <td><?= $pend->nim ?></td>
+                                                <td><?= $pend->program_studi ?></td>
+                                                <td><?= $pend->judul_tulisan ?></td>
+                                            </tr>
+                                        <?php endforeach; ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <div class="card mb-3">
+                            <h1 class="card-title">Publikasi</h1>
+                            <div class="card-body">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">Publikasi</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php $i = 1; ?>
+                                        <?php foreach ($publikasi as $pub) : ?>
+                                            <tr>
+                                                <th scope="row"><?= $i++; ?></th>
+                                                <td><?= $pub->publikasi ?></td>
+                                            </tr>
+                                        <?php endforeach; ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <div class="card mb-3">
+                            <h1 class="card-title">Prestasi</h1>
+                            <div class="card-body">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">Nama Prestasi</th>
+                                            <th scope="col">Tahun Prestasi</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php $i = 1; ?>
+                                        <?php foreach ($prestasi as $pres) : ?>
+                                            <tr>
+                                                <th scope="row"><?= $i++; ?></th>
+                                                <td><?= $pres->nama_prestasi ?></td>
+                                                <td><?= $pres->tahun_prestasi ?></td>
+                                            </tr>
+                                        <?php endforeach; ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
