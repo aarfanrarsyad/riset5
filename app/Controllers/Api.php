@@ -1,68 +1,36 @@
 <?php
+
 namespace App\Controllers;
+
 use App\Models\AlumniModel;
 use App\Models\WebserviceModel;
 use CodeIgniter\RESTful\ResourceController;
+
 class Api extends ResourceController
 {
 	public function index() //project list + form create
 	{
 		$init = new AlumniModel();
-		
-		$da=$init->getDetailUserApi();
+
+		$da = $init->getDetailUserApi();
 		$data = [];
-foreach($da as $item)
-{
-  $data[$item['id_alumni']]['nama'] = $item['nama'];
-  $data[$item['id_alumni']]['jenis_kelamin'] = $item['jenis_kelamin'];
-  $data[$item['id_alumni']]['status_bekerja'] = $item['status_bekerja'];
-  $data[$item['id_alumni']]['jabatan_terakhir'] = $item['jabatan_terakhir'];
-  $data[$item['id_alumni']]['aktif_pns'] = $item['aktif_pns'];
-  $data[$item['id_alumni']]['pendidikan_tinggi'][] = [
-      "instansi" => $item['instansi'],
-	  "jenjang" => $item['jenjang'],
-	  "prodi" => $item['prodi'],
-	  "nim" => $item['nim'],
-	  "angkatan" => $item['angkatan'],
-	  "tahun_masuk" => $item['tahun_masuk'],
-	  "tahun_lulus" => $item['tahun_lulus'] 
-  ];
- };
- dd($data);
-		die();
-		$curl = curl_init();
-		curl_setopt_array($curl, [
-			CURLOPT_RETURNTRANSFER => 1,
-			CURLOPT_URL => "https://pbd.bps.go.id/simpeg_api/pkl_stis_2021",
-			CURLOPT_POST => 1,
-			CURLOPT_POSTFIELDS => [
-				'apiKey'	=> "0smUjhQHo2SMu2MJkcJmgEmEkv4qAfCvTW8PwnQQ724=",
-				'kategori'	=> "get_riwayat_pendidikan",
-				// 'nipbps'	=> "340058944"
-				'nipbps'	=> "340014024"
-				// 'nipbps'	=> "123120312"
-
-				// 'nipbps'	=> $user->getNip()
-			]
-		]);
-		curl_setopt($curl, CURLOPT_FRESH_CONNECT, TRUE);
-
-		$result = curl_exec($curl);
-		curl_close($curl);
-		$hasil = json_decode($result);
-
-		// echo $result;
-		if (isset($hasil->pesan)) {
-			echo "data tidak ditemukan";
-		} else {
-			$riwayat_pendidikan = array();
-			foreach ($hasil as $data)
-				array_push($riwayat_pendidikan, $data->Nama_Instansi_Pendidikan);
-			if (in_array('Akademi Ilmu Statistik', $riwayat_pendidikan) || in_array('Sekolah Tinggi Ilmu Statistik', $riwayat_pendidikan) || in_array('Politeknin Statistika STIS', $riwayat_pendidikan))
-				echo "Alumni";
-			else
-				echo "Bukan Alumni";
-		}
+		foreach ($da as $item) {
+			$data[$item['id_alumni']]['nama'] = $item['nama'];
+			$data[$item['id_alumni']]['jenis_kelamin'] = $item['jenis_kelamin'];
+			$data[$item['id_alumni']]['status_bekerja'] = $item['status_bekerja'];
+			$data[$item['id_alumni']]['jabatan_terakhir'] = $item['jabatan_terakhir'];
+			$data[$item['id_alumni']]['aktif_pns'] = $item['aktif_pns'];
+			$data[$item['id_alumni']]['pendidikan_tinggi'][] = [
+				"instansi" => $item['instansi'],
+				"jenjang" => $item['jenjang'],
+				"prodi" => $item['prodi'],
+				"nim" => $item['nim'],
+				"angkatan" => $item['angkatan'],
+				"tahun_masuk" => $item['tahun_masuk'],
+				"tahun_lulus" => $item['tahun_lulus']
+			];
+		};
+		dd($data);
 		die();
 	}
 
@@ -76,54 +44,53 @@ foreach($da as $item)
 		$apiKey = $this->request->getPost('api-key');
 		$email = $this->request->getPost('email');
 
-		if ($apiKey==NULL) {
+		if ($apiKey == NULL) {
 			$respond = [
 				'status' => 401,
-				'message'=> 'Please input an api-key',
+				'message' => 'Please input an api-key',
 				'data' => []
 			];
 
-			return $this->respond($respond,401);
+			return $this->respond($respond, 401);
 		}
 
 		$scope = $init2->getScopeAppToken($apiKey)->getResult();
 
 		foreach ($scope as $key => $value) {
-			 $scope[$key]->id_scope;
-			 if ($scope[$key]->id_scope=='1') {
-				 $cek = $cek+1;
-			 }
+			$scope[$key]->id_scope;
+			if ($scope[$key]->id_scope == '1') {
+				$cek = $cek + 1;
+			}
 		}
 
 
 		$init2->updateTokenReq($apiKey);
 
-		if($cek == 1){
-			if(!$email){
+		if ($cek == 1) {
+			if (!$email) {
 				$respond = [
 					'status' => 401,
-					'message'=> 'Please input an email!',
+					'message' => 'Please input an email!',
 					'data' => []
 				];
-	
-				return $this->respond($respond,401);
+
+				return $this->respond($respond, 401);
 			};
 			$alumni = $init->getUserApi($email)->getResult();
 			$respond = [
 				'status' => 200,
-				'message'=> 'Successful!',
+				'message' => 'Successful!',
 				'data' => $alumni
 			];
 			return $this->respond($respond, 200);
 		} else {
 			$respond = [
 				'status' => 403,
-				'message'=> 'Forbidden!',
+				'message' => 'Forbidden!',
 				'data' => []
 			];
-			return $this->respond($respond, 403);	
+			return $this->respond($respond, 403);
 		}
-		 
 	}
 
 	//--------------------------------------------------------------------
@@ -139,25 +106,25 @@ foreach($da as $item)
 		$list = $this->request->getPost('list');
 		$nim = $this->request->getPost('nim');
 
-		if ($apiKey==NULL) {
+		if ($apiKey == NULL) {
 			$respond = [
 				'status' => 401,
-				'message'=> 'Please input an api-key!',
+				'message' => 'Please input an api-key!',
 				'data' => []
 			];
 
-			return $this->respond($respond,401);
+			return $this->respond($respond, 401);
 		}
 
 		$scope = $init2->getScopeAppToken($apiKey)->getResult();
 
 		foreach ($scope as $key => $value) {
-			 $scope[$key]->id_scope;
-			 if ($scope[$key]->id_scope=='2') {
-				 $scp2 = 1;
-			 };
+			$scope[$key]->id_scope;
+			if ($scope[$key]->id_scope == '2') {
+				$scp2 = 1;
+			};
 
-			 if ($scope[$key]->id_scope=='3') {
+			if ($scope[$key]->id_scope == '3') {
 				$scp3 = 1;
 			};
 		};
@@ -165,21 +132,20 @@ foreach($da as $item)
 		$init2->updateTokenReq($apiKey);
 
 
-		if ($list==1) {
+		if ($list == 1) {
 			if ($scp3 == 1) {
 				$alumni = $init->getDetailUserApi();
 
 				$respond = [
 					'status' => 200,
-					'message'=> 'Successful!',
+					'message' => 'Successful!',
 					'data' => $alumni
 				];
 				return $this->respond($respond, 200);
-				
 			} else {
 				$respond = [
 					'status' => 403,
-					'message'=> 'Forbidden!',
+					'message' => 'Forbidden!',
 					'data' => []
 				];
 				return $this->respond($respond, 403);
@@ -187,34 +153,33 @@ foreach($da as $item)
 		} else {
 
 			if ($scp2 == 1) {
-				if(!$nim){
+				if (!$nim) {
 					$respond = [
 						'status' => 401,
-						'message'=> 'Please input an nim!',
+						'message' => 'Please input an nim!',
 						'data' => []
 					];
-		
-					return $this->respond($respond,401);
+
+					return $this->respond($respond, 401);
 				};
 				$alumni = $init->getDetailUserApi($nim);
-	
+
 				$respond = [
 					'status' => 200,
-					'message'=> 'Successful!',
+					'message' => 'Successful!',
 					'data' => $alumni
 				];
 				return $this->respond($respond, 200);
 			} else {
 				$respond = [
 					'status' => 403,
-					'message'=> 'Forbidden!',
+					'message' => 'Forbidden!',
 					'data' => []
 				];
 				return $this->respond($respond, 403);
 			}
 		};
-
-	} 
+	}
 
 	//--------------------------------------------------------------------
 
