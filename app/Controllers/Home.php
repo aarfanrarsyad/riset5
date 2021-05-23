@@ -87,13 +87,12 @@ class Home extends BaseController
 								array_push($riwayat_pendidikan, $data->Nama_Instansi_Pendidikan);
 							if (in_array('Akademi Ilmu Statistik', $riwayat_pendidikan) || in_array('Sekolah Tinggi Ilmu Statistik', $riwayat_pendidikan) || in_array('Politeknin Statistika STIS', $riwayat_pendidikan)) {
 
-								$id = substr($user->getNipBaru(), 0, 6);
+								$cek = $this->modelAlumni->getAlumniByEmail($user->getEmail());
 
 								// binding session dengan database
-								if ($this->modelAlumni->getAlumniById($id) == NULL) {
+								if ($cek == NULL) {
 
 									$data = [
-										'id_alumni'          => $id,
 										'nama'               => $user->getName(),
 										'jenis_kelamin'      => $faker->randomElement($array = array('Lk', 'Pr')),
 										'tempat_lahir'       => $faker->city,
@@ -118,6 +117,8 @@ class Home extends BaseController
 									];
 									$this->modelAlumni->db->table('alumni')->insert($data);
 
+									$cek = $this->modelAlumni->getAlumniByEmail($user->getEmail());
+
 									// $data = [
 									// 	'nama_instansi' 	=> $faker->company,
 									// 	'kota'      	 	=> $faker->city,
@@ -131,7 +132,7 @@ class Home extends BaseController
 									// $this->modelAlumni->db->table('tempat_kerja')->insert($data);
 
 									$data = [
-										'id_alumni'       => $data['id_alumni'],
+										'id_alumni'       => $cek['id_alumni'],
 										'id_tempat_kerja' => 1,
 									];
 									$this->modelAlumni->db->table('alumni_tempat_kerja')->insert($data);
@@ -161,13 +162,15 @@ class Home extends BaseController
 									// $this->modelAlumni->db->table('alumni_tempat_kerja')->insert($data);
 								}
 
+								// $cek = $this->modelAlumni->getAlumniByEmail($user->getEmail());
+
 								if ($this->modelAuth->getUserByUsername($user->getUsername()) == NULL) {
 									date_default_timezone_set("Asia/Bangkok");
 									$now = date("Y-m-d H:i:s");
 									$data = [
 										'email'				=> $user->getEmail(),
 										'username'			=> $user->getUsername(),
-										'id_alumni'			=> $id,
+										'id_alumni'			=> $cek['id_alumni'],
 										'fullname'			=> $user->getName(),
 										'user_image'		=> $user->getUrlFoto(),
 										'active'			=> 1,
@@ -338,13 +341,11 @@ class Home extends BaseController
 				if (isset($hasil['profile']['nim'])) {	//apabila alumni login dengan akun sipadu mahasiswa
 					$user = $hasil['profile'];
 
-					$id = "02" . substr($user['nim'], -5);
-					// echo $id;
-					// die();
+					$cek = $this->modelAlumni->getAlumniByEmail($user['nim'] . "@stis.ac.id");
+
 					// binding session dengan database (insert data ke tabel alumni kalau belum terdaftar di tabel alumni) 
-					if ($this->modelAlumni->getAlumniById($id) == NULL) {
+					if ($cek == NULL) {
 						$data = [
-							'id_alumni'          => $id,
 							'nama'               => $user['nama'],
 							'jenis_kelamin'      => $faker->randomElement($array = array('Lk', 'Pr')),
 							'tempat_lahir'       => $faker->city,
@@ -369,6 +370,8 @@ class Home extends BaseController
 						];
 						$this->modelAlumni->db->table('alumni')->insert($data);
 
+						$cek = $this->modelAlumni->getAlumniByEmail($user['nim'] . "@stis.ac.id");
+
 						// $data = [
 						// 	'nama_instansi' 	=> $faker->company,
 						// 	'kota'      	 	=> $faker->city,
@@ -382,7 +385,7 @@ class Home extends BaseController
 						// $this->modelAlumni->db->table('tempat_kerja')->insert($data);
 
 						$data = [
-							'id_alumni'       => $data['id_alumni'],
+							'id_alumni'       => $cek['id_alumni'],
 							'id_tempat_kerja' => 1,
 						];
 						$this->modelAlumni->db->table('alumni_tempat_kerja')->insert($data);
@@ -420,8 +423,9 @@ class Home extends BaseController
 						$data = [
 							'email'				=> $user['nim'] . "@stis.ac.id",
 							'username'			=> $user['nim'],
-							'id_alumni'			=> $id,
+							'id_alumni'			=> $cek['id_alumni'],
 							'fullname'			=> $user['nama'],
+							'user_image'		=> "default.svg"
 							'active'			=> 1,
 							'force_pass_reset'	=> 0,
 							'created_at'		=> $now,
