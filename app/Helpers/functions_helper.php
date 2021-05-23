@@ -424,29 +424,29 @@ function getRGBColor($num)
     ); //b
 }
 
-function get_alumni_by_nim($nim=null,$select='id_alumni')
+function get_alumni_by_nim($nim = null, $select = 'id_alumni')
 {
     $db = \Config\Database::connect();
     $id = $db->table('pendidikan')->join('pendidikan_tinggi', 'pendidikan_tinggi.id_pendidikan = pendidikan.id_pendidikan')
-                ->getWhere(['nim'=>$nim])->getRow()->id_alumni;
+        ->getWhere(['nim' => $nim])->getRow()->id_alumni;
 
     if (!is_null($nim)) {
-        $return = $db->table('alumni')->select($select)->getWhere(['id_alumni'=>$id]);
+        $return = $db->table('alumni')->select($select)->getWhere(['id_alumni' => $id]);
     } else {
         $return = $db->table('alumni')->select($select)->get();
     }
 
-    if (count(explode(',', $select))==1 && $select !== '*') {
+    if (count(explode(',', $select)) == 1 && $select !== '*') {
         return $return->getRowArray()[$select];
     } else {
         return $return->getRow();
-    }    
+    }
 }
 
-function get_nim_by_id_alumni($id=null,$select='nim')
+function get_nim_by_id_alumni($id = null, $select = 'nim')
 {
     $db = \Config\Database::connect();
-    if(!is_null($id)){
+    if (!is_null($id)) {
         $query = "SELECT $select FROM pendidikan_tinggi AS A JOIN pendidikan AS B
         ON A.id_pendidikan=B.id_pendidikan JOIN alumni AS C 
         ON B.id_alumni = C.id_alumni WHERE C.id_alumni = $id ORDER BY A.nim DESC";
@@ -458,4 +458,119 @@ function get_nim_by_id_alumni($id=null,$select='nim')
         $result = $db->query($query)->getRow()->nim;
     }
     return $result;
+}
+
+# Helper to standardize Pendidikan Terakhir
+function standardPendidikanTerakhir($key)
+{
+    $arr_standar = [
+        'Ak. Ilmu Statistik' => 'Akademi Ilmu Statistik',
+        'D III Statistika' => 'D-III Statistika',
+        'D III STIS' => 'D-III Statistika',
+        'D-III STIS' => 'D-III Statistika',
+        'D-III AIS' => 'D-III Statistika',
+        'D-IV Statistik Ekonomi' => 'D-IV Statistika Ekonomi',
+        'D-IV SE' => 'D-IV Statistika Ekonomi',
+        'Statistik Ekonomi' => 'D-IV Statistika Ekonomi',
+        'D-IV Statistik Sosial Kependudukan' => 'D-IV Statistika Sosial & Kependudukan',
+        'D-IV SK' => 'D-IV Statistika Sosial & Kependudukan',
+        'Statistik Sosial Kependudukan' => 'D-IV Statistika Sosial & Kependudukan',
+        'Komputasi Statistik' => 'D-IV Komputasi Statistik',
+        'S-1 Adm.Negara' => 'S-1 Administrasi Negara',
+        'S-1 Ek. Akuntansi' => 'S-1 Ekonomi Akuntansi',
+        'S-1 Ekonomi(Perus)' => 'S-1 Ekonomi Perusahaan',
+        'S-1 IKIP (Penddkn)' => 'S-1 IKIP Pendidikan',
+        'S-2 Businnes adm.' => 'S-2 Business Administration',
+        'S-2 Ekonomi (Manajemen)' => 'S-2 Ekonomi Manajemen',
+        'S-2 Engin In Computer Science' => 'S-2 Engineering In Computer Science',
+        'S-2 Engin In Indus Engineering' => 'S-2 Engineering In Indus Engineering',
+        'S-2 Engin. In Manag.Engin' => 'S-2 Engineering In Manag. Engineering',
+        'S-2 Engineering in Mech. Engin' => 'S-2 Engineering in Mech. Engineering',
+        'S-2 Lainnya' => 'S-2',
+        'S-2 Master' => 'S-2',
+        'S-2 Public Healt' => 'S-2 Public Health',
+        'S-2 Sains' => 'S-2',
+        'S-3 Doktor' => 'S-3',
+        'S-3 Of Engenering' => 'S-3 Of Engineering',
+    ];
+    $standard = $arr_standar[$key];
+
+    if (isset($standard) || $standard != NULL) {
+        $value = $standard;
+    } else {
+        $value = $key;
+    }
+
+    return $value;
+}
+
+# Helper to standardize Prodi Jurusan
+function standardProdiJurusan($key)
+{
+    $arr_standar = [
+        'Ak. Ilmu Statistik' => 'Akademi Ilmu Statistik',
+        'Ak.I.Keu.Perbankan' => 'Akademi Ilmu Keuangan Perbankan',
+        'Akademi (D III)' => 'Akademi D-III',
+        'APP (Ekonomi)' => 'APP Ekonomi',
+        'APP (Umum)' => 'APP Umum',
+        'D-IV Statistik Ekonomi' => 'D-IV Statistika Ekonomi',
+        'D-IV SE' => 'D-IV Statistika Ekonomi',
+        'Statistik Ekonomi' => 'D-IV Statistika Ekonomi',
+        'D-IV Statistik Sosial Kependudukan' => 'D-IV Statistika Sosial & Kependudukan',
+        'D-IV SK' => 'D-IV Statistika Sosial & Kependudukan',
+        'Statistik Sosial Kependudukan' => 'D-IV Statistika Sosial & Kependudukan',
+        'Komputasi Statistik' => 'D-IV Komputasi Statistik',
+        'D III Kebidanan' => 'D-III Kebidanan',
+        'D III Manajemen Informatika' => 'D-III Manajemen Informatika',
+        'D III Statistika' => 'D-III Statistika',
+        'D III STIS' => 'D-III Statistika',
+        'D-III STIS' => 'D-III Statistika',
+        'D-III AIS' => 'D-III Statistika',
+        'Diploma I Statistika' => 'D-I Statistika',
+        'S-1 Adm.Negara' => 'S-1 Administrasi Negara',
+        'S-1 Adm.Niaga' => 'S-1 Administrasi Niaga',
+        'S-1 Ek. Akuntansi' => 'S-1 Ekonomi Akuntansi',
+        'S-1 Ekonomi(Perus)' => 'S-1 Ekonomi Perusahaan',
+        'S-1 IKIP (Penddkn)' => 'S-1 IKIP Pendidikan',
+        'S-1 Lainnya' => 'S-1',
+        'S-1 Sospol(Adm.Negara' => 'S-1 Sospol Administrasi Negara',
+        'S-1 Sospol(Adm.Niaga)' => 'S-1 Sospol Administrasi Niaga',
+        'S-2 Businnes adm.' => 'S-2 Business Administration',
+        'S-2 Ekonomi (Manajemen)' => 'S-2 Ekonomi Manajemen',
+        'S-2 Engin In Computer Science' => 'S-2 Engineering In Computer Science',
+        'S-2 Engin In Indus Engineering' => 'S-2 Engineering In Indus Engineering',
+        'S-2 Engin. In Manag.Engin' => 'S-2 Engineering In Manag. Engineering',
+        'S-2 Engineering in Mech. Engin' => 'S-2 Engineering in Mech. Engineering',
+        'S-2 Lainnya' => 'S-2',
+        'S-2 Master' => 'S-2',
+        'S-2 Public Healt' => 'S-2 Public Health',
+        'S-2 Sains' => 'S-2',
+        'S-3 Doktor' => 'S-3',
+        'S.D.' => 'SD',
+        'S.M.A' => 'SMA',
+        'S.M.A Pasti' => 'SMA',
+        'S.M.A Sosial' => 'SMA IPS',
+        'S.M.E.A Tata Buku' => 'SMEA Tata Buku',
+        'S.M.E.P' => 'SMEP',
+        'S.M.P' => 'SMP',
+        'S.T.M' => 'STM',
+        'S.T.M Bangunan' => 'STM Bangunan',
+        'S.T.M Mesin' => 'STM',
+        'S.T.M. Listrik' => 'STM Listrik',
+        'SMA A1 (Fisik)' => 'SMA IPA',
+        'SMA A2 (Biologi)' => 'SMA IPA',
+        'SMA A3 (Sosial)' => 'SMA IPS',
+        'SMK Lainnya' => 'SMK',
+        'SMU IPA' => 'SMA IPA',
+        'SMU IPS' => 'SMA IPS'
+    ];
+    $standard = $arr_standar[$key];
+
+    if (isset($standard) || $standard != NULL) {
+        $value = $standard;
+    } else {
+        $value = $key;
+    }
+
+    return $value;
 }
