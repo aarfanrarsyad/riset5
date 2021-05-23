@@ -574,3 +574,32 @@ function standardProdiJurusan($key)
 
     return $value;
 }
+
+# Helper to standardize No Hp
+function standardNoHp($key)
+{
+    $provider = array('811', '812', '813', '852', '853', '821', '822', '851', '823', '814', '815', '816', '855', '856', '857', '858', '817', '818', '819', '859', '877', '878', '831', '832', '833', '838', '828', '881', '882', '884', '886', '885', '883', '887', '888', '889', '895', '896', '897', '899', '898');
+    $ss = 0;
+    // remove strip
+    $number = str_replace('-', '', $key);
+    // standarkan 62
+    $country_code = '62';
+    if (substr($number, 0, strlen($country_code)) == $country_code) {
+        $number = substr($number, strlen($country_code));
+        $number = "0" . $number;
+    }
+    // Loop to check provider
+    foreach ($provider as $p) {
+        if (substr($number, 1, 3) === $p) {
+            $ss = $ss + 1;
+        } else {
+            $ss = $ss + 0;
+        }
+    }
+    if ($ss == 1) {
+        $value = $number;
+    } elseif ($ss == 0) {
+        $value = "";
+    }
+    return $value;
+}
