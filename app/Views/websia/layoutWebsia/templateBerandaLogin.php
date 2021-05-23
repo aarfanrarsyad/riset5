@@ -103,7 +103,7 @@
                                     <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
                                 </svg>
                                 <form action="/User/searchAndFilter" method="get">
-                                    <input type="text" name="cari" placeholder="|  CARI" class="placeholder-white bg-transparent focus:outline-none ml-6 font-paragraph p-1">
+                                    <input type="text" name="cari" placeholder="|  CARI" autocomplete="off" class="placeholder-white bg-transparent focus:outline-none ml-6 font-paragraph p-1" value="<?= isset($_GET['cari'])?$_GET['cari']:'' ?>">
                                 </form>
                             </div>
                         </div>
@@ -160,7 +160,7 @@
                                 <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
                             </svg>
                             <form action="/User/searchAndFilter" method="get">
-                                <input type="text" name="cari" placeholder="    |  CARI" id="inputCari" class="placeholder-white bg-transparent ml-6 text-xs text-center w-2/3 outline-none ">
+                                <input type="text" name="cari" placeholder="    |  CARI" id="inputCari" class="placeholder-white bg-transparent ml-6 text-xs text-center w-2/3 outline-none " value="<?= isset($_GET['cari'])?$_GET['cari']:'' ?>">
                             </form>
                         </div>
                         <div class=" mt-1 px-2 py-2 w-11/12 mx-auto font-medium bg-secondary hover:bg-secondaryhover transition-colors duration-200 text-xs text-center text-white ">

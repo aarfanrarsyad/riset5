@@ -201,7 +201,7 @@ $routes->group('admin', ['namespace' => 'App\Controllers'], function ($routes) {
 	$routes->post('request-api/update-scope', 'Admin::update_scope');
 	$routes->post(
 		'request-api/delete-scope',
-		'Admin::delete_scope',
+		'Admin::delete_scope'
 	);
 
 
