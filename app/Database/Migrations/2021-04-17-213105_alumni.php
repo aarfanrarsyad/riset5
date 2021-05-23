@@ -351,6 +351,11 @@ class Alumni extends Migration
 				'unsigned'       => true,
 				'auto_increment' => true,
 			],
+			'tag' => [
+				'type'           => 'VARCHAR',
+				'constraint'     => 80,
+				'null'			 => true,
+			],
 			'nama_file' => [
 				'type' => 'VARCHAR',
 				'constraint' => '255',
@@ -388,26 +393,26 @@ class Alumni extends Migration
 
 		//================================================================== 
 		// tabel tag_foto
-		$this->forge->addField([
-			'tag' => [
-				'type'           => 'VARCHAR',
-				'constraint'     => 80,
-				'null'			 => true,
-			],
-			'id_foto' => [
-				'type'           => 'INT',
-				'constraint'     => 16,
-				'unsigned'       => true,
-			],
-		]);
+		// $this->forge->addField([
+		// 	'tag' => [
+		// 		'type'           => 'VARCHAR',
+		// 		'constraint'     => 80,
+		// 		'null'			 => true,
+		// 	],
+		// 	'id_foto' => [
+		// 		'type'           => 'INT',
+		// 		'constraint'     => 16,
+		// 		'unsigned'       => true,
+		// 	],
+		// ]);
 
 		//primary key
-		$this->forge->addKey('tag', TRUE);
-		$this->forge->addKey('id_foto', TRUE);
-		//foreign key
-		$this->forge->addForeignKey('id_foto', 'foto', 'id_foto', 'CASCADE', 'CASCADE');
-		//create table
-		$this->forge->createTable('tag_foto');
+		// $this->forge->addKey('tag', TRUE);
+		// $this->forge->addKey('id_foto', TRUE);
+		// //foreign key
+		// $this->forge->addForeignKey('id_foto', 'foto', 'id_foto', 'CASCADE', 'CASCADE');
+		// //create table
+		// $this->forge->createTable('tag_foto');
 
 		//================================================================== 
 		// tabel report
@@ -515,6 +520,6 @@ class Alumni extends Migration
 		$this->forge->dropTable('galeri');
 
 		//tabel tag_galeri
-		$this->forge->dropTable('tag_galeri');
+		// $this->forge->dropTable('tag_galeri');
 	}
 }

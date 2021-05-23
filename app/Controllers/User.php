@@ -1030,6 +1030,8 @@ class User extends BaseController
 			$year = date("Y");
 			$path = ROOTPATH . '/public/img/galeri/' . $year;
 
+			// $foto->move($path);
+
 			//cek apakah sudah terdapat foldernya
 			if (!is_dir($path))
 				mkdir($path, 0755, true);
@@ -1038,21 +1040,27 @@ class User extends BaseController
 			$file = $path . "/" . $foto->getName();
 			$ext = "." . $foto->guessExtension();
 			$file = str_replace($ext, "", $file);
-			if (is_file($file . $ext)) {
+			if (is_file($file  . '.jpeg')) {
 				$new_name = $file;
-				while (is_file($new_name . $ext)) {
+				while (is_file($new_name  . '.jpeg')) {
 					$time = date("Ymdhis");
 					$new_name = $new_name . "-" . $time;
 				}
-				rename($file . $ext, $new_name . $ext);
+				// rename($file . $ext, $new_name . $ext);
 			}
 
-			$foto->move($path);
-
 			if (!isset($new_name)) {
+				$image = \Config\Services::image()
+					->withFile($foto->getPath() . '\\' . $foto->getFilename())
+					->withResource()
+					->convert(IMAGETYPE_JPEG)
+					->save($file  . '.jpeg', 50);
+				// unlink($file . $ext);
+
 				$file = str_replace(ROOTPATH . '/public/img/galeri/', "", $file);
 				$data = [
-					'nama_file'		=> $file . $ext,
+					'nama_file'		=> $file  . '.jpeg',
+					'tag'			=> $tags,
 					'caption'		=> $caption,
 					'created_at'	=> $now,
 					'album' 		=> $album,
@@ -1061,9 +1069,17 @@ class User extends BaseController
 				];
 				$model->db->table('foto')->insert($data);
 			} else {
+				$image = \Config\Services::image()
+					->withFile($foto->getPath() . '\\' . $foto->getFilename())
+					->withResource()
+					->convert(IMAGETYPE_JPEG)
+					->save($new_name  . '.jpeg', 50);
+				// unlink($new_name . $ext);
+
 				$new_name = str_replace(ROOTPATH . '/public/img/galeri/', "", $new_name);
 				$data = [
-					'nama_file'		=> $new_name . $ext,
+					'nama_file'		=> $new_name  . '.jpeg',
+					'tag'			=> $tags,
 					'album' 		=> $album,
 					'caption'		=> $caption,
 					'created_at'	=> $now,
@@ -1074,13 +1090,13 @@ class User extends BaseController
 				$model->db->table('foto')->insert($data);
 			}
 
-			$foto = $model->getByName($data['nama_file']);
+			// $foto = $model->getByName($data['nama_file']);
 
-			$data = [
-				'id_foto'	=> $foto[0]->id_foto,
-				'tag'		=> $tags
-			];
-			$model->db->table('tag_foto')->insert($data);
+			// $data = [
+			// 	'id_foto'	=> $foto[0]->id_foto,
+			// 	'tag'		=> $tags
+			// ];
+			// $model->db->table('tag_foto')->insert($data);
 			$flash = "<script> suksesUnggahFoto(); </script>";
 			session()->setFlashdata('flash', $flash);
 			return redirect()->back();
