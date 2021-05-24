@@ -44,7 +44,7 @@
                     </div>
                 </div>-->
 
-                <div class="hidden lg:w-2/5 md:w-2/3 w-3/4 opacity-0 transition-all duration-300 rounded-xl text-primary py-2 text-sm absolute lg:right-18 -lg:right-2 md:right-6 right-1 md:top-48 top-28">
+                <div class="hidden lg:w-2/5 md:w-2/3 w-3/4 opacity-0 transition-all duration-300 rounded-xl text-primary py-2 text-sm absolute lg:right-18 -lg:right-2 md:right-6 right-1 md:top-48 top-28 h-72 overflow-y-auto z-20">
                     <div class="font-bold px-2">Status Unggah Berita</div>
                     <div class="bg-gray-100 flex p-2 gap-x-2 mb-2">
                         <div class="lg:w-3/4 md:w-4/5 w-2/3">
@@ -74,17 +74,20 @@
     </div>
     <hr class="border-primary border-t-2 border-b-0 mt-3">
     <?php if (count($dataset) >= 3) : ?>
-        <div class="mt-4 bg-primary md:p-6 p-3">
+        <div class="mt-4 bg-primary md:p-8 p-3">
             <h2 class="font-bold text-secondary text-center font-heading lg:text-2xl md:text-xl text-lg">Berita Terpopuler</h2>
-            <div class="md:grid md:grid-cols-3 md:gap-x-6 mt-4">
-                <div class="md:col-span-2 md:h-full h-32 flex items-end p-2 sm:mb-6 mb-2 md:mb-0" style="background-image: url('<?= base_url('berita/berita_' . $dataset[0]['id'] . '/' . $dataset[0]['thumbnail']) ?>');">
+            <div class="md:grid md:grid-cols-3 md:gap-x-8 mt-4">
+                <div class="md:col-span-2 lg:h-96 md:h-72 h-32 flex items-end p-2 sm:mb-4 mb-2 md:mb-0 border border-gray-100">
+                    <img src="<?= base_url('berita/berita_' . $dataset[0]['id'] . '/' . $dataset[0]['thumbnail']) ?>" alt="" class="w-full md:h-full object-contain">
                     <h1 class="text-white font-heading font-bold text-xl" style="position:absolute;"><?= $dataset[0]['judul'] ?></h1>
                 </div>
-                <div class="md:grid md:grid-rows-2 md:gap-y-6">
-                    <div class="lg:h-48 h-32 flex items-end p-2 sm:mb-6 mb-2 md:mb-0" style="background-image: url('<?= base_url('berita/berita_' . $dataset[1]['id'] . '/' . $dataset[1]['thumbnail']) ?>');">
+                <div class="md:grid md:grid-rows-2 md:gap-y-8">
+                    <div class="lg:h-44 h-32 flex items-end p-2 sm:mb-4 mb-2 md:mb-0 border border-gray-100">
+                        <img src="<?= base_url('berita/berita_' . $dataset[1]['id'] . '/' . $dataset[1]['thumbnail']) ?>" alt="" class="w-full h-full object-contain">
                         <h1 class="text-white font-heading font-bold text-lg" style="position:absolute;"><?= $dataset[1]['judul'] ?></h1>
                     </div>
-                    <div class="lg:h-48 h-32 flex items-end p-2" style="background-image: url('<?= base_url('berita/berita_' . $dataset[2]['id'] . '/' . $dataset[2]['thumbnail']) ?>');">
+                    <div class="lg:h-44 h-32 flex items-end p-2 border border-gray-100">
+                        <img src="<?= base_url('berita/berita_' . $dataset[2]['id'] . '/' . $dataset[2]['thumbnail']) ?>" alt="" class="w-full h-full object-contain">
                         <h1 class="text-white font-heading font-bold text-lg" style="position:absolute;"><?= $dataset[2]['judul'] ?></h1>
                     </div>
                 </div>
@@ -101,16 +104,18 @@
                 <?php if ($i % 2 == 0) : ?>
                     <div>
                         <div class="flex gap-x-2 items-center">
-                            <img src="<?= base_url('berita/berita_' . $dataset[$i]['id'] . '/' . $dataset[$i]['thumbnail']) ?>" class="lg:w-1/4 w-1/3 lg:h-24 h-20">
-                            </img>
+                            <div class="lg:w-1/4 w-1/3 lg:h-24 h-20 border border-gray-400">
+                                <img src="<?= base_url('berita/berita_' . $dataset[$i]['id'] . '/' . $dataset[$i]['thumbnail']) ?>" class="w-full h-full object-contain">
+                                </img>
+                            </div>
                             <div class="lg:w-3/4 w-2/3">
                                 <a href="<?= base_url('user/viewBerita/' . $dataset[$i]['id']) ?>">
                                     <h3 class="font-heading font-semibold text-primary text-lg"><?= $dataset[$i]['judul'] ?></h3>
                                 </a>
                                 <div class="flex gap-x-1 items-center">
-                                    <img src="/img/icon/clock.png" class="w-3 h-3" alt="">
+                                    <img src="/img/components/icon/clock.png" class="h-4" alt="tanggal">
                                     <p class="text-xs text-primary"><?= $dataset[$i]['tanggal_publish'] ?></p>
-                                    <img src="/img/icon/profile.png" class="w-3 h-3 ml-2" alt="">
+                                    <img src="/img/components/icon/profile.png" class="h-4 ml-2" alt="author">
                                     <p class="text-xs text-primary"><?= $dataset[$i]['author'] ?></p>
                                 </div>
                                 <p>
@@ -123,16 +128,18 @@
                 <?php else : ?>
                     <div class="md:block hidden">
                         <div class="flex gap-x-2 items-center">
-                            <img src="<?= base_url('berita/berita_' . $dataset[$i]['id'] . '/' . $dataset[$i]['thumbnail']) ?>" class="lg:w-1/4 w-1/3 lg:h-24 h-20">
-                            </img>
+                            <div class="lg:w-1/4 w-1/3 lg:h-24 h-20 border border-gray-400">
+                                <img src="<?= base_url('berita/berita_' . $dataset[$i]['id'] . '/' . $dataset[$i]['thumbnail']) ?>" class="w-full h-full object-contain">
+                                </img>
+                            </div>
                             <div class="lg:w-3/4 w-2/3">
                                 <a href="<?= base_url('user/viewBerita/' . $dataset[$i]['id']) ?>">
                                     <h3 class="font-heading font-semibold text-primary text-lg"><?= $dataset[$i]['judul'] ?></h3>
                                 </a>
                                 <div class="flex gap-x-1 items-center">
-                                    <img src="/img/icon/clock.png" class="w-3 h-3" alt="">
+                                    <img src="/img/components/icon/clock.png" class="h-4" alt="tanggal">
                                     <p class="text-xs text-primary"><?= $dataset[$i]['tanggal_publish'] ?></p>
-                                    <img src="/img/icon/profile.png" class="w-3 h-3 ml-2" alt="">
+                                    <img src="/img/components/icon/profile.png" class="h-4 ml-2" alt="author">
                                     <p class="text-xs text-primary"><?= $dataset[$i]['author'] ?></p>
                                 </div>
                                 <p>
@@ -148,12 +155,12 @@
         <!-- end card berita -->
         <div class="flex gap-x-2 items-center justify-end mb-8">
             <a href="">
-                <img src="/img/components/left-on.png" class="w-4 h-4 cursor-pointer" alt="">
+                <img src="/img/components/icon/left-on.png" class="w-4 h-4 cursor-pointer" alt="Berita sebelumnya">
             </a>
             <a href="" class="text-secondary">1</a>
             <a href="" class="text-secondary">2</a>
             <a href="">
-                <img src="/img/components/right-on.png" class="w-4 h-4 cursor-pointer" alt="">
+                <img src="/img/components/icon/right-on.png" class="w-4 h-4 cursor-pointer" alt="Berita selanjutnya">
             </a>
         </div>
     </div>
