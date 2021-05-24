@@ -102,3 +102,19 @@ $('#notif').click(function () {
     $(this).next().addClass('scale-0')
   }
 })
+
+  function notif(idDiv){
+    if ($(idDiv).next().hasClass('hidden')) {
+      $(idDiv).next().removeClass('hidden')
+      setTimeout(() => {
+      $(idDiv).next().removeClass('opacity-0')
+      $(idDiv).next().removeClass('scale-0')
+    }, 5);
+  } else {
+    setTimeout(() => {
+      $(idDiv).next().addClass('hidden')
+    }, 300);
+    $(idDiv).next().addClass('opacity-0')
+    $(idDiv).next().addClass('scale-0')
+  }
+}

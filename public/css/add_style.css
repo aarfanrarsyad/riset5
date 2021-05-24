@@ -65,7 +65,6 @@ body div.loading {
 }
 
 @media (max-width: 460px) {
-
   #divKosong,
   #burgerDok {
     top: 4rem;
@@ -86,8 +85,8 @@ body div.loading {
 }
 
 #menu1:hover,
-#menu1+ul>li>div:hover,
-#menu1+ul>li>ul>li:hover {
+#menu1 + ul > li > div:hover,
+#menu1 + ul > li > ul > li:hover {
   background-color: rgb(1, 89, 152);
 }
 
@@ -101,7 +100,7 @@ body div.loading {
 
 /* style layoutDokumentasi */
 
-#nav ul li:hover>ul {
+#nav ul li:hover > ul {
   max-height: 9em;
 }
 
@@ -171,11 +170,11 @@ input[type="checkbox"] {
 }
 
 /* style unggah berita */
-#infoBerita~div {
+#infoBerita ~ div {
   background-color: #6cf;
 }
 
-#infoBerita~div:before {
+#infoBerita ~ div:before {
   position: absolute;
   top: -10px;
   content: "";
@@ -185,11 +184,25 @@ input[type="checkbox"] {
   border-color: transparent transparent #6cf transparent;
 }
 
-#notif~div {
+#notif ~ div {
   background-color: #6cf;
 }
 
-#notif~div:before {
+#notif ~ div:before {
+  position: absolute;
+  top: -10px;
+  content: "";
+  right: 10px;
+  border-style: solid;
+  border-width: 0 10px 10px 10px;
+  border-color: transparent transparent #6cf transparent;
+}
+
+#notif1 ~ div {
+  background-color: #6cf;
+}
+
+#notif1 ~ div:before {
   position: absolute;
   top: -10px;
   content: "";
@@ -200,6 +213,6 @@ input[type="checkbox"] {
 }
 
 /* style proyek WS */
-.proyek+div {
+.proyek + div {
   box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.1), 0 0px 3px 3px rgba(0, 0, 0, 0.06);
 }
