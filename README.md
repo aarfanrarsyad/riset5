@@ -13,7 +13,7 @@ OPTIONAL {
       - php spark db:seed DataSeeder
 } OR {
   5. Import DB dari ...\riset5\new.sql
-  > direkomendasikan yang ini
+  > SQL masih banyak bug
 }
 
 6. Siap digunakan. php spark serve
