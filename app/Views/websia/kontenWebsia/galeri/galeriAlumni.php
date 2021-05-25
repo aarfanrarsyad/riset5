@@ -11,11 +11,11 @@
         <div class="album-btn rounded-3xl text-sm bg-white text-secondary hover:bg-secondaryhover hover:text-white transition-all duration-400 galeriButton">
             <!-- Awal button album -->
             <div class="font-paragraph">
-                <button type="button" class="text-center rounded-3xl px-4 py-1 border border-secondary focus:outline-none">
-                    <a href="<?= base_url() ?>/User/listAlbumFoto">
+                <a href="<?= base_url() ?>/User/listAlbumFoto">
+                    <button type="button" class="text-center rounded-3xl px-4 py-1 border border-secondary focus:outline-none">
                         ALBUM
-                    </a>
-                </button>
+                    </button>
+                </a>
             </div>
             <!-- Akhir button album -->
         </div>

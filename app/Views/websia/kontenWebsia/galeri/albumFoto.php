@@ -8,19 +8,19 @@
         Album <?= $current_album ?>
     </div>
     <div class="flex items-center justify-center mt-4 mb-8">
-        <button type="button" class="mr-4 px-4 py-1 rounded-3xl border border-secondary text-sm bg-white text-secondary hover:bg-secondaryhover hover:text-white transition-colors duration-300 focus:outline-none galeriButton">
-            <a href="<?= base_url() ?>/User/galeriFoto">
+        <a href="<?= base_url() ?>/User/galeriFoto">
+            <button type="button" class="mr-4 px-4 py-1 rounded-3xl border border-secondary text-sm bg-white text-secondary hover:bg-secondaryhover hover:text-white transition-colors duration-300 focus:outline-none galeriButton">
                 SEMUA FOTO
-            </a>
-        </button>
+            </button>
+        </a>
         <div class="album-btn rounded-3xl text-sm bg-white text-secondary hover:bg-secondaryhover hover:text-white transition-all duration-400 galeriButton">
             <!-- Awal button album -->
             <div class="font-paragraph">
-                <button type="button" class="text-center rounded-3xl px-4 py-1 border border-secondary focus:outline-none">
-                    <a href="<?= base_url() ?>/User/listAlbumFoto">
+                <a href="<?= base_url() ?>/User/listAlbumFoto">
+                    <button type="button" class="text-center rounded-3xl px-4 py-1 border border-secondary focus:outline-none">
                         ALBUM
-                    </a>
-                </button>
+                    </button>
+                </a>
             </div>
             <!-- Akhir button album -->
         </div>

@@ -8,11 +8,11 @@
         Album Galeri Video Kenangan Alumni
     </div>
     <div class="flex items-center justify-center mt-4 mb-8">
-        <button type="button" class="mr-4 px-4 py-1 rounded-3xl border border-secondary text-sm bg-white text-secondary hover:bg-secondaryhover hover:text-white transition-colors duration-300 focus:outline-none galeriButton">
-            <a href="/User/galeriVideo">
+        <a href="/User/galeriVideo">
+            <button type="button" class="mr-4 px-4 py-1 rounded-3xl border border-secondary text-sm bg-white text-secondary hover:bg-secondaryhover hover:text-white transition-colors duration-300 focus:outline-none galeriButton">
                 SEMUA VIDEO
-            </a>
-        </button>
+            </button>
+        </a>
         <div class="album-btn rounded-3xl text-sm bg-secondary text-white hover:bg-secondaryhover transition-all duration-400 galeriButton">
             <!-- Awal button album -->
             <div class="font-paragraph">
