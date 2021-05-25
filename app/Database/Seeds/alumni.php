@@ -18,9 +18,6 @@ class Alumni extends Seeder
 			'tanggal_lahir'      => $faker->date($format = 'Y-m-d', $max = 'now'),
 			'telp_alumni'        => $faker->phoneNumber,
 			'alamat_alumni'      => $faker->address,
-			'kota'      	 	 => $faker->city,
-			'provinsi'      	 => $faker->state,
-			'negara'      		 => $faker->country,
 			'status_bekerja'     => $faker->boolean,
 			'perkiraan_pensiun'  => $faker->year,
 			'jabatan_terakhir'   => $faker->jobTitle,
@@ -28,11 +25,10 @@ class Alumni extends Seeder
 			'deskripsi'          => $faker->text,
 			'email'				 => $faker->email,
 			'ig'          		 => "dummy_igza__",
-			'fb'          		 => "Dummy",
 			'twitter'          	 => "Dummy__",
 			'nip'          	 	 => "198109262004122002",
 			'nip_bps'          	 => "301820912",
-			'foto_profil'      	 => "default.svg"
+			'foto_profil'      	 => $faker->randomElement($array = array('Lk', 'Pr'))."/default.svg"
 		];
 		$this->db->table('alumni')->insert($data);
 

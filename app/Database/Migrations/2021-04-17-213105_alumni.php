@@ -99,12 +99,12 @@ class Alumni extends Migration
 			],
 			'linkedin' => [
 				'type' => 'VARCHAR',
-				'constraint' => '50',
+				'constraint' => '255',
 				'null' => true,
 			],
 			'gscholar' => [
 				'type' => 'VARCHAR',
-				'constraint' => '50',
+				'constraint' => '255',
 				'null' => true,
 			],
 			'nip' => [
