@@ -31,6 +31,16 @@ class AlumniModel extends Model
         return $this->table('alumni')->like($field, $search);
     }
 
+    public function getProv()
+    {
+        return $this->db->table('provinsi')->get()->getResult();
+    }
+
+    public function getKab($idProv)
+    {
+        return $this->db->table('kabkota')->getWhere(['id_provinsi' => $idProv])->getResult();
+    }
+
     public function getAlumni($id)
     {
         $query = "SELECT * FROM users WHERE id = $id";

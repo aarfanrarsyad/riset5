@@ -212,6 +212,19 @@ input[type="checkbox"] {
   border-color: transparent transparent #6cf transparent;
 }
 
+#infoMedsos ~ div {
+  background-color: #6cf;
+}
+
+#infoMedsos ~ div:before {
+  position: absolute;
+  top: -10px;
+  content: "";
+  left: 20px;
+  border-style: solid;
+  border-width: 0 10px 10px 10px;
+  border-color: transparent transparent #6cf transparent;
+}
 /* style proyek WS */
 .proyek + div {
   box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.1), 0 0px 3px 3px rgba(0, 0, 0, 0.06);

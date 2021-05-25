@@ -11,6 +11,7 @@
    - php spark db:seed alumni
    - php spark db:seed rbac
    - php spark db:seed webservice
+   - php spark db:seed prov_kab
 6. Siap digunakan. php spark serve
 
 ## Catatan :
