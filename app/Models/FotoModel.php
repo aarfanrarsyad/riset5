@@ -68,4 +68,19 @@ class FotoModel extends Model
     {
         return $this->builder()->where('approval', 1)->where('album', $key)->countAllResults();
     }
+
+    public function getForProfil($id)
+    {
+        $this->builder()
+            ->select('foto.id_foto AS id_foto, foto.tag AS tag, foto.nama_file AS nama_file, foto.caption AS caption, foto.album AS album, foto.created_at AS created_at, foto.approval AS approval, alumni.nama AS nama')
+            ->join('alumni', 'alumni.id_alumni = foto.id_alumni', 'left')
+            ->like('tag', $id . ",%")
+            ->orLike('tag', "%," . $id . ",%")
+            ->orLike('tag', "%," . $id)
+            ->orWhere('foto.id_alumni', $id)
+            ->where('approval', 1)
+            ->orderBy('created_at', 'DESC')
+            ->orderBy('id_foto', 'DESC');
+        return $this->builder()->get()->getResultArray();
+    }
 }

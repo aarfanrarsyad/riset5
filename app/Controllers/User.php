@@ -96,6 +96,20 @@ class User extends BaseController
 	{
 
 		$model = new AlumniModel();
+		$fotoModel = new \App\Models\FotoModel;
+		$galeri_profil = $fotoModel->getForProfil(session()->id_alumni);
+		$i = 0;
+		foreach ($galeri_profil as $foto) {
+			$tag = explode(',', $foto['tag']);
+			$j = 0;
+			foreach ($tag as $t) {
+				$galeri_profil[$i]['tag_name'][$j] = $model->getTags($t);
+				$j++;
+			}
+			$i++;
+		}
+		// dd($galeri_profil);
+
 		$query1 = $model->bukaProfile(session('id_alumni'))->getRow();
 		// dd($query1);
 		//isi :
@@ -214,19 +228,21 @@ class User extends BaseController
 		}
 
 		$data = [
-			'status'		=> $status,
+			'status'			=> $status,
 			'judulHalaman' 		=> 'Profil User | Website Riset 5',
-			'active' 		=> 'profil',
-			'alumni'      => $query1,
-			'jenis_kelamin'  => $jk,
+			'active' 			=> 'profil',
+			'alumni'      		=> $query1,
+			'jenis_kelamin'  	=> $jk,
 			'status_bekerja'	=> $sb,
-			'aktif_pns'		=> $ap,
-			'tempat_kerja'	=> $query2,
-			'role' => $query3,
-			'prestasi' => $query5,
-			'pendidikan' => $query6,
-			'user' => $query7,
-			'rekomendasi'          => $query4,
+			'aktif_pns'			=> $ap,
+			'tempat_kerja'		=> $query2,
+			'role' 				=> $query3,
+			'prestasi'			=> $query5,
+			'pendidikan' 		=> $query6,
+			'user' 				=> $query7,
+			'rekomendasi'     	=> $query4,
+			'foto'				=> $galeri_profil,
+			'count'				=> count($galeri_profil),
 		];
 		return view('websia/kontenWebsia/userProfile/userProfile', $data);
 	}
@@ -1034,6 +1050,7 @@ class User extends BaseController
 			'judulHalaman'	=> 'Galeri Kenangan Alumni',
 			'active' 		=> 'galeri'
 		];
+		dd($data['galeri']);
 		return view('websia/kontenWebsia/galeri/galeriAlumni', $data);
 	}
 
