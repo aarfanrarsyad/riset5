@@ -282,8 +282,8 @@ function standardTempatLahir($key)
     $arr_standar = [
         'pekan baru' => 'Pekanbaru',
         'fak-fak' => 'Fakfak',
-        'Fak Fak"' => 'Fakfak',
-        'Klanten' => 'Klaten',
+        'fak fak"' => 'Fakfak',
+        'klanten' => 'Klaten',
         '16085' => '-',
         'temaggung' => 'Temanggung',
         'pare-pare' => 'Parepare',
