@@ -67,7 +67,7 @@
                     <a href="" class="w-full h-full">
                         <img src="<?= base_url('berita/berita_' . $dataset[0]['id'] . '/' . $dataset[0]['thumbnail']) ?>" alt="thumbnail" class="w-full h-full object-contain" style="z-index: 0;">
                         <div class="-mt-9 p-1">
-                            <h1 class="text-white font-heading font-bold text-lg"><?= $dataset[0]['judul'] ?></h1>
+                            <h1 class="bg-clip-content bg-black bg-opacity-50 text-white font-heading font-bold lg:text-lg md:text-base text-sm"><?= $dataset[0]['judul'] ?></h1>
                         </div>
                     </a>
                 </div>
@@ -102,7 +102,7 @@
             <?php for ($i = 0; $i < count($dataset); $i++) : ?>
                 <?php if ($i % 2 == 0) : ?>
                     <div>
-                        <div class="flex gap-x-2 items-center">
+                        <div class="flex gap-x-2">
                             <div class="lg:w-1/4 w-1/3 lg:h-24 h-20 border border-gray-400">
                                 <img src="<?= base_url('berita/berita_' . $dataset[$i]['id'] . '/' . $dataset[$i]['thumbnail']) ?>" alt="thumbnail" class="w-full h-full object-contain">
                                 </img>
@@ -111,22 +111,22 @@
                                 <a href="<?= base_url('user/viewBerita/' . $dataset[$i]['id']) ?>">
                                     <h3 class="font-heading font-semibold text-primary text-lg"><?= $dataset[$i]['judul'] ?></h3>
                                 </a>
-                                <div class="flex gap-x-1 items-center">
+                                <div class="flex mt-1 gap-x-1">
                                     <img src="/img/components/icon/clock.png" class="h-4" alt="tanggal">
-                                    <p class="text-xs text-primary"><?= $dataset[$i]['tanggal_publish'] ?></p>
+                                    <p class="font-paragraph text-xs text-primary"><?= $dataset[$i]['tanggal_publish'] ?></p>
                                     <img src="/img/components/icon/profile.png" class="h-4 ml-2" alt="author">
-                                    <p class="text-xs text-primary"><?= $dataset[$i]['author'] ?></p>
+                                    <p class="font-paragraph text-xs text-primary"><?= $dataset[$i]['author'] ?></p>
                                 </div>
-                                <p>
+                                <!-- <p>
                                     <?= $dataset[$i]['konten'] ?>
-                                </p>
+                                </p> -->
                             </div>
                         </div>
                         <hr class="my-3 border-gray-400">
                     </div>
                 <?php else : ?>
                     <div class="md:block hidden">
-                        <div class="flex gap-x-2 items-center">
+                        <div class="flex gap-x-2">
                             <div class="lg:w-1/4 w-1/3 lg:h-24 h-20 border border-gray-400">
                                 <img src="<?= base_url('berita/berita_' . $dataset[$i]['id'] . '/' . $dataset[$i]['thumbnail']) ?>" alt="thumbnail" class="w-full h-full object-contain">
                                 </img>
@@ -135,15 +135,15 @@
                                 <a href="<?= base_url('user/viewBerita/' . $dataset[$i]['id']) ?>">
                                     <h3 class="font-heading font-semibold text-primary text-lg"><?= $dataset[$i]['judul'] ?></h3>
                                 </a>
-                                <div class="flex gap-x-1 items-center">
+                                <div class="flex mt-1 gap-x-1">
                                     <img src="/img/components/icon/clock.png" class="h-4" alt="tanggal">
                                     <p class="text-xs text-primary"><?= $dataset[$i]['tanggal_publish'] ?></p>
                                     <img src="/img/components/icon/profile.png" class="h-4 ml-2" alt="author">
                                     <p class="text-xs text-primary"><?= $dataset[$i]['author'] ?></p>
                                 </div>
-                                <p>
+                                <!-- <p>
                                     <?= $dataset[$i]['konten'] ?>
-                                </p>
+                                </p> -->
                             </div>
                         </div>
                         <hr class="my-3 border-gray-400">
