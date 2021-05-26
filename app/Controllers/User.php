@@ -1041,7 +1041,7 @@ class User extends BaseController
 	{
 		$validated = $this->validate([
 			'file_upload'   => [
-				'rules' => 'uploaded[file_upload]',
+				'rules' => 'uploaded[file_upload]|max_size[file_upload,2048]',
 			],
 			'albumFoto'			=> [
 				'rules' => 'required',

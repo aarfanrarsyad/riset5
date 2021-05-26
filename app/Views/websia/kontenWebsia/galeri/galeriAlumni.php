@@ -233,7 +233,8 @@
         maxItems: 10,
         options: [
             <?php foreach ($alumni as $data) {
-                echo ("{
+                if ($data->id_alumni !== session()->id_alumni)
+                    echo ("{
                         angkatan: \"Angkatan " . $data->angkatan . "\",
                         name: \"" . $data->nama . "\",
                         id_alumni: \"" . $data->id_alumni . "\"
