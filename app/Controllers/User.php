@@ -1050,7 +1050,6 @@ class User extends BaseController
 			'judulHalaman'	=> 'Galeri Kenangan Alumni',
 			'active' 		=> 'galeri'
 		];
-		dd($data['galeri']);
 		return view('websia/kontenWebsia/galeri/galeriAlumni', $data);
 	}
 
