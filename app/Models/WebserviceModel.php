@@ -175,6 +175,6 @@ class WebserviceModel extends Model
         SET count_usage = count_usage+1, last_access = ? 
         WHERE token = ?;";
 
-        return $this->db->query($sql,[$dateTime,$token]);
+        return $this->db->query($sql, [$dateTime, $token]);
     }
 }

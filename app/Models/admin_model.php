@@ -1058,49 +1058,9 @@ class admin_model extends Model
 
     public function getAllAlumni($id)
     {
-        $query = "SELECT * FROM alumni
+        $query = "SELECT * FROM alumni 
+            JOIN angkatan_alumni ON angkatan_alumni.id_alumni=alumni.id_alumni 
             WHERE alumni.id_alumni=$id";
-        return $this->db->query($query);
-    }
-
-    public function getTempatKerjabyIdAlumni($id)
-    {
-        $query = "SELECT * FROM alumni_tempat_kerja
-        JOIN tempat_kerja ON alumni_tempat_kerja.id_tempat_kerja=tempat_kerja.id_tempat_kerja
-        WHERE alumni_tempat_kerja.id_alumni = $id";
-        return $this->db->query($query);
-    }
-
-    public function getPublikasiById($id)
-    {
-        if (!isset($id)) return redirect()->to(base_url('/admin'));
-
-        $query = "SELECT *
-            FROM publikasi 
-            WHERE publikasi.id_alumni = $id
-            ";
-        return $this->db->query($query);
-    }
-
-    public function getPendidikanById($id)
-    {
-        if (!isset($id)) return redirect()->to(base_url('/admin'));
-
-        $query = "SELECT * FROM pendidikan 
-            JOIN pendidikan_tinggi ON pendidikan.id_pendidikan=pendidikan_tinggi.id_pendidikan
-            WHERE pendidikan.id_alumni = $id
-            ";
-        return $this->db->query($query);
-    }
-
-    public function getPrestasiById($id)
-    {
-        if (!isset($id)) return redirect()->to(base_url('/admin'));
-
-        $query = "SELECT *
-             FROM prestasi
-             WHERE prestasi.id_alumni = $id
-             ";
         return $this->db->query($query);
     }
 
@@ -1108,13 +1068,10 @@ class admin_model extends Model
     {
         if (!isset($id)) return redirect()->to(base_url('/admin'));
 
-        $query = "SELECT * FROM alumni
-        JOIN alumni_tempat_kerja ON alumni.id_alumni=alumni_tempat_kerja.id_alumni
-        JOIN publikasi ON alumni.id_alumni=publikasi.id_alumni
-        JOIN pendidikan ON alumni.id_alumni=pendidikan.id_alumni
-        JOIN pendidikan_tinggi ON pendidikan.id_pendidikan=pendidikan_tinggi.id_pendidikan
-        JOIN prestasi ON alumni.id_alumni=prestasi.id_alumni
-        WHERE alumni.id_alumni=$id";
+        $query = "SELECT *
+            FROM alumni 
+            WHERE alumni.id_alumni = $id
+            ";
         return $this->db->query($query);
     }
 
@@ -1126,13 +1083,7 @@ class admin_model extends Model
         if (is_null($alumni_data)) return false;
 
         $desc = 'menghapus alumni ' . $alumni_data['nama'];
-        $query = "DELETE alumni, publikasi, pendidikan, pendidikan_tinggi, prestasi, alumni_tempat_kerja FROM alumni
-        JOIN alumni_tempat_kerja ON alumni.id_alumni=alumni_tempat_kerja.id_alumni
-        JOIN publikasi ON alumni.id_alumni=publikasi.id_alumni
-        JOIN pendidikan ON alumni.id_alumni=pendidikan.id_alumni
-        JOIN pendidikan_tinggi ON pendidikan.id_pendidikan=pendidikan_tinggi.id_pendidikan
-        JOIN prestasi ON alumni.id_alumni=prestasi.id_alumni 
-        WHERE alumni.id_alumni=$id";
+        $query = "DELETE FROM alumni WHERE id_alumni  = $id";
         if ($this->db->query($query)) {
             activity_log(3, 3, ucfirst($desc), 1);
             return true;
@@ -1190,6 +1141,266 @@ class admin_model extends Model
         }
     }
 
+    #-----------------------------------------------------------------------------------------------------------------------------
+
+    public function getAllPublikasi()
+    {
+        $query = "SELECT * FROM publikasi";
+        return $this->db->query($query);
+    }
+
+    public function searchPublikasi($keyword)
+    {
+        return $this->table('publikasi')->like('publikasi', $keyword)->orLike('id_alumni', $keyword);
+    }
+
+    public function getPublikasiById($id)
+    {
+        if (!isset($id)) return redirect()->to(base_url('/admin'));
+
+        $query = "SELECT *
+            FROM publikasi 
+            WHERE publikasi.id_alumni = $id
+            ";
+        return $this->db->query($query);
+    }
+
+    public function deletePublikasiByid($id)
+    {
+        if (!isset($id)) return false;
+
+        $publikasi_data = $this->getPublikasiById($id)->getRowArray();
+        if (is_null($publikasi_data)) return false;
+
+        $desc = 'menghapus publikasi ' . $publikasi_data['publikasi'];
+        $query = "DELETE FROM publikasi WHERE id_alumni   = $id";
+        if ($this->db->query($query)) {
+            activity_log(3, 3, ucfirst($desc), 1);
+            return true;
+        } else {
+            activity_log(3, 3, 'Gagal ' . ($desc), 0);
+            return false;
+        }
+    }
+
+    #-----------------------------------------------------------------------------------------------------------------------------
+
+    public function getAllPendidikan()
+    {
+        $query = "SELECT * FROM pendidikan";
+        return $this->db->query($query);
+    }
+
+    public function searchPendidikan($keyword)
+    {
+        return $this->table('pendidikan')->like('instansi', $keyword)->orLike('jenjang', $keyword);
+    }
+
+    public function getPendidikanById($id)
+    {
+        if (!isset($id)) return redirect()->to(base_url('/admin'));
+
+        $query = "SELECT *
+            FROM pendidikan 
+            WHERE pendidikan.id_pendidikan = $id
+            ";
+        return $this->db->query($query);
+    }
+
+    public function deletePendidikanByid($id)
+    {
+        if (!isset($id)) return false;
+
+        $pendidikan_data = $this->getPendidikanById($id)->getRowArray();
+        if (is_null($pendidikan_data)) return false;
+
+        $desc = 'menghapus pendidikan ' . $pendidikan_data['jenjang'];
+        $query = "DELETE FROM pendidikan WHERE id_pendidikan  = $id";
+        if ($this->db->query($query)) {
+            activity_log(3, 3, ucfirst($desc), 1);
+            return true;
+        } else {
+            activity_log(3, 3, 'Gagal ' . ($desc), 0);
+            return false;
+        }
+    }
+    public function getAllApiRequests()
+    {
+        $query = "SELECT client_app.*, token_app.token 
+        FROM client_app 
+        LEFT JOIN token_app ON client_app.id_token = token_app.id";
+        return $this->db->query($query);
+    }
+
+    public function getApiRequest($id)
+    {
+        $query = "SELECT * FROM client_app WHERE id = '$id'";
+        return $this->db->query($query);
+    }
+
+    public function getSelectedScopeRequest($token_id)
+    {
+        if (!$token_id || empty($token_id)) return false;
+        $query = "SELECT scope_app.id
+        FROM token_scope JOIN scope_app ON token_scope.id_scope = scope_app.id
+        WHERE token_scope.id_token = '$token_id'";
+        return $this->db->query($query);
+    }
+
+    public function updateApiRequests($data)
+    {
+        if (!isset($data) || empty($data)) return false;
+        helper('text');
+
+        $id = $data[0];
+        $status = $data[1];
+        $date = $data[2];
+        $admin = $data[3];
+
+        $get_client = $this->getApiRequest($id)->getRowArray();
+        if (!$get_client || !$get_client['id_token'] || empty($get_client['id_token'])) return false;
+        $token_id = $get_client['id_token'];
+
+        $client_update = false;
+        $token_update = false;
+        if (!$data[2] || empty($data[2])) { //it is Review or back to default value
+            $query = "UPDATE client_app SET status ='$status', req_acc = null , uid_admin = null WHERE id = $id";
+            $token_query = "UPDATE token_app SET token = null, count_usage = 0 ,last_access = null WHERE id = '$token_id' ";
+            $client_update = $this->db->query($query);
+            $token_update = $this->db->query($token_query);
+        } else {
+            $query = "UPDATE client_app SET status ='$status', req_acc = '$date' , uid_admin = '$admin' WHERE id = $id";
+            $client_update = $this->db->query($query);
+
+            $token = random_string('alnum', 30);
+            if (strtolower($status) == 'diterima') {
+                $token_query = "UPDATE token_app SET token = '$token', count_usage = count_usage + 1,last_access = '$date' WHERE id = '$token_id' ";
+            } else {
+                $token_query = "UPDATE token_app SET token = null, count_usage = 0 ,last_access = null WHERE id = '$token_id' ";
+            }
+            $token_update = $this->db->query($token_query);
+        }
+
+        return ($client_update && $token_update);
+    }
+
+    public function getAllApiScopes()
+    {
+        $query = "SELECT * FROM scope_app";
+        return $this->db->query($query);
+    }
+
+    public function createScope($data)
+    {
+        if (empty($data) || !isset($data)) return redirect()->to(base_url('/admin'));
+        $scope = $data[0];
+        $detail_scope = $data[1];
+
+        $query = "INSERT INTO scope_app VALUES ('','$scope','$detail_scope')";
+        if ($this->db->query($query)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    #-----------------------------------------------------------------------------------------------------------------------------
+
+    public function getAllPendidikanTinggi()
+    {
+        $query = "SELECT * FROM pendidikan_tinggi";
+        return $this->db->query($query);
+    }
+
+    public function searchPendidikanTinggi($keyword)
+    {
+        return $this->table('pendidikan_tinggi')->like('nim', $keyword)->orLike('program_studi', $keyword);
+    }
+
+    public function getPendidikanTinggiById($id)
+    {
+        if (!isset($id)) return redirect()->to(base_url('/admin'));
+
+        $query = "SELECT *
+            FROM pendidikan_tinggi
+            WHERE pendidikan_tinggi.id_pendidikan = $id
+            ";
+        return $this->db->query($query);
+    }
+
+    public function deletePendidikanTinggiByid($id)
+    {
+        if (!isset($id)) return false;
+
+        $pendidikantinggi_data = $this->getPendidikanTinggiById($id)->getRowArray();
+        if (is_null($pendidikantinggi_data)) return false;
+
+        $desc = 'menghapus pendidikan tinggi' . $pendidikantinggi_data['nim'];
+        $query = "DELETE FROM pendidikan_tinggi WHERE id_pendidikan  = $id";
+        if ($this->db->query($query)) {
+            activity_log(3, 3, ucfirst($desc), 1);
+            return true;
+        } else {
+            activity_log(3, 3, 'Gagal ' . ($desc), 0);
+            return false;
+        }
+    }
+    public function updateScope($data)
+    {
+        if (empty($data) || !isset($data)) return redirect()->to(base_url('/admin'));
+        $id = $data[0];
+        $scope = $data[1];
+        $detail_scope = $data[2];
+
+        $query = "UPDATE scope_app set scope = '$scope', scope_dev = '$detail_scope' WHERE id = $id";
+        if ($this->db->query($query)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    #-----------------------------------------------------------------------------------------------------------------------------
+
+    public function getAllPrestasi()
+    {
+        $query = "SELECT * FROM prestasi";
+        return $this->db->query($query);
+    }
+
+    public function searchPrestasi($keyword)
+    {
+        return $this->table('prestasi')->like('nama_prestasi', $keyword)->orLike('tahun_prestasi', $keyword);
+    }
+
+    public function getPrestasiById($id)
+    {
+        if (!isset($id)) return redirect()->to(base_url('/admin'));
+
+        $query = "SELECT *
+             FROM prestasi
+             WHERE prestasi.id_prestasi = $id
+             ";
+        return $this->db->query($query);
+    }
+
+    public function deletePrestasiByid($id)
+    {
+        if (!isset($id)) return false;
+
+        $prestasi_data = $this->getPrestasiById($id)->getRowArray();
+        if (is_null($prestasi_data)) return false;
+
+        $desc = 'menghapus prestasi' . $prestasi_data['nama_prestasi'];
+        $query = "DELETE FROM prestasi WHERE id_prestasi  = $id";
+        if ($this->db->query($query)) {
+            activity_log(3, 3, ucfirst($desc), 1);
+            return true;
+        } else {
+            activity_log(3, 3, 'Gagal ' . ($desc), 0);
+            return false;
+        }
+    }
     public function deleteScope($id)
     {
         if (!isset($id)) return redirect()->to(base_url('/admin'));

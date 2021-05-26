@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 5.0.4
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 25, 2021 at 07:11 PM
--- Server version: 10.4.14-MariaDB-log
--- PHP Version: 7.4.9
+-- Generation Time: May 26, 2021 at 02:37 AM
+-- Server version: 10.4.17-MariaDB
+-- PHP Version: 7.4.14
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `testing`
+-- Database: `riset5`
 --
 
 -- --------------------------------------------------------
@@ -89,66 +89,66 @@ CREATE TABLE `alumni` (
 --
 
 INSERT INTO `alumni` (`id_alumni`, `nama`, `jenis_kelamin`, `tempat_lahir`, `tanggal_lahir`, `telp_alumni`, `alamat_alumni`, `kota`, `provinsi`, `negara`, `status_bekerja`, `perkiraan_pensiun`, `jabatan_terakhir`, `aktif_pns`, `deskripsi`, `email`, `ig`, `fb`, `twitter`, `linkedin`, `gscholar`, `nip`, `nip_bps`, `foto_profil`, `cttl`, `calamat`, `cpendidikan`, `cprestasi`) VALUES
-(1, 'Dummy_dummy', 'Lk', 'Sungai Penuh', '1997-01-25', '081299594151', 'Jr. Abdul Rahmat No. 755, Tangerang 47637, SulUt', 'Kabupaten Tuban', 'Jawa Timur', 'Indonesia', 0, 1978, 'amet', 0, 'Maiores ut quasi beatae vel quisquam. Quo aut iusto et nobis et blanditiis non. Animi in architecto et iusto occaecati mollitia vel.', 'wulan.pratiwi@winarsih.mil.id', 'dummy_igza__', 'Dummy', 'Dummy__', '', '', '198109262004122002', '301820912', 'Lk/default.svg', 0, 0, 0, 0),
-(2, 'Kartika Lismawati', 'Pr', 'Palembang', '1964-11-19', NULL, 'Jl. Lumbu Barat II B No. 82 Bl', NULL, NULL, NULL, 1, 2022, 'Kepala Subbidang Program dan Evaluasi Pendidikan dan Pelatihan Teknis dan Fungsional', 1, 'Test test 1 2 3', 'kartika@gmail.com', 'kartika123', NULL, NULL, NULL, NULL, '196411191987022003', '340011691', 'Pr/default.svg', 0, 0, 0, 0),
-(3, 'Budi Cahyono', 'Lk', 'Bojonegoro', '1964-06-08', NULL, 'Kp. Jati Griya Jatimas Asri', NULL, NULL, NULL, 1, 2022, 'Kepala BPS Kabupaten/Kota', 1, 'Hi there', 'boecah@gmail.com', 'boecah123', 'Budi Cahyono', 'Budi Cahyono', NULL, NULL, '196406081987021002', '340011692', 'Lk/default.svg', 1, 1, 1, 0),
-(4, 'Indra Susilo', 'Lk', 'Jakarta Pusat', '1964-06-07', '081318869089', 'Jl. Wibisana No. 6', NULL, NULL, 'Indonesia', 1, 2022, 'Kepala BPS Kabupaten/Kota', 1, 'Test123', 'indrass@yahoo.co.id', 'indrass98', NULL, NULL, NULL, NULL, '196406071987021001', '340011693', 'Lk/default.svg', 1, 1, 0, 0),
-(5, 'Erisman', 'Lk', 'Jakarta Timur', '1964-11-02', '08129491174', 'JL.SMART HOUSE KAV.B56', NULL, NULL, NULL, 1, 2020, 'Kepala BPS Kabupaten/Kota', 0, 'Saya adalah Kepala BPS Kabupaten/Kota', 'erisman@gmail.com', 'erisman222', NULL, 'erisman123', NULL, NULL, '196411021987021001', '340011694', 'Lk/default.svg', 1, 1, 0, 0),
-(6, 'Ono Margiono', 'LK', 'Jakarta Timur', '1966-05-13', '081214770887', 'Jl. Pangeran Kejaksan Gg. Muja', NULL, NULL, NULL, 1, 2024, 'Kepala BPS Kabupaten/Kota', 1, 'good', 'ono@bps.go.id', NULL, NULL, NULL, NULL, NULL, '196605131988021001', '340011828', 'LK/default.svg', 0, 0, 0, 0),
-(7, 'Sofan', 'LK', 'Kebumen', '1964-10-21', '0811383762', 'Jl Alamandar', NULL, NULL, NULL, 1, 2022, 'Kepala Bidang Statistik Produksi', 1, 'asyik', 'sofan@bps.go.id', NULL, NULL, NULL, NULL, NULL, '196410211988021001', '340011829', 'LK/default.svg', 0, 0, 0, 0),
-(8, 'Efliza', 'PR', 'Medan', '1965-04-28', '0816228960', 'Jl Masjid Nurul Falah No 14', NULL, NULL, NULL, 1, 2025, 'Kepala Direktorat Statistik Distribusi', 1, 'asyiap', 'efliza@bps.go.id', NULL, NULL, NULL, NULL, NULL, '196504281988022001', '340011855', 'PR/default.svg', 0, 0, 0, 0),
-(17, 'Oldestia Vianny', 'Pr', 'Payakumbuh', '1979-06-11', '081274707292', 'Jl Rantau 3 No. 3 Rt 003 Rw 01', NULL, NULL, NULL, 1, 2037, 'Statistisi Muda Seksi Analisis Statistik Lintas Sektor', 1, 'PNS', 'oldestia@bps.go.id', NULL, NULL, NULL, NULL, NULL, '197906111999122001', '340015996', 'Pr/default.svg', 0, 0, 0, 0),
-(18, 'Oemar Syarief Wibisono', 'Lk', 'Jakarta', '1994-09-29', '082278449084', 'Lorong Perdamaian Bedeng Akau', NULL, NULL, NULL, 1, 2052, 'Staf Seksi Integrasi Pengolahan dan Diseminasi Statistik', 1, 'gk tau', 'oemar.wibisono@bps.go.id', 'NULL', 'Omarhehe', 'Omar', NULL, NULL, '199409292017011001', '340057694', 'Lk/default.svg', 0, 0, 0, 0),
-(19, 'Odry Syafwil', 'Lk', 'Jakarta', '1954-10-08', '081574594320', 'KOMPLEKS STATISTIK Jl. Statistik', NULL, NULL, NULL, 1, 2019, 'Lektor Kepala Tenaga Fungsional STIS', 0, 'Sudah pensiun', 'odrys@bps.go.id', NULL, NULL, NULL, NULL, NULL, '195410081979031004', '340006615', 'Lk/default.svg', 0, 0, 0, 0),
-(20, 'Pradini Ajeng Gemellia', 'Pr', 'Bandung', '1989-10-13', '08567485818', 'Jl. Pelabuhan II Km 4,5 RT 2/8', NULL, NULL, NULL, 1, 2047, 'Staf Seksi Statistik Niaga dan Jasa', 1, 'hmm', 'pradinigemellia@bps.go.id', NULL, NULL, NULL, NULL, NULL, '198910132012112001', '340055881', 'Pr/default.svg', 0, 0, 0, 0),
-(21, 'Lisiana Imana Yesani', 'PR', 'Jakarta Pusat', '1977-05-21', '085283507222', 'Jl. Kayu Manis VII No. 36', 'Jakarta Pusat', 'DKI Jakarta', 'Indonesia', 1, 2035, 'Kepala Seksi Statistik Sosial', 1, 'Asli jakarta hehe', 'lisiana@bps.go.id', NULL, NULL, NULL, NULL, NULL, '197705211999012001', '340015738', 'PR/default.svg', 0, 0, 0, 0),
-(22, 'Sana Damarhita', 'PR', 'Jakarta Selatan', '1977-05-14', '087722882289', 'Perumahan Bumi Cinderaya Jl. C', 'Jakarta Selatan', 'DKI Jakarta', 'Indonesia', 1, 2035, 'Kepala Seksi Neraca Wilayah dan Analisis Statistik', 1, 'Haha hihi penempatan', 'sana@bps.go.id', NULL, NULL, NULL, NULL, NULL, '197705141999011001', '340015739', 'PR/default.svg', 0, 0, 0, 0),
-(23, 'Krisdiana Galih', 'LK', 'Bandung', '1990-12-30', '081261932301', 'cluster hang lekir J9, batu IX', 'Bintan', 'Kepulauan Riau', 'Indonesia', 1, 2049, 'Kepala Subbagian Tata Usaha', 1, 'Sekarang rantau dulu bos', 'krisdiana.galih@bps.go.id', NULL, NULL, NULL, NULL, NULL, '199012302014101001', '340056726', 'LK/default.svg', 0, 0, 0, 0),
-(24, 'La Ode Ahmad Arafat', 'LK', 'Ambon', '1991-09-16', '085733198934', 'Jl. Raya Sambiroto, Dsn. Sambi', '', '', '', 1, 2049, 'Statistisi Pertama Seksi Diseminasi dan Layanan Statistik', 1, 'mantap ks teladan', 'ahmad.arafat@bps.go.id', NULL, NULL, NULL, NULL, NULL, '340056728', '199109162014101002', 'LK/default.svg', 0, 0, 0, 0),
-(25, 'Aan Sujanah', 'Pr', 'Jakarta Timur', '1962-10-02', '08116291011', 'Maskoki Raya No 2', NULL, NULL, 'Indonesia', 0, 2020, 'Kepala Subbagian Penyimpanan', 0, NULL, 'aan@bps.go.id', NULL, NULL, NULL, NULL, NULL, '196210021986012001', '340011224', 'Pr/default.svg', 0, 0, 0, 0),
-(26, 'Risma Pijayantini', 'Pr', 'Palembang', '1963-06-09', '082183288585', 'Perumnas Permata Biru Blok B3', NULL, NULL, 'Indonesia', 1, 2021, 'Kepala Bagian Tata Usaha', 1, NULL, 'risma@bps.go.id', NULL, NULL, NULL, NULL, NULL, '196306091986012001', '340011225', 'Pr/default.svg', 0, 0, 0, 0),
-(27, 'Ade Rika Agus', 'Pr', 'Bogor', '1963-10-14', NULL, 'JL Bojong Kaler I/4 Cigadung', NULL, NULL, 'Indonesia', 0, NULL, 'Staf Seksi Neraca Produksi', 0, NULL, 'aderika@bps.go.id', NULL, NULL, NULL, NULL, NULL, '196310141986012001', '340011226', 'Pr/default.svg', 0, 0, 0, 0),
-(28, 'Haryoto Sutomo', 'Lk', 'Jakarta Selatan', '1962-07-02', NULL, 'Jl. Statistik II/32 Komplek St', NULL, NULL, 'Indonesia', 0, 2011, 'Staf Seksi Pengembangan Desain Sensus dan Survei Bidang Statistik Distribusi dan Jasa', 0, NULL, 'haryoto@bps.go.id', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Lk/default.svg', 0, 0, 0, 0),
-(39, 'I Ketut Mertayasa', 'Lk', 'Padangbae', '1968-07-26', '081271067114', 'JL. BYPASS, KOBA, BANGKA TENGA', 'Bangka Tengah', 'Bangka Belitung', 'Indonesia', 1, 2026, 'Kepala BPS Kabupaten/Kota', 1, NULL, 'ikmertayasa@bps.go.id', NULL, NULL, NULL, NULL, NULL, '196807261992111001', '340013357', 'Lk/default.svg', 0, 0, 0, 0),
-(40, 'Ni Putu Beliana Puspita Sari', 'Pr', 'Tabanan', '1996-11-29', '082237404808', 'BTN Senapahan II No. 26, Br. D', NULL, NULL, NULL, 1, 2054, 'Staf Seksi Integrasi Pengolahan dan Diseminasi Statistik', 1, NULL, 'beliana.puspita@bps.go.id', NULL, NULL, NULL, NULL, NULL, '199611292019012002', '340058885', 'Pr/default.svg', 0, 0, 0, 0),
-(41, 'Putu Yogi Wigunanca', 'Lk', 'Tabanan', '1994-11-15', '081558417994', 'banjar rangdu, desa pohsanten', NULL, NULL, NULL, 1, 2052, 'Penugasan Statistisi Pelaksana Lanjutan Seksi Statistik Produksi', 1, NULL, 'putu.yogi@bps.go.id', NULL, NULL, NULL, NULL, NULL, '199411152019011001', '340058915', 'Lk/default.svg', 0, 0, 0, 0),
-(42, 'Ni Putu Ayu Mila Dewi', 'Pr', 'Karangasem', '1992-12-28', '081806595936', 'Jalan Anawai no. 27', NULL, NULL, NULL, 1, 2051, 'Statistisi Pertama Seksi Statistik Industri', 1, NULL, 'niputu.mila@bps.go.id', NULL, NULL, NULL, NULL, NULL, '199212282014122001', '340057159', 'Pr/default.svg', 0, 0, 0, 0),
-(43, 'Ratna Rosmayanti', 'Pr', 'Cianjur', '1972-10-11', '085860789234', 'JL PIRUS II NO. 34 BLOK 7 PERU', NULL, NULL, NULL, 1, 2030, 'Kepala Seksi Integrasi Pengolahan dan Diseminasi Statistik', 1, 'Tring tring', 'ratna_r@bps.go.id', NULL, NULL, NULL, NULL, NULL, '197210111992032001', '340013242', 'Pr/default.svg', 0, 0, 0, 0),
-(44, 'Aris Muji Atmoko', 'Lk', 'Karawang', '1983-11-20', ' 6281381234899', 'Perum Pesona Handayani Indah', NULL, NULL, NULL, 1, 2041, 'Statistisi Muda Seksi Statistik Sosial', 1, 'Jalan dengan kaki', 'atmoko@bps.go.id', NULL, NULL, NULL, NULL, NULL, ' 198311202009021004', ' 340050003', 'Lk/default.svg', 0, 0, 0, 0),
-(45, 'Efran Feri Kriswanto', 'Lk', 'Palembang', '1985-02-22', '085208314690', 'Jl R. Sukamto Lr. Masjid No.39', NULL, NULL, NULL, 1, 2043, 'Staf Seksi Neraca Wilayah dan Analisis Statistik', 1, NULL, 'efran@bps.go.id', NULL, NULL, NULL, NULL, NULL, '198502222009021005', '340050005', 'Lk/default.svg', 0, 0, 0, 0),
-(69, 'Husin Maulana', 'LK', 'Jakarta Selatan', '0000-00-00', NULL, 'Griya Serang Asri Blok L4/13', NULL, NULL, NULL, 1, 2033, 'Kepala BPS Kabupaten/Kota', 1, 'asadadassas', 'hmaulana@bps.go.id', NULL, NULL, NULL, NULL, NULL, '197504231996121001', '340015382', 'LK/default.svg', 0, 0, 0, 0),
-(70, 'Toto E Sastrasuanda', 'LK', 'Cirebon', '0000-00-00', NULL, 'Dusun Belawa I Rt 03/01', NULL, NULL, NULL, 1, 2003, 'Kepala Deputi Bidang Statistik Sosial', 1, 'sasasaasa', 'tsastra@bps.go.id', NULL, NULL, NULL, NULL, NULL, NULL, '340003304', 'LK/default.svg', 0, 0, 0, 0),
-(71, 'Anik Triani', 'PR', 'Semarang', '0000-00-00', NULL, 'Griya Cempaka Arum Blok AA 11', NULL, NULL, NULL, 1, 2039, 'Statistisi Muda Seksi Statistik Pertambangan, Energi dan Konstruksi', 1, 'asadadadad', 'triani@bps.go.id', NULL, NULL, NULL, NULL, NULL, '198103102002122002', '340016472', 'PR/default.svg', 0, 0, 0, 0),
-(72, 'Maya Harsanti', 'PR', 'Jakarta', '0000-00-00', NULL, 'Perum Grand Duta Cluster Jade', NULL, NULL, NULL, 1, 2038, 'Staf Seksi Statistik Distribusi', 1, 'ADAAADADDAD', 'mayah@bps.go.id', NULL, NULL, NULL, NULL, NULL, '198011042002122001', '340016479', 'PR/default.svg', 0, 0, 0, 0),
-(73, 'Lestari Utaminingsih', 'PR', 'Kendal', '1977-10-13', '085641509482', 'Jl. Candi Kencana IV/C.66', NULL, NULL, 'Indonesia', 1, 2035, 'Staf Subbagian Kepegawaian & Hukum', 1, 'Taken', 'lestari.utaminingsih@bps.go.id', 'lestari10', 'lestari_utami', 'lestari_utami', NULL, NULL, '197710132000022001', '340016072', 'PR/default.svg', 0, 0, 0, 0),
-(74, 'Hengki Eko Riyadi', 'LK', 'Lubang Lor (Purworejo)', '1978-09-03', '085261660531', 'Grand Serpong Residence Blok A', NULL, NULL, 'Indonesia', 1, 2038, 'Statistisi Madya Pejabat Fungsional', 1, 'Laper nih', 'hengki@bps.go.id', 'iri_hengki', 'hengki_itudosa', 'hengki01', NULL, NULL, '197809032000121002', '340016113', 'LK/default.svg', 0, 0, 0, 0),
-(75, 'Eddy Prayitno', 'LK', 'Bandar Lampung', '1977-01-15', '07215605102', 'Jl. Purnawirawan Raya Belakang', NULL, NULL, 'Indonesia', 1, 2035, 'Kepala BPS Kabupaten/Kota', 1, 'Makan bang!!', 'eddyp@bps.go.id', NULL, NULL, NULL, NULL, NULL, '197701151999011001', '340015736', 'LK/default.svg', 0, 0, 0, 0),
-(76, 'Edison Manurung', 'LK', 'Tapanuli Utara', '1962-11-10', '021-7815560', 'Jl.Raya Lt.Agung Tg.BaratRt.00', NULL, NULL, 'Indonesia', 0, 2019, 'Staf Seksi Penyiapan Statistik Perdagangan Dalam Negeri', 0, 'Ngantuk bat', 'victor@bps.go.id', NULL, NULL, NULL, NULL, NULL, '196211101988021001', '340011827', 'LK/default.svg', 0, 0, 0, 0),
-(77, 'Bambang Susilo', 'Lk', 'Blora', '1957-04-03', NULL, 'H.Ahyar No.49 RT.006/05 13440', NULL, NULL, NULL, 1, 2013, 'Staf Seksi Pengolahan Statistik Pendidikan dan Kesejahteraan Sosial', 0, NULL, 'bsusilo@bps.go.id', NULL, NULL, NULL, NULL, NULL, '195704031977121001', '340005601', 'Lk/default.svg', 0, 0, 0, 0),
-(78, 'Hotbel Purba', 'Lk', 'Pasir/Banjar Tongga', '1966-06-20', '081350343245', 'Jl. Pusat Pemerintahan', NULL, NULL, NULL, 1, 2024, 'Kepala BPS Kabupaten/Kota', 1, NULL, 'hotbelpurba@bps.go.id', NULL, NULL, NULL, NULL, NULL, '196606201986031001', '340011571', 'Lk/default.svg', 0, 0, 0, 0),
-(79, 'Edison Situmorang', 'Lk', 'Simarsoituruk', '1966-11-26', '082347774666', 'A W syahrani 4 Rt 23 Sempaja', NULL, NULL, NULL, 1, 2024, 'Kepala Seksi Statistik Sosial', 1, NULL, 'edisons@bps.go.id', NULL, NULL, NULL, NULL, NULL, '196611261988021001', '340011786', 'Lk/default.svg', 0, 0, 0, 0),
-(80, 'Chatarina Budi Anggarini', 'Pr', 'Bantul', '1969-04-29', '089610147898', 'Melikan Lor RT 04 Gandekan Ban', NULL, NULL, NULL, 1, 2027, 'Kepala Seksi Statistik Keuangan Dan Harga Produsen', 1, NULL, 'chatarina@bps.go.id', NULL, NULL, NULL, NULL, NULL, '196904291989022001', '340012122', 'Pr/default.svg', 0, 0, 0, 0),
-(81, 'Muhammad Dedy', 'LK', 'Palembang', '1978-08-05', '081377900322', 'Jl. Sambu No. 33', NULL, NULL, 'Indonesia', 1, 2036, 'Kepala BPS Kabupaten/Kota', 1, NULL, 'mdedy@bps.go.id', NULL, NULL, NULL, NULL, NULL, '197808052000121001', '340016240', 'LK/default.svg', 0, 0, 0, 0),
-(82, 'Ayu Setiawaty', 'PR', 'Jakarta Barat', '1977-05-09', 'Jakarta Barat', 'PERUMAHAN DUKUH ZAMRUD BLOK N7', NULL, NULL, NULL, 1, 2035, 'Penugasan Statistisi Pertama Seksi Statistik Distribusi', 1, NULL, '', NULL, NULL, NULL, NULL, NULL, '197705092000122007', '340016241', 'PR/default.svg', 0, 0, 0, 0),
-(83, 'Shanti Kartika Astrilestari', 'PR', 'Surabaya', '1979-04-26', '082181923897', 'Perum Ragom Mufakat I Blok F-5', NULL, NULL, 'Indonesia', 1, 2037, 'Kepala Seksi Neraca Wilayah dan Analisis Statistik', 1, NULL, 'shanti_ka@bps.go.id', NULL, NULL, NULL, NULL, NULL, '197904262000122001', '340016242', 'PR/default.svg', 0, 0, 0, 0),
-(84, 'Bambang Pamungkas', 'LK', 'Semarang', '1979-09-17', '081355103999', 'Jl Kredit Blok B 5 No 13', NULL, NULL, 'Indonesia', 1, 2037, 'Kepala BPS Kabupaten/Kota', 1, NULL, '', NULL, NULL, NULL, NULL, NULL, '197909172000121003', '340016243', 'LK/default.svg', 0, 0, 0, 0),
-(85, 'Johanes Supranto', 'Lk', 'Semarang', '1939-05-22', NULL, 'Jl. Kejaksaan Raya No. 23 Kreo C', NULL, 'DKI Jakarta', 'Indonesia', 0, 2004, 'Kepala K.S Tk. I (Tipe A)', 0, 'Jangan Menyerah', '', NULL, NULL, NULL, NULL, NULL, NULL, '340000423', 'Lk/default.svg', 1, 0, 0, 0),
-(86, 'Gita Devi Asyarita', 'Pr', 'Bekasi', '1994-08-05', '6281319546221', 'Desa Daruba', NULL, NULL, NULL, 1, 2052, 'Statistisi Pertama Seksi Statistik Distribusi', 1, 'Bersakit-sakit dahulu, bersenang-senangnya gak tau kapan', 'gita.asyarita@bps.go.id', 'gitaasy_', NULL, NULL, NULL, NULL, '199408052017012001', '340058000', 'Pr/default.svg', 1, 0, 0, 0),
-(87, 'Galang Retno Winarko', 'Lk', 'Blitar', '1990-10-22', '6282299649735', 'RT 4 RW 3, Desa Panggungrejo, Kecamatan Panggungrejo', 'Blitar', 'Jawa Timur', 'Indonesia', 1, 2048, 'Staf Seksi Integrasi Pengolahan Data', 1, 'WOW Amazing', 'galang.winarko@bps.go.id', 'galang_winarko', NULL, NULL, NULL, NULL, '199010222017011001', '340057999', 'Lk/default.svg', 1, 0, 0, 0),
-(88, 'Timbang Sirait', 'Lk', 'Labuhan Batu', '1973-12-27', '628179719667', 'Puri Bintara Regency Blok K-19', 'Jakarta Timur', 'DKI Jakarta', 'Indonesia', 1, 2039, 'Lektor Tenaga Fungsional STIS', 1, 'Statmat jaya', 'timbang@bps.go.id', NULL, NULL, NULL, NULL, NULL, '197312272000031002', '340016106', 'Lk/default.svg', 1, 0, 0, 0),
-(93, 'Khaerul Anwar', 'LK', 'Demak', '1970-03-29', '081228439121', 'Perum Griya Utama Permai Blok', NULL, NULL, 'Indonesia', 1, 2028, 'Kepala Seksi Integrasi Pengolahan dan Diseminasi Statistik', 1, NULL, 'kh_anwar@bps.go.id', NULL, NULL, NULL, NULL, NULL, '197003291991021001', '340012773', 'LK/default.svg', 0, 0, 0, 0),
-(94, 'Achmad Rifai', 'LK', 'Jakarta Utara', '1974-12-05', '082221518394', 'Jl. Kranji No. 493', NULL, NULL, 'Indonesia', 1, 2033, 'Kepala Seksi Integrasi Pengolahan dan Diseminasi Statistik', 1, NULL, 'arifai@bps.go.id', NULL, NULL, NULL, NULL, NULL, '197412052000031001', '340016107', 'LK/default.svg', 0, 0, 0, 0),
-(95, 'Apriliya Puput Nadea', 'PR', 'Klaten', '1989-04-06', '085647331647', 'Gg Spoor Dalam IV no 12', NULL, NULL, 'Indonesia', 1, 2047, 'Staf Seksi Jasa Perpustakaan', 1, NULL, 'nadea@bps.go.id', NULL, NULL, NULL, NULL, NULL, '198904062012112001', '340055736', 'PR/default.svg', 0, 0, 0, 0),
-(96, 'Arini Ismiati', 'PR', 'Malang', '1979-12-20', '081215927271', 'Jl. Batok GG III no.5', NULL, NULL, 'Indonesia', 1, 2038, 'Statistisi Muda Seksi Statistik Produksi', 1, NULL, 'arini.ismi@bps.go.id', NULL, NULL, NULL, NULL, NULL, '197912202003122006', '340017013', 'PR/default.svg', 0, 0, 0, 0),
-(332, 'Dea Venditama', 'LK', 'Bantul', '1991-06-02', '6282292146507', 'Otista', 'Pusat', 'DKI Jakarta', 'Indonesia', 1, 2049, 'Pranata Komputer Pertama Seksi Pemantauan dan Evaluasi Publikasi', 1, NULL, 'deav@bps.go.id', NULL, NULL, NULL, NULL, NULL, '199106022014101001', '340056757', 'LK/default.svg', 0, 0, 0, 0),
-(333, 'Delly Rakasiwi', 'LK', 'Jakarta', '1991-03-05', NULL, 'Ki Hajar DewantaraRT 01 RW 06', 'Palangkaraya', 'Kalimantan Tengah', 'Indonesia', 1, 2049, 'Pranata Komputer Pertama Seksi Jaringan dan Rujukan Statistik', 1, NULL, 'drakasiwi@bps.go.id', NULL, NULL, NULL, NULL, NULL, '199103052014101002', '340056758', 'LK/default.svg', 0, 0, 0, 0),
-(334, 'Dhoni Eko Wahyu Nugroho', 'LK', 'Kediri', '1991-07-28', NULL, 'Jl. Kebon Nanas Utara No 10 Ja', 'Pusat', 'DKI Jakarta', 'Indonesia', 1, 2049, 'Pranata Komputer Pertama Seksi Pengemasan Informasi Statistik', 1, NULL, 'dhonieko@bps.go.id', NULL, NULL, NULL, NULL, NULL, '199107282014101001', '340056759', 'LK/default.svg', 0, 0, 0, 0),
-(433, 'Poltak Sutrisno Siahaan', 'Lk', 'Tebing Tinggi', '1952-08-06', NULL, 'Jl. Asrama Komplek Bumi AsriBl', NULL, NULL, NULL, 1, 2012, 'Staf MPP', 0, NULL, 'poltak@bps.go.id', NULL, NULL, NULL, NULL, NULL, '195208061975031001', '340004375', 'Lk/default.svg', 0, 0, 0, 0),
-(434, 'Weni Lidya Sukma', 'Pr', 'Padang Pariaman', '1989-09-12', '085263662023', 'jl. mandor dami 2 perumahan fe', NULL, NULL, NULL, 1, 2047, 'Penugasan Statistisi Pelaksana Lanjutan Seksi Pengolahan Statistik Ketenagakerjaan', 1, NULL, 'wenilidya@bps.go.id', NULL, NULL, NULL, NULL, NULL, '198909122012112001', '340055951', 'Pr/default.svg', 0, 0, 0, 0),
-(435, 'Tri Hayuni Syardi', 'Pr', 'Padang', '1990-10-30', '081281060452', 'Komplek Mawar Putih Blok L No.', NULL, NULL, NULL, 1, 2048, 'Kepala Seksi Integrasi Pengolahan dan Diseminasi Statistik', 1, NULL, 'trihayuni@bps.go.id', NULL, NULL, NULL, NULL, NULL, '199010302012112001', '340055938', 'Pr/default.svg', 0, 0, 0, 0),
-(436, 'Subuh Sukmono Putro', 'Lk', 'Sragen', '1975-03-15', '081329278642', 'Graha Surya No IC', NULL, NULL, NULL, 1, 2033, 'Kepala Seksi Statistik Sosial', 1, NULL, 'subuhsukmono@bps.go.id', NULL, NULL, NULL, NULL, NULL, '197503151996121001', '340015332', 'Lk/default.svg', 0, 0, 0, 0),
-(555, 'Sigit Purnomo', 'LK', 'Kulon Progo', '1965-02-17', '081288378366', 'Puri Citayam Permai Blok B-10', NULL, NULL, NULL, 1, 2023, 'Kepala Bagian Penyusunan Rencana', 1, 'mantap', 'sigit@bps.go.id', NULL, NULL, NULL, NULL, NULL, '196502171988021001', '340011821', 'LK/default.svg', 0, 0, 0, 0),
-(210422, 'MOCHAMAD IZZA ZULFIKAR SYA\'RONI', 'Pr', 'Jayapura', '1989-12-12', '(+62) 29 2629 944', 'Ds. Sumpah Pemuda No. 190, Singkawang 21576, KalSel', 'Makassar', 'Gorontalo', 'Mikronesia', 1, 2002, 'minima', 1, 'Voluptatem quam a tenetur dolore minima qui. Nostrum aut autem ut. Sapiente enim consequatur ipsam qui quia provident. Et at vel illo.', '221810422@stis.ac.id', NULL, NULL, NULL, NULL, NULL, '2435731040527948', '221810422', 'Pr/default.svg', 0, 0, 0, 0);
+(1, 'Dummy_dummy', 'Lk', 'Sungai Penuh', '1997-01-25', '081299594151', 'Jr. Abdul Rahmat No. 755, Tangerang 47637, SulUt', 'Kabupaten Tuban', 'Jawa Timur', 'Indonesia', 0, 1978, 'amet', 0, 'Maiores ut quasi beatae vel quisquam. Quo aut iusto et nobis et blanditiis non. Animi in architecto et iusto occaecati mollitia vel.', '', 'dummy_igza__', 'Dummy', 'Dummy__', '', '', '198109262004122002', '301820912', 'Lk/default.svg', 0, 0, 0, 0),
+(2, 'Kartika Lismawati', 'Pr', 'Palembang', '1964-11-19', '', 'Jl. Lumbu Barat II B No. 82 Bl', '', '', '', 1, 2022, 'Kepala Subbidang Program dan Evaluasi Pendidikan dan Pelatihan Teknis dan Fungsional', 1, 'Test test 1 2 3', '', 'kartika123', '', '', '', '', '196411191987022003', '340011691', 'Pr/default.svg', 0, 0, 0, 0),
+(3, 'Budi Cahyono', 'Lk', 'Bojonegoro', '1964-06-08', '', 'Kp. Jati Griya Jatimas Asri', '', '', '', 1, 2022, 'Kepala BPS Kabupaten/Kota', 1, 'Hi there', '', 'boecah123', 'Budi Cahyono', 'Budi Cahyono', '', '', '196406081987021002', '340011692', 'Lk/default.svg', 1, 1, 1, 0),
+(4, 'Indra Susilo', 'Lk', 'Jakarta Pusat', '1964-06-07', '081318869089', 'Jl. Wibisana No. 6', '', '', 'Indonesia', 1, 2022, 'Kepala BPS Kabupaten/Kota', 1, 'Test123', '', 'indrass98', '', '', '', '', '196406071987021001', '340011693', 'Lk/default.svg', 1, 1, 0, 0),
+(5, 'Erisman', 'Lk', 'Jakarta Timur', '1964-11-02', '08129491174', 'JL.SMART HOUSE KAV.B56', '', '', '', 1, 2020, 'Kepala BPS Kabupaten/Kota', 0, 'Saya adalah Kepala BPS Kabupaten/Kota', '', 'erisman222', '', 'erisman123', '', '', '196411021987021001', '340011694', 'Lk/default.svg', 1, 1, 0, 0),
+(6, 'Ono Margiono', 'LK', 'Jakarta Timur', '1966-05-13', '081214770887', 'Jl. Pangeran Kejaksan Gg. Muja', '', '', '', 1, 2024, 'Kepala BPS Kabupaten/Kota', 1, 'good', '', '', '', '', '', '', '196605131988021001', '340011828', 'LK/default.svg', 0, 0, 0, 0),
+(7, 'Sofan', 'LK', 'Kebumen', '1964-10-21', '0811383762', 'Jl Alamandar', '', '', '', 1, 2022, 'Kepala Bidang Statistik Produksi', 1, 'asyik', '', '', '', '', '', '', '196410211988021001', '340011829', 'LK/default.svg', 0, 0, 0, 0),
+(8, 'Efliza', 'PR', 'Medan', '1965-04-28', '0816228960', 'Jl Masjid Nurul Falah No 14', '', '', '', 1, 2025, 'Kepala Direktorat Statistik Distribusi', 1, 'asyiap', '', '', '', '', '', '', '196504281988022001', '340011855', 'PR/default.svg', 0, 0, 0, 0),
+(9, 'Oldestia Vianny', 'Pr', 'Payakumbuh', '1979-06-11', '081274707292', 'Jl Rantau 3 No. 3 Rt 003 Rw 01', '', '', '', 1, 2037, 'Statistisi Muda Seksi Analisis Statistik Lintas Sektor', 1, 'PNS', '', '', '', '', '', '', '197906111999122001', '340015996', 'Pr/default.svg', 0, 0, 0, 0),
+(10, 'Oemar Syarief Wibisono', 'Lk', 'Jakarta', '1994-09-29', '082278449084', 'Lorong Perdamaian Bedeng Akau', '', '', '', 1, 2052, 'Staf Seksi Integrasi Pengolahan dan Diseminasi Statistik', 1, 'gk tau', '', 'NULL', 'Omarhehe', 'Omar', '', '', '199409292017011001', '340057694', 'Lk/default.svg', 0, 0, 0, 0),
+(11, 'Odry Syafwil', 'Lk', 'Jakarta', '1954-10-08', '081574594320', 'KOMPLEKS STATISTIK Jl. Statistik', '', '', '', 1, 2019, 'Lektor Kepala Tenaga Fungsional STIS', 0, 'Sudah pensiun', '', '', '', '', '', '', '195410081979031004', '340006615', 'Lk/default.svg', 0, 0, 0, 0),
+(12, 'Pradini Ajeng Gemellia', 'Pr', 'Bandung', '1989-10-13', '08567485818', 'Jl. Pelabuhan II Km 4,5 RT 2/8', '', '', '', 1, 2047, 'Staf Seksi Statistik Niaga dan Jasa', 1, 'hmm', '', '', '', '', '', '', '198910132012112001', '340055881', 'Pr/default.svg', 0, 0, 0, 0),
+(13, 'Lisiana Imana Yesani', 'PR', 'Jakarta Pusat', '1977-05-21', '085283507222', 'Jl. Kayu Manis VII No. 36', 'Jakarta Pusat', 'DKI Jakarta', 'Indonesia', 1, 2035, 'Kepala Seksi Statistik Sosial', 1, 'Asli jakarta hehe', '', '', '', '', '', '', '197705211999012001', '340015738', 'PR/default.svg', 0, 0, 0, 0),
+(14, 'Sana Damarhita', 'PR', 'Jakarta Selatan', '1977-05-14', '087722882289', 'Perumahan Bumi Cinderaya Jl. C', 'Jakarta Selatan', 'DKI Jakarta', 'Indonesia', 1, 2035, 'Kepala Seksi Neraca Wilayah dan Analisis Statistik', 1, 'Haha hihi penempatan', '', '', '', '', '', '', '197705141999011001', '340015739', 'PR/default.svg', 0, 0, 0, 0),
+(15, 'Krisdiana Galih', 'LK', 'Bandung', '1990-12-30', '081261932301', 'cluster hang lekir J9, batu IX', 'Bintan', 'Kepulauan Riau', 'Indonesia', 1, 2049, 'Kepala Subbagian Tata Usaha', 1, 'Sekarang rantau dulu bos', '', '', '', '', '', '', '199012302014101001', '340056726', 'LK/default.svg', 0, 0, 0, 0),
+(16, 'La Ode Ahmad Arafat', 'LK', 'Ambon', '1991-09-16', '085733198934', 'Jl. Raya Sambiroto, Dsn. Sambi', '', '', '', 1, 2049, 'Statistisi Pertama Seksi Diseminasi dan Layanan Statistik', 1, 'mantap ks teladan', '', '', '', '', '', '', '340056728', '199109162014101002', 'LK/default.svg', 0, 0, 0, 0),
+(17, 'Aan Sujanah', 'Pr', 'Jakarta Timur', '1962-10-02', '08116291011', 'Maskoki Raya No 2', '', '', 'Indonesia', 0, 2020, 'Kepala Subbagian Penyimpanan', 0, '', '', '', '', '', '', '', '196210021986012001', '340011224', 'Pr/default.svg', 0, 0, 0, 0),
+(18, 'Risma Pijayantini', 'Pr', 'Palembang', '1963-06-09', '082183288585', 'Perumnas Permata Biru Blok B3', '', '', 'Indonesia', 1, 2021, 'Kepala Bagian Tata Usaha', 1, '', '', '', '', '', '', '', '196306091986012001', '340011225', 'Pr/default.svg', 0, 0, 0, 0),
+(19, 'Ade Rika Agus', 'Pr', 'Bogor', '1963-10-14', '', 'JL Bojong Kaler I/4 Cigadung', '', '', 'Indonesia', 0, 0000, 'Staf Seksi Neraca Produksi', 0, '', '', '', '', '', '', '', '196310141986012001', '340011226', 'Pr/default.svg', 0, 0, 0, 0),
+(20, 'Haryoto Sutomo', 'Lk', 'Jakarta Selatan', '1962-07-02', '', 'Jl. Statistik II/32 Komplek St', '', '', 'Indonesia', 0, 2011, 'Staf Seksi Pengembangan Desain Sensus dan Survei Bidang Statistik Distribusi dan Jasa', 0, '', '', '', '', '', '', '', '', '', 'Lk/default.svg', 0, 0, 0, 0),
+(21, 'I Ketut Mertayasa', 'Lk', 'Padangbae', '1968-07-26', '081271067114', 'JL. BYPASS, KOBA, BANGKA TENGA', 'Bangka Tengah', 'Bangka Belitung', 'Indonesia', 1, 2026, 'Kepala BPS Kabupaten/Kota', 1, '', '', '', '', '', '', '', '196807261992111001', '340013357', 'Lk/default.svg', 0, 0, 0, 0),
+(22, 'Ni Putu Beliana Puspita Sari', 'Pr', 'Tabanan', '1996-11-29', '082237404808', 'BTN Senapahan II No. 26, Br. D', '', '', '', 1, 2054, 'Staf Seksi Integrasi Pengolahan dan Diseminasi Statistik', 1, '', '', '', '', '', '', '', '199611292019012002', '340058885', 'Pr/default.svg', 0, 0, 0, 0),
+(23, 'Putu Yogi Wigunanca', 'Lk', 'Tabanan', '1994-11-15', '081558417994', 'banjar rangdu, desa pohsanten', '', '', '', 1, 2052, 'Penugasan Statistisi Pelaksana Lanjutan Seksi Statistik Produksi', 1, '', '', '', '', '', '', '', '199411152019011001', '340058915', 'Lk/default.svg', 0, 0, 0, 0),
+(24, 'Ni Putu Ayu Mila Dewi', 'Pr', 'Karangasem', '1992-12-28', '081806595936', 'Jalan Anawai no. 27', '', '', '', 1, 2051, 'Statistisi Pertama Seksi Statistik Industri', 1, '', '', '', '', '', '', '', '199212282014122001', '340057159', 'Pr/default.svg', 0, 0, 0, 0),
+(25, 'Ratna Rosmayanti', 'Pr', 'Cianjur', '1972-10-11', '085860789234', 'JL PIRUS II NO. 34 BLOK 7 PERU', '', '', '', 1, 2030, 'Kepala Seksi Integrasi Pengolahan dan Diseminasi Statistik', 1, 'Tring tring', '', '', '', '', '', '', '197210111992032001', '340013242', 'Pr/default.svg', 0, 0, 0, 0),
+(26, 'Aris Muji Atmoko', 'Lk', 'Karawang', '1983-11-20', ' 6281381234899', 'Perum Pesona Handayani Indah', '', '', '', 1, 2041, 'Statistisi Muda Seksi Statistik Sosial', 1, 'Jalan dengan kaki', '', '', '', '', '', '', ' 198311202009021004', ' 340050003', 'Lk/default.svg', 0, 0, 0, 0),
+(27, 'Efran Feri Kriswanto', 'Lk', 'Palembang', '1985-02-22', '085208314690', 'Jl R. Sukamto Lr. Masjid No.39', '', '', '', 1, 2043, 'Staf Seksi Neraca Wilayah dan Analisis Statistik', 1, '', '', '', '', '', '', '', '198502222009021005', '340050005', 'Lk/default.svg', 0, 0, 0, 0),
+(28, 'Husin Maulana', 'LK', 'Jakarta Selatan', '0000-00-00', '', 'Griya Serang Asri Blok L4/13', '', '', '', 1, 2033, 'Kepala BPS Kabupaten/Kota', 1, 'asadadassas', '', '', '', '', '', '', '197504231996121001', '340015382', 'LK/default.svg', 0, 0, 0, 0),
+(29, 'Toto E Sastrasuanda', 'LK', 'Cirebon', '0000-00-00', '', 'Dusun Belawa I Rt 03/01', '', '', '', 1, 2003, 'Kepala Deputi Bidang Statistik Sosial', 1, 'sasasaasa', '', '', '', '', '', '', '', '340003304', 'LK/default.svg', 0, 0, 0, 0),
+(30, 'Anik Triani', 'PR', 'Semarang', '0000-00-00', '', 'Griya Cempaka Arum Blok AA 11', '', '', '', 1, 2039, 'Statistisi Muda Seksi Statistik Pertambangan, Energi dan Konstruksi', 1, 'asadadadad', '', '', '', '', '', '', '198103102002122002', '340016472', 'PR/default.svg', 0, 0, 0, 0),
+(31, 'Maya Harsanti', 'PR', 'Jakarta', '0000-00-00', '', 'Perum Grand Duta Cluster Jade', '', '', '', 1, 2038, 'Staf Seksi Statistik Distribusi', 1, 'ADAAADADDAD', '', '', '', '', '', '', '198011042002122001', '340016479', 'PR/default.svg', 0, 0, 0, 0),
+(32, 'Lestari Utaminingsih', 'PR', 'Kendal', '1977-10-13', '085641509482', 'Jl. Candi Kencana IV/C.66', '', '', 'Indonesia', 1, 2035, 'Staf Subbagian Kepegawaian & Hukum', 1, 'Taken', '', 'lestari10', 'lestari_utami', 'lestari_utami', '', '', '197710132000022001', '340016072', 'PR/default.svg', 0, 0, 0, 0),
+(33, 'Hengki Eko Riyadi', 'LK', 'Lubang Lor (Purworejo)', '1978-09-03', '085261660531', 'Grand Serpong Residence Blok A', '', '', 'Indonesia', 1, 2038, 'Statistisi Madya Pejabat Fungsional', 1, 'Laper nih', '', 'iri_hengki', 'hengki_itudosa', 'hengki01', '', '', '197809032000121002', '340016113', 'LK/default.svg', 0, 0, 0, 0),
+(34, 'Eddy Prayitno', 'LK', 'Bandar Lampung', '1977-01-15', '07215605102', 'Jl. Purnawirawan Raya Belakang', '', '', 'Indonesia', 1, 2035, 'Kepala BPS Kabupaten/Kota', 1, 'Makan bang!!', '', '', '', '', '', '', '197701151999011001', '340015736', 'LK/default.svg', 0, 0, 0, 0),
+(35, 'Edison Manurung', 'LK', 'Tapanuli Utara', '1962-11-10', '021-7815560', 'Jl.Raya Lt.Agung Tg.BaratRt.00', '', '', 'Indonesia', 0, 2019, 'Staf Seksi Penyiapan Statistik Perdagangan Dalam Negeri', 0, 'Ngantuk bat', '', '', '', '', '', '', '196211101988021001', '340011827', 'LK/default.svg', 0, 0, 0, 0),
+(36, 'Bambang Susilo', 'Lk', 'Blora', '1957-04-03', '', 'H.Ahyar No.49 RT.006/05 13440', '', '', '', 1, 2013, 'Staf Seksi Pengolahan Statistik Pendidikan dan Kesejahteraan Sosial', 0, '', '', '', '', '', '', '', '195704031977121001', '340005601', 'Lk/default.svg', 0, 0, 0, 0),
+(37, 'Hotbel Purba', 'Lk', 'Pasir/Banjar Tongga', '1966-06-20', '081350343245', 'Jl. Pusat Pemerintahan', '', '', '', 1, 2024, 'Kepala BPS Kabupaten/Kota', 1, '', '', '', '', '', '', '', '196606201986031001', '340011571', 'Lk/default.svg', 0, 0, 0, 0),
+(38, 'Edison Situmorang', 'Lk', 'Simarsoituruk', '1966-11-26', '082347774666', 'A W syahrani 4 Rt 23 Sempaja', '', '', '', 1, 2024, 'Kepala Seksi Statistik Sosial', 1, '', '', '', '', '', '', '', '196611261988021001', '340011786', 'Lk/default.svg', 0, 0, 0, 0),
+(39, 'Chatarina Budi Anggarini', 'Pr', 'Bantul', '1969-04-29', '089610147898', 'Melikan Lor RT 04 Gandekan Ban', '', '', '', 1, 2027, 'Kepala Seksi Statistik Keuangan Dan Harga Produsen', 1, '', '', '', '', '', '', '', '196904291989022001', '340012122', 'Pr/default.svg', 0, 0, 0, 0),
+(40, 'Muhammad Dedy', 'LK', 'Palembang', '1978-08-05', '081377900322', 'Jl. Sambu No. 33', '', '', 'Indonesia', 1, 2036, 'Kepala BPS Kabupaten/Kota', 1, '', '', '', '', '', '', '', '197808052000121001', '340016240', 'LK/default.svg', 0, 0, 0, 0),
+(41, 'Ayu Setiawaty', 'PR', 'Jakarta Barat', '1977-05-09', 'Jakarta Barat', 'PERUMAHAN DUKUH ZAMRUD BLOK N7', '', '', '', 1, 2035, 'Penugasan Statistisi Pertama Seksi Statistik Distribusi', 1, '', '', '', '', '', '', '', '197705092000122007', '340016241', 'PR/default.svg', 0, 0, 0, 0),
+(42, 'Shanti Kartika Astrilestari', 'PR', 'Surabaya', '1979-04-26', '082181923897', 'Perum Ragom Mufakat I Blok F-5', '', '', 'Indonesia', 1, 2037, 'Kepala Seksi Neraca Wilayah dan Analisis Statistik', 1, '', '', '', '', '', '', '', '197904262000122001', '340016242', 'PR/default.svg', 0, 0, 0, 0),
+(43, 'Bambang Pamungkas', 'LK', 'Semarang', '1979-09-17', '081355103999', 'Jl Kredit Blok B 5 No 13', '', '', 'Indonesia', 1, 2037, 'Kepala BPS Kabupaten/Kota', 1, '', '', '', '', '', '', '', '197909172000121003', '340016243', 'LK/default.svg', 0, 0, 0, 0),
+(44, 'Johanes Supranto', 'Lk', 'Semarang', '1939-05-22', '', 'Jl. Kejaksaan Raya No. 23 Kreo C', '', 'DKI Jakarta', 'Indonesia', 0, 2004, 'Kepala K.S Tk. I (Tipe A)', 0, 'Jangan Menyerah', '', '', '', '', '', '', '', '340000423', 'Lk/default.svg', 1, 0, 0, 0),
+(45, 'Gita Devi Asyarita', 'Pr', 'Bekasi', '1994-08-05', '6281319546221', 'Desa Daruba', '', '', '', 1, 2052, 'Statistisi Pertama Seksi Statistik Distribusi', 1, 'Bersakit-sakit dahulu, bersenang-senangnya gak tau kapan', '', 'gitaasy_', '', '', '', '', '199408052017012001', '340058000', 'Pr/default.svg', 1, 0, 0, 0),
+(46, 'Galang Retno Winarko', 'Lk', 'Blitar', '1990-10-22', '6282299649735', 'RT 4 RW 3, Desa Panggungrejo, Kecamatan Panggungrejo', 'Blitar', 'Jawa Timur', 'Indonesia', 1, 2048, 'Staf Seksi Integrasi Pengolahan Data', 1, 'WOW Amazing', '', 'galang_winarko', '', '', '', '', '199010222017011001', '340057999', 'Lk/default.svg', 1, 0, 0, 0),
+(47, 'Timbang Sirait', 'Lk', 'Labuhan Batu', '1973-12-27', '628179719667', 'Puri Bintara Regency Blok K-19', 'Jakarta Timur', 'DKI Jakarta', 'Indonesia', 1, 2039, 'Lektor Tenaga Fungsional STIS', 1, 'Statmat jaya', '', '', '', '', '', '', '197312272000031002', '340016106', 'Lk/default.svg', 1, 0, 0, 0),
+(48, 'Khaerul Anwar', 'LK', 'Demak', '1970-03-29', '081228439121', 'Perum Griya Utama Permai Blok', '', '', 'Indonesia', 1, 2028, 'Kepala Seksi Integrasi Pengolahan dan Diseminasi Statistik', 1, '', '', '', '', '', '', '', '197003291991021001', '340012773', 'LK/default.svg', 0, 0, 0, 0),
+(49, 'Achmad Rifai', 'LK', 'Jakarta Utara', '1974-12-05', '082221518394', 'Jl. Kranji No. 493', '', '', 'Indonesia', 1, 2033, 'Kepala Seksi Integrasi Pengolahan dan Diseminasi Statistik', 1, '', '', '', '', '', '', '', '197412052000031001', '340016107', 'LK/default.svg', 0, 0, 0, 0),
+(50, 'Apriliya Puput Nadea', 'PR', 'Klaten', '1989-04-06', '085647331647', 'Gg Spoor Dalam IV no 12', '', '', 'Indonesia', 1, 2047, 'Staf Seksi Jasa Perpustakaan', 1, '', '', '', '', '', '', '', '198904062012112001', '340055736', 'PR/default.svg', 0, 0, 0, 0),
+(51, 'Arini Ismiati', 'PR', 'Malang', '1979-12-20', '081215927271', 'Jl. Batok GG III no.5', '', '', 'Indonesia', 1, 2038, 'Statistisi Muda Seksi Statistik Produksi', 1, '', '', '', '', '', '', '', '197912202003122006', '340017013', 'PR/default.svg', 0, 0, 0, 0),
+(52, 'Dea Venditama', 'LK', 'Bantul', '1991-06-02', '6282292146507', 'Otista', 'Pusat', 'DKI Jakarta', 'Indonesia', 1, 2049, 'Pranata Komputer Pertama Seksi Pemantauan dan Evaluasi Publikasi', 1, '', '', '', '', '', '', '', '199106022014101001', '340056757', 'LK/default.svg', 0, 0, 0, 0),
+(53, 'Delly Rakasiwi', 'LK', 'Jakarta', '1991-03-05', '', 'Ki Hajar DewantaraRT 01 RW 06', 'Palangkaraya', 'Kalimantan Tengah', 'Indonesia', 1, 2049, 'Pranata Komputer Pertama Seksi Jaringan dan Rujukan Statistik', 1, '', '', '', '', '', '', '', '199103052014101002', '340056758', 'LK/default.svg', 0, 0, 0, 0),
+(54, 'Dhoni Eko Wahyu Nugroho', 'LK', 'Kediri', '1991-07-28', '', 'Jl. Kebon Nanas Utara No 10 Ja', 'Pusat', 'DKI Jakarta', 'Indonesia', 1, 2049, 'Pranata Komputer Pertama Seksi Pengemasan Informasi Statistik', 1, '', '', '', '', '', '', '', '199107282014101001', '340056759', 'LK/default.svg', 0, 0, 0, 0),
+(55, 'Poltak Sutrisno Siahaan', 'Lk', 'Tebing Tinggi', '1952-08-06', '', 'Jl. Asrama Komplek Bumi AsriBl', '', '', '', 1, 2012, 'Staf MPP', 0, '', '', '', '', '', '', '', '195208061975031001', '340004375', 'Lk/default.svg', 0, 0, 0, 0),
+(56, 'Weni Lidya Sukma', 'Pr', 'Padang Pariaman', '1989-09-12', '085263662023', 'jl. mandor dami 2 perumahan fe', '', '', '', 1, 2047, 'Penugasan Statistisi Pelaksana Lanjutan Seksi Pengolahan Statistik Ketenagakerjaan', 1, '', '', '', '', '', '', '', '198909122012112001', '340055951', 'Pr/default.svg', 0, 0, 0, 0),
+(57, 'Tri Hayuni Syardi', 'Pr', 'Padang', '1990-10-30', '081281060452', 'Komplek Mawar Putih Blok L No.', '', '', '', 1, 2048, 'Kepala Seksi Integrasi Pengolahan dan Diseminasi Statistik', 1, '', '', '', '', '', '', '', '199010302012112001', '340055938', 'Pr/default.svg', 0, 0, 0, 0),
+(58, 'Subuh Sukmono Putro', 'Lk', 'Sragen', '1975-03-15', '081329278642', 'Graha Surya No IC', '', '', '', 1, 2033, 'Kepala Seksi Statistik Sosial', 1, '', '', '', '', '', '', '', '197503151996121001', '340015332', 'Lk/default.svg', 0, 0, 0, 0),
+(59, 'Sigit Purnomo', 'LK', 'Kulon Progo', '1965-02-17', '081288378366', 'Puri Citayam Permai Blok B-10', '', '', '', 1, 2023, 'Kepala Bagian Penyusunan Rencana', 1, 'mantap', '', '', '', '', '', '', '196502171988021001', '340011821', 'LK/default.svg', 0, 0, 0, 0),
+(60, 'MOCHAMAD IZZA ZULFIKAR SYA\'RONI', 'Pr', 'Jayapura', '1989-12-12', '(+62) 29 2629 944', 'Ds. Sumpah Pemuda No. 190, Singkawang 21576, KalSel', 'Makassar', 'Gorontalo', 'Mikronesia', 1, 2002, 'minima', 1, 'Voluptatem quam a tenetur dolore minima qui. Nostrum aut autem ut. Sapiente enim consequatur ipsam qui quia provident. Et at vel illo.', '', '', '', '', '', '', '2435731040527948', '221810422', 'Pr/default.svg', 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -171,61 +171,61 @@ INSERT INTO `alumni_tempat_kerja` (`id_alumni`, `id_tempat_kerja`) VALUES
 (3, 5),
 (4, 4),
 (5, 3),
-(6, 965),
-(7, 33),
+(6, 55),
+(7, 13),
 (8, 2),
-(17, 962),
-(18, 963),
-(19, 2),
-(20, 964),
-(21, 210),
-(22, 220),
-(23, 230),
-(24, 240),
-(25, 2),
-(26, 10),
-(27, 27),
-(28, 2),
-(39, 390),
-(40, 400),
-(41, 410),
-(42, 420),
-(43, 430),
-(44, 440),
-(45, 450),
-(69, 69),
-(70, 2),
-(71, 27),
-(72, 72),
-(73, 73),
-(74, 2),
-(75, 75),
-(76, 2),
-(77, 2),
-(78, 781),
-(79, 791),
-(80, 801),
-(81, 810),
-(82, 820),
-(83, 830),
-(84, 840),
-(85, 2),
-(86, 860),
-(87, 870),
-(88, 880),
-(93, 930),
-(94, 940),
-(95, 950),
-(96, 960),
-(332, 2),
-(333, 2),
-(334, 32),
-(433, 33),
-(434, 2),
-(435, 35),
-(436, 36),
-(555, 961),
-(210422, 1);
+(9, 52),
+(10, 53),
+(11, 2),
+(12, 54),
+(13, 22),
+(14, 23),
+(15, 24),
+(16, 25),
+(17, 2),
+(18, 7),
+(19, 10),
+(20, 2),
+(21, 28),
+(22, 29),
+(23, 30),
+(24, 31),
+(25, 32),
+(26, 33),
+(27, 34),
+(28, 18),
+(29, 2),
+(30, 10),
+(31, 19),
+(32, 20),
+(33, 2),
+(34, 21),
+(35, 2),
+(36, 2),
+(37, 35),
+(38, 36),
+(39, 37),
+(40, 38),
+(41, 39),
+(42, 40),
+(43, 41),
+(44, 2),
+(45, 42),
+(46, 43),
+(47, 44),
+(48, 47),
+(49, 48),
+(50, 49),
+(51, 50),
+(52, 2),
+(53, 2),
+(54, 12),
+(55, 13),
+(56, 2),
+(57, 14),
+(58, 15),
+(59, 17),
+(60, 1);
 
 -- --------------------------------------------------------
 
@@ -292,7 +292,6 @@ CREATE TABLE `auth_groups_users` (
 INSERT INTO `auth_groups_users` (`group_id`, `user_id`) VALUES
 (1, 1),
 (2, 1),
-(2, 2),
 (3, 1),
 (4, 1);
 
@@ -316,19 +315,9 @@ CREATE TABLE `auth_logins` (
 --
 
 INSERT INTO `auth_logins` (`id`, `ip_address`, `email`, `user_id`, `date`, `success`) VALUES
-(1, '::1', 'dummy@stis.ac.id', 1, '2021-04-27 10:28:13', 1),
-(2, '::1', '@stis.ac.id', 2, '2021-05-02 00:33:27', 1),
-(3, '::1', 'dummy@stis.ac.id', 1, '2021-05-01 12:39:05', 1),
-(4, '::1', 'dummy@stis.ac.id', 1, '2021-05-05 10:04:58', 1),
-(5, '::1', 'dummy@stis.ac.id', 1, '2021-05-10 02:14:25', 1),
-(6, '::1', 'dummy@stis.ac.id', 1, '2021-05-10 04:32:19', 1),
-(7, '::1', 'dummy@stis.ac.id', 1, '2021-05-15 06:46:18', 1),
-(8, '::1', 'dummy@stis.ac.id', 1, '2021-05-15 20:09:54', 1),
-(9, '::1', 'dummy@stis.ac.id', 1, '2021-05-16 03:05:28', 1),
-(10, '::1', 'dummy@stis.ac.id', NULL, '2021-05-16 11:22:14', 0),
-(11, '::1', 'dummy@stis.ac.id', 1, '2021-05-16 11:22:28', 1),
-(12, '::1', 'dummy@stis.ac.id', 1, '2021-05-19 05:07:42', 1),
-(13, '::1', 'dummy@stis.ac.id', 1, '2021-05-21 01:49:45', 1);
+(1, '::1', 'dummy@stis.ac.id', 1, '2021-05-25 19:23:48', 1),
+(2, '::1', 'dummy@stis.ac.id', 1, '2021-05-25 19:28:08', 1),
+(3, '::1', 'dummy@stis.ac.id', 1, '2021-05-25 19:31:52', 1);
 
 -- --------------------------------------------------------
 
@@ -392,6 +381,25 @@ CREATE TABLE `auth_users_permissions` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `berita`
+--
+
+CREATE TABLE `berita` (
+  `id` int(11) UNSIGNED NOT NULL,
+  `tanggal_publish` datetime NOT NULL,
+  `judul` varchar(255) NOT NULL,
+  `thumbnail` varchar(255) NOT NULL,
+  `konten` text NOT NULL,
+  `akses` enum('public','private','other','Review') NOT NULL DEFAULT 'Review',
+  `user_id` int(11) NOT NULL,
+  `groups_id` varchar(255) DEFAULT NULL,
+  `author` varchar(255) NOT NULL,
+  `aktif` char(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `client_app`
 --
 
@@ -406,6 +414,13 @@ CREATE TABLE `client_app` (
   `uid_admin` int(11) UNSIGNED DEFAULT NULL,
   `id_token` int(11) UNSIGNED DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `client_app`
+--
+
+INSERT INTO `client_app` (`id`, `uid`, `nama_app`, `deskripsi`, `status`, `req_date`, `req_acc`, `uid_admin`, `id_token`) VALUES
+(1, 1, 'Aplikasi Sipadu Mobile', 'Aplikasi ini membutuhkan request data dari sistem anda.', 'Diterima', '2021-03-16 22:45:34', '2021-03-17 21:56:53', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -436,6 +451,7 @@ INSERT INTO `crud` (`crud_id`, `crud_name`) VALUES
 
 CREATE TABLE `foto` (
   `id_foto` int(16) UNSIGNED NOT NULL,
+  `tag` varchar(80) DEFAULT NULL,
   `nama_file` varchar(50) NOT NULL,
   `caption` varchar(2200) DEFAULT NULL,
   `created_at` date NOT NULL,
@@ -493,7 +509,47 @@ INSERT INTO `groups_access` (`access_group_id`, `group_id`, `menu_access_id`) VA
 (30, 1, 10),
 (31, 1, 9),
 (32, 1, 11),
-(33, 1, 12);
+(33, 1, 12),
+(34, 1, 32),
+(35, 1, 33),
+(36, 1, 34),
+(37, 1, 35),
+(38, 1, 36),
+(39, 1, 37),
+(40, 1, 38),
+(41, 1, 39),
+(42, 1, 40),
+(43, 1, 41),
+(44, 1, 42),
+(45, 1, 43),
+(46, 1, 44),
+(47, 1, 45),
+(48, 1, 46),
+(49, 1, 47),
+(50, 1, 48),
+(51, 1, 49),
+(52, 1, 50),
+(53, 1, 51),
+(54, 1, 52),
+(55, 1, 53),
+(56, 1, 54),
+(57, 1, 55),
+(58, 1, 56),
+(59, 1, 57),
+(60, 1, 58),
+(61, 1, 59),
+(62, 1, 60),
+(63, 1, 61),
+(64, 1, 62),
+(65, 1, 63),
+(66, 1, 64),
+(67, 1, 65),
+(68, 1, 66),
+(69, 1, 67),
+(70, 1, 68),
+(71, 1, 69),
+(72, 1, 70),
+(73, 1, 71);
 
 -- --------------------------------------------------------
 
@@ -505,7 +561,7 @@ CREATE TABLE `kabkota` (
   `id_provinsi` int(11) NOT NULL,
   `id_kabkota` int(11) NOT NULL,
   `nama_kabkota` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `kabkota`
@@ -1030,6 +1086,20 @@ INSERT INTO `kabkota` (`id_provinsi`, `id_kabkota`, `nama_kabkota`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `komentar_berita`
+--
+
+CREATE TABLE `komentar_berita` (
+  `id` int(11) UNSIGNED NOT NULL,
+  `berita_id` int(11) UNSIGNED NOT NULL,
+  `time` datetime NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `komentar` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `menu`
 --
 
@@ -1044,12 +1114,16 @@ CREATE TABLE `menu` (
 --
 
 INSERT INTO `menu` (`menu_id`, `menu_name`, `menu_icon`) VALUES
-(1, 'Magement RBAC', 'fas fa-users-cog'),
+(1, 'Managemen RBAC', 'fas fa-users-cog'),
 (2, 'Security', 'fas fa-user-shield'),
 (3, 'Token', 'fas fa-qrcode'),
 (4, 'Dashboard', 'fas fa-tachometer-alt'),
 (5, 'Tracking Activity', 'fas fa-user-clock'),
-(6, 'Setting Aplikasi', 'fas fa-user-shield');
+(6, 'Setting Aplikasi', 'fas fa-user-shield'),
+(7, 'Manajemen Berita', 'fas fa-book-open'),
+(8, 'Manajemen API', 'fab fa-chrome'),
+(9, 'Managemen Database', 'fas fa-user-circle'),
+(10, 'Managemen Galeri', 'fas fa-photo-video');
 
 -- --------------------------------------------------------
 
@@ -1072,10 +1146,26 @@ CREATE TABLE `migrations` (
 --
 
 INSERT INTO `migrations` (`id`, `version`, `class`, `group`, `namespace`, `time`, `batch`) VALUES
-(1, '2021-04-17-213105', 'App\\Database\\Migrations\\Alumni', 'default', 'App', 1619537253, 1),
-(2, '2021-04-17-213203', 'App\\Database\\Migrations\\AuthTable', 'default', 'App', 1619537254, 1),
-(3, '2021-04-17-213248', 'App\\Database\\Migrations\\Rbac', 'default', 'App', 1619537254, 1),
-(4, '2021-04-17-213438', 'App\\Database\\Migrations\\Webservice', 'default', 'App', 1619537254, 1);
+(1, '2021-04-17-213105', 'App\\Database\\Migrations\\Alumni', 'default', 'App', 1621988597, 1),
+(2, '2021-04-17-213203', 'App\\Database\\Migrations\\AuthTable', 'default', 'App', 1621988597, 1),
+(3, '2021-04-17-213248', 'App\\Database\\Migrations\\Rbac', 'default', 'App', 1621988597, 1),
+(4, '2021-04-17-213438', 'App\\Database\\Migrations\\Webservice', 'default', 'App', 1621988597, 1),
+(5, '2021-04-29-090021', 'App\\Database\\Migrations\\Berita', 'default', 'App', 1621988597, 1),
+(6, '2021-05-21-073527', 'App\\Database\\Migrations\\ProvKabKot', 'default', 'App', 1621988597, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `news_visited`
+--
+
+CREATE TABLE `news_visited` (
+  `id` int(11) UNSIGNED NOT NULL,
+  `news_id` int(11) UNSIGNED NOT NULL,
+  `ip` varchar(20) NOT NULL,
+  `date` datetime NOT NULL,
+  `hits` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -1098,64 +1188,64 @@ CREATE TABLE `pendidikan` (
 --
 
 INSERT INTO `pendidikan` (`id_pendidikan`, `jenjang`, `instansi`, `tahun_lulus`, `tahun_masuk`, `angkatan`, `id_alumni`) VALUES
-(2, 'D-III', 'Akademi Ilmu Statistik', 1986, 1983, 25, 2),
-(3, 'D-IV', 'Sekolah Tinggi Ilmu Statistik', 2002, 1999, 40, 2),
-(4, 'D-III', 'Akademi Ilmu Statistik', 1986, NULL, 25, 3),
-(5, 'D-III', 'Akademi Ilmu Statistik', 1986, NULL, 25, 4),
-(6, 'D-III', 'Akademi Ilmu Statistik', 1986, NULL, 25, 5),
-(33, 'D-III', 'Akademi Ilmu Statistik', 1975, 1972, 14, 433),
-(34, 'D-IV', 'Sekolah Tinggi Ilmu Statistik', 2011, 2007, 14, 434),
-(35, 'D-IV', 'Sekolah Tinggi Ilmu Statistik', 2011, 2007, 49, 435),
-(70, 'D-III', 'Akademi Ilmu Statistik', 1966, NULL, 6, 70),
-(71, 'D-IV', 'Sekolah Tinggi Ilmu Statistik', 2002, NULL, 40, 71),
-(72, 'D-IV', 'Sekolah Tinggi Ilmu Statistik', 2002, NULL, 40, 72),
-(211, 'D-III', 'Sekolah Tinggi Ilmu Statistik', 1998, NULL, 37, 21),
-(212, 'D-IV', 'Sekolah Tinggi Ilmu Statistik', 2001, NULL, 39, 21),
-(221, 'D-III', 'Sekolah Tinggi Ilmu Statistik', 1998, NULL, 37, 22),
-(231, 'D-IV', 'Sekolah Tinggi Ilmu Statistik', 2013, NULL, 51, 23),
-(241, 'D-IV', 'Sekolah Tinggi Ilmu Statistik', 2013, NULL, 51, 24),
-(251, 'D-III', 'Akademi Ilmu Statistik', 1985, NULL, 24, 25),
-(252, 'D-IV', 'Sekolah Tinggi Ilmu Statistik', 2002, NULL, 40, 25),
-(261, 'D-III', 'Akademi Ilmu Statistik', 1985, NULL, 24, 26),
-(391, 'D-III', 'Akademi Ilmu Statistik', 1992, 1989, 31, 39),
-(401, 'D-IV', 'Sekolah Tinggi Ilmu Statistik', 2018, 2014, 56, 40),
-(411, 'D-IV', 'Sekolah Tinggi Ilmu Statistik', 2018, 2014, 56, 41),
-(421, 'D-IV', 'Sekolah Tinggi Ilmu Statistik', 2014, 2010, 52, 42),
-(431, 'D-IV', 'Sekolah Tinggi Ilmu Statistik', 2008, 2004, 46, 43),
-(441, 'D-IV', 'Sekolah Tinggi Ilmu Statistik', 2008, 2004, 46, 44),
-(451, 'D-IV', 'Sekolah Tinggi Ilmu Statistik', 2008, 2004, 46, 45),
-(731, 'D-IV', 'Sekolah Tinggi Ilmu Statistik', 2003, 2002, 41, 73),
-(741, 'D-III', 'Sekolah Tinggi Ilmu Statistik', 1999, 1996, 38, 74),
-(742, 'D-IV', 'Sekolah Tinggi Ilmu Statistik', 2000, 1999, 38, 74),
-(751, 'D-III', 'Sekolah Tinggi Ilmu Statistik', 1998, 1995, 37, 75),
-(761, 'D-III', 'Akademi Ilmu Statistik', 1987, 1984, 26, 76),
-(811, 'D-IV', 'Sekolah Tinggi Ilmu Statistik', 2001, 1997, 39, 81),
-(821, 'D-IV', 'Sekolah Tinggi Ilmu Statistik', 2001, 1997, 39, 82),
-(831, 'D-IV', 'Sekolah Tinggi Ilmu Statistik', 2001, 1997, 39, 83),
-(841, 'D-IV', 'Sekolah Tinggi Ilmu Statistik', 2001, 1997, 39, 84),
-(850, 'D-III', 'Akademi Ilmu Statistik', 1961, 1958, 1, 85),
-(860, 'D-IV', 'Sekolah Tinggi Ilmu Statistik', 2016, 2012, 55, 86),
-(870, 'D-IV', 'Sekolah Tinggi Ilmu Statistik', 2016, 2012, 55, 87),
-(880, 'D-III', 'Sekolah Tinggi Ilmu Statistik', 1998, 1995, 37, 88),
-(881, 'D-IV', 'Sekolah Tinggi Ilmu Statistik', 2000, 1998, 39, 88),
-(931, 'D-III', 'Akademi Ilmu Statistik', 1997, 1994, 36, 93),
-(932, 'D-IV', 'Sekolah Tinggi Ilmu Statistik', 2000, 1997, 38, 93),
-(941, 'D-IV', 'Sekolah Tinggi Ilmu Statistik', 2000, 1998, 38, 94),
-(951, 'D-IV', 'Sekolah Tinggi Ilmu Statistik', 2011, 2007, 49, 95),
-(961, 'D-IV', 'Sekolah Tinggi Ilmu Statistik', 2003, 1999, 41, 96),
-(2711, 'D-III', 'Akademi Ilmu Statistik', 1985, NULL, 24, 27),
-(2811, 'D-III', 'Akademi Ilmu Statistik', 1985, NULL, 24, 28),
-(3601, 'D-III', 'Akademi Ilmu Statistik', 1996, 1993, 35, 436),
-(3602, 'D-IV', 'Sekolah Tinggi Ilmu Statistik', 2003, 1999, 41, 436),
-(3911, 'D-IV', 'Sekolah Tinggi Ilmu Statistik', 1999, 1995, 38, 39),
-(6901, 'D-III', 'Akademi Ilmu Statistik', 1996, NULL, 35, 69),
-(6902, 'D-IV', 'Sekolah Tinggi Ilmu Statistik', 2000, NULL, 35, 69),
-(7701, 'D-III', 'Akademi Ilmu Statistik', 1990, NULL, 29, 77),
-(7702, 'D-IV', 'Sekolah Tinggi Ilmu Statistik', 2002, NULL, 40, 77),
-(7801, 'D-IV', 'Sekolah Tinggi Ilmu Statistik', 2001, NULL, 39, 78),
-(7901, 'D-IV', 'Sekolah Tinggi Ilmu Statistik', 2001, NULL, 39, 79),
-(8001, 'D-IV', 'Sekolah Tinggi Ilmu Statistik', 2002, NULL, 40, 80),
-(9213, 'D4', 'ais', 1951, 1950, 25, 1);
+(1, 'D-III', 'Akademi Ilmu Statistik', 1986, 1983, 25, 2),
+(2, 'D-IV', 'Sekolah Tinggi Ilmu Statistik', 2002, 1999, 40, 2),
+(3, 'D-III', 'Akademi Ilmu Statistik', 1986, 0000, 25, 3),
+(4, 'D-III', 'Akademi Ilmu Statistik', 1986, 0000, 25, 4),
+(5, 'D-III', 'Akademi Ilmu Statistik', 1986, 0000, 25, 5),
+(6, 'D-III', 'Akademi Ilmu Statistik', 1975, 1972, 14, 55),
+(7, 'D-IV', 'Sekolah Tinggi Ilmu Statistik', 2011, 2007, 14, 56),
+(8, 'D-IV', 'Sekolah Tinggi Ilmu Statistik', 2011, 2007, 49, 57),
+(9, 'D-III', 'Akademi Ilmu Statistik', 1966, 0000, 6, 29),
+(10, 'D-IV', 'Sekolah Tinggi Ilmu Statistik', 2002, 0000, 40, 30),
+(11, 'D-IV', 'Sekolah Tinggi Ilmu Statistik', 2002, 0000, 40, 31),
+(12, 'D-III', 'Sekolah Tinggi Ilmu Statistik', 1998, 0000, 37, 13),
+(13, 'D-IV', 'Sekolah Tinggi Ilmu Statistik', 2001, 0000, 39, 13),
+(14, 'D-III', 'Sekolah Tinggi Ilmu Statistik', 1998, 0000, 37, 14),
+(15, 'D-IV', 'Sekolah Tinggi Ilmu Statistik', 2013, 0000, 51, 15),
+(16, 'D-IV', 'Sekolah Tinggi Ilmu Statistik', 2013, 0000, 51, 16),
+(17, 'D-III', 'Akademi Ilmu Statistik', 1985, 0000, 24, 17),
+(18, 'D-IV', 'Sekolah Tinggi Ilmu Statistik', 2002, 0000, 40, 17),
+(19, 'D-III', 'Akademi Ilmu Statistik', 1985, 0000, 24, 18),
+(20, 'D-III', 'Akademi Ilmu Statistik', 1992, 1989, 31, 21),
+(21, 'D-IV', 'Sekolah Tinggi Ilmu Statistik', 2018, 2014, 56, 22),
+(22, 'D-IV', 'Sekolah Tinggi Ilmu Statistik', 2018, 2014, 56, 23),
+(23, 'D-IV', 'Sekolah Tinggi Ilmu Statistik', 2014, 2010, 52, 24),
+(24, 'D-IV', 'Sekolah Tinggi Ilmu Statistik', 2008, 2004, 46, 25),
+(25, 'D-IV', 'Sekolah Tinggi Ilmu Statistik', 2008, 2004, 46, 26),
+(26, 'D-IV', 'Sekolah Tinggi Ilmu Statistik', 2008, 2004, 46, 27),
+(27, 'D-IV', 'Sekolah Tinggi Ilmu Statistik', 2003, 2002, 41, 32),
+(28, 'D-III', 'Sekolah Tinggi Ilmu Statistik', 1999, 1996, 38, 33),
+(29, 'D-IV', 'Sekolah Tinggi Ilmu Statistik', 2000, 1999, 38, 33),
+(30, 'D-III', 'Sekolah Tinggi Ilmu Statistik', 1998, 1995, 37, 34),
+(31, 'D-III', 'Akademi Ilmu Statistik', 1987, 1984, 26, 35),
+(32, 'D-IV', 'Sekolah Tinggi Ilmu Statistik', 2001, 1997, 39, 40),
+(33, 'D-IV', 'Sekolah Tinggi Ilmu Statistik', 2001, 1997, 39, 41),
+(34, 'D-IV', 'Sekolah Tinggi Ilmu Statistik', 2001, 1997, 39, 42),
+(35, 'D-IV', 'Sekolah Tinggi Ilmu Statistik', 2001, 1997, 39, 43),
+(36, 'D-III', 'Akademi Ilmu Statistik', 1961, 1958, 1, 44),
+(37, 'D-IV', 'Sekolah Tinggi Ilmu Statistik', 2016, 2012, 55, 45),
+(38, 'D-IV', 'Sekolah Tinggi Ilmu Statistik', 2016, 2012, 55, 46),
+(39, 'D-III', 'Sekolah Tinggi Ilmu Statistik', 1998, 1995, 37, 47),
+(40, 'D-IV', 'Sekolah Tinggi Ilmu Statistik', 2000, 1998, 39, 47),
+(41, 'D-III', 'Akademi Ilmu Statistik', 1997, 1994, 36, 48),
+(42, 'D-IV', 'Sekolah Tinggi Ilmu Statistik', 2000, 1997, 38, 48),
+(43, 'D-IV', 'Sekolah Tinggi Ilmu Statistik', 2000, 1998, 38, 49),
+(44, 'D-IV', 'Sekolah Tinggi Ilmu Statistik', 2011, 2007, 49, 50),
+(45, 'D-IV', 'Sekolah Tinggi Ilmu Statistik', 2003, 1999, 41, 51),
+(46, 'D-III', 'Akademi Ilmu Statistik', 1985, 0000, 24, 19),
+(47, 'D-III', 'Akademi Ilmu Statistik', 1985, 0000, 24, 20),
+(48, 'D-III', 'Akademi Ilmu Statistik', 1996, 1993, 35, 58),
+(49, 'D-IV', 'Sekolah Tinggi Ilmu Statistik', 2003, 1999, 41, 58),
+(50, 'D-IV', 'Sekolah Tinggi Ilmu Statistik', 1999, 1995, 38, 21),
+(51, 'D-III', 'Akademi Ilmu Statistik', 1996, 0000, 35, 28),
+(52, 'D-IV', 'Sekolah Tinggi Ilmu Statistik', 2000, 0000, 35, 28),
+(53, 'D-III', 'Akademi Ilmu Statistik', 1990, 0000, 29, 36),
+(54, 'D-IV', 'Sekolah Tinggi Ilmu Statistik', 2002, 0000, 40, 36),
+(55, 'D-IV', 'Sekolah Tinggi Ilmu Statistik', 2001, 0000, 39, 37),
+(56, 'D-IV', 'Sekolah Tinggi Ilmu Statistik', 2001, 0000, 39, 38),
+(57, 'D-IV', 'Sekolah Tinggi Ilmu Statistik', 2002, 0000, 40, 39),
+(58, 'D4', 'Akademi Ilmu Statistik', 1951, 1950, 25, 1);
 
 -- --------------------------------------------------------
 
@@ -1175,64 +1265,64 @@ CREATE TABLE `pendidikan_tinggi` (
 --
 
 INSERT INTO `pendidikan_tinggi` (`id_pendidikan`, `program_studi`, `nim`, `judul_tulisan`) VALUES
-(2, 'D-III AIS', '1320', ''),
-(3, 'Statistik Sosial Kependudukan', '01.0258', NULL),
-(4, 'D-III AIS', '1264', NULL),
-(5, 'D-III AIS', '1281', NULL),
-(6, 'D-III AIS', '1274', NULL),
-(33, 'Ak. Ilmu Statistik', '559', NULL),
-(34, 'D-IV Statistik Sosial Kependudukan', 'SK.07.5525', NULL),
-(35, 'D-IV Statistik Ekonomi', 'SE.07.5510', NULL),
-(70, 'D-III AIS', '270', NULL),
-(71, 'D-IV SK', 'SK.01.0186', NULL),
-(72, 'D-IV SK', 'SK.01.0275 ', NULL),
-(211, 'D-III STIS', '95.2655', 'Analisis Ubinan Kota Wonogiri 1997'),
-(212, 'D-IV Statistik Sosial Kependudukan', 'SK.00.0118', 'Mortalitas Penduduk Indonesia'),
-(221, 'D-III STIS', '95.2679', 'Judul Tulisannya Apa ya'),
-(231, 'D-IV Komputasi Statistik', 'KS.09.6024', 'Clustering Indeks Pembangunan Manusia hihi'),
-(241, 'D-IV Komputasi Statistik', 'KS.09.6027', 'Remote Sensing ajah pokoknya'),
-(251, 'D-III AIS', '1188', 'Disparitas Distribusi Pendapatan dan Variabel-Variabel yang Mempengaruhinya'),
-(252, 'D-IV Statistik Sosial Kependudukan', 'SK.01.0171 ', 'Faktor-faktor yang Mempengaruhi Perawatan Kehamilan'),
-(261, 'D-III AIS', '1209', 'Ketimpangan Capaian Pendidikan di Indonesia dan Determinannya'),
-(391, 'D-III AIS', '1842', 'Analisis Sistem Keamanan Jaringan Hot-Spot'),
-(401, 'Komputasi Statistik', 'KS.14.8287', 'Analisis Sistem Keamanan Jaringan Hot-Spot'),
-(411, 'Statistik Ekonomi', 'SE.14.8316', 'Analisis Efisiensi Penggunaan Modal Kerja Untuk Kegiatan Usaha Pada Perusahaan Konveksi Perusahaan'),
-(421, 'Komputasi Statistik', 'KS.10.6395', 'Analisa Struktur Kalimat Bahasa Indonesia dengan Menggunakan Pengurai Kalimat Berbasis Linguistik'),
-(431, 'D-IV Statistik Sosial Kependudukan', ' SK.04.4611', NULL),
-(441, 'D-IV Statistik Sosial Kependudukan', ' SK.03.4145', NULL),
-(451, 'D-IV Statistik Ekonomi', 'SE.03.4182 ', NULL),
-(731, 'D-IV Statistik Ekonomi', 'SE.02.0398', 'Analisis Prediksi Hari Kiamat 2012 Dengan Metode Monte Carlo'),
-(741, 'D-III STIS', '96.2782', 'Analisis Peubah Ganda'),
-(742, 'D-IV Statistik Ekonomi', 'SE.99.0052', 'Kecerdasan Buatan'),
-(751, 'D-III STIS', '95.2623', 'Sadis, seorang istri tega menjemur dan memukuli kasur karna ketahuan sudah ditiduri suaminya'),
-(761, 'Ak. Ilmu Statistik', '1271', 'Ingin mempunyai umur yang panjang seorang kakek berpura-pura budek ketika dipanggil malaikat'),
-(811, 'D-IV Statistik Sosial Kependudukan', 'SK.00.0127', NULL),
-(821, 'D-IV Statistik Sosial Kependudukan', 'SK.00.0082', NULL),
-(831, 'D-IV Statistik Ekonomi', 'SE.00.0152', NULL),
-(841, 'D-IV Komputasi Statistik', 'KS.00.0067', NULL),
-(850, 'D-III AIS', '1', 'Analisis Klaster Menggunakan Metode Hierarchical Clustering'),
-(860, 'D-IV Statistik Ekonomi', 'SE.12.7157', 'Pengaruh Virus H5N1 terhadap Perekonomian di Provinsi Banten'),
-(870, 'D-IV Komputasi Statistik', 'KS.12.7151', 'Perancangan Sistem Pakar Pendeteksi Gangguan Kecemasan Berbasis Web'),
-(880, 'D-III STIS', '95.2691', 'Analisis Pola Fertilitas Wanita Usia Subur di Indonesia tahun 1997'),
-(881, 'D-IV Statistik Ekonomi', 'SE..98.0036', 'Kesalahan Spesifikasi Model pada Data Cacah Menyebabkan Overdispersi'),
-(931, 'Ak. Ilmu Statistik', '2515', NULL),
-(932, 'D-IV Statistik Sosial Kependudukan', 'SK.99.0055 ', NULL),
-(941, 'D-IV Komputasi Statistik', 'KS.98.0019 ', NULL),
-(951, 'D-IV Komputasi Statistik', 'KS.07.5297', NULL),
-(961, 'D-IV Statistik Ekonomi', 'SE.02.0365', NULL),
-(2711, 'D-III AIS', '1226', 'Kemiskinan Multidimensi dan Variabel yang Mempengaruhinya'),
-(2811, 'D-III AIS', '1200', 'Pemilihan Model Terbaik pada Peramalan Produksi Batubara di Indonesia'),
-(3601, 'Ak. Ilmu Statistik', '2421', NULL),
-(3602, 'D-IV Statistik Ekonomi', 'SE.02.0433', NULL),
-(3911, 'Komputasi Statistik', 'KS.97.0008', 'Analisis Data Geospasial Media Sosial untuk Melihat Pola Pariwisata di Indonesia'),
-(6901, 'D-III AIS', '2353', NULL),
-(6902, 'D-IV SE', 'SE.99.0054', NULL),
-(7701, 'D-III AIS', '2314', 'Pengeruh Skripsi Terhadap Kesehatan Mental'),
-(7702, 'D-IV Statistik Sosial Kependudukan', 'SK.01.0199', 'Pengaruh Pertumbuhan Penduduk terhadap Harga Pasar'),
-(7801, 'D-IV Statistik Sosial Kependudukan', 'SK.00.0103', 'Pengaruh Nilai terhadap Presatasi'),
-(7901, 'D-IV Statistik Sosial Kependudukan', 'SK.00.0093', 'Binggung bikin judul'),
-(8001, 'D-IV Statistik Ekonomi', 'SE.01.0210 ', 'Pokoknya Judul'),
-(9213, 'Komputasi', '221810', 'Aww Malu banget');
+(1, 'D-III AIS', '1320', ''),
+(2, 'Statistik Sosial Kependudukan', '01.0258', ''),
+(3, 'D-III AIS', '1264', ''),
+(4, 'D-III AIS', '1281', ''),
+(5, 'D-III AIS', '1274', ''),
+(6, 'Ak. Ilmu Statistik', '559', ''),
+(7, 'D-IV Statistik Sosial Kependudukan', 'SK.07.5525', ''),
+(8, 'D-IV Statistik Ekonomi', 'SE.07.5510', ''),
+(9, 'D-III AIS', '270', ''),
+(10, 'D-IV SK', 'SK.01.0186', ''),
+(11, 'D-IV SK', 'SK.01.0275 ', ''),
+(12, 'D-III STIS', '95.2655', 'Analisis Ubinan Kota Wonogiri 1997'),
+(13, 'D-IV Statistik Sosial Kependudukan', 'SK.00.0118', 'Mortalitas Penduduk Indonesia'),
+(14, 'D-III STIS', '95.2679', 'Judul Tulisannya Apa ya'),
+(15, 'D-IV Komputasi Statistik', 'KS.09.6024', 'Clustering Indeks Pembangunan Manusia hihi'),
+(16, 'D-IV Komputasi Statistik', 'KS.09.6027', 'Remote Sensing ajah pokoknya'),
+(17, 'D-III AIS', '1188', 'Disparitas Distribusi Pendapatan dan Variabel-Variabel yang Mempengaruhinya'),
+(18, 'D-IV Statistik Sosial Kependudukan', 'SK.01.0171 ', 'Faktor-faktor yang Mempengaruhi Perawatan Kehamilan'),
+(19, 'D-III AIS', '1209', 'Ketimpangan Capaian Pendidikan di Indonesia dan Determinannya'),
+(20, 'D-III AIS', '1842', 'Analisis Sistem Keamanan Jaringan Hot-Spot'),
+(21, 'Komputasi Statistik', 'KS.14.8287', 'Analisis Sistem Keamanan Jaringan Hot-Spot'),
+(22, 'Statistik Ekonomi', 'SE.14.8316', 'Analisis Efisiensi Penggunaan Modal Kerja Untuk Kegiatan Usaha Pada Perusahaan Konveksi Perusahaan'),
+(23, 'Komputasi Statistik', 'KS.10.6395', 'Analisa Struktur Kalimat Bahasa Indonesia dengan Menggunakan Pengurai Kalimat Berbasis Linguistik'),
+(24, 'D-IV Statistik Sosial Kependudukan', ' SK.04.4611', ''),
+(25, 'D-IV Statistik Sosial Kependudukan', ' SK.03.4145', ''),
+(26, 'D-IV Statistik Ekonomi', 'SE.03.4182 ', ''),
+(27, 'D-IV Statistik Ekonomi', 'SE.02.0398', 'Analisis Prediksi Hari Kiamat 2012 Dengan Metode Monte Carlo'),
+(28, 'D-III STIS', '96.2782', 'Analisis Peubah Ganda'),
+(29, 'D-IV Statistik Ekonomi', 'SE.99.0052', 'Kecerdasan Buatan'),
+(30, 'D-III STIS', '95.2623', 'Sadis, seorang istri tega menjemur dan memukuli kasur karna ketahuan sudah ditiduri suaminya'),
+(31, 'Ak. Ilmu Statistik', '1271', 'Ingin mempunyai umur yang panjang seorang kakek berpura-pura budek ketika dipanggil malaikat'),
+(32, 'D-IV Statistik Sosial Kependudukan', 'SK.00.0127', ''),
+(33, 'D-IV Statistik Sosial Kependudukan', 'SK.00.0082', ''),
+(34, 'D-IV Statistik Ekonomi', 'SE.00.0152', ''),
+(35, 'D-IV Komputasi Statistik', 'KS.00.0067', ''),
+(36, 'D-III AIS', '1', 'Analisis Klaster Menggunakan Metode Hierarchical Clustering'),
+(37, 'D-IV Statistik Ekonomi', 'SE.12.7157', 'Pengaruh Virus H5N1 terhadap Perekonomian di Provinsi Banten'),
+(38, 'D-IV Komputasi Statistik', 'KS.12.7151', 'Perancangan Sistem Pakar Pendeteksi Gangguan Kecemasan Berbasis Web'),
+(39, 'D-III STIS', '95.2691', 'Analisis Pola Fertilitas Wanita Usia Subur di Indonesia tahun 1997'),
+(40, 'D-IV Statistik Ekonomi', 'SE..98.0036', 'Kesalahan Spesifikasi Model pada Data Cacah Menyebabkan Overdispersi'),
+(41, 'Ak. Ilmu Statistik', '2515', ''),
+(42, 'D-IV Statistik Sosial Kependudukan', 'SK.99.0055 ', ''),
+(43, 'D-IV Komputasi Statistik', 'KS.98.0019 ', ''),
+(44, 'D-IV Komputasi Statistik', 'KS.07.5297', ''),
+(45, 'D-IV Statistik Ekonomi', 'SE.02.0365', ''),
+(46, 'D-III AIS', '1226', 'Kemiskinan Multidimensi dan Variabel yang Mempengaruhinya'),
+(47, 'D-III AIS', '1200', 'Pemilihan Model Terbaik pada Peramalan Produksi Batubara di Indonesia'),
+(48, 'Ak. Ilmu Statistik', '2421', ''),
+(49, 'D-IV Statistik Ekonomi', 'SE.02.0433', ''),
+(50, 'Komputasi Statistik', 'KS.97.0008', 'Analisis Data Geospasial Media Sosial untuk Melihat Pola Pariwisata di Indonesia'),
+(51, 'D-III AIS', '2353', ''),
+(52, 'D-IV SE', 'SE.99.0054', ''),
+(53, 'D-III AIS', '2314', 'Pengeruh Skripsi Terhadap Kesehatan Mental'),
+(54, 'D-IV Statistik Sosial Kependudukan', 'SK.01.0199', 'Pengaruh Pertumbuhan Penduduk terhadap Harga Pasar'),
+(55, 'D-IV Statistik Sosial Kependudukan', 'SK.00.0103', 'Pengaruh Nilai terhadap Presatasi'),
+(56, 'D-IV Statistik Sosial Kependudukan', 'SK.00.0093', 'Binggung bikin judul'),
+(57, 'D-IV Statistik Ekonomi', 'SE.01.0210 ', 'Pokoknya Judul'),
+(58, 'Komputasi', '221810', 'Aww Malu banget');
 
 -- --------------------------------------------------------
 
@@ -1247,61 +1337,6 @@ CREATE TABLE `prestasi` (
   `id_alumni` int(12) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Dumping data for table `prestasi`
---
-
-INSERT INTO `prestasi` (`id_prestasi`, `nama_prestasi`, `tahun_prestasi`, `id_alumni`) VALUES
-(1, 'Juara 1 Lomba Makan Kerupuk Provinsi DKI Jakarta', 1998, 2),
-(5, 'juara 1 puisi nasional', 1986, 5),
-(6, 'juara 2 puisi nasional', 1986, 6),
-(7, 'juara 3 puisi nasional', 1986, 7),
-(8, 'juara 1 puisi provinsi', 1986, 8),
-(33, 'Juara 1 Pidato Bahasa Inggris Provinsi Sumatera Utara', 1970, 433),
-(34, 'Juara 1 Olimpiade Matematika Provinsi Sumatera Barat', 2006, 434),
-(35, 'Juara 2 Olimpiade Matematika Provinsi Sumatera Barat', 2006, 435),
-(36, 'Juara 3 Pidato Bahasa Inggris Kota Sragen', 1992, 436),
-(69, 'Juara 1 tadarus nasional', 1995, 69),
-(70, 'juara 1 adzan nasional', 1999, 70),
-(71, 'juara 1 ngaji nasional', 2001, 71),
-(72, 'juara 1 lari nasional', 2001, 72),
-(251, 'Juara 1 Speech Contest', 1984, 25),
-(261, 'Best Speaker English Debate', 1983, 26),
-(262, 'Juara 1 Infografis Statistika Ria', 1984, 26),
-(281, 'Juara 1 Lomba Gombal Nasional', 1985, 28),
-(392, 'Juara 3 Olimpiade Statistika ', 1997, 39),
-(402, 'Juara I Olimpiade Matematika Tk Provinsi', 2010, 40),
-(412, 'Juara 2 Debat Bahasa Inggris', 2012, 41),
-(422, 'Harapan I lomba Statistik nasional Statistika Ria IPB', 2012, 42),
-(850, 'Juara 1 Lomba Tarik Tambang Provinsi DKI Jakarta', 1962, 85),
-(860, 'Juara 3 Lomba Mencari Perhatian Tingkat Jabodetabek', 2014, 86),
-(870, 'Juara 2 Menulis Cerita Palsu Tingkat Nasional', 2013, 87),
-(880, 'Juara 1 Lomba Dakwah Islami', 1996, 88),
-(892, 'Juara 1 Olimpiade Matematika', 1995, 93),
-(902, 'Juara 1 Olimpiade Matematika', 2001, 94),
-(912, 'Juara 1 Olimpiade Matematika', 2008, 95),
-(922, 'Juara 3 Olimpiade Matematika', 2003, 96),
-(2101, 'Juara 1 Logika UI ', 1998, 21),
-(2102, 'Juara 3 Satria Data Essay Nasional', 1999, 21),
-(2301, 'Juara 1 Lomba Makan Mie Sepuluh Porsi', 2010, 23),
-(2401, 'Juara 3 Arkavidia ITB Kompetisi Programming', 2019, 24),
-(4301, 'Juara 1 Jambore Statistika ', 2007, 43),
-(4401, 'Juara 3 Olimpiade Statistika', 2006, 44),
-(4501, 'Juara 2 Kompetisi Essay Statistika Statistics Festival UGM', 2007, 45),
-(7301, 'JUARA 1 LOMBA RENANG 10 KM CABANG GAYA KODOK DI ANTARTIKA', 2020, 73),
-(7401, 'JUARA 1 LOMBA MEMASUKKAN JIN KE DALAM BOTOL', 2022, 74),
-(7501, 'JUARA 2 LOMBA MEMBUAT BAYI MENANGIS', 2017, 75),
-(7601, 'JUARA 3 LOMBA TIDUR PALING LAMA DI KELAS', 2015, 76),
-(8101, 'Juara 1 Turnamen Dewa Kipas', 2001, 81),
-(8201, 'Juara 2 Lomba Baca Puisi Cinta', 2001, 82),
-(8301, 'Juara 1 Olimpiade Statistika', 2000, 83),
-(8401, 'Juara 1 Olimpiade Statistika', 2000, 84),
-(9301, 'Juara 2 Olimpiade Matematika', 1995, 93),
-(9401, 'Juara 1 Kompetisi Sains Data', 2001, 94),
-(9501, 'Juara 1 Olimpiade Statistika', 2008, 95),
-(9601, 'Juara 3 Olimpiade Statistika', 2003, 96),
-(9602, 'Mangatz', 1954, 210422);
-
 -- --------------------------------------------------------
 
 --
@@ -1311,7 +1346,7 @@ INSERT INTO `prestasi` (`id_prestasi`, `nama_prestasi`, `tahun_prestasi`, `id_al
 CREATE TABLE `provinsi` (
   `id_provinsi` int(11) NOT NULL,
   `nama_provinsi` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `provinsi`
@@ -1356,71 +1391,6 @@ INSERT INTO `provinsi` (`id_provinsi`, `nama_provinsi`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `publikasi`
---
-
-CREATE TABLE `publikasi` (
-  `publikasi` varchar(255) NOT NULL,
-  `id_alumni` int(7) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `publikasi`
---
-
-INSERT INTO `publikasi` (`publikasi`, `id_alumni`) VALUES
-('ABCD', 79),
-('Algoritma Pemrograman Metode Numerik Kalkulus ', 24),
-('Analisa Komoditi Ekspor Sektor Industri, Pertanian, dan Pertambangan', 25),
-('Analisa Struktur Kalimat Bahasa Indonesia dengan Menggunakan Pengurai Kalimat Berbasis Linguistik', 42),
-('Analisis Custering Time Series pada Data Import tiap Provinsi', 22),
-('Analisis Data Geospasial Media Sosial untuk Melihat Pola Pariwisata di Indonesia', 39),
-('Analisis Efisiensi Penggunaan Modal Kerja Untuk Kegiatan Usaha Pada Perusahaan Konveksi Perusahaan', 41),
-('Analisis Empiris Perilaku Konsumsi Pangan Masyarakat di Kota Sukabumi', 43),
-('Analisis Faktor-faktor yang Memengaruhi Mahasiswa STIS dalam Memilih Penempatan', 95),
-('Analisis Harga Bitcoin Menggunakan Metode SARIMA', 86),
-('Analisis Kepuasan Mahasiswa STIS terhadap Kualitas Pelayanan Klinik Kampus STIS', 94),
-('Analisis Klaster Menggunakan Partition-based Clustering pada Data Kemiskinan Provinsi Jawa Barat Tahun 2013', 87),
-('Analisis Mobilitas Tenaga Kerja Hasil Sakernas', 28),
-('Analisis Pengaruh Bermain Game terhadap Prestasi', 72),
-('Analisis Perubahan Pola Makan Penduduk dengan Perekonomian Tingkat Menengah dengan Tingkat Atas', 2),
-('Analisis Semantik terhadap pernyataan \"Tetap semangat ya, kegagalanmu hari ini adalah awal dari kegagalan selanjutnya\"', 85),
-('Analisis Sistem Keamanan Jaringan Hot-Spot', 40),
-('Analisis Time Series Pendekatan Error Correction Mechanism pada Ekspor  Kopi Indonesia ke Jepang Periode 2005-2010', 44),
-('BE YOURSELF AND NEVER SURRENDER!1', 81),
-('BE YOURSELF AND NEVER SURRENDER!2', 82),
-('BE YOURSELF AND NEVER SURRENDER!3', 83),
-('BE YOURSELF AND NEVER SURRENDER!4', 84),
-('Biarkan saja orang menertawakan dirimu, karena itu memang pantas untukmu', 88),
-('dampak buruk makan malam terhadap aktivitas olahraga', 8),
-('Diduga sebagai penyebab kemacetan, polisi tidur dibangunkan oleh warga', 75),
-('Distribusi Upah di Indonesia : Perbandingan Antar Kelompok Gender', 434),
-('EFGH', 80),
-('Faktor-Faktor yang Mempengaruhi Pernikahan Dini pada Wanita usia 20-24 di Ogan Ilir Tahun 2016 ', 45),
-('Harga sembako sudah mulai merangkak naik, diperkirakan sudah dapat berjalan dan bisa berlari tahun depan', 73),
-('Implementasi Analisis Faktor Pada Pengambilan Keputusan Mahasiswa dalam Memilih Program Studi di STIS', 433),
-('Ini Publikasi', 77),
-('Itu Publikasi', 78),
-('Kreatifitas tanpa batas dan melampauinya', 21),
-('Model Regresi Dummy Indeks Prestasi Kumulatif Mahasiswa Prodi D-IV Statistik Ekonomi di STIS', 435),
-('Penerapan Monte Carlo Marcov Chain pada Cinta', 23),
-('Pengaruh Jam Tidur terhadap Kerajinan', 71),
-('Pengaruh lama tidur terhadap prestasi', 70),
-('pengaruh rokok terhadap kesehatan paru-paru', 5),
-('pengaruh sarapan pagi terhadap kesehatan otak', 7),
-('Pengaruh Stress terhadap Prestasi', 69),
-('pengaruh tidur siang terhadap efektivitas belajar ', 6),
-('Pengelompokan Kecamatan di DKI Jakarta Berdasarkan Karakteristik Kesejahteraan Rakyat Menggunakan Metode K-Means Cluster', 96),
-('Pengendalian Kualitas Produk Menggunakan Peta Kendali T^2 Hotelling', 436),
-('Potret Pendidikan Indonesia', 26),
-('Prediksi Jumlah Pendaftar STIS dengan Menggunakan Metode ARIMA', 93),
-('Produksi Padi dan Palawija dan Angka Ramalan', 27),
-('Seorang anak tewas tersedak karena disuruh memakan kuda saat pertandingan catur', 76),
-('Tragis, seorang jomblo terjatuh dalam jurang masa lalu dan terkubur bersama kenangan', 74);
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `report`
 --
 
@@ -1450,7 +1420,7 @@ CREATE TABLE `scope_app` (
 INSERT INTO `scope_app` (`id`, `scope`, `scope_dev`) VALUES
 (1, 'user:profile:read', 'Mengakses informasi pribadi dasar pengguna'),
 (2, 'alumni:profile:read', 'Mengakses informasi pribadi dasar alumni atas nama pengguna'),
-(3, 'alumni:profile:list', 'Mengakses informasi pribadi dasar alumni atas nama pengguna');
+(3, 'alumni:profile:list', 'Mengakses list informasi pribadi dasar alumni atas nama pengguna');
 
 -- --------------------------------------------------------
 
@@ -1485,7 +1455,17 @@ INSERT INTO `submenu` (`submenu_id`, `menu_id`, `title`, `url`, `icon`, `active`
 (11, 5, 'Activity Log', 'admin/activity-log', 'activity-log', '1'),
 (12, 3, 'Activation Tokens', 'admin/activation-tokens', 'fas fa-barcode', '1'),
 (13, 3, 'Reset Tokens', 'admin/reset-tokens', 'fas fa-barcode', '1'),
-(14, 4, 'Report 2', 'admin/reports/report-2', 'far fa-chart-bar', '0');
+(14, 4, 'Report 2', 'admin/reports/report-2', 'far fa-chart-bar', '0'),
+(15, 7, 'Berita', 'admin/berita', 'fas fa-book-open', '1'),
+(16, 8, 'API', 'admin/request-api', 'fab fa-chrome', '1'),
+(17, 9, 'Alumni', 'admin/alumni', 'fas fa-user', '1'),
+(18, 9, 'Instansi', 'admin/instansi', 'fas fa-landmark', '1'),
+(19, 9, 'Publikasi', 'admin/publikasi', 'fas fa-file-alt', '1'),
+(20, 9, 'Pendidikan', 'admin/pendidikan', 'fas fa-school', '1'),
+(21, 9, 'Pendidikan Tinggi', 'admin/pendidikan-tinggi', 'fas fa-school', '1'),
+(22, 9, 'Prestasi', 'admin/prestasi', 'fas fa-award', '1'),
+(23, 10, 'Galeri Foto', 'admin/galeri-foto', 'fas fa-images', '1'),
+(24, 10, 'Galeri Video', 'admin/galeri-video', 'fab fa-youtube', '1');
 
 -- --------------------------------------------------------
 
@@ -1534,7 +1514,47 @@ INSERT INTO `submenu_access` (`menu_access_id`, `submenu_id`, `crud_id`) VALUES
 (28, 12, 2),
 (29, 11, 2),
 (30, 10, 2),
-(31, 13, 2);
+(31, 13, 2),
+(32, 15, 1),
+(33, 15, 2),
+(34, 15, 3),
+(35, 15, 4),
+(36, 16, 1),
+(37, 16, 2),
+(38, 16, 3),
+(39, 16, 4),
+(40, 17, 1),
+(41, 17, 2),
+(42, 17, 3),
+(43, 17, 4),
+(44, 18, 1),
+(45, 18, 2),
+(46, 18, 3),
+(47, 18, 4),
+(48, 19, 1),
+(49, 19, 2),
+(50, 19, 3),
+(51, 19, 4),
+(52, 20, 1),
+(53, 20, 2),
+(54, 20, 3),
+(55, 20, 4),
+(56, 21, 1),
+(57, 21, 2),
+(58, 21, 3),
+(59, 21, 4),
+(60, 22, 1),
+(61, 22, 2),
+(62, 22, 3),
+(63, 22, 4),
+(64, 23, 1),
+(65, 23, 2),
+(66, 23, 3),
+(67, 23, 4),
+(68, 24, 1),
+(69, 24, 2),
+(70, 24, 3),
+(71, 24, 4);
 
 -- --------------------------------------------------------
 
@@ -1562,17 +1582,6 @@ INSERT INTO `table_scope` (`target_scope_id`, `target_scope`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tag_foto`
---
-
-CREATE TABLE `tag_foto` (
-  `tag` varchar(80) NOT NULL,
-  `id_foto` int(16) UNSIGNED NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `tempat_kerja`
 --
 
@@ -1595,59 +1604,59 @@ CREATE TABLE `tempat_kerja` (
 INSERT INTO `tempat_kerja` (`id_tempat_kerja`, `nama_instansi`, `kota`, `provinsi`, `negara`, `alamat_instansi`, `telp_instansi`, `faks_instansi`, `email_instansi`) VALUES
 (1, 'BPS Dummy', 'Manado', 'Lampung', 'Albania', 'Ki. Acordion No. 70, Probolinggo 66519, KalUt', '0859 3699 927', '0809 083 024', 'yunita57@gmail.com'),
 (2, 'BPS Pusat', 'Jakarta Pusat', 'DKI Jakarta', 'Indonesia', 'Jl. Dr. Sutomo 6-8', '(62-21) 3841195', '(62-21) 3857046', 'bpshq@bps.go.id'),
-(3, 'BPS Kota Semarang', 'Semarang', 'Jawa Tengah', 'Indonesia', 'Jl. Inspeksi Kali Semarang No.1', '0243546413', NULL, 'bps3374@bps.go.id'),
+(3, 'BPS Kota Semarang', 'Semarang', 'Jawa Tengah', 'Indonesia', 'Jl. Inspeksi Kali Semarang No.1', '0243546413', '', 'bps3374@bps.go.id'),
 (4, 'BPS Kabupaten Tabanan', 'Tabanan', 'Bali', 'Indonesia', 'Jl. Pahlawan No 1B', '0361811571', '', 'bps5102@bps.go.id'),
-(5, 'BPS Kabupaten Karawang', 'Karawang', 'Jawa Barat', 'Indonesia', 'Jl. Cakradireja No.36', '0267402250', NULL, 'kabkarawang@bps.go.id'),
-(9, 'BPS Kabupaten Lamongan', 'Lamongan', 'Jawa Timur', 'Indonesia', 'Jl. Veteran 185 Lamongan-62218', '(0322) 321339', '(0322) 321339', 'bps3524@bps.go.id'),
-(10, 'BPS Provinsi Lampung', 'Bandar Lampung', 'Lampung', 'Indonesia', 'Jl. Basuki Rahmat No 54', '(62-721) 482909', '(62-721) 484329', 'bps1800@bps.go.id'),
-(11, 'BPS Kabupaten Tegal', 'Tegal', 'Jawa Tengah', 'Indonesia', 'Jl Ade Irma Suryani No 1 Slawi', '(0283) 4561190', '(0283) 4561190', 'bps3328@bps.go.id'),
-(12, 'BPS Provinsi DKI Jakarta', 'Jakarta Pusat', 'Jakarta', 'Indonesia', 'Jl. Salemba Tengah No. 36-38 Paseban Senen', '(021) 31928493', '(021) 3152004', 'bps3100@bps.go.id'),
-(27, 'BPS Provinsi Jawa Barat', 'Bandung', 'Jawa Barat', 'Indonesia', 'Jl. PHH. Mustofa No. 43 Bandung 40124', '+62 22 7272595', '+62 22 7213572', 'bps3200@bps.go.id'),
-(31, 'BPS Indragiri Hilir', 'Indragiri Hilir', 'Riau', 'Indonesia', 'Jl. Praja Sakti (Bunga) No. 11 Tembilahan Hilir, Tembilahan. ', ' (0768) 22489', ' (0768) 22489', 'bps1403@bps.go.id'),
-(32, 'BPS Provinsi Kalimantan Selatan', 'Palangkaraya', 'Kalimantan Tengah', 'Indonesia', 'Jl. Kapt. Piere Tendean No 6 Palangka Raya 73112 Indonesia', ' (0536) 322 8105', ' (0536) 322 8105', 'kalteng@bps.go.id'),
-(33, 'BPS Provinsi Nusa Tenggara Timur', 'Kupang', 'Nusa Tenggara Timur', 'Indonesia', 'Jl. R. Suprapto No. 5', '(0380) 8554535', '(0380) 8550136', 'ntt@bps.go.id'),
-(35, 'BPS Kota Pariaman', 'Pariaman', 'Sumatera Barat', 'Indonesia', 'Jl. Sentot Ali Basa', '(0751) 93785', '(0751) 93780', 'pariaman@bps.go.id'),
-(36, 'BPS Kabupaten Boyolali', 'Boyolali', 'Jawa Tengah', 'Indonesia', 'Jl. Raya Boyolali-Semarang No.Km. 2', '(0276) 323772', '(0276) 323701', 'boyolali@bps.go.id'),
-(50, 'BPS Kabupaten Garut', 'Garut', 'Jawa Barat', 'Indonesia', 'Jl. Pembangunan No.222, Sukagalih, Kec. Tarogong Kidul', '233273', '020234873432', 'bpsgarut@gmail.com'),
-(51, 'BPS Kabupaten Musi Banyuasin', 'Musi Banyuasin', 'Sumatera Selatan', 'Indonesia', 'Jl. Merdeka No.531, Kayu Ara, Sekayu', '0001234', '02025678', 'bpsmusibanyuasin@gmail.com'),
-(69, 'BPS Kabupaten Lebak', 'Lebak', 'Banten', 'Indonesia', 'Jl. Jendral Sudirman No.807, Narimbang Mulia, Kec. Rangkasbitung, Kabupaten Lebak, Banten 42315', '(62-252) 5554673', '', 'bps3602@bps.go.id'),
-(72, 'BPS Kota Tangerang', 'Tangerang', 'Banten', 'Indonesia', 'Jl. RHM Noer Radji No. 28 Gerendeng Tangerang', '(62-21) 55792858', '(62-21) 55796910', 'bps3671@bps.go.id'),
-(73, 'BPS Provinsi Jawa Tengah', 'Semarang', 'Jawa Tengah', 'Indonesia', 'Jl. Pahlawan No.6, Pleburan, Kec. Semarang Sel., Kota Semarang, Jawa Tengah 50241', '024 - 8412802', '024 - 8311195', 'bps3300@bps.go.id'),
-(75, 'BPS Kabupaten Pringsewu', 'Pringsewu', 'Lampung', 'Indonesia', 'Jl. Raya Gading Rejo KM.33 Wonodadi, Gading Rejo 35372', '(62-729) 7330811', NULL, 'bps1810@bps.go.id'),
-(210, 'BPS Kota Jakarta Selatan', 'Jakarta Selatan', 'DKI Jakarta', 'Indonesia', 'Komplek Walikota Jakarta Selatan Blok A 15th Floor, JL. Prapanca Raya, No. 9, Kebayoran Baru, RT.2/RW.3, Pulo, Kec. Kby. Baru, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12160', '(021) 72792576', '(021) 27872812', 'bps3171@bps.go.id'),
-(220, 'BPS Kabupaten Indramayu', 'Indramayu', 'Jawa Barat', 'Indonesia', 'Jl. Golf No. 4 Indramayu, Jawa Barat - Indonesia', '+62 234 272880', '+62 234 272880', 'bps3212@bps.go.id'),
-(230, 'BPS Kabupaten Bintan', 'Bintan', 'Kepulauan Riau', 'Indonesia', 'Jl. Tata Bumi, Ceruk Ijuk, Toapaya, Bintan, Kepulauan Riau', ' (0771) 3300 700', NULL, 'bps2102@bps.go.id'),
-(240, 'BPS Kota Surabaya', 'Kota Surabaya', 'Jawa Timur', NULL, 'Jl. A. Yani 152 E Surabaya 60231 Jawa Timur Indonesia', '(62-31) 82516020', '(62-31) 8296691', 'bps3578@bps.go.id'),
-(290, 'BPS Minahasa', 'Minahasa', 'Sulawesi Utara', 'Indonesia', 'Jl. Dotulolong Lasut, Tondano Timur, Minahasa', '(0431)321155', '(0431)321155', ' bps7102@bps.go.id'),
-(299, 'BPS Jawa Timur', 'Surabaya', 'Jawa Timur', 'Indonesia', 'Jl. Raya Kendangsari Industri N0.34', '081213869409', '62913857000', 'tpramono11@bps.go.id'),
-(390, 'BPS Bangka Selatan', 'Bangka Selatan', 'Bangka Belitung', 'Indonesia', NULL, '(0718) 4220039', NULL, 'bps1905@bps.go.id'),
-(400, 'BPS Tomohon', 'Tomohon', 'Sulawesi Utara', 'Indonesia', 'JL. Nimawanua, Lansot, Lansot, Tomohon Sel., Kota Tomohon, Sulawesi Utara', '0431) 3159904', NULL, 'bps7173@bps.go.id'),
-(410, 'BPS Sorong Selatan', 'Sorong Selatan', 'Papua Barat', 'Indonesia', 'Jalan Teminabuan-Ayamaru', NULL, NULL, 'bps9106@bps.go.id'),
-(420, 'BPS Sulawesi Tenggara', 'Kendari', 'Sulawesi Tenggara', 'Indonesia', 'Jl. Boulevard No. 1 Kendari Sulawesi Tenggara', '(0401) 3135363', '0401-3122355', 'bps7400@bps.go.id'),
-(430, 'BPS Kabupaten Sukabumi', 'Sukabumi', 'Jawa Barat', 'Indonesia', 'Jl. Raya Karangtengah Km 14 No 52 Cibadak Sukabumi 43351', '0266536953', '0653536949', 'bps3202@bps.go.id'),
-(440, 'BPS Kabupaten Gunungkidul', 'Gunungkidul', 'Jawa Tengah', 'Indonesia', 'Jl. Pemuda 19A Baleharjo Wonosari 55811', '0274394180', '0274394181', 'bps3403@bps.go.id'),
-(450, 'BPS Kabupaten Ogan Ilir', 'Prabumulih', 'Sumatera Selatan', 'Indonesia', 'Jl. Palembang-Prabumulih Km 33 Desa Tanjung Pering 30813 Indralaya', '0711581713', '0711581713', 'bps1610@bps.go.id'),
-(781, 'BPS Kabupaten Paser', 'Paser', 'Kalimantan Timur', 'Indonesia', 'Jl. Gajah Mada No.76, Tanah Grogot', '(0543)21219', '(0543)21219', 'bps6401@bps.go.id'),
-(791, 'BPS Kota Samarinda', 'Samarinda', 'Kalimantan Timur', 'Indonesia', 'Jl. Kyai Haji Ahmad Dahlan No.33, Sungai Pinang Luar', '(0543)21219', '(0543)21219', 'bps6401@bps.go.id'),
-(801, 'BPS Provinsi Daerah Istimewa Yogyakarta', 'Bantul', 'Daerah Istimewa Yogyakar', 'Indonesia', 'Jalan Lingkar Selatan, Tamantirto, Kasihan, Geblagan, Tamantirto', '0274-4342234', '0274-4342230', 'pst3400@bps.go.id'),
-(810, 'BPS Kab Empat Lawang', NULL, NULL, 'Indonesia', 'Jl. Lintas Sumatera No. 35 Kecamatan Tebing Tinggi Kabupaten Empat Lawang Sumatera Selatan', '070221674', '070221674', 'bps1611@bps.go.id'),
-(820, 'BPS Kota Bekasi', NULL, NULL, 'Indonesia', 'Jl. Rawa Tembaga I, No. 6, Bekasi', '02188953987', '02188953987', 'bps3275@bps.go.id'),
-(830, 'BPS Kab Lampung Selatan', NULL, NULL, 'Indonesia', 'Jl. Mustafa Kemal No. 24 Kalianda, Lampung Selatan - Lampung', '0727322241 ', '0727322241 ', 'bps1803@bps.go.id'),
-(840, 'BPS Kab Tasikmalaya', NULL, NULL, 'Indonesia', 'Jalan Raya Timur Singaparna km 4 Cintaraja Singaparna Tasikmalaya', '0265549281', '0265549253', 'bps3206@bps.go.id'),
-(860, 'BPS Kabupaten Pulau Morotai', 'Pulau Morotai', 'Maluku Utara', 'Indonesia', 'Jln. Hi. Ahmad Syukur, Kec. Morotai Selatan, Pulau Morotai-Maluku Utara, 97771', '(0923) 2221133', NULL, 'bps8207@bps.go.id'),
-(870, 'BPS Provinsi Maluku Utara', 'Ternate', 'Maluku Utara', 'Indonesia', 'Jl. Stadion No 65 Ternate 97712', '(0921) 3127878', '(0921) 3126301', 'bps8200@bps.go.id'),
-(880, 'Politeknik Statistika STIS', 'Jakarta Timur', 'DKI Jakarta', 'Indonesia', 'Jl. Otto Iskandardinata No. 64C', '(021) 8508812', '8197577', 'info@stis.ac.id'),
-(890, 'BPS Kabupaten/Kota Bandung', 'Bandung', 'Jawa Barat', 'Indonesia', NULL, NULL, NULL, ''),
-(920, 'BPS Kabupaten Aceh Singkil', 'Aceh Singkil', 'Aceh', 'Indonesia', 'Jl. H. Sayuthi No. 2  Pulo Sarok', '(0658) 21268', '21268', 'bps1102@bps.go.id'),
-(930, 'BPS Kabupaten Rembang', 'Rembang', 'Jawa Tengah', 'Indonesia', 'Jl. Pemuda Km. 1', '0295691040', '0295691040', 'bps3317@bps.go.id'),
-(940, 'BPS Kabupaten Cilacap', 'Cilacap', 'Jawa Tengah', 'Indonesia', 'Jalan Dr. Soetomo No. 16A', '0282534328', '0282535011', 'bps3301@bps.go.id'),
-(950, 'BPS Kabupaten Klaten', 'Klaten', 'Jawa Tengah', 'Indonesia', 'Jl. Merapi No. 6', '62272321689', NULL, 'bps3310@bps.go.id'),
-(960, 'BPS Kota Malang', 'Malang', 'Jawa Timur', 'Indonesia', 'Jl. Janti Barat No. 47', '0341801164', '0341805871', 'bps3573@bps.go.id'),
-(961, 'BPS Kota Banjarmasin', NULL, NULL, NULL, 'Jalan Gatot Subroto No. 5 Banjarmasin 70235', '(0511) 6773031', '(0511) 6773032', 'bps6371@gmail.com'),
-(962, 'BPS Provinsi Riau', NULL, NULL, NULL, 'Jl. Pattimura No. 12 Pekanbaru - Riau, Indonesia', '(62-761) 23042', '(62-761) 21336', 'riau@bps.go.id'),
-(963, 'BPS Kabupaten Tanjung Jabung Barat', NULL, NULL, NULL, 'Jl. Prof.Dr. Sri Soedewi MS, SH.-Kuala Tungkal, Jambi', '(0742) 21738', NULL, 'bps1507@bps.go.id'),
-(964, 'BPS Provinsi Sulawesi Utara', NULL, NULL, NULL, 'Jl. 17 Agustus Manado 95119', '(0431) 847044', '(0431) 862204', 'mailto:sulut@bps.go.id'),
-(965, 'BPS Kabupaten Cirebon', NULL, NULL, NULL, 'Jl. Sunan Kalijaga No.4 Sumber-Cirebon 45611', '+62 231 321445', '+62 231 321445', 'bps3209@bps.go.id');
+(5, 'BPS Kabupaten Karawang', 'Karawang', 'Jawa Barat', 'Indonesia', 'Jl. Cakradireja No.36', '0267402250', '', 'kabkarawang@bps.go.id'),
+(6, 'BPS Kabupaten Lamongan', 'Lamongan', 'Jawa Timur', 'Indonesia', 'Jl. Veteran 185 Lamongan-62218', '(0322) 321339', '(0322) 321339', 'bps3524@bps.go.id'),
+(7, 'BPS Provinsi Lampung', 'Bandar Lampung', 'Lampung', 'Indonesia', 'Jl. Basuki Rahmat No 54', '(62-721) 482909', '(62-721) 484329', 'bps1800@bps.go.id'),
+(8, 'BPS Kabupaten Tegal', 'Tegal', 'Jawa Tengah', 'Indonesia', 'Jl Ade Irma Suryani No 1 Slawi', '(0283) 4561190', '(0283) 4561190', 'bps3328@bps.go.id'),
+(9, 'BPS Provinsi DKI Jakarta', 'Jakarta Pusat', 'Jakarta', 'Indonesia', 'Jl. Salemba Tengah No. 36-38 Paseban Senen', '(021) 31928493', '(021) 3152004', 'bps3100@bps.go.id'),
+(10, 'BPS Provinsi Jawa Barat', 'Bandung', 'Jawa Barat', 'Indonesia', 'Jl. PHH. Mustofa No. 43 Bandung 40124', '+62 22 7272595', '+62 22 7213572', 'bps3200@bps.go.id'),
+(11, 'BPS Indragiri Hilir', 'Indragiri Hilir', 'Riau', 'Indonesia', 'Jl. Praja Sakti (Bunga) No. 11 Tembilahan Hilir, Tembilahan. ', ' (0768) 22489', ' (0768) 22489', 'bps1403@bps.go.id'),
+(12, 'BPS Provinsi Kalimantan Selatan', 'Palangkaraya', 'Kalimantan Tengah', 'Indonesia', 'Jl. Kapt. Piere Tendean No 6 Palangka Raya 73112 Indonesia', ' (0536) 322 8105', ' (0536) 322 8105', 'kalteng@bps.go.id'),
+(13, 'BPS Provinsi Nusa Tenggara Timur', 'Kupang', 'Nusa Tenggara Timur', 'Indonesia', 'Jl. R. Suprapto No. 5', '(0380) 8554535', '(0380) 8550136', 'ntt@bps.go.id'),
+(14, 'BPS Kota Pariaman', 'Pariaman', 'Sumatera Barat', 'Indonesia', 'Jl. Sentot Ali Basa', '(0751) 93785', '(0751) 93780', 'pariaman@bps.go.id'),
+(15, 'BPS Kabupaten Boyolali', 'Boyolali', 'Jawa Tengah', 'Indonesia', 'Jl. Raya Boyolali-Semarang No.Km. 2', '(0276) 323772', '(0276) 323701', 'boyolali@bps.go.id'),
+(16, 'BPS Kabupaten Garut', 'Garut', 'Jawa Barat', 'Indonesia', 'Jl. Pembangunan No.222, Sukagalih, Kec. Tarogong Kidul', '233273', '020234873432', 'bpsgarut@gmail.com'),
+(17, 'BPS Kabupaten Musi Banyuasin', 'Musi Banyuasin', 'Sumatera Selatan', 'Indonesia', 'Jl. Merdeka No.531, Kayu Ara, Sekayu', '0001234', '02025678', 'bpsmusibanyuasin@gmail.com'),
+(18, 'BPS Kabupaten Lebak', 'Lebak', 'Banten', 'Indonesia', 'Jl. Jendral Sudirman No.807, Narimbang Mulia, Kec. Rangkasbitung, Kabupaten Lebak, Banten 42315', '(62-252) 5554673', '', 'bps3602@bps.go.id'),
+(19, 'BPS Kota Tangerang', 'Tangerang', 'Banten', 'Indonesia', 'Jl. RHM Noer Radji No. 28 Gerendeng Tangerang', '(62-21) 55792858', '(62-21) 55796910', 'bps3671@bps.go.id'),
+(20, 'BPS Provinsi Jawa Tengah', 'Semarang', 'Jawa Tengah', 'Indonesia', 'Jl. Pahlawan No.6, Pleburan, Kec. Semarang Sel., Kota Semarang, Jawa Tengah 50241', '024 - 8412802', '024 - 8311195', 'bps3300@bps.go.id'),
+(21, 'BPS Kabupaten Pringsewu', 'Pringsewu', 'Lampung', 'Indonesia', 'Jl. Raya Gading Rejo KM.33 Wonodadi, Gading Rejo 35372', '(62-729) 7330811', '', 'bps1810@bps.go.id'),
+(22, 'BPS Kota Jakarta Selatan', 'Jakarta Selatan', 'DKI Jakarta', 'Indonesia', 'Komplek Walikota Jakarta Selatan Blok A 15th Floor, JL. Prapanca Raya, No. 9, Kebayoran Baru, RT.2/RW.3, Pulo, Kec. Kby. Baru, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12160', '(021) 72792576', '(021) 27872812', 'bps3171@bps.go.id'),
+(23, 'BPS Kabupaten Indramayu', 'Indramayu', 'Jawa Barat', 'Indonesia', 'Jl. Golf No. 4 Indramayu, Jawa Barat - Indonesia', '+62 234 272880', '+62 234 272880', 'bps3212@bps.go.id'),
+(24, 'BPS Kabupaten Bintan', 'Bintan', 'Kepulauan Riau', 'Indonesia', 'Jl. Tata Bumi, Ceruk Ijuk, Toapaya, Bintan, Kepulauan Riau', ' (0771) 3300 700', '', 'bps2102@bps.go.id'),
+(25, 'BPS Kota Surabaya', 'Kota Surabaya', 'Jawa Timur', '', 'Jl. A. Yani 152 E Surabaya 60231 Jawa Timur Indonesia', '(62-31) 82516020', '(62-31) 8296691', 'bps3578@bps.go.id'),
+(26, 'BPS Minahasa', 'Minahasa', 'Sulawesi Utara', 'Indonesia', 'Jl. Dotulolong Lasut, Tondano Timur, Minahasa', '(0431)321155', '(0431)321155', ' bps7102@bps.go.id'),
+(27, 'BPS Jawa Timur', 'Surabaya', 'Jawa Timur', 'Indonesia', 'Jl. Raya Kendangsari Industri N0.34', '081213869409', '62913857000', 'tpramono11@bps.go.id'),
+(28, 'BPS Bangka Selatan', 'Bangka Selatan', 'Bangka Belitung', 'Indonesia', '', '(0718) 4220039', '', 'bps1905@bps.go.id'),
+(29, 'BPS Tomohon', 'Tomohon', 'Sulawesi Utara', 'Indonesia', 'JL. Nimawanua, Lansot, Lansot, Tomohon Sel., Kota Tomohon, Sulawesi Utara', '0431) 3159904', '', 'bps7173@bps.go.id'),
+(30, 'BPS Sorong Selatan', 'Sorong Selatan', 'Papua Barat', 'Indonesia', 'Jalan Teminabuan-Ayamaru', '', '', 'bps9106@bps.go.id'),
+(31, 'BPS Sulawesi Tenggara', 'Kendari', 'Sulawesi Tenggara', 'Indonesia', 'Jl. Boulevard No. 1 Kendari Sulawesi Tenggara', '(0401) 3135363', '0401-3122355', 'bps7400@bps.go.id'),
+(32, 'BPS Kabupaten Sukabumi', 'Sukabumi', 'Jawa Barat', 'Indonesia', 'Jl. Raya Karangtengah Km 14 No 52 Cibadak Sukabumi 43351', '0266536953', '0653536949', 'bps3202@bps.go.id'),
+(33, 'BPS Kabupaten Gunungkidul', 'Gunungkidul', 'Jawa Tengah', 'Indonesia', 'Jl. Pemuda 19A Baleharjo Wonosari 55811', '0274394180', '0274394181', 'bps3403@bps.go.id'),
+(34, 'BPS Kabupaten Ogan Ilir', 'Prabumulih', 'Sumatera Selatan', 'Indonesia', 'Jl. Palembang-Prabumulih Km 33 Desa Tanjung Pering 30813 Indralaya', '0711581713', '0711581713', 'bps1610@bps.go.id'),
+(35, 'BPS Kabupaten Paser', 'Paser', 'Kalimantan Timur', 'Indonesia', 'Jl. Gajah Mada No.76, Tanah Grogot', '(0543)21219', '(0543)21219', 'bps6401@bps.go.id'),
+(36, 'BPS Kota Samarinda', 'Samarinda', 'Kalimantan Timur', 'Indonesia', 'Jl. Kyai Haji Ahmad Dahlan No.33, Sungai Pinang Luar', '(0543)21219', '(0543)21219', 'bps6401@bps.go.id'),
+(37, 'BPS Provinsi Daerah Istimewa Yogyakarta', 'Bantul', 'Daerah Istimewa Yogyakar', 'Indonesia', 'Jalan Lingkar Selatan, Tamantirto, Kasihan, Geblagan, Tamantirto', '0274-4342234', '0274-4342230', 'pst3400@bps.go.id'),
+(38, 'BPS Kab Empat Lawang', '', '', 'Indonesia', 'Jl. Lintas Sumatera No. 35 Kecamatan Tebing Tinggi Kabupaten Empat Lawang Sumatera Selatan', '070221674', '070221674', 'bps1611@bps.go.id'),
+(39, 'BPS Kota Bekasi', '', '', 'Indonesia', 'Jl. Rawa Tembaga I, No. 6, Bekasi', '02188953987', '02188953987', 'bps3275@bps.go.id'),
+(40, 'BPS Kab Lampung Selatan', '', '', 'Indonesia', 'Jl. Mustafa Kemal No. 24 Kalianda, Lampung Selatan - Lampung', '0727322241 ', '0727322241 ', 'bps1803@bps.go.id'),
+(41, 'BPS Kab Tasikmalaya', '', '', 'Indonesia', 'Jalan Raya Timur Singaparna km 4 Cintaraja Singaparna Tasikmalaya', '0265549281', '0265549253', 'bps3206@bps.go.id'),
+(42, 'BPS Kabupaten Pulau Morotai', 'Pulau Morotai', 'Maluku Utara', 'Indonesia', 'Jln. Hi. Ahmad Syukur, Kec. Morotai Selatan, Pulau Morotai-Maluku Utara, 97771', '(0923) 2221133', '', 'bps8207@bps.go.id'),
+(43, 'BPS Provinsi Maluku Utara', 'Ternate', 'Maluku Utara', 'Indonesia', 'Jl. Stadion No 65 Ternate 97712', '(0921) 3127878', '(0921) 3126301', 'bps8200@bps.go.id'),
+(44, 'Politeknik Statistika STIS', 'Jakarta Timur', 'DKI Jakarta', 'Indonesia', 'Jl. Otto Iskandardinata No. 64C', '(021) 8508812', '8197577', 'info@stis.ac.id'),
+(45, 'BPS Kabupaten/Kota Bandung', 'Bandung', 'Jawa Barat', 'Indonesia', '', '', '', ''),
+(46, 'BPS Kabupaten Aceh Singkil', 'Aceh Singkil', 'Aceh', 'Indonesia', 'Jl. H. Sayuthi No. 2 Pulo Sarok', '(0658) 21268', '21268', 'bps1102@bps.go.id'),
+(47, 'BPS Kabupaten Rembang', 'Rembang', 'Jawa Tengah', 'Indonesia', 'Jl. Pemuda Km. 1', '0295691040', '0295691040', 'bps3317@bps.go.id'),
+(48, 'BPS Kabupaten Cilacap', 'Cilacap', 'Jawa Tengah', 'Indonesia', 'Jalan Dr. Soetomo No. 16A', '0282534328', '0282535011', 'bps3301@bps.go.id'),
+(49, 'BPS Kabupaten Klaten', 'Klaten', 'Jawa Tengah', 'Indonesia', 'Jl. Merapi No. 6', '62272321689', '', 'bps3310@bps.go.id'),
+(50, 'BPS Kota Malang', 'Malang', 'Jawa Timur', 'Indonesia', 'Jl. Janti Barat No. 47', '0341801164', '0341805871', 'bps3573@bps.go.id'),
+(51, 'BPS Kota Banjarmasin', '', '', '', 'Jalan Gatot Subroto No. 5 Banjarmasin 70235', '(0511) 6773031', '(0511) 6773032', 'bps6371@gmail.com'),
+(52, 'BPS Provinsi Riau', '', '', '', 'Jl. Pattimura No. 12 Pekanbaru - Riau, Indonesia', '(62-761) 23042', '(62-761) 21336', 'riau@bps.go.id'),
+(53, 'BPS Kabupaten Tanjung Jabung Barat', '', '', '', 'Jl. Prof.Dr. Sri Soedewi MS, SH.-Kuala Tungkal, Jambi', '(0742) 21738', '', 'bps1507@bps.go.id'),
+(54, 'BPS Provinsi Sulawesi Utara', '', '', '', 'Jl. 17 Agustus Manado 95119', '(0431) 847044', '(0431) 862204', 'mailto:sulut@bps.go.id'),
+(55, 'BPS Kabupaten Cirebon', '', '', '', 'Jl. Sunan Kalijaga No.4 Sumber-Cirebon 45611', '+62 231 321445', '+62 231 321445', 'bps3209@bps.go.id');
 
 -- --------------------------------------------------------
 
@@ -1661,6 +1670,13 @@ CREATE TABLE `token_app` (
   `count_usage` int(11) NOT NULL DEFAULT 0,
   `last_access` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `token_app`
+--
+
+INSERT INTO `token_app` (`id`, `token`, `count_usage`, `last_access`) VALUES
+(1, 'BFvhXmuJLtEHkGoQCcrUaNM9SPbf7q', 1, '2021-03-17 21:56:53');
 
 -- --------------------------------------------------------
 
@@ -1706,8 +1722,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `email`, `username`, `id_alumni`, `fullname`, `user_image`, `password_hash`, `reset_hash`, `reset_at`, `reset_expires`, `activate_hash`, `status`, `status_message`, `active`, `force_pass_reset`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 'dummy@stis.ac.id', 'Dummy', 1, 'Dummy_dummy', 'default.svg', '$2y$10$yLFu3bK0s5cHqd1VLT6Eh.GjA3H2GJzwqb6o/gjrhKXTWGkMsh3IS', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2021-04-27 22:27:45', '2021-04-27 22:27:45', NULL),
-(2, '221810422@stis.ac.id', '221810422', 210422, 'MOCHAMAD IZZA ZULFIKAR SYA\'RONI', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2021-05-02 00:33:27', '2021-05-02 00:33:27', NULL);
+(1, 'dummy@stis.ac.id', 'Dummy', 1, 'Dummy_dummy', 'default.svg', '$2y$10$yLFu3bK0s5cHqd1VLT6Eh.GjA3H2GJzwqb6o/gjrhKXTWGkMsh3IS', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2021-05-26 07:23:20', '2021-05-26 07:23:20', NULL);
 
 -- --------------------------------------------------------
 
@@ -1810,6 +1825,12 @@ ALTER TABLE `auth_users_permissions`
   ADD KEY `user_id_permission_id` (`user_id`,`permission_id`);
 
 --
+-- Indexes for table `berita`
+--
+ALTER TABLE `berita`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `client_app`
 --
 ALTER TABLE `client_app`
@@ -1844,7 +1865,14 @@ ALTER TABLE `groups_access`
 --
 ALTER TABLE `kabkota`
   ADD PRIMARY KEY (`id_kabkota`),
-  ADD KEY `foreign` (`id_provinsi`);
+  ADD KEY `kabkota_id_provinsi_foreign` (`id_provinsi`);
+
+--
+-- Indexes for table `komentar_berita`
+--
+ALTER TABLE `komentar_berita`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `komentar_berita_berita_id_foreign` (`berita_id`);
 
 --
 -- Indexes for table `menu`
@@ -1857,6 +1885,13 @@ ALTER TABLE `menu`
 --
 ALTER TABLE `migrations`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `news_visited`
+--
+ALTER TABLE `news_visited`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `news_visited_news_id_foreign` (`news_id`);
 
 --
 -- Indexes for table `pendidikan`
@@ -1883,13 +1918,6 @@ ALTER TABLE `prestasi`
 --
 ALTER TABLE `provinsi`
   ADD PRIMARY KEY (`id_provinsi`);
-
---
--- Indexes for table `publikasi`
---
-ALTER TABLE `publikasi`
-  ADD PRIMARY KEY (`publikasi`,`id_alumni`),
-  ADD KEY `publikasi_id_alumni_foreign` (`id_alumni`);
 
 --
 -- Indexes for table `report`
@@ -1925,13 +1953,6 @@ ALTER TABLE `submenu_access`
 --
 ALTER TABLE `table_scope`
   ADD PRIMARY KEY (`target_scope_id`);
-
---
--- Indexes for table `tag_foto`
---
-ALTER TABLE `tag_foto`
-  ADD PRIMARY KEY (`tag`,`id_foto`),
-  ADD KEY `tag_foto_id_foto_foreign` (`id_foto`);
 
 --
 -- Indexes for table `tempat_kerja`
@@ -1983,7 +2004,7 @@ ALTER TABLE `activity_log`
 -- AUTO_INCREMENT for table `alumni`
 --
 ALTER TABLE `alumni`
-  MODIFY `id_alumni` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=210423;
+  MODIFY `id_alumni` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
 
 --
 -- AUTO_INCREMENT for table `auth_activation_attempts`
@@ -2001,7 +2022,7 @@ ALTER TABLE `auth_groups`
 -- AUTO_INCREMENT for table `auth_logins`
 --
 ALTER TABLE `auth_logins`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `auth_permissions`
@@ -2022,10 +2043,16 @@ ALTER TABLE `auth_tokens`
   MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `berita`
+--
+ALTER TABLE `berita`
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `client_app`
 --
 ALTER TABLE `client_app`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `crud`
@@ -2043,31 +2070,43 @@ ALTER TABLE `foto`
 -- AUTO_INCREMENT for table `groups_access`
 --
 ALTER TABLE `groups_access`
-  MODIFY `access_group_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `access_group_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
+
+--
+-- AUTO_INCREMENT for table `komentar_berita`
+--
+ALTER TABLE `komentar_berita`
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `menu`
 --
 ALTER TABLE `menu`
-  MODIFY `menu_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `menu_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `news_visited`
+--
+ALTER TABLE `news_visited`
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `pendidikan`
 --
 ALTER TABLE `pendidikan`
-  MODIFY `id_pendidikan` int(16) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9214;
+  MODIFY `id_pendidikan` int(16) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
 
 --
 -- AUTO_INCREMENT for table `prestasi`
 --
 ALTER TABLE `prestasi`
-  MODIFY `id_prestasi` int(16) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9603;
+  MODIFY `id_prestasi` int(16) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `report`
@@ -2085,13 +2124,13 @@ ALTER TABLE `scope_app`
 -- AUTO_INCREMENT for table `submenu`
 --
 ALTER TABLE `submenu`
-  MODIFY `submenu_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `submenu_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `submenu_access`
 --
 ALTER TABLE `submenu_access`
-  MODIFY `menu_access_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `menu_access_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
 
 --
 -- AUTO_INCREMENT for table `table_scope`
@@ -2103,13 +2142,13 @@ ALTER TABLE `table_scope`
 -- AUTO_INCREMENT for table `tempat_kerja`
 --
 ALTER TABLE `tempat_kerja`
-  MODIFY `id_tempat_kerja` int(16) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=966;
+  MODIFY `id_tempat_kerja` int(16) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
 
 --
 -- AUTO_INCREMENT for table `token_app`
 --
 ALTER TABLE `token_app`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `token_scope`
@@ -2121,7 +2160,7 @@ ALTER TABLE `token_scope`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `video`
@@ -2198,7 +2237,19 @@ ALTER TABLE `groups_access`
 -- Constraints for table `kabkota`
 --
 ALTER TABLE `kabkota`
-  ADD CONSTRAINT `foreign` FOREIGN KEY (`id_provinsi`) REFERENCES `provinsi` (`id_provinsi`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `kabkota_id_provinsi_foreign` FOREIGN KEY (`id_provinsi`) REFERENCES `provinsi` (`id_provinsi`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `komentar_berita`
+--
+ALTER TABLE `komentar_berita`
+  ADD CONSTRAINT `komentar_berita_berita_id_foreign` FOREIGN KEY (`berita_id`) REFERENCES `berita` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `news_visited`
+--
+ALTER TABLE `news_visited`
+  ADD CONSTRAINT `news_visited_news_id_foreign` FOREIGN KEY (`news_id`) REFERENCES `berita` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `pendidikan`
@@ -2219,12 +2270,6 @@ ALTER TABLE `prestasi`
   ADD CONSTRAINT `prestasi_id_alumni_foreign` FOREIGN KEY (`id_alumni`) REFERENCES `alumni` (`id_alumni`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `publikasi`
---
-ALTER TABLE `publikasi`
-  ADD CONSTRAINT `publikasi_id_alumni_foreign` FOREIGN KEY (`id_alumni`) REFERENCES `alumni` (`id_alumni`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
 -- Constraints for table `report`
 --
 ALTER TABLE `report`
@@ -2243,12 +2288,6 @@ ALTER TABLE `submenu`
 ALTER TABLE `submenu_access`
   ADD CONSTRAINT `submenu_access_crud_id_foreign` FOREIGN KEY (`crud_id`) REFERENCES `crud` (`crud_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `submenu_access_submenu_id_foreign` FOREIGN KEY (`submenu_id`) REFERENCES `submenu` (`submenu_id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `tag_foto`
---
-ALTER TABLE `tag_foto`
-  ADD CONSTRAINT `tag_foto_id_foto_foreign` FOREIGN KEY (`id_foto`) REFERENCES `foto` (`id_foto`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `token_scope`
