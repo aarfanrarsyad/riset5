@@ -89,7 +89,7 @@ class Alumni extends Migration
 			],
 			'fb' => [
 				'type' => 'VARCHAR',
-				'constraint' => '50',
+				'constraint' => '255',
 				'null' => true,
 			],
 			'twitter' => [

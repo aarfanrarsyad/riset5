@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.4
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 26, 2021 at 02:37 AM
--- Server version: 10.4.17-MariaDB
--- PHP Version: 7.4.14
+-- Generation Time: May 26, 2021 at 10:33 AM
+-- Server version: 10.4.14-MariaDB-log
+-- PHP Version: 7.4.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -71,7 +71,7 @@ CREATE TABLE `alumni` (
   `deskripsi` varchar(300) DEFAULT NULL,
   `email` varchar(50) NOT NULL,
   `ig` varchar(50) DEFAULT NULL,
-  `fb` varchar(50) DEFAULT NULL,
+  `fb` varchar(255) DEFAULT NULL,
   `twitter` varchar(50) DEFAULT NULL,
   `linkedin` varchar(255) DEFAULT NULL,
   `gscholar` varchar(255) DEFAULT NULL,
@@ -89,16 +89,16 @@ CREATE TABLE `alumni` (
 --
 
 INSERT INTO `alumni` (`id_alumni`, `nama`, `jenis_kelamin`, `tempat_lahir`, `tanggal_lahir`, `telp_alumni`, `alamat_alumni`, `kota`, `provinsi`, `negara`, `status_bekerja`, `perkiraan_pensiun`, `jabatan_terakhir`, `aktif_pns`, `deskripsi`, `email`, `ig`, `fb`, `twitter`, `linkedin`, `gscholar`, `nip`, `nip_bps`, `foto_profil`, `cttl`, `calamat`, `cpendidikan`, `cprestasi`) VALUES
-(1, 'Dummy_dummy', 'Lk', 'Sungai Penuh', '1997-01-25', '081299594151', 'Jr. Abdul Rahmat No. 755, Tangerang 47637, SulUt', 'Kabupaten Tuban', 'Jawa Timur', 'Indonesia', 0, 1978, 'amet', 0, 'Maiores ut quasi beatae vel quisquam. Quo aut iusto et nobis et blanditiis non. Animi in architecto et iusto occaecati mollitia vel.', '', 'dummy_igza__', 'Dummy', 'Dummy__', '', '', '198109262004122002', '301820912', 'Lk/default.svg', 0, 0, 0, 0),
+(1, 'Dummy_dummy', 'Lk', 'Sungai Penuh', '1997-01-25', '081299594151', 'Jr. Abdul Rahmat No. 755, Tangerang 47637, SulUt', 'Kabupaten Tuban', 'Jawa Timur', 'Indonesia', 0, 1978, 'amet', 0, 'Maiores ut quasi beatae vel quisquam. Quo aut iusto et nobis et blanditiis non. Animi in architecto et iusto occaecati mollitia vel.', '', 'dummy_igza__', '', 'Dummy__', '', '', '198109262004122002', '301820912', 'Lk/default.svg', 0, 0, 0, 0),
 (2, 'Kartika Lismawati', 'Pr', 'Palembang', '1964-11-19', '', 'Jl. Lumbu Barat II B No. 82 Bl', '', '', '', 1, 2022, 'Kepala Subbidang Program dan Evaluasi Pendidikan dan Pelatihan Teknis dan Fungsional', 1, 'Test test 1 2 3', '', 'kartika123', '', '', '', '', '196411191987022003', '340011691', 'Pr/default.svg', 0, 0, 0, 0),
-(3, 'Budi Cahyono', 'Lk', 'Bojonegoro', '1964-06-08', '', 'Kp. Jati Griya Jatimas Asri', '', '', '', 1, 2022, 'Kepala BPS Kabupaten/Kota', 1, 'Hi there', '', 'boecah123', 'Budi Cahyono', 'Budi Cahyono', '', '', '196406081987021002', '340011692', 'Lk/default.svg', 1, 1, 1, 0),
+(3, 'Budi Cahyono', 'Lk', 'Bojonegoro', '1964-06-08', '', 'Kp. Jati Griya Jatimas Asri', '', '', '', 1, 2022, 'Kepala BPS Kabupaten/Kota', 1, 'Hi there', '', 'boecah123', '', 'Budi Cahyono', '', '', '196406081987021002', '340011692', 'Lk/default.svg', 1, 1, 1, 0),
 (4, 'Indra Susilo', 'Lk', 'Jakarta Pusat', '1964-06-07', '081318869089', 'Jl. Wibisana No. 6', '', '', 'Indonesia', 1, 2022, 'Kepala BPS Kabupaten/Kota', 1, 'Test123', '', 'indrass98', '', '', '', '', '196406071987021001', '340011693', 'Lk/default.svg', 1, 1, 0, 0),
 (5, 'Erisman', 'Lk', 'Jakarta Timur', '1964-11-02', '08129491174', 'JL.SMART HOUSE KAV.B56', '', '', '', 1, 2020, 'Kepala BPS Kabupaten/Kota', 0, 'Saya adalah Kepala BPS Kabupaten/Kota', '', 'erisman222', '', 'erisman123', '', '', '196411021987021001', '340011694', 'Lk/default.svg', 1, 1, 0, 0),
 (6, 'Ono Margiono', 'LK', 'Jakarta Timur', '1966-05-13', '081214770887', 'Jl. Pangeran Kejaksan Gg. Muja', '', '', '', 1, 2024, 'Kepala BPS Kabupaten/Kota', 1, 'good', '', '', '', '', '', '', '196605131988021001', '340011828', 'LK/default.svg', 0, 0, 0, 0),
 (7, 'Sofan', 'LK', 'Kebumen', '1964-10-21', '0811383762', 'Jl Alamandar', '', '', '', 1, 2022, 'Kepala Bidang Statistik Produksi', 1, 'asyik', '', '', '', '', '', '', '196410211988021001', '340011829', 'LK/default.svg', 0, 0, 0, 0),
 (8, 'Efliza', 'PR', 'Medan', '1965-04-28', '0816228960', 'Jl Masjid Nurul Falah No 14', '', '', '', 1, 2025, 'Kepala Direktorat Statistik Distribusi', 1, 'asyiap', '', '', '', '', '', '', '196504281988022001', '340011855', 'PR/default.svg', 0, 0, 0, 0),
 (9, 'Oldestia Vianny', 'Pr', 'Payakumbuh', '1979-06-11', '081274707292', 'Jl Rantau 3 No. 3 Rt 003 Rw 01', '', '', '', 1, 2037, 'Statistisi Muda Seksi Analisis Statistik Lintas Sektor', 1, 'PNS', '', '', '', '', '', '', '197906111999122001', '340015996', 'Pr/default.svg', 0, 0, 0, 0),
-(10, 'Oemar Syarief Wibisono', 'Lk', 'Jakarta', '1994-09-29', '082278449084', 'Lorong Perdamaian Bedeng Akau', '', '', '', 1, 2052, 'Staf Seksi Integrasi Pengolahan dan Diseminasi Statistik', 1, 'gk tau', '', 'NULL', 'Omarhehe', 'Omar', '', '', '199409292017011001', '340057694', 'Lk/default.svg', 0, 0, 0, 0),
+(10, 'Oemar Syarief Wibisono', 'Lk', 'Jakarta', '1994-09-29', '082278449084', 'Lorong Perdamaian Bedeng Akau', '', '', '', 1, 2052, 'Staf Seksi Integrasi Pengolahan dan Diseminasi Statistik', 1, 'gk tau', '', 'NULL', '', 'Omar', '', '', '199409292017011001', '340057694', 'Lk/default.svg', 0, 0, 0, 0),
 (11, 'Odry Syafwil', 'Lk', 'Jakarta', '1954-10-08', '081574594320', 'KOMPLEKS STATISTIK Jl. Statistik', '', '', '', 1, 2019, 'Lektor Kepala Tenaga Fungsional STIS', 0, 'Sudah pensiun', '', '', '', '', '', '', '195410081979031004', '340006615', 'Lk/default.svg', 0, 0, 0, 0),
 (12, 'Pradini Ajeng Gemellia', 'Pr', 'Bandung', '1989-10-13', '08567485818', 'Jl. Pelabuhan II Km 4,5 RT 2/8', '', '', '', 1, 2047, 'Staf Seksi Statistik Niaga dan Jasa', 1, 'hmm', '', '', '', '', '', '', '198910132012112001', '340055881', 'Pr/default.svg', 0, 0, 0, 0),
 (13, 'Lisiana Imana Yesani', 'PR', 'Jakarta Pusat', '1977-05-21', '085283507222', 'Jl. Kayu Manis VII No. 36', 'Jakarta Pusat', 'DKI Jakarta', 'Indonesia', 1, 2035, 'Kepala Seksi Statistik Sosial', 1, 'Asli jakarta hehe', '', '', '', '', '', '', '197705211999012001', '340015738', 'PR/default.svg', 0, 0, 0, 0),
@@ -120,8 +120,8 @@ INSERT INTO `alumni` (`id_alumni`, `nama`, `jenis_kelamin`, `tempat_lahir`, `tan
 (29, 'Toto E Sastrasuanda', 'LK', 'Cirebon', '0000-00-00', '', 'Dusun Belawa I Rt 03/01', '', '', '', 1, 2003, 'Kepala Deputi Bidang Statistik Sosial', 1, 'sasasaasa', '', '', '', '', '', '', '', '340003304', 'LK/default.svg', 0, 0, 0, 0),
 (30, 'Anik Triani', 'PR', 'Semarang', '0000-00-00', '', 'Griya Cempaka Arum Blok AA 11', '', '', '', 1, 2039, 'Statistisi Muda Seksi Statistik Pertambangan, Energi dan Konstruksi', 1, 'asadadadad', '', '', '', '', '', '', '198103102002122002', '340016472', 'PR/default.svg', 0, 0, 0, 0),
 (31, 'Maya Harsanti', 'PR', 'Jakarta', '0000-00-00', '', 'Perum Grand Duta Cluster Jade', '', '', '', 1, 2038, 'Staf Seksi Statistik Distribusi', 1, 'ADAAADADDAD', '', '', '', '', '', '', '198011042002122001', '340016479', 'PR/default.svg', 0, 0, 0, 0),
-(32, 'Lestari Utaminingsih', 'PR', 'Kendal', '1977-10-13', '085641509482', 'Jl. Candi Kencana IV/C.66', '', '', 'Indonesia', 1, 2035, 'Staf Subbagian Kepegawaian & Hukum', 1, 'Taken', '', 'lestari10', 'lestari_utami', 'lestari_utami', '', '', '197710132000022001', '340016072', 'PR/default.svg', 0, 0, 0, 0),
-(33, 'Hengki Eko Riyadi', 'LK', 'Lubang Lor (Purworejo)', '1978-09-03', '085261660531', 'Grand Serpong Residence Blok A', '', '', 'Indonesia', 1, 2038, 'Statistisi Madya Pejabat Fungsional', 1, 'Laper nih', '', 'iri_hengki', 'hengki_itudosa', 'hengki01', '', '', '197809032000121002', '340016113', 'LK/default.svg', 0, 0, 0, 0),
+(32, 'Lestari Utaminingsih', 'PR', 'Kendal', '1977-10-13', '085641509482', 'Jl. Candi Kencana IV/C.66', '', '', 'Indonesia', 1, 2035, 'Staf Subbagian Kepegawaian & Hukum', 1, 'Taken', '', 'lestari10', '', 'lestari_utami', '', '', '197710132000022001', '340016072', 'PR/default.svg', 0, 0, 0, 0),
+(33, 'Hengki Eko Riyadi', 'LK', 'Lubang Lor (Purworejo)', '1978-09-03', '085261660531', 'Grand Serpong Residence Blok A', '', '', 'Indonesia', 1, 2038, 'Statistisi Madya Pejabat Fungsional', 1, 'Laper nih', '', 'iri_hengki', '', 'hengki01', '', '', '197809032000121002', '340016113', 'LK/default.svg', 0, 0, 0, 0),
 (34, 'Eddy Prayitno', 'LK', 'Bandar Lampung', '1977-01-15', '07215605102', 'Jl. Purnawirawan Raya Belakang', '', '', 'Indonesia', 1, 2035, 'Kepala BPS Kabupaten/Kota', 1, 'Makan bang!!', '', '', '', '', '', '', '197701151999011001', '340015736', 'LK/default.svg', 0, 0, 0, 0),
 (35, 'Edison Manurung', 'LK', 'Tapanuli Utara', '1962-11-10', '021-7815560', 'Jl.Raya Lt.Agung Tg.BaratRt.00', '', '', 'Indonesia', 0, 2019, 'Staf Seksi Penyiapan Statistik Perdagangan Dalam Negeri', 0, 'Ngantuk bat', '', '', '', '', '', '', '196211101988021001', '340011827', 'LK/default.svg', 0, 0, 0, 0),
 (36, 'Bambang Susilo', 'Lk', 'Blora', '1957-04-03', '', 'H.Ahyar No.49 RT.006/05 13440', '', '', '', 1, 2013, 'Staf Seksi Pengolahan Statistik Pendidikan dan Kesejahteraan Sosial', 0, '', '', '', '', '', '', '', '195704031977121001', '340005601', 'Lk/default.svg', 0, 0, 0, 0),
@@ -309,15 +309,6 @@ CREATE TABLE `auth_logins` (
   `date` datetime NOT NULL,
   `success` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `auth_logins`
---
-
-INSERT INTO `auth_logins` (`id`, `ip_address`, `email`, `user_id`, `date`, `success`) VALUES
-(1, '::1', 'dummy@stis.ac.id', 1, '2021-05-25 19:23:48', 1),
-(2, '::1', 'dummy@stis.ac.id', 1, '2021-05-25 19:28:08', 1),
-(3, '::1', 'dummy@stis.ac.id', 1, '2021-05-25 19:31:52', 1);
 
 -- --------------------------------------------------------
 
@@ -1146,12 +1137,12 @@ CREATE TABLE `migrations` (
 --
 
 INSERT INTO `migrations` (`id`, `version`, `class`, `group`, `namespace`, `time`, `batch`) VALUES
-(1, '2021-04-17-213105', 'App\\Database\\Migrations\\Alumni', 'default', 'App', 1621988597, 1),
-(2, '2021-04-17-213203', 'App\\Database\\Migrations\\AuthTable', 'default', 'App', 1621988597, 1),
-(3, '2021-04-17-213248', 'App\\Database\\Migrations\\Rbac', 'default', 'App', 1621988597, 1),
-(4, '2021-04-17-213438', 'App\\Database\\Migrations\\Webservice', 'default', 'App', 1621988597, 1),
-(5, '2021-04-29-090021', 'App\\Database\\Migrations\\Berita', 'default', 'App', 1621988597, 1),
-(6, '2021-05-21-073527', 'App\\Database\\Migrations\\ProvKabKot', 'default', 'App', 1621988597, 1);
+(1, '2021-04-17-213105', 'App\\Database\\Migrations\\Alumni', 'default', 'App', 1622017980, 1),
+(2, '2021-04-17-213203', 'App\\Database\\Migrations\\AuthTable', 'default', 'App', 1622017981, 1),
+(3, '2021-04-17-213248', 'App\\Database\\Migrations\\Rbac', 'default', 'App', 1622017981, 1),
+(4, '2021-04-17-213438', 'App\\Database\\Migrations\\Webservice', 'default', 'App', 1622017982, 1),
+(5, '2021-04-29-090021', 'App\\Database\\Migrations\\Berita', 'default', 'App', 1622017982, 1),
+(6, '2021-05-21-073527', 'App\\Database\\Migrations\\ProvKabKot', 'default', 'App', 1622017982, 1);
 
 -- --------------------------------------------------------
 
@@ -1722,7 +1713,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `email`, `username`, `id_alumni`, `fullname`, `user_image`, `password_hash`, `reset_hash`, `reset_at`, `reset_expires`, `activate_hash`, `status`, `status_message`, `active`, `force_pass_reset`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 'dummy@stis.ac.id', 'Dummy', 1, 'Dummy_dummy', 'default.svg', '$2y$10$yLFu3bK0s5cHqd1VLT6Eh.GjA3H2GJzwqb6o/gjrhKXTWGkMsh3IS', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2021-05-26 07:23:20', '2021-05-26 07:23:20', NULL);
+(1, 'dummy@stis.ac.id', 'Dummy', 1, 'Dummy_dummy', 'default.svg', '$2y$10$yLFu3bK0s5cHqd1VLT6Eh.GjA3H2GJzwqb6o/gjrhKXTWGkMsh3IS', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2021-05-26 15:33:06', '2021-05-26 15:33:06', NULL);
 
 -- --------------------------------------------------------
 
@@ -2022,7 +2013,7 @@ ALTER TABLE `auth_groups`
 -- AUTO_INCREMENT for table `auth_logins`
 --
 ALTER TABLE `auth_logins`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `auth_permissions`
