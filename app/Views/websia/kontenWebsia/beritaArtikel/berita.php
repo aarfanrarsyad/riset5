@@ -149,8 +149,8 @@
                 <a href="/" class="hover:text-primaryHover">Beranda</a>
                 <p>></p>
                 <a href="/User/berita" class="hover:text-primaryHover">Berita</a>
-                <p>></p>
-                <a href="/User/judulBerita" class="hover:text-primaryHover"><?= ucwords(strtolower($dataset['judul'])) ?></a>
+                <!-- <p>></p> -->
+                <!-- <a href="/User/judulBerita" class="hover:text-primaryHover"><?= ucwords(strtolower($dataset['judul'])) ?></a> -->
             </div>
         </div>
         <div>
@@ -203,7 +203,7 @@
     <div class="md:flex lg:flex justify-between">
         <div class="flex-grow">
             <div class="flex flex-col lg:mr-8 md:mr-4 sm:mr-8 lg:ml-0 md:ml-0 sm:ml-4">
-                <div class="text-secondary font-heading font-bold lg:text-4xl md:text-3xl text-2xl"><?= ucwords(strtolower($dataset['judul'])) ?></div>
+                <div class="text-secondary font-heading font-bold lg:text-3xl text-2xl"><?= ucwords(strtolower($dataset['judul'])) ?></div>
                 <div class="flex lg:my-3 my-2">
                     <div class="flex text-primary">
                         <svg class="w-4 h-4 mr-2 my-auto" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -301,14 +301,14 @@
                             </div>
                             <div class="lg:ml-4 md:ml-3 ml-2 lg:w-4/7 w-3/5">
                                 <a href="<?= base_url('user/viewBerita/' . $berita_popular[$i]['id']) ?>">
-                                    <h3 class="font-heading font-semibold text-primary lg:text-lg md:text-base text-sm"><?= $berita_popular[$i]['judul'] ?></h3>
+                                    <h3 class="font-heading font-semibold text-primary lg:text-base md:text-sm sm:text-base"><?= $berita_popular[$i]['judul'] ?></h3>
                                 </a>
                                 <div class="flex gap-x-1 items-center">
                                     <p class="text-xs text-primary lg:mb-2 mb-1"><?= $berita_popular[$i]['tanggal_publish'] ?></p>
                                 </div>
-                                <p class="lg:text-sm text-xs text-justify">
+                                <!-- <p class="lg:text-sm text-xs text-justify">
                                     <?= $berita_popular[$i]['konten'] ?>
-                                </p>
+                                </p> -->
                             </div>
                         </div>
                     <?php endfor; ?>
@@ -323,14 +323,14 @@
                             </div>
                             <div class="lg:ml-4 md:ml-3 ml-2 lg:w-4/7 w-3/5">
                                 <a href="<?= base_url('user/viewBerita/' . $berita[$i]['id']) ?>">
-                                    <h3 class="font-heading font-semibold text-primary lg:text-lg md:text-base text-sm"><?= $berita[$i]['tanggal_publish'] ?></h3>
+                                    <h3 class="font-heading font-semibold text-primary lg:text-base md:text-sm sm:text-base"><?= $berita[$i]['judul'] ?></h3>
                                 </a>
                                 <div class="flex gap-x-1 items-center">
                                     <p class="text-xs text-primary lg:mb-2 mb-1"><?= $berita[$i]['tanggal_publish'] ?></p>
                                 </div>
-                                <p class="lg:text-sm text-xs text-justify">
-                                    <?= $berita[$i]['konten'] ?>
-                                </p>
+                                <!-- <p class="lg:text-sm text-xs text-justify">
+                                <?= $berita[$i]['konten'] ?>
+                                </p> -->
                             </div>
                         </div>
                     <?php endfor; ?>
