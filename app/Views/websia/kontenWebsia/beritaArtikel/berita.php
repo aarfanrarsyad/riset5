@@ -295,7 +295,7 @@
                         <?php if ($i > 2) break ?>
                         <hr class="lg:my-3 my-2 border-gray-400">
                         <div class="flex justify between">
-                            <div class="lg:h-34 h-28 lg:w-3/7 w-2/5 border border-gray-400">
+                            <div class="lg:h-28 md:h-20 h-28 lg:w-3/7 w-2/5 border border-gray-400">
                                 <!-- tambahin img nya di dalem src ya-->
                                 <img src="" alt="thumbnail" class="w-full h-full object-contain">
                             </div>
@@ -318,7 +318,7 @@
                     <?php for ($i = 0; $i < count($berita); $i++) : ?>
                         <hr class="lg:my-3 my-2 border-gray-400">
                         <div class="flex justify between">
-                            <div class="lg:h-34 h-28 lg:w-3/7 w-2/5 border border-gray-400">
+                            <div class="lg:h-28 md:h-20 h-28 lg:w-3/7 w-2/5 border border-gray-400">
                                 <img src="" alt="thumbnail" class="w-full h-full object-contain">
                             </div>
                             <div class="lg:ml-4 md:ml-3 ml-2 lg:w-4/7 w-3/5">

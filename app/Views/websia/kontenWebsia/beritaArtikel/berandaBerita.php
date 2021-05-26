@@ -65,7 +65,7 @@
                 <div class="md:col-span-2 lg:h-96 md:h-72 h-32 flex items-end sm:mb-4 mb-2 md:mb-0 border border-gray-100">
                     <!-- tambahin link buat ke beritanya di sini-->
                     <a href="" class="w-full h-full">
-                        <img src="<?= base_url('berita/berita_' . $dataset[0]['id'] . '/' . $dataset[0]['thumbnail']) ?>" alt="thumbnail" class="w-full md:h-full object-contain" style="z-index: 0;">
+                        <img src="<?= base_url('berita/berita_' . $dataset[0]['id'] . '/' . $dataset[0]['thumbnail']) ?>" alt="thumbnail" class="w-full h-full object-contain" style="z-index: 0;">
                         <div class="-mt-9 p-1">
                             <h1 class="text-white font-heading font-bold text-lg"><?= $dataset[0]['judul'] ?></h1>
                         </div>

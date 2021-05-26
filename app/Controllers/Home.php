@@ -12,6 +12,24 @@ use \JKD\SSO\Client\Provider\Keycloak;
 class Home extends BaseController
 {
 
+	public function alumni()
+	{
+		$model = new \App\Models\AlumniModel();
+		$i = 1;
+		foreach ($model->db->table('pendidikan_tinggi')->get()->getResultArray() as $alumni) {
+			echo '
+			[<br>
+				"id_pendidikan" => "' . $alumni['id_pendidikan'] . '",<br>
+				"program_studi" => "' . $alumni['program_studi'] . '",<br>
+				"nim" => "' . $alumni['nim'] . '",<br>
+				"judul_tulisan" => "' . $alumni['judul_tulisan'] . '",<br>
+			],<br>';
+			// echo $i . " 	" . $alumni['id_pendidikan'] . "<br>";
+			$i++;
+		}
+		// dd($model->db->table('tempat_kerja')->get()->getResultArray());
+	}
+
 	public function index()
 	{
 		$this->modelAuth = new \App\Models\AuthModel();
