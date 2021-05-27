@@ -18,6 +18,10 @@
     <script type="text/javascript" src="/js/leaflet.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="/css/add_style.css">
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/croppie.js"></script>
+    <link rel="stylesheet" href="/css/croppie.css" />
 
     <!-- link utk manggil font nya  -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
