@@ -352,8 +352,14 @@ class AlumniModel extends Model
         return $this->table('alumni')->like('nama', $keyword);
     }
 
+    // kanddidat untuk binding sso bps
     public function getAlumniByEmail($email)
     {
         return $this->builder()->where('email', $email)->get()->getFirstRow('array');
+    }
+
+    public function getAlumniByNipBPS($nip)
+    {
+        return $this->builder()->where('nip_bps', $nip)->get()->getFirstRow('array');
     }
 }
