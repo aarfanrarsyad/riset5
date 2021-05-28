@@ -872,7 +872,6 @@ class Admin extends BaseController
 		$init = new admin_model();
 		$alumni = $init->getAllAlumni($id)->getResultArray()[0];
 		$instansi = $init->getTempatKerjabyIdAlumni($id)->getResultArray()[0];
-		$publikasi = $init->getPublikasiById($id)->getResult();
 		$pendidikan = $init->getPendidikanById($id)->getResult();
 		$prestasi = $init->getPrestasiById($id)->getResult();
 
@@ -880,7 +879,6 @@ class Admin extends BaseController
 			'title' => 'Detail Alumni | Website Riset 5',
 			'alumni' => $alumni,
 			'instansi' => $instansi,
-			'publikasi' => $publikasi,
 			'pendidikan' => $pendidikan,
 			'prestasi' => $prestasi
 		];

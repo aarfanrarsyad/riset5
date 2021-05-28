@@ -315,34 +315,6 @@ class Rbac extends Seeder
 				'active'		=> '1'
 			],
 			[
-				'menu_id'     	=> 9,
-				'title'			=> 'Publikasi',
-				'url'			=> 'admin/publikasi',
-				'icon'			=> 'fas fa-file-alt',
-				'active'		=> '1'
-			],
-			[
-				'menu_id'     	=> 9,
-				'title'			=> 'Pendidikan',
-				'url'			=> 'admin/pendidikan',
-				'icon'			=> 'fas fa-school',
-				'active'		=> '1'
-			],
-			[
-				'menu_id'     	=> 9,
-				'title'			=> 'Pendidikan Tinggi',
-				'url'			=> 'admin/pendidikan-tinggi',
-				'icon'			=> 'fas fa-school',
-				'active'		=> '1'
-			],
-			[
-				'menu_id'     	=> 9,
-				'title'			=> 'Prestasi',
-				'url'			=> 'admin/prestasi',
-				'icon'			=> 'fas fa-award',
-				'active'		=> '1'
-			],
-			[
 				'menu_id'     	=> 10,
 				'title'			=> 'Galeri Foto',
 				'url'			=> 'admin/galeri-foto',
@@ -546,70 +518,6 @@ class Rbac extends Seeder
 			],
 			[
 				'submenu_id'     	=> 18,
-				'crud_id'			=> 4
-			],
-			[
-				'submenu_id'     	=> 19,
-				'crud_id'			=> 1
-			],
-			[
-				'submenu_id'     	=> 19,
-				'crud_id'			=> 2
-			],
-			[
-				'submenu_id'     	=> 19,
-				'crud_id'			=> 3
-			],
-			[
-				'submenu_id'     	=> 19,
-				'crud_id'			=> 4
-			],
-			[
-				'submenu_id'     	=> 20,
-				'crud_id'			=> 1
-			],
-			[
-				'submenu_id'     	=> 20,
-				'crud_id'			=> 2
-			],
-			[
-				'submenu_id'     	=> 20,
-				'crud_id'			=> 3
-			],
-			[
-				'submenu_id'     	=> 20,
-				'crud_id'			=> 4
-			],
-			[
-				'submenu_id'     	=> 21,
-				'crud_id'			=> 1
-			],
-			[
-				'submenu_id'     	=> 21,
-				'crud_id'			=> 2
-			],
-			[
-				'submenu_id'     	=> 21,
-				'crud_id'			=> 3
-			],
-			[
-				'submenu_id'     	=> 21,
-				'crud_id'			=> 4
-			],
-			[
-				'submenu_id'     	=> 22,
-				'crud_id'			=> 1
-			],
-			[
-				'submenu_id'     	=> 22,
-				'crud_id'			=> 2
-			],
-			[
-				'submenu_id'     	=> 22,
-				'crud_id'			=> 3
-			],
-			[
-				'submenu_id'     	=> 22,
 				'crud_id'			=> 4
 			],
 			[
@@ -843,70 +751,6 @@ class Rbac extends Seeder
 			[
 				'group_id'     		=> 1,
 				'menu_access_id'	=> 47
-			],
-			[
-				'group_id'     		=> 1,
-				'menu_access_id'	=> 48
-			],
-			[
-				'group_id'     		=> 1,
-				'menu_access_id'	=> 49
-			],
-			[
-				'group_id'     		=> 1,
-				'menu_access_id'	=> 50
-			],
-			[
-				'group_id'     		=> 1,
-				'menu_access_id'	=> 51
-			],
-			[
-				'group_id'     		=> 1,
-				'menu_access_id'	=> 52
-			],
-			[
-				'group_id'     		=> 1,
-				'menu_access_id'	=> 53
-			],
-			[
-				'group_id'     		=> 1,
-				'menu_access_id'	=> 54
-			],
-			[
-				'group_id'     		=> 1,
-				'menu_access_id'	=> 55
-			],
-			[
-				'group_id'     		=> 1,
-				'menu_access_id'	=> 56
-			],
-			[
-				'group_id'     		=> 1,
-				'menu_access_id'	=> 57
-			],
-			[
-				'group_id'     		=> 1,
-				'menu_access_id'	=> 58
-			],
-			[
-				'group_id'     		=> 1,
-				'menu_access_id'	=> 59
-			],
-			[
-				'group_id'     		=> 1,
-				'menu_access_id'	=> 60
-			],
-			[
-				'group_id'     		=> 1,
-				'menu_access_id'	=> 61
-			],
-			[
-				'group_id'     		=> 1,
-				'menu_access_id'	=> 62
-			],
-			[
-				'group_id'     		=> 1,
-				'menu_access_id'	=> 63
 			],
 			[
 				'group_id'     		=> 1,
