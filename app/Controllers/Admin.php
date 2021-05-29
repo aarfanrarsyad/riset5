@@ -122,7 +122,7 @@ class Admin extends BaseController
 		// Validate here first, since some things,
 		// like the password, can only be validated properly here.
 		$rules = [
-
+			'id_alumni'		=> 'permit_empty|numeric',
 			'fullname'      => 'required',
 			// 'nim'           => 'exact_length[9]|is_unique[users.nim]',
 			'email'			=> 'required|valid_email|is_unique[users.email]',
