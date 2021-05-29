@@ -71,6 +71,11 @@
                                     BERANDA
                                 </div>
                             </a>
+                            <a href="/developer/">
+                                <div class="nav-menu transition-colors duration-300 <?= ($active == 'profil') ? 'activeMenu' : ''; ?>">
+                                    WEBSERVICE
+                                </div>
+                            </a>
                             <a href="/User/profil">
                                 <div class="nav-menu transition-colors duration-300 <?= ($active == 'profil') ? 'activeMenu' : ''; ?>">
                                     PROFIL

@@ -46,16 +46,16 @@
             </div>
             <div id="nav" class="hidden sm:flex sm:items-center">
                 <ul class="flex lg:gap-x-6 md:gap-x-4 gap-x-2 relative">
-                    <li class="bg-secondary text-white py-1.5 sm:px-1 md:w-20 text-center cursor-pointer border-secondary border-2 hover:text-secondary hover:bg-white transition-colors duration-300 relative">API
+                    <a href="/developer/">
+                        <li class="bg-secondary text-white py-1.5 sm:px-1 md:w-24 text-center cursor-pointer border-secondary border-2 hover:text-secondary hover:bg-white transition-colors duration-300">BERANDA</li>
+                    </a>
+                    <li class="bg-secondary text-white py-1.5 sm:px-1 md:w-24 text-center cursor-pointer border-secondary border-2 hover:text-secondary hover:bg-white transition-colors duration-300 relative">API
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-4 inline" viewBox="0 0 20 20" fill="currentColor">
                             <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
                         </svg>
                         <ul class="text-secondary absolute top-9 -left-0.5 overflow-hidden transition-all max-h-0 bg-white duration-300 menuWebService">
-                            <a href="/developer/">
-                                <li class="list hover:text-white py-1.5 text-left border-2 border-secondary transiton duration-300 px-3">BERANDA</li>
-                            </a>
                             <a href="/developer/dokumentasi">
-                                <li class="list hover:text-white py-1.5 text-left border-l-2 border-r-2 border-secondary transiton duration-300 px-3">DOKUMENTASI</li>
+                                <li class="list hover:text-white py-1.5 text-left border-l-2 border-t-2 border-r-2 border-secondary transiton duration-300 px-3">DOKUMENTASI</li>
                             </a>
                             <a href="/developer/proyek">
                                 <li class="list hover:text-white py-1.5 text-left border-2 border-secondary transiton duration-300 px-3">PROYEK</li>
@@ -63,11 +63,11 @@
                         </ul>
                     </li>
 
-                    <a href="/developer/profil">
-                        <li class="bg-secondary text-white py-1.5 sm:px-1 md:w-20 text-center cursor-pointer border-secondary border-2 hover:text-secondary hover:bg-white transition-colors duration-300">PROFIL</li>
+                    <a href="/developer/edit/akun">
+                        <li class="bg-secondary text-white py-1.5 sm:px-1 md:w-24 text-center cursor-pointer border-secondary border-2 hover:text-secondary hover:bg-white transition-colors duration-300">EDIT AKUN</li>
                     </a>
                     <a href="/logout">
-                        <li class="bg-secondary text-white py-1.5 sm:px-1 md:w-20 text-center cursor-pointer border-secondary border-2 hover:text-secondary hover:bg-white transition-colors duration-300">KELUAR</li>
+                        <li class="bg-secondary text-white py-1.5 sm:px-1 md:w-24 text-center cursor-pointer border-secondary border-2 hover:text-secondary hover:bg-white transition-colors duration-300">KELUAR</li>
                     </a>
                 </ul>
             </div>
@@ -80,6 +80,15 @@
         </div>
 
         <div class="sm:hidden hidden menuWebService navbar" id="menuApi">
+            <div class="menu border-b flex justify-center">
+                <ul class="w-min">
+                    <a href="/developer/">
+                        <li class="cursor-pointer flex justify-center text-white py-1">
+                            <div class="bg-secondary w-28 flex justify-center hover:bg-white hover:text-secondary py-0.5">BERANDA</div>
+                        </li>
+                    </a>
+                </ul>
+            </div>
             <div class="menu border-t border-b flex justify-center">
                 <ul class="w-min" id="navmobile">
                     <li class="cursor-pointer flex justify-center text-white py-1">
@@ -88,9 +97,6 @@
                             </svg></div>
                     </li>
                     <ul class="transform -translate-y-0.5 text-white w-screen flex flex-col items-center hidden block">
-                        <a href="/developer/">
-                            <li class="list m-auto hover:text-white bg-white text-center text-secondary text-sm py-0.5 w-44 border-b-2 border-gray-500">BERANDA</li>
-                        </a>
                         <a href="/developer/dokumentasi">
                             <li class="list m-auto hover:text-white bg-white text-center text-secondary text-sm py-0.5 w-44 border-b-2 border-gray-500">DOKUMENTASI</li>
                         </a>
@@ -102,9 +108,9 @@
             </div>
             <div class="menu border-b flex justify-center">
                 <ul class="w-min">
-                    <a href="/developer/profil">
+                    <a href="/developer/edit/akun">
                         <li class="cursor-pointer flex justify-center text-white py-1">
-                            <div class="bg-secondary w-28 flex justify-center hover:bg-white hover:text-secondary py-0.5">PROFIL</div>
+                            <div class="bg-secondary w-28 flex justify-center hover:bg-white hover:text-secondary py-0.5">EDIT AKUN</div>
                         </li>
                     </a>
                 </ul>

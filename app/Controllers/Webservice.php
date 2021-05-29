@@ -10,11 +10,11 @@ class Webservice extends BaseController
 {
 	public function __construct()
 	{
-		if (!session()->has('id_user')) {
-			$flash = 'Harap Login Terlebih Dahulu';
-			session()->setFlashdata('role', $flash);
-			echo '<script>window.location.replace("' . base_url('') . '");</script>';
-		}
+		// if (!session()->has('id_user')) {
+		// 	$flash = 'Harap Login Terlebih Dahulu';
+		// 	session()->setFlashdata('role', $flash);
+		// 	echo '<script>window.location.replace("' . base_url('') . '");</script>';
+		// }
 
 		if (session()->has('role'))
 			if (!in_array("4", session('role'))) {
