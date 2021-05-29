@@ -247,10 +247,11 @@ $routes->group('admin', ['namespace' => 'App\Controllers'], function ($routes) {
 
 	// CRUD Create
 	$routes->match(['get', 'post'], 'alumni/tambah-alumni', 'Admin::CRUD_createAlumni', ['filter' => 'permission:1']);
-	$routes->match(['get', 'post'], 'alumni/tambah-instansi', 'Admin::CRUD_createInstansi', ['filter' => 'permission:1']);
+	$routes->match(['get', 'post'], 'instansi/tambah-instansi', 'Admin::CRUD_createInstansi', ['filter' => 'permission:1']);
 
 	// CRUD Update
-	// $routes->match(['get', 'post'], 'resources/update/(:num)', 'Admin::update_resource/$1', ['filter' => 'permission:3']);
+	$routes->match(['get', 'post'], 'alumni/update-alumni/(:segment)', 'Admin::CRUD_updateAlumni/$1', ['filter' => 'permission:3']);
+	$routes->match(['get', 'post'], 'instansi/update-instansi/(:segment)', 'Admin::CRUD_updateInstansi/$1', ['filter' => 'permission:3']);
 
 	// CRUD Detail
 	$routes->get('alumni/(:any)', 'Admin::CRUD_detailAlumni/$1', ['filter' => 'permission:2']);

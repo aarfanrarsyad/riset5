@@ -29,7 +29,7 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col text-primaryHover font-heading">
-                        <h5><i class="fas fa-qrcode text-primaryHover"></i>&ensp;Daftar Instansi</h5>
+                        <h5><i class="fas fa-building text-primaryHover"></i>&ensp;Daftar Instansi</h5>
                     </div>
                 </div>
                 <div class="card-body">
@@ -40,7 +40,7 @@
                                     <i class="fas fa-th-list text-muted"></i>&ensp;Pilih Tindakan
                                 </button>
                                 <div class="dropdown-menu text-sm">
-                                    <a class="dropdown-item" href="<?= base_url('/admin/alumni/tambah-instansi') ?>" onclick="CRUD_createInstansi()"><i class="fas fa-plus-square"></i>&ensp;Add new instansi</a>
+                                    <a class="dropdown-item" href="<?= base_url('/admin/instansi/tambah-instansi') ?>" onclick="CRUD_createInstansi()"><i class="fas fa-plus-square"></i>&ensp;Add new instansi</a>
                                 </div>
                             </div>
                             <div class="row">
@@ -48,7 +48,8 @@
                                     <table class="table table-hover table-sm text-sm" id="instansi-table">
                                         <thead>
                                             <tr>
-                                                <th scope="col">ID</th>
+                                                <th scope="col">No.</th>
+                                                <th scope="col">ID Instansi</th>
                                                 <th scope="col">Nama Instansi</th>
                                                 <th scope="col">Alamat Instansi</th>
                                                 <th scope="col">Aksi</th>
@@ -59,11 +60,12 @@
                                             <?php foreach ($instansi as $inst) : ?>
                                                 <tr>
                                                     <th scope="row"><?= $i++; ?></th>
+                                                    <td><?= $inst['id_tempat_kerja']; ?></td>
                                                     <td><?= $inst['nama_instansi']; ?></td>
                                                     <td><?= $inst['alamat_instansi']; ?></td>
                                                     <td>
                                                         <a href="/admin/instansi/<?= $inst['id_tempat_kerja']; ?>" class="btn btn-xs btn-outline-primary mr-1"><i class="fas fa-search"></i>&ensp;<span class="text-xs">Detail</span></a>
-                                                        <button type="button" class="btn btn-xs btn-outline-primary mr-1" onclick=""><i class="fas fa-edit"></i>&ensp;<span class="text-xs">Update</span></button>
+                                                        <a href="/admin/instansi/update-instansi/<?= $inst['id_tempat_kerja']; ?>" class="btn btn-xs btn-outline-primary mr-1"><i class="fas fa-edit"></i>&ensp;<span class="text-xs">Update</span></a>
                                                         <button type="button" class="btn btn-xs btn-outline-primary" onclick="CRUD_deleteInstansi(<?= $inst['id_tempat_kerja']; ?>, '<?= $inst['nama_instansi']; ?>')"><i class="fas fa-trash"></i>&ensp;<span class="text-xs">Delete</span></button>
                                                     </td>
                                                 </tr>

@@ -28,7 +28,7 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col text-primaryHover font-heading">
-                        <h5><i class="fas fa-qrcode text-primaryHover"></i>&ensp;Daftar Alumni</h5>
+                        <h5><i class="fas fa-user text-primaryHover"></i>&ensp;Daftar Alumni</h5>
                     </div>
                 </div>
                 <div class="card-body">
@@ -51,6 +51,7 @@
                                                 <th scope="col">Foto</th>
                                                 <th scope="col">NIP</th>
                                                 <th scope="col">NIP BPS</th>
+                                                <th scope="col">ID Alumni</th>
                                                 <th scope="col">Nama</th>
                                                 <th scope="col">Aksi</th>
                                             </tr>
@@ -61,13 +62,14 @@
                                             <?php foreach ($alumni as $alum) : ?>
                                                 <tr>
                                                     <th scope="row"><?= $i++; ?></th>
-                                                    <td><img src="img/<?= $alum['foto_profil']; ?>" alt="" class="foto"></td>
+                                                    <td><img src="/img/<?= $alum['foto_profil']; ?>" alt="" class="foto"></td>
                                                     <td><?= $alum['nip']; ?></td>
                                                     <td><?= $alum['nip_bps']; ?></td>
+                                                    <td><?= $alum['id_alumni']; ?></td>
                                                     <td><?= $alum['nama']; ?></td>
                                                     <td>
                                                         <a href="/admin/alumni/<?= $alum['id_alumni']; ?>" class="btn btn-xs btn-outline-primary mr-1"><i class="fas fa-search"></i>&ensp;<span class="text-xs">Detail</span></a>
-                                                        <button type="button" class="btn btn-xs btn-outline-primary mr-1" onclick=""><i class="fas fa-edit"></i>&ensp;<span class="text-xs">Update</span></button>
+                                                        <a href="/admin/alumni/update-alumni/<?= $alum['id_alumni']; ?>" class="btn btn-xs btn-outline-primary mr-1"><i class="fas fa-edit"></i>&ensp;<span class="text-xs">Update</span></a>
                                                         <button type="button" class="btn btn-xs btn-outline-primary" onclick="CRUD_deleteAlumni(<?= $alum['id_alumni']; ?>, '<?= $alum['nama']; ?>')"><i class="fas fa-trash"></i>&ensp;<span class="text-xs">Delete</span></button>
                                                     </td>
                                                 </tr>

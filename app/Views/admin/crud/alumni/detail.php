@@ -41,7 +41,7 @@
                                             <img src="/img/<?= $alumni['foto_profil']; ?>" alt="Admin" class="rounded-circle" width="150">
                                             <div class="mt-3">
                                                 <h4><?= $alumni['nama']; ?></h4>
-                                                <button type="button" class="btn btn-xs btn-outline-primary mr-1" onclick=""><i class="fas fa-edit"></i>&ensp;<span class="text-xs">Update</span></button>
+                                                <a href="/admin/alumni/update-alumni/<?= $alumni['id_alumni']; ?>" class="btn btn-xs btn-outline-primary mr-1"><i class="fas fa-edit"></i>&ensp;<span class="text-xs">Update</span></a>
                                                 <button type="button" class="btn btn-xs btn-outline-primary" onclick="CRUD_deleteAlumni(<?= $alumni['id_alumni']; ?>, '<?= $alumni['nama']; ?>')"><i class="fas fa-trash"></i>&ensp;<span class="text-xs">Delete</span></button>
                                             </div>
                                         </div>
@@ -101,6 +101,7 @@
                             <div class="col-md-8">
                                 <div class="card mb-3">
                                     <div class="card-body">
+                                        <hr>
                                         <div class="row">
                                             <div class="col-sm-3">
                                                 <h6 class="mb-0">NIP</h6>
@@ -220,7 +221,24 @@
                                         <hr>
                                         <div class="row">
                                             <div class="col-sm-3">
-                                                <h6 class="mb-0">Tempat Kerja</h6>
+                                                <h6 class="mb-0">Deskripsi</h6>
+                                            </div>
+                                            <div class="col-sm-9 text-secondary">
+                                                <?= $alumni['deskripsi']; ?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12">
+                                <div class="card mb-3">
+                                    <h1 class="card-title">Tempat Kerja Alumni</h1>
+                                    <div class="card-body">
+                                        <hr>
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <h6 class="mb-0">Nama</h6>
                                             </div>
                                             <div class="col-sm-9 text-secondary">
                                                 <?= $instansi['nama_instansi']; ?>
@@ -229,7 +247,7 @@
                                         <hr>
                                         <div class="row">
                                             <div class="col-sm-3">
-                                                <h6 class="mb-0">Alamat Tempat Kerja</h6>
+                                                <h6 class="mb-0">Alamat</h6>
                                             </div>
                                             <div class="col-sm-9 text-secondary">
                                                 <?= $instansi['alamat_instansi']; ?>, <?= $instansi['kota']; ?> , <?= $instansi['provinsi']; ?>, <?= $instansi['negara']; ?>
@@ -238,10 +256,28 @@
                                         <hr>
                                         <div class="row">
                                             <div class="col-sm-3">
-                                                <h6 class="mb-0">Deskripsi</h6>
+                                                <h6 class="mb-0">Telepon</h6>
                                             </div>
                                             <div class="col-sm-9 text-secondary">
-                                                <?= $alumni['deskripsi']; ?>
+                                                <?= $instansi['telp_instansi']; ?>
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <h6 class="mb-0">Faks</h6>
+                                            </div>
+                                            <div class="col-sm-9 text-secondary">
+                                                <?= $instansi['faks_instansi']; ?>
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <h6 class="mb-0">Email</h6>
+                                            </div>
+                                            <div class="col-sm-9 text-secondary">
+                                                <?= $instansi['email_instansi']; ?>
                                             </div>
                                         </div>
                                     </div>

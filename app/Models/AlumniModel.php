@@ -334,22 +334,16 @@ class AlumniModel extends Model
         return $this->db->query($query);
     }
 
-    // kureng nih DBnya keknya ada yang kurang
-    // public function deletePublikasi($id)
-    // {
-    //     $query = "DELETE FROM publikasi WHERE id_publikasi= $id";
-    //     return $this->db->query($query);
-    // }
-
     public function getIdTempatKerja($nama)
     {
         $query = "SELECT id_tempat_kerja FROM tempat_kerja WHERE nama_instansi = '$nama'";
         return $this->db->query($query)->getRow()->id_tempat_kerja;
     }
 
-    public function searchAlumni($keyword)
+    public function getTempatKerjaById($id)
     {
-        return $this->table('alumni')->like('nama', $keyword);
+        $query = "SELECT * FROM tempat_kerja WHERE id_tempat_kerja = $id";
+        return $this->db->query($query);
     }
 
     // kanddidat untuk binding sso bps

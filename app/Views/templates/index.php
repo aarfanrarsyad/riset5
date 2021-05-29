@@ -138,4 +138,7 @@
 
 </body>
 
+<!-- Manajemen Database -->
+<script type="text/javascript" src="/js/manajemenDatabase.js"></script>
+
 </html>

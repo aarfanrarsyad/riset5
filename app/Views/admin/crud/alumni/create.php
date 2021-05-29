@@ -14,7 +14,7 @@
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right text-sm">
                             <li class="breadcrumb-item"><a href="<?= base_url('/') ?>">Home</a></li>
-                            <li class="breadcrumb-item text-muted"><a href="<?= base_url('/admin') ?>">Home Admin</a></li>
+                            <li class="breadcrumb-item text-muted"><a href="<?= base_url('/admin') ?>">Tambah Alumni</a></li>
                         </ol>
                     </div><!-- /.col -->
                 </div><!-- /.row -->
@@ -30,12 +30,12 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col text-primaryHover font-heading">
-                                <h5><i class="fas fa-qrcode text-primaryHover"></i>&ensp;Form Tambah Alumni</h5>
+                                <h5><i class="fas fa-id-card text-primaryHover"></i>&ensp;Form Tambah Alumni</h5>
                             </div>
                         </div>
                         <br>
 
-                        <form action="/admin/CRUD_saveAlumni" method="post" enctype="multipart/form-data">
+                        <form action="/admin/addAlumni" method="post" enctype="multipart/form-data">
                             <?= csrf_field(); ?>
                             <!-- Biodata Alumni -->
                             <h2 class="row mb-3 text-info">Biodata Alumni</h2>
@@ -52,11 +52,11 @@
                                 <label class="col-sm-2 col-form-label pt-0">Jenis Kelamin</label>
                                 <div class="col-sm-10">
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="jenis_kelamin" id="jenis_kelamin" value="L" />
+                                        <input class="form-check-input" type="radio" name="jenis_kelamin" id="jenis_kelamin" value="Lk" />
                                         <label class="form-check-label text-primary" for="jenis_kelamin-laki">Laki-laki</label>
                                     </div>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="jenis_kelamin" id="jenis_kelamin" value="P" />
+                                        <input class="form-check-input" type="radio" name="jenis_kelamin" id="jenis_kelamin" value="Pr" />
                                         <label class="form-check-label text-pink" for="jenis_kelamin">Perempuan</label>
                                     </div>
                                 </div>
@@ -96,15 +96,15 @@
                                 </div>
                             </div>
                             <div class="row mb-3">
-                                <label for="fb" class="col-sm-2 col-form-label">Facebook</label>
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control" placeholder="Masukkan Facebook" id="fb" name="fb" value="<?= old('fb'); ?>">
-                                </div>
-                            </div>
-                            <div class="row mb-3">
                                 <label for="twitter" class="col-sm-2 col-form-label">Twitter</label>
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control" placeholder="Masukkan username Twitter" id="twitter" name="twitter" value="<?= old('twitter'); ?>">
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label for="fb" class="col-sm-2 col-form-label">Facebook</label>
+                                <div class="col-sm-10">
+                                    <input type="url" class="form-control" placeholder="Masukkan link Facebook" id="fb" name="fb" value="<?= old('fb'); ?>">
                                 </div>
                             </div>
                             <div class="row mb-3">
@@ -114,7 +114,7 @@
                                 </div>
                             </div>
                             <div class="row mb-3">
-                                <label for="gscholar" class="col-sm-2 col-form-label">Gscholar</label>
+                                <label for="gscholar" class="col-sm-2 col-form-label">Google Scholar</label>
                                 <div class="col-sm-10">
                                     <input type="url" class="form-control" placeholder="Masukkan link gscholar" id="gscholar" name="gscholar" value="<?= old('gscholar'); ?>">
                                 </div>
@@ -122,25 +122,49 @@
                             <div class="row mb-3">
                                 <label for="alamat" class="col-sm-2 col-form-label">Alamat</label>
                                 <div class="col-sm-10">
-                                    <textarea type="text" class="form-control" placeholder="Masukkan alamt lengkap" id="alamat" name="alamat" rows="2"><?= old('alamat'); ?></textarea>
+                                    <textarea type="text" class="form-control" placeholder="Masukkan alamat lengkap" id="alamat" name="alamat" rows="2"><?= old('alamat'); ?></textarea>
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <label for="negara" class="col-sm-2 col-form-label">Negara</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" placeholder="Masukkan nama Negara" id="negara" name="negara" value="<?= old('negara'); ?>">
+                                    <select name="negara" id="negara" class="inputForm" onchange="displayDiv2('negaraLainIndonesia','negaraIndonesia',this)">
+                                        <option disabled selected>Pilih Negara</option>
+                                        <option value="Indonesia">Indonesia</option>
+                                        <option value="lainnya">Lainnya...</option>
+                                    </select>
                                 </div>
                             </div>
-                            <div class="row mb-3">
-                                <label for="provinsi" class="col-sm-2 col-form-label">Provinsi</label>
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control" placeholder="Masukkan nama Provinsi" id="provinsi" name="provinsi" value="<?= old('provinsi'); ?>">
+                            <div class="hidden" id="negaraLainIndonesia">
+                                <div class="row mb-3">
+                                    <label for="negara" class="col-sm-2 col-form-label">Negara</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" name="negaraLainnya" id="negaraLainnya" class="inputForm" placeholder="Masukkan nama negara">
+                                    </div>
                                 </div>
                             </div>
-                            <div class="row mb-3">
-                                <label for="kota" class="col-sm-2 col-form-label">Kota/Kabupaten</label>
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control" placeholder="Masukkan nama Kota/Kabupaten" id="kota" name="kota" value="<?= old('kota'); ?>">
+                            <div class="hidden" id="negaraIndonesia">
+                                <div class="row mb-3">
+                                    <label for="provinsi" class="col-sm-2 col-form-label">Provinsi</label>
+                                    <div class="col-sm-10">
+                                        <select name="provinsi" id="provinsi" class="inputForm">
+                                            <option selected disabled>Pilih Provinsi</option>
+                                            <?php foreach ($daftarProv as $prov) : ?>
+                                                <option id="<?= $prov->id_provinsi ?>" value="<?= $prov->nama_provinsi ?>"><?= $prov->nama_provinsi ?></option>
+                                            <?php endforeach ?>
+                                        </select>
+                                        <input hidden type="text" name="prov" id="prov-hidden">
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <label for="kota" class="col-sm-2 col-form-label">Kota/Kabupaten</label>
+                                    <div class="col-sm-10">
+                                        <!-- <select name='kabkota' id='kabkota' class='inputForm'>
+                                                <option selected disabled>Pilih Kabupaten/Kota</option>                                                        
+                                            </select> -->
+                                        <input hidden type="text" name="kab" id="kab-hidden">
+                                        <input type="text" class="form-control" placeholder="Masukkan nama kabupaten" id="kota" name="kota" value="<?= old('kota'); ?>">
+                                    </div>
                                 </div>
                             </div>
                             <div class="row mb-3">
@@ -164,63 +188,23 @@
                                     <input type="text" class="form-control" placeholder="Masukkan NIP BPS" id="nip_bps" name="nip_bps" value="<?= old('nip_bps'); ?>">
                                 </div>
                             </div>
-                            <div class="form-group row">
-                                <label for="foto" class="col-sm-2 col-form-label">Foto Profil</label>
-                                <div class="col-sm-2">
-                                    <img src="/img/default.svg" class="img-thumbnail img-preview">
-                                </div>
-                                <div class="col-sm-8">
-                                    <div class="custom-file">
-                                        <input type="file" class="custom-file-input <?= ($validation->hasError('foto_profil')) ? 'is-invalid' : ''; ?>" id="foto_profil" name="foto_profil" onchange="previewImg()">
-                                        <div class="invalid-feedback">
-                                            <?= $validation->getError('foto_profil'); ?>
-                                        </div>
-                                        <label for="foto_profil" class="custom-file-label">Pilih Foto...</label>
-                                    </div>
-                                </div>
-                                <script>
-                                    function previewImg() {
-                                        const foto = document.querySelector('#foto_profil');
-                                        const fotoLabel = document.querySelector('.custom-file-label');
-                                        const imgPreview = document.querySelector('.img-preview');
-
-                                        fotoLabel.textContent = foto.files[0].name;
-
-                                        const filefoto = new FileReader();
-                                        filefoto.readAsDataURL(foto.files[0]);
-
-                                        filefoto.onload = function(e) {
-                                            imgPreview.src = e.target.result;
-                                        }
-                                    }
-                                </script>
-                            </div>
                             <div class="row mb-3">
                                 <label for="perkiraanpensiun" class="col-sm-2 col-form-label pt-0">Perkiraan Pensiun</label>
-                                <div class="col-sm-15">
-                                    <select class="form-select" aria-label="Default select example" id="perkiraan_pensiun" name="perkiraan_pensiun" value="<?= old('perkiraan_pensiun'); ?>">
-                                        <option selected>Pilih Tahun</option>
-                                        <script>
-                                            var myDate = new Date();
-                                            var year = myDate.getFullYear();
-                                            for (var i = 1990; i < year + 55; i++) {
-                                                document.write('<option value="' + i + '">' + i + '</option>');
-                                            }
-                                        </script>
-                                    </select>
+                                <div class="col-sm-3">
+                                    <input type="number" name="perkiraan_pensiun" id="perkiraan_pensiun" placeholder="2050" min="1950" max="2100" class="inputForm" value="<?= old('perkiraan_pensiun'); ?>" required>
                                 </div>
                             </div>
                             <fieldset class="row mb-3">
                                 <label class="col-sm-2 col-form-label pt-0">Status Bekerja</label>
                                 <div class="col-sm-10">
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="checkbox" name="status_bekerja" id="bekerja" value="1">
+                                        <input class="form-check-input" type="radio" name="status_bekerja" id="bekerja" value="1">
                                         <label class="form-check-label text-primary" for="bekerja">
                                             Bekerja
                                         </label>
                                     </div>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="checkbox" name="status_bekerja" id="tidakbekerja" value="0">
+                                        <input class="form-check-input" type="radio" name="status_bekerja" id="tidakbekerja" value="0">
                                         <label class="form-check-label text-danger" for="tidakbekerja">
                                             Tidak Bekerja
                                         </label>
@@ -230,13 +214,13 @@
                                 <label class="col-sm-2 col-form-label pt-0">Aktif PNS</label>
                                 <div class="col-sm-10">
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="checkbox" name="aktif_pns" id="aktif" value="1">
+                                        <input class="form-check-input" type="radio" name="aktif_pns" id="aktif" value="1">
                                         <label class="form-check-label text-primary" for="aktif">
                                             Aktif
                                         </label>
                                     </div>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="checkbox" name="aktif_pns" id="tidakaktif" value="0">
+                                        <input class="form-check-input" type="radio" name="aktif_pns" id="tidakaktif" value="0">
                                         <label class="form-check-label text-danger" for="tidakaktif">
                                             Tidak Aktif
                                         </label>
@@ -248,152 +232,12 @@
                                     <textarea type="text" class="form-control" placeholder="Masukkan Deskripsi" id="deskripsi" name="deskripsi" rows="2"><?= old('deskripsi'); ?></textarea>
                                 </div>
                             </div>
-                            <button type="submit" class="btn btn-primary row mb-3">Simpan</button>
-                        </form>
-                    </div>
-                </div>
-
-                <!-- Instansi -->
-                <div class="card card-secondary card-outline elevation-3">
-                    <div class="card-body">
-                        <form action="/admin/CRUD_saveAlumni" method="post" enctype="multipart/form-data">
-                            <h2 class="row mb-3 text-info">Instansi</h2>
-                            <div class="row mb-3">
-                                <label for="nama_instansi" class="col-sm-2 col-form-label">Nama Instansi</label>
-                                <div class="col-sm-10">
-                                    <input list="daftarInstansi" class="form-control <?= ($validation->hasError('nama_instansi')) ? 'is-invalid' : ''; ?>" placeholder="Masukkan nama instansi" id="nama_instansi" name="nama_instansi" value="<?= old('nama_instansi'); ?>">
-                                    <datalist id="daftarInstansi" class="font-paragraph">
-                                        <?php foreach ($list as $row) : ?>
-                                            <option data-value="<?= $row->id_tempat_kerja ?>"><?= $row->nama_instansi ?></option>
-                                        <?php endforeach; ?>
-                                    </datalist>
-                                    <div class="invalid-feedback">
-                                        <?= $validation->getError('nama_instansi'); ?>
-                                    </div>
-                                </div>
+                            <div class="flex justify-end">
+                                <button type="submit" class="w-24 text-center py-1 bg-primarySidebar hover:bg-secondaryhover text-white rounded-full cursor-pointer focus:outline-none">TAMBAH</button>
                             </div>
-                            <button type="submit" class="btn btn-primary">Simpan</button>
                         </form>
                     </div>
                 </div>
-
-                <!-- Pendidikan -->
-                <div class="card card-secondary card-outline elevation-3">
-                    <div class="card-body">
-                        <form action="/admin/CRUD_saveAlumni" method="post" enctype="multipart/form-data">
-                            <h2 class="row mb-3 text-info">Pendidikan</h2>
-                            <div class="row g-3">
-                                <div class="col-md-4">
-                                    <label for="jenjang" class="col-sm-3 col-form-label">Jenjang</label>
-                                    <input type="text" class="form-control <?= ($validation->hasError('jenjang')) ? 'is-invalid' : ''; ?>" id="jenjang" name="jenjang" value="<?= old('jenjang'); ?>">
-                                    <div class="invalid-feedback">
-                                        <?= $validation->getError('jenjang'); ?>
-                                    </div>
-                                </div>
-                                <div class="col-md-8">
-                                    <label for="universitas" class="col-sm-2 col-form-label">Universitas</label>
-                                    <input type="text" class="form-control <?= ($validation->hasError('instansi')) ? 'is-invalid' : ''; ?>" id="universitas" name="instansi" value="<?= old('instansi'); ?>">
-                                    <div class="invalid-feedback">
-                                        <?= $validation->getError('instansi'); ?>
-                                    </div>
-                                </div>
-                                <div class="col-md-8">
-                                    <label for="nim" class="col-sm-2 col-form-label">NIM</label>
-                                    <input type="text" class="form-control <?= ($validation->hasError('nim')) ? 'is-invalid' : ''; ?>" id="nim" name="nim" value="<?= old('nim'); ?>">
-                                    <div class="invalid-feedback">
-                                        <?= $validation->getError('nim'); ?>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <label for="angkatan" class="col-sm-3 col-form-label">Angkatan</label>
-                                    <input type="number" class="form-control <?= ($validation->hasError('instansi')) ? 'is-invalid' : ''; ?>" id="angkatan" name="angkatan" value="<?= old('angkatan'); ?>">
-                                    <div class="invalid-feedback">
-                                        <?= $validation->getError('angkatan'); ?>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <label for="program_studi" class="col-sm-2 col-form-label">Program Studi</label>
-                                    <input type="text" class="form-control <?= ($validation->hasError('program_studi')) ? 'is-invalid' : ''; ?>" id="program_studi" name="program_studi" value="<?= old('program_studi'); ?>">
-                                    <div class="invalid-feedback">
-                                        <?= $validation->getError('program_studi'); ?>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 row my-3">
-                                    <label for="tahun_masuk" class="col-sm-4 col-form-label">Tahun Masuk</label>
-                                    <select class="form-select" id="tahun_masuk" name="tahun_masuk" value="<?= old('tahun_masuk'); ?>">
-                                        <option selected>Pilih Tahun</option>
-                                        <script>
-                                            var myDate = new Date();
-                                            var year = myDate.getFullYear();
-                                            for (var i = 1990; i < year + 55; i++) {
-                                                document.write('<option value="' + i + '">' + i + '</option>');
-                                            }
-                                        </script>
-                                    </select>
-                                </div>
-                                <div class="col-md-6 row my-3">
-                                    <label for="tahun_lulus" class="col-sm-4 col-form-label">Tahun Lulus</label>
-                                    <select class="form-select" id="tahun_lulus" name="tahun_lulus" value="<?= old('tahun_lulus'); ?>">
-                                        <option selected>Pilih Tahun</option>
-                                        <script>
-                                            var myDate = new Date();
-                                            var year = myDate.getFullYear();
-                                            for (var i = 1990; i < year + 55; i++) {
-                                                document.write('<option value="' + i + '">' + i + '</option>');
-                                            }
-                                        </script>
-                                    </select>
-                                </div>
-                                <div class="col-12 row mb-3">
-                                    <label for="judul_tulisan" class="col-sm-2 col-form-label">Judul Tulisan</label>
-                                    <textarea type="text" class="form-control <?= ($validation->hasError('judul_tulisan')) ? 'is-invalid' : ''; ?>" id="judul_tulisan" name="judul_tulisan" rows="2"><?= old('judul_tulisan'); ?></textarea>
-                                    <div class="invalid-feedback">
-                                        <?= $validation->getError('judul_tulisan'); ?>
-                                    </div>
-                                </div>
-                            </div>
-                            <button type="submit" class="btn btn-primary">Tambah</button>
-                        </form>
-                    </div>
-                </div>
-
-                <!-- Prestasi -->
-                <div class="card card-secondary card-outline elevation-3">
-                    <div class="card-body">
-                        <form action="/admin/CRUD_saveAlumni" method="post" enctype="multipart/form-data">
-                            <h2 class="row mb-3 text-info">Prestasi</h2>
-                            <div class="row g-3 mb-3">
-                                <div class="col-md-8">
-                                    <label for="nama_prestasi" class="col-sm-3 col-form-label">Nama Prestasi</label>
-                                    <input type="text" class="form-control" id="nama_prestasi" name="nama_prestasi" value="<?= old('nama_prestasi'); ?>">
-                                </div>
-                                <div class="col-md-4">
-                                    <label for="tahun" class="col-sm-2 col-form-label">Tahun</label>
-                                    <input type="number" class="form-control" id="tahun" name="tahun_prestasi" value="<?= old('tahun_prestasi'); ?>">
-                                </div>
-                            </div>
-                            <button type="submit" class="btn btn-primary">Tambah</button>
-                        </form>
-                    </div>
-                </div>
-
-                <!-- Publikasi -->
-                <div class="card card-secondary card-outline elevation-3">
-                    <div class="card-body">
-                        <form action="/admin/CRUD_saveAlumni" method="post" enctype="multipart/form-data">
-                            <h2 class="row mb-3 text-info">Publikasi</h2>
-                            <div class="row mb-3">
-                                <label for="publikasi" class="col-sm-2 col-form-label">Publikasi</label>
-                                <div class="col-sm-10">
-                                    <textarea type="text" class="form-control" id="publikasi" name="publikasi" rows="2"><?= old('publikasi'); ?></textarea>
-                                </div>
-                            </div>
-                            <button type="submit" class="btn btn-primary">Tambah</button>
-                        </form>
-                    </div>
-                </div>
-
-                <button type="submit" class="btn btn-primary row mb-3">Tambah</button>
             </div>
     </div>
 </div>

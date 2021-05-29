@@ -521,35 +521,35 @@ class Rbac extends Seeder
 				'crud_id'			=> 4
 			],
 			[
-				'submenu_id'     	=> 23,
+				'submenu_id'     	=> 19,
 				'crud_id'			=> 1
 			],
 			[
-				'submenu_id'     	=> 23,
+				'submenu_id'     	=> 19,
 				'crud_id'			=> 2
 			],
 			[
-				'submenu_id'     	=> 23,
+				'submenu_id'     	=> 19,
 				'crud_id'			=> 3
 			],
 			[
-				'submenu_id'     	=> 23,
+				'submenu_id'     	=> 19,
 				'crud_id'			=> 4
 			],
 			[
-				'submenu_id'     	=> 24,
+				'submenu_id'     	=> 20,
 				'crud_id'			=> 1
 			],
 			[
-				'submenu_id'     	=> 24,
+				'submenu_id'     	=> 20,
 				'crud_id'			=> 2
 			],
 			[
-				'submenu_id'     	=> 24,
+				'submenu_id'     	=> 20,
 				'crud_id'			=> 3
 			],
 			[
-				'submenu_id'     	=> 24,
+				'submenu_id'     	=> 20,
 				'crud_id'			=> 4
 			]
 		];
@@ -754,35 +754,35 @@ class Rbac extends Seeder
 			],
 			[
 				'group_id'     		=> 1,
-				'menu_access_id'	=> 64
+				'menu_access_id'	=> 48
 			],
 			[
 				'group_id'     		=> 1,
-				'menu_access_id'	=> 65
+				'menu_access_id'	=> 49
 			],
 			[
 				'group_id'     		=> 1,
-				'menu_access_id'	=> 66
+				'menu_access_id'	=> 50
 			],
 			[
 				'group_id'     		=> 1,
-				'menu_access_id'	=> 67
+				'menu_access_id'	=> 51
 			],
 			[
 				'group_id'     		=> 1,
-				'menu_access_id'	=> 68
+				'menu_access_id'	=> 52
 			],
 			[
 				'group_id'     		=> 1,
-				'menu_access_id'	=> 69
+				'menu_access_id'	=> 53
 			],
 			[
 				'group_id'     		=> 1,
-				'menu_access_id'	=> 70
+				'menu_access_id'	=> 54
 			],
 			[
 				'group_id'     		=> 1,
-				'menu_access_id'	=> 71
+				'menu_access_id'	=> 55
 			]
 		];
 		$this->db->table('groups_access')->insertBatch($data);

@@ -43,7 +43,7 @@
                                                 <p class="text-secondary mb-1">
                                                     <span class="text-primary"><?= $instansi['alamat_instansi']; ?></span><br />
                                                 </p>
-                                                <button type="button" class="btn btn-xs btn-outline-primary mr-1" onclick=""><i class="fas fa-edit"></i>&ensp;<span class="text-xs">Update</span></button>
+                                                <a href="/admin/instansi/update-instansi/<?= $instansi['id_tempat_kerja']; ?>" class="btn btn-xs btn-outline-primary mr-1"><i class="fas fa-edit"></i>&ensp;<span class="text-xs">Update</span></a>
                                                 <button type="button" class="btn btn-xs btn-outline-primary" onclick="CRUD_deleteInstansi(<?= $instansi['id_tempat_kerja']; ?>, '<?= $instansi['nama_instansi']; ?>')"><i class="fas fa-trash"></i>&ensp;<span class="text-xs">Delete</span></button>
                                             </div>
                                         </div>
