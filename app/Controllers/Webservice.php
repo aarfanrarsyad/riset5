@@ -10,30 +10,20 @@ class Webservice extends BaseController
 {
 	public function __construct()
 	{
-		// if (!session()->has('id_user')) {
-		// 	$flash = 'Harap Login Terlebih Dahulu';
-		// 	session()->setFlashdata('role', $flash);
-		// 	echo '<script>window.location.replace("' . base_url('') . '");</script>';
-		// }
-
-		if (session()->has('role'))
-			if (!in_array("4", session('role'))) {
-				$flash = 'Anda tidak terdaftar sebagai developer.';
-				session()->setFlashdata('role', $flash);
-				echo '<script>window.location.replace("' . base_url('') . '");</script>';
-			}
-
 		$this->model = new WebserviceModel();
 	}
 
 	public function index()
 	{
-
-		//user id didapat dari sessiom
-		$uid = session('id_user');
+		if (!session()->has('id_user')){
+			$login=0;
+		} else {
+			$login=1;
+		};
 
 		$data = [
 			'login' => 'sudah',
+			'statusLog'=>$login,
 			'judul' => 'Web Service | SIA',
 		];
 
@@ -42,20 +32,33 @@ class Webservice extends BaseController
 
 	public function dokumentasi()
 	{
-
-		$data['judul'] = 'Dokumentasi Web Service | SIA';
+		if (!session()->has('id_user')){
+			$login=0;
+		} else {
+			$login=1;
+		};
+		$data = [
+			'login' => 'sudah',
+			'statusLog'=>$login,
+			'judul' => 'Dokumentasi Web Service | SIA'
+		];
 		return view('webservice/kontenWebservice/dokumentasi/dokumentasi.php', $data);
 	}
 
 	public function proyek()
 	{
-
+		if (!session()->has('id_user')){
+			$login=0;
+			echo '<script>window.location.replace("' . base_url('login') . '");</script>';
+		} else {
+			$login=1;
+		};
 		//user id dapat dari session
 		$uid = session('id_user');
 
-
 		$data = [
 			'login' => 'sudah',
+			'statusLog'=> $login,
 			'judul' => 'Proyek Web Service | SIA',
 			'client_app' => $this->model->getApp($uid)->getResultArray(),
 		];
@@ -64,7 +67,14 @@ class Webservice extends BaseController
 
 	public function buatProyek()
 	{
-
+		if (!session()->has('id_user')){
+			$login=0;
+			echo '<script>window.location.replace("' . base_url('login') . '");</script>';
+		} else {
+			$login=1;
+		};
+		$data['login'] = 'sudah';
+		$data['statusLog']= $login;
 		$data['judul'] = 'Proyek Web Service | SIA';
 		$data['scope_app'] = $this->model->getScope()->getResultArray();
 		return view('webservice/kontenWebservice/proyek/buatProyek.php', $data);
@@ -72,6 +82,9 @@ class Webservice extends BaseController
 
 	public function insertProyek()
 	{
+		if (!session()->has('id_user')){
+			echo '<script>window.location.replace("' . base_url('login') . '");</script>';
+		}
 
 		$time = new Time('now');
 
@@ -120,6 +133,16 @@ class Webservice extends BaseController
 	// }
 	public function editAkun()
 	{
+		if (!session()->has('id_user')){
+			$login=0;
+			echo '<script>window.location.replace("' . base_url('login') . '");</script>';
+		} else {
+			$login=1;
+		};
+		$data = [
+			'login' => 'sudah',
+			'statusLog'=>$login,
+		];
 
 		$data['judul'] = 'Edit Profil | SIA';
 		$data['active'] = 'akunDev';

@@ -281,6 +281,11 @@ class AlumniModel extends Model
         }
     }
 
+    public function getNumAlumni(){
+        $sql ="SELECT COUNT(*) as jumlah_alumni FROM alumni";
+        return $this->db->query($sql);
+    }
+
     public function getDetailUserApi($nim = false)
     {
         if ($nim === false) {
