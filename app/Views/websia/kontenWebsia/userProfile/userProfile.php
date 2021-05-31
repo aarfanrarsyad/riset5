@@ -433,7 +433,7 @@ if ($status == 'bukan user') {
                     <!-- 1 gambar -->
                     <!-- <a href="#img-1" id="img-1">
                         <div class="rounded-3xl m-2 relative hover:shadow-xl transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105 cursor-pointer">
-                            <img id="slide" class="object-cover w-96 h-48 object-fit rounded-3xl mx-auto" src="/img/alumni.jpg" alt="" />
+                            <img id="slide" class="object-cover w-96 h-48 object-fit rounded-3xl mx-auto" src="/img/components/alumni.jpg" alt="" />
                         </div>
                     </a>
 
@@ -448,7 +448,7 @@ if ($status == 'bukan user') {
                             <a href="#">
                                 <img src="<= base_url() ?>/img/components/icon/left-on.png" alt="" class="" onclick="prev()" id="prev">
                             </a>
-                            <img src="<= base_url() ?>/img/galeri/alumni.jpg" alt="" class="slider-img w-3/4">
+                            <img src="<= base_url() ?>/img/components/alumni.jpg" alt="" class="slider-img w-3/4">
                             <a href="#">
                                 <img src="<= base_url() ?>/img/components/icon/right-on.png" alt="" class="" onclick="next()" id="next">
                             </a>
