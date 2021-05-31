@@ -62,7 +62,7 @@
                                             <?php foreach ($alumni as $alum) : ?>
                                                 <tr>
                                                     <th scope="row"><?= $i++; ?></th>
-                                                    <td><img src="/img/<?= $alum['foto_profil']; ?>" alt="" class="foto"></td>
+                                                    <td><img src="/img/<?= $alum['foto_profil']; ?>" alt="Foto Profil" class="foto"></td>
                                                     <td><?= $alum['nip']; ?></td>
                                                     <td><?= $alum['nip_bps']; ?></td>
                                                     <td><?= $alum['id_alumni']; ?></td>

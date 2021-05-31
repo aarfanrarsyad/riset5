@@ -13,7 +13,7 @@
             <div>
                 Edit Tampilan
             </div>
-            <img src="/img/components/icon/edit.png" alt="" class="w-4 h-4">
+            <img src="/img/components/icon/edit.png" alt="edit pendidikan" class="w-4 h-4">
         </div>
     </div>
     <div class="editTampilanPendidikan hidden">
@@ -98,7 +98,7 @@
     <div id="berhasilEditPendidikan">
         <div class="fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40">
             <div class="duration-700 transition-all p-3 rounded-lg flex items-center" style="background-color: #B1FF66;">
-                <img src="/img/components/icon/check.png" class="h-5 mr-2" style="color: #54AC00;">
+                <img src="/img/components/icon/check.png" class="h-5 mr-2" style="color: #54AC00;" alt="berhasil edit pendidikan">
                 <p class="sm:text-base text-sm font-heading font-bold text-success"><?= session()->getFlashdata('edit-pendidikan-success') ?></p>
             </div>
         </div>
@@ -114,7 +114,7 @@ if (session()->getFlashdata('edit-pendidikan-fail')) : ?>
     <div id="gagalEditPendidikan">
         <div class="fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40">
             <div class="duration-700 transition-all p-3 rounded-lg flex items-center" style="background-color: #FF7474;">
-                <img src="/img/components/icon/warning.png" class="h-5 mr-2">
+                <img src="/img/components/icon/warning.png" class="h-5 mr-2" alt="gagal edit pendidikan">
                 <p class="sm:text-base text-sm font-heading font-bold" style="color: #C51800;"><?= session()->getFlashdata('edit-pendidikan-fail') ?> : <?= session('error-nim') ?></p>
             </div>
         </div>
@@ -131,7 +131,7 @@ if (session()->getFlashdata('add-pendidikan-success')) : ?>
     <div id="berhasilTambahPendidikan">
         <div class="fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40">
             <div class="duration-700 transition-all p-3 rounded-lg flex items-center" style="background-color: #B1FF66;">
-                <img src="/img/components/icon/check.png" class="h-5 mr-2" style="color: #54AC00;">
+                <img src="/img/components/icon/check.png" class="h-5 mr-2" style="color: #54AC00;" alt="berhasil tambah pendidikan">
                 <p class="sm:text-base text-sm font-heading font-bold text-success"><?= session()->getFlashdata('add-pendidikan-success') ?></p>
             </div>
         </div>
@@ -147,7 +147,7 @@ if (session()->getFlashdata('add-pendidikan-fail')) : ?>
     <div id="gagalTambahPendidikan">
         <div class="fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40">
             <div class="duration-700 transition-all p-3 rounded-lg flex items-center" style="background-color: #FF7474;">
-                <img src="/img/components/icon/warning.png" class="h-5 mr-2">
+                <img src="/img/components/icon/warning.png" class="h-5 mr-2" alt="gagal tambah pendidikan">
                 <p class="sm:text-base text-sm font-heading font-bold" style="color: #C51800;"><?= session()->getFlashdata('add-pendidikan-fail') ?> : <?= session('error-nim') ?></p>
             </div>
         </div>
@@ -165,7 +165,7 @@ if (session()->getFlashdata('delete-pendidikan-success')) : ?>
     <div id="berhasilHapusPendidikan">
         <div class="fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40">
             <div class="duration-700 transition-all p-3 rounded-lg flex items-center" style="background-color: #B1FF66;">
-                <img src="/img/components/icon/check.png" class="h-5 mr-2" style="color: #54AC00;">
+                <img src="/img/components/icon/check.png" class="h-5 mr-2" style="color: #54AC00;" alt="berhasil hapus pendidikan">
 
                 <p class="sm:text-base text-sm font-heading font-bold text-success"><?= session()->getFlashdata('delete-pendidikan-success') ?></p>
 

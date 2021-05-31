@@ -41,9 +41,9 @@
                 </div>
                 <label for="nama" class="font-medium">Nama Instansi:</label>
                 <?php if (session()->getFlashdata('error-nama_instansi') != "") { ?>
-                            <p class="text-xs text-red-500 text-justify" id="errorNamaInstansi">
-                                <?= session('error-nama_instansi') ?>
-                            </p>
+                    <p class="text-xs text-red-500 text-justify" id="errorNamaInstansi">
+                        <?= session('error-nama_instansi') ?>
+                    </p>
                 <?php } ?>
                 <input type="text" name="nama_instansi" id="nama" class="inputForm" placeholder="Masukkan nama Instansi">
                 <label for="alamat" class="font-medium">Alamat Instansi:</label>
@@ -55,9 +55,9 @@
                     <input type="text" name="faks_instansi" id="faks" class="inputForm" placeholder="Masukkan faks instansi">
                     <label for="email" class="font-medium">Email:</label>
                     <?php if (session()->getFlashdata('error-email_instansi') != "") { ?>
-                            <p class="text-xs text-red-500 text-justify" id="errorEmailInstansi">
-                                <?= session('error-email_instansi') ?>
-                            </p>
+                        <p class="text-xs text-red-500 text-justify" id="errorEmailInstansi">
+                            <?= session('error-email_instansi') ?>
+                        </p>
                     <?php } ?>
                     <input type="email" name="email_instansi" id="email" class="inputForm" placeholder="Masukkan email instansi">
                 </div>
@@ -74,27 +74,27 @@
 <!-- kalau mau ngecek hilangin kelas hidden sama opacity-0 nya-->
 
 <?php if (session()->getFlashdata('edit-tk-success')) { ?>
-<!-- BERHASIL edit instansi -->
-<div id="berhasilEditInstansi">
-    <div class="fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40">
-        <div class="duration-700 transition-all p-3 rounded-lg flex items-center" style="background-color: #B1FF66;">
-            <img src="/img/components/icon/check.png" class="h-5 mr-2" style="color: #54AC00;">
-            <p class="sm:text-base text-sm font-heading font-bold text-success"><?= session()->getFlashdata('edit-tk-success') ?></p>
+    <!-- BERHASIL edit instansi -->
+    <div id="berhasilEditInstansi">
+        <div class="fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40">
+            <div class="duration-700 transition-all p-3 rounded-lg flex items-center" style="background-color: #B1FF66;">
+                <img src="/img/components/icon/check.png" class="h-5 mr-2" style="color: #54AC00;" alt="berhasil edit instansi">
+                <p class="sm:text-base text-sm font-heading font-bold text-success"><?= session()->getFlashdata('edit-tk-success') ?></p>
+            </div>
         </div>
     </div>
-</div>
-<script>
-    setTimeout(function() {
-        $('#berhasilEditInstansi').fadeOut();
-    }, 1500);
-</script>
+    <script>
+        setTimeout(function() {
+            $('#berhasilEditInstansi').fadeOut();
+        }, 1500);
+    </script>
 <?php }
 if (session()->getFlashdata('add-tk-success')) { ?>
-<!-- GAGAL edit instansi KAYAKNYA GAPERLU -->
-<!-- <div id="gagalEditInstansi">
+    <!-- GAGAL edit instansi KAYAKNYA GAPERLU -->
+    <!-- <div id="gagalEditInstansi">
     <div class="fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40">
         <div class="duration-700 transition-all p-3 rounded-lg flex items-center" style="background-color: #FF7474;">
-            <img src="/img/components/icon/warning.png" class="h-5 mr-2">
+            <img src="/img/components/icon/warning.png" class="h-5 mr-2" alt="gagal edit instansi">
             <p class="sm:text-base text-sm font-heading font-bold" style="color: #C51800;">Tempat Kerja Tidak Berhasil Disimpan</p>
         </div>
     </div>
@@ -104,36 +104,36 @@ if (session()->getFlashdata('add-tk-success')) { ?>
         $('#gagalEditInstansi').fadeOut();
     }, 1500);
 </script> -->
-<!-- BERHASIL tambah instansi -->
-<div id="berhasilTambahInstansi">
-    <div class="fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40">
-        <div class="duration-700 transition-all p-3 rounded-lg flex items-center" style="background-color: #B1FF66;">
-            <img src="/img/components/icon/check.png" class="h-5 mr-2" style="color: #54AC00;">
-            <p class="sm:text-base text-sm font-heading font-bold text-success"><?= session()->getFlashdata('add-tk-success') ?></p>
+    <!-- BERHASIL tambah instansi -->
+    <div id="berhasilTambahInstansi">
+        <div class="fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40">
+            <div class="duration-700 transition-all p-3 rounded-lg flex items-center" style="background-color: #B1FF66;">
+                <img src="/img/components/icon/check.png" class="h-5 mr-2" style="color: #54AC00;" alt="berhasil tambah instansi">
+                <p class="sm:text-base text-sm font-heading font-bold text-success"><?= session()->getFlashdata('add-tk-success') ?></p>
+            </div>
         </div>
     </div>
-</div>
-<script>
-    setTimeout(function() {
-        $('#berhasilTambahInstansi').fadeOut();
-    }, 1500);
-</script>
+    <script>
+        setTimeout(function() {
+            $('#berhasilTambahInstansi').fadeOut();
+        }, 1500);
+    </script>
 <?php }
 if (session()->getFlashdata('add-tk-fail')) { ?>
-<!-- GAGAL tambah instansi -->
-<div id="gagalTambahInstansi">
-    <div class="fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40">
-        <div class="duration-700 transition-all p-3 rounded-lg flex items-center" style="background-color: #FF7474;">
-            <img src="/img/components/icon/warning.png" class="h-5 mr-2">
-            <p class="sm:text-base text-sm font-heading font-bold" style="color: #C51800;"><?= session()->getFlashdata('add-tk-fail') ?></p>
+    <!-- GAGAL tambah instansi -->
+    <div id="gagalTambahInstansi">
+        <div class="fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40">
+            <div class="duration-700 transition-all p-3 rounded-lg flex items-center" style="background-color: #FF7474;">
+                <img src="/img/components/icon/warning.png" class="h-5 mr-2" alt="gagal tambah instansi">
+                <p class="sm:text-base text-sm font-heading font-bold" style="color: #C51800;"><?= session()->getFlashdata('add-tk-fail') ?></p>
+            </div>
         </div>
     </div>
-</div>
-<script>
-    setTimeout(function() {
-        $('#gagalTambahInstansi').fadeOut();
-    }, 1500);
-</script>
-<!-- end dialog box-->
+    <script>
+        setTimeout(function() {
+            $('#gagalTambahInstansi').fadeOut();
+        }, 1500);
+    </script>
+    <!-- end dialog box-->
 <?php } ?>
 <?= $this->endSection(); ?>

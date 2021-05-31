@@ -21,7 +21,7 @@
 
     <!-- loading -->
     <div class="loading flex fixed w-full h-screen z-50 transition-opacity duration-200">
-        <img src="/img/components/loading/load.gif" class="m-auto items-center md:w-96 sm:w-72 w-60">
+        <img src="/img/components/loading/load.gif" class="m-auto items-center md:w-96 sm:w-72 w-60" alt="loading gif">
     </div>
     <!-- loading -->
     <!-- tombol kembali ke atas -->
@@ -57,25 +57,25 @@
                             <a href="/developer/dokumentasi">
                                 <li class="list hover:text-white py-1.5 text-left border-l-2 border-b-2 border-t-2 border-r-2 border-secondary transiton duration-300 px-3">DOKUMENTASI</li>
                             </a>
-                            <?php if($statusLog==1){?>
-                            <a href="/developer/proyek">
-                                <li class="list hover:text-white py-1.5 text-left border-l-2 border-b-2 border-r-2 border-secondary transiton duration-300 px-3">PROYEK</li>
-                            </a>
-                            <?php }?>
+                            <?php if ($statusLog == 1) { ?>
+                                <a href="/developer/proyek">
+                                    <li class="list hover:text-white py-1.5 text-left border-l-2 border-b-2 border-r-2 border-secondary transiton duration-300 px-3">PROYEK</li>
+                                </a>
+                            <?php } ?>
                         </ul>
                     </li>
-                    <?php if($statusLog==1){?>
-                    <a href="/developer/edit/akun">
-                        <li class="bg-secondary text-white py-1.5 sm:px-1 md:w-24 text-center cursor-pointer border-secondary border-2 hover:text-secondary hover:bg-white transition-colors duration-300">EDIT AKUN</li>
-                    </a>
-                    <a href="/logout">
-                        <li class="bg-secondary text-white py-1.5 sm:px-1 md:w-24 text-center cursor-pointer border-secondary border-2 hover:text-secondary hover:bg-white transition-colors duration-300">KELUAR</li>
-                    </a>
-                    <?php } else {?>
-                    <a href="/login">
-                        <li class="bg-secondary text-white py-1.5 sm:px-1 md:w-24 text-center cursor-pointer border-secondary border-2 hover:text-secondary hover:bg-white transition-colors duration-300">LOGIN</li>
-                    </a>
-                    <?php }?>
+                    <?php if ($statusLog == 1) { ?>
+                        <a href="/developer/edit/akun">
+                            <li class="bg-secondary text-white py-1.5 sm:px-1 md:w-24 text-center cursor-pointer border-secondary border-2 hover:text-secondary hover:bg-white transition-colors duration-300">EDIT AKUN</li>
+                        </a>
+                        <a href="/logout">
+                            <li class="bg-secondary text-white py-1.5 sm:px-1 md:w-24 text-center cursor-pointer border-secondary border-2 hover:text-secondary hover:bg-white transition-colors duration-300">KELUAR</li>
+                        </a>
+                    <?php } else { ?>
+                        <a href="/login">
+                            <li class="bg-secondary text-white py-1.5 sm:px-1 md:w-24 text-center cursor-pointer border-secondary border-2 hover:text-secondary hover:bg-white transition-colors duration-300">LOGIN</li>
+                        </a>
+                    <?php } ?>
                 </ul>
             </div>
 

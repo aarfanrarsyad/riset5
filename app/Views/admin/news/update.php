@@ -149,7 +149,7 @@ $errors = session()->getFlashdata('errors');
                                     <label class="custom-file-label form-control-sm" for="thumbnail"><span id="oldfileLabel"><?= $data['thumbnail'] ?></span></label>
                                 </div>
                                 <div class="col-sm-4">
-                                    <img src="<?= base_url('berita/berita_' . $data['id'] . '/' . $data['thumbnail']) ?>" class="img-fluid border" id="previewHolder" onclick="show_img(event)">
+                                    <img src="<?= base_url('berita/berita_' . $data['id'] . '/' . $data['thumbnail']) ?>" class="img-fluid border" id="previewHolder" onclick="show_img(event)" alt="Thumbnail Berita">
                                 </div>
                             </div>
                             <div class="form-group row">

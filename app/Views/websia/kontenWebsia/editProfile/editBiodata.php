@@ -48,7 +48,7 @@ if ($alumni->cprestasi == 0) {
             <div class="flex items-center justify-center lg:flex-none">
                 <div class="md:w-2/3 w-1/2 lg:w-full">
                     <div class="flex justify-center">
-                        <img src="/img/<?= $alumni->foto_profil ?>" alt="" class="mb-6 md:w-48 md:h-48 w-28 h-28 rounded-full">
+                        <img src="/img/<?= $alumni->foto_profil ?>" alt="profil user" class="mb-6 md:w-48 md:h-48 w-28 h-28 rounded-full">
                     </div>
                     <div class="flex justify-center">
                         <button class="updateFotoProfil bg-secondary rounded-full font-paragraph text-white px-3 py-1 hover:bg-secondaryhover lg:text-base text-sm focus:outline-none">Ubah foto profil</button>
@@ -81,7 +81,7 @@ if ($alumni->cprestasi == 0) {
                         <div>
                             Edit Tampilan
                         </div>
-                        <img src="/img/components/icon/edit.png" alt="" class="w-4 h-4">
+                        <img src="/img/components/icon/edit.png" alt="edit" class="w-4 h-4">
                     </div>
                 </div>
                 <div class="text-black font-heading font-normal mb-2"><?= $alumni->nama ?></div>
@@ -352,7 +352,7 @@ if ($alumni->cprestasi == 0) {
     <div id="berhasilUpdateFoto" class="dialogBox">
         <div class="fixed top-0 bottom-0 right-0 left-0 z-50 bg-black bg-opacity-40 flex flex-col justify-end">
             <div class=" duration-300 transition-all p-2 pl-8 flex items-center" style="background-color: #B1FF66;">
-                <img src="/img/components/icon/check.png" class="h-5 mr-2" style="color: #54AC00;">
+                <img src="/img/components/icon/check.png" class="h-5 mr-2" style="color: #54AC00;" alt="berhasil ubah foto">
                 <p class="sm:text-base text-sm font-heading font-bold text-success"><?= session()->getFlashdata('edit-foto-success') ?></p>
             </div>
         </div>
@@ -367,7 +367,7 @@ if (session()->getFlashdata('edit-foto-fail')) { ?>
     <!-- GAGAL ubah foto -->
     <div class="fixed top-0 bottom-0 right-0 left-0 z-50 bg-black bg-opacity-40 flex flex-col justify-end" id="gagalUpdateFoto">
         <div class="duration-300 transition-all p-2 pl-8 flex items-center" style="background-color: #FF7474;">
-            <img src="/img/components/icon/warning.png" class="h-5 mr-2">
+            <img src="/img/components/icon/warning.png" class="h-5 mr-2" alt="gagal ubah foto">
             <p class="sm:text-base text-sm font-heading font-bold" style="color: #C51800;">Foto Profil Tidak Berhasil Diubah : <?= session()->getFlashdata('edit-foto-fail') ?></p>
         </div>
     </div>
@@ -383,7 +383,7 @@ if (session()->getFlashdata('edit-bio-success')) { ?>
     <div id="berhasilUpdateBiodata">
         <div class="fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40">
             <div class="duration-700 transition-all p-3 rounded-lg flex items-center" style="background-color: #B1FF66;">
-                <img src="/img/components/icon/check.png" class="h-5 mr-2" style="color: #54AC00;">
+                <img src="/img/components/icon/check.png" class="h-5 mr-2" style="color: #54AC00;" alt="berhasil update biodata">
                 <p class="sm:text-base text-sm font-heading font-bold text-success"><?= session()->getFlashdata('edit-bio-success') ?></p>
             </div>
         </div>
@@ -399,7 +399,7 @@ if (session()->getFlashdata('edit-bio-fail')) { ?>
     <div id="gagalUpdateBiodata">
         <div class="fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40">
             <div class="duration-700 transition-all p-3 rounded-lg flex items-center" style="background-color: #FF7474;">
-                <img src="/img/components/icon/warning.png" class="h-5 mr-2">
+                <img src="/img/components/icon/warning.png" class="h-5 mr-2" alt="gagal update biodata">
                 <p class="sm:text-base text-sm font-heading font-bold" style="color: #C51800;"><?= session()->getFlashdata('edit-bio-fail') ?></p>
             </div>
         </div>
@@ -415,7 +415,7 @@ if (session()->getFlashdata('hapus-foto') != NULL) { ?>
     <div id="berhasilHapusFoto">
         <div class="fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40">
             <div class="duration-700 transition-all p-3 rounded-lg flex items-center" style="background-color: #B1FF66;">
-                <img src="/img/components/icon/check.png" class="h-5 mr-2" style="color: #54AC00;">
+                <img src="/img/components/icon/check.png" class="h-5 mr-2" style="color: #54AC00;" alt="berhasil hapus foto">
                 <p class="sm:text-base text-sm font-heading font-bold text-success"><?= session()->getFlashdata('hapus-foto') ?></p>
             </div>
         </div>

@@ -80,7 +80,7 @@
                             <td class="text-center"><?= $i ?></td>
                             <td>
                               <a data-toggle="modal" data-target="#imgpreview" onclick='galleryPreview("<?= $data["caption"] ?>", "<?= base_url() ?>/img/galeri/<?= $data["nama_file"] ?>")'>
-                                <img style="width: 15em" src="<?= base_url() ?>/img/galeri/<?= $data['nama_file'] ?>">
+                                <img style="width: 15em" src="<?= base_url() ?>/img/galeri/<?= $data['nama_file'] ?>" alt="<?= $data['nama_file'] ?>">
                               </a>
 
                             </td>
@@ -206,7 +206,7 @@
         </button>
       </div>
       <div class="modal-body text-center">
-        <img src="" id="imagepreview" class="w-100">
+        <img src="" id="imagepreview" class="w-100" alt="Image Preview">
         <hr>
         <p id="captionPreview"></p>
       </div>

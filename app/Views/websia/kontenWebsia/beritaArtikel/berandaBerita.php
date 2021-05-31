@@ -35,7 +35,7 @@
                         <div class="lg:w-3/4 md:w-4/5 w-2/3">
                             Berita dengan judul "Polstat STIS Mengadakan Reuni" oleh A. Karim telah dikonfirmasi dan dipublikasikan.
                             <div class="flex gap-x-2 items-center">
-                                <img src="/img/components/icon/calendar.png" class="w-5 h-5" alt="">
+                                <img src="/img/components/icon/calendar.png" class="w-5 h-5" alt="icon kalender">
                                 <p class="text-xs">17 April 2021</p>
                             </div>
                         </div>
@@ -46,7 +46,7 @@
                         <div class="lg:w-3/4 md:w-4/5 w-2/3">
                             Berita dengan judul "Peraturan Baru Tentang Pengambilan Ijazah Alumni" oleh Doraemon telah dikonfirmasi dan dipublikasikan.
                             <div class="flex gap-x-2 items-center">
-                                <img src="/img/components/icon/calendar.png" class="w-5 h-5" alt="">
+                                <img src="/img/components/icon/calendar.png" class="w-5 h-5" alt="iicon kalender">
                                 <p class="text-xs">14 April 2021</p>
                             </div>
                         </div>

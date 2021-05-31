@@ -176,7 +176,7 @@
                         <div class="lg:w-3/4 md:w-4/5 w-2/3">
                             Berita dengan judul "Polstat STIS Mengadakan Reuni" oleh A. Karim telah dikonfirmasi dan dipublikasikan.
                             <div class="flex gap-x-2 items-center">
-                                <img src="/img/components/icon/calendar.png" class="w-5 h-5" alt="">
+                                <img src="/img/components/icon/calendar.png" class="w-5 h-5" alt="tanggal">
                                 <p class="text-xs">17 April 2021</p>
                             </div>
                         </div>
@@ -187,7 +187,7 @@
                         <div class="lg:w-3/4 md:w-4/5 w-2/3">
                             Berita dengan judul "Peraturan Baru Tentang Pengambilan Ijazah Alumni" oleh Doraemon telah dikonfirmasi dan dipublikasikan.
                             <div class="flex gap-x-2 items-center">
-                                <img src="/img/components/icon/calendar.png" class="w-5 h-5" alt="">
+                                <img src="/img/components/icon/calendar.png" class="w-5 h-5" alt="tanggal">
                                 <p class="text-xs">14 April 2021</p>
                             </div>
                         </div>
@@ -244,19 +244,19 @@
 
                     <div class="text-primary text-center font-heading lg:text-lg md:text-base text-sm">Bagikan:</div>
                     <div class="flex justify-center lg:mt-3 mt-2 lg:mb-16 md:mb-12 mb-8">
-                        <img class="lg:h-6 h-4 mx-1" src="/img/components/icon/fb.png">
-                        <img class="lg:h-6 h-4 mx-1" src="/img/components/icon/twit.png">
-                        <img class="lg:h-6 h-4 mx-1" src="/img/components/icon/whatsapp.png">
-                        <img class="lg:h-6 h-4 mx-1" src="/img/components/icon/linkedin.png">
+                        <img class="lg:h-6 h-4 mx-1" src="/img/components/icon/fb.png" alt="icon facebook">
+                        <img class="lg:h-6 h-4 mx-1" src="/img/components/icon/twit.png" alt="icon twitter">
+                        <img class="lg:h-6 h-4 mx-1" src="/img/components/icon/whatsapp.png" alt="icon whatsapp">
+                        <img class="lg:h-6 h-4 mx-1" src="/img/components/icon/linkedin.png" alt="icon linkedin">
                     </div>
                     <div class="flex items-center font-paragraph text-primary mb-3">
-                        <img class="lg:h-10 h-6 mx-1" src="/img/components/icon/komen.png">
+                        <img class="lg:h-10 h-6 mx-1" src="/img/components/icon/komen.png" alt="komentar">
                         <div class="lg:mx-4 mx-2 lg:text-xl md:text-lg text-base font-bold"><?= $dataset['count_comments'] ?> Komentar</div>
                     </div>
                     <?php foreach ($dataset['comments'] as $dts) : ?>
 
                         <div class="flex items-center text-primary lg:mb-4 mb-3">
-                            <img class="lg:h-14 md:h-12 h-8 lg:mr-4 mr-2" src="<?= base_url('users/profile/' . $dts['image']) ?>">
+                            <img class="lg:h-14 md:h-12 h-8 lg:mr-4 mr-2" src="<?= base_url('users/profile/' . $dts['image']) ?>" alt="User profil">
                             <div class="bg-gray-200 lg:pl-6 pl-4 py-3 gap-x-2 rounded-lg w-full">
                                 <div class="flex justify-between">
                                     <div class="w-7/8">
@@ -264,7 +264,7 @@
                                         <div class="lg:text-base md:text-sm text-xs"><?= $dts['komentar'] ?></div>
                                     </div>
                                     <div class="w-1/8">
-                                        <img class="float-right lg:h-8 h-6" src="/  more.png">
+                                        <img class="float-right lg:h-8 h-6" src="/  more.png" alt="komentar lainnya">
 
                                     </div>
 
@@ -276,7 +276,7 @@
                         <div class="flex justify-end text-secondary lg:text-xl md:text-lg text-base lg:mb-8 md:mb-6 mb-4">Lihat semua komentar</div>
                     <?php endif; ?>
                     <div class="flex items-center text-primary mb-2">
-                        <img class="lg:h-14 md:h-12 h-8 lg:mr-4 mr-2" src="/img/components/icon/female-icon.png">
+                        <img class="lg:h-14 md:h-12 h-8 lg:mr-4 mr-2" src="/img/components/icon/female-icon.png" alt="icon user">
                         <textarea class="border-4 rounded-lg w-full shadow-lg px-4 py-4 mb-4 resize-none outline-none" placeholder="Tambah komentar Anda." name="tambahKomentar" id="tambahKomentar" cols="10" rows="5"></textarea>
                     </div>
                     <div class="flex justify-end lg:mb-12 mb-8">

@@ -278,7 +278,7 @@
                                                 <?php foreach ($data as $dataset) : ?>
                                                     <tr>
                                                         <td class="text-center"><?= $i ?></td>
-                                                        <td class="text-center"><img class="img-fluid border" src="<?= base_url('berita/berita_' . $dataset['id'] . '/' . $dataset['thumbnail']) ?>" width="200px" onclick="get_content(<?= $dataset['id'] ?>)"></td>
+                                                        <td class="text-center"><img class="img-fluid border" src="<?= base_url('berita/berita_' . $dataset['id'] . '/' . $dataset['thumbnail']) ?>" width="200px" onclick="get_content(<?= $dataset['id'] ?>)" alt="Thumbnail Berita <?= $dataset['judul'] ?>"></td>
                                                         <td><?= date_formats($dataset['tanggal_publish']) ?></td>
                                                         <td><?= $dataset['author'] ?></td>
                                                         <td><?= $dataset['judul'] ?></td>
@@ -354,7 +354,7 @@
                                                 <?php foreach ($inactive as $dataset) : ?>
                                                     <tr>
                                                         <td class="text-center"><?= $i ?></td>
-                                                        <td class="text-center"><img class="img-fluid border" src="<?= base_url('berita/berita_' . $dataset['id'] . '/' . $dataset['thumbnail']) ?>" width="200px" onclick="get_content(<?= $dataset['id'] ?>)"></td>
+                                                        <td class="text-center"><img class="img-fluid border" src="<?= base_url('berita/berita_' . $dataset['id'] . '/' . $dataset['thumbnail']) ?>" width="200px" onclick="get_content(<?= $dataset['id'] ?>)" alt="Thumbnail Berita <?= $dataset['judul'] ?>"></td>
                                                         <td><?= $dataset['user'] ?></td>
                                                         <td><?= date_formats($dataset['tanggal_publish']) ?></td>
                                                         <td><?= $dataset['author'] ?></td>
