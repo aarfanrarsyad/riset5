@@ -22,7 +22,7 @@
 <body>
     <!-- loading -->
     <div class="loading flex fixed w-full h-screen z-50 transition-opacity duration-200">
-        <img src="/img/components/loading/load1.gif" class="m-auto items-center md:w-96 sm:w-72 w-60">
+        <img src="/img/components/loading/load1.gif" alt="loading gif" class="m-auto items-center md:w-96 sm:w-72 w-60">
     </div>
     <!-- loading -->
     <!-- tombol kembali ke atas -->
