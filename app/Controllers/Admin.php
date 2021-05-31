@@ -915,7 +915,7 @@ class Admin extends BaseController
 			$avatar->move(ROOTPATH . '/public/img/components/user/userid_' . session('idAlumni'));
 
 			if ($foto != $query1->jenis_kelamin . '/default.svg' && $foto != 'default.svg') {
-				$url = ROOTPATH . '/public/img/' . $foto;
+				$url = ROOTPATH . '/public/img/components/' . $foto;
 				if (is_file($url))
 					unlink($url);
 			}
@@ -945,7 +945,7 @@ class Admin extends BaseController
 		$foto = $query1->foto_profil;
 
 		if ($foto != $query1->jenis_kelamin . '/default.svg' && $foto != 'default.svg') {
-			$url = ROOTPATH . '/public/img/' . $foto;
+			$url = ROOTPATH . '/public/img/components/' . $foto;
 			if (is_file($url))
 				unlink($url);
 		}
