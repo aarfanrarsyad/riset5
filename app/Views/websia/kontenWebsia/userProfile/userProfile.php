@@ -629,11 +629,9 @@ if ($status == 'bukan user') {
         images.push('<?= $foto['nama_file'] ?>');
     <?php endforeach ?>
     var i = 0;
-    console.log(i);
 
     function clicked(n) {
         i = n;
-        console.log(i);
     }
 
     function prev(id) {
@@ -649,7 +647,6 @@ if ($status == 'bukan user') {
     }
 
     function setImg(id) {
-        console.log('<?= base_url() ?>/img/galeri/' + images[i]);
         get = document.getElementById(id);
         return get.setAttribute('src', '<?= base_url() ?>/img/galeri/' + images[i]);
     }
