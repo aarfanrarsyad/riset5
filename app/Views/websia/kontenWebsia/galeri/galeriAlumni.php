@@ -65,7 +65,7 @@
                                         </span>
                                         <!-- Awal Tampilan Daftar Tag -->
                                         <div class="tampilTag hidden relative" id="tampilTag">
-                                            <div class="static mt-2 p-2 rounded-2xl overflow-y-auto h-64 ml-80 bg-primary w-1/4 position-right text-white">
+                                            <div class="static mt-2 p-2 rounded-2xl overflow-y-auto ml-80 bg-primary w-1/4 position-right text-white">
                                                 <ul class="bg-primary">
                                                     <?php for ($n = 1; $n < count($foto['tag_name']); $n++) : ?>
                                                         <li><?= $foto['tag_name'][$n]['nama'] ?></li>
@@ -208,6 +208,26 @@
 </div>
 
 <script>
+    var slider_img = document.querySelector('.slider-img');
+    var images = ['Virtual Background FRAKSI PKL60 - 28 November 2020-01.png', '1607494849.jpg', 'alumni.jpg'];
+    var i = 0;
+
+    function prev() {
+        if (i <= 0) i = images.length;
+        i--;
+        return setImg();
+    }
+
+    function next() {
+        if (i >= images.length - 1) i = -1;
+        i++;
+        return setImg();
+    }
+
+    function setImg() {
+        return slider_img.setAttribute('src', '/img/galeri/2021/' + images[i]);
+    }
+
     // buat nama di foto yang diupload
     $('#pilihFile').change(function() {
         string = $('#pilihFile').val().split("\\");
