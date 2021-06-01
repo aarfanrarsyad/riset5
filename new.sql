@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.0
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 29, 2021 at 04:33 PM
--- Server version: 10.4.18-MariaDB
--- PHP Version: 7.4.16
+-- Generation Time: Jun 01, 2021 at 04:31 PM
+-- Server version: 10.4.14-MariaDB-log
+-- PHP Version: 7.4.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `new`
+-- Database: `riset5`
 --
 
 -- --------------------------------------------------------
@@ -77,7 +77,7 @@ CREATE TABLE `alumni` (
   `gscholar` varchar(255) DEFAULT NULL,
   `nip` varchar(255) DEFAULT NULL,
   `nip_bps` varchar(255) DEFAULT NULL,
-  `foto_profil` varchar(255) NOT NULL DEFAULT 'default.svg',
+  `foto_profil` varchar(255) NOT NULL DEFAULT 'components/avatar.png',
   `cttl` tinyint(1) NOT NULL DEFAULT 0,
   `calamat` tinyint(1) NOT NULL DEFAULT 0,
   `cpendidikan` tinyint(1) NOT NULL DEFAULT 0,
@@ -89,66 +89,67 @@ CREATE TABLE `alumni` (
 --
 
 INSERT INTO `alumni` (`id_alumni`, `nama`, `jenis_kelamin`, `tempat_lahir`, `tanggal_lahir`, `telp_alumni`, `alamat_alumni`, `kota`, `provinsi`, `negara`, `status_bekerja`, `perkiraan_pensiun`, `jabatan_terakhir`, `aktif_pns`, `deskripsi`, `email`, `ig`, `fb`, `twitter`, `linkedin`, `gscholar`, `nip`, `nip_bps`, `foto_profil`, `cttl`, `calamat`, `cpendidikan`, `cprestasi`) VALUES
-(1, 'Dummy_dummy', 'Lk', 'Sungai Penuh', '1997-01-25', '081299594151', 'Jr. Abdul Rahmat No. 755, Tangerang 47637, SulUt', 'Kabupaten Tuban', 'Jawa Timur', 'Indonesia', 0, 1978, 'amet', 0, 'Maiores ut quasi beatae vel quisquam. Quo aut iusto et nobis et blanditiis non. Animi in architecto et iusto occaecati mollitia vel.', '', 'dummy_igza__', '', 'Dummy__', '', '', '198109262004122002', '301820912', 'Lk/default.svg', 0, 0, 0, 0),
-(2, 'Kartika Lismawati', 'Pr', 'Palembang', '1964-11-19', '', 'Jl. Lumbu Barat II B No. 82 Bl', '', '', '', 1, 2022, 'Kepala Subbidang Program dan Evaluasi Pendidikan dan Pelatihan Teknis dan Fungsional', 1, 'Test test 1 2 3', '', 'kartika123', '', '', '', '', '196411191987022003', '340011691', 'Pr/default.svg', 0, 0, 0, 0),
-(3, 'Budi Cahyono', 'Lk', 'Bojonegoro', '1964-06-08', '', 'Kp. Jati Griya Jatimas Asri', '', '', '', 1, 2022, 'Kepala BPS Kabupaten/Kota', 1, 'Hi there', '', 'boecah123', '', 'Budi Cahyono', '', '', '196406081987021002', '340011692', 'Lk/default.svg', 1, 1, 1, 0),
-(4, 'Indra Susilo', 'Lk', 'Jakarta Pusat', '1964-06-07', '081318869089', 'Jl. Wibisana No. 6', '', '', 'Indonesia', 1, 2022, 'Kepala BPS Kabupaten/Kota', 1, 'Test123', '', 'indrass98', '', '', '', '', '196406071987021001', '340011693', 'Lk/default.svg', 1, 1, 0, 0),
-(5, 'Erisman', 'Lk', 'Jakarta Timur', '1964-11-02', '08129491174', 'JL.SMART HOUSE KAV.B56', '', '', '', 1, 2020, 'Kepala BPS Kabupaten/Kota', 0, 'Saya adalah Kepala BPS Kabupaten/Kota', '', 'erisman222', '', 'erisman123', '', '', '196411021987021001', '340011694', 'Lk/default.svg', 1, 1, 0, 0),
-(6, 'Ono Margiono', 'LK', 'Jakarta Timur', '1966-05-13', '081214770887', 'Jl. Pangeran Kejaksan Gg. Muja', '', '', '', 1, 2024, 'Kepala BPS Kabupaten/Kota', 1, 'good', '', '', '', '', '', '', '196605131988021001', '340011828', 'LK/default.svg', 0, 0, 0, 0),
-(7, 'Sofan', 'LK', 'Kebumen', '1964-10-21', '0811383762', 'Jl Alamandar', '', '', '', 1, 2022, 'Kepala Bidang Statistik Produksi', 1, 'asyik', '', '', '', '', '', '', '196410211988021001', '340011829', 'LK/default.svg', 0, 0, 0, 0),
-(8, 'Efliza', 'PR', 'Medan', '1965-04-28', '0816228960', 'Jl Masjid Nurul Falah No 14', '', '', '', 1, 2025, 'Kepala Direktorat Statistik Distribusi', 1, 'asyiap', '', '', '', '', '', '', '196504281988022001', '340011855', 'PR/default.svg', 0, 0, 0, 0),
-(9, 'Oldestia Vianny', 'Pr', 'Payakumbuh', '1979-06-11', '081274707292', 'Jl Rantau 3 No. 3 Rt 003 Rw 01', '', '', '', 1, 2037, 'Statistisi Muda Seksi Analisis Statistik Lintas Sektor', 1, 'PNS', '', '', '', '', '', '', '197906111999122001', '340015996', 'Pr/default.svg', 0, 0, 0, 0),
-(10, 'Oemar Syarief Wibisono', 'Lk', 'Jakarta', '1994-09-29', '082278449084', 'Lorong Perdamaian Bedeng Akau', '', '', '', 1, 2052, 'Staf Seksi Integrasi Pengolahan dan Diseminasi Statistik', 1, 'gk tau', '', 'NULL', '', 'Omar', '', '', '199409292017011001', '340057694', 'Lk/default.svg', 0, 0, 0, 0),
-(11, 'Odry Syafwil', 'Lk', 'Jakarta', '1954-10-08', '081574594320', 'KOMPLEKS STATISTIK Jl. Statistik', '', '', '', 1, 2019, 'Lektor Kepala Tenaga Fungsional STIS', 0, 'Sudah pensiun', '', '', '', '', '', '', '195410081979031004', '340006615', 'Lk/default.svg', 0, 0, 0, 0),
-(12, 'Pradini Ajeng Gemellia', 'Pr', 'Bandung', '1989-10-13', '08567485818', 'Jl. Pelabuhan II Km 4,5 RT 2/8', '', '', '', 1, 2047, 'Staf Seksi Statistik Niaga dan Jasa', 1, 'hmm', '', '', '', '', '', '', '198910132012112001', '340055881', 'Pr/default.svg', 0, 0, 0, 0),
-(13, 'Lisiana Imana Yesani', 'PR', 'Jakarta Pusat', '1977-05-21', '085283507222', 'Jl. Kayu Manis VII No. 36', 'Jakarta Pusat', 'DKI Jakarta', 'Indonesia', 1, 2035, 'Kepala Seksi Statistik Sosial', 1, 'Asli jakarta hehe', '', '', '', '', '', '', '197705211999012001', '340015738', 'PR/default.svg', 0, 0, 0, 0),
-(14, 'Sana Damarhita', 'PR', 'Jakarta Selatan', '1977-05-14', '087722882289', 'Perumahan Bumi Cinderaya Jl. C', 'Jakarta Selatan', 'DKI Jakarta', 'Indonesia', 1, 2035, 'Kepala Seksi Neraca Wilayah dan Analisis Statistik', 1, 'Haha hihi penempatan', '', '', '', '', '', '', '197705141999011001', '340015739', 'PR/default.svg', 0, 0, 0, 0),
-(15, 'Krisdiana Galih', 'LK', 'Bandung', '1990-12-30', '081261932301', 'cluster hang lekir J9, batu IX', 'Bintan', 'Kepulauan Riau', 'Indonesia', 1, 2049, 'Kepala Subbagian Tata Usaha', 1, 'Sekarang rantau dulu bos', '', '', '', '', '', '', '199012302014101001', '340056726', 'LK/default.svg', 0, 0, 0, 0),
-(16, 'La Ode Ahmad Arafat', 'LK', 'Ambon', '1991-09-16', '085733198934', 'Jl. Raya Sambiroto, Dsn. Sambi', '', '', '', 1, 2049, 'Statistisi Pertama Seksi Diseminasi dan Layanan Statistik', 1, 'mantap ks teladan', '', '', '', '', '', '', '340056728', '199109162014101002', 'LK/default.svg', 0, 0, 0, 0),
-(17, 'Aan Sujanah', 'Pr', 'Jakarta Timur', '1962-10-02', '08116291011', 'Maskoki Raya No 2', '', '', 'Indonesia', 0, 2020, 'Kepala Subbagian Penyimpanan', 0, '', '', '', '', '', '', '', '196210021986012001', '340011224', 'Pr/default.svg', 0, 0, 0, 0),
-(18, 'Risma Pijayantini', 'Pr', 'Palembang', '1963-06-09', '082183288585', 'Perumnas Permata Biru Blok B3', '', '', 'Indonesia', 1, 2021, 'Kepala Bagian Tata Usaha', 1, '', '', '', '', '', '', '', '196306091986012001', '340011225', 'Pr/default.svg', 0, 0, 0, 0),
-(19, 'Ade Rika Agus', 'Pr', 'Bogor', '1963-10-14', '', 'JL Bojong Kaler I/4 Cigadung', '', '', 'Indonesia', 0, 0000, 'Staf Seksi Neraca Produksi', 0, '', '', '', '', '', '', '', '196310141986012001', '340011226', 'Pr/default.svg', 0, 0, 0, 0),
-(20, 'Haryoto Sutomo', 'Lk', 'Jakarta Selatan', '1962-07-02', '', 'Jl. Statistik II/32 Komplek St', '', '', 'Indonesia', 0, 2011, 'Staf Seksi Pengembangan Desain Sensus dan Survei Bidang Statistik Distribusi dan Jasa', 0, '', '', '', '', '', '', '', '', '', 'Lk/default.svg', 0, 0, 0, 0),
-(21, 'I Ketut Mertayasa', 'Lk', 'Padangbae', '1968-07-26', '081271067114', 'JL. BYPASS, KOBA, BANGKA TENGA', 'Bangka Tengah', 'Bangka Belitung', 'Indonesia', 1, 2026, 'Kepala BPS Kabupaten/Kota', 1, '', '', '', '', '', '', '', '196807261992111001', '340013357', 'Lk/default.svg', 0, 0, 0, 0),
-(22, 'Ni Putu Beliana Puspita Sari', 'Pr', 'Tabanan', '1996-11-29', '082237404808', 'BTN Senapahan II No. 26, Br. D', '', '', '', 1, 2054, 'Staf Seksi Integrasi Pengolahan dan Diseminasi Statistik', 1, '', '', '', '', '', '', '', '199611292019012002', '340058885', 'Pr/default.svg', 0, 0, 0, 0),
-(23, 'Putu Yogi Wigunanca', 'Lk', 'Tabanan', '1994-11-15', '081558417994', 'banjar rangdu, desa pohsanten', '', '', '', 1, 2052, 'Penugasan Statistisi Pelaksana Lanjutan Seksi Statistik Produksi', 1, '', '', '', '', '', '', '', '199411152019011001', '340058915', 'Lk/default.svg', 0, 0, 0, 0),
-(24, 'Ni Putu Ayu Mila Dewi', 'Pr', 'Karangasem', '1992-12-28', '081806595936', 'Jalan Anawai no. 27', '', '', '', 1, 2051, 'Statistisi Pertama Seksi Statistik Industri', 1, '', '', '', '', '', '', '', '199212282014122001', '340057159', 'Pr/default.svg', 0, 0, 0, 0),
-(25, 'Ratna Rosmayanti', 'Pr', 'Cianjur', '1972-10-11', '085860789234', 'JL PIRUS II NO. 34 BLOK 7 PERU', '', '', '', 1, 2030, 'Kepala Seksi Integrasi Pengolahan dan Diseminasi Statistik', 1, 'Tring tring', '', '', '', '', '', '', '197210111992032001', '340013242', 'Pr/default.svg', 0, 0, 0, 0),
-(26, 'Aris Muji Atmoko', 'Lk', 'Karawang', '1983-11-20', ' 6281381234899', 'Perum Pesona Handayani Indah', '', '', '', 1, 2041, 'Statistisi Muda Seksi Statistik Sosial', 1, 'Jalan dengan kaki', '', '', '', '', '', '', ' 198311202009021004', ' 340050003', 'Lk/default.svg', 0, 0, 0, 0),
-(27, 'Efran Feri Kriswanto', 'Lk', 'Palembang', '1985-02-22', '085208314690', 'Jl R. Sukamto Lr. Masjid No.39', '', '', '', 1, 2043, 'Staf Seksi Neraca Wilayah dan Analisis Statistik', 1, '', '', '', '', '', '', '', '198502222009021005', '340050005', 'Lk/default.svg', 0, 0, 0, 0),
-(28, 'Husin Maulana', 'LK', 'Jakarta Selatan', '0000-00-00', '', 'Griya Serang Asri Blok L4/13', '', '', '', 1, 2033, 'Kepala BPS Kabupaten/Kota', 1, 'asadadassas', '', '', '', '', '', '', '197504231996121001', '340015382', 'LK/default.svg', 0, 0, 0, 0),
-(29, 'Toto E Sastrasuanda', 'LK', 'Cirebon', '0000-00-00', '', 'Dusun Belawa I Rt 03/01', '', '', '', 1, 2003, 'Kepala Deputi Bidang Statistik Sosial', 1, 'sasasaasa', '', '', '', '', '', '', '', '340003304', 'LK/default.svg', 0, 0, 0, 0),
-(30, 'Anik Triani', 'PR', 'Semarang', '0000-00-00', '', 'Griya Cempaka Arum Blok AA 11', '', '', '', 1, 2039, 'Statistisi Muda Seksi Statistik Pertambangan, Energi dan Konstruksi', 1, 'asadadadad', '', '', '', '', '', '', '198103102002122002', '340016472', 'PR/default.svg', 0, 0, 0, 0),
-(31, 'Maya Harsanti', 'PR', 'Jakarta', '0000-00-00', '', 'Perum Grand Duta Cluster Jade', '', '', '', 1, 2038, 'Staf Seksi Statistik Distribusi', 1, 'ADAAADADDAD', '', '', '', '', '', '', '198011042002122001', '340016479', 'PR/default.svg', 0, 0, 0, 0),
-(32, 'Lestari Utaminingsih', 'PR', 'Kendal', '1977-10-13', '085641509482', 'Jl. Candi Kencana IV/C.66', '', '', 'Indonesia', 1, 2035, 'Staf Subbagian Kepegawaian & Hukum', 1, 'Taken', '', 'lestari10', '', 'lestari_utami', '', '', '197710132000022001', '340016072', 'PR/default.svg', 0, 0, 0, 0),
-(33, 'Hengki Eko Riyadi', 'LK', 'Lubang Lor (Purworejo)', '1978-09-03', '085261660531', 'Grand Serpong Residence Blok A', '', '', 'Indonesia', 1, 2038, 'Statistisi Madya Pejabat Fungsional', 1, 'Laper nih', '', 'iri_hengki', '', 'hengki01', '', '', '197809032000121002', '340016113', 'LK/default.svg', 0, 0, 0, 0),
-(34, 'Eddy Prayitno', 'LK', 'Bandar Lampung', '1977-01-15', '07215605102', 'Jl. Purnawirawan Raya Belakang', '', '', 'Indonesia', 1, 2035, 'Kepala BPS Kabupaten/Kota', 1, 'Makan bang!!', '', '', '', '', '', '', '197701151999011001', '340015736', 'LK/default.svg', 0, 0, 0, 0),
-(35, 'Edison Manurung', 'LK', 'Tapanuli Utara', '1962-11-10', '021-7815560', 'Jl.Raya Lt.Agung Tg.BaratRt.00', '', '', 'Indonesia', 0, 2019, 'Staf Seksi Penyiapan Statistik Perdagangan Dalam Negeri', 0, 'Ngantuk bat', '', '', '', '', '', '', '196211101988021001', '340011827', 'LK/default.svg', 0, 0, 0, 0),
-(36, 'Bambang Susilo', 'Lk', 'Blora', '1957-04-03', '', 'H.Ahyar No.49 RT.006/05 13440', '', '', '', 1, 2013, 'Staf Seksi Pengolahan Statistik Pendidikan dan Kesejahteraan Sosial', 0, '', '', '', '', '', '', '', '195704031977121001', '340005601', 'Lk/default.svg', 0, 0, 0, 0),
-(37, 'Hotbel Purba', 'Lk', 'Pasir/Banjar Tongga', '1966-06-20', '081350343245', 'Jl. Pusat Pemerintahan', '', '', '', 1, 2024, 'Kepala BPS Kabupaten/Kota', 1, '', '', '', '', '', '', '', '196606201986031001', '340011571', 'Lk/default.svg', 0, 0, 0, 0),
-(38, 'Edison Situmorang', 'Lk', 'Simarsoituruk', '1966-11-26', '082347774666', 'A W syahrani 4 Rt 23 Sempaja', '', '', '', 1, 2024, 'Kepala Seksi Statistik Sosial', 1, '', '', '', '', '', '', '', '196611261988021001', '340011786', 'Lk/default.svg', 0, 0, 0, 0),
-(39, 'Chatarina Budi Anggarini', 'Pr', 'Bantul', '1969-04-29', '089610147898', 'Melikan Lor RT 04 Gandekan Ban', '', '', '', 1, 2027, 'Kepala Seksi Statistik Keuangan Dan Harga Produsen', 1, '', '', '', '', '', '', '', '196904291989022001', '340012122', 'Pr/default.svg', 0, 0, 0, 0),
-(40, 'Muhammad Dedy', 'LK', 'Palembang', '1978-08-05', '081377900322', 'Jl. Sambu No. 33', '', '', 'Indonesia', 1, 2036, 'Kepala BPS Kabupaten/Kota', 1, '', '', '', '', '', '', '', '197808052000121001', '340016240', 'LK/default.svg', 0, 0, 0, 0),
-(41, 'Ayu Setiawaty', 'PR', 'Jakarta Barat', '1977-05-09', 'Jakarta Barat', 'PERUMAHAN DUKUH ZAMRUD BLOK N7', '', '', '', 1, 2035, 'Penugasan Statistisi Pertama Seksi Statistik Distribusi', 1, '', '', '', '', '', '', '', '197705092000122007', '340016241', 'PR/default.svg', 0, 0, 0, 0),
-(42, 'Shanti Kartika Astrilestari', 'PR', 'Surabaya', '1979-04-26', '082181923897', 'Perum Ragom Mufakat I Blok F-5', '', '', 'Indonesia', 1, 2037, 'Kepala Seksi Neraca Wilayah dan Analisis Statistik', 1, '', '', '', '', '', '', '', '197904262000122001', '340016242', 'PR/default.svg', 0, 0, 0, 0),
-(43, 'Bambang Pamungkas', 'LK', 'Semarang', '1979-09-17', '081355103999', 'Jl Kredit Blok B 5 No 13', '', '', 'Indonesia', 1, 2037, 'Kepala BPS Kabupaten/Kota', 1, '', '', '', '', '', '', '', '197909172000121003', '340016243', 'LK/default.svg', 0, 0, 0, 0),
-(44, 'Johanes Supranto', 'Lk', 'Semarang', '1939-05-22', '', 'Jl. Kejaksaan Raya No. 23 Kreo C', '', 'DKI Jakarta', 'Indonesia', 0, 2004, 'Kepala K.S Tk. I (Tipe A)', 0, 'Jangan Menyerah', '', '', '', '', '', '', '', '340000423', 'Lk/default.svg', 1, 0, 0, 0),
-(45, 'Gita Devi Asyarita', 'Pr', 'Bekasi', '1994-08-05', '6281319546221', 'Desa Daruba', '', '', '', 1, 2052, 'Statistisi Pertama Seksi Statistik Distribusi', 1, 'Bersakit-sakit dahulu, bersenang-senangnya gak tau kapan', '', 'gitaasy_', '', '', '', '', '199408052017012001', '340058000', 'Pr/default.svg', 1, 0, 0, 0),
-(46, 'Galang Retno Winarko', 'Lk', 'Blitar', '1990-10-22', '6282299649735', 'RT 4 RW 3, Desa Panggungrejo, Kecamatan Panggungrejo', 'Blitar', 'Jawa Timur', 'Indonesia', 1, 2048, 'Staf Seksi Integrasi Pengolahan Data', 1, 'WOW Amazing', '', 'galang_winarko', '', '', '', '', '199010222017011001', '340057999', 'Lk/default.svg', 1, 0, 0, 0),
-(47, 'Timbang Sirait', 'Lk', 'Labuhan Batu', '1973-12-27', '628179719667', 'Puri Bintara Regency Blok K-19', 'Jakarta Timur', 'DKI Jakarta', 'Indonesia', 1, 2039, 'Lektor Tenaga Fungsional STIS', 1, 'Statmat jaya', '', '', '', '', '', '', '197312272000031002', '340016106', 'Lk/default.svg', 1, 0, 0, 0),
-(48, 'Khaerul Anwar', 'LK', 'Demak', '1970-03-29', '081228439121', 'Perum Griya Utama Permai Blok', '', '', 'Indonesia', 1, 2028, 'Kepala Seksi Integrasi Pengolahan dan Diseminasi Statistik', 1, '', '', '', '', '', '', '', '197003291991021001', '340012773', 'LK/default.svg', 0, 0, 0, 0),
-(49, 'Achmad Rifai', 'LK', 'Jakarta Utara', '1974-12-05', '082221518394', 'Jl. Kranji No. 493', '', '', 'Indonesia', 1, 2033, 'Kepala Seksi Integrasi Pengolahan dan Diseminasi Statistik', 1, '', '', '', '', '', '', '', '197412052000031001', '340016107', 'LK/default.svg', 0, 0, 0, 0),
-(50, 'Apriliya Puput Nadea', 'PR', 'Klaten', '1989-04-06', '085647331647', 'Gg Spoor Dalam IV no 12', '', '', 'Indonesia', 1, 2047, 'Staf Seksi Jasa Perpustakaan', 1, '', '', '', '', '', '', '', '198904062012112001', '340055736', 'PR/default.svg', 0, 0, 0, 0),
-(51, 'Arini Ismiati', 'PR', 'Malang', '1979-12-20', '081215927271', 'Jl. Batok GG III no.5', '', '', 'Indonesia', 1, 2038, 'Statistisi Muda Seksi Statistik Produksi', 1, '', '', '', '', '', '', '', '197912202003122006', '340017013', 'PR/default.svg', 0, 0, 0, 0),
-(52, 'Dea Venditama', 'LK', 'Bantul', '1991-06-02', '6282292146507', 'Otista', 'Pusat', 'DKI Jakarta', 'Indonesia', 1, 2049, 'Pranata Komputer Pertama Seksi Pemantauan dan Evaluasi Publikasi', 1, '', '', '', '', '', '', '', '199106022014101001', '340056757', 'LK/default.svg', 0, 0, 0, 0),
-(53, 'Delly Rakasiwi', 'LK', 'Jakarta', '1991-03-05', '', 'Ki Hajar DewantaraRT 01 RW 06', 'Palangkaraya', 'Kalimantan Tengah', 'Indonesia', 1, 2049, 'Pranata Komputer Pertama Seksi Jaringan dan Rujukan Statistik', 1, '', '', '', '', '', '', '', '199103052014101002', '340056758', 'LK/default.svg', 0, 0, 0, 0),
-(54, 'Dhoni Eko Wahyu Nugroho', 'LK', 'Kediri', '1991-07-28', '', 'Jl. Kebon Nanas Utara No 10 Ja', 'Pusat', 'DKI Jakarta', 'Indonesia', 1, 2049, 'Pranata Komputer Pertama Seksi Pengemasan Informasi Statistik', 1, '', '', '', '', '', '', '', '199107282014101001', '340056759', 'LK/default.svg', 0, 0, 0, 0),
-(55, 'Poltak Sutrisno Siahaan', 'Lk', 'Tebing Tinggi', '1952-08-06', '', 'Jl. Asrama Komplek Bumi AsriBl', '', '', '', 1, 2012, 'Staf MPP', 0, '', '', '', '', '', '', '', '195208061975031001', '340004375', 'Lk/default.svg', 0, 0, 0, 0),
-(56, 'Weni Lidya Sukma', 'Pr', 'Padang Pariaman', '1989-09-12', '085263662023', 'jl. mandor dami 2 perumahan fe', '', '', '', 1, 2047, 'Penugasan Statistisi Pelaksana Lanjutan Seksi Pengolahan Statistik Ketenagakerjaan', 1, '', '', '', '', '', '', '', '198909122012112001', '340055951', 'Pr/default.svg', 0, 0, 0, 0),
-(57, 'Tri Hayuni Syardi', 'Pr', 'Padang', '1990-10-30', '081281060452', 'Komplek Mawar Putih Blok L No.', '', '', '', 1, 2048, 'Kepala Seksi Integrasi Pengolahan dan Diseminasi Statistik', 1, '', '', '', '', '', '', '', '199010302012112001', '340055938', 'Pr/default.svg', 0, 0, 0, 0),
-(58, 'Subuh Sukmono Putro', 'Lk', 'Sragen', '1975-03-15', '081329278642', 'Graha Surya No IC', '', '', '', 1, 2033, 'Kepala Seksi Statistik Sosial', 1, '', '', '', '', '', '', '', '197503151996121001', '340015332', 'Lk/default.svg', 0, 0, 0, 0),
-(59, 'Sigit Purnomo', 'LK', 'Kulon Progo', '1965-02-17', '081288378366', 'Puri Citayam Permai Blok B-10', '', '', '', 1, 2023, 'Kepala Bagian Penyusunan Rencana', 1, 'mantap', '', '', '', '', '', '', '196502171988021001', '340011821', 'LK/default.svg', 0, 0, 0, 0),
-(60, 'MOCHAMAD IZZA ZULFIKAR SYA\'RONI', 'Pr', 'Jayapura', '1989-12-12', '(+62) 29 2629 944', 'Ds. Sumpah Pemuda No. 190, Singkawang 21576, KalSel', 'Makassar', 'Gorontalo', 'Mikronesia', 1, 2002, 'minima', 1, 'Voluptatem quam a tenetur dolore minima qui. Nostrum aut autem ut. Sapiente enim consequatur ipsam qui quia provident. Et at vel illo.', '', '', '', '', '', '', '2435731040527948', '221810422', 'Pr/default.svg', 0, 0, 0, 0);
+(1, 'Dummy_dummy', 'Lk', 'Sungai Penuh', '1997-01-25', '081299594151', 'Jr. Abdul Rahmat No. 755, Tangerang 47637, SulUt', 'Kabupaten Tuban', 'Jawa Timur', 'Indonesia', 0, 1978, 'amet', 0, 'Maiores ut quasi beatae vel quisquam. Quo aut iusto et nobis et blanditiis non. Animi in architecto et iusto occaecati mollitia vel.', '', 'dummy_igza__', '', 'Dummy__', '', '', '198109262004122002', '301820912', 'components/icon/Lk-icon.svg', 0, 0, 0, 0),
+(2, 'Kartika Lismawati', 'Pr', 'Palembang', '1964-11-19', '', 'Jl. Lumbu Barat II B No. 82 Bl', '', '', '', 1, 2022, 'Kepala Subbidang Program dan Evaluasi Pendidikan dan Pelatihan Teknis dan Fungsional', 1, 'Test test 1 2 3', '', 'kartika123', '', '', '', '', '196411191987022003', '340011691', 'components/icon/Pr-icon.svg', 0, 0, 0, 0),
+(3, 'Budi Cahyono', 'Lk', 'Bojonegoro', '1964-06-08', '', 'Kp. Jati Griya Jatimas Asri', '', '', '', 1, 2022, 'Kepala BPS Kabupaten/Kota', 1, 'Hi there', '', 'boecah123', '', 'Budi Cahyono', '', '', '196406081987021002', '340011692', 'components/icon/Lk-icon.svg', 1, 1, 1, 0),
+(4, 'Indra Susilo', 'Lk', 'Jakarta Pusat', '1964-06-07', '081318869089', 'Jl. Wibisana No. 6', '', '', 'Indonesia', 1, 2022, 'Kepala BPS Kabupaten/Kota', 1, 'Test123', '', 'indrass98', '', '', '', '', '196406071987021001', '340011693', 'components/icon/Lk-icon.svg', 1, 1, 0, 0),
+(5, 'Erisman', 'Lk', 'Jakarta Timur', '1964-11-02', '08129491174', 'JL.SMART HOUSE KAV.B56', '', '', '', 1, 2020, 'Kepala BPS Kabupaten/Kota', 0, 'Saya adalah Kepala BPS Kabupaten/Kota', '', 'erisman222', '', 'erisman123', '', '', '196411021987021001', '340011694', 'components/icon/Lk-icon.svg', 1, 1, 0, 0),
+(6, 'Ono Margiono', 'LK', 'Jakarta Timur', '1966-05-13', '081214770887', 'Jl. Pangeran Kejaksan Gg. Muja', '', '', '', 1, 2024, 'Kepala BPS Kabupaten/Kota', 1, 'good', '', '', '', '', '', '', '196605131988021001', '340011828', 'components/icon/LK-icon.svg', 0, 0, 0, 0),
+(7, 'Sofan', 'LK', 'Kebumen', '1964-10-21', '0811383762', 'Jl Alamandar', '', '', '', 1, 2022, 'Kepala Bidang Statistik Produksi', 1, 'asyik', '', '', '', '', '', '', '196410211988021001', '340011829', 'components/icon/LK-icon.svg', 0, 0, 0, 0),
+(8, 'Efliza', 'PR', 'Medan', '1965-04-28', '0816228960', 'Jl Masjid Nurul Falah No 14', '', '', '', 1, 2025, 'Kepala Direktorat Statistik Distribusi', 1, 'asyiap', '', '', '', '', '', '', '196504281988022001', '340011855', 'components/icon/PR-icon.svg', 0, 0, 0, 0),
+(9, 'Oldestia Vianny', 'Pr', 'Payakumbuh', '1979-06-11', '081274707292', 'Jl Rantau 3 No. 3 Rt 003 Rw 01', '', '', '', 1, 2037, 'Statistisi Muda Seksi Analisis Statistik Lintas Sektor', 1, 'PNS', '', '', '', '', '', '', '197906111999122001', '340015996', 'components/icon/Pr-icon.svg', 0, 0, 0, 0),
+(10, 'Oemar Syarief Wibisono', 'Lk', 'Jakarta', '1994-09-29', '082278449084', 'Lorong Perdamaian Bedeng Akau', '', '', '', 1, 2052, 'Staf Seksi Integrasi Pengolahan dan Diseminasi Statistik', 1, 'gk tau', '', 'NULL', '', 'Omar', '', '', '199409292017011001', '340057694', 'components/icon/Lk-icon.svg', 0, 0, 0, 0),
+(11, 'Odry Syafwil', 'Lk', 'Jakarta', '1954-10-08', '081574594320', 'KOMPLEKS STATISTIK Jl. Statistik', '', '', '', 1, 2019, 'Lektor Kepala Tenaga Fungsional STIS', 0, 'Sudah pensiun', '', '', '', '', '', '', '195410081979031004', '340006615', 'components/icon/Lk-icon.svg', 0, 0, 0, 0),
+(12, 'Pradini Ajeng Gemellia', 'Pr', 'Bandung', '1989-10-13', '08567485818', 'Jl. Pelabuhan II Km 4,5 RT 2/8', '', '', '', 1, 2047, 'Staf Seksi Statistik Niaga dan Jasa', 1, 'hmm', '', '', '', '', '', '', '198910132012112001', '340055881', 'components/icon/Pr-icon.svg', 0, 0, 0, 0),
+(13, 'Lisiana Imana Yesani', 'PR', 'Jakarta Pusat', '1977-05-21', '085283507222', 'Jl. Kayu Manis VII No. 36', 'Jakarta Pusat', 'DKI Jakarta', 'Indonesia', 1, 2035, 'Kepala Seksi Statistik Sosial', 1, 'Asli jakarta hehe', '', '', '', '', '', '', '197705211999012001', '340015738', 'components/icon/PR-icon.svg', 0, 0, 0, 0),
+(14, 'Sana Damarhita', 'PR', 'Jakarta Selatan', '1977-05-14', '087722882289', 'Perumahan Bumi Cinderaya Jl. C', 'Jakarta Selatan', 'DKI Jakarta', 'Indonesia', 1, 2035, 'Kepala Seksi Neraca Wilayah dan Analisis Statistik', 1, 'Haha hihi penempatan', '', '', '', '', '', '', '197705141999011001', '340015739', 'components/icon/PR-icon.svg', 0, 0, 0, 0),
+(15, 'Krisdiana Galih', 'LK', 'Bandung', '1990-12-30', '081261932301', 'cluster hang lekir J9, batu IX', 'Bintan', 'Kepulauan Riau', 'Indonesia', 1, 2049, 'Kepala Subbagian Tata Usaha', 1, 'Sekarang rantau dulu bos', '', '', '', '', '', '', '199012302014101001', '340056726', 'components/icon/LK-icon.svg', 0, 0, 0, 0),
+(16, 'La Ode Ahmad Arafat', 'LK', 'Ambon', '1991-09-16', '085733198934', 'Jl. Raya Sambiroto, Dsn. Sambi', '', '', '', 1, 2049, 'Statistisi Pertama Seksi Diseminasi dan Layanan Statistik', 1, 'mantap ks teladan', '', '', '', '', '', '', '340056728', '199109162014101002', 'components/icon/LK-icon.svg', 0, 0, 0, 0),
+(17, 'Aan Sujanah', 'Pr', 'Jakarta Timur', '1962-10-02', '08116291011', 'Maskoki Raya No 2', '', '', 'Indonesia', 0, 2020, 'Kepala Subbagian Penyimpanan', 0, '', '', '', '', '', '', '', '196210021986012001', '340011224', 'components/icon/Pr-icon.svg', 0, 0, 0, 0),
+(18, 'Risma Pijayantini', 'Pr', 'Palembang', '1963-06-09', '082183288585', 'Perumnas Permata Biru Blok B3', '', '', 'Indonesia', 1, 2021, 'Kepala Bagian Tata Usaha', 1, '', '', '', '', '', '', '', '196306091986012001', '340011225', 'components/icon/Pr-icon.svg', 0, 0, 0, 0),
+(19, 'Ade Rika Agus', 'Pr', 'Bogor', '1963-10-14', '', 'JL Bojong Kaler I/4 Cigadung', '', '', 'Indonesia', 0, 0000, 'Staf Seksi Neraca Produksi', 0, '', '', '', '', '', '', '', '196310141986012001', '340011226', 'components/icon/Pr-icon.svg', 0, 0, 0, 0),
+(20, 'Haryoto Sutomo', 'Lk', 'Jakarta Selatan', '1962-07-02', '', 'Jl. Statistik II/32 Komplek St', '', '', 'Indonesia', 0, 2011, 'Staf Seksi Pengembangan Desain Sensus dan Survei Bidang Statistik Distribusi dan Jasa', 0, '', '', '', '', '', '', '', '', '', 'components/icon/Lk-icon.svg', 0, 0, 0, 0),
+(21, 'I Ketut Mertayasa', 'Lk', 'Padangbae', '1968-07-26', '081271067114', 'JL. BYPASS, KOBA, BANGKA TENGA', 'Bangka Tengah', 'Bangka Belitung', 'Indonesia', 1, 2026, 'Kepala BPS Kabupaten/Kota', 1, '', '', '', '', '', '', '', '196807261992111001', '340013357', 'components/icon/Lk-icon.svg', 0, 0, 0, 0),
+(22, 'Ni Putu Beliana Puspita Sari', 'Pr', 'Tabanan', '1996-11-29', '082237404808', 'BTN Senapahan II No. 26, Br. D', '', '', '', 1, 2054, 'Staf Seksi Integrasi Pengolahan dan Diseminasi Statistik', 1, '', '', '', '', '', '', '', '199611292019012002', '340058885', 'components/icon/Pr-icon.svg', 0, 0, 0, 0),
+(23, 'Putu Yogi Wigunanca', 'Lk', 'Tabanan', '1994-11-15', '081558417994', 'banjar rangdu, desa pohsanten', '', '', '', 1, 2052, 'Penugasan Statistisi Pelaksana Lanjutan Seksi Statistik Produksi', 1, '', '', '', '', '', '', '', '199411152019011001', '340058915', 'components/icon/Lk-icon.svg', 0, 0, 0, 0),
+(24, 'Ni Putu Ayu Mila Dewi', 'Pr', 'Karangasem', '1992-12-28', '081806595936', 'Jalan Anawai no. 27', '', '', '', 1, 2051, 'Statistisi Pertama Seksi Statistik Industri', 1, '', '', '', '', '', '', '', '199212282014122001', '340057159', 'components/icon/Pr-icon.svg', 0, 0, 0, 0),
+(25, 'Ratna Rosmayanti', 'Pr', 'Cianjur', '1972-10-11', '085860789234', 'JL PIRUS II NO. 34 BLOK 7 PERU', '', '', '', 1, 2030, 'Kepala Seksi Integrasi Pengolahan dan Diseminasi Statistik', 1, 'Tring tring', '', '', '', '', '', '', '197210111992032001', '340013242', 'components/icon/Pr-icon.svg', 0, 0, 0, 0),
+(26, 'Aris Muji Atmoko', 'Lk', 'Karawang', '1983-11-20', ' 6281381234899', 'Perum Pesona Handayani Indah', '', '', '', 1, 2041, 'Statistisi Muda Seksi Statistik Sosial', 1, 'Jalan dengan kaki', '', '', '', '', '', '', ' 198311202009021004', ' 340050003', 'components/icon/Lk-icon.svg', 0, 0, 0, 0),
+(27, 'Efran Feri Kriswanto', 'Lk', 'Palembang', '1985-02-22', '085208314690', 'Jl R. Sukamto Lr. Masjid No.39', '', '', '', 1, 2043, 'Staf Seksi Neraca Wilayah dan Analisis Statistik', 1, '', '', '', '', '', '', '', '198502222009021005', '340050005', 'components/icon/Lk-icon.svg', 0, 0, 0, 0),
+(28, 'Husin Maulana', 'LK', 'Jakarta Selatan', '0000-00-00', '', 'Griya Serang Asri Blok L4/13', '', '', '', 1, 2033, 'Kepala BPS Kabupaten/Kota', 1, 'asadadassas', '', '', '', '', '', '', '197504231996121001', '340015382', 'components/icon/LK-icon.svg', 0, 0, 0, 0),
+(29, 'Toto E Sastrasuanda', 'LK', 'Cirebon', '0000-00-00', '', 'Dusun Belawa I Rt 03/01', '', '', '', 1, 2003, 'Kepala Deputi Bidang Statistik Sosial', 1, 'sasasaasa', '', '', '', '', '', '', '', '340003304', 'components/icon/LK-icon.svg', 0, 0, 0, 0),
+(30, 'Anik Triani', 'PR', 'Semarang', '0000-00-00', '', 'Griya Cempaka Arum Blok AA 11', '', '', '', 1, 2039, 'Statistisi Muda Seksi Statistik Pertambangan, Energi dan Konstruksi', 1, 'asadadadad', '', '', '', '', '', '', '198103102002122002', '340016472', 'components/icon/PR-icon.svg', 0, 0, 0, 0),
+(31, 'Maya Harsanti', 'PR', 'Jakarta', '0000-00-00', '', 'Perum Grand Duta Cluster Jade', '', '', '', 1, 2038, 'Staf Seksi Statistik Distribusi', 1, 'ADAAADADDAD', '', '', '', '', '', '', '198011042002122001', '340016479', 'components/icon/PR-icon.svg', 0, 0, 0, 0),
+(32, 'Lestari Utaminingsih', 'PR', 'Kendal', '1977-10-13', '085641509482', 'Jl. Candi Kencana IV/C.66', '', '', 'Indonesia', 1, 2035, 'Staf Subbagian Kepegawaian & Hukum', 1, 'Taken', '', 'lestari10', '', 'lestari_utami', '', '', '197710132000022001', '340016072', 'components/icon/PR-icon.svg', 0, 0, 0, 0),
+(33, 'Hengki Eko Riyadi', 'LK', 'Lubang Lor (Purworejo)', '1978-09-03', '085261660531', 'Grand Serpong Residence Blok A', '', '', 'Indonesia', 1, 2038, 'Statistisi Madya Pejabat Fungsional', 1, 'Laper nih', '', 'iri_hengki', '', 'hengki01', '', '', '197809032000121002', '340016113', 'components/icon/LK-icon.svg', 0, 0, 0, 0),
+(34, 'Eddy Prayitno', 'LK', 'Bandar Lampung', '1977-01-15', '07215605102', 'Jl. Purnawirawan Raya Belakang', '', '', 'Indonesia', 1, 2035, 'Kepala BPS Kabupaten/Kota', 1, 'Makan bang!!', '', '', '', '', '', '', '197701151999011001', '340015736', 'components/icon/LK-icon.svg', 0, 0, 0, 0),
+(35, 'Edison Manurung', 'LK', 'Tapanuli Utara', '1962-11-10', '021-7815560', 'Jl.Raya Lt.Agung Tg.BaratRt.00', '', '', 'Indonesia', 0, 2019, 'Staf Seksi Penyiapan Statistik Perdagangan Dalam Negeri', 0, 'Ngantuk bat', '', '', '', '', '', '', '196211101988021001', '340011827', 'components/icon/LK-icon.svg', 0, 0, 0, 0),
+(36, 'Bambang Susilo', 'Lk', 'Blora', '1957-04-03', '', 'H.Ahyar No.49 RT.006/05 13440', '', '', '', 1, 2013, 'Staf Seksi Pengolahan Statistik Pendidikan dan Kesejahteraan Sosial', 0, '', '', '', '', '', '', '', '195704031977121001', '340005601', 'components/icon/Lk-icon.svg', 0, 0, 0, 0),
+(37, 'Hotbel Purba', 'Lk', 'Pasir/Banjar Tongga', '1966-06-20', '081350343245', 'Jl. Pusat Pemerintahan', '', '', '', 1, 2024, 'Kepala BPS Kabupaten/Kota', 1, '', '', '', '', '', '', '', '196606201986031001', '340011571', 'components/icon/Lk-icon.svg', 0, 0, 0, 0),
+(38, 'Edison Situmorang', 'Lk', 'Simarsoituruk', '1966-11-26', '082347774666', 'A W syahrani 4 Rt 23 Sempaja', '', '', '', 1, 2024, 'Kepala Seksi Statistik Sosial', 1, '', '', '', '', '', '', '', '196611261988021001', '340011786', 'components/icon/Lk-icon.svg', 0, 0, 0, 0),
+(39, 'Chatarina Budi Anggarini', 'Pr', 'Bantul', '1969-04-29', '089610147898', 'Melikan Lor RT 04 Gandekan Ban', '', '', '', 1, 2027, 'Kepala Seksi Statistik Keuangan Dan Harga Produsen', 1, '', '', '', '', '', '', '', '196904291989022001', '340012122', 'components/icon/Pr-icon.svg', 0, 0, 0, 0),
+(40, 'Muhammad Dedy', 'LK', 'Palembang', '1978-08-05', '081377900322', 'Jl. Sambu No. 33', '', '', 'Indonesia', 1, 2036, 'Kepala BPS Kabupaten/Kota', 1, '', '', '', '', '', '', '', '197808052000121001', '340016240', 'components/icon/LK-icon.svg', 0, 0, 0, 0),
+(41, 'Ayu Setiawaty', 'PR', 'Jakarta Barat', '1977-05-09', 'Jakarta Barat', 'PERUMAHAN DUKUH ZAMRUD BLOK N7', '', '', '', 1, 2035, 'Penugasan Statistisi Pertama Seksi Statistik Distribusi', 1, '', '', '', '', '', '', '', '197705092000122007', '340016241', 'components/icon/PR-icon.svg', 0, 0, 0, 0),
+(42, 'Shanti Kartika Astrilestari', 'PR', 'Surabaya', '1979-04-26', '082181923897', 'Perum Ragom Mufakat I Blok F-5', '', '', 'Indonesia', 1, 2037, 'Kepala Seksi Neraca Wilayah dan Analisis Statistik', 1, '', '', '', '', '', '', '', '197904262000122001', '340016242', 'components/icon/PR-icon.svg', 0, 0, 0, 0),
+(43, 'Bambang Pamungkas', 'LK', 'Semarang', '1979-09-17', '081355103999', 'Jl Kredit Blok B 5 No 13', '', '', 'Indonesia', 1, 2037, 'Kepala BPS Kabupaten/Kota', 1, '', '', '', '', '', '', '', '197909172000121003', '340016243', 'components/icon/LK-icon.svg', 0, 0, 0, 0),
+(44, 'Johanes Supranto', 'Lk', 'Semarang', '1939-05-22', '', 'Jl. Kejaksaan Raya No. 23 Kreo C', '', 'DKI Jakarta', 'Indonesia', 0, 2004, 'Kepala K.S Tk. I (Tipe A)', 0, 'Jangan Menyerah', '', '', '', '', '', '', '', '340000423', 'components/icon/Lk-icon.svg', 1, 0, 0, 0),
+(45, 'Gita Devi Asyarita', 'Pr', 'Bekasi', '1994-08-05', '6281319546221', 'Desa Daruba', '', '', '', 1, 2052, 'Statistisi Pertama Seksi Statistik Distribusi', 1, 'Bersakit-sakit dahulu, bersenang-senangnya gak tau kapan', '', 'gitaasy_', '', '', '', '', '199408052017012001', '340058000', 'components/icon/Pr-icon.svg', 1, 0, 0, 0),
+(46, 'Galang Retno Winarko', 'Lk', 'Blitar', '1990-10-22', '6282299649735', 'RT 4 RW 3, Desa Panggungrejo, Kecamatan Panggungrejo', 'Blitar', 'Jawa Timur', 'Indonesia', 1, 2048, 'Staf Seksi Integrasi Pengolahan Data', 1, 'WOW Amazing', '', 'galang_winarko', '', '', '', '', '199010222017011001', '340057999', 'components/icon/Lk-icon.svg', 1, 0, 0, 0),
+(47, 'Timbang Sirait', 'Lk', 'Labuhan Batu', '1973-12-27', '628179719667', 'Puri Bintara Regency Blok K-19', 'Jakarta Timur', 'DKI Jakarta', 'Indonesia', 1, 2039, 'Lektor Tenaga Fungsional STIS', 1, 'Statmat jaya', '', '', '', '', '', '', '197312272000031002', '340016106', 'components/icon/Lk-icon.svg', 1, 0, 0, 0),
+(48, 'Khaerul Anwar', 'LK', 'Demak', '1970-03-29', '081228439121', 'Perum Griya Utama Permai Blok', '', '', 'Indonesia', 1, 2028, 'Kepala Seksi Integrasi Pengolahan dan Diseminasi Statistik', 1, '', '', '', '', '', '', '', '197003291991021001', '340012773', 'components/icon/LK-icon.svg', 0, 0, 0, 0),
+(49, 'Achmad Rifai', 'LK', 'Jakarta Utara', '1974-12-05', '082221518394', 'Jl. Kranji No. 493', '', '', 'Indonesia', 1, 2033, 'Kepala Seksi Integrasi Pengolahan dan Diseminasi Statistik', 1, '', '', '', '', '', '', '', '197412052000031001', '340016107', 'components/icon/LK-icon.svg', 0, 0, 0, 0),
+(50, 'Apriliya Puput Nadea', 'PR', 'Klaten', '1989-04-06', '085647331647', 'Gg Spoor Dalam IV no 12', '', '', 'Indonesia', 1, 2047, 'Staf Seksi Jasa Perpustakaan', 1, '', '', '', '', '', '', '', '198904062012112001', '340055736', 'components/icon/PR-icon.svg', 0, 0, 0, 0),
+(51, 'Arini Ismiati', 'PR', 'Malang', '1979-12-20', '081215927271', 'Jl. Batok GG III no.5', '', '', 'Indonesia', 1, 2038, 'Statistisi Muda Seksi Statistik Produksi', 1, '', '', '', '', '', '', '', '197912202003122006', '340017013', 'components/icon/PR-icon.svg', 0, 0, 0, 0),
+(52, 'Dea Venditama', 'LK', 'Bantul', '1991-06-02', '6282292146507', 'Otista', 'Pusat', 'DKI Jakarta', 'Indonesia', 1, 2049, 'Pranata Komputer Pertama Seksi Pemantauan dan Evaluasi Publikasi', 1, '', '', '', '', '', '', '', '199106022014101001', '340056757', 'components/icon/LK-icon.svg', 0, 0, 0, 0),
+(53, 'Delly Rakasiwi', 'LK', 'Jakarta', '1991-03-05', '', 'Ki Hajar DewantaraRT 01 RW 06', 'Palangkaraya', 'Kalimantan Tengah', 'Indonesia', 1, 2049, 'Pranata Komputer Pertama Seksi Jaringan dan Rujukan Statistik', 1, '', '', '', '', '', '', '', '199103052014101002', '340056758', 'components/icon/LK-icon.svg', 0, 0, 0, 0),
+(54, 'Dhoni Eko Wahyu Nugroho', 'LK', 'Kediri', '1991-07-28', '', 'Jl. Kebon Nanas Utara No 10 Ja', 'Pusat', 'DKI Jakarta', 'Indonesia', 1, 2049, 'Pranata Komputer Pertama Seksi Pengemasan Informasi Statistik', 1, '', '', '', '', '', '', '', '199107282014101001', '340056759', 'components/icon/LK-icon.svg', 0, 0, 0, 0),
+(55, 'Poltak Sutrisno Siahaan', 'Lk', 'Tebing Tinggi', '1952-08-06', '', 'Jl. Asrama Komplek Bumi AsriBl', '', '', '', 1, 2012, 'Staf MPP', 0, '', '', '', '', '', '', '', '195208061975031001', '340004375', 'components/icon/Lk-icon.svg', 0, 0, 0, 0),
+(56, 'Weni Lidya Sukma', 'Pr', 'Padang Pariaman', '1989-09-12', '085263662023', 'jl. mandor dami 2 perumahan fe', '', '', '', 1, 2047, 'Penugasan Statistisi Pelaksana Lanjutan Seksi Pengolahan Statistik Ketenagakerjaan', 1, '', '', '', '', '', '', '', '198909122012112001', '340055951', 'components/icon/Pr-icon.svg', 0, 0, 0, 0),
+(57, 'Tri Hayuni Syardi', 'Pr', 'Padang', '1990-10-30', '081281060452', 'Komplek Mawar Putih Blok L No.', '', '', '', 1, 2048, 'Kepala Seksi Integrasi Pengolahan dan Diseminasi Statistik', 1, '', '', '', '', '', '', '', '199010302012112001', '340055938', 'components/icon/Pr-icon.svg', 0, 0, 0, 0),
+(58, 'Subuh Sukmono Putro', 'Lk', 'Sragen', '1975-03-15', '081329278642', 'Graha Surya No IC', '', '', '', 1, 2033, 'Kepala Seksi Statistik Sosial', 1, '', '', '', '', '', '', '', '197503151996121001', '340015332', 'components/icon/Lk-icon.svg', 0, 0, 0, 0),
+(59, 'Sigit Purnomo', 'LK', 'Kulon Progo', '1965-02-17', '081288378366', 'Puri Citayam Permai Blok B-10', '', '', '', 1, 2023, 'Kepala Bagian Penyusunan Rencana', 1, 'mantap', '', '', '', '', '', '', '196502171988021001', '340011821', 'components/icon/LK-icon.svg', 0, 0, 0, 0),
+(60, 'MOCHAMAD IZZA ZULFIKAR SYA\'RONI', 'Pr', 'Jayapura', '1989-12-12', '(+62) 29 2629 944', 'Ds. Sumpah Pemuda No. 190, Singkawang 21576, KalSel', 'Makassar', 'Gorontalo', 'Mikronesia', 1, 2002, 'minima', 1, 'Voluptatem quam a tenetur dolore minima qui. Nostrum aut autem ut. Sapiente enim consequatur ipsam qui quia provident. Et at vel illo.', '', '', '', '', '', '', '2435731040527948', '221810422', 'components/icon/Pr-icon.svg', 0, 0, 0, 0),
+(61, 'MOCHAMAD IZZA ZULFIKAR SYA\'RONI', 'Lk', 'Tasikmalaya', '2008-05-09', '0591 7422 841', 'Kpg. Wahidin No. 354, Sukabumi 32703, SumUt', 'Bandar Lampung', 'DKI Jakarta', 'Rumania', 0, 2002, 'vero', 1, 'Omnis tempore ut repellendus sequi sed voluptatem. Numquam est nam earum porro odit tenetur. At ad aperiam aspernatur minus. Incidunt quaerat qui vel aliquam atque sapiente dolor.', '221810422@stis.ac.id', NULL, NULL, NULL, NULL, NULL, '6011767838937884', '221810422', 'components/icon/Lk-icon.svg', 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -225,7 +226,8 @@ INSERT INTO `alumni_tempat_kerja` (`id_alumni`, `id_tempat_kerja`) VALUES
 (57, 14),
 (58, 15),
 (59, 17),
-(60, 1);
+(60, 1),
+(61, 1);
 
 -- --------------------------------------------------------
 
@@ -292,6 +294,7 @@ CREATE TABLE `auth_groups_users` (
 INSERT INTO `auth_groups_users` (`group_id`, `user_id`) VALUES
 (1, 1),
 (2, 1),
+(2, 2),
 (3, 1),
 (4, 1);
 
@@ -309,6 +312,13 @@ CREATE TABLE `auth_logins` (
   `date` datetime NOT NULL,
   `success` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `auth_logins`
+--
+
+INSERT INTO `auth_logins` (`id`, `ip_address`, `email`, `user_id`, `date`, `success`) VALUES
+(1, '::1', '@stis.ac.id', 2, '2021-06-01 21:28:35', 1);
 
 -- --------------------------------------------------------
 
@@ -1677,7 +1687,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `email`, `username`, `id_alumni`, `fullname`, `user_image`, `password_hash`, `reset_hash`, `reset_at`, `reset_expires`, `activate_hash`, `status`, `status_message`, `active`, `force_pass_reset`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 'dummy@stis.ac.id', 'Dummy', 1, 'Dummy_dummy', 'default.svg', '$2y$10$yLFu3bK0s5cHqd1VLT6Eh.GjA3H2GJzwqb6o/gjrhKXTWGkMsh3IS', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2021-05-29 21:26:40', '2021-05-29 21:26:40', NULL);
+(1, 'dummy@stis.ac.id', 'Dummy', 1, 'Dummy_dummy', 'default.svg', '$2y$10$yLFu3bK0s5cHqd1VLT6Eh.GjA3H2GJzwqb6o/gjrhKXTWGkMsh3IS', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2021-05-29 21:26:40', '2021-05-29 21:26:40', NULL),
+(2, '221810422@stis.ac.id', '221810422', 61, 'MOCHAMAD IZZA ZULFIKAR SYA\'RONI', 'default.svg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2021-06-01 21:28:35', '2021-06-01 21:28:35', NULL);
 
 -- --------------------------------------------------------
 
@@ -1959,7 +1970,7 @@ ALTER TABLE `activity_log`
 -- AUTO_INCREMENT for table `alumni`
 --
 ALTER TABLE `alumni`
-  MODIFY `id_alumni` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
+  MODIFY `id_alumni` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
 
 --
 -- AUTO_INCREMENT for table `auth_activation_attempts`
@@ -1977,7 +1988,7 @@ ALTER TABLE `auth_groups`
 -- AUTO_INCREMENT for table `auth_logins`
 --
 ALTER TABLE `auth_logins`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `auth_permissions`
@@ -2115,7 +2126,7 @@ ALTER TABLE `token_scope`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `video`
