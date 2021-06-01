@@ -512,7 +512,9 @@ if ($status == 'bukan user') {
                     <?php for ($i = 0; $i < 6; $i++) :
                         if (isset($foto[$i])) : ?>
                             <!-- 1 gambar -->
-                            <a href="#<?= $foto[$i]['id_foto']; ?>" id="foto<?= $foto[$i]['id_foto']; ?>">
+                            <a onclick="clicked(<?= $i ?>)" href="#<?= $foto[$i]['id_foto']; ?>" id="foto<?= $foto[$i]['id_foto']; ?>">
+
+                                <!-- <a href="#<?= $foto[$i]['id_foto']; ?>" id="foto<?= $foto[$i]['id_foto']; ?>"> -->
                                 <div class="rounded-3xl m-2 relative hover:shadow-xl transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105 cursor-pointer">
                                     <img id="slide" class="object-cover w-96 h-48 object-fit rounded-3xl mx-auto" src="<?= base_url() ?>/img/galeri/<?= $foto[$i]['nama_file']; ?>" alt="foto yang ditandai" />
                                 </div>
@@ -527,13 +529,20 @@ if ($status == 'bukan user') {
 
                                     <div class="flex flex-col justify-center items-center">
                                         <div class="flex flex-row justify-center items-center gap-x-4 mt-8 mb-6">
-                                            <a href="#<?= $foto[$i]['id_foto'] - 1; ?>">
+                                            <a>
+                                                <img src="<?= base_url() ?>/img/components/icon/left-on.png" alt="foto sebelumnya" class="" onclick="prev('img-<?= $foto[$i]['id_foto']; ?>')" id="prev">
+                                            </a>
+                                            <img src="<?= base_url() ?>/img/galeri/<?= $foto[$i]['nama_file']; ?>" alt="<?= $foto[$i]['nama_file']; ?>" class="slider-img w-3/4" id="img-<?= $foto[$i]['id_foto']; ?>">
+                                            <a>
+                                                <img src="<?= base_url() ?>/img/components/icon/right-on.png" alt="foto selanjutnya" class="" onclick="next('img-<?= $foto[$i]['id_foto']; ?>')" id="next">
+                                            </a>
+                                            <!-- <a href="#<?= $foto[$i]['id_foto'] - 1; ?>">
                                                 <img src="<?= base_url() ?>/img/components/icon/left-on.png" alt="foto sebelumnya" class="" onclick="prev()" id="prev">
                                             </a>
                                             <img src="<?= base_url() ?>/img/galeri/<?= $foto[$i]['nama_file']; ?>" alt="<?= $foto[$i]['nama_file']; ?>" class="slider-img w-3/4">
                                             <a href="#<?= $foto[$i]['id_foto'] + 1; ?>">
                                                 <img src="<?= base_url() ?>/img/components/icon/right-on.png" alt="foto berikutnya" class="" onclick="next()" id="next">
-                                            </a>
+                                            </a> -->
                                         </div>
 
                                         <!-- Awal Caption -->
@@ -614,4 +623,35 @@ if ($status == 'bukan user') {
     <!-- Akhir Foto Tentang Anda -->
 <?php } ?>
 
+<script>
+    var images = [];
+    <?php foreach ($foto as $foto) : ?>
+        images.push('<?= $foto['nama_file'] ?>');
+    <?php endforeach ?>
+    var i = 0;
+    console.log(i);
+
+    function clicked(n) {
+        i = n;
+        console.log(i);
+    }
+
+    function prev(id) {
+        if (i <= 0) i = images.length;
+        i--;
+        return setImg(id);
+    }
+
+    function next(id) {
+        if (i >= images.length - 1) i = -1;
+        i++;
+        return setImg(id);
+    }
+
+    function setImg(id) {
+        console.log('<?= base_url() ?>/img/galeri/' + images[i]);
+        get = document.getElementById(id);
+        return get.setAttribute('src', '<?= base_url() ?>/img/galeri/' + images[i]);
+    }
+</script>
 <?= $this->endSection(); ?>
