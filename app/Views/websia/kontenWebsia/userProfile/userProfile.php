@@ -557,7 +557,7 @@ if ($status == 'bukan user') {
                                                     </span>
                                                     <!-- Awal Tampilan Daftar Tag -->
                                                     <div class="tampilTag hidden relative" id="tampilTag">
-                                                        <div class="static mt-2 p-2 rounded-2xl overflow-y-auto h-64 ml-80 bg-primary w-1/4 position-right text-white">
+                                                        <div class="static mt-2 p-2 rounded-2xl overflow-y-auto ml-64 sm:ml-64 md:ml-80 lg:96 bg-primary w-32 md:w-36 position-right text-white text-xs md:text-sm">
                                                             <ul class="bg-primary">
                                                                 <?php for ($n = 1; $n < count($foto[$i]['tag_name']); $n++) : ?>
                                                                     <li><?= $foto[$i]['tag_name'][$n]['nama'] ?></li>

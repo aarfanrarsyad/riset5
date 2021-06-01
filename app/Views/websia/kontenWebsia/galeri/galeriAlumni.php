@@ -22,8 +22,8 @@
     </div>
 </div>
 <div class="bg-primary">
-    <div class="py-4">
-        <div class="holder p-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-4">
+    <div class="py-2">
+        <div class="holder p-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-4 gap-y-2">
             <!-- Awal Tampilan Galeri (Buat ditambahkan coding sesuai gambar dari database) -->
             <!-- <php for ($x = 0; $x < 12; $x++) : ?> -->
             <?php $i = 0;
@@ -65,7 +65,7 @@
                                         </span>
                                         <!-- Awal Tampilan Daftar Tag -->
                                         <div class="tampilTag hidden relative" id="tampilTag">
-                                            <div class="static mt-2 p-2 rounded-2xl overflow-y-auto ml-80 bg-primary w-1/4 position-right text-white">
+                                            <div class="static mt-2 p-2 rounded-2xl overflow-y-auto ml-64 sm:ml-64 md:ml-80 lg:96 bg-primary w-32 md:w-36 position-right text-white text-xs md:text-sm">
                                                 <ul class="bg-primary">
                                                     <?php for ($n = 1; $n < count($foto['tag_name']); $n++) : ?>
                                                         <li><?= $foto['tag_name'][$n]['nama'] ?></li>
