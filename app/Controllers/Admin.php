@@ -141,8 +141,11 @@ class Admin extends BaseController
 			$allowedPostFields = array_merge(['password', 'id_alumni'], $this->config->validFields, $this->config->personalFields);
 		}
 
+		if (($key = array_search('nim', $allowedPostFields)) !== false) {
+			unset($allowedPostFields[$key]);
+		}
 
-		// dd($_POST);
+
 		$user = new User($this->request->getPost($allowedPostFields));
 
 		$this->config->requireActivation !== false ? $user->generateActivateHash() : $user->activate();
