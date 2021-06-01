@@ -7,7 +7,7 @@
         Mohon maaf, <br>
         Laman yang Anda akses belum tersedia
     </p>
-    <img src="/img/components/halamanError/laman_masih_dibangun.png" class="inline-block z-0 object-center w-10/12 h-auto md:w-8/12 ">
+    <img src="/img/components/halamanError/laman_masih_dibangun.png" class="inline-block z-0 object-center w-10/12 h-auto md:w-8/12" alt="laman masih dibangun">
 </div>
 
 <?= $this->endSection(); ?>

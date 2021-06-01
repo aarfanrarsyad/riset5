@@ -45,7 +45,7 @@
                                     <div class="mx-2">
                                         <div class="flex gap-x-4">
                                             <div class="flex items-center">
-                                                <img src="/img/avatar.png" class="lg:w-18 w-12 mx-auto" alt="">
+                                                <img src="/img/components/avatar.png" class="lg:w-18 w-12 mx-auto" alt="Foto profil user">
                                             </div>
                                             <div class="flex items-center">
                                                 <div>
@@ -102,7 +102,7 @@
                                 <!-- Awal Card Berita  -->
                                 <a href="">
                                     <div class="flex px-2 md:flex-row flex-col md:gap-x-4 gap-x-0 items-center">
-                                        <img src="/img/sampel.jpeg" alt="" class="md:w-48 w-full gambarBerita">
+                                        <img src="/img/components/sampel.jpeg" alt="thumbnail berita" class="md:w-48 w-full gambarBerita">
                                         <div class="flex-grow">
                                             <div class="flex flex-col">
 
@@ -164,12 +164,12 @@
         data2.map((item, index) => {
             if (input == "") {
                 jumlah++
-                string = string + "<a href='/User/profilAlumni?nim=" + item.nim + "><div class='mx-2'><div class='flex gap-x-4'><div class='flex items-center'><img src='/img/avatar.png' class='lg:w-18 w-12 mx-auto' alt=''></div><div class='flex items-center'><div><!-- Awal Nama Alumni --><h2 class='md:text-lg font-heading text-primary font-semibold'>" + item.nama + "</h2><!-- Akhir Nama Alumni --><!-- Awal Atribut Alumni --><div class='md:text-sm text-xs font-paragraph text-primary'>Angkatan " + item.angkatan + "</div><!-- Akhir Atribut Alumni --></div></div></div></div></a><!-- Akhir Card Alumni --><hr class='my-4 border-gray-400'>"
+                string = string + "<a href='/User/profilAlumni?nim=" + item.nim + "><div class='mx-2'><div class='flex gap-x-4'><div class='flex items-center'><img src='/img/components/avatar.png' class='lg:w-18 w-12 mx-auto' alt='foto profil user'></div><div class='flex items-center'><div><!-- Awal Nama Alumni --><h2 class='md:text-lg font-heading text-primary font-semibold'>" + item.nama + "</h2><!-- Akhir Nama Alumni --><!-- Awal Atribut Alumni --><div class='md:text-sm text-xs font-paragraph text-primary'>Angkatan " + item.angkatan + "</div><!-- Akhir Atribut Alumni --></div></div></div></div></a><!-- Akhir Card Alumni --><hr class='my-4 border-gray-400'>"
                 string2 = "Terdapat " + jumlah + " alumni dengan kata kunci `<B><?= $cari; ?></B>` ditemukan."
             }
             if (input == item.angkatan) {
                 jumlah++
-                string = string + "<a href='/User/profilAlumni?nim=" + item.nim + "><div class='mx-2'><div class='flex gap-x-4'><div class='flex items-center'><img src='/img/avatar.png' class='lg:w-18 w-12 mx-auto' alt=''></div><div class='flex items-center'><div><!-- Awal Nama Alumni --><h2 class='md:text-lg font-heading text-primary font-semibold'>" + item.nama + "</h2><!-- Akhir Nama Alumni --><!-- Awal Atribut Alumni --><div class='md:text-sm text-xs font-paragraph text-primary'>Angkatan " + item.angkatan + "</div><!-- Akhir Atribut Alumni --></div></div></div></div></a><!-- Akhir Card Alumni --><hr class='my-4 border-gray-400'>"
+                string = string + "<a href='/User/profilAlumni?nim=" + item.nim + "><div class='mx-2'><div class='flex gap-x-4'><div class='flex items-center'><img src='/img/components/avatar.png' class='lg:w-18 w-12 mx-auto' alt='foto profil user'></div><div class='flex items-center'><div><!-- Awal Nama Alumni --><h2 class='md:text-lg font-heading text-primary font-semibold'>" + item.nama + "</h2><!-- Akhir Nama Alumni --><!-- Awal Atribut Alumni --><div class='md:text-sm text-xs font-paragraph text-primary'>Angkatan " + item.angkatan + "</div><!-- Akhir Atribut Alumni --></div></div></div></div></a><!-- Akhir Card Alumni --><hr class='my-4 border-gray-400'>"
                 string2 = "Terdapat " + jumlah + " alumni dengan kata kunci `<B><?= $cari; ?></B>` dan angkatan = " + input + " ditemukan."
             }
         });

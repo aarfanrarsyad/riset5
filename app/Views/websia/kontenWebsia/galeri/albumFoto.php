@@ -36,7 +36,7 @@
                 <!-- 1 gambar -->
                 <a href="#<?= $foto['id_foto']; ?>" id="foto<?= $foto['id_foto']; ?>">
                     <div class="rounded-3xl m-2 relative hover:shadow-xl transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105 cursor-pointer">
-                        <img class="albumImg w-full rounded-3xl mx-auto" src="<?= base_url() ?>/img/galeri/<?= $foto['nama_file']; ?>" alt="" />
+                        <img class="albumImg w-full rounded-3xl mx-auto" src="<?= base_url() ?>/img/galeri/<?= $foto['nama_file']; ?>" alt="<?= $foto['nama_file']; ?>" />
                     </div>
                 </a>
                 <!-- <php endfor; ?> -->
@@ -44,17 +44,17 @@
                 <div class="fixed overflow-auto top-0 bottom-0 right-0 left-0 z-40 bg-black bg-opacity-80 text-center font-paragraph hidden" id="<?= $foto['id_foto']; ?>">
                     <div class="m-auto duration-700 transition-all bg-gray bg-opacity-0 w-11/12 sm:w-9/12 md:w-8/12 lg:w-7/12">
                         <!-- Awal Tombol Laporkan foto -->
-                        <button onClick="laporkanFoto(<?= $foto['id_foto']; ?>)"><img src="<?= base_url() ?>/img/components/icon/danger-sign.png" alt="" class="absolute top-3 right-3"></button>
+                        <button onClick="laporkanFoto(<?= $foto['id_foto']; ?>)"><img src="<?= base_url() ?>/img/components/icon/danger-sign.png" alt="laporkan foto" class="absolute top-3 right-3"></button>
                         <!-- Akhir Tombol Laporkan foto -->
 
                         <div class="flex flex-col justify-center items-center">
                             <div class="flex flex-row justify-center items-center gap-x-4 mt-8 mb-6">
                                 <a href="#<?= $foto['id_foto'] - 1; ?>">
-                                    <img src="<?= base_url() ?>/img/components/icon/left-on.png" alt="" class="">
+                                    <img src="<?= base_url() ?>/img/components/icon/left-on.png" alt="foto sebelumnya" class="">
                                 </a>
-                                <img src="/img/galeri/<?= $foto['nama_file']; ?>" alt="" class="w-3/4">
+                                <img src="/img/galeri/<?= $foto['nama_file']; ?>" alt="<?= $foto['nama_file']; ?>" class="w-3/4">
                                 <a href="#<?= $foto['id_foto'] + 1; ?>">
-                                    <img src="<?= base_url() ?>/img/components/icon/right-on.png" alt="" class="">
+                                    <img src="<?= base_url() ?>/img/components/icon/right-on.png" alt="foto selanjutnya" class="">
                                 </a>
                             </div>
 
@@ -131,7 +131,7 @@
     </div>
     <div class="md:col-span-2 lg:col-span-2">
         <div class="">
-            <img src="<?= base_url() ?>/img/components/galeri.png" alt="" class="w-full md:h-full md:w-auto">
+            <img src="<?= base_url() ?>/img/components/galeri.png" alt="icon galeri" class="w-full md:h-full md:w-auto">
         </div>
     </div>
     <div class="fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40 font-paragraph hidden" id='formUnggahFoto'>

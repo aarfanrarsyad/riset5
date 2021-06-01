@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 5.1.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 26, 2021 at 10:33 AM
--- Server version: 10.4.14-MariaDB-log
--- PHP Version: 7.4.9
+-- Generation Time: May 29, 2021 at 04:33 PM
+-- Server version: 10.4.18-MariaDB
+-- PHP Version: 7.4.16
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `riset5`
+-- Database: `new`
 --
 
 -- --------------------------------------------------------
@@ -443,7 +443,7 @@ INSERT INTO `crud` (`crud_id`, `crud_name`) VALUES
 CREATE TABLE `foto` (
   `id_foto` int(16) UNSIGNED NOT NULL,
   `tag` varchar(80) DEFAULT NULL,
-  `nama_file` varchar(50) NOT NULL,
+  `nama_file` varchar(255) NOT NULL,
   `caption` varchar(2200) DEFAULT NULL,
   `created_at` date NOT NULL,
   `album` varchar(255) NOT NULL,
@@ -524,23 +524,7 @@ INSERT INTO `groups_access` (`access_group_id`, `group_id`, `menu_access_id`) VA
 (54, 1, 52),
 (55, 1, 53),
 (56, 1, 54),
-(57, 1, 55),
-(58, 1, 56),
-(59, 1, 57),
-(60, 1, 58),
-(61, 1, 59),
-(62, 1, 60),
-(63, 1, 61),
-(64, 1, 62),
-(65, 1, 63),
-(66, 1, 64),
-(67, 1, 65),
-(68, 1, 66),
-(69, 1, 67),
-(70, 1, 68),
-(71, 1, 69),
-(72, 1, 70),
-(73, 1, 71);
+(57, 1, 55);
 
 -- --------------------------------------------------------
 
@@ -1137,12 +1121,12 @@ CREATE TABLE `migrations` (
 --
 
 INSERT INTO `migrations` (`id`, `version`, `class`, `group`, `namespace`, `time`, `batch`) VALUES
-(1, '2021-04-17-213105', 'App\\Database\\Migrations\\Alumni', 'default', 'App', 1622017980, 1),
-(2, '2021-04-17-213203', 'App\\Database\\Migrations\\AuthTable', 'default', 'App', 1622017981, 1),
-(3, '2021-04-17-213248', 'App\\Database\\Migrations\\Rbac', 'default', 'App', 1622017981, 1),
-(4, '2021-04-17-213438', 'App\\Database\\Migrations\\Webservice', 'default', 'App', 1622017982, 1),
-(5, '2021-04-29-090021', 'App\\Database\\Migrations\\Berita', 'default', 'App', 1622017982, 1),
-(6, '2021-05-21-073527', 'App\\Database\\Migrations\\ProvKabKot', 'default', 'App', 1622017982, 1);
+(1, '2021-04-17-213105', 'App\\Database\\Migrations\\Alumni', 'default', 'App', 1622298068, 1),
+(2, '2021-04-17-213203', 'App\\Database\\Migrations\\AuthTable', 'default', 'App', 1622298072, 1),
+(3, '2021-04-17-213248', 'App\\Database\\Migrations\\Rbac', 'default', 'App', 1622298076, 1),
+(4, '2021-04-17-213438', 'App\\Database\\Migrations\\Webservice', 'default', 'App', 1622298078, 1),
+(5, '2021-04-29-090021', 'App\\Database\\Migrations\\Berita', 'default', 'App', 1622298081, 1),
+(6, '2021-05-21-073527', 'App\\Database\\Migrations\\ProvKabKot', 'default', 'App', 1622298083, 1);
 
 -- --------------------------------------------------------
 
@@ -1451,12 +1435,8 @@ INSERT INTO `submenu` (`submenu_id`, `menu_id`, `title`, `url`, `icon`, `active`
 (16, 8, 'API', 'admin/request-api', 'fab fa-chrome', '1'),
 (17, 9, 'Alumni', 'admin/alumni', 'fas fa-user', '1'),
 (18, 9, 'Instansi', 'admin/instansi', 'fas fa-landmark', '1'),
-(19, 9, 'Publikasi', 'admin/publikasi', 'fas fa-file-alt', '1'),
-(20, 9, 'Pendidikan', 'admin/pendidikan', 'fas fa-school', '1'),
-(21, 9, 'Pendidikan Tinggi', 'admin/pendidikan-tinggi', 'fas fa-school', '1'),
-(22, 9, 'Prestasi', 'admin/prestasi', 'fas fa-award', '1'),
-(23, 10, 'Galeri Foto', 'admin/galeri-foto', 'fas fa-images', '1'),
-(24, 10, 'Galeri Video', 'admin/galeri-video', 'fab fa-youtube', '1');
+(19, 10, 'Galeri Foto', 'admin/galeri-foto', 'fas fa-images', '1'),
+(20, 10, 'Galeri Video', 'admin/galeri-video', 'fab fa-youtube', '1');
 
 -- --------------------------------------------------------
 
@@ -1529,23 +1509,7 @@ INSERT INTO `submenu_access` (`menu_access_id`, `submenu_id`, `crud_id`) VALUES
 (52, 20, 1),
 (53, 20, 2),
 (54, 20, 3),
-(55, 20, 4),
-(56, 21, 1),
-(57, 21, 2),
-(58, 21, 3),
-(59, 21, 4),
-(60, 22, 1),
-(61, 22, 2),
-(62, 22, 3),
-(63, 22, 4),
-(64, 23, 1),
-(65, 23, 2),
-(66, 23, 3),
-(67, 23, 4),
-(68, 24, 1),
-(69, 24, 2),
-(70, 24, 3),
-(71, 24, 4);
+(55, 20, 4);
 
 -- --------------------------------------------------------
 
@@ -1713,7 +1677,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `email`, `username`, `id_alumni`, `fullname`, `user_image`, `password_hash`, `reset_hash`, `reset_at`, `reset_expires`, `activate_hash`, `status`, `status_message`, `active`, `force_pass_reset`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 'dummy@stis.ac.id', 'Dummy', 1, 'Dummy_dummy', 'default.svg', '$2y$10$yLFu3bK0s5cHqd1VLT6Eh.GjA3H2GJzwqb6o/gjrhKXTWGkMsh3IS', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2021-05-26 15:33:06', '2021-05-26 15:33:06', NULL);
+(1, 'dummy@stis.ac.id', 'Dummy', 1, 'Dummy_dummy', 'default.svg', '$2y$10$yLFu3bK0s5cHqd1VLT6Eh.GjA3H2GJzwqb6o/gjrhKXTWGkMsh3IS', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2021-05-29 21:26:40', '2021-05-29 21:26:40', NULL);
 
 -- --------------------------------------------------------
 
@@ -2061,7 +2025,7 @@ ALTER TABLE `foto`
 -- AUTO_INCREMENT for table `groups_access`
 --
 ALTER TABLE `groups_access`
-  MODIFY `access_group_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
+  MODIFY `access_group_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
 
 --
 -- AUTO_INCREMENT for table `komentar_berita`
@@ -2115,13 +2079,13 @@ ALTER TABLE `scope_app`
 -- AUTO_INCREMENT for table `submenu`
 --
 ALTER TABLE `submenu`
-  MODIFY `submenu_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `submenu_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `submenu_access`
 --
 ALTER TABLE `submenu_access`
-  MODIFY `menu_access_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
+  MODIFY `menu_access_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
 
 --
 -- AUTO_INCREMENT for table `table_scope`

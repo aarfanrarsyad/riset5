@@ -33,7 +33,7 @@
                     <!-- <a href="/User/albumVideo"> -->
                     <div class="flex flex-col rounded-3xl m-2 relative hover:shadow-xl transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105 cursor-pointer">
                         <div class="rounded-3xl w-full mb-2 bg-gray-300">
-                            <img src="https://img.youtube.com/vi/<?= $video['link'] ?>/0.jpg" alt="" class="rounded-2xl">
+                            <img src="https://img.youtube.com/vi/<?= $video['link'] ?>/0.jpg" alt="<?= $video['link'] ?>" class="rounded-2xl">
                         </div>
                         <div class="text-white text-center">
                             Album <?= $video['album']; ?>
@@ -46,10 +46,10 @@
         <!-- Awal Navigasi -->
         <!-- <div class="flex justify-center md:justify-end items-center mx-8 p-2 text-secondary font-paragraph">
             <a href="" class="p-1 rounded-full w-7 transform hover:scale-110">
-                <img src="/img/components/icon/left-double.png" alt="">
+                <img src="/img/components/icon/left-double.png" alt="halaman pertama">
             </a>
             <a href="" class="p-1 rounded-full w-7 transform hover:scale-110">
-                <img src="/img/components/icon/left-on.png" alt="">
+                <img src="/img/components/icon/left-on.png" alt="halaman sebelumnya">
             </a>
             <a href="" class="p-1 hover:text-white">
                 1
@@ -64,9 +64,9 @@
                 45
             </a>
             <a href="" class="p-1 rounded-full w-7 transform hover:scale-110">
-                <img src="/img/components/icon/right-on.png" alt=""></a>
+                <img src="/img/components/icon/right-on.png" alt="halaman berikutnya"></a>
             <a href="" class="p-1 rounded-full w-7 transform hover:scale-110">
-                <img src="/img/components/icon/right-double.png" alt=""></a>
+                <img src="/img/components/icon/right-double.png" alt="halaman terakhir"></a>
         </div> -->
         <!-- Akhir Navigasi -->
     </div>
@@ -89,7 +89,7 @@
     </div>
     <div class="md:col-span-2 lg:col-span-2">
         <div class="">
-            <img src="/img/components/galeri.png" alt="" class="w-full md:h-full md:w-auto mb-8">
+            <img src="/img/components/galeri.png" alt="icon galeri" class="w-full md:h-full md:w-auto mb-8">
         </div>
     </div>
     <div class="fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40 font-paragraph hidden" id='formUnggahVideo'>

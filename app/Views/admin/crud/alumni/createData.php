@@ -51,7 +51,7 @@ if ($instansi != NULL) {
                                             <div class="flex items-center justify-center lg:flex-none">
                                                 <div class="md:w-2/3 w-1/2 lg:w-full">
                                                     <div class="flex justify-center">
-                                                        <img src="/img/<?= $alumni['foto_profil'] ?>" alt="Foto Profil <?= $alumni['nama']; ?>" class="mb-6 md:w-48 md:h-48 w-28 h-28 rounded-full">
+                                                        <img src="/img/<?= $alumni['foto_profil'] ?>" alt="Foto Profil" class="mb-6 md:w-48 md:h-48 w-28 h-28 rounded-full">
                                                     </div>
                                                     <div class="flex justify-center">
                                                         <div class="updateFotoProfil bg-primarySidebar rounded-full font-paragraph text-white px-3 py-1 hover:bg-secondaryhover lg:text-base text-sm focus:outline-none" onclick="updateFotoProfil()">Ubah foto profil</div>

@@ -647,7 +647,7 @@ class Admin extends BaseController
 
 		$data = [
 			'title' => 'Alumni | Website Riset 5',
-			'alumni' => $alumni->paginate(20, 'alumni'),
+			'alumni' => $alumni->paginate(1000, 'alumni'),
 			'pager' => $init->pager,
 			'currentPage' => $currentPage
 		];
@@ -655,23 +655,125 @@ class Admin extends BaseController
 		return view('admin' . DIRECTORY_SEPARATOR . 'crud' .  DIRECTORY_SEPARATOR . 'alumni' . DIRECTORY_SEPARATOR . 'index', $data);
 	}
 
-	#method untuk create CRUD Alumni
+	# method untuk halaman tambah-alumni
 	public function CRUD_createAlumni()
 	{
 		$model = new AlumniModel();
-		$listtk = $model->getTempatKerja()->getResult();
-
+		$daftarProv = $model->getProv();
 		$data = [
-			'title' => 'Tambah Alumni | Website Riset 5',
-			'validation' => \Config\Services::validation(),
-			'list'		=> $listtk
+			'title' 		=> 'Tambah Alumni | Website Riset 5',
+			'daftarProv'    => $daftarProv,
+			'validation' 	=> \Config\Services::validation()
 		];
 
 		return view('admin' . DIRECTORY_SEPARATOR . 'crud' . DIRECTORY_SEPARATOR . 'alumni' . DIRECTORY_SEPARATOR . 'create', $data);
 	}
 
-	#method untuk save CRUD Alumni
-	public function CRUD_saveAlumni()
+	public function daftarKab()
+	{
+		$model = new AlumniModel();
+		$idProv = (int)$_POST['id'];
+		$daftarKab = $model->getKab($idProv);
+		echo json_encode($daftarKab);
+	}
+
+	# method untuk halaman tambah-data-alumni
+	public function CRUD_createDataAlumni()
+	{
+		$model = new AlumniModel();
+		$alumni 			= $model->getAlumniById(session('idAlumni'));
+		$instansi_alumni 	= $model->getTempatKerjaByNIM(session('idAlumni'))->getRow();
+		$tempat_kerja 		= $model->getTempatKerja()->getResult();
+		$pendidikan 		= $model->getPendidikanByIdAlumni(session('idAlumni'))->getResult();
+		$prestasi 			= $model->getPrestasiByIdAlumni(session('idAlumni'))->getResult();
+		$daftarProv		 	= $model->getProv();
+
+		$data = [
+			'title' 		=> 'Tambah Data Alumni | Website Riset 5',
+			'validation' 	=> \Config\Services::validation(),
+			'alumni'		=> $alumni,
+			'instansi'		=> $instansi_alumni,
+			'tempat_kerja'	=> $tempat_kerja,
+			'pendidikan'	=> $pendidikan,
+			'prestasi'		=> $prestasi,
+			'daftarProv'	=> $daftarProv
+		];
+
+		return view('admin' . DIRECTORY_SEPARATOR . 'crud' . DIRECTORY_SEPARATOR . 'alumni' . DIRECTORY_SEPARATOR . 'createData', $data);
+	}
+
+	# method untuk halaman update-alumni
+	public function CRUD_updateAlumni($id_alumni)
+	{
+		$model = new AlumniModel();
+
+		$alumni 			= $model->getAlumniById($id_alumni);
+		$instansi_alumni 	= $model->getTempatKerjaByNIM($id_alumni)->getRow();
+		$tempat_kerja 		= $model->getTempatKerja()->getResult();
+		$pendidikan 		= $model->getPendidikanByIdAlumni($id_alumni)->getResult();
+		$prestasi 			= $model->getPrestasiByIdAlumni($id_alumni)->getResult();
+		$daftarProv 		= $model->getProv();
+
+		$data = [
+			'title' 		=> 'Update Alumni | Website Riset 5',
+			'validation' 	=> \Config\Services::validation(),
+			'alumni'		=> $alumni,
+			'instansi'		=> $instansi_alumni,
+			'tempat_kerja'	=> $tempat_kerja,
+			'pendidikan'	=> $pendidikan,
+			'prestasi'		=> $prestasi,
+			'daftarProv'    => $daftarProv
+		];
+
+		if (empty($data['alumni'])) {
+			throw new \CodeIgniter\Exceptions\PageNotFoundException('Alumni dengan ID : ' . $id_alumni . 'Tidak Ditemukan');
+		}
+
+		session()->set(['idAlumni' => $id_alumni]);
+
+		return view('admin' . DIRECTORY_SEPARATOR . 'crud' . DIRECTORY_SEPARATOR . 'alumni' . DIRECTORY_SEPARATOR . 'update', $data);
+	}
+
+	#method untuk detail CRUD Alumni
+	public function CRUD_detailAlumni($id)
+	{
+		$init = new admin_model();
+		$alumni = $init->getAllAlumni($id)->getResultArray()[0];
+		$instansi = $init->getTempatKerjabyIdAlumni($id)->getResultArray()[0];
+		$pendidikan = $init->getPendidikanById($id)->getResult();
+		$prestasi = $init->getPrestasiById($id)->getResult();
+
+		$data = [
+			'title' => 'Detail Alumni | Website Riset 5',
+			'alumni' => $alumni,
+			'instansi' => $instansi,
+			'pendidikan' => $pendidikan,
+			'prestasi' => $prestasi
+		];
+
+		if (empty($data['alumni'])) {
+			throw new \CodeIgniter\Exceptions\PageNotFoundException('Alumni dengan ID : ' . $id . 'Tidak Ditemukan');
+		}
+		return view('admin' . DIRECTORY_SEPARATOR . 'crud' . DIRECTORY_SEPARATOR . 'alumni' . DIRECTORY_SEPARATOR . 'detail', $data);
+	}
+
+	#method untuk delete CRUD Alumni
+	public function CRUD_deleteAlumni()
+	{
+		if (!$this->request->isAJAX()) return false;
+
+		$id = $this->request->getPost('id');
+		if (!$id) return false;
+
+		$init = new admin_model();
+		$query = $init->deleteAlumniByid($id);
+		$this->output_json($query);
+	}
+
+	#----------SAVE DATA ALUMNI----------#
+
+	# method untuk tambah biodata Alumni
+	public function addAlumni()
 	{
 		$init = new AlumniModel();
 
@@ -723,69 +825,231 @@ class Admin extends BaseController
 				'errors' => [
 					'required' => 'Email alumni harus diisi.'
 				]
-			],
-			'foto_profil' => [
-				'rules' => 'max_size[foto_profil,5120]|is_image[foto_profil]|mime_in[foto_profil,image/jpg,image/jpeg,image/png]',
-				'errors' => [
-					'max_size' => 'Ukuran foto maksimal 5MB',
-					'is_image' => 'Yang anda pilih bukan gambar',
-					'mime_in' => 'Yang anda pilih bukan gambar'
-				]
-			],
-			'nama_instansi' => [
+			]
+		])) {
+			return redirect()->back()->withInput();
+		}
+
+		$negara		= htmlspecialchars($_POST['negara']);
+		$negara2    = htmlspecialchars($_POST['negaraLainnya']);
+		$kota = NULL;
+
+		if (isset($_POST['prov'])) {
+			$provinsi = htmlspecialchars($_POST['prov']);
+		} else {
+			$provinsi = NULL;
+		}
+
+		if ($negara == "Indonesia") {
+			if ($provinsi != NULL) {
+				$provinsi = ucwords(htmlspecialchars($_POST['prov']));
+				if (isset($_POST['kab'])) {
+					$kota = ucwords(htmlspecialchars($_POST['kab']));
+				}
+			} else {
+				$provinsi = NULL;
+			}
+		} else {
+			if ($negara2 == "") {
+				$negara = NULL;
+				$provinsi = NULL;
+			} else {
+				$negara = htmlspecialchars($negara2);
+				$provinsi = NULL;
+			}
+		}
+
+		$alumni = [
+			'nama' => htmlspecialchars($_POST['nama']),
+			'jenis_kelamin' => htmlspecialchars($_POST['jenis_kelamin']),
+			'tempat_lahir' 	=> htmlspecialchars($_POST['tempat_lahir']),
+			'tanggal_lahir' => htmlspecialchars($_POST['tanggal_lahir']),
+			'telp_alumni' 	=> htmlspecialchars($_POST['telp_alumni']),
+			'alamat_alumni' => htmlspecialchars($_POST['alamat']),
+			'kota'			=> $kota,
+			'provinsi'		=> $provinsi,
+			'negara'		=> $negara,
+			'status_bekerja' 	=> htmlspecialchars($_POST['status_bekerja']),
+			'perkiraan_pensiun' => htmlspecialchars($_POST['perkiraan_pensiun']),
+			'jabatan_terakhir' 	=> htmlspecialchars($_POST['jabatan_terakhir']),
+			'aktif_pns' 	=> htmlspecialchars($_POST['aktif_pns']),
+			'deskripsi' 	=> htmlspecialchars($_POST['deskripsi']),
+			'email' 		=> htmlspecialchars($_POST['email']),
+			'ig' 			=> htmlspecialchars($_POST['ig']),
+			'fb' 			=> htmlspecialchars($_POST['fb']),
+			'twitter' 		=> htmlspecialchars($_POST['twitter']),
+			'linkedin' 		=> htmlspecialchars($_POST['linkedin']),
+			'gscholar' 		=> htmlspecialchars($_POST['gscholar']),
+			'nip' 			=> htmlspecialchars($_POST['nip']),
+			'nip_bps' 		=> htmlspecialchars($_POST['nip_bps'])
+		];
+
+		$init->db->table('alumni')->insert($alumni);
+
+		// Membuat session('idAlumni)
+		$id_alumni = $init->table('alumni')->getWhere($alumni)->getRow()->id_alumni;
+		session()->set(['idAlumni' => $id_alumni]);
+
+		session()->setFlashdata('pesan', 'Data berhasil ditambahkan.');
+
+		return redirect()->to('/admin/CRUD_createDataAlumni');
+	}
+
+	public function updateFotoProfil()
+	{
+
+		$model = new AlumniModel();
+		$query1 = $model->bukaProfile(session('idAlumni'))->getRow();
+		$foto = $query1->foto_profil;
+
+		$validated = $this->validate([
+			'file_upload' => 'uploaded[file_upload]|mime_in[file_upload,image/jpg,image/jpeg,image/png]|max_size[file_upload,2048]'
+		]);
+
+		if ($validated == FALSE) {
+			session()->setFlashdata('edit-foto-fail', 'Format atau ukuran file tidak sesuai.');
+			// Kembali ke function index supaya membawa data uploads dan validasi
+			return redirect()->to(previous_url());
+		} else {
+			$avatar = $this->request->getFile('file_upload');
+			$avatar->move(ROOTPATH . '/public/img/components/user/userid_' . session('idAlumni'));
+
+			if ($foto != $query1->jenis_kelamin . '/default.svg' && $foto != 'default.svg') {
+				$url = ROOTPATH . '/public/img/components/' . $foto;
+				if (is_file($url))
+					unlink($url);
+			}
+
+			$image = \Config\Services::image()
+				->withFile(ROOTPATH . '/public/img/components/user/userid_' . session('idAlumni') . '/' . $avatar->getName())
+				->fit(350, 350, 'center')
+				->convert(IMAGETYPE_JPEG)
+				->save(ROOTPATH . '/public/img/components/user/userid_' . session('idAlumni') . '/foto_profil.jpeg', 70);
+
+			unlink(ROOTPATH . '/public/img/components/user/userid_' . session('idAlumni') . '/' . $avatar->getName());
+
+			$data = [
+				'foto_profil' => 'components/user/userid_' . session('idAlumni') . '/foto_profil.jpeg'
+			];
+
+			$model->db->table('alumni')->set($data)->where('id_alumni', session('idAlumni'))->update();
+			session()->setFlashdata('edit-foto-success', 'Foto Profil Berhasil Diubah');
+			return redirect()->to(previous_url());
+		}
+	}
+
+	public function hapusFotoProfil()
+	{
+		$model = new AlumniModel();
+		$query1 = $model->bukaProfile(session('idAlumni'))->getRow();
+		$foto = $query1->foto_profil;
+
+		if ($foto != $query1->jenis_kelamin . '/default.svg' && $foto != 'default.svg') {
+			$url = ROOTPATH . '/public/img/components/' . $foto;
+			if (is_file($url))
+				unlink($url);
+		}
+
+		$data = [
+			'foto_profil' => $query1->jenis_kelamin . '/default.svg'
+		];
+
+
+		$model->db->table('alumni')->set($data)->where('id_alumni', session('idAlumni'))->update();
+		session()->setFlashdata('hapus-foto', 'Foto berhasil dihapus');
+		return redirect()->to(previous_url());
+	}
+
+	# method untuk ubah biodata Alumni
+	public function updateAlumni()
+	{
+		$init = new AlumniModel();
+
+		if (!$this->validate([
+			'nama' => [
 				'rules' => 'required',
 				'errors' => [
-					'required' => 'Nama Instansi harus diisi.'
+					'required' => 'Nama alumni harus diisi.'
 				]
 			],
-			'jenjang' => [
+			'jenis_kelamin' => [
 				'rules' => 'required',
 				'errors' => [
-					'required' => 'Jenjang harus diisi.'
+					'required' => 'Jenis Kelamin alumni harus diisi.'
 				]
 			],
-			'instansi' => [
+			'tempat_lahir' => [
 				'rules' => 'required',
 				'errors' => [
-					'required' => 'Universitas harus diisi.'
+					'required' => 'Tempat Lahir alumni harus diisi.'
 				]
 			],
-			'tahun_lulus' => [
+			'tanggal_lahir' => [
 				'rules' => 'required',
 				'errors' => [
-					'required' => 'Tahun Lulus harus diisi.'
+					'required' => 'Tanggal Lahir alumni harus diisi.'
 				]
 			],
-			'angkatan' => [
+			'status_bekerja' => [
 				'rules' => 'required',
 				'errors' => [
-					'required' => 'Angkatan alumni harus diisi.'
+					'required' => 'Status Bekerja alumni harus diisi.'
 				]
 			],
-			'program_studi' => [
+			'jabatan_terakhir' => [
 				'rules' => 'required',
 				'errors' => [
-					'required' => 'Program Studi harus diisi.'
+					'required' => 'Jabatan Terakhir alumni harus diisi.'
+				]
+			],
+			'aktif_pns' => [
+				'rules' => 'required',
+				'errors' => [
+					'required' => 'Aktif PNS alumni harus diisi.'
+				]
+			],
+			'email' => [
+				'rules' => 'required',
+				'errors' => [
+					'required' => 'Email alumni harus diisi.'
 				]
 			]
 		])) {
-			return redirect()->to('/admin/CRUD_createAlumni')->withInput();
+			return redirect()->back()->withInput();
 		}
 
-		// Ambil gambar
-		$fileFotoProfil = $this->request->getFile('foto_profil');
-		// Jika tidak ada gambar yang diupload
-		if ($fileFotoProfil->getError() == 4) {
-			$namaFotoProfil = 'default.svg';
+		$negara		= htmlspecialchars($_POST['negara']);
+		$negara2    = htmlspecialchars($_POST['negaraLainnya']);
+
+		$kota = NULL;
+
+		if (isset($_POST['prov'])) {
+			$provinsi = htmlspecialchars($_POST['prov']);
 		} else {
-			// Genereate nama foto random
-			$namaFotoProfil = $fileFotoProfil->getRandomName();
-			// Pindahkan file ke folder img/alumni
-			$fileFotoProfil->move('img', $namaFotoProfil);
+			$provinsi = NULL;
 		}
 
+		if ($negara == "Indonesia") {
+			if ($provinsi != NULL) {
+				$provinsi = ucwords(htmlspecialchars($_POST['prov']));
+				if (isset($_POST['kab'])) {
+					$kota = ucwords(htmlspecialchars($_POST['kab']));
+				}
+			} else {
+				$provinsi = NULL;
+			}
+		} else {
+			if ($negara2 == "") {
+				$negara = NULL;
+				$provinsi = NULL;
+			} else {
+				$negara = htmlspecialchars($negara2);
+				$provinsi = NULL;
+			}
+		}
 
 		$alumni = [
+			'id_alumni' => session('idAlumni'),
 			'nama' => htmlspecialchars($_POST['nama']),
 			'jenis_kelamin' => htmlspecialchars($_POST['jenis_kelamin']),
 			'tempat_lahir' => htmlspecialchars($_POST['tempat_lahir']),
@@ -805,105 +1069,166 @@ class Admin extends BaseController
 			'fb' => htmlspecialchars($_POST['fb']),
 			'twitter' => htmlspecialchars($_POST['twitter']),
 			'nip' => htmlspecialchars($_POST['nip']),
-			'nip_bps' => htmlspecialchars($_POST['nip_bps']),
-			'foto_profil' => $namaFotoProfil
+			'nip_bps' => htmlspecialchars($_POST['nip_bps'])
 		];
 
-		$init->db->table('alumni')->insert($alumni);
+		$init->db->table('alumni')->set($alumni)->where('id_alumni', session('idAlumni'))->update();
 
-		$id_alumni = $init->table('alumni')->getWhere($alumni)->getRow()->id_alumni;
+		session()->setFlashdata('edit-prestasi-success', 'Prestasi berhasil diperbaharui');
 
-		$instansi = [
-			'id_tempat_kerja' => $init->getIdTempatKerja(htmlspecialchars($_POST['nama_instansi'])),
-			'id_alumni'	=> $id_alumni
+		return redirect()->to(previous_url());
+	}
+
+	# method untuk tambah tempat kerja (instansi) Alumni
+	public function addTempatKerja()
+	{
+		$model = new AlumniModel();
+
+		$data = [
+			'id_tempat_kerja' => $model->getIdTempatKerja(htmlspecialchars($_POST['nama_instansi'])),
+			'id_alumni' => session('idAlumni')
 		];
 
-		$init->db->table('alumni_tempat_kerja')->insert($instansi);
+		$model->db->table('alumni_tempat_kerja')->insert($data);
 
-		$pendidikan = [
+		session()->setFlashdata('edit-tk-success', 'Tempat Kerja berhasil diperbaharui');
+
+		return redirect()->to(previous_url());
+	}
+
+	# method untuk tambah riwayat pendidikan Alumni
+	public function addPendidikan()
+	{
+		$model = new AlumniModel();
+
+		$data = [
+			'jenjang'    	=> htmlspecialchars($_POST['jenjang']),
+			'instansi'	 	=> htmlspecialchars($_POST['instansi']),
+			'tahun_lulus'  	=> htmlspecialchars($_POST['tahun_lulus']),
+			'tahun_masuk'  	=> htmlspecialchars($_POST['tahun_masuk']),
+			'angkatan'		=> htmlspecialchars($_POST['angkatan']),
+			'id_alumni'		=> session('idAlumni')
+		];
+
+		$data2 = [
+			'program_studi'     => htmlspecialchars($_POST['program_studi']),
+			'nim'				=> htmlspecialchars($_POST['nim']),
+			'judul_tulisan'		=> htmlspecialchars($_POST['judul_tulisan'])
+		];
+
+		if ($this->form_validation->run($data2, 'editPendidikan') === FALSE) {
+			session()->setFlashdata('add-pendidikan-fail', 'Pendidikan gagal ditambahkan');
+			session()->setFlashdata('error-nim', $this->form_validation->getError('nim'));
+			return redirect()->to(base_url('/admin/CRUD_createDataAlumni'));
+		} else {
+			$model->db->table('pendidikan')->insert($data);
+
+			$query = "SELECT id_pendidikan FROM pendidikan WHERE id_alumni = " . session('idAlumni') . " ORDER BY id_pendidikan DESC";
+			$id_pendidikan = $model->query($query)->getRow()->id_pendidikan;
+			$data2 = [
+				'id_pendidikan'		=> $id_pendidikan,
+				'program_studi'     => htmlspecialchars($_POST['program_studi']),
+				'nim'				=> htmlspecialchars($_POST['nim']),
+				'judul_tulisan'		=> htmlspecialchars($_POST['judul_tulisan'])
+			];
+			$model->db->table('pendidikan_tinggi')->insert($data2);
+			session()->setFlashdata('add-pendidikan-success', 'Pendidikan berhasil ditambahkan');
+			return redirect()->to(previous_url());
+		}
+	}
+
+	# method untuk ubah riwayat pendidikan Alumni
+	public function updatePendidikan()
+	{
+
+		$model = new AlumniModel();
+
+		$data = [
 			'jenjang'    => htmlspecialchars($_POST['jenjang']),
 			'instansi'	 => htmlspecialchars($_POST['instansi']),
 			'tahun_lulus'  => htmlspecialchars($_POST['tahun_lulus']),
 			'tahun_masuk'  => htmlspecialchars($_POST['tahun_masuk']),
-			'angkatan'  => htmlspecialchars($_POST['angkatan']),
-			'id_alumni'	=> $id_alumni
+			'angkatan'		=> htmlspecialchars($_POST['angkatan']),
+			'id_alumni'	=> session('idAlumni')
 		];
 
-		$pendidikanTinggi = [
-			'program_studi'	=> htmlspecialchars($_POST['program_studi']),
-			'nim'			=> htmlspecialchars($_POST['nim']),
-			'judul_tulisan'	=> htmlspecialchars($_POST['judul_tulisan'])
-		];
-
-		$init->db->table('pendidikan')->insert($pendidikan);
-
-		$query = "SELECT id_pendidikan FROM pendidikan WHERE id_alumni = " . $id_alumni . " ORDER BY id_pendidikan DESC";
-		$id_pendidikan = $init->query($query)->getRow()->id_pendidikan;
-		$pendidikanTinggi = [
-			'id_pendidikan'		=> $id_pendidikan,
+		$data2 = [
 			'program_studi'     => htmlspecialchars($_POST['program_studi']),
 			'nim'				=> htmlspecialchars($_POST['nim']),
-			'judul_tulisan'		=> htmlspecialchars($_POST['judul_tulisan']),
-		];
-		$init->db->table('pendidikan_tinggi')->insert($pendidikanTinggi);
-
-		$prestasi = [
-			'nama_prestasi'     => htmlspecialchars($_POST['nama_prestasi']),
-			'tahun_prestasi'		=> htmlspecialchars($_POST['tahun_prestasi']),
-			'id_alumni'	=> $id_alumni
+			'judul_tulisan'		=> htmlspecialchars($_POST['judul_tulisan'])
 		];
 
-		$init->db->table('prestasi')->insert($prestasi);
-
-		$publikasi = [
-			'publikasi'     => htmlspecialchars($_POST['publikasi']),
-			'id_alumni'	=> $id_alumni
-		];
-		$init->db->table('publikasi')->insert($publikasi);
-
-		session()->setFlashdata('pesan', 'Data berhasil ditambahkan.');
-
-		return redirect()->to('/admin/CRUD_alumniindex');
+		if ($this->form_validation->run($data2, 'editPendidikan') === FALSE) {
+			session()->setFlashdata('edit-pendidikan-fail', 'Pendidikan gagal diperbaharui');
+			session()->setFlashdata('error-nim', $this->form_validation->getError('nim'));
+			return redirect()->to(previous_url());
+		} else {
+			$model->db->table('pendidikan')->set($data)->where('id_pendidikan', $_POST['id_pendidikan'])->update();
+			$model->db->table('pendidikan_tinggi')->set($data2)->where('id_pendidikan', $_POST['id_pendidikan'])->update();
+			session()->setFlashdata('edit-pendidikan-success', 'Pendidikan berhasil diperbaharui');
+			return redirect()->to(previous_url());
+		}
 	}
 
-	#method untuk detail CRUD Alumni
-	public function CRUD_detailAlumni($id)
+	# method untuk hapus riwayat pendidikan Alumni
+	public function deletePendidikan()
 	{
-		$init = new admin_model();
-		$alumni = $init->getAllAlumni($id)->getResultArray()[0];
-		$instansi = $init->getTempatKerjabyIdAlumni($id)->getResultArray()[0];
-		$publikasi = $init->getPublikasiById($id)->getResult();
-		$pendidikan = $init->getPendidikanById($id)->getResult();
-		$prestasi = $init->getPrestasiById($id)->getResult();
+		$model = new AlumniModel();
+		$model->deletePendidikanById($_POST['id_pendidikan']);
+		session()->setFlashdata('delete-pendidikan-success', 'Data pendidikan berhasil dihapus');
+		return redirect()->to(previous_url());
+	}
+
+	# method untuk tambah prestasi Alumni
+	public function addPrestasi()
+	{
+		$model = new AlumniModel();
 
 		$data = [
-			'title' => 'Detail Alumni | Website Riset 5',
-			'alumni' => $alumni,
-			'instansi' => $instansi,
-			'publikasi' => $publikasi,
-			'pendidikan' => $pendidikan,
-			'prestasi' => $prestasi
+			'nama_prestasi'     => htmlspecialchars($_POST['nama_prestasi']),
+			'tahun_prestasi'	=> htmlspecialchars($_POST['tahun_prestasi']),
+			'id_alumni'			=> session('idAlumni')
 		];
 
-		// dd($data);
-
-		if (empty($data['alumni'])) {
-			throw new \CodeIgniter\Exceptions\PageNotFoundException('Alumni dengan ID : ' . $id . 'Tidak Ditemukan');
-		}
-		return view('admin' . DIRECTORY_SEPARATOR . 'crud' . DIRECTORY_SEPARATOR . 'alumni' . DIRECTORY_SEPARATOR . 'detail', $data);
+		$model->db->table('prestasi')->insert($data);
+		session()->setFlashdata('add-prestasi-success', 'Prestasi berhasil ditambahkan');
+		return redirect()->to(previous_url());
 	}
 
-	#method untuk delete CRUD Alumni
-	public function CRUD_deleteAlumni()
+	# method untuk ubah prestasi Alumni
+	public function updatePrestasi()
 	{
-		if (!$this->request->isAJAX()) return false;
+		$model = new AlumniModel();
 
-		$id = $this->request->getPost('id');
-		if (!$id) return false;
+		$data = [
+			'nama_prestasi'     => htmlspecialchars($_POST['nama_prestasi']),
+			'tahun_prestasi'	=> htmlspecialchars($_POST['tahun_prestasi']),
+			'id_alumni'			=> session('idAlumni')
+		];
 
-		$init = new admin_model();
-		$query = $init->deleteAlumniByid($id);
-		$this->output_json($query);
+		$model->db->table('prestasi')->set($data)->where('id_prestasi', $_POST['id_prestasi'])->update();
+		session()->setFlashdata('edit-prestasi-success', 'Prestasi berhasil diperbaharui');
+		return redirect()->to(previous_url());
+	}
+
+	# method untuk hapus prestasi Alumni
+	public function deletePrestasi()
+	{
+		$model = new AlumniModel();
+		$model->deletePrestasiById($_POST['id_prestasi']);
+		session()->setFlashdata('delete-prestasi-success', 'Prestasi berhasil dihapus');
+		return redirect()->to(previous_url());
+	}
+
+	#----------SAVE DATA ALUMNI----------#
+
+	# Method untuk simpan data (Biodata, Tempat Kerja, Pendidikan, Prestasi) Alumni
+	public function simpanDataAlumni()
+	{
+		// Menghapus Session idAlumni
+		session()->remove('idAlumni');
+
+		return redirect()->to(base_url('/admin/alumni'));
 	}
 
 	#------------------------------------------------------------------------------------------------------------------------------------------------#
@@ -912,25 +1237,15 @@ class Admin extends BaseController
 	public function CRUD_indexInstansi()
 	{
 		$init = new admin_model();
-		// $init = new AlumniModel();
 		$instansi = $init->getAllTempatKerja()->getResultArray();
 		$currentPage = $this->request->getVar('page_instansi') ? $this->request->getVar('page_instansi') : 1;
 
-		// $keyword = $this->request->getVar('keyword');
-		// if ($keyword) {
-		// 	$instansi = $init->searchInstansi($keyword);
-		// } else {
-		// 	$instansi = $init;
-		// }
-
 		$data = [
 			'title' => 'Instansi | Website Riset 5',
-			'instansi' => $instansi, //->paginate(20, 'instansi'),
+			'instansi' => $instansi,
 			'pager' => $init->pager,
 			'currentPage' => $currentPage
 		];
-
-		// dd($data);
 
 		return view('admin' . DIRECTORY_SEPARATOR . 'crud' . DIRECTORY_SEPARATOR . 'instansi' . DIRECTORY_SEPARATOR . 'index', $data);
 	}
@@ -961,27 +1276,6 @@ class Admin extends BaseController
 					'is_unique' => 'Nama Instansi sudah terdaftar'
 				]
 			],
-			// 'alamat_instansi' => [
-			// 	'rules' => 'required|is_unique[tempat_kerja.alamat_instansi]',
-			// 	'errors' => [
-			// 		'required' => 'Alamat Instansi harus diisi.',
-			// 		'is_unique' => 'Alamat Instansi sudah terdaftar'
-			// 	]
-			// ],
-			// 'telp_instansi' => [
-			// 	'rules' => 'required|is_unique[tempat_kerja.telp_instansi]',
-			// 	'errors' => [
-			// 		'required' => 'Telepon Instansi harus diisi.',
-			// 		'is_unique' => 'Telepon Instansi sudah terdaftar'
-			// 	]
-			// ],
-			// 'faks_instansi' => [
-			// 	'rules' => 'required|is_unique[tempat_kerja.faks_instansi]',
-			// 	'errors' => [
-			// 		'required' => 'Faks Instansi harus diisi.',
-			// 		'is_unique' => 'Faks Instansi sudah terdaftar'
-			// 	]
-			// ],
 			'email_instansi' => [
 				'rules' => 'required|is_unique[tempat_kerja.email_instansi]',
 				'errors' => [
@@ -1011,6 +1305,67 @@ class Admin extends BaseController
 		return redirect()->to('/admin/CRUD_indexInstansi');
 	}
 
+
+	#method untuk update CRUD Instansi
+	public function CRUD_updateInstansi($id_tempat_kerja)
+	{
+		$model = new AlumniModel();
+
+		$tempat_kerja = $model->getTempatKerjaById($id_tempat_kerja)->getRow();
+
+		$data = [
+			'title' => 'Update Instansi | Website Riset 5',
+			'instansi' => $tempat_kerja,
+			'validation' => \Config\Services::validation()
+		];
+
+		return view('admin' . DIRECTORY_SEPARATOR . 'crud' . DIRECTORY_SEPARATOR . 'instansi' . DIRECTORY_SEPARATOR . 'update', $data);
+	}
+
+	#method untuk update Instansi
+	public function updateInstansi()
+	{
+		$init = new AlumniModel();
+
+		if (!$this->validate([
+			'nama_instansi' => [
+				'rules' => 'required|is_unique[tempat_kerja.nama_instansi]',
+				'errors' => [
+					'required' => 'Nama Instansi harus diisi.',
+					'is_unique' => 'Nama Instansi sudah terdaftar'
+				]
+			],
+			'email_instansi' => [
+				'rules' => 'required|is_unique[tempat_kerja.email_instansi]',
+				'errors' => [
+					'required' => 'Email Instansi harus diisi.',
+					'is_unique' => 'Email Instansi sudah terdaftar'
+				]
+			]
+		])) {
+			return redirect()->to('/admin/CRUD_createInstansi')->withInput();
+		}
+
+		$id_tempat_kerja = htmlspecialchars($_POST['id_tempat_kerja']);
+
+		$instansi = [
+			'id_tempat_kerja' => $id_tempat_kerja,
+			'nama_instansi' => htmlspecialchars($_POST['nama_instansi']),
+			'kota' => htmlspecialchars($_POST['kota']),
+			'provinsi' => htmlspecialchars($_POST['provinsi']),
+			'negara' => htmlspecialchars($_POST['negara']),
+			'alamat_instansi' => htmlspecialchars($_POST['alamat_instansi']),
+			'telp_instansi' => htmlspecialchars($_POST['telp_instansi']),
+			'faks_instansi' => htmlspecialchars($_POST['faks_instansi']),
+			'email_instansi' => htmlspecialchars($_POST['email_instansi']),
+		];
+
+		$init->db->table('tempat_kerja')->set($instansi)->where('id_tempat_kerja', $id_tempat_kerja)->update();
+
+		session()->setFlashdata('pesan', 'Data berhasil ditambahkan.');
+
+		return redirect()->to('/admin/CRUD_indexInstansi');
+	}
 
 	#method untuk detail CRUD Instansi
 	public function CRUD_detailInstansi($id)
@@ -1269,7 +1624,7 @@ class Admin extends BaseController
 			$alert = "<div id=\"alert\">
 				<div class=\"fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40\">
 					<div class=\"duration-700 transition-all p-3 rounded-lg flex items-center\" style=\"background-color: #FF7474;\">
-						<img src=\"/img/components/icon/warning.png\" class=\"h-5 mr-2\" style=\"color: #C51800;\">
+						<img src=\"/img/components/icon/warning.png\" class=\"h-5 mr-2\" style=\"color: #C51800;\" alt=\"Warning\">
 						<p class=\"sm:text-base text-sm font-heading font-bold\">" . $flash . "</p>
 					</div>
 				</div>

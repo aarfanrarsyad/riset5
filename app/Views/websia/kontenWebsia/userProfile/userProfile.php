@@ -52,8 +52,8 @@ if ($status == 'bukan user') {
             <div class="flex flex-wrap justify-center">
                 <div class="w-2/3 sm:w-full px-4">
                     <!-- syarat foto disini harus persegi (solusi : object fit) -->
-                    <img src="/img/<?= $alumni->foto_profil ?>" alt="..." class="rounded-full min-w-full max-w-full h-auto align-middle border-none" />
-                    <!-- <img src="/img/tes/download.jpg" alt="..." class="shadow rounded-full max-w-full h-auto align-middle border-none" /> -->
+                    <img src="/img/<?= $alumni->foto_profil ?>" alt="foto profil user" class="rounded-full min-w-full max-w-full h-auto align-middle border-none" />
+                    <!-- <img src="/img/tes/download.jpg" alt="download" class="shadow rounded-full max-w-full h-auto align-middle border-none" /> -->
                 </div>
             </div>
             <!-- Tombol edit profil yang ketika di klik akan mengarah ke halaman edit profil -->
@@ -119,7 +119,7 @@ if ($status == 'bukan user') {
             <?php if ($calamat == "") : ?>
                 <p class="font-heading text-primary text-xs px-5 md:px-0 mt-6">Lokasi Tempat Tinggal Saat Ini</p>
                 <span class="font-heading flex justify-start px-3 md:px-0 text-base text-left mb-5 md:mb-0">
-                    <img class="my-2 mt-2 mr-0 md:mr-2 ml-1 md:ml-0 w-6 h-6 md:w-6 float-left" src="/img/components/icon/maps_flag.png" alt="">
+                    <img class="my-2 mt-2 mr-0 md:mr-2 ml-1 md:ml-0 w-6 h-6 md:w-6 float-left" src="/img/components/icon/maps_flag.png" alt="alamat">
                     <!-- Lokasi tempat tinggal -->
                     <p class="font-heading my-2 mt-2"> <?= $alumni->alamat_alumni ?> </p>
                 </span>
@@ -129,32 +129,32 @@ if ($status == 'bukan user') {
                 <div class="w-full md:w-1/2 mr-10">
                     <!-- Email -->
                     <div class="inline-block mb-2 flex flex-row">
-                        <img src="/img/components/icon/message.png" alt="" class="float-left w-5">
+                        <img src="/img/components/icon/message.png" alt="message" class="float-left w-5">
                         <?php if ($alumni->email == NULL) { ?>
-                            <span class="font-heading text-xs text-primary text-center ml-1 md:ml-2"><i>belum terisi</i></span>
+                            <span class="font-heading text-xs text-primary text-center ml-2 md:ml-2"><i>belum terisi</i></span>
                         <?php } else { ?>
-                            <span class="font-heading text-xs text-primary text-center ml-1 md:ml-2"><?= $alumni->email ?></span>
+                            <span class="font-heading text-xs text-primary text-center ml-2 md:ml-2"><?= $alumni->email ?></span>
                         <?php } ?>
                     </div>
                     <!-- Twitter -->
                     <a href="https://www.twitter.com/<?= $alumni->twitter ?>" target="_new">
                         <div class="inline-block mb-2 flex flex-row">
-                            <img src="/img/components/icon/tiny_twitter.png" alt="" class="float-left w-4 w-4">
+                            <img src="/img/components/icon/tiny_twitter.png" alt="twitter" class="float-left w-4 w-4">
                             <?php if ($alumni->twitter == NULL) { ?>
-                                <span class="font-heading text-xs text-primary text-center ml-2 md:ml-3"><i>belum terisi</i></span>
+                                <span class="font-heading text-xs text-primary text-center ml-3 md:ml-3"><i>belum terisi</i></span>
                             <?php } else { ?>
-                                <span class="font-heading text-xs text-primary text-center ml-2 md:ml-3"><?= $alumni->twitter ?></span>
+                                <span class="font-heading text-xs text-primary text-center ml-3 md:ml-3"><?= $alumni->twitter ?></span>
                             <?php } ?>
                         </div>
                     </a>
                     <!-- Instagram -->
                     <a href="https://www.instagram.com/<?= $alumni->ig ?>" target="_new">
                         <div class="inline-block flex flex-row">
-                            <img src="/img/components/icon/tiny_instagram.png" alt="" class="float-left w-4">
+                            <img src="/img/components/icon/tiny_instagram.png" alt="instagram" class="float-left w-4">
                             <?php if ($alumni->ig == NULL) { ?>
-                                <span class="font-heading text-xs text-primary text-center flex items-center ml-2 md:ml-3"><i>belum terisi</i></span>
+                                <span class="font-heading text-xs text-primary text-center flex items-center ml-3 md:ml-3"><i>belum terisi</i></span>
                             <?php } else { ?>
-                                <span class="font-heading text-xs text-primary text-center flex items-center ml-2 md:ml-3"><?= $alumni->ig ?></span>
+                                <span class="font-heading text-xs text-primary text-center flex items-center ml-3 md:ml-3"><?= $alumni->ig ?></span>
                             <?php } ?>
                         </div>
                     </a>
@@ -167,8 +167,8 @@ if ($status == 'bukan user') {
                         <div class="w-full md:w-1/2 mt-2 md:mt-0">
                             <!-- Facebook -->
                             <div class="inline-block mb-2 flex flex-row">
-                                <img src="/img/components/icon/fb.png" alt="" class="float-left ml-0 md:ml-1 w-4 h-4">
-                                <span class="font-heading text-xs text-primary text-left flex items-center ml-2 md:ml-3">Facebook</span>
+                                <img src="/img/components/icon/fb.png" alt="facebook" class="float-left ml-1 md:ml-1 h-4">
+                                <span class="font-heading text-xs text-primary text-left flex items-center ml-4 md:ml-5">Facebook</span>
                             </div>
                         </a>
                         <!-- LinkedIn -->
@@ -178,7 +178,7 @@ if ($status == 'bukan user') {
                                 <a href="<?= $alumni->linkedin ?>" target="_new">
                                 <?php endif; ?>
                                 <div class="inline-block mb-2 flex flex-row">
-                                    <img src="/img/components/icon/linkedin.png" alt="" class="float-left w-5">
+                                    <img src="/img/components/icon/linkedin.png" alt="linkedin" class="float-left w-5">
                                     <span class="font-heading text-xs text-primary text-center flex items-center ml-2 md:ml-3">LinkedIn</span>
                                 </div>
                                 </a>
@@ -190,7 +190,7 @@ if ($status == 'bukan user') {
                                         <a href="<?= $alumni->gscholar ?>" target="_new">
                                         <?php endif; ?>
                                         <div class="inline-block flex flex-row">
-                                            <img src="/img/components/icon/google.png" alt="" class="float-left w-5">
+                                            <img src="/img/components/icon/google.png" alt="google" class="float-left w-5">
                                             <span class="font-heading text-xs text-primary text-center flex items-center ml-2 md:ml-3">Google Scholar</span>
                                         </div>
                                         </a>
@@ -220,7 +220,7 @@ if ($status == 'bukan user') {
                 <div class="card shadow border-gray-800 hover:bg-gray-200 hover:shadow-inner transition duration-700 bg-white relative" data-aos="zoom-in">
                     <a href="/User/profilAlumni/<?= $row->id_alumni ?>" target="_new">
                         <div class="">
-                            <img class="w-full md:w-20 lg:w-24 mx-auto mt-4" src="/img/<?= $row->foto_profil ?>" alt="" /> <!-- Hilangin padding klo dah ada gambar, dan pake w-full aja -->
+                            <img class="w-full md:w-20 lg:w-24 mx-auto mt-4" src="/img/<?= $row->foto_profil ?>" alt="foto profil user" /> <!-- Hilangin padding klo dah ada gambar, dan pake w-full aja -->
                         </div>
                         <div>
                             <span class="title mt-4 font-heading text-sm md:text-base lg:text-lg font-semibold text-primary block px-2 md:px-0 text-center"><?= $row->nama; ?></span>
@@ -242,7 +242,7 @@ if ($status == 'bukan user') {
         <div class="visible sm:invisible">
             <a class="bg-secondary mb-8 mt-1 md:mt-0 float-right font-paragraph text-sm text-white text-center py-1 px-4 mx-auto rounded-full cursor-pointer hover:bg-secondaryhover transition-colors duration-300" href="/User/rekomendasi">
                 Lihat Semua Rekomendasi
-                <img src="/img/components/icon/g" alt="" class="float-right pl-2">
+                <img src="/img/components/icon/g" alt="lihat semua rekomendasi" class="float-right pl-2">
             </a>
         </div>
     </div>
@@ -433,51 +433,51 @@ if ($status == 'bukan user') {
                     <!-- 1 gambar -->
                     <!-- <a href="#img-1" id="img-1">
                         <div class="rounded-3xl m-2 relative hover:shadow-xl transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105 cursor-pointer">
-                            <img id="slide" class="object-cover w-96 h-48 object-fit rounded-3xl mx-auto" src="/img/alumni.jpg" alt="" />
+                            <img id="slide" class="object-cover w-96 h-48 object-fit rounded-3xl mx-auto" src="/img/components/alumni.jpg" alt="" />
                         </div>
                     </a>
 
                     <div class="fixed overflow-auto top-0 bottom-0 right-0 left-0 z-40 bg-black bg-opacity-80 text-center font-paragraph hidden" id="img-1">
                         <div class="m-auto duration-700 transition-all bg-gray bg-opacity-0 w-11/12 sm:w-9/12 md:w-8/12 lg:w-7/12">
-                            <!-- Awal Tombol Laporkan foto -->
-                    <button onClick="laporkanFoto()"><img src="<?= base_url() ?>/img/components/icon/danger-sign.png" alt="" class="absolute top-3 right-3"></button>
-                    <!-- Akhir Tombol Laporkan foto --
+                            <!- Awal Tombol Laporkan foto ->
+                    <button onClick="laporkanFoto()"><img src="<= base_url() ?>/img/components/icon/danger-sign.png" alt="" class="absolute top-3 right-3"></button>
+                    <!- Akhir Tombol Laporkan foto --
 
                     <div class="flex flex-col justify-center items-center">
                         <div class="flex flex-row justify-center items-center gap-x-4 mt-8 mb-6">
                             <a href="#">
-                                <img src="<?= base_url() ?>/img/components/icon/left-on.png" alt="" class="" onclick="prev()" id="prev">
+                                <img src="<= base_url() ?>/img/components/icon/left-on.png" alt="" class="" onclick="prev()" id="prev">
                             </a>
-                            <img src="<?= base_url() ?>/img/galeri/alumni.jpg" alt="" class="slider-img w-3/4">
+                            <img src="<= base_url() ?>/img/components/alumni.jpg" alt="" class="slider-img w-3/4">
                             <a href="#">
-                                <img src="<?= base_url() ?>/img/components/icon/right-on.png" alt="" class="" onclick="next()" id="next">
+                                <img src="<= base_url() ?>/img/components/icon/right-on.png" alt="" class="" onclick="next()" id="next">
                             </a>
                         </div>
 
-                        <!-- Awal Caption --
+                        <!- Awal Caption --
                         <div class="text-white w-3/4 h-3/4 mx-2 text-base">
-                            <!-- <p class="mb-2">Oleh : Si Fulan (59)</p> --
+                            <!- <p class="mb-2">Oleh : Si Fulan (59)</p> --
                             <p class="mb-2">Oleh : Fulan</p>
-                            <!-- <p class="">Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam impedit optio praesentium soluta quasi. Voluptatibus molestias sequi inventore odit voluptas pariatur a ut, totam obcaecati accusamus iure, labore dolorum dolor.</p> --
+                            <!- <p class="">Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam impedit optio praesentium soluta quasi. Voluptatibus molestias sequi inventore odit voluptas pariatur a ut, totam obcaecati accusamus iure, labore dolorum dolor.</p> --
                             <p class="mt-4">Caption</p>
                             <div class="mt-5 text-gray-400 text-center">
-                                <span> <img src="<?= base_url() ?>/img/components/icon/line.png" alt="" class="inline mr-1"> bersama </span> <span class=" text-white">Nama1 </span> <span> dan</span> <span class="text-white"> 10 lainnya</span> <span><img src="<?= base_url() ?>/img/components/icon/down.png" alt="" class="daftarTag inline ml-1 rounded-full w-4 hover:bg-secondary cursor-pointer" onclick="daftarTag()">
+                                <span> <img src="<= base_url() ?>/img/components/icon/line.png" alt="" class="inline mr-1"> bersama </span> <span class=" text-white">Nama1 </span> <span> dan</span> <span class="text-white"> 10 lainnya</span> <span><img src="<= base_url() ?>/img/components/icon/down.png" alt="" class="daftarTag inline ml-1 rounded-full w-4 hover:bg-secondary cursor-pointer" onclick="daftarTag()">
                                 </span>
-                                <!-- Awal Tampilan Daftar Tag --
+                                <!- Awal Tampilan Daftar Tag --
                                 <div class="tampilTag hidden relative" id="tampilTag">
                                     <div class="static mt-2 p-2 rounded-2xl overflow-y-auto h-64 ml-80 bg-primary w-1/4 position-right text-white">
                                         <ul class="bg-primary">
-                                            <?php for ($a = 0; $a < 12; $a++) : ?>
+                                            <php for ($a = 0; $a < 12; $a++) : ?>
                                                 <li>Nama</li>
-                                            <?php endfor ?>
+                                            <php endfor ?>
                                         </ul>
                                     </div>
                                 </div>
-                                <!-- Akhir Tampilan Daftar Tag --
+                                <!- Akhir Tampilan Daftar Tag --
                             </div>
 
                         </div>
-                        <!-- Akhir Caption --
+                        <!- Akhir Caption --
 
 
                     </div>
@@ -509,7 +509,7 @@ if ($status == 'bukan user') {
                         <!-- 1 gambar -->
                         <a href="#<?= $foto[$i]['id_foto']; ?>" id="foto<?= $foto[$i]['id_foto']; ?>">
                             <div class="rounded-3xl m-2 relative hover:shadow-xl transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105 cursor-pointer">
-                                <img id="slide" class="object-cover w-96 h-48 object-fit rounded-3xl mx-auto" src="<?= base_url() ?>/img/galeri/<?= $foto[$i]['nama_file']; ?>" alt="" />
+                                <img id="slide" class="object-cover w-96 h-48 object-fit rounded-3xl mx-auto" src="<?= base_url() ?>/img/galeri/<?= $foto[$i]['nama_file']; ?>" alt="foto yang ditandai" />
                             </div>
                         </a>
                         <!-- <php endfor; ?> -->
@@ -517,17 +517,17 @@ if ($status == 'bukan user') {
                         <div class="fixed overflow-auto top-0 bottom-0 right-0 left-0 z-40 bg-black bg-opacity-80 text-center font-paragraph hidden" id="<?= $foto[$i]['id_foto']; ?>">
                             <div class="m-auto duration-700 transition-all bg-gray bg-opacity-0 w-11/12 sm:w-9/12 md:w-8/12 lg:w-7/12">
                                 <!-- Awal Tombol Laporkan foto -->
-                                <button onClick="laporkanFoto(<?= $foto[$i]['id_foto']; ?>)"><img src="<?= base_url() ?>/img/components/icon/danger-sign.png" alt="" class="absolute top-3 right-3"></button>
+                                <button onClick="laporkanFoto(<?= $foto[$i]['id_foto']; ?>)"><img src="<?= base_url() ?>/img/components/icon/danger-sign.png" alt="laporkan foto" class="absolute top-3 right-3"></button>
                                 <!-- Akhir Tombol Laporkan foto -->
 
                                 <div class="flex flex-col justify-center items-center">
                                     <div class="flex flex-row justify-center items-center gap-x-4 mt-8 mb-6">
                                         <a href="#<?= $foto[$i]['id_foto'] - 1; ?>">
-                                            <img src="<?= base_url() ?>/img/components/icon/left-on.png" alt="" class="" onclick="prev()" id="prev">
+                                            <img src="<?= base_url() ?>/img/components/icon/left-on.png" alt="foto sebelumnya" class="" onclick="prev()" id="prev">
                                         </a>
-                                        <img src="<?= base_url() ?>/img/galeri/<?= $foto[$i]['nama_file']; ?>" alt="" class="slider-img w-3/4">
+                                        <img src="<?= base_url() ?>/img/galeri/<?= $foto[$i]['nama_file']; ?>" alt="<?= $foto[$i]['nama_file']; ?>" class="slider-img w-3/4">
                                         <a href="#<?= $foto[$i]['id_foto'] + 1; ?>">
-                                            <img src="<?= base_url() ?>/img/components/icon/right-on.png" alt="" class="" onclick="next()" id="next">
+                                            <img src="<?= base_url() ?>/img/components/icon/right-on.png" alt="foto berikutnya" class="" onclick="next()" id="next">
                                         </a>
                                     </div>
 
@@ -539,7 +539,7 @@ if ($status == 'bukan user') {
                                         <p class="mt-4"><?= $foto[$i]['caption'] ?></p>
                                         <div class="mt-5 text-gray-400 text-center">
                                             <?php if (count($foto[$i]['tag_name']) > 1) : ?>
-                                                <span> <img src="<?= base_url() ?>/img/components/icon/line.png" alt="" class="inline mr-1"> bersama </span> <span class=" text-white"><?= $foto[$i]['tag_name'][0]['nama'] ?> </span> <span> dan</span> <span class="text-white"> <?= count($foto[$i]['tag_name']) - 1 ?> lainnya</span> <span><img src="<?= base_url() ?>/img/components/icon/down.png" alt="" class="daftarTag inline ml-1 rounded-full w-4 hover:bg-secondary cursor-pointer" onclick="daftarTag()">
+                                                <span> <img src="<?= base_url() ?>/img/components/icon/line.png" alt="icon tag foto" class="inline mr-1"> bersama </span> <span class=" text-white"><?= $foto[$i]['tag_name'][0]['nama'] ?> </span> <span> dan</span> <span class="text-white"> <?= count($foto[$i]['tag_name']) - 1 ?> lainnya</span> <span><img src="<?= base_url() ?>/img/components/icon/down.png" alt="daftar tag" class="daftarTag inline ml-1 rounded-full w-4 hover:bg-secondary cursor-pointer" onclick="daftarTag()">
                                                 </span>
                                                 <!-- Awal Tampilan Daftar Tag -->
                                                 <div class="tampilTag hidden relative" id="tampilTag">
@@ -552,7 +552,7 @@ if ($status == 'bukan user') {
                                                     </div>
                                                 </div>
                                             <?php elseif (count($foto[$i]['tag_name']) < 1) : ?>
-                                                <span> <img src="<?= base_url() ?>/img/components/icon/line.png" alt="" class="inline mr-1"> bersama </span> <span class=" text-white"><?= $foto[$i]['tag_name'][0]['nama'] ?> </span>
+                                                <span> <img src="<?= base_url() ?>/img/components/icon/line.png" alt="icon tag foto" class="inline mr-1"> bersama </span> <span class=" text-white"><?= $foto[$i]['tag_name'][0]['nama'] ?> </span>
                                                 </span>
                                             <?php else : ?>
                                             <?php endif ?>
@@ -597,7 +597,7 @@ if ($status == 'bukan user') {
             <div class="visible sm:invisible">
                 <a class="bg-secondary mb-8 mt-1 md:mt-0 float-right font-paragraph text-sm text-white text-center py-1 px-4 mx-auto rounded-full cursor-pointer hover:bg-secondaryhover transition-colors duration-300" href="/User/rekomendasi">
                     Lihat Semua foto
-                    <img src="/img/components/icon/g" alt="" class="float-right pl-2">
+                    <img src="/img/components/icon/g" alt="lihat semua foto" class="float-right pl-2">
                 </a>
             </div>
         </div>

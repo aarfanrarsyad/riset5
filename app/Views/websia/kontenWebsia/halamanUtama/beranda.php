@@ -23,7 +23,7 @@ if (session()->getFlashdata('role')) { ?>
     <div id="alert">
         <div class="fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40">
             <div class="duration-700 transition-all p-3 rounded-lg flex items-center" style="background-color: #FF7474;">
-                <img src="/img/components/icon/warning.png" class="h-5 mr-2" style="color: #C51800;">
+                <img src="/img/components/icon/warning.png" class="h-5 mr-2" style="color: #C51800;" alt="warning">
                 <p class="sm:text-base text-sm font-heading font-bold"><?= session()->role; ?></p>
             </div>
         </div>
@@ -160,13 +160,13 @@ if (session()->getFlashdata('role')) { ?>
                 <div class="text-sm font-heading font-semibold">Keterangan :</div>
                 <div class="flex items-center text-xs font-paragraph">
                     <span class="font-heading flex justify-start text-left">
-                        <img class="mr-0 md:mr-2 ml-1 md:ml-0 w-4 h-4 md:w-4 float-left" src="/img/components/icon/peta_lokasi.png" alt="">
+                        <img class="mr-0 md:mr-2 ml-1 md:ml-0 w-4 h-4 md:w-4 float-left" src="/img/components/icon/peta_lokasi.png" alt="peta lokasi">
                         <p class="font-heading text-xs">Terdapat total 2000 Alumni yang berada di luar Indonesia</p>
                     </span>
                 </div>
                 <div class="flex items-center text-xs font-paragraph">
                     <span class="font-heading flex justify-start text-left">
-                        <img class="mr-0 md:mr-2 ml-1 md:ml-0 w-4 h-4 md:w-4 float-left" src="/img/components/icon/peta_beluminput.png" alt="">
+                        <img class="mr-0 md:mr-2 ml-1 md:ml-0 w-4 h-4 md:w-4 float-left" src="/img/components/icon/peta_beluminput.png" alt="alumni yang belum menginput data">
                         <p class="font-heading text-xs">Terdapat total 300 Alumni yang belum menginput data</p>
                     </span>
                 </div>
@@ -191,7 +191,7 @@ if (session()->getFlashdata('role')) { ?>
             <!-- awal card-->
             <div class="mb-6 lg:w-1/4 md:w-1/3 lg:mx-0 md:mx-2 mx-0  w-full md:border-0 border-b-2 border-gray-300" data-aos="zoom-in">
                 <a href="/User/judulBerita" class="mb-4">
-                    <img class="w-full gambarBerita" src="/img/sampel.jpeg">
+                    <img class="w-full gambarBerita" src="/img/components/sampel.jpeg" alt="thumbnail berita">
                 </a>
                 <div class="py-4">
                     <!-- Awal judul berita -->

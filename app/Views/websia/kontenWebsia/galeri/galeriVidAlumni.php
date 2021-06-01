@@ -56,7 +56,7 @@
     </div>
     <div class="md:col-span-2 lg:col-span-2">
         <div class="">
-            <img src="/img/components/galeri.png" alt="" class="w-full md:h-full md:w-auto mb-8">
+            <img src="/img/components/galeri.png" alt="icon galeri" class="w-full md:h-full md:w-auto mb-8">
         </div>
     </div>
     <div class="fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40 font-paragraph hidden" id='formUnggahVideo'>

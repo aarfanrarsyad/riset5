@@ -149,8 +149,8 @@
                 <a href="/" class="hover:text-primaryHover">Beranda</a>
                 <p>></p>
                 <a href="/User/berita" class="hover:text-primaryHover">Berita</a>
-                <p>></p>
-                <a href="/User/judulBerita" class="hover:text-primaryHover"><?= ucwords(strtolower($dataset['judul'])) ?></a>
+                <!-- <p>></p> -->
+                <!-- <a href="/User/judulBerita" class="hover:text-primaryHover"><?= ucwords(strtolower($dataset['judul'])) ?></a> -->
             </div>
         </div>
         <div>
@@ -176,7 +176,7 @@
                         <div class="lg:w-3/4 md:w-4/5 w-2/3">
                             Berita dengan judul "Polstat STIS Mengadakan Reuni" oleh A. Karim telah dikonfirmasi dan dipublikasikan.
                             <div class="flex gap-x-2 items-center">
-                                <img src="/img/components/icon/calendar.png" class="w-5 h-5" alt="">
+                                <img src="/img/components/icon/calendar.png" class="w-5 h-5" alt="tanggal">
                                 <p class="text-xs">17 April 2021</p>
                             </div>
                         </div>
@@ -187,7 +187,7 @@
                         <div class="lg:w-3/4 md:w-4/5 w-2/3">
                             Berita dengan judul "Peraturan Baru Tentang Pengambilan Ijazah Alumni" oleh Doraemon telah dikonfirmasi dan dipublikasikan.
                             <div class="flex gap-x-2 items-center">
-                                <img src="/img/components/icon/calendar.png" class="w-5 h-5" alt="">
+                                <img src="/img/components/icon/calendar.png" class="w-5 h-5" alt="tanggal">
                                 <p class="text-xs">14 April 2021</p>
                             </div>
                         </div>
@@ -203,7 +203,7 @@
     <div class="md:flex lg:flex justify-between">
         <div class="flex-grow">
             <div class="flex flex-col lg:mr-8 md:mr-4 sm:mr-8 lg:ml-0 md:ml-0 sm:ml-4">
-                <div class="text-secondary font-heading font-bold lg:text-4xl md:text-3xl text-2xl"><?= ucwords(strtolower($dataset['judul'])) ?></div>
+                <div class="text-secondary font-heading font-bold lg:text-3xl text-2xl"><?= ucwords(strtolower($dataset['judul'])) ?></div>
                 <div class="flex lg:my-3 my-2">
                     <div class="flex text-primary">
                         <svg class="w-4 h-4 mr-2 my-auto" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -244,19 +244,19 @@
 
                     <div class="text-primary text-center font-heading lg:text-lg md:text-base text-sm">Bagikan:</div>
                     <div class="flex justify-center lg:mt-3 mt-2 lg:mb-16 md:mb-12 mb-8">
-                        <img class="lg:h-6 h-4 mx-1" src="/img/components/icon/fb.png">
-                        <img class="lg:h-6 h-4 mx-1" src="/img/components/icon/twit.png">
-                        <img class="lg:h-6 h-4 mx-1" src="/img/components/icon/whatsapp.png">
-                        <img class="lg:h-6 h-4 mx-1" src="/img/components/icon/linkedin.png">
+                        <img class="lg:h-6 h-4 mx-1" src="/img/components/icon/fb.png" alt="icon facebook">
+                        <img class="lg:h-6 h-4 mx-1" src="/img/components/icon/twit.png" alt="icon twitter">
+                        <img class="lg:h-6 h-4 mx-1" src="/img/components/icon/whatsapp.png" alt="icon whatsapp">
+                        <img class="lg:h-6 h-4 mx-1" src="/img/components/icon/linkedin.png" alt="icon linkedin">
                     </div>
                     <div class="flex items-center font-paragraph text-primary mb-3">
-                        <img class="lg:h-10 h-6 mx-1" src="/img/components/icon/komen.png">
+                        <img class="lg:h-10 h-6 mx-1" src="/img/components/icon/komen.png" alt="komentar">
                         <div class="lg:mx-4 mx-2 lg:text-xl md:text-lg text-base font-bold"><?= $dataset['count_comments'] ?> Komentar</div>
                     </div>
                     <?php foreach ($dataset['comments'] as $dts) : ?>
 
                         <div class="flex items-center text-primary lg:mb-4 mb-3">
-                            <img class="lg:h-14 md:h-12 h-8 lg:mr-4 mr-2" src="<?= base_url('users/profile/' . $dts['image']) ?>">
+                            <img class="lg:h-14 md:h-12 h-8 lg:mr-4 mr-2" src="<?= base_url('users/profile/' . $dts['image']) ?>" alt="User profil">
                             <div class="bg-gray-200 lg:pl-6 pl-4 py-3 gap-x-2 rounded-lg w-full">
                                 <div class="flex justify-between">
                                     <div class="w-7/8">
@@ -264,7 +264,7 @@
                                         <div class="lg:text-base md:text-sm text-xs"><?= $dts['komentar'] ?></div>
                                     </div>
                                     <div class="w-1/8">
-                                        <img class="float-right lg:h-8 h-6" src="/  more.png">
+                                        <img class="float-right lg:h-8 h-6" src="/  more.png" alt="komentar lainnya">
 
                                     </div>
 
@@ -276,7 +276,7 @@
                         <div class="flex justify-end text-secondary lg:text-xl md:text-lg text-base lg:mb-8 md:mb-6 mb-4">Lihat semua komentar</div>
                     <?php endif; ?>
                     <div class="flex items-center text-primary mb-2">
-                        <img class="lg:h-14 md:h-12 h-8 lg:mr-4 mr-2" src="/img/components/icon/female-icon.png">
+                        <img class="lg:h-14 md:h-12 h-8 lg:mr-4 mr-2" src="/img/components/icon/female-icon.png" alt="icon user">
                         <textarea class="border-4 rounded-lg w-full shadow-lg px-4 py-4 mb-4 resize-none outline-none" placeholder="Tambah komentar Anda." name="tambahKomentar" id="tambahKomentar" cols="10" rows="5"></textarea>
                     </div>
                     <div class="flex justify-end lg:mb-12 mb-8">
@@ -301,14 +301,14 @@
                             </div>
                             <div class="lg:ml-4 md:ml-3 ml-2 lg:w-4/7 w-3/5">
                                 <a href="<?= base_url('user/viewBerita/' . $berita_popular[$i]['id']) ?>">
-                                    <h3 class="font-heading font-semibold text-primary lg:text-lg md:text-base text-sm"><?= $berita_popular[$i]['judul'] ?></h3>
+                                    <h3 class="font-heading font-semibold text-primary lg:text-base md:text-sm sm:text-base"><?= $berita_popular[$i]['judul'] ?></h3>
                                 </a>
                                 <div class="flex gap-x-1 items-center">
                                     <p class="text-xs text-primary lg:mb-2 mb-1"><?= $berita_popular[$i]['tanggal_publish'] ?></p>
                                 </div>
-                                <p class="lg:text-sm text-xs text-justify">
+                                <!-- <p class="lg:text-sm text-xs text-justify">
                                     <?= $berita_popular[$i]['konten'] ?>
-                                </p>
+                                </p> -->
                             </div>
                         </div>
                     <?php endfor; ?>
@@ -323,14 +323,14 @@
                             </div>
                             <div class="lg:ml-4 md:ml-3 ml-2 lg:w-4/7 w-3/5">
                                 <a href="<?= base_url('user/viewBerita/' . $berita[$i]['id']) ?>">
-                                    <h3 class="font-heading font-semibold text-primary lg:text-lg md:text-base text-sm"><?= $berita[$i]['tanggal_publish'] ?></h3>
+                                    <h3 class="font-heading font-semibold text-primary lg:text-base md:text-sm sm:text-base"><?= $berita[$i]['judul'] ?></h3>
                                 </a>
                                 <div class="flex gap-x-1 items-center">
                                     <p class="text-xs text-primary lg:mb-2 mb-1"><?= $berita[$i]['tanggal_publish'] ?></p>
                                 </div>
-                                <p class="lg:text-sm text-xs text-justify">
-                                    <?= $berita[$i]['konten'] ?>
-                                </p>
+                                <!-- <p class="lg:text-sm text-xs text-justify">
+                                <?= $berita[$i]['konten'] ?>
+                                </p> -->
                             </div>
                         </div>
                     <?php endfor; ?>

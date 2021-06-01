@@ -21,7 +21,7 @@
 
     <!-- loading -->
     <div class="loading flex fixed w-full h-screen z-50 transition-opacity duration-200">
-        <img src="/img/components/loading/load.gif" class="m-auto items-center md:w-96 sm:w-72 w-60">
+        <img src="/img/components/load.gif" class="m-auto items-center md:w-96 sm:w-72 w-60" alt="loading gif">
     </div>
     <!-- loading -->
     <!-- tombol kembali ke atas -->
@@ -44,6 +44,19 @@
             </div>
             <div id="nav" class="flex items-center z-10">
                 <ul class="flex relative">
+                    <a href="/developer/">
+                        <li class="bg-secondary text-white py-1.5 sm:px-1 md:w-24 text-center cursor-pointer border-secondary border-2 hover:text-secondary hover:bg-white transition-colors duration-300">BERANDA</li>
+                    </a>
+                    <li class="bg-secondary text-white py-1.5 sm:px-1 md:w-24 text-center cursor-pointer border-secondary border-2 hover:text-secondary hover:bg-white transition-colors duration-300 relative">API
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 inline" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                        </svg>
+                        <ul class="text-secondary absolute top-9 -left-0.5 overflow-hidden transition-all max-h-0 bg-white duration-300 menuWebService">
+                            <a href="/developer/dokumentasi">
+                                <li class="list hover:text-white py-1.5 text-left border-l-2 border-t-2 border-r-2 border-secondary transiton duration-300 px-3">DOKUMENTASI</li>
+                            </a>
+                        </ul>
+                    </li>
                     <a href="/login">
                         <li class="bg-secondary text-white sm:py-1.5 py-0.5 w-20 md:w-24 text-center cursor-pointer border-secondary border-2 hover:text-secondary hover:bg-white transition-colors duration-300">MASUK</li>
                     </a>
@@ -51,6 +64,55 @@
             </div>
         </div>
 
+        <svg id="hamburgerApi" class="w-8 select-none cursor-pointer fill-current block text-white hover:text-gray-200 focus:text-gray-200 sm:hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+
+    </div>
+
+    <div class="sm:hidden hidden menuWebService navbar" id="menuApi">
+        <div class="menu border-b flex justify-center">
+            <ul class="w-min">
+                <a href="/developer/">
+                    <li class="cursor-pointer flex justify-center text-white py-1">
+                        <div class="bg-secondary w-28 flex justify-center hover:bg-white hover:text-secondary py-0.5">BERANDA</div>
+                    </li>
+                </a>
+            </ul>
+        </div>
+        <div class="menu border-t border-b flex justify-center">
+            <ul class="w-min" id="navmobile">
+                <li class="cursor-pointer flex justify-center text-white py-1">
+                    <div class="bg-secondary w-28 flex justify-center hover:bg-white hover:text-secondary py-0.5">API<svg xmlns="http://www.w3.org/2000/svg" class="w-4 inline" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                        </svg></div>
+                </li>
+                <ul class="transform -translate-y-0.5 text-white w-screen flex flex-col items-center hidden block">
+                    <a href="/developer/dokumentasi">
+                        <li class="list m-auto hover:text-white bg-white text-center text-secondary text-sm py-0.5 w-44 border-b-2 border-gray-500">DOKUMENTASI</li>
+                    </a>
+                </ul>
+            </ul>
+        </div>
+        <div class="menu border-b flex justify-center">
+            <ul class="w-min">
+                <a href="/developer/edit/akun">
+                    <li class="cursor-pointer flex justify-center text-white py-1">
+                        <div class="bg-secondary w-28 flex justify-center hover:bg-white hover:text-secondary py-0.5">EDIT AKUN</div>
+                    </li>
+                </a>
+            </ul>
+        </div>
+        <div class="menu flex justify-center">
+            <ul class="w-min">
+                <a href="/login/">
+                    <li class="cursor-pointer flex justify-center text-white py-1">
+                        <div class="bg-secondary w-28 flex justify-center hover:bg-white hover:text-secondary py-0.5">MASUK</div>
+                    </li>
+                </a>
+            </ul>
+        </div>
+    </div>
     </div>
     <!-- END HEADER -->
     <div id="divKosong" class="bg-primary w-full md:h-20 sm:h-16 h-10"></div>

@@ -12,24 +12,6 @@ use \JKD\SSO\Client\Provider\Keycloak;
 class Home extends BaseController
 {
 
-	public function alumni()
-	{
-		$model = new \App\Models\AlumniModel();
-		$i = 1;
-		foreach ($model->db->table('pendidikan_tinggi')->get()->getResultArray() as $alumni) {
-			echo '
-			[<br>
-				"id_pendidikan" => "' . $alumni['id_pendidikan'] . '",<br>
-				"program_studi" => "' . $alumni['program_studi'] . '",<br>
-				"nim" => "' . $alumni['nim'] . '",<br>
-				"judul_tulisan" => "' . $alumni['judul_tulisan'] . '",<br>
-			],<br>';
-			// echo $i . " 	" . $alumni['id_pendidikan'] . "<br>";
-			$i++;
-		}
-		// dd($model->db->table('tempat_kerja')->get()->getResultArray());
-	}
-
 	public function index()
 	{
 		$this->modelAuth = new \App\Models\AuthModel();
@@ -78,7 +60,6 @@ class Home extends BaseController
 						$user = $provider->getResourceOwner($token);
 
 						// dd(var_dump($user->toArray()));	//cek result sso-bps
-						// die();
 
 						$curl = curl_init();
 						curl_setopt_array($curl, [
@@ -103,9 +84,9 @@ class Home extends BaseController
 							$riwayat_pendidikan = array();
 							foreach ($hasil as $data)
 								array_push($riwayat_pendidikan, $data->Nama_Instansi_Pendidikan);
-							if (in_array('Akademi Ilmu Statistik', $riwayat_pendidikan) || in_array('Sekolah Tinggi Ilmu Statistik', $riwayat_pendidikan) || in_array('Politeknin Statistika STIS', $riwayat_pendidikan)) {
+							if (in_array('Akademi Ilmu Statistik', $riwayat_pendidikan) || in_array('Sekolah Tinggi Ilmu Statistik', $riwayat_pendidikan) || in_array('Politeknik Statistika STIS', $riwayat_pendidikan)) {
 
-								$cek = $this->modelAlumni->getAlumniByEmail($user->getEmail());
+								$cek = $this->modelAlumni->getAlumniByNipBPS($user->getNip());
 
 								// binding session dengan database
 								if ($cek == NULL) {
@@ -122,20 +103,21 @@ class Home extends BaseController
 										'negara'      		 => "Indonesia",
 										'status_bekerja'     => $faker->boolean,
 										'perkiraan_pensiun'  => $faker->year,
-										'jabatan_terakhir'   => $faker->jobTitle,
+										'jabatan_terakhir'   => $user->getJabatan(),
 										'aktif_pns'          => $faker->boolean,
 										'deskripsi'          => $faker->text,
 										'email'				 => $user->getEmail(),
-										// 'ig'          		 => "",
-										// 'fb'          		 => "",
-										// 'twitter'          	 => "Dummy__",
 										'nip'          	 	 => $user->getNipBaru(),
 										'nip_bps'          	 => $user->getNip(),
-										'foto_profil'      	 => $user->getUrlFoto()
 									];
+									if ($data['jenis_kelamin'] == 'Lk')
+										$data['foto_profil'] = 'Lk/default.svg';
+									else
+										$data['foto_profil'] = 'Pr/default.svg';
+
 									$this->modelAlumni->db->table('alumni')->insert($data);
 
-									$cek = $this->modelAlumni->getAlumniByEmail($user->getEmail());
+									$cek = $this->modelAlumni->getAlumniByNipBPS($user->getNip());
 
 									// $data = [
 									// 	'nama_instansi' 	=> $faker->company,
@@ -154,30 +136,6 @@ class Home extends BaseController
 										'id_tempat_kerja' => 1,
 									];
 									$this->modelAlumni->db->table('alumni_tempat_kerja')->insert($data);
-
-									// $data = [
-									// 	'id_alumni'          => $user->getNip(),
-									// 	'nama'               => $user->getName(),
-									// 	'jenis_kelamin'      => $faker->randomElement($array = array('L', 'P')),
-									// 	'tempat_lahir'       => $faker->city,
-									// 	'tanggal_lahir'      => $faker->date($format = 'Y-m-d', $max = 'now'),
-									// 	'telp_alumni'        => $faker->phoneNumber,
-									// 	'email'              => $user->getEmail(),
-									// 	'alamat'             => $user->getKabupaten() . ', ' . $user->getProvinsi(),
-									// 	'status_bekerja'     => $faker->boolean,
-									// 	'perkiraan_pensiun'  => $faker->year,
-									// 	'jabatan_terakhir'   => $faker->jobTitle,
-									// 	'aktif_pns'          => $faker->boolean,
-									// 	'nip'				 => $user->getNipBaru(),
-									// 	'nip_bps'            => $user->getNip()
-									// ];
-									// $this->modelAlumni->db->table('alumni')->insert($data);
-
-									// $data = [
-									// 	'nim'             => $user->getNip(),
-									// 	'id_tempat_kerja' => $faker->numberBetween($min = 1, $max = 100),
-									// ];
-									// $this->modelAlumni->db->table('alumni_tempat_kerja')->insert($data);
 								}
 
 								// $cek = $this->modelAlumni->getAlumniByEmail($user->getEmail());
@@ -198,12 +156,6 @@ class Home extends BaseController
 									];
 									$this->modelAuth->insertUser($data);
 								}
-								//  else {
-								// 	date_default_timezone_set("Asia/Bangkok");
-								// 	$now = date("Y-m-d H:i:s");
-								// 	$email = $user->getEmail();
-								// 	$this->modelAuth->isLogin($now, $email);
-								// }
 
 								$hasil = $this->modelAuth->getUserByUsername($user->getUsername());
 
@@ -267,7 +219,7 @@ class Home extends BaseController
 								$alert = "<div id=\"alert\">
 									<div class=\"fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40\">
 										<div class=\"duration-700 transition-all p-3 rounded-lg flex items-center\" style=\"background-color: #FF7474;\">
-											<img src=\"/img/components/icon/warning.png\" class=\"h-5 mr-2\" style=\"color: #C51800;\">
+											<img src=\"/img/components/icon/warning.png\" class=\"h-5 mr-2\" style=\"color: #C51800;\" alt=\"Warning\">
 											<p class=\"sm:text-base text-sm font-heading font-bold\">" . $flash . "</p>
 										</div>
 									</div>
@@ -282,25 +234,6 @@ class Home extends BaseController
 								]);
 							}
 						}
-
-						// echo "Id : " . $user->getId();
-						// echo "Nama : " . $user->getName();
-						// echo "Nama Depan: " . $user->getnamaDepan();
-						// echo "Nama Belakang: " . $user->getnamaBelakang();
-						// echo "E-Mail : " . $user->getEmail();
-						// echo "Username : " . $user->getUsername();
-						// echo "NIP : " . $user->getNip();
-						// echo "NIP Baru : " . $user->getNipBaru();
-						// echo "Kode Organisasi : " . $user->getKodeOrganisasi();
-						// echo "Kode Provinsi : " . $user->getKodeProvinsi();
-						// echo "Kode Kabupaten : " . $user->getKodeKabupaten();
-						// echo "Alamat Kantor : " . $user->getAlamatKantor();
-						// echo "Provinsi : " . $user->getProvinsi();
-						// echo "Kabupaten : " . $user->getKabupaten();
-						// echo "Golongan : " . $user->getGolongan();
-						// echo "Jabatan : " . $user->getJabatan();
-						// echo "Foto : " . $user->getUrlFoto();
-						// echo "Eselon : " . $user->getEselon();
 					} catch (Exception $e) {
 						exit('Gagal Mendapatkan Data Pengguna: ' . $e->getMessage());
 					}
@@ -379,9 +312,6 @@ class Home extends BaseController
 							'aktif_pns'          => $faker->boolean,
 							'deskripsi'          => $faker->text,
 							'email'				 => $user['nim'] . "@stis.ac.id",
-							// 'ig'          		 => "",
-							// 'fb'          		 => "",
-							// 'twitter'          	 => "Dummy__",
 							'nip'          	 	 => $faker->creditCardNumber,
 							'nip_bps'          	 => $user['nim'],
 							'foto_profil'      	 => "default.svg"
@@ -390,47 +320,11 @@ class Home extends BaseController
 
 						$cek = $this->modelAlumni->getAlumniByEmail($user['nim'] . "@stis.ac.id");
 
-						// $data = [
-						// 	'nama_instansi' 	=> $faker->company,
-						// 	'kota'      	 	=> $faker->city,
-						// 	'provinsi'      	=> $faker->state,
-						// 	'negara'      		=> $faker->country,
-						// 	'alamat_instansi' 	=> $faker->address,
-						// 	'telp_instansi' 	=> $faker->phoneNumber,
-						// 	'faks_instansi' 	=> $faker->phoneNumber,
-						// 	'email_instansi' 	=> $faker->companyEmail,
-						// ];
-						// $this->modelAlumni->db->table('tempat_kerja')->insert($data);
-
 						$data = [
 							'id_alumni'       => $cek['id_alumni'],
 							'id_tempat_kerja' => 1,
 						];
 						$this->modelAlumni->db->table('alumni_tempat_kerja')->insert($data);
-
-						// $data = [
-						// 	'nim'                => $user['nim'],
-						// 	'angkatan'           => $faker->numberBetween($min = 1, $max = 62),
-						// 	'nama'               => $user['nama'],
-						// 	'jenis_kelamin'      => $faker->randomElement($array = array('L', 'P')),
-						// 	'tempat_lahir'       => $faker->city,
-						// 	'tanggal_lahir'      => $faker->date($format = 'Y-m-d', $max = 'now'),
-						// 	'telp_alumni'        => $faker->phoneNumber,
-						// 	'email'              => $user['nim'] . "@stis.ac.id",
-						// 	'alamat'             => $faker->address,
-						// 	'status_bekerja'     => $faker->boolean,
-						// 	'perkiraan_pensiun'  => $faker->year,
-						// 	'jabatan_terakhir'   => $faker->jobTitle,
-						// 	'aktif_pns'          => $faker->boolean,
-						// 	'nip_bps'            => $user['nim']
-						// ];
-						// $this->modelAlumni->db->table('alumni')->insert($data);
-
-						// $data = [
-						// 	'nim'             => $user['nim'],
-						// 	'id_tempat_kerja' => $faker->numberBetween($min = 1, $max = 100),
-						// ];
-						// $this->modelAlumni->db->table('alumni_tempat_kerja')->insert($data);
 					}
 
 					//insert new user sipadu (mahasiswa)
@@ -510,12 +404,11 @@ class Home extends BaseController
 				} else {	//apabila alumni memakai akun dosen
 					/* KATANYA LANGSUNG ALERT AJA */
 					// session()->setFlashdata('pesan', 'Silahkan gunakan akun Sipadu Mahasiswa atau akun BPS, atau hubungi admin website');
-					// echo '<script>alert(\'Silahkan gunakan akun Sipadu Mahasiswa atau akun BPS, atau hubungi admin website\')</script>';
 					$flash = '<strong>Login gagal!</strong> silahkan gunakan akun Sipadu Mahasiswa atau akun BPS, atau hubungi admin website.';
 					$alert = "<div id=\"alert\">
 									<div class=\"fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40\">
 										<div class=\"duration-700 transition-all p-3 rounded-lg flex items-center\" style=\"background-color: #FF7474;\">
-											<img src=\"/img/components/icon/warning.png\" class=\"h-5 mr-2\" style=\"color: #C51800;\">
+											<img src=\"/img/components/icon/warning.png\" class=\"h-5 mr-2\" style=\"color: #C51800;\" alt=\"Warning\">
 											<p class=\"sm:text-base text-sm font-heading font-bold\">" . $flash . "</p>
 										</div>
 									</div>
@@ -548,7 +441,6 @@ class Home extends BaseController
 		}
 
 		return view('websia/kontenWebsia/halamanUtama/beranda', $data);
-		// return view('pages/dashboard', $data);
 	}
 
 	public function recordLoginAttempt(string $email, string $ipAddress = null, int $userID = null, bool $success)
