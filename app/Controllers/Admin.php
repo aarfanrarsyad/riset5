@@ -122,6 +122,7 @@ class Admin extends BaseController
 		// Validate here first, since some things,
 		// like the password, can only be validated properly here.
 		$rules = [
+			'id_alumni'		=> 'permit_empty|numeric',
 			'fullname'      => 'required',
 			// 'nim'           => 'exact_length[9]|is_unique[users.nim]',
 			'email'			=> 'required|valid_email|is_unique[users.email]',
@@ -133,8 +134,15 @@ class Admin extends BaseController
 		if (!$this->validate($rules)) return redirect()->back()->withInput()->with('errors', service('validation')->getErrors());
 
 		// Save the user
-		$allowedPostFields = array_merge(['password'], $this->config->validFields, $this->config->personalFields);
+		if ($_POST['id_alumni'] == '') {
 
+			$allowedPostFields = array_merge(['password'], $this->config->validFields, $this->config->personalFields);
+		} else {
+			$allowedPostFields = array_merge(['password', 'id_alumni'], $this->config->validFields, $this->config->personalFields);
+		}
+
+
+		// dd($_POST);
 		$user = new User($this->request->getPost($allowedPostFields));
 
 		$this->config->requireActivation !== false ? $user->generateActivateHash() : $user->activate();

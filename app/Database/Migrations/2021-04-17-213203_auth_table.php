@@ -15,7 +15,7 @@ class AuthTable extends Migration
 			'id'               => ['type' => 'int', 'constraint' => 11, 'unsigned' => true, 'auto_increment' => true],
 			'email'            => ['type' => 'varchar', 'constraint' => 255],
 			'username'         => ['type' => 'varchar', 'constraint' => 30, 'null' => true],
-			'id_alumni'        => ['type' => 'int', 'constraint' => 6, 'null' => true],
+			'id_alumni'        => ['type' => 'int', 'constraint' => 6, 'default' => NULL, 'null' => true],
 			'fullname'         => ['type' => 'varchar', 'constraint' => 255],
 			'user_image'       => ['type' => 'varchar', 'constraint' => 255],
 			'password_hash'    => ['type' => 'varchar', 'constraint' => 255, 'null' => true],

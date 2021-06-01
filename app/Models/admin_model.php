@@ -33,7 +33,7 @@ class admin_model extends Model
      */
     public function getAllUsers()
     {
-        $query = "SELECT id,fullname,email,created_at,updated_at,active FROM users";
+        $query = "SELECT id,id_alumni,fullname,email,created_at,updated_at,active FROM users";
         return $this->db->query($query);
     }
 
@@ -54,7 +54,7 @@ class admin_model extends Model
      */
     public function getUserById($id)
     {
-        $query = "SELECT id,fullname,id_alumni,email,created_at,updated_at,active,user_image FROM users WHERE id = $id";
+        $query = "SELECT id,id_alumni,fullname,email,created_at,updated_at,active,user_image FROM users WHERE id = $id";
         return $this->db->query($query);
     }
 
