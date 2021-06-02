@@ -205,15 +205,26 @@ if ($status == 'bukan user') {
 <!-- Awal Rekomendasi -->
 <div class="bg-primary py-8 md:py-4 lg:px-20 md:px-8 px-3">
     <div class="static md:w-full md:px-2 md:py-8 pb-8">
-        <div class="-mt-16 sm:mt-0 md:mb-6 mb-2 text-center md:text-left text-secondary font-semibold">
-            <!-- link ini mengarah ke halaman tampilan semua rekomendasi -->
+
+        <!-- <div class="md:mb-6 mb-2 text-left text-secondary font-semibold">
             <div class="invisible sm:visible">
-                <a class="bg-secondary mb-8 mt-1 md:mt-0 float-right font-paragraph text-sm text-white text-center py-1 px-4 mx-auto rounded-full cursor-pointer hover:bg-secondaryhover transition-colors duration-100" href="/User/rekomendasi">
+                <a class="bg-secondary mb-8 mt-1 md:mt-0 font-paragraph text-sm text-white text-center py-1 px-4 mx-auto rounded-full cursor-pointer hover:bg-secondaryhover transition-colors duration-100" href="/User/rekomendasi">
                     Lihat Semua Rekomendasi
                     <img src="/img/components/icon/panah_kanan.png" alt="icon panah kanan" class="float-right pl-2">
                 </a>
             </div>
-            <h2 class="font-heading mb-6 text-xl inline-block">Alumni yang mungkin Anda kenal</h2>
+            <h2 class="font-heading mb-6 ml-2 text-base sm:text-xl">Alumni yang mungkin Anda kenal</h2>
+        </div> -->
+
+        <div class="-mt-8 sm:mt-0 md:mb-6 mb-2 text-left text-secondary font-semibold">
+            <!-- link ini mengarah ke halaman tampilan semua rekomendasi -->
+            <div class="invisible sm:visible">
+                <a class="bg-secondary mb-8 mt-1 md:mt-0 sm:float-right font-paragraph text-sm text-white text-center py-1 px-4 mx-auto rounded-full cursor-pointer hover:bg-secondaryhover transition-colors duration-100" href="/User/rekomendasi">
+                    Lihat Semua Rekomendasi
+                    <img src="/img/components/icon/panah_kanan.png" alt="icon panah kanan" class="float-right pl-2">
+                </a>
+            </div>
+            <h2 class="font-heading mb-6 ml-2 text-base sm:text-xl inline-block">Alumni yang mungkin Anda kenal</h2>
         </div>
         <div class="holder mx-auto w-11/12 md:w-full lg:w-11/12 grid grid-cols-2 md:grid-cols-4 gap-x-4 md:gap-x-0 lg:gap-x-8" data-aos="zoom-in">
             <?php foreach ($rekomendasi as $row) :  ?>
@@ -240,9 +251,9 @@ if ($status == 'bukan user') {
             <?php endforeach; ?>
         </div>
         <div class="visible sm:invisible">
-            <a class="bg-secondary mb-8 mt-1 md:mt-0 float-right font-paragraph text-sm text-white text-center py-1 px-4 mx-auto rounded-full cursor-pointer hover:bg-secondaryhover transition-colors duration-300" href="/User/rekomendasi">
-                Lihat Semua Rekomendasi
-                <img src="/img/components/icon/g" alt="lihat semua rekomendasi" class="float-right pl-2">
+            <a class="bg-secondary mb-8 -mt-14 mr-2 md:mt-0 float-right font-paragraph text-sm text-white text-center py-1 px-4 mx-auto rounded-full cursor-pointer hover:bg-secondaryhover transition-colors duration-300" href="/User/rekomendasi">
+                Lihat Semua
+                <img src="/img/components/icon/panah_kanan.png" alt="lihat semua rekomendasi" class="float-right pl-2">
             </a>
         </div>
     </div>
@@ -414,23 +425,27 @@ if ($status == 'bukan user') {
         </div>
     </div>
     <!-- Akhir Riwayat Pendidikan -->
+    <hr class="visible sm:invisible border-primary border-opacity-75 w-4/5 object-center mx-auto mt-8">
 
-    <!-- Awal Foto Tentang Anda -->
-    <div class="w-full my-8 lg:px-20 md:px-8 px-2">
-        <div class="font-heading">
-            <!-- link ini mengarah ke halaman tampilan semua galeri -->
-            <div class="invisible sm:visible">
-                <a class="bg-secondary mb-8 md:mt-0 float-right font-paragraph text-sm text-white text-center py-1 px-4 mx-auto rounded-full cursor-pointer hover:bg-secondaryhover transition-colors duration-100" href="/User/galeriFoto">
-                    Lihat Semua Foto
-                    <img src="/img/components/icon/panah_kanan.png" alt="icon panah kanan" class="float-right pl-2">
-                </a>
-            </div>
+<?php } ?>
+
+<!-- Awal Foto Tentang Anda -->
+<div class="w-full my-8 lg:px-20 md:px-8 px-2">
+    <div class="font-heading">
+        <!-- link ini mengarah ke halaman tampilan semua galeri -->
+        <div class="invisible sm:visible">
+            <a class="bg-secondary mb-8 mt-1 md:mt-0 float-right font-paragraph text-sm text-white text-center py-1 px-4 mx-auto rounded-full cursor-pointer hover:bg-secondaryhover transition-colors duration-100" href="/User/galeriFoto">
+                Lihat Semua Foto
+                <img src="/img/components/icon/panah_kanan.png" alt="icon panah kanan" class="float-right pl-2">
+            </a>
         </div>
-        <h3 class="font-heading font-bold text-xl text-center md:text-left text-secondary inline-block">Foto Tentang Anda</h3>
-        <div class="md:shadow-lg lg:shadow-xl rounded-2xl px-3 py-3 md:px-7 md:py-5 lg:mx-14 lg:py-8 lg:px-11 md:mt-3">
-            <?php for ($x = 0; $x < 6; $x++) : ?>
-                <!-- 1 gambar -->
-                <!-- <a href="#img-1" id="img-1">
+    </div>
+    <h3 class="font-heading ml-2 font-bold text-xl text-center md:text-left text-secondary inline-block">Foto Tentang Anda</h3>
+
+    <div class="md:shadow-lg lg:shadow-xl rounded-2xl px-3 py-3 md:px-7 md:py-5 lg:mx-14 lg:py-8 lg:px-11 md:mt-3">
+        <?php for ($x = 0; $x < 6; $x++) : ?>
+            <!-- 1 gambar -->
+            <!-- <a href="#img-1" id="img-1">
                         <div class="rounded-3xl m-2 relative hover:shadow-xl transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105 cursor-pointer">
                             <img id="slide" class="object-cover w-96 h-48 object-fit rounded-3xl mx-auto" src="/img/components/alumni.jpg" alt="" />
                         </div>
@@ -501,127 +516,129 @@ if ($status == 'bukan user') {
                 // });
             })
         </script> -->
-            <?php endfor; ?>
+        <?php endfor; ?>
 
-            <?php if ($foto == null) : ?>
-                <tr>
-                    <td class="text-sm text-center border-b-2 border-gray-200 px-3 lg:px-5 py-2 md:py-3 lg:py-4">Belum terdapat foto yang berhubungan dengan anda.</td>
-                </tr>
-            <?php else : ?>
-                <div class="holder mx-auto w-11/12 md:w-full lg:w-11/12 grid grid-cols-2 md:grid-cols-3 gap-x-4 md:gap-x-0 lg:gap-x-8">
-                    <?php for ($i = 0; $i < 6; $i++) :
-                        if (isset($foto[$i])) : ?>
-                            <!-- 1 gambar -->
-                            <a onclick="clicked(<?= $i ?>)" href="#<?= $foto[$i]['id_foto']; ?>" id="foto<?= $foto[$i]['id_foto']; ?>">
+        <?php if ($foto == null) : ?>
+            <p class="text-sm text-center px-3 lg:px-5 sm:mt-4 mt-10 pb-2 lg:py-4"> Belum terdapat foto yang berhubungan dengan anda.
+            </p>
+            <!-- <tr>
+                <td class="text-sm text-center border-b-2 border-gray-200 px-3 lg:px-5 py-2 md:py-3 lg:py-4">Belum terdapat foto yang berhubungan dengan anda.</td>
+            </tr> -->
+        <?php else : ?>
+            <div class="holder mx-auto w-11/12 md:w-full lg:w-11/12 grid grid-cols-2 md:grid-cols-3 gap-x-4 md:gap-x-0 lg:gap-x-8">
+                <?php for ($i = 0; $i < 6; $i++) :
+                    if (isset($foto[$i])) : ?>
+                        <!-- 1 gambar -->
+                        <a onclick="clicked(<?= $i ?>)" href="#<?= $foto[$i]['id_foto']; ?>" id="foto<?= $foto[$i]['id_foto']; ?>">
 
-                                <!-- <a href="#<?= $foto[$i]['id_foto']; ?>" id="foto<?= $foto[$i]['id_foto']; ?>"> -->
-                                <div class="rounded-3xl m-2 relative hover:shadow-xl transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105 cursor-pointer">
-                                    <img id="slide" class="object-cover w-96 h-48 object-fit rounded-3xl mx-auto" src="<?= base_url() ?>/img/galeri/<?= $foto[$i]['nama_file']; ?>" alt="foto yang ditandai" />
-                                </div>
-                            </a>
-                            <!-- <php endfor; ?> -->
+                            <!-- <a href="#<?= $foto[$i]['id_foto']; ?>" id="foto<?= $foto[$i]['id_foto']; ?>"> -->
+                            <div class="rounded-3xl m-2 relative hover:shadow-xl transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105 cursor-pointer">
+                                <img id="slide" class="object-cover w-96 h-48 object-fit rounded-3xl mx-auto" src="<?= base_url() ?>/img/galeri/<?= $foto[$i]['nama_file']; ?>" alt="foto yang ditandai" />
+                            </div>
+                        </a>
+                        <!-- <php endfor; ?> -->
 
-                            <div class="fixed overflow-auto top-0 bottom-0 right-0 left-0 z-40 bg-black bg-opacity-80 text-center font-paragraph hidden" id="<?= $foto[$i]['id_foto']; ?>">
-                                <div class="m-auto duration-700 transition-all bg-gray bg-opacity-0 w-11/12 sm:w-9/12 md:w-8/12 lg:w-7/12">
-                                    <!-- Awal Tombol Laporkan foto -->
-                                    <button onClick="laporkanFoto(<?= $foto[$i]['id_foto']; ?>)"><img src="<?= base_url() ?>/img/components/icon/danger-sign.png" alt="laporkan foto" class="absolute top-3 right-3"></button>
-                                    <!-- Akhir Tombol Laporkan foto -->
+                        <div class="fixed overflow-auto top-0 bottom-0 right-0 left-0 z-40 bg-black bg-opacity-80 text-center font-paragraph hidden" id="<?= $foto[$i]['id_foto']; ?>">
+                            <div class="m-auto duration-700 transition-all bg-gray bg-opacity-0 w-11/12 sm:w-9/12 md:w-8/12 lg:w-7/12">
+                                <!-- Awal Tombol Laporkan foto -->
+                                <button onClick="laporkanFoto(<?= $foto[$i]['id_foto']; ?>)"><img src="<?= base_url() ?>/img/components/icon/danger-sign.png" alt="laporkan foto" class="absolute top-3 right-3"></button>
+                                <!-- Akhir Tombol Laporkan foto -->
 
-                                    <div class="flex flex-col justify-center items-center">
-                                        <div class="flex flex-row justify-center items-center gap-x-4 mt-8 mb-6">
-                                            <a>
-                                                <img src="<?= base_url() ?>/img/components/icon/left-on.png" alt="foto sebelumnya" class="" onclick="prev('img-<?= $foto[$i]['id_foto']; ?>')" id="prev">
-                                            </a>
-                                            <img src="<?= base_url() ?>/img/galeri/<?= $foto[$i]['nama_file']; ?>" alt="<?= $foto[$i]['nama_file']; ?>" class="slider-img w-3/4" id="img-<?= $foto[$i]['id_foto']; ?>">
-                                            <a>
-                                                <img src="<?= base_url() ?>/img/components/icon/right-on.png" alt="foto selanjutnya" class="" onclick="next('img-<?= $foto[$i]['id_foto']; ?>')" id="next">
-                                            </a>
-                                            <!-- <a href="#<?= $foto[$i]['id_foto'] - 1; ?>">
+                                <div class="flex flex-col justify-center items-center">
+                                    <div class="flex flex-row justify-center items-center gap-x-4 mt-8 mb-6">
+                                        <a>
+                                            <img src="<?= base_url() ?>/img/components/icon/left-on.png" alt="foto sebelumnya" class="cursor-pointer" onclick="prev('img-<?= $foto[$i]['id_foto']; ?>')" id="prev">
+                                        </a>
+                                        <img src="<?= base_url() ?>/img/galeri/<?= $foto[$i]['nama_file']; ?>" alt="<?= $foto[$i]['nama_file']; ?>" class="slider-img w-3/4" id="img-<?= $foto[$i]['id_foto']; ?>">
+                                        <a>
+                                            <img src="<?= base_url() ?>/img/components/icon/right-on.png" alt="foto selanjutnya" class="cursor-pointer" onclick="next('img-<?= $foto[$i]['id_foto']; ?>')" id="next">
+                                        </a>
+                                        <!-- <a href="#<?= $foto[$i]['id_foto'] - 1; ?>">
                                                 <img src="<?= base_url() ?>/img/components/icon/left-on.png" alt="foto sebelumnya" class="" onclick="prev()" id="prev">
                                             </a>
                                             <img src="<?= base_url() ?>/img/galeri/<?= $foto[$i]['nama_file']; ?>" alt="<?= $foto[$i]['nama_file']; ?>" class="slider-img w-3/4">
                                             <a href="#<?= $foto[$i]['id_foto'] + 1; ?>">
                                                 <img src="<?= base_url() ?>/img/components/icon/right-on.png" alt="foto berikutnya" class="" onclick="next()" id="next">
                                             </a> -->
-                                        </div>
+                                    </div>
 
-                                        <!-- Awal Caption -->
-                                        <div class="text-white w-3/4 h-3/4 mx-2 text-base">
-                                            <!-- <p class="mb-2">Oleh : Si Fulan (59)</p> -->
-                                            <p class="mb-2">Oleh : <?= $foto[$i]['nama'] ?></p>
-                                            <!-- <p class="">Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam impedit optio praesentium soluta quasi. Voluptatibus molestias sequi inventore odit voluptas pariatur a ut, totam obcaecati accusamus iure, labore dolorum dolor.</p> -->
-                                            <p class="mt-4"><?= $foto[$i]['caption'] ?></p>
-                                            <div class="mt-5 text-gray-400 text-center">
-                                                <?php if (count($foto[$i]['tag_name']) > 1) : ?>
-                                                    <span> <img src="<?= base_url() ?>/img/components/icon/line.png" alt="icon tag foto" class="inline mr-1"> bersama </span> <span class=" text-white"><?= $foto[$i]['tag_name'][0]['nama'] ?> </span> <span> dan</span> <span class="text-white"> <?= count($foto[$i]['tag_name']) - 1 ?> lainnya</span> <span><img src="<?= base_url() ?>/img/components/icon/down.png" alt="daftar tag" class="daftarTag inline ml-1 rounded-full w-4 hover:bg-secondary cursor-pointer" onclick="daftarTag()">
-                                                    </span>
-                                                    <!-- Awal Tampilan Daftar Tag -->
-                                                    <div class="tampilTag hidden relative" id="tampilTag">
-                                                        <div class="static mt-2 p-2 rounded-2xl overflow-y-auto ml-64 sm:ml-64 md:ml-80 lg:96 bg-primary w-32 md:w-36 position-right text-white text-xs md:text-sm">
-                                                            <ul class="bg-primary">
-                                                                <?php for ($n = 1; $n < count($foto[$i]['tag_name']); $n++) : ?>
-                                                                    <li><?= $foto[$i]['tag_name'][$n]['nama'] ?></li>
-                                                                <?php endfor ?>
-                                                            </ul>
-                                                        </div>
+                                    <!-- Awal Caption -->
+                                    <div class="text-white w-3/4 h-3/4 mx-2 text-base">
+                                        <!-- <p class="mb-2">Oleh : Si Fulan (59)</p> -->
+                                        <p class="mb-2">Oleh : <?= $foto[$i]['nama'] ?></p>
+                                        <!-- <p class="">Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam impedit optio praesentium soluta quasi. Voluptatibus molestias sequi inventore odit voluptas pariatur a ut, totam obcaecati accusamus iure, labore dolorum dolor.</p> -->
+                                        <p class="mt-4"><?= $foto[$i]['caption'] ?></p>
+                                        <div class="mt-5 text-gray-400 text-center">
+                                            <?php if (count($foto[$i]['tag_name']) > 1) : ?>
+                                                <span> <img src="<?= base_url() ?>/img/components/icon/line.png" alt="icon tag foto" class="inline mr-1"> bersama </span> <span class=" text-white"><?= $foto[$i]['tag_name'][0]['nama'] ?> </span> <span> dan</span> <span class="text-white"> <?= count($foto[$i]['tag_name']) - 1 ?> lainnya</span> <span><img src="<?= base_url() ?>/img/components/icon/down.png" alt="daftar tag" class="daftarTag inline ml-1 rounded-full w-4 hover:bg-secondary cursor-pointer" onclick="daftarTag()">
+                                                </span>
+                                                <!-- Awal Tampilan Daftar Tag -->
+                                                <div class="tampilTag hidden relative" id="tampilTag">
+                                                    <div class="static mt-2 p-2 rounded-2xl overflow-y-auto ml-64 sm:ml-64 md:ml-80 lg:96 bg-primary w-32 md:w-36 position-right text-white text-xs md:text-sm">
+                                                        <ul class="bg-primary">
+                                                            <?php for ($n = 1; $n < count($foto[$i]['tag_name']); $n++) : ?>
+                                                                <li><?= $foto[$i]['tag_name'][$n]['nama'] ?></li>
+                                                            <?php endfor ?>
+                                                        </ul>
                                                     </div>
-                                                <?php elseif (count($foto[$i]['tag_name']) < 1) : ?>
-                                                    <span> <img src="<?= base_url() ?>/img/components/icon/line.png" alt="icon tag foto" class="inline mr-1"> bersama </span> <span class=" text-white"><?= $foto[$i]['tag_name'][0]['nama'] ?> </span>
-                                                    </span>
-                                                <?php else : ?>
-                                                <?php endif ?>
-                                                <!-- Akhir Tampilan Daftar Tag -->
-                                            </div>
-
-                                        </div>
-                                        <!-- Akhir Caption -->
-
-                                        <div class="text-white w-3/4 mx-2 mt-10 md:text-xl">
-                                            <p class="mb-2">
-                                                <?= ($i + 1) ?> dari <?= $count ?></p>
+                                                </div>
+                                            <?php elseif (count($foto[$i]['tag_name']) < 1) : ?>
+                                                <span> <img src="<?= base_url() ?>/img/components/icon/line.png" alt="icon tag foto" class="inline mr-1"> bersama </span> <span class=" text-white"><?= $foto[$i]['tag_name'][0]['nama'] ?> </span>
+                                                </span>
+                                            <?php else : ?>
+                                            <?php endif ?>
+                                            <!-- Akhir Tampilan Daftar Tag -->
                                         </div>
 
                                     </div>
+                                    <!-- Akhir Caption -->
+
+                                    <div class="text-white w-3/4 mx-2 mt-10 md:text-xl">
+                                        <p class="mb-2">
+                                            <?= ($i + 1) ?> dari <?= $count ?></p>
+                                    </div>
+
                                 </div>
                             </div>
-                            <script>
-                                $('#foto<?= $foto[$i]['id_foto']; ?>').click(function() {
-                                    var modal = document.getElementById('<?= $foto[$i]['id_foto']; ?>')
-                                    $('#<?= $foto[$i]['id_foto']; ?>').removeClass('hidden')
-                                    $(window).click(function(e) {
-                                        if (e.target === modal) {
-                                            setTimeout(function() {
-                                                $('#<?= $foto[$i]['id_foto']; ?>').addClass('hidden')
-                                            }, 100);
-                                        }
-                                    });
+                        </div>
+                        <script>
+                            $('#foto<?= $foto[$i]['id_foto']; ?>').click(function() {
+                                var modal = document.getElementById('<?= $foto[$i]['id_foto']; ?>')
+                                $('#<?= $foto[$i]['id_foto']; ?>').removeClass('hidden')
+                                $(window).click(function(e) {
+                                    if (e.target === modal) {
+                                        setTimeout(function() {
+                                            $('#<?= $foto[$i]['id_foto']; ?>').addClass('hidden')
+                                        }, 100);
+                                    }
+                                });
 
-                                    // $('.closeFormUnggahFoto').click(function() {
-                                    //     setTimeout(function() {
-                                    //         $('#formUnggahFoto').addClass('hidden')
-                                    //     }, 100);
-                                    // });
-                                })
-                            </script>
+                                // $('.closeFormUnggahFoto').click(function() {
+                                //     setTimeout(function() {
+                                //         $('#formUnggahFoto').addClass('hidden')
+                                //     }, 100);
+                                // });
+                            })
+                        </script>
                 <?php else :
-                            break;
-                        endif;
-                    endfor;
-                endif; ?>
+                        break;
+                    endif;
+                endfor; ?>
+            </div>
+        <?php endif; ?>
 
-                </div>
-                <div class="visible sm:invisible">
-                    <a class="bg-secondary mb-8 mt-1 md:mt-0 float-right font-paragraph text-sm text-white text-center py-1 px-4 mx-auto rounded-full cursor-pointer hover:bg-secondaryhover transition-colors duration-300" href="/User/rekomendasi">
-                        Lihat Semua foto
-                        <img src="/img/components/icon/g" alt="lihat semua foto" class="float-right pl-2">
-                    </a>
-                </div>
-        </div>
+
     </div>
-    <hr class="visible sm:invisible border-primary border-opacity-75 w-4/5 object-center mx-auto mt-8">
+    <div class="visible sm:invisible">
+        <a class="bg-secondary mb-8 -mt-28 mr-2 sm:mt-0 float-right font-paragraph text-sm text-white text-center py-1 px-4 mx-auto rounded-full cursor-pointer hover:bg-secondaryhover transition-colors duration-300" href="/User/rekomendasi">
+            Lihat Semua
+            <img src="/img/components/icon/panah_kanan.png" alt="lihat semua foto" class="float-right pl-2">
+        </a>
     </div>
-    <!-- Akhir Foto Tentang Anda -->
-<?php } ?>
+</div>
+<hr class="visible sm:invisible border-primary border-opacity-75 w-4/5 object-center mx-auto mt-8">
+</div>
+<!-- Akhir Foto Tentang Anda -->
 
 <script>
     var images = [];

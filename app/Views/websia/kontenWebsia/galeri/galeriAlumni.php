@@ -45,11 +45,11 @@
                         <div class="flex flex-col justify-center items-center">
                             <div class="flex flex-row justify-center items-center gap-x-4 mt-8 mb-6">
                                 <a>
-                                    <img src="<?= base_url() ?>/img/components/icon/left-on.png" alt="foto sebelumnya" class="" onclick="prev('img-<?= $foto['id_foto']; ?>')" id="prev">
+                                    <img src="<?= base_url() ?>/img/components/icon/left-on.png" alt="foto sebelumnya" class="cursor-pointer" onclick="prev('img-<?= $foto['id_foto']; ?>')" id="prev">
                                 </a>
                                 <img src="<?= base_url() ?>/img/galeri/<?= $foto['nama_file']; ?>" alt="<?= $foto['nama_file']; ?>" class="slider-img w-3/4" id="img-<?= $foto['id_foto']; ?>">
                                 <a>
-                                    <img src="<?= base_url() ?>/img/components/icon/right-on.png" alt="foto selanjutnya" class="" onclick="next('img-<?= $foto['id_foto']; ?>')" id="next">
+                                    <img src="<?= base_url() ?>/img/components/icon/right-on.png" alt="foto selanjutnya" class="cursor-pointer" onclick="next('img-<?= $foto['id_foto']; ?>')" id="next">
                                 </a>
                             </div>
 
