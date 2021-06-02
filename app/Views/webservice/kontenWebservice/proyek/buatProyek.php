@@ -11,12 +11,20 @@
                     <!-- start form buat proyek -->
                     <form action="<?php echo base_url('/Webservice/insertProyek'); ?>" method="post" class="lg:text-base md:text-sm text-xs">
                         <label for="nama" class="font-bold text-secondary lg:text-lg md:text-base text-sm">Nama*</label>
+                        <p class="text-xs text-red-500 text-justify" id="errorNamaProyek">
+                            Nama proyek harus diisi.
+                        </p>
                         <input type="text" name="nama" id="nama" placeholder="Nama Proyek" class="inputForm lg:mb-4" required>
-
                         <label for="deskripsi" class="font-bold text-secondary lg:text-lg md:text-base text-sm">Deskripsi*</label>
+                        <p class="text-xs text-red-500 text-justify" id="errorDescProyek">
+                            Deskripsi proyek harus diisi.
+                        </p>
                         <textarea name="deskripsi" id="deskripsi" cols="50" rows="5" class="inputForm lg:mb-4" placeholder="Masukkan Deskripsi Proyek" required></textarea>
                         <div>
                             <label for="scope" class="font-bold text-secondary lg:text-lg md:text-base text-sm">API*</label>
+                            <p class="text-xs text-red-500 text-justify" id="errorNamaProyek">
+                                Pilih minimum satu data yang diinginkan.
+                            </p>
                             <!-- start scope webservice -->
                             <div>
                                 <?php foreach ($scope_app as $key => $data) { ?>

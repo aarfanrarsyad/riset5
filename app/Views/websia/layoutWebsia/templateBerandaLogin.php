@@ -71,11 +71,6 @@
                                     BERANDA
                                 </div>
                             </a>
-                            <a href="/developer/">
-                                <div class="nav-menu transition-colors duration-300 <?= ($active == 'profil') ? 'activeMenu' : ''; ?>">
-                                    WEBSERVICE
-                                </div>
-                            </a>
                             <a href="/User/profil">
                                 <div class="nav-menu transition-colors duration-300 <?= ($active == 'profil') ? 'activeMenu' : ''; ?>">
                                     PROFIL
@@ -93,6 +88,11 @@
                             <a href="/User/berita">
                                 <div class="nav-menu transition-colors duration-300 <?= ($active == 'berita') ? 'activeMenu' : ''; ?>">
                                     BERITA
+                                </div>
+                            </a>
+                            <a href="/developer/">
+                                <div class="nav-menu transition-colors duration-300">
+                                    WEBSERVICE
                                 </div>
                             </a>
                             <!-- Navbar admin -->
@@ -154,6 +154,9 @@
                         </div>
                         <div class="nav-menu-relative px-2 py-2 <?= ($active == 'berita') ? 'activeMenu' : ''; ?>">
                             <a href="/User/berita"> BERITA</a>
+                        </div>
+                        <div class="nav-menu-relative px-2 py-2">
+                            <a href="/User/developer"> WEBSERVICE</a>
                         </div>
                         <?php if (in_array("1", session('role'))) : ?>
                             <div class="nav-menu-relative px-2 py-2">

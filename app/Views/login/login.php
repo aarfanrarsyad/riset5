@@ -7,12 +7,12 @@
         <img src="/img/components/login.png" alt="gambar login" class="transform lg:scale-y-125 xl:scale-y-100">
     </div>
     <div class="w-full flex justify-center items-center mt-4">
-        <form method="POST" action="<?= route_to('login') ?>" class="pt-6 pb-16 rounded-3xl shadow-2xl flex flex-col justify-center 2xl:w-7/12 xl:w-8/12 lg:w-3/4 md:w-7/12 sm:w-2/3 w-full lg:mx-0 mx-5" data-aos="fade-left">
+        <form method="POST" action="<?= route_to('login') ?>" class="pt-6 pb-16 md:mb-8 md:mt-4 rounded-3xl md:shadow-2xl flex flex-col justify-center 2xl:w-7/12 xl:w-8/12 lg:w-3/4 md:w-7/12 sm:w-2/3 w-full lg:mx-0 mx-5" data-aos="fade-left">
             <?= csrf_field(); ?>
             <h2 class="text-2xl mb-4 font-bold text-center cursor-default text-primary">LOGIN PENGGUNA</h2>
             <div class="flex lg:mx-8 sm:mx-6 mx-3 h-10 mb-1">
                 <label for="email" class="w-1/4 text-primary font-medium flex items-center text-sm md:text-base">Email</label>
-                <input type="text" name="login" class="input pl-2 w-3/4 border-2 rounded-lg border-gray-400 text-sm outline-none text-gray-400" spellcheck="false" id="email" placeholder="Ketik email di sini">
+                <input type="text" name="login" class="input pl-2 w-3/4 border-2 rounded-lg border-gray-400 text-sm outline-none" spellcheck="false" id="email" placeholder="Ketik email di sini">
             </div>
             <div class="flex lg:mx-8 sm:mx-6 mx-3">
                 <div class="w-1/4"></div>
@@ -28,7 +28,7 @@
 
             <div class="flex lg:mx-8 sm:mx-6 mx-3 mt-2 mb-1 h-10 relative">
                 <label for="pass" class="w-1/4 text-primary font-medium flex items-center text-sm md:text-base">Kata Sandi</label>
-                <input type="password" name="password" class="input input-sandi pl-2 w-3/4 border-2 rounded-lg border-gray-400 text-sm outline-none text-gray-400" spellcheck="false" id="password" placeholder="Ketik kata sandi di sini">
+                <input type="password" name="password" class="input input-sandi pl-2 w-3/4 border-2 rounded-lg border-gray-400 text-sm outline-none" spellcheck="false" id="password" placeholder="Ketik kata sandi di sini">
                 <div class="relative right-7 flex items-center text-gray-500" id="eye">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="cursor-pointer sm:w-5 w-4 absolute">
                         <path fill-rule="evenodd" d="M3.707 2.293a1 1 0 00-1.414 1.414l14 14a1 1 0 001.414-1.414l-1.473-1.473A10.014 10.014 0 0019.542 10C18.268 5.943 14.478 3 10 3a9.958 9.958 0 00-4.512 1.074l-1.78-1.781zm4.261 4.26l1.514 1.515a2.003 2.003 0 012.45 2.45l1.514 1.514a4 4 0 00-5.478-5.478z" clip-rule="evenodd" />

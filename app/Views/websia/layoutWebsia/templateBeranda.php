@@ -34,64 +34,27 @@
 
     <!-- HEADER -->
     <div class="navbar w-full fixed z-30 bg-cover bg-no-repeat bg-left" style="background-image: url(/img/components/bgHeader.png)" id="navbar">
-        <header>
-            <div class="flex flex-col">
-                <div class="flex items-center justify-between px-6 md:pt-3 pt-1 ">
-                    <div class="">
-                        <div class="flex">
-                            <a href="<?= base_url(); ?>">
-                                <img src="/img/components/logo/logo_sia.png" class=" z-50 md:w-16 w-10" alt="logo SIA">
-                            </a>
-                            <div class="md:px-3 px-2 my-auto text-white z-50">
-                                <p class="font-heading text-lg md:text-2xl font-semibold">Sistem Informasi Alumni</p>
-                                <p class="font-heading md:text-xs font-normal hidden md:block -mt-1.5">Akademi Ilmu Statistik - Sekolah Tinggi Ilmu Statistik - Politeknik Statistika STIS</p>
-                            </div>
-                        </div>
-                        <div class="font-paragraph hidden md:flex items-end justify-start pt-1">
-                            <a href="<?= base_url(); ?>">
-                                <div class="nav-menu transition-colors duration-300 ">
-                                    BERANDA
-                                </div>
-                            </a>
-                            <a href="/developer/">
-                                <div class="nav-menu transition-colors duration-300 ">
-                                    WEBSERVICE
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="flex my-auto">
-                        <a href="/login" class="font-paragraph font-medium items-center hidden md:flex md:h-9 md:px-5 md:mt-3.5 md:-mb-14 md:shadow-sm md:text-base  md:text-white md:bg-secondary hover:bg-secondaryhover transition-colors duration-200 hover:rounded">
-                            MASUK
+        <div class="navbar w-full fixed z-30 bg-cover bg-no-repeat bg-left" style="background-image: url(/img/components/bgHeader.png)" id="navbar">
+            <header>
+                <div class="flex items-center justify-between px-6 pt-3">
+                    <div class="flex">
+                        <a href="<?= base_url(); ?>">
+                            <img src="/img/components/logo/logo_sia.png" class=" z-50 md:w-16 w-10" alt="logo SIA">
                         </a>
-                        <div class="">
-                            <button type="button" class="block text-white hover:text-gray-200 focus:text-gray-200 md:hidden" id="hamburger">
-                                <svg class="w-8 fill-current" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                                </svg>
-                            </button>
+                        <div class="md:px-3 px-2 my-auto text-white z-50">
+                            <p class="font-heading text-lg md:text-2xl font-semibold">Sistem Informasi Alumni</p>
+                            <p class="font-heading md:text-xs font-normal hidden md:block -mt-1.5">Akademi Ilmu Statistik - Sekolah Tinggi Ilmu Statistik - Politeknik Statistika STIS</p>
                         </div>
                     </div>
+
+                    <a href="/login">
+                        <button type="button" class="font-paragraph font-medium flex px-3 md:px-5 md:py-2 py-1 my-auto rounded-3xl shadow-sm md:text-base text-xs text-white bg-secondary hover:bg-secondaryhover transition-colors duration-200 focus:outline-none">
+                            MASUK
+                        </button>
+                    </a>
                 </div>
-
-                <div class="md:hidden">
-                    <div class="flex flex-col hidden w-full border-t border-b border-white py-2 font-paragraph" id="menu">
-                        <div class="nav-menu-relative px-2 py-2">
-                            <a href="<?= base_url(); ?>">BERANDA </a>
-                        </div>
-                        <div class="nav-menu-relative px-2 py-2">
-                            <a href="/developer/"> WEBSERVICE</a>
-                        </div>
-
-                        <div class=" mt-1 px-2 py-2 w-11/12 mx-auto font-medium bg-secondary hover:bg-secondaryhover transition-colors duration-200 text-xs text-center text-white ">
-                            <a href="/login">MASUK</a>
-                        </div>
-                    </div>
-                </div>
-
-
-            </div>
-        </header>
+            </header>
+        </div>
     </div>
     <div class="w-full md:h-18 h-12 bg-primary">
         <!-- Codingan Navbar Taruh Sini juga buat semacam marginnya -->
