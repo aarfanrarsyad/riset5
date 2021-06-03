@@ -85,7 +85,7 @@
                                     <a href="/User/galeriVideo" class="bg-primaryDark hover:bg-primary text-white hover:text-secondary text-left w-full px-2 transition duration-300"> Galeri Video </a>
                                 </div>
                             </div>
-                            <a href="/User/berita">
+                            <a href="/Berita/berita">
                                 <div class="nav-menu transition-colors duration-300 <?= ($active == 'berita') ? 'activeMenu' : ''; ?>">
                                     BERITA
                                 </div>
@@ -108,7 +108,7 @@
                                     <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
                                 </svg>
                                 <form action="/User/searchAndFilter" method="get">
-                                    <input type="text" name="cari" placeholder="|  CARI" autocomplete="off" class="placeholder-white bg-transparent focus:outline-none ml-6 font-paragraph p-1" value="<?= isset($_GET['cari'])?$_GET['cari']:'' ?>">
+                                    <input type="text" name="cari" placeholder="|  CARI" autocomplete="off" class="placeholder-white bg-transparent focus:outline-none ml-6 font-paragraph p-1" value="<?= isset($_GET['cari']) ? $_GET['cari'] : '' ?>">
                                 </form>
                             </div>
                         </div>
@@ -153,7 +153,7 @@
                             </div>
                         </div>
                         <div class="nav-menu-relative px-2 py-2 <?= ($active == 'berita') ? 'activeMenu' : ''; ?>">
-                            <a href="/User/berita"> BERITA</a>
+                            <a href="/Berita/berita"> BERITA</a>
                         </div>
                         <div class="nav-menu-relative px-2 py-2">
                             <a href="/User/developer"> WEBSERVICE</a>
@@ -168,7 +168,7 @@
                                 <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
                             </svg>
                             <form action="/User/searchAndFilter" method="get">
-                                <input type="text" name="cari" placeholder="    |  CARI" id="inputCari" class="placeholder-white bg-transparent ml-6 text-xs text-center w-2/3 outline-none " value="<?= isset($_GET['cari'])?$_GET['cari']:'' ?>">
+                                <input type="text" name="cari" placeholder="    |  CARI" id="inputCari" class="placeholder-white bg-transparent ml-6 text-xs text-center w-2/3 outline-none " value="<?= isset($_GET['cari']) ? $_GET['cari'] : '' ?>">
                             </form>
                         </div>
                         <a href="/auth/logout">

@@ -18,6 +18,7 @@ class Home extends BaseController
 		$this->modelAlumni = new \App\Models\AlumniModel();
 		$this->loginModel = new LoginModel();
 		$this->roleModel = new \App\Models\RoleModel();
+		$this->beritaModel = new \App\Models\BeritaModel();
 		$faker = \Faker\Factory::create('id_ID');
 
 		// processing login sso bps
@@ -427,6 +428,13 @@ class Home extends BaseController
 			}
 		}
 
+		// Load three news populer
+		$hotNews = $this->beritaModel->getNewsForLandingPage()->getResultArray();
+		for ($i = 0; $i < count($hotNews); $i++) {
+			$hotNews[$i]['tanggal_publish'] = date('d F Y');
+			$hotNews[$i]['konten'] = substr(strip_tags($hotNews[$i]['konten']), 0, 215) . ' ..';
+		}
+
 		if (session()->has('id_user')) {
 			$data = [
 				'judulHalaman' 	=> 'Beranda WEBSIA',
@@ -439,6 +447,7 @@ class Home extends BaseController
 				'login'			=> 'belum'
 			];
 		}
+		$data['Allnews'] = $hotNews;
 
 		return view('websia/kontenWebsia/halamanUtama/beranda', $data);
 	}

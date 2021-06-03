@@ -153,6 +153,8 @@ function userdata()
     }
 
     $user = $authenticate->user();
+
+    $default = ["components/icon/Lk-icon.svg", "components/icon/Pr-icon.svg"];
     $data = [
         'id' => $user->id,
         'fullname' => $user->fullname,
@@ -604,34 +606,33 @@ function standardNoHp($key)
     return $value;
 }
 
-function get_by_id($id=null,$select='*',$table='pendidikan',$array=false)
+function get_by_id($id = null, $select = '*', $table = 'pendidikan', $array = false)
 {
     $db = \Config\Database::connect();
 
     switch ($table) {
         case 'pendidikan':
-        $return = $db->table('pendidikan')->select($select)
-                    ->join('pendidikan_tinggi', 'pendidikan_tinggi.id_pendidikan = pendidikan.id_pendidikan');
-        break;
+            $return = $db->table('pendidikan')->select($select)
+                ->join('pendidikan_tinggi', 'pendidikan_tinggi.id_pendidikan = pendidikan.id_pendidikan');
+            break;
         case 'tempat_kerja':
-        $return = $db->table('tempat_kerja')->select($select)
-                    ->join('alumni_tempat_kerja', 'tempat_kerja.id_tempat_kerja = alumni_tempat_kerja.id_tempat_kerja');
-        break;        
+            $return = $db->table('tempat_kerja')->select($select)
+                ->join('alumni_tempat_kerja', 'tempat_kerja.id_tempat_kerja = alumni_tempat_kerja.id_tempat_kerja');
+            break;
         default:
-        $return = $db->table($table)->select($select);
-        break;
+            $return = $db->table($table)->select($select);
+            break;
     }
-    
-    $GLOBALS['select'] = $select;
-    if (count(explode(',', $select))==1 && $select !== '*') {
-        $return = array_map(function($val){
-            return $val[$GLOBALS['select']];
-        }, $return->getWhere(['id_alumni'=>$id])->getResultArray());
-    } else {
-        $return = $return->getWhere(['id_alumni'=>$id])->getResultArray();
-    }
-    $return = (!$array && isset($return[0])) ? $return[0] : $return ;    
-    
-    return $return; 
-}
 
+    $GLOBALS['select'] = $select;
+    if (count(explode(',', $select)) == 1 && $select !== '*') {
+        $return = array_map(function ($val) {
+            return $val[$GLOBALS['select']];
+        }, $return->getWhere(['id_alumni' => $id])->getResultArray());
+    } else {
+        $return = $return->getWhere(['id_alumni' => $id])->getResultArray();
+    }
+    $return = (!$array && isset($return[0])) ? $return[0] : $return;
+
+    return $return;
+}

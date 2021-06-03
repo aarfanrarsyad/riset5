@@ -224,7 +224,7 @@ if (session()->getFlashdata('role')) { ?>
 
 <!-- awal tombol "Lihat Berita Selanjutnya" -->
 <div class="flex w-full justify-end lg:px-20 md:px-8 px-5 mb-8">
-    <div class="text-primary font-paragraph my-auto"><a href="/User/berita">Lihat Berita Selanjutnya</a> </div>
+    <div class="text-primary font-paragraph my-auto"><a href="/Berita/berita">Lihat Berita Selanjutnya</a> </div>
     <div>
         <a href="/websia/berandaBerita">
             <svg class="w-6 h-6 font-bold text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
