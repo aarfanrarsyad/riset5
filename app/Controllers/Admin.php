@@ -1070,7 +1070,7 @@ class Admin extends BaseController
 			'tanggal_lahir' => htmlspecialchars($_POST['tanggal_lahir']),
 			'telp_alumni' => htmlspecialchars($_POST['telp_alumni']),
 			'alamat_alumni' => htmlspecialchars($_POST['alamat']),
-			'kota' => htmlspecialchars($_POST['kota']),
+			'kota' => htmlspecialchars($_POST['kabkota']),
 			'provinsi' => htmlspecialchars($_POST['provinsi']),
 			'negara' => htmlspecialchars($_POST['negara']),
 			'status_bekerja' => htmlspecialchars($_POST['status_bekerja']),
