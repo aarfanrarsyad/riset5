@@ -11,6 +11,9 @@
                 <label for="passbaru" class="font-medium">Kata Sandi Baru:</label>
                 <input type="password" name="passbaru" id="passbaru" class="inputForm mb-2" placeholder="🞄🞄🞄🞄🞄🞄🞄🞄">
                 <label for="ulangpassbaru" class="font-medium">Ketik Ulang Kata Sandi Baru:</label>
+                <p class="text-xs text-red-500 text-justify" id="errorPassBaru">
+                    Kata sandi tidak sesuai.
+                </p>
                 <input type="password" name="ulangpassbaru" id="ulangpassbaru" class="inputForm mb-2" placeholder="🞄🞄🞄🞄🞄🞄🞄🞄">
                 <div class="text-secondary text-justify text-xs mt-6 mb-2">
                     Silakan Masukkan Kata Sandi Lama Anda untuk Verifikasi!
@@ -30,4 +33,40 @@
         </form>
     </div>
 </div>
+
+<!--nanti ganti script sessionnya aja -->
+<?php
+if (session()->getFlashdata('edit-bio-success')) { ?>
+
+    <!-- BERHASIL update biodata -->
+    <div id="berhasilGantiSandi">
+        <div class="fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40">
+            <div class="duration-700 transition-all p-3 rounded-lg flex items-center" style="background-color: #B1FF66;">
+                <img src="/img/components/icon/check.png" class="h-5 mr-2" style="color: #54AC00;" alt="kata sandi baru berhasil diperbarui">
+                <p class="sm:text-base text-sm font-heading font-bold text-success"><?= session()->getFlashdata('edit-bio-success') ?></p>
+            </div>
+        </div>
+    </div>
+    <script>
+        setTimeout(function() {
+            $('#berhasilGantiSandi').fadeOut();
+        }, 1500);
+    </script>
+<?php }
+if (session()->getFlashdata('edit-bio-fail')) { ?>
+    <!-- GAGAL update biodata -->
+    <div id="gagalGantiSandi">
+        <div class="fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40">
+            <div class="duration-700 transition-all p-3 rounded-lg flex items-center" style="background-color: #FF7474;">
+                <img src="/img/components/icon/warning.png" class="h-5 mr-2" alt="kata sandi baru gagal diperbarui">
+                <p class="sm:text-base text-sm font-heading font-bold" style="color: #C51800;"><?= session()->getFlashdata('edit-bio-fail') ?></p>
+            </div>
+        </div>
+    </div>
+    <script>
+        setTimeout(function() {
+            $('#gagalGantiSandi').fadeOut();
+        }, 1500);
+    </script>
+<?php } ?>
 <?= $this->endSection(); ?>
