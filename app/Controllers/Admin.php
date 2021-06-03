@@ -750,7 +750,10 @@ class Admin extends BaseController
 	{
 		$init = new admin_model();
 		$alumni = $init->getAllAlumni($id)->getResultArray()[0];
-		$instansi = $init->getTempatKerjabyIdAlumni($id)->getResultArray()[0];
+		$instansialumni = $init->getTempatKerjabyIdAlumni($id)->getRow()->id_tempat_kerja;
+		// dd($instansialumni);
+		$instansi = $init->getTempatKerjaById($instansialumni)->getRow();
+		// dd($instansi);
 		$pendidikan = $init->getPendidikanById($id)->getResult();
 		$prestasi = $init->getPrestasiById($id)->getResult();
 
@@ -925,8 +928,8 @@ class Admin extends BaseController
 			$avatar = $this->request->getFile('file_upload');
 			$avatar->move(ROOTPATH . '/public/img/components/user/userid_' . session('idAlumni'));
 
-			if ($foto != $query1->jenis_kelamin . '/default.svg' && $foto != 'default.svg') {
-				$url = ROOTPATH . '/public/img/components/' . $foto;
+			if ($foto != 'components/icon/' . $query1->jenis_kelamin . '-icon.svg') {
+				$url = ROOTPATH . '/public/img/' . $foto;
 				if (is_file($url))
 					unlink($url);
 			}
@@ -955,8 +958,8 @@ class Admin extends BaseController
 		$query1 = $model->bukaProfile(session('idAlumni'))->getRow();
 		$foto = $query1->foto_profil;
 
-		if ($foto != $query1->jenis_kelamin . '/default.svg' && $foto != 'default.svg') {
-			$url = ROOTPATH . '/public/img/components/' . $foto;
+		if ($foto != 'components/icon/' . $query1->jenis_kelamin . '-icon.svg') {
+			$url = ROOTPATH . '/public/img/' . $foto;
 			if (is_file($url))
 				unlink($url);
 		}

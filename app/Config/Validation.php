@@ -104,26 +104,48 @@ class Validation
 
 
 	public $editProfil = [
+		'tempat_lahir'   => [
+			'rules' => 'alpha_space',
+		],
 		'telp_alumni'   => [
-			'rules' => 'required|numeric|min_length[9]',
+			'rules' => 'permit_empty|numeric|min_length[9]',
 		],
 		'email'			=> [
 			'rules' => 'valid_email|is_unique[alumni.email,id_alumni,{id_alumni}]',
+		],
+		'fb'			=> [
+			'rules' => 'permit_empty|regex_match[/(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/]',
+		],
+		'linkedin'			=> [
+			'rules' => 'permit_empty|regex_match[/(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/]',
+		],
+		'gscholar'			=> [
+			'rules' => 'permit_empty|regex_match[/(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/]',
 		],
 	];
 
 	public $editProfil_errors  = [
+		'tempat_lahir'   => [
+			'alpha_space'	=> 'kolom harus berisi huruf atau spasi',
+		],
 		'telp_alumni'   => [
-			'required'	=> 'kolom nomor harus diisi',
 			'numeric'	=> 'kolom harus berisi angka',
 			'min_length' => 'minimal memiliki panjang 9 angka',
 		],
 		'email'			=> [
-			'rules' => 'valid_email|is_unique[alumni.email,id_alumni,{id_alumni}]',
 			'required'	=> 'kolom email harus diisi',
 			'valid_email'	=> 'harus memiliki format email',
 			'is_unique'	=> 'alamat email telah digunakan alumni lain',
-		]
+		],
+		'fb'   => [
+			'regex_match'	=> 'kolom harus berisi link/url yang valid',
+		],
+		'linkedin'   => [
+			'regex_match'	=> 'kolom harus berisi link/url yang valid',
+		],
+		'gscholar'   => [
+			'regex_match'	=> 'kolom harus berisi link/url yang valid',
+		],
 	];
 
 	public $editPendidikan = [
@@ -163,14 +185,27 @@ class Validation
 		'nama_instansi'   => [
 			'rules' => 'required',
 		],
+		'telp_instansi'   => [
+			'rules' => 'permit_empty|numeric|min_length[9]',
+		],
+		'faks_instansi'   => [
+			'rules' => 'permit_empty|numeric',
+		],
 		'email_instansi'   => [
 			'rules' => 'required',
-		]
+		],
 	];
 
 	public $editTempatKerja_errors  = [
 		'nama_instansi'   => [
 			'required'	=> 'kolom ini harus diisi',
+		],
+		'telp_instansi'   => [
+			'numeric'	=> 'kolom harus berisi angka',
+			'min_length' => 'minimal memiliki panjang 9 angka',
+		],
+		'faks_instansi'   => [
+			'numeric'	=> 'kolom harus berisi angka',
 		],
 		'email_instansi'   => [
 			'required'	=> 'kolom ini harus diisi',
