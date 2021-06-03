@@ -32,8 +32,8 @@
                 <a href="<?= base_url('/User/albumVideo/' . $video['album']) ?>">
                     <!-- <a href="/User/albumVideo"> -->
                     <div class="flex flex-col rounded-3xl m-2 relative hover:shadow-xl transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105 cursor-pointer">
-                        <div class="rounded-3xl object-cover w-96 h-48 mb-2 bg-gray-300">
-                            <img src="https://img.youtube.com/vi/<?= $video['link'] ?>/0.jpg" alt="<?= $video['link'] ?>" class="rounded-2xl">
+                        <div class="rounded-3xl mb-2 bg-gray-300">
+                            <img src="https://img.youtube.com/vi/<?= $video['link'] ?>/0.jpg" alt="<?= $video['link'] ?>" class="rounded-2xl object-cover w-96 h-48">
                         </div>
                         <div class="text-white text-center">
                             Album <?= $video['album']; ?>

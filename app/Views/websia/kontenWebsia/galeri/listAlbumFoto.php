@@ -26,13 +26,13 @@
 </div>
 <div class="bg-primary">
     <div class="py-4">
-        <div class="holder p-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-4">
+        <div class="holder p-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-4 gap-y-2">
             <!-- Awal Tampilan Galeri (Buat ditambahkan coding sesuai gambar dari database) -->
             <?php foreach ($list as $foto) : ?>
                 <a href="<?= base_url('/User/albumFoto/' . $foto['album']) ?>">
-                    <div class="flex flex-col rounded-3xl m-2 relative hover:shadow-xl transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105 cursor-pointer">
-                        <div class="rounded-3xl object-cover w-96 h-48 mb-2 bg-gray-300">
-                            <img src="<?= base_url() ?>/img/galeri/<?= $foto['nama_file']; ?>" alt="<?= $foto['nama_file']; ?>" class="rounded-2xl">
+                    <div class="flex flex-col rounded-3xl m-2 relative transition duration-500 ease-in-out transform  hover:scale-105 cursor-pointer">
+                        <div class="rounded-3xl mb-2 bg-gray-300">
+                            <img src="<?= base_url() ?>/img/galeri/<?= $foto['nama_file']; ?>" alt="<?= $foto['nama_file']; ?>" class="rounded-2xl object-cover w-96 h-48">
                         </div>
                         <div class="text-white text-center">
                             Album <?= $foto['album']; ?>
