@@ -21,7 +21,7 @@
 
     <!-- loading -->
     <div class="loading flex fixed w-full h-screen z-50 transition-opacity duration-200">
-        <img src="/img/components/load.gif" class="m-auto items-center md:w-96 sm:w-72 w-60" alt="loading gif">
+        <img src="/img/components/loading/load.gif" class="m-auto items-center md:w-96 sm:w-72 w-60">
     </div>
     <!-- loading -->
     <!-- tombol kembali ke atas -->
@@ -57,25 +57,25 @@
                             <a href="/developer/dokumentasi">
                                 <li class="list hover:text-white py-1.5 text-left border-l-2 border-b-2 border-t-2 border-r-2 border-secondary transiton duration-300 px-3">DOKUMENTASI</li>
                             </a>
-                            <?php if ($statusLog == 1) { ?>
-                                <a href="/developer/proyek">
-                                    <li class="list hover:text-white py-1.5 text-left border-l-2 border-b-2 border-r-2 border-secondary transiton duration-300 px-3">PROYEK</li>
-                                </a>
-                            <?php } ?>
+                            <?php if($statusLog==1){?>
+                            <a href="/developer/proyek">
+                                <li class="list hover:text-white py-1.5 text-left border-l-2 border-b-2 border-r-2 border-secondary transiton duration-300 px-3">PROYEK</li>
+                            </a>
+                            <?php }?>
                         </ul>
                     </li>
-                    <?php if ($statusLog == 1) { ?>
-                        <a href="/developer/edit/akun">
-                            <li class="bg-secondary text-white py-1.5 sm:px-1 md:w-24 text-center cursor-pointer border-secondary border-2 hover:text-secondary hover:bg-white transition-colors duration-300">EDIT AKUN</li>
-                        </a>
-                        <a href="/logout">
-                            <li class="bg-secondary text-white py-1.5 sm:px-1 md:w-24 text-center cursor-pointer border-secondary border-2 hover:text-secondary hover:bg-white transition-colors duration-300">KELUAR</li>
-                        </a>
-                    <?php } else { ?>
-                        <a href="/login">
-                            <li class="bg-secondary text-white py-1.5 sm:px-1 md:w-24 text-center cursor-pointer border-secondary border-2 hover:text-secondary hover:bg-white transition-colors duration-300">LOGIN</li>
-                        </a>
-                    <?php } ?>
+                    <?php if($statusLog==1){?>
+                    <a href="/developer/edit/akun">
+                        <li class="bg-secondary text-white py-1.5 sm:px-1 md:w-24 text-center cursor-pointer border-secondary border-2 hover:text-secondary hover:bg-white transition-colors duration-300">EDIT AKUN</li>
+                    </a>
+                    <a href="/logout">
+                        <li class="bg-secondary text-white py-1.5 sm:px-1 md:w-24 text-center cursor-pointer border-secondary border-2 hover:text-secondary hover:bg-white transition-colors duration-300">KELUAR</li>
+                    </a>
+                    <?php } else {?>
+                    <a href="/login">
+                        <li class="bg-secondary text-white py-1.5 sm:px-1 md:w-24 text-center cursor-pointer border-secondary border-2 hover:text-secondary hover:bg-white transition-colors duration-300">LOGIN DEV</li>
+                    </a>
+                    <?php }?>
                 </ul>
             </div>
 
@@ -144,16 +144,15 @@
     <!-- END CONTENT PAGE -->
 
     <!-- FOOTER -->
-    <div class="bg-primary w-full pt-6 pb-3 lg:px-20 md:px-8 px-3">
-        <div class="flex flex-col md:flex-row md:justify-around md:text-sm text-xs items-center">
+    <div class="bg-primary w-full  pt-6 pb-3 lg:px-20 md:px-8 px-3 ">
+        <div class="flex flex-col md:flex-row md:justify-around md:text-sm text-xs">
             <!-- awal footer stis -->
-            <div class="flex  gap-x-2 mx-auto md:mx-0 mb-2 md:mb-0">
-                <div class=" md:w-auto">
+            <div class="flex items-center gap-x-2 mx-auto md:mx-0">
+                <div class="w-36 md:w-auto">
                     <a href="https://stis.ac.id/"><img class="lg:w-24 lg:h-24 w-20 h-20" src="/img/components/logo/logo_stis.png" alt="logo STIS"></a>
                 </div>
                 <div class="text-white font-heading">
-                    <h3>Jl. Otto Iskandardinata </h3>
-                    <h3>No.64C Jakarta 13330</h3>
+                    <h3>Jl. Otto Iskandardinata No.64C Jakarta 13330</h3>
                     <h3>Telp. (021) 8191437, 8508812</h3>
                     <h3>Fax. (021) 8197577</h3>
                     <div class="flex gap-x-2 mt-2">
@@ -167,23 +166,17 @@
             <!-- akhir footer stis -->
 
             <!-- awal footer haistis -->
-            <div class="md:mt-0 mx-auto md:mx-0 mb-2 md:mb-0 md:-mt-5">
-                <a href="https://haisstis.org/"><img class="lg:h-28 h-20 w-36 lg:w-auto lg:-mt-6" src="/img/components/logo/logo_haisstis.png" alt="logo HAISSTIS"></a>
-                <div class="flex gap-x-2 -mt-2 lg:-mt-4 mx-4 lg:mx-16">
-                    <div><img class="lg:h-5 h-4" src="/img/components/icon/message_white.png" alt="icon message"></div>
-                    <div>
-                        <h3 class="text-white font-heading">sia@stis.ac.id</h3>
-                    </div>
-                </div>
+            <div class="flex  gap-x-2 md:mt-0 mx-auto md:mx-0">
+                <a href="https://haisstis.org/"><img class="lg:h-28 h-20 w-36 lg:w-auto" src="/img/components/logo/logo_haisstis.png" alt="logo HAISSTIS"></a>
             </div>
             <!-- akhir footer haistis -->
 
             <!-- awal link ke webservice  -->
-            <div class="flex flex-col text-white font-heading mx-auto md:mx-5 mt-4 md:mt-0 mb-2 md:mb-0">
-                <a href="https://pkl.stis.ac.id/60/" class="mb-2 hover:text-secondary">
+            <div class="flex flex-col text-white font-heading mx-auto md:mx-5 mt-4 md:mt-0">
+                <a href="/" class="mb-2 hover:text-secondary">
                     <h3 class="underline md:no-underline">Website PKL60</h3>
                 </a>
-                <a href="/developer/" class="hover:text-secondary">
+                <a href="/webservice/" class="hover:text-secondary">
                     <h3 class="underline md:no-underline">Webservice(API)</h3>
                 </a>
             </div>
@@ -195,6 +188,8 @@
             <div class="flex-grow">
                 <hr class="text-white bg-white border my-auto">
             </div>
+
+
         </div>
 
         <h2 class="text-white text-sm text-center mt-1">Copyright &copy; PKL 60 Riset 5</h2>
