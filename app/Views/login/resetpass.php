@@ -27,7 +27,7 @@
             <div class="w-3/4 flex sm:flex-row flex-col sm:items-center">
                 <form action="">
                     <input type="submit" class="px-8 shadow-2xl sm:h-9 h-8 rounded-2xl text-base outline-none border-none bg-secondary cursor-pointer text-white duration-300 hover:bg-yellow-400 sm:w-max w-1/2" value="Kirim">
-                    <a href="/login/" class="text-secondary text-sm font-medium sm:ml-6 ml-0 mt-2 sm:mt-0 hover:text-yellow-700">Kembali ke laman login</a>
+                    <a href="/login/" class="text-secondary font-medium sm:ml-6 ml-0 mt-2 sm:mt-0 hover:text-yellow-700">Kembali</a>
                 </form>
             </div>
         </div>

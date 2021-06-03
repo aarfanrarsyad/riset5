@@ -51,12 +51,6 @@ body div.loading {
   z-index: -1;
 }
 
-@media (max-width: 409px) {
-  #divKosong {
-    height: 65px;
-  }
-}
-
 /* style templateWebserviceLogin */
 
 /* style layoutDokumentasi */
@@ -65,6 +59,10 @@ body div.loading {
 }
 
 @media (max-width: 460px) {
+  #divKosong {
+    height: 65px;
+  }
+
   #divKosong,
   #burgerDok {
     top: 4rem;
@@ -85,13 +83,13 @@ body div.loading {
 }
 
 #menu1:hover,
-#menu1 + ul > li > div:hover,
-#menu1 + ul > li > ul > li:hover {
+#menu1+ul>li>div:hover,
+#menu1+ul>li>ul>li:hover {
   background-color: rgb(1, 89, 152);
 }
 
 .open-submenu {
-  max-height: 90px;
+  max-height: 110px;
 }
 
 .close-submenu {
@@ -100,7 +98,7 @@ body div.loading {
 
 /* style layoutDokumentasi */
 
-#nav ul li:hover > ul {
+#nav ul li:hover>ul {
   max-height: 9em;
 }
 
@@ -113,7 +111,7 @@ body div.loading {
     width: 100%;
     height: 100%;
     opacity: 0.15;
-    background-image: url("/img/components/logo/logo_api.png");
+    background-image: url("/img/components/logo/logo_api.svg");
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;
@@ -170,11 +168,11 @@ input[type="checkbox"] {
 }
 
 /* style unggah berita */
-#infoBerita ~ div {
+#infoBerita~div {
   background-color: #6cf;
 }
 
-#infoBerita ~ div:before {
+#infoBerita~div:before {
   position: absolute;
   top: -10px;
   content: "";
@@ -184,11 +182,11 @@ input[type="checkbox"] {
   border-color: transparent transparent #6cf transparent;
 }
 
-#notif ~ div {
+#notif~div {
   background-color: #6cf;
 }
 
-#notif ~ div:before {
+#notif~div:before {
   position: absolute;
   top: -10px;
   content: "";
@@ -198,11 +196,11 @@ input[type="checkbox"] {
   border-color: transparent transparent #6cf transparent;
 }
 
-#notif1 ~ div {
+#notif1~div {
   background-color: #6cf;
 }
 
-#notif1 ~ div:before {
+#notif1~div:before {
   position: absolute;
   top: -10px;
   content: "";
@@ -212,11 +210,11 @@ input[type="checkbox"] {
   border-color: transparent transparent #6cf transparent;
 }
 
-#infoMedsos ~ div {
+#infoMedsos~div {
   background-color: #6cf;
 }
 
-#infoMedsos ~ div:before {
+#infoMedsos~div:before {
   position: absolute;
   top: -10px;
   content: "";
@@ -225,7 +223,8 @@ input[type="checkbox"] {
   border-width: 0 10px 10px 10px;
   border-color: transparent transparent #6cf transparent;
 }
+
 /* style proyek WS */
-.proyek + div {
+.proyek+div {
   box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.1), 0 0px 3px 3px rgba(0, 0, 0, 0.06);
 }

@@ -9,7 +9,7 @@
     <div class="w-full flex justify-center items-center mt-4">
         <form method="POST" action="<?= route_to('login') ?>" class="pt-6 pb-16 md:mb-8 md:mt-4 rounded-3xl md:shadow-2xl flex flex-col justify-center 2xl:w-7/12 xl:w-8/12 lg:w-3/4 md:w-7/12 sm:w-2/3 w-full lg:mx-0 mx-5" data-aos="fade-left">
             <?= csrf_field(); ?>
-            <h2 class="text-2xl mb-4 font-bold text-center cursor-default text-primary">LOGIN PENGGUNA</h2>
+            <h2 class="text-2xl mb-4 font-bold text-center cursor-default text-primary">MASUK PENGGUNA</h2>
             <div class="flex lg:mx-8 sm:mx-6 mx-3 h-10 mb-1">
                 <label for="email" class="w-1/4 text-primary font-medium flex items-center text-sm md:text-base">Email</label>
                 <input type="text" name="login" class="input pl-2 w-3/4 border-2 rounded-lg border-gray-400 text-sm outline-none" spellcheck="false" id="email" placeholder="Ketik email di sini">
@@ -72,7 +72,7 @@
             <!-- login with sipadu -->
             <div class="lg:mx-8 sm:mx-6 mx-3 mb-2" onclick="loginSipadu()">
                 <div class="sso flex justify-center rounded-2xl w-full border-2 border-secondary py-1 cursor-pointer trasform transform duration-300 hover:bg-yellow-200 hover:border-yellow-600 hover:scale-105">
-                    <img src="/img/components/logo/logo_sipadu.png" alt="logo Sipadu" width="25" height="25" class="mr-4">
+                    <img src="/img/components/logo/logo_sipadu.png" alt="logo Sipadu" width="25" height="25" class="mr-2">
                     <h3 class="flex items-center text-sm text-secondary font-bold">SIPADU</h3>
                 </div>
             </div>
@@ -93,8 +93,8 @@
 
             <!-- login with BPS -->
             <div class="lg:mx-8 sm:mx-6 mx-3" onclick="loginBPS()">
-                <div class="sso flex justify-center rounded-2xl w-full border-2 border-secondary py-1 cursor-pointer transform hover:scale-105 duration-300 hover:bg-yellow-200 hover:border-yellow-600">
-                    <img src="/img/components/logo/logo_bps.png" alt="logo BPS" width="25" height="25" class="mr-4">
+                <div class="sso flex justify-center rounded-2xl w-full border-2 border-secondary py-1 cursor-pointer transform hover:scale-105 duration-300 hover:bg-yellow-200 hover:border-yellow-600 translate-x-0.5">
+                    <img src="/img/components/logo/logo_bps.png" alt="logo BPS" width="25" height="25" class="mr-2">
                     <h3 class="flex items-center text-sm text-secondary font-bold">BPS</h3>
                 </div>
             </div>

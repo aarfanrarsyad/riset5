@@ -14,14 +14,22 @@
     <!-- link utk manggil font nya  -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <!-- <style>
+        @media (min-width: 640px) {
+            #tulisanNav{
+                
+            }
+        }
 
+        @media (min-width: 768px) {}
+    </style> -->
 </head>
 
 <body class="flex min-h-screen flex-col overflow-x-hidden">
 
     <!-- loading -->
     <div class="loading flex fixed w-full h-screen z-50 transition-opacity duration-200">
-        <img src="/img/components/loading/load.gif" class="m-auto items-center md:w-96 sm:w-72 w-60">
+        <img src="/img/components/load.gif" class="m-auto items-center md:w-96 sm:w-72 w-60">
     </div>
     <!-- loading -->
     <!-- tombol kembali ke atas -->
@@ -32,10 +40,10 @@
     </button>
 
     <!-- HEADER -->
-    <div class="bg-primary lg:px-12 sm:px-8 px-4 w-full navbar fixed z-30 bg-no-repeat bg-cover bg-left" style="background-image: url(/img/components/bgHeaderWS.png)">
+    <div class="bg-primary xl:px-12 lg:px-8 sm:px-8 px-4 w-full navbar fixed z-30 bg-no-repeat bg-cover bg-left" style="background-image: url(/img/components/bgHeaderWS.png)">
 
         <div class="flex justify-between sm:my-2 my-1">
-            <div class="font-heading flex items-center gap-x-1 lg:gap-x-3">
+            <div id="tulisanNav" class="font-heading flex md:w-auto sm:w-5/12 items-center xl:gap-x-3 lg:gap-x-1 gap-x-1">
                 <a href="<?= base_url(); ?>">
                     <img src="/img/components/logo/logo_sia.png" class="md:w-16 w-10" alt="logo SIA">
                 </a>
@@ -45,11 +53,11 @@
                 </div>
             </div>
             <div id="nav" class="hidden sm:flex sm:items-center">
-                <ul class="flex lg:gap-x-6 md:gap-x-4 gap-x-2 relative">
+                <ul class="flex items-center xl:gap-x-6 lg:gap-x-2 md:gap-x-1.5 gap-x-2 relative">
                     <a href="/developer/">
                         <li class="bg-secondary text-white py-1.5 sm:px-1 md:w-24 text-center cursor-pointer border-secondary border-2 hover:text-secondary hover:bg-white transition-colors duration-300">BERANDA</li>
                     </a>
-                    <li class="bg-secondary text-white py-1.5 sm:px-1 md:w-24 text-center cursor-pointer border-secondary border-2 hover:text-secondary hover:bg-white transition-colors duration-300 relative">API
+                    <li style="min-width: 55px;" class="bg-secondary text-white py-1.5 sm:px-1 md:w-24 text-center cursor-pointer border-secondary border-2 hover:text-secondary hover:bg-white transition-colors duration-300 relative">API
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-4 inline" viewBox="0 0 20 20" fill="currentColor">
                             <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
                         </svg>
@@ -75,7 +83,11 @@
                         </a>
                     <?php } else { ?>
                         <a href="/login">
+<<<<<<< HEAD
                             <li class="bg-secondary text-white py-1.5 sm:px-1 md:w-24 text-center cursor-pointer border-secondary border-2 hover:text-secondary hover:bg-white transition-colors duration-300">MASUK</li>
+=======
+                            <li class="bg-secondary text-white py-1.5 sm:px-1 md:w-24 text-center cursor-pointer border-secondary border-2 hover:text-secondary hover:bg-white transition-colors duration-300">LOGIN DEV</li>
+>>>>>>> 7d6fbcfd033e7083b26c99604b283f98b7de1367
                         </a>
                     <?php } ?>
                 </ul>
@@ -101,9 +113,11 @@
             <div class="menu border-t border-b flex justify-center">
                 <ul class="w-min" id="navmobile">
                     <li class="cursor-pointer flex justify-center text-white py-1">
-                        <div class="bg-secondary w-28 flex justify-center hover:bg-white hover:text-secondary py-0.5">API<svg xmlns="http://www.w3.org/2000/svg" class="w-4 inline" viewBox="0 0 20 20" fill="currentColor">
+                        <div class="bg-secondary select-none w-28 flex justify-center hover:bg-white hover:text-secondary py-0.5">API
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 inline" viewBox="0 0 20 20" fill="currentColor">
                                 <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-                            </svg></div>
+                            </svg>
+                        </div>
                     </li>
                     <ul class="transform -translate-y-0.5 text-white w-screen flex flex-col items-center hidden block">
                         <a href="/developer/dokumentasi">
@@ -146,7 +160,7 @@
     <!-- END CONTENT PAGE -->
 
     <!-- FOOTER -->
-    <div class="bg-primary w-full  pt-6 pb-3 lg:px-20 md:px-8 px-3 ">
+    <div class="bg-primary w-full relative z-10 pt-6 pb-3 lg:px-20 md:px-8 px-3">
         <div class="flex flex-col md:flex-row md:justify-around md:text-sm text-xs">
             <!-- awal footer stis -->
             <div class="flex items-center gap-x-2 mx-auto md:mx-0">
