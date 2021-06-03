@@ -90,11 +90,11 @@
                             <td class="text-center">
                               <span><?= count($data['report']) ?>&nbsp;&nbsp;&nbsp;</span>
                               <?php if (count($data['report']) > 0) : ?>
-                                <span class="badge badge-pill badge-primary btn" href="javascript:void(0)" onclick="view_report(event)" data-report="
-                                <?php $report = "";
-                                foreach ($data['report'] as $dt)
-                                  if ($report == "") echo ($dt['alasan']);
-                                  else echo (";" . $dt['alasan']); ?>">view</span>
+                                <span class="badge badge-pill badge-primary btn" href="javascript:void(0)" onclick="view_report(event)" data-report="<?php $report = "";
+                                                                                                                                                      foreach ($data['report'] as $dt)
+                                                                                                                                                        if ($report == "") $report .= ($dt['alasan']);
+                                                                                                                                                        else $report .= (";" . $dt['alasan']);
+                                                                                                                                                      echo ($report); ?>">view</span>
                               <?php endif; ?>
                             </td>
                             <td class="text-center">

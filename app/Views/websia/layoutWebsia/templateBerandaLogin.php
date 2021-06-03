@@ -149,7 +149,7 @@
                             </div>
                             <div class="flex flex-col hidden" id="listGaleri">
                                 <a href="/User/galeriFoto" class="nav-menu-relative py-2"> Galeri Foto </a>
-                                <a href="/User/galeriVidAlumni" class="nav-menu-relative py-2"> Galeri Video </a>
+                                <a href="/User/galeriVideo" class="nav-menu-relative py-2"> Galeri Video </a>
                             </div>
                         </div>
                         <div class="nav-menu-relative px-2 py-2 <?= ($active == 'berita') ? 'activeMenu' : ''; ?>">

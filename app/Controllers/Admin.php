@@ -1573,7 +1573,8 @@ class Admin extends BaseController
 			'isGalery'	=> TRUE
 		];
 
-		// dd($data);
+		// $report = implode(";", )
+		// dd($data['foto'][5]['report']);
 		return view('admin' . DIRECTORY_SEPARATOR . 'galeri' . DIRECTORY_SEPARATOR . 'foto', $data);
 	}
 
