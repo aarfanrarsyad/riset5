@@ -79,6 +79,7 @@ class User extends BaseController
 				}, $query->get()->getResult());
 			}
 			// dd(get_by_id(433,'nim'));
+			// dd($prodi);
 
 			// logic pecarian angkatan
 			$reg = '1234567890-,';
@@ -132,7 +133,7 @@ class User extends BaseController
 				}
 			}
 		}
-
+		// dd($id_alumni);
 		//query utama
 		$query = $db->table('alumni')->select('alumni.id_alumni,nama,foto_profil,nim,angkatan')
 			->groupBy('alumni.id_alumni')->orderBy('alumni.id_alumni')
@@ -167,7 +168,6 @@ class User extends BaseController
 		$compiled = $query->getCompiledSelect(false);
 		$countAllResults = $query->countAllResults(false);
 		$alumni = $query->get()->getResultArray();
-		// dd($alumni);
 		$jumlah = [
 			'text' => (!empty($cari)) ?
 				"Terdapat " . $countAllResults . " alumni dengan kata kunci `<B>$cari</B>` ditemukan." :
@@ -175,13 +175,20 @@ class User extends BaseController
 			'ret' => $countAllResults
 		];
 		// dd($alumni);
-
+		// dd($jumlah);
 		#prncarian berita
-		$berita = $db->table('publikasi')->limit(5)->get()->getResultArray();
-
+		$berita = $db->table('berita')->limit(5)->get()->getResultArray();
 
 		if ($this->request->isAJAX()) { // repond ajax live search
 			// $query = $model->getAlumniFilter($cari, $min_angkatan, $max_angkatan);
+			dd(json_encode([
+			'alumni' => $alumni,
+			'berita' => $berita,
+			'jumlah' => $jumlah['text'],
+			'ret' => $jumlah['ret'],
+			'search' => $this->request->getVar(),
+			'query' => $query,
+			]));
 			return json_encode([
 				'alumni' => $alumni,
 				'berita' => $berita,
