@@ -74,11 +74,7 @@
                         </a>
                     <?php } else { ?>
                         <a href="/login">
-<<<<<<< HEAD
                             <li class="bg-secondary text-white py-1.5 sm:px-1 md:w-24 text-center cursor-pointer border-secondary border-2 hover:text-secondary hover:bg-white transition-colors duration-300">MASUK</li>
-=======
-                            <li class="bg-secondary text-white py-1.5 sm:px-1 md:w-24 text-center cursor-pointer border-secondary border-2 hover:text-secondary hover:bg-white transition-colors duration-300">LOGIN DEV</li>
->>>>>>> 7d6fbcfd033e7083b26c99604b283f98b7de1367
                         </a>
                     <?php } ?>
                 </ul>
@@ -183,8 +179,8 @@
                 <a href="/" class="mb-2 hover:text-secondary">
                     <h3 class="underline md:no-underline">Website PKL60</h3>
                 </a>
-                <a href="/webservice/" class="hover:text-secondary">
-                    <h3 class="underline md:no-underline">Webservice(API)</h3>
+                <a href="<?= base_url(); ?>" class="hover:text-secondary">
+                    <h3 class="underline md:no-underline">Website SIA</h3>
                 </a>
             </div>
             <!-- akhir link ke webservice  -->

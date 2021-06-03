@@ -162,8 +162,8 @@
                 <a href="https://pkl.stis.ac.id/60/" class="mb-2 hover:text-secondary">
                     <h3 class="underline md:no-underline">Website PKL60</h3>
                 </a>
-                <a href="/developer/" class="hover:text-secondary">
-                    <h3 class="underline md:no-underline">Webservice(API)</h3>
+                <a href="<?= base_url(); ?>" class="hover:text-secondary">
+                    <h3 class="underline md:no-underline">Website SIA</h3>
                 </a>
             </div>
             <!-- akhir link ke webservice  -->
