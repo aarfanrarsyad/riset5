@@ -21,7 +21,7 @@
                             Swal.fire({
                                 icon: 'success',
                                 title: 'Success',
-                                text: 'The ' + instansi + ' menu deleted successfully',
+                                text: instansi + ' deleted successfully',
                                 showConfirmButton: false,
                                 timer: 1500
                             }).then(function() {
@@ -64,7 +64,7 @@
                             Swal.fire({
                                 icon: 'success',
                                 title: 'Success',
-                                text: 'The ' + alumni + ' menu deleted successfully',
+                                text: 'Alumni ' + alumni + ' deleted successfully',
                                 showConfirmButton: false,
                                 timer: 1500
                             }).then(function() {
