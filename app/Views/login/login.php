@@ -53,7 +53,7 @@
                 <div class="w-3/4 flex justify-between">
                     <div class="transform -translate-y-1">
                         <input type="checkbox" class="cursor-pointer transform translate-y-0.5 sm:w-5 w-3">
-                        <label for="check" id="remember" class="sm:text-sm text-xs cursor-pointer hover:text-blue-600 text-primary font-medium select-none">Ingat saya</label>
+                        <label for="check" id="remember" class="sm:text-sm text-xs text-primary font-medium select-none">Ingat saya</label>
                     </div>
                     <a href="<?= route_to('forgot'); ?>" class="sm:text-sm text-xs cursor-pointer text-secondary font-medium hover:text-yellow-700">Lupa kata sandi?</a>
                 </div>
