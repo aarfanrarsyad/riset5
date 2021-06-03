@@ -4,6 +4,7 @@ Hal ini berpengaruh pada ada tidaknya tampilan tombol edit profil di halaman pro
 <?php
 if ($status == 'bukan user') {
     $tombolEdit = 'hidden';
+    $usernya = "Alumni ini"; 
 
     // berfungsi, tapi butuh tempat tersendiri biar bisa di hidden, sekarang masih gabung sama tempat lahir
     if ($alumni->cttl == 1) {
@@ -27,6 +28,7 @@ if ($status == 'bukan user') {
         $cprestasi = "0";
     }
 } else if ($status == 'user') {
+    $usernya = "Anda"; 
     $tombolEdit = '';
     $cttl = "";
     $cemail = "";
@@ -441,7 +443,7 @@ if ($status == 'bukan user') {
             </a>
         </div>
     </div>
-    <h3 class="font-heading ml-2 font-bold text-xl text-center md:text-left text-secondary md:inline-block">Foto Tentang Anda</h3>
+    <h3 class="font-heading ml-2 font-bold text-xl text-center md:text-left text-secondary md:inline-block">Foto Tentang <?= $usernya ?></h3>
 
     <div class="md:shadow-lg lg:shadow-xl rounded-2xl px-3 py-3 md:px-7 md:py-5 lg:mx-14 lg:py-8 lg:px-11 md:mt-3">
         <?php for ($x = 0; $x < 6; $x++) : ?>
@@ -520,7 +522,7 @@ if ($status == 'bukan user') {
         <?php endfor; ?>
 
         <?php if ($foto == null) : ?>
-            <p class="text-center px-3 lg:px-5 mt-1 md:mt-0 pb-2 lg:py-4"> Belum terdapat foto yang berhubungan dengan Anda.
+            <p class="text-center px-3 lg:px-5 mt-1 md:mt-0 pb-2 lg:py-4"> Belum terdapat foto yang berhubungan dengan <?= $usernya ?>.
             </p>
             <!-- <tr>
                 <td class="text-sm text-center border-b-2 border-gray-200 px-3 lg:px-5 py-2 md:py-3 lg:py-4">Belum terdapat foto yang berhubungan dengan anda.</td>

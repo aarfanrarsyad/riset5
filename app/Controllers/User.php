@@ -383,6 +383,18 @@ class User extends BaseController
 		$model = new AlumniModel();
 		// $kunci = $_GET['id_alumni'];
 		// $kunci = get_alumni_by_nim($nim);
+		$fotoModel = new \App\Models\FotoModel;
+		$galeri_profil = $fotoModel->getForProfil($id);
+		$i = 0;
+		foreach ($galeri_profil as $foto) {
+			$tag = explode(',', $foto['tag']);
+			$j = 0;
+			foreach ($tag as $t) {
+				$galeri_profil[$i]['tag_name'][$j] = $model->getTags($t);
+				$j++;
+			}
+			$i++;
+		}
 		$kunci = htmlspecialchars($id);
 		$query1 = $model->bukaProfile($kunci)->getRow();
 		// dd($query1);
@@ -516,6 +528,8 @@ class User extends BaseController
 			'pendidikan' => $query6,
 			'user' => $query7,
 			'rekomendasi'          => $query4,
+			'foto'				=> $galeri_profil,
+			'count'				=> count($galeri_profil),
 		];
 		return view('websia/kontenWebsia/userProfile/userProfile', $data);
 	}
