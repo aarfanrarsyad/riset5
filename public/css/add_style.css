@@ -54,6 +54,26 @@ body div.loading {
 /* style templateWebserviceLogin */
 
 /* style layoutDokumentasi */
+@media (min-width: 768px) and (max-width: 876px) {
+  #divKosong {
+    height: 104px;
+  }
+
+  #divKosong,
+  #burgerDok {
+    top: 6.5rem;
+  }
+
+  #sidebarDok>img {
+    margin-top: 1.3rem;
+    margin-bottom: 1.3rem;
+  }
+
+  #sidebarDok {
+    margin-top: -5rem;
+  }
+}
+
 #sidebarDok {
   z-index: 5;
 }
@@ -68,7 +88,7 @@ body div.loading {
     top: 4rem;
   }
 
-  #sidebarDok img {
+  #sidebarDok>img {
     margin-top: 1.2rem;
     margin-bottom: 1.2rem;
   }
@@ -99,7 +119,7 @@ body div.loading {
 /* style layoutDokumentasi */
 
 #nav ul li:hover>ul {
-  max-height: 9em;
+  max-height: 5em;
 }
 
 @media screen and (max-width: 640px) {
