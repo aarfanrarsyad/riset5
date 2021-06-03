@@ -6,7 +6,7 @@
 
 <div class="w-full">
     <div class="flex w-full h-full relative">
-        <div id="sidebarDok" class="md:top-20 sm:top-16 top-11 bottom-0 xl:w-80 lg:w-64 lg:left-0 -left-64 w-64 transition-all duration-700 easy-out md:-mt-20 sm:-mt-16 -mt-11 fixed z-20 bg-primarySidebar">
+        <div id="sidebarDok" class="md:top-20 sm:top-16 top-11 bottom-0 xl:w-80 lg:w-64 lg:left-0 -left-64 w-64 transition-all duration-500 easy-out md:-mt-20 sm:-mt-16 -mt-11 fixed z-20 bg-primarySidebar">
             <!-- start sidebar posisi buka -->
 
             <img src="/img/components/logo/logo_sia.png" class="md:w-20 sm:w-16 w-10 md:mb-1.5 md:mt-2.5 my-2 mx-auto" alt="Logo SIA">
@@ -74,7 +74,7 @@
         </div>
 
         <!-- content edit di sini -->
-        <div class="xl:mx-4 lg:mx-0 relative w-full xl:left-72 lg:left-64 -left-4 transition-all duration-700 easy-out xl:ml-10 xl:mr-80 xl:pr-2 lg:mr-72 ">
+        <div class="xl:mx-4 lg:mx-0 relative w-full xl:left-72 lg:left-64 -left-4 transition-all duration-500 easy-out xl:ml-10 xl:mr-80 xl:pr-2 lg:mr-72 ">
             <?php $this->renderSection('dokumentasi'); ?>
         </div>
         <!-- end content edit -->
