@@ -15,8 +15,9 @@ class Webservice extends BaseController
 
 	public function index()
 	{
+		if(session()->has('role')){
 		$role=array_search('4',session('role'), true);
-		
+		} else $role=false;
 		if ($role==false){
 			$login=0;
 		} else {
@@ -34,8 +35,9 @@ class Webservice extends BaseController
 
 	public function dokumentasi()
 	{
-		$role=array_search('4',session('role'), true);
-		
+		if(session()->has('role')){
+			$role=array_search('4',session('role'), true);
+			} else $role=false;
 		if ($role==false){
 			$login=0;
 		} else {
@@ -51,8 +53,9 @@ class Webservice extends BaseController
 
 	public function proyek()
 	{
-		$role=array_search('4',session('role'), true); 
-		
+		if(session()->has('role')){
+			$role=array_search('4',session('role'), true);
+			} else $role=false;
 		if ($role==false){
 			$login=0;
 			echo '<script>window.location.replace("' . base_url('login') . '");</script>';
@@ -73,7 +76,9 @@ class Webservice extends BaseController
 
 	public function buatProyek()
 	{
-		$role=array_search('4',session('role'), true);
+		if(session()->has('role')){
+			$role=array_search('4',session('role'), true);
+			} else $role=false;
 		if ($role==false){
 			$login=0;
 			echo '<script>window.location.replace("' . base_url('login') . '");</script>';
@@ -89,7 +94,9 @@ class Webservice extends BaseController
 
 	public function insertProyek()
 	{
-		$role=array_search('4',session('role'), true);
+		if(session()->has('role')){
+			$role=array_search('4',session('role'), true);
+			} else $role=false;
 		if ($role==false){
 			echo '<script>window.location.replace("' . base_url('login') . '");</script>';
 		}
@@ -141,8 +148,9 @@ class Webservice extends BaseController
 	// }
 	public function editAkun()
 	{
-		$role=array_search('4',session('role'), true);
-		
+		if(session()->has('role')){
+			$role=array_search('4',session('role'), true);
+			} else $role=false;
 		if ($role==false){
 			$login=0;
 			echo '<script>window.location.replace("' . base_url('login') . '");</script>';
