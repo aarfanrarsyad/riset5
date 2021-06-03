@@ -750,9 +750,26 @@ class Admin extends BaseController
 	{
 		$init = new admin_model();
 		$alumni = $init->getAllAlumni($id)->getResultArray()[0];
-		$instansialumni = $init->getTempatKerjabyIdAlumni($id)->getRow()->id_tempat_kerja;
+		$instansialumni = $init->getTempatKerjabyIdAlumni($id)->getRow();
+		if(!is_null($instansialumni)){
+			$instansialumni=$instansialumni->id_tempat_kerja;
+			$instansi = $init->getTempatKerjaById($instansialumni)->getRow();
+		}else{
+			$instansi = array(
+				"alamat_instansi"=>'-',
+				"email_instansi"=>'-',
+				"faks_instansi"=>'-',
+				"id_tempat_kerja"=>'-',
+				"kota"=>'-',
+				"nama_instansi"=>'-',
+				"negara"=>'-',
+				"provinsi"=>'-',
+				"telp_instansi"=>'-',
+			);
+			$instansi=(object) $instansi;
+		}
 		// dd($instansialumni);
-		$instansi = $init->getTempatKerjaById($instansialumni)->getRow();
+		
 		// dd($instansi);
 		$pendidikan = $init->getPendidikanById($id)->getResult();
 		$prestasi = $init->getPrestasiById($id)->getResult();
@@ -1070,7 +1087,7 @@ class Admin extends BaseController
 			'tanggal_lahir' => htmlspecialchars($_POST['tanggal_lahir']),
 			'telp_alumni' => htmlspecialchars($_POST['telp_alumni']),
 			'alamat_alumni' => htmlspecialchars($_POST['alamat']),
-			'kota' => htmlspecialchars($_POST['kabkota']),
+			'kota' => htmlspecialchars($_POST['kabkota'] ?? ''),
 			'provinsi' => htmlspecialchars($_POST['provinsi']),
 			'negara' => htmlspecialchars($_POST['negara']),
 			'status_bekerja' => htmlspecialchars($_POST['status_bekerja']),
