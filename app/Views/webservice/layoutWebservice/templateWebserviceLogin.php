@@ -150,7 +150,7 @@
     <div class="bg-primary w-full relative z-10 pt-6 pb-3 lg:px-20 md:px-8 px-3">
         <div class="flex flex-col md:flex-row md:justify-around md:text-sm text-xs">
             <!-- awal footer stis -->
-            <div class="flex items-center gap-x-2 mx-auto md:mx-0">
+            <div class="flex items-center md:items-start gap-x-2 mx-auto md:mx-0">
                 <div class="w-36 md:w-auto">
                     <a href="https://stis.ac.id/"><img class="lg:w-24 lg:h-24 w-20 h-20" src="/img/components/logo/logo_stis.png" alt="logo STIS"></a>
                 </div>
@@ -169,8 +169,14 @@
             <!-- akhir footer stis -->
 
             <!-- awal footer haistis -->
-            <div class="flex  gap-x-2 md:mt-0 mx-auto md:mx-0">
-                <a href="https://haisstis.org/"><img class="lg:h-28 h-20 w-36 lg:w-auto" src="/img/components/logo/logo_haisstis.png" alt="logo HAISSTIS"></a>
+            <div class="md:mt-0 mx-auto md:mx-0 mb-2 md:mb-0">
+                <a href="https://haisstis.org/"><img class="lg:h-28 h-20 w-36 lg:w-auto lg:-mt-6" src="/img/components/logo/logo_haisstis.png" alt="logo HAISSTIS"></a>
+                <div class="flex justify-start gap-x-2 -mt-2 lg:-mt-4">
+                    <div><img class="lg:h-5 h-4" src="/img/components/icon/message_white.png" alt="icon message"></div>
+                    <div>
+                        <h3 class="text-white font-heading">sia@stis.ac.id</h3>
+                    </div>
+                </div>
             </div>
             <!-- akhir footer haistis -->
 
