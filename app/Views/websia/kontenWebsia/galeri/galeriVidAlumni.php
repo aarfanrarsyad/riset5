@@ -27,7 +27,7 @@
         <div class="p-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-10">
             <?php foreach ($video['video'] as $vd) : ?>
                 <div class="rounded-3xl m-2 relative transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105 cursor-pointer">
-                    <iframe class="h-52 w-full rounded-3xl" src="https://www.youtube.com/embed/<?= $vd['link'] ?>" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <iframe class="object-cover w-96 h-48 rounded-3xl" src="https://www.youtube.com/embed/<?= $vd['link'] ?>" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </div>
             <?php endforeach; ?>
         </div>

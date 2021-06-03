@@ -31,7 +31,7 @@
             <?php foreach ($list as $foto) : ?>
                 <a href="<?= base_url('/User/albumFoto/' . $foto['album']) ?>">
                     <div class="flex flex-col rounded-3xl m-2 relative hover:shadow-xl transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105 cursor-pointer">
-                        <div class="rounded-3xl w-full mb-2 bg-gray-300">
+                        <div class="rounded-3xl object-cover w-96 h-48 mb-2 bg-gray-300">
                             <img src="<?= base_url() ?>/img/galeri/<?= $foto['nama_file']; ?>" alt="<?= $foto['nama_file']; ?>" class="rounded-2xl">
                         </div>
                         <div class="text-white text-center">

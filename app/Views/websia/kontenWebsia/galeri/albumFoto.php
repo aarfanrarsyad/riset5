@@ -36,7 +36,7 @@
                 <!-- 1 gambar -->
                 <a href="#<?= $foto['id_foto']; ?>" id="foto<?= $foto['id_foto']; ?>">
                     <div class="rounded-3xl m-2 relative hover:shadow-xl transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105 cursor-pointer">
-                        <img class="albumImg w-full rounded-3xl mx-auto" src="<?= base_url() ?>/img/galeri/<?= $foto['nama_file']; ?>" alt="<?= $foto['nama_file']; ?>" />
+                        <img class="albumImg object-cover w-96 h-48 rounded-3xl mx-auto" src="<?= base_url() ?>/img/galeri/<?= $foto['nama_file']; ?>" alt="<?= $foto['nama_file']; ?>" />
                     </div>
                 </a>
                 <!-- <php endfor; ?> -->
