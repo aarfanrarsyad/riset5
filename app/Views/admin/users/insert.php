@@ -52,6 +52,13 @@
                             <form action="<?= base_url('admin/users/register') ?>" method="post" id="registration-form">
                                 <?= csrf_field() ?>
                                 <div class="form-group row pl-4">
+                                    <label for="id_alumni" class="col-sm-2 col-form-label text-secondary"><span class="text-center">ID Alumni</span></label>
+                                    <div class="col-sm-1 d-flex justify-content-end align-items-center">:</div>
+                                    <div class="col-sm-6">
+                                        <input type="text" class="form-control form-control-sm border border-secondary border-top-0 border-right-0 border-left-0 <?php if (session('errors.id_alumni')) : ?>is-invalid<?php endif ?>" name="id_alumni" id="id_alumni" placeholder="ID Alumni" value="<?= old('id_alumni') ?>" style="border-radius: 0;" autocomplete="off">
+                                    </div>
+                                </div>
+                                <div class="form-group row pl-4">
                                     <label for="fullname" class="col-sm-2 col-form-label text-secondary"><span class="text-center">Nama Lengkap</span></label>
                                     <div class="col-sm-1 d-flex justify-content-end align-items-center">:</div>
                                     <div class="col-sm-6">

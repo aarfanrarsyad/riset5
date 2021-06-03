@@ -21,7 +21,7 @@
 
     <!-- loading -->
     <div class="loading flex fixed w-full h-screen z-50 transition-opacity duration-200">
-        <img src="/img/components/loading/load.gif" class="m-auto items-center md:w-96 sm:w-72 w-60">
+        <img src="/img/components/load.gif" class="m-auto items-center md:w-96 sm:w-72 w-60" alt="loading gif">
     </div>
     <!-- loading -->
     <!-- tombol kembali ke atas -->
@@ -44,6 +44,19 @@
             </div>
             <div id="nav" class="flex items-center z-10">
                 <ul class="flex relative">
+                    <a href="/developer/">
+                        <li class="bg-secondary text-white py-1.5 sm:px-1 md:w-24 text-center cursor-pointer border-secondary border-2 hover:text-secondary hover:bg-white transition-colors duration-300">BERANDA</li>
+                    </a>
+                    <li class="bg-secondary text-white py-1.5 sm:px-1 md:w-24 text-center cursor-pointer border-secondary border-2 hover:text-secondary hover:bg-white transition-colors duration-300 relative">API
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 inline" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                        </svg>
+                        <ul class="text-secondary absolute top-9 -left-0.5 overflow-hidden transition-all max-h-0 bg-white duration-300 menuWebService">
+                            <a href="/developer/dokumentasi">
+                                <li class="list hover:text-white py-1.5 text-left border-l-2 border-t-2 border-r-2 border-secondary transiton duration-300 px-3">DOKUMENTASI</li>
+                            </a>
+                        </ul>
+                    </li>
                     <a href="/login">
                         <li class="bg-secondary text-white sm:py-1.5 py-0.5 w-20 md:w-24 text-center cursor-pointer border-secondary border-2 hover:text-secondary hover:bg-white transition-colors duration-300">MASUK</li>
                     </a>
@@ -51,6 +64,55 @@
             </div>
         </div>
 
+        <svg id="hamburgerApi" class="w-8 select-none cursor-pointer fill-current block text-white hover:text-gray-200 focus:text-gray-200 sm:hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+
+    </div>
+
+    <div class="sm:hidden hidden menuWebService navbar" id="menuApi">
+        <div class="menu border-b flex justify-center">
+            <ul class="w-min">
+                <a href="/developer/">
+                    <li class="cursor-pointer flex justify-center text-white py-1">
+                        <div class="bg-secondary w-28 flex justify-center hover:bg-white hover:text-secondary py-0.5">BERANDA</div>
+                    </li>
+                </a>
+            </ul>
+        </div>
+        <div class="menu border-t border-b flex justify-center">
+            <ul class="w-min" id="navmobile">
+                <li class="cursor-pointer flex justify-center text-white py-1">
+                    <div class="bg-secondary w-28 flex justify-center hover:bg-white hover:text-secondary py-0.5">API<svg xmlns="http://www.w3.org/2000/svg" class="w-4 inline" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                        </svg></div>
+                </li>
+                <ul class="transform -translate-y-0.5 text-white w-screen flex flex-col items-center hidden block">
+                    <a href="/developer/dokumentasi">
+                        <li class="list m-auto hover:text-white bg-white text-center text-secondary text-sm py-0.5 w-44 border-b-2 border-gray-500">DOKUMENTASI</li>
+                    </a>
+                </ul>
+            </ul>
+        </div>
+        <div class="menu border-b flex justify-center">
+            <ul class="w-min">
+                <a href="/developer/edit/akun">
+                    <li class="cursor-pointer flex justify-center text-white py-1">
+                        <div class="bg-secondary w-28 flex justify-center hover:bg-white hover:text-secondary py-0.5">EDIT AKUN</div>
+                    </li>
+                </a>
+            </ul>
+        </div>
+        <div class="menu flex justify-center">
+            <ul class="w-min">
+                <a href="/login/">
+                    <li class="cursor-pointer flex justify-center text-white py-1">
+                        <div class="bg-secondary w-28 flex justify-center hover:bg-white hover:text-secondary py-0.5">MASUK</div>
+                    </li>
+                </a>
+            </ul>
+        </div>
+    </div>
     </div>
     <!-- END HEADER -->
     <div id="divKosong" class="bg-primary w-full md:h-20 sm:h-16 h-10"></div>
@@ -61,16 +123,16 @@
     <!-- END CONTENT PAGE -->
 
     <!-- FOOTER -->
-    <div class="bg-primary w-full mt-8 pt-6 pb-3 lg:px-20 md:px-8 px-3">
-        <div class="flex flex-col md:flex-row md:justify-around text-xs">
-
+    <div class="bg-primary w-full pt-6 pb-3 lg:px-20 md:px-8 px-3">
+        <div class="flex flex-col md:flex-row md:justify-around md:text-sm text-xs items-center">
             <!-- awal footer stis -->
-            <div class="flex items-center gap-x-2 mx-auto md:mx-0">
-                <div class="w-36 md:w-auto">
+            <div class="flex  gap-x-2 mx-auto md:mx-0 mb-2 md:mb-0">
+                <div class=" md:w-auto">
                     <a href="https://stis.ac.id/"><img class="lg:w-24 lg:h-24 w-20 h-20" src="/img/components/logo/logo_stis.png" alt="logo STIS"></a>
                 </div>
                 <div class="text-white font-heading">
-                    <h3>Jl. Otto Iskandardinata No.64C Jakarta 13330</h3>
+                    <h3>Jl. Otto Iskandardinata </h3>
+                    <h3>No.64C Jakarta 13330</h3>
                     <h3>Telp. (021) 8191437, 8508812</h3>
                     <h3>Fax. (021) 8197577</h3>
                     <div class="flex gap-x-2 mt-2">
@@ -84,36 +146,31 @@
             <!-- akhir footer stis -->
 
             <!-- awal footer haistis -->
-            <div class="flex items-center mt-4 gap-x-2 md:mt-0 mx-auto md:mx-0">
-                <a href="https://haisstis.org/"><img class="lg:h-24 h-20 w-36 lg:w-auto" src="/img/components/logo/logo_haisstis.png" alt="logo HAISSTIS"></a>
-                <div class="text-white font-heading">
-                    <h3>Jl. Otto Iskandardinata No.64C Jakarta 13330</h3>
-                    <h3>Telp. (021) 8191437, 8508812</h3>
-                    <h3>Fax. (021) 8197577</h3>
-                    <div class="flex gap-x-2 mt-2">
-                        <a href=""><img class="lg:h-6 h-4" src="/img/components/icon/facebook.png" alt="icon facebook"></a>
-                        <a href=""><img class="lg:h-6 h-4" src="/img/components/icon/youtube.png" alt="icon youtube"></a>
-                        <a href="https://twitter.com/haisstis"><img class="lg:h-6 h-4" src="/img/components/icon/twitter.png" alt="icon twitter"></a>
-                        <a href=""><img class="lg:h-6 h-4" src="/img/components/icon/instagram.png" alt="icon instagram"></a>
+            <div class="md:mt-0 mx-auto md:mx-0 mb-2 md:mb-0 md:-mt-5">
+                <a href="https://haisstis.org/"><img class="lg:h-28 h-20 w-36 lg:w-auto lg:-mt-6" src="/img/components/logo/logo_haisstis.png" alt="logo HAISSTIS"></a>
+                <div class="flex gap-x-2 -mt-2 lg:-mt-4 mx-4 lg:mx-16">
+                    <div><img class="lg:h-5 h-4" src="/img/components/icon/message_white.png" alt="icon message"></div>
+                    <div>
+                        <h3 class="text-white font-heading">sia@stis.ac.id</h3>
                     </div>
                 </div>
             </div>
             <!-- akhir footer haistis -->
 
             <!-- awal link ke webservice  -->
-            <div class="flex flex-col text-white font-heading mx-auto md:mx-5 mt-4 md:mt-0">
-                <a href="/" class="mb-2 hover:text-secondary">
-                    <h3 class="underline md:no-underline">Website SIA</h3>
-                </a>
-                <a href="https://pkl.stis.ac.id/60/" class="hover:text-secondary">
+            <div class="flex flex-col text-white font-heading mx-auto md:mx-5 mt-4 md:mt-0 mb-2 md:mb-0">
+                <a href="https://pkl.stis.ac.id/60/" class="mb-2 hover:text-secondary">
                     <h3 class="underline md:no-underline">Website PKL60</h3>
+                </a>
+                <a href="/developer/" class="hover:text-secondary">
+                    <h3 class="underline md:no-underline">Webservice(API)</h3>
                 </a>
             </div>
             <!-- akhir link ke webservice  -->
 
         </div>
 
-        <div class="flex items-center mt-2">
+        <div class="flex items-center mt-4">
             <div class="flex-grow">
                 <hr class="text-white bg-white border my-auto">
             </div>

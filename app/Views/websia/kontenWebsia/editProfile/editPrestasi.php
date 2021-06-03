@@ -1,10 +1,3 @@
-<?php
-if ($checked->cprestasi == 0) {
-    $cprestasi = "";
-} else {
-    $cprestasi = "checked";
-}
-?>
 <?= $this->extend('websia/kontenWebsia/editProfile/layoutEdit.php'); ?>
 
 <?= $this->section('contentEdit'); ?>
@@ -16,25 +9,25 @@ if ($checked->cprestasi == 0) {
 </style>
 
 <div class="w-full bg-white mb-8" id="pagePrestasi">
-    <div class="flex justify-end w-full mb-4 w-36">
+    <!--<div class="flex justify-end w-full mb-4 w-36">
         <div class="bg-secondary hover:bg-secondaryhover text-white lg:py-1.5 py-1 px-3 lg:text-sm text-xs outline-none cursor-pointer rounded-full flex gap-x-2 items-center" onclick="buttonEditTampilanPrestasi()">
             <div>
                 Edit Tampilan
             </div>
-            <img src="/img/components/icon/edit.png" alt="" class="w-4 h-4">
+            <img src="/img/components/icon/edit.png" alt="edit prestasi" class="w-4 h-4">
         </div>
     </div>
     <div class="editTampilanPrestasi hidden">
         <form action="/User/updateTampilanPrestasi" method="POST">
             <div class="flex justify-between mb-4">
                 <label for="checkPrestasi" id="labelCheckPrestasi" class="text-gray-500 font-bold">Tampilkan Prestasi</label>
-                <input type="checkbox" <?= $cprestasi ?> name="checkPrestasi" id="checkPrestasi" class="cursor-pointer outline-none" onclick="checkPrestasi()">
+                <input type="checkbox" <= $cprestasi ?> name="checkPrestasi" id="checkPrestasi" class="cursor-pointer outline-none" onclick="checkPrestasi()">
             </div>
             <div class="flex justify-end">
                 <input type="submit" value="SIMPAN" class="ml-auto bg-secondary text-white rounded-full w-24 py-1 text-center cursor-pointer hover:bg-secondaryhover transition-colors duration-300 -mt-2 mb-4">
             </div>
         </form>
-    </div>
+    </div>-->
     <div class="md:overflow-x-auto overflow-x-scroll shadow-2xl rounded-3xl">
         <!-- start tabel prestasi -->
         <table class="w-full sm:text-sm text-xs rounded-3xl shadow-2xl md:shadow-none font-paragraph">
@@ -85,6 +78,12 @@ if ($checked->cprestasi == 0) {
                         <div class="ml-auto mr-3 bg-secondary text-white rounded-full w-28 py-1 text-center cursor-pointer hover:bg-secondaryhover transition-colors duration-300 my-2 tambahPrestasi" onclick="tambahPrestasi()">TAMBAH</div>
                     </td>
                 </tr>
+                <?php if ($prestasi == NULL) : ?>
+                    <!-- Tampilan jika data semua kolom belum diisi -->
+                    <tr>
+                        <td colspan="8" class="text-sm text-center border-b-2 border-gray-200 px-3 lg:px-5 py-2 md:py-3 lg:py-4">Riwayat prestasi tidak ditemukan.</td>
+                    </tr>
+                <?php endif; ?>
                 <tr class="h-5 formEdit">
                     <td colspan="8" class="rounded-b-3xl"></td>
                 </tr>
@@ -99,26 +98,26 @@ if ($checked->cprestasi == 0) {
 <!-- dialog box edit prestasi -->
 <!-- kalau mau ngecek hilangin kelas hidden sama opacity-0 nya-->
 <?php if (session()->getFlashdata('edit-prestasi-success')) : ?>
-<!-- BERHASIL edit prestasi -->
-<div id="berhasilEditPrestasi">
-    <div class="fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40">
-        <div class="duration-700 transition-all p-3 rounded-lg flex items-center" style="background-color: #B1FF66;">
-            <img src="/img/components/icon/check.png" class="h-5 mr-2" style="color: #54AC00;">
-            <p class="sm:text-base text-sm font-heading font-bold text-success"><?= session()->getFlashdata('edit-prestasi-success') ?></p>
+    <!-- BERHASIL edit prestasi -->
+    <div id="berhasilEditPrestasi">
+        <div class="fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40">
+            <div class="duration-700 transition-all p-3 rounded-lg flex items-center" style="background-color: #B1FF66;">
+                <img src="/img/components/icon/check.png" class="h-5 mr-2" style="color: #54AC00;" alt="berhasil edit prestasi">
+                <p class="sm:text-base text-sm font-heading font-bold text-success"><?= session()->getFlashdata('edit-prestasi-success') ?></p>
+            </div>
         </div>
     </div>
-</div>
-<script>
-    setTimeout(function() {
-        $('#berhasilEditPrestasi').fadeOut();
-    }, 1500);
-</script>
+    <script>
+        setTimeout(function() {
+            $('#berhasilEditPrestasi').fadeOut();
+        }, 1500);
+    </script>
 <?php endif; ?>
 <!-- GAGAL edit prestasi SEPERTINYA TIDAK DIPERLUKAN
 <div id="gagalEditPrestasi">
     <div class="fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40">
         <div class="duration-700 transition-all p-3 rounded-lg flex items-center" style="background-color: #FF7474;">
-            <img src="/img/components/icon/warning.png" class="h-5 mr-2">
+            <img src="/img/components/icon/warning.png" class="h-5 mr-2" alt="gagal edit prestasi">
             <p class="sm:text-base text-sm font-heading font-bold" style="color: #C51800;">Prestasi Tidak Berhasil Disimpan</p>
         </div>
     </div>
@@ -129,27 +128,27 @@ if ($checked->cprestasi == 0) {
     }, 1500);
 </script> -->
 <?php if (session()->getFlashdata('add-prestasi-success')) : ?>
-<!-- BERHASIL tambah prestasi -->
-<div id="berhasilTambahPrestasi">
-    <div class="fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40">
-        <div class="duration-700 transition-all p-3 rounded-lg flex items-center" style="background-color: #B1FF66;">
-            <img src="/img/components/icon/check.png" class="h-5 mr-2" style="color: #54AC00;">
-            <p class="sm:text-base text-sm font-heading font-bold text-success"><?= session()->getFlashdata('add-prestasi-success') ?></p>
+    <!-- BERHASIL tambah prestasi -->
+    <div id="berhasilTambahPrestasi">
+        <div class="fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40">
+            <div class="duration-700 transition-all p-3 rounded-lg flex items-center" style="background-color: #B1FF66;">
+                <img src="/img/components/icon/check.png" class="h-5 mr-2" style="color: #54AC00;" alt="berhasil tambah prestasi">
+                <p class="sm:text-base text-sm font-heading font-bold text-success"><?= session()->getFlashdata('add-prestasi-success') ?></p>
+            </div>
         </div>
     </div>
-</div>
-<script>
-    setTimeout(function() {
-        $('#berhasilTambahPrestasi').fadeOut();
-    }, 1500);
-</script>
+    <script>
+        setTimeout(function() {
+            $('#berhasilTambahPrestasi').fadeOut();
+        }, 1500);
+    </script>
 <?php endif; ?>
 
 <!-- GAGAL tambah prestasi GAPERLU KEKNYA
 <div id="gagalTambahPrestasi">
     <div class="fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40">
         <div class="duration-700 transition-all p-3 rounded-lg flex items-center" style="background-color: #FF7474;">
-            <img src="/img/components/icon/warning.png" class="h-5 mr-2">
+            <img src="/img/components/icon/warning.png" class="h-5 mr-2" alt="gagal tambah prestasi">
             <p class="sm:text-base text-sm font-heading font-bold" style="color: #C51800;">Prestasi Tidak Berhasil Ditambahkan</p>
         </div>
     </div>
@@ -161,21 +160,21 @@ if ($checked->cprestasi == 0) {
 </script> -->
 
 <?php if (session()->getFlashdata('delete-prestasi-success')) : ?>
-<!-- BERHASIL hapus prestasi-->
-<div id="berhasilHapusPrestasi">
-    <div class="fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40">
-        <div class="duration-700 transition-all p-3 rounded-lg flex items-center" style="background-color: #B1FF66;">
-            <img src="/img/components/icon/check.png" class="h-5 mr-2" style="color: #54AC00;">
-            <p class="sm:text-base text-sm font-heading font-bold text-success"><?= session()->getFlashdata('delete-prestasi-success') ?></p>
+    <!-- BERHASIL hapus prestasi-->
+    <div id="berhasilHapusPrestasi">
+        <div class="fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40">
+            <div class="duration-700 transition-all p-3 rounded-lg flex items-center" style="background-color: #B1FF66;">
+                <img src="/img/components/icon/check.png" class="h-5 mr-2" style="color: #54AC00;" alt="berhasil hapus prestasi">
+                <p class="sm:text-base text-sm font-heading font-bold text-success"><?= session()->getFlashdata('delete-prestasi-success') ?></p>
+            </div>
         </div>
     </div>
-</div>
-<script>
-    setTimeout(function() {
-        $('#berhasilHapusPrestasi').fadeOut();
-    }, 1500);
-</script>
-<!-- end dialog box-->
+    <script>
+        setTimeout(function() {
+            $('#berhasilHapusPrestasi').fadeOut();
+        }, 1500);
+    </script>
+    <!-- end dialog box-->
 <?php endif; ?>
 
 <?= $this->endSection(); ?>

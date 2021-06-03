@@ -64,7 +64,7 @@
 <body class="flex min-h-screen flex-col w-screen overflow-x-hidden font-paragraph">
     <!-- loading -->
     <div class="loading flex fixed w-full h-screen z-50 transition-opacity duration-200">
-        <img src="/img/components/loading/load1.gif" class="m-auto items-center md:w-96 sm:w-72 w-60">
+        <img src="/img/components/load.gif" alt="loading gif" class="m-auto items-center md:w-96 sm:w-72 w-60">
     </div>
     <!-- loading -->
     <!-- HEADER -->
@@ -93,9 +93,8 @@
     <!-- END CONTENT PAGE -->
 
     <!-- FOOTER -->
-    <div class="bg-primary w-full mt-5 pt-6 pb-3 lg:px-20 md:px-8 px-3">
-        <div class="flex flex-col md:flex-row md:justify-around text-xs">
-
+    <div class="bg-primary w-full  pt-6 pb-3 lg:px-20 md:px-8 px-3 ">
+        <div class="flex flex-col md:flex-row md:justify-around md:text-sm text-xs">
             <!-- awal footer stis -->
             <div class="flex items-center gap-x-2 mx-auto md:mx-0">
                 <div class="w-36 md:w-auto">
@@ -116,28 +115,36 @@
             <!-- akhir footer stis -->
 
             <!-- awal footer haistis -->
-            <div class="flex items-center mt-4 gap-x-2 md:mt-0 mx-auto md:mx-0">
-                <a href="https://haisstis.org/"><img class="lg:h-24 h-20 w-36 lg:w-auto" src="/img/components/logo/logo_haisstis.png" alt="logo HAISSTIS"></a>
-                <div class="text-white font-heading">
-                    <h3>Jl. Otto Iskandardinata No.64C Jakarta 13330</h3>
-                    <h3>Telp. (021) 8191437, 8508812</h3>
-                    <h3>Fax. (021) 8197577</h3>
-                    <div class="flex gap-x-2 mt-2">
-                        <a href=""><img class="lg:h-6 h-4" src="/img/components/icon/facebook.png" alt="icon facebook"></a>
-                        <a href=""><img class="lg:h-6 h-4" src="/img/components/icon/youtube.png" alt="icon youtube"></a>
-                        <a href="https://twitter.com/haisstis"><img class="lg:h-6 h-4" src="/img/components/icon/twitter.png" alt="icon twitter"></a>
-                        <a href=""><img class="lg:h-6 h-4" src="/img/components/icon/instagram.png" alt="icon instagram"></a>
+            <div class="md:mt-0 mx-auto md:mx-0">
+                <a href="https://haisstis.org/"><img class="lg:h-28 h-20 w-36 lg:w-auto lg:-mt-6" src="/img/components/logo/logo_haisstis.png" alt="logo HAISSTIS"></a>
+                <div class="flex gap-x-2 -mt-2 lg:-mt-4 mx-4 lg:mx-16">
+                    <div><img class="lg:h-5 h-4" src="/img/components/icon/message_white.png" alt="icon message"></div>
+                    <div>
+                        <h3 class="text-white font-heading">sia@stis.ac.id</h3>
                     </div>
                 </div>
             </div>
             <!-- akhir footer haistis -->
 
+            <!-- awal link ke webservice  -->
+            <div class="flex flex-col text-white font-heading mx-auto md:mx-5 mt-4 md:mt-0">
+                <a href="/" class="mb-2 hover:text-secondary">
+                    <h3 class="underline md:no-underline">Website PKL60</h3>
+                </a>
+                <a href="/webservice/" class="hover:text-secondary">
+                    <h3 class="underline md:no-underline">Webservice(API)</h3>
+                </a>
+            </div>
+            <!-- akhir link ke webservice  -->
+
         </div>
 
-        <div class="flex items-center mt-2">
+        <div class="flex items-center mt-4">
             <div class="flex-grow">
                 <hr class="text-white bg-white border my-auto">
             </div>
+
+
         </div>
 
         <h2 class="text-white text-sm text-center mt-1">Copyright &copy; PKL 60 Riset 5</h2>

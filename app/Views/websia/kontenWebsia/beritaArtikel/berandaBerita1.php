@@ -35,7 +35,7 @@
                         <div>
                             Berita dengan judul "Polstat STIS Mengadakan Reuni" oleh A. Karim telah dikonfirmasi dan dipublikasikan.
                             <div class="flex gap-x-2 items-center">
-                                <img src="/img/icon/calendar.png" class="w-5 h-5" alt="">
+                                <img src="/img/components/icon/calendar.png" class="w-5 h-5" alt="icon kalender">
                                 <p class="text-xs">17 April 2021</p>
                             </div>
                         </div>
@@ -49,7 +49,7 @@
                         <div class="lg:w-3/4 md:w-4/5 w-2/3">
                             Berita dengan judul "Polstat STIS Mengadakan Reuni" oleh A. Karim telah dikonfirmasi dan dipublikasikan.
                             <div class="flex gap-x-2 items-center">
-                                <img src="/img/icon/calendar.png" class="w-5 h-5" alt="">
+                                <img src="/img/components/icon/calendar.png" class="w-5 h-5" alt="icon kalender">
                                 <p class="text-xs">17 April 2021</p>
                             </div>
                         </div>
@@ -60,7 +60,7 @@
                         <div class="lg:w-3/4 md:w-4/5 w-2/3">
                             Berita dengan judul "Peraturan Baru Tentang Pengambilan Ijazah Alumni" oleh Doraemon telah dikonfirmasi dan dipublikasikan.
                             <div class="flex gap-x-2 items-center">
-                                <img src="/img/icon/calendar.png" class="w-5 h-5" alt="">
+                                <img src="/img/components/icon/calendar.png" class="w-5 h-5" alt="ikon kalender">
                                 <p class="text-xs">14 April 2021</p>
                             </div>
                         </div>
@@ -102,9 +102,9 @@
                             <h3 class="font-heading font-semibold text-primary text-lg">Judul Berita</h3>
                         </a>
                         <div class="flex gap-x-1 items-center">
-                            <img src="/img/icon/clock.png" class="w-3 h-3" alt="">
+                            <img src="/img/components/icon/clock.png" class="w-3 h-3" alt="tanggal">
                             <p class="text-xs text-primary">11 Januari 2021</p>
-                            <img src="/img/icon/profile.png" class="w-3 h-3 ml-2" alt="">
+                            <img src="/img/components/icon/profile.png" class="w-3 h-3 ml-2" alt="author">
                             <p class="text-xs text-primary">David Smith</p>
                         </div>
                         <p>
@@ -121,9 +121,9 @@
                             <h3 class="font-heading font-semibold text-primary text-lg">Judul Berita</h3>
                         </a>
                         <div class="flex gap-x-1 items-center">
-                            <img src="/img/icon/clock.png" class="w-3 h-3" alt="">
+                            <img src="/img/components/icon/clock.png" class="w-3 h-3" alt="tanggal">
                             <p class="text-xs text-primary">11 Januari 2021</p>
-                            <img src="/img/icon/profile.png" class="w-3 h-3 ml-2" alt="">
+                            <img src="/img/components/icon/profile.png" class="w-3 h-3 ml-2" alt="author">
                             <p class="text-xs text-primary">David Smith</p>
                         </div>
                         <p>
@@ -140,9 +140,9 @@
                             <h3 class="font-heading font-semibold text-primary text-lg">Judul Berita</h3>
                         </a>
                         <div class="flex gap-x-1 items-center">
-                            <img src="/img/icon/clock.png" class="w-3 h-3" alt="">
+                            <img src="/img/components/icon/clock.png" class="w-3 h-3" alt="tanggal">
                             <p class="text-xs text-primary">11 Januari 2021</p>
-                            <img src="/img/icon/profile.png" class="w-3 h-3 ml-2" alt="">
+                            <img src="/img/components/icon/profile.png" class="w-3 h-3 ml-2" alt="author">
                             <p class="text-xs text-primary">David Smith</p>
                         </div>
                         <p>
@@ -159,9 +159,9 @@
                             <h3 class="font-heading font-semibold text-primary text-lg">Judul Berita</h3>
                         </a>
                         <div class="flex gap-x-1 items-center">
-                            <img src="/img/icon/clock.png" class="w-3 h-3" alt="">
+                            <img src="/img/components/icon/clock.png" class="w-3 h-3" alt="tanggal">
                             <p class="text-xs text-primary">11 Januari 2021</p>
-                            <img src="/img/icon/profile.png" class="w-3 h-3 ml-2" alt="">
+                            <img src="/img/components/icon/profile.png" class="w-3 h-3 ml-2" alt="author">
                             <p class="text-xs text-primary">David Smith</p>
                         </div>
                         <p>
@@ -180,9 +180,9 @@
                             <h3 class="font-heading font-semibold text-primary text-lg">Judul Berita</h3>
                         </a>
                         <div class="flex gap-x-1 items-center">
-                            <img src="/img/icon/clock.png" class="w-3 h-3" alt="">
+                            <img src="/img/components/icon/clock.png" class="w-3 h-3" alt="tanggal">
                             <p class="text-xs text-primary">11 Januari 2021</p>
-                            <img src="/img/icon/profile.png" class="w-3 h-3 ml-2" alt="">
+                            <img src="/img/components/icon/profile.png" class="w-3 h-3 ml-2" alt="author">
                             <p class="text-xs text-primary">David Smith</p>
                         </div>
                         <p>
@@ -199,9 +199,9 @@
                             <h3 class="font-heading font-semibold text-primary text-lg">Judul Berita</h3>
                         </a>
                         <div class="flex gap-x-1 items-center">
-                            <img src="/img/icon/clock.png" class="w-3 h-3" alt="">
+                            <img src="/img/components/icon/clock.png" class="w-3 h-3" alt="tanggal">
                             <p class="text-xs text-primary">11 Januari 2021</p>
-                            <img src="/img/icon/profile.png" class="w-3 h-3 ml-2" alt="">
+                            <img src="/img/components/icon/profile.png" class="w-3 h-3 ml-2" alt="author">
                             <p class="text-xs text-primary">David Smith</p>
                         </div>
                         <p>
@@ -218,9 +218,9 @@
                             <h3 class="font-heading font-semibold text-primary text-lg">Judul Berita</h3>
                         </a>
                         <div class="flex gap-x-1 items-center">
-                            <img src="/img/icon/clock.png" class="w-3 h-3" alt="">
+                            <img src="/img/components/icon/clock.png" class="w-3 h-3" alt="tanggal">
                             <p class="text-xs text-primary">11 Januari 2021</p>
-                            <img src="/img/icon/profile.png" class="w-3 h-3 ml-2" alt="">
+                            <img src="/img/components/icon/profile.png" class="w-3 h-3 ml-2" alt="author">
                             <p class="text-xs text-primary">David Smith</p>
                         </div>
                         <p>
@@ -237,9 +237,9 @@
                             <h3 class="font-heading font-semibold text-primary text-lg">Judul Berita</h3>
                         </a>
                         <div class="flex gap-x-1 items-center">
-                            <img src="/img/icon/clock.png" class="w-3 h-3" alt="">
+                            <img src="/img/components/icon/clock.png" class="w-3 h-3" alt="tanggal">
                             <p class="text-xs text-primary">11 Januari 2021</p>
-                            <img src="/img/icon/profile.png" class="w-3 h-3 ml-2" alt="">
+                            <img src="/img/components/icon/profile.png" class="w-3 h-3 ml-2" alt="author">
                             <p class="text-xs text-primary">David Smith</p>
                         </div>
                         <p>
@@ -253,12 +253,12 @@
         <!-- end card berita -->
         <div class="flex gap-x-2 items-center justify-end mb-8">
             <a href="">
-                <img src="/img/left-on.png" class="w-4 h-4 cursor-pointer" alt="">
+                <img src="/img/components/left-on.png" class="w-4 h-4 cursor-pointer" alt="Berita sebelumnya">
             </a>
             <a href="" class="text-secondary">1</a>
             <a href="" class="text-secondary">2</a>
             <a href="">
-                <img src="/img/right-on.png" class="w-4 h-4 cursor-pointer" alt="">
+                <img src="/img/components/icon/right-on.png" class="w-4 h-4 cursor-pointer" alt="Berita berikutnya">
             </a>
         </div>
     </div>

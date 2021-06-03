@@ -23,7 +23,7 @@ if (session()->getFlashdata('role')) { ?>
     <div id="alert">
         <div class="fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40">
             <div class="duration-700 transition-all p-3 rounded-lg flex items-center" style="background-color: #FF7474;">
-                <img src="/img/components/icon/warning.png" class="h-5 mr-2" style="color: #C51800;">
+                <img src="/img/components/icon/warning.png" class="h-5 mr-2" style="color: #C51800;" alt="warning">
                 <p class="sm:text-base text-sm font-heading font-bold"><?= session()->role; ?></p>
             </div>
         </div>
@@ -42,7 +42,7 @@ if (session()->getFlashdata('role')) { ?>
 
 <!-- Awal Sejarah Singkat HAISTIS -->
 </div>
-<div class="flex md:flex-row flex-col-reverse my-8 pt-0 lg:px-20 md:px-8 px-3">
+<div class="flex md:flex-row flex-col-reverse my-8 pt-0 lg:px-20 md:px-8 px-5">
     <div class="md:w-2/3 block md:px-2 md:py-8 pb-4">
         <div class="md:mb-6 mb-2 text-xl text-center md:text-left text-black font-heading font-semibold">HASIL DARI PROYEK PKL RISET 5</div>
         <!-- awal keterangan hasil proyek pkl riset 5 -->
@@ -63,7 +63,7 @@ if (session()->getFlashdata('role')) { ?>
 <!-- Akhir Sejarah Singkat HAISTIS -->
 
 <!-- Awal Sejarah Singkat HAISTIS -->
-<div class="flex md:flex-row flex-col bg-primary my-4 py-4 lg:px-20 md:px-8 px-3">
+<div class="flex md:flex-row flex-col bg-primary my-4 py-4 lg:px-20 md:px-8 px-5">
     <div class="md:w-1/3 w-full md:flex md:items-stretch bg-contain bg-no-repeat bg-left" style="background-image: url(/img/components/atribut_beranda_sia/segitiga1.png)">
         <img class="lg:w-2/3 md:w-11/12 w-10/12  mx-auto md:self-center" src="/img/components/logo/logo_haisstis.png" alt="logo HAISSTIS" data-aos="fade-right">
     </div>
@@ -82,7 +82,7 @@ if (session()->getFlashdata('role')) { ?>
 <!-- Akhir Sejarah Singkat HAISTIS -->
 
 <!-- Awal Jumlah Alumni AIS/STIS/Polstat STIS -->
-<div class="w-full my-8 lg:px-20 md:px-8 px-3">
+<div class="w-full my-8 lg:px-20 md:px-8 px-5">
     <div class="w-full md:mb-6 mb-4 text-center text-xl text-black font-heading font-bold">ALUMNI AIS/STIS/POLSTAT STIS</div>
 
     <div class="flex flex-col items-center md:flex-row md:justify-around w-full mt-4">
@@ -112,7 +112,7 @@ if (session()->getFlashdata('role')) { ?>
 <!-- Akhir Jumlah Alumni AIS/STIS/Polstat STIS -->
 
 <!-- Awal Peta Sebaran ALUMNI -->
-<div class="bg-primary mt-8 md:py-8 py-4 lg:px-20 md:px-8 px-3 z-10">
+<div class="bg-primary mt-8 md:py-8 py-4 lg:px-20 md:px-8 px-5 z-10">
     <div class="w-full md:mb-6 mb-4 text-center text-xl text-secondary font-bold font-heading">PETA SEBARAN ALUMNI</div>
 
     <div class="text-white font-medium text-center mb-1">Tampilkan Berdasarkan :</div>
@@ -160,13 +160,13 @@ if (session()->getFlashdata('role')) { ?>
                 <div class="text-sm font-heading font-semibold">Keterangan :</div>
                 <div class="flex items-center text-xs font-paragraph">
                     <span class="font-heading flex justify-start text-left">
-                        <img class="mr-0 md:mr-2 ml-1 md:ml-0 w-4 h-4 md:w-4 float-left" src="/img/components/icon/peta_lokasi.png" alt="">
+                        <img class="mr-0 md:mr-2 ml-1 md:ml-0 w-4 h-4 md:w-4 float-left" src="/img/components/icon/peta_lokasi.png" alt="peta lokasi">
                         <p class="font-heading text-xs">Terdapat total 2000 Alumni yang berada di luar Indonesia</p>
                     </span>
                 </div>
                 <div class="flex items-center text-xs font-paragraph">
                     <span class="font-heading flex justify-start text-left">
-                        <img class="mr-0 md:mr-2 ml-1 md:ml-0 w-4 h-4 md:w-4 float-left" src="/img/components/icon/peta_beluminput.png" alt="">
+                        <img class="mr-0 md:mr-2 ml-1 md:ml-0 w-4 h-4 md:w-4 float-left" src="/img/components/icon/peta_beluminput.png" alt="alumni yang belum menginput data">
                         <p class="font-heading text-xs">Terdapat total 300 Alumni yang belum menginput data</p>
                     </span>
                 </div>
@@ -182,16 +182,17 @@ if (session()->getFlashdata('role')) { ?>
 
 
 <!-- awal card -->
-<div class="w-full mt-8 lg:px-20 md:px-8 px-3">
+<div class="w-full mt-8 lg:px-20 md:px-8 px-5">
     <div class="w-full md:mb-6 mb-4 text-center text-xl text-black font-bold font-heading">BERITA TERBARU</div>
 
     <div class="flex flex-col md:flex-row md:justify-between w-full mt-4">
 
         <?php for ($x = 0; $x < 3; $x++) : ?>
+
             <!-- awal card-->
-            <div class="mb-6 lg:w-1/4 md:w-1/3 lg:mx-0 md:mx-2 mx-0  w-full md:border-0 border-b-2 border-gray-300" data-aos="zoom-in">
+            <div class="<?= ($x == 2) ? 'hidden md:flex md:flex-col ' : ' '; ?>  mb-6 lg:w-1/4 md:w-1/3 lg:mx-0 md:mx-2 mx-0  w-full md:border-0 border-b-4 border-gray-500" data-aos="zoom-in">
                 <a href="/User/judulBerita" class="mb-4">
-                    <img class="w-full gambarBerita" src="/img/sampel.jpeg">
+                    <img class="w-full gambarBerita" src="/img/components/sampel.jpeg" alt="thumbnail berita">
                 </a>
                 <div class="py-4">
                     <!-- Awal judul berita -->
@@ -222,7 +223,7 @@ if (session()->getFlashdata('role')) { ?>
 </div>
 
 <!-- awal tombol "Lihat Berita Selanjutnya" -->
-<div class="flex w-full justify-end lg:px-20 md:px-8 px-3 mb-8">
+<div class="flex w-full justify-end lg:px-20 md:px-8 px-5 mb-8">
     <div class="text-primary font-paragraph my-auto"><a href="/User/berita">Lihat Berita Selanjutnya</a> </div>
     <div>
         <a href="/websia/berandaBerita">

@@ -634,3 +634,4 @@ function get_by_id($id=null,$select='*',$table='pendidikan',$array=false)
     
     return $return; 
 }
+

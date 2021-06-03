@@ -31,6 +31,16 @@ class AlumniModel extends Model
         return $this->table('alumni')->like($field, $search);
     }
 
+    public function getProv()
+    {
+        return $this->db->table('provinsi')->get()->getResult();
+    }
+
+    public function getKab($idProv)
+    {
+        return $this->db->table('kabkota')->getWhere(['id_provinsi' => $idProv])->getResult();
+    }
+
     public function getAlumni($id)
     {
         $query = "SELECT * FROM users WHERE id = $id";
@@ -253,6 +263,11 @@ class AlumniModel extends Model
         }
     }
 
+    public function getNumAlumni(){
+        $sql ="SELECT COUNT(*) as jumlah_alumni FROM alumni";
+        return $this->db->query($sql);
+    }
+
     public function getDetailUserApi($nim = false)
     {
         if ($nim === false) {
@@ -306,26 +321,26 @@ class AlumniModel extends Model
         return $this->db->query($query);
     }
 
-    // kureng nih DBnya keknya ada yang kurang
-    // public function deletePublikasi($id)
-    // {
-    //     $query = "DELETE FROM publikasi WHERE id_publikasi= $id";
-    //     return $this->db->query($query);
-    // }
-
     public function getIdTempatKerja($nama)
     {
         $query = "SELECT id_tempat_kerja FROM tempat_kerja WHERE nama_instansi = '$nama'";
         return $this->db->query($query)->getRow()->id_tempat_kerja;
     }
 
-    public function searchAlumni($keyword)
+    public function getTempatKerjaById($id)
     {
-        return $this->table('alumni')->like('nama', $keyword);
+        $query = "SELECT * FROM tempat_kerja WHERE id_tempat_kerja = $id";
+        return $this->db->query($query);
     }
 
+    // kanddidat untuk binding sso bps
     public function getAlumniByEmail($email)
     {
         return $this->builder()->where('email', $email)->get()->getFirstRow('array');
+    }
+
+    public function getAlumniByNipBPS($nip)
+    {
+        return $this->builder()->where('nip_bps', $nip)->get()->getFirstRow('array');
     }
 }

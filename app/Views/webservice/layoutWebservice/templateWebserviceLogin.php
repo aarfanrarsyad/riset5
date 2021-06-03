@@ -46,29 +46,37 @@
             </div>
             <div id="nav" class="hidden sm:flex sm:items-center">
                 <ul class="flex lg:gap-x-6 md:gap-x-4 gap-x-2 relative">
-                    <li class="bg-secondary text-white py-1.5 sm:px-1 md:w-20 text-center cursor-pointer border-secondary border-2 hover:text-secondary hover:bg-white transition-colors duration-300 relative">API
+                    <a href="/developer/">
+                        <li class="bg-secondary text-white py-1.5 sm:px-1 md:w-24 text-center cursor-pointer border-secondary border-2 hover:text-secondary hover:bg-white transition-colors duration-300">BERANDA</li>
+                    </a>
+                    <li class="bg-secondary text-white py-1.5 sm:px-1 md:w-24 text-center cursor-pointer border-secondary border-2 hover:text-secondary hover:bg-white transition-colors duration-300 relative">API
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-4 inline" viewBox="0 0 20 20" fill="currentColor">
                             <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
                         </svg>
                         <ul class="text-secondary absolute top-9 -left-0.5 overflow-hidden transition-all max-h-0 bg-white duration-300 menuWebService">
-                            <a href="/developer/">
-                                <li class="list hover:text-white py-1.5 text-left border-2 border-secondary transiton duration-300 px-3">BERANDA</li>
-                            </a>
                             <a href="/developer/dokumentasi">
-                                <li class="list hover:text-white py-1.5 text-left border-l-2 border-r-2 border-secondary transiton duration-300 px-3">DOKUMENTASI</li>
+                                <li class="list hover:text-white py-1.5 text-left border-l-2 border-b-2 border-t-2 border-r-2 border-secondary transiton duration-300 px-3">DOKUMENTASI</li>
                             </a>
+                            <?php if($statusLog==1){?>
                             <a href="/developer/proyek">
-                                <li class="list hover:text-white py-1.5 text-left border-2 border-secondary transiton duration-300 px-3">PROYEK</li>
+                                <li class="list hover:text-white py-1.5 text-left border-l-2 border-b-2 border-r-2 border-secondary transiton duration-300 px-3">PROYEK</li>
                             </a>
+                            <?php }?>
                         </ul>
                     </li>
-
-                    <a href="/developer/profil">
-                        <li class="bg-secondary text-white py-1.5 sm:px-1 md:w-20 text-center cursor-pointer border-secondary border-2 hover:text-secondary hover:bg-white transition-colors duration-300">PROFIL</li>
+                    <?php if($statusLog==1){?>
+                    <a href="/developer/edit/akun">
+                        <li class="bg-secondary text-white py-1.5 sm:px-1 md:w-24 text-center cursor-pointer border-secondary border-2 hover:text-secondary hover:bg-white transition-colors duration-300">EDIT AKUN</li>
                     </a>
+                    <?php }; if(session()->has('id_user')){?>
                     <a href="/logout">
-                        <li class="bg-secondary text-white py-1.5 sm:px-1 md:w-20 text-center cursor-pointer border-secondary border-2 hover:text-secondary hover:bg-white transition-colors duration-300">KELUAR</li>
+                        <li class="bg-secondary text-white py-1.5 sm:px-1 md:w-24 text-center cursor-pointer border-secondary border-2 hover:text-secondary hover:bg-white transition-colors duration-300">KELUAR</li>
                     </a>
+                    <?php } else {?>
+                    <a href="/login">
+                        <li class="bg-secondary text-white py-1.5 sm:px-1 md:w-24 text-center cursor-pointer border-secondary border-2 hover:text-secondary hover:bg-white transition-colors duration-300">LOGIN DEV</li>
+                    </a>
+                    <?php }?>
                 </ul>
             </div>
 
@@ -80,6 +88,15 @@
         </div>
 
         <div class="sm:hidden hidden menuWebService navbar" id="menuApi">
+            <div class="menu border-b flex justify-center">
+                <ul class="w-min">
+                    <a href="/developer/">
+                        <li class="cursor-pointer flex justify-center text-white py-1">
+                            <div class="bg-secondary w-28 flex justify-center hover:bg-white hover:text-secondary py-0.5">BERANDA</div>
+                        </li>
+                    </a>
+                </ul>
+            </div>
             <div class="menu border-t border-b flex justify-center">
                 <ul class="w-min" id="navmobile">
                     <li class="cursor-pointer flex justify-center text-white py-1">
@@ -88,9 +105,6 @@
                             </svg></div>
                     </li>
                     <ul class="transform -translate-y-0.5 text-white w-screen flex flex-col items-center hidden block">
-                        <a href="/developer/">
-                            <li class="list m-auto hover:text-white bg-white text-center text-secondary text-sm py-0.5 w-44 border-b-2 border-gray-500">BERANDA</li>
-                        </a>
                         <a href="/developer/dokumentasi">
                             <li class="list m-auto hover:text-white bg-white text-center text-secondary text-sm py-0.5 w-44 border-b-2 border-gray-500">DOKUMENTASI</li>
                         </a>
@@ -102,9 +116,9 @@
             </div>
             <div class="menu border-b flex justify-center">
                 <ul class="w-min">
-                    <a href="/developer/profil">
+                    <a href="/developer/edit/akun">
                         <li class="cursor-pointer flex justify-center text-white py-1">
-                            <div class="bg-secondary w-28 flex justify-center hover:bg-white hover:text-secondary py-0.5">PROFIL</div>
+                            <div class="bg-secondary w-28 flex justify-center hover:bg-white hover:text-secondary py-0.5">EDIT AKUN</div>
                         </li>
                     </a>
                 </ul>
@@ -131,9 +145,8 @@
     <!-- END CONTENT PAGE -->
 
     <!-- FOOTER -->
-    <div class="bg-primary w-full pt-6 pb-3 lg:px-20 md:px-8 px-3 z-30">
-        <div class="flex flex-col md:flex-row md:justify-around text-xs">
-
+    <div class="bg-primary w-full  pt-6 pb-3 lg:px-20 md:px-8 px-3 ">
+        <div class="flex flex-col md:flex-row md:justify-around md:text-sm text-xs">
             <!-- awal footer stis -->
             <div class="flex items-center gap-x-2 mx-auto md:mx-0">
                 <div class="w-36 md:w-auto">
@@ -154,39 +167,30 @@
             <!-- akhir footer stis -->
 
             <!-- awal footer haistis -->
-            <div class="flex items-center mt-4 gap-x-2 md:mt-0 mx-auto md:mx-0">
-                <a href="https://haisstis.org/"><img class="lg:h-24 h-20 w-36 lg:w-auto" src="/img/components/logo/logo_haisstis.png" alt="logo HAISSTIS"></a>
-                <div class="text-white font-heading">
-                    <h3>Jl. Otto Iskandardinata No.64C Jakarta 13330</h3>
-                    <h3>Telp. (021) 8191437, 8508812</h3>
-                    <h3>Fax. (021) 8197577</h3>
-                    <div class="flex gap-x-2 mt-2">
-                        <a href=""><img class="lg:h-6 h-4" src="/img/components/icon/facebook.png" alt="icon facebook"></a>
-                        <a href=""><img class="lg:h-6 h-4" src="/img/components/icon/youtube.png" alt="icon youtube"></a>
-                        <a href="https://twitter.com/haisstis"><img class="lg:h-6 h-4" src="/img/components/icon/twitter.png" alt="icon twitter"></a>
-                        <a href=""><img class="lg:h-6 h-4" src="/img/components/icon/instagram.png" alt="icon instagram"></a>
-                    </div>
-                </div>
+            <div class="flex  gap-x-2 md:mt-0 mx-auto md:mx-0">
+                <a href="https://haisstis.org/"><img class="lg:h-28 h-20 w-36 lg:w-auto" src="/img/components/logo/logo_haisstis.png" alt="logo HAISSTIS"></a>
             </div>
             <!-- akhir footer haistis -->
 
             <!-- awal link ke webservice  -->
             <div class="flex flex-col text-white font-heading mx-auto md:mx-5 mt-4 md:mt-0">
                 <a href="/" class="mb-2 hover:text-secondary">
-                    <h3 class="underline md:no-underline">Website SIA</h3>
-                </a>
-                <a href="https://pkl.stis.ac.id/60/" class="hover:text-secondary">
                     <h3 class="underline md:no-underline">Website PKL60</h3>
+                </a>
+                <a href="/webservice/" class="hover:text-secondary">
+                    <h3 class="underline md:no-underline">Webservice(API)</h3>
                 </a>
             </div>
             <!-- akhir link ke webservice  -->
 
         </div>
 
-        <div class="flex items-center mt-2">
+        <div class="flex items-center mt-4">
             <div class="flex-grow">
                 <hr class="text-white bg-white border my-auto">
             </div>
+
+
         </div>
 
         <h2 class="text-white text-sm text-center mt-1">Copyright &copy; PKL 60 Riset 5</h2>

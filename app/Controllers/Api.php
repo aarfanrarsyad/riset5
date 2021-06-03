@@ -181,6 +181,20 @@ class Api extends ResourceController
 		};
 	}
 
+	public function jmlalumni(){
+		$init = new AlumniModel();
+
+		$alumni = $init->getNumAlumni()->getResult();
+
+				$respond = [
+					'status' => 200,
+					'message' => 'Successful!',
+					'data' => $alumni
+				];
+				return $this->respond($respond, 200);
+
+	}
+
 	//--------------------------------------------------------------------
 
 }

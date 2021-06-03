@@ -39,11 +39,12 @@
         let report = $(event.target).data('report');
 
         report = report.split(";");
+        console.log(report);
         j = 1;
         $('#reportBody').empty();
         for (let i = 0; i < report.length; i++) {
             if (report[i] != "") {
-                $('#reportBody').html('\<tr\>\<td class = "text-center"\>' + j + '\<\/td\>\<td\>' + report[i] + '\<\/td\>\<\/tr\>');
+                $('#reportBody').append('\<tr\>\<td class = "text-center"\>' + j + '\<\/td\>\<td\>' + report[i] + '\<\/td\>\<\/tr\>');
                 j++;
             }
         }

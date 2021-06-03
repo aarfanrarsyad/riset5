@@ -45,7 +45,7 @@
                                     <div class="mx-2">
                                         <div class="flex gap-x-4">
                                             <div class="flex items-center">
-                                                <img src="/img/<?= $row['foto_profil'] ?>" class="lg:w-18 w-12 mx-auto" alt="">
+                                                <img src="/img/components/<?= $row['foto_profil'] ?>" class="lg:w-18 w-12 mx-auto" alt="<?= $row['nama'] ?>">
                                             </div>
                                             <div class="flex items-center">
                                                 <div>
@@ -103,7 +103,7 @@
                                 <!-- Awal Card Berita  -->
                                 <a href="">
                                     <div class="flex px-2 md:flex-row flex-col md:gap-x-4 gap-x-0 items-center">
-                                        <img src="/img/sampel.jpeg" alt="" class="md:w-48 md:h-36 w-full h-52 ">
+                                        <img src="/img/sampel.jpeg" alt="" class="md:w-48 w-full gambarBerita ">
                                         <div class="flex-grow">
                                             <div class="flex flex-col">
 

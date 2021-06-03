@@ -130,3 +130,4 @@ nb-configuration.xml
 /public/vendor/tailwind/node_modules
 /public/vendor/tailwind/package-lock.json
 /resources/
+workspace.code-workspace

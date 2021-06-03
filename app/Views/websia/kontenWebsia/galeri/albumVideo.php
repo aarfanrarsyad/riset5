@@ -7,19 +7,19 @@
         Album <?= $current_album ?>
     </div>
     <div class="flex items-center justify-center mt-4 mb-8">
-        <button type="button" class="mr-4 px-4 py-1 rounded-3xl border border-secondary text-sm bg-white text-secondary hover:bg-secondaryhover hover:text-white transition-colors duration-300 focus:outline-none galeriButton">
-            <a href="/User/galeriVideo">
+        <a href="/User/galeriVideo">
+            <button type="button" class="mr-4 px-4 py-1 rounded-3xl border border-secondary text-sm bg-white text-secondary hover:bg-secondaryhover hover:text-white transition-colors duration-300 focus:outline-none galeriButton">
                 SEMUA VIDEO
-            </a>
-        </button>
+            </button>
+        </a>
         <div class="album-btn rounded-3xl text-sm bg-white text-secondary hover:bg-secondaryhover hover:text-white transition-all duration-400 galeriButton">
             <!-- Awal button album -->
             <div class="font-paragraph">
-                <button type="button" class="text-center rounded-3xl px-4 py-1 border border-secondary focus:outline-none">
-                    <a href="/User/listAlbumVideo">
+                <a href="/User/listAlbumVideo">
+                    <button type="button" class="text-center rounded-3xl px-4 py-1 border border-secondary focus:outline-none">
                         ALBUM
-                    </a>
-                </button>
+                    </button>
+                </a>
             </div>
             <!-- Akhir button album -->
         </div>
@@ -30,7 +30,7 @@
         <div class="p-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-10">
             <?php foreach ($video['video'] as $vd) : ?>
                 <div class="rounded-3xl m-2 relative transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105 cursor-pointer">
-                    <iframe class="h-52 w-full rounded-3xl" src="https://www.youtube.com/embed/<?= $vd['link'] ?>" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <iframe class="object-cover w-96 h-48 rounded-3xl" src="https://www.youtube.com/embed/<?= $vd['link'] ?>" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </div>
             <?php endforeach; ?>
         </div>
@@ -59,7 +59,7 @@
     </div>
     <div class="md:col-span-2 lg:col-span-2">
         <div class="">
-            <img src="/img/components/galeri.png" alt="" class="w-full md:h-full md:w-auto mb-8">
+            <img src="/img/components/galeri.png" alt="icon galeri" class="w-full md:h-full md:w-auto mb-8">
         </div>
     </div>
     <div class="fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40 font-paragraph hidden" id='formUnggahVideo'>

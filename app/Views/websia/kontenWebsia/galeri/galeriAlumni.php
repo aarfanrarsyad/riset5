@@ -11,27 +11,27 @@
         <div class="album-btn rounded-3xl text-sm bg-white text-secondary hover:bg-secondaryhover hover:text-white transition-all duration-400 galeriButton">
             <!-- Awal button album -->
             <div class="font-paragraph">
-                <button type="button" class="text-center rounded-3xl px-4 py-1 border border-secondary focus:outline-none">
-                    <a href="<?= base_url() ?>/User/listAlbumFoto">
+                <a href="<?= base_url() ?>/User/listAlbumFoto">
+                    <button type="button" class="text-center rounded-3xl px-4 py-1 border border-secondary focus:outline-none">
                         ALBUM
-                    </a>
-                </button>
+                    </button>
+                </a>
             </div>
             <!-- Akhir button album -->
         </div>
     </div>
 </div>
 <div class="bg-primary">
-    <div class="py-4">
-        <div class="holder p-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-4">
+    <div class="py-2">
+        <div class="holder p-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-4 gap-y-2">
             <!-- Awal Tampilan Galeri (Buat ditambahkan coding sesuai gambar dari database) -->
             <!-- <php for ($x = 0; $x < 12; $x++) : ?> -->
             <?php $i = 0;
             foreach ($galeri['foto'] as $foto) : ?>
                 <!-- 1 gambar -->
-                <a href="#<?= $foto['id_foto']; ?>" id="foto<?= $foto['id_foto']; ?>">
+                <a onclick="clicked(<?= $i ?>)" href="#<?= $foto['id_foto']; ?>" id="foto<?= $foto['id_foto']; ?>">
                     <div class="rounded-3xl m-2 relative hover:shadow-xl transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105 cursor-pointer">
-                        <img id="slide" class="object-cover w-full h-48 object-fit rounded-3xl mx-auto" src="<?= base_url() ?>/img/galeri/<?= $foto['nama_file']; ?>" alt="" />
+                        <img id="slide" class="object-cover w-96 h-48 object-fit rounded-3xl mx-auto" src="<?= base_url() ?>/img/galeri/<?= $foto['nama_file']; ?>" alt="<?= $foto['nama_file']; ?>" />
                     </div>
                 </a>
                 <!-- <php endfor; ?> -->
@@ -39,17 +39,17 @@
                 <div class="fixed overflow-auto top-0 bottom-0 right-0 left-0 z-40 bg-black bg-opacity-80 text-center font-paragraph hidden" id="<?= $foto['id_foto']; ?>">
                     <div class="m-auto duration-700 transition-all bg-gray bg-opacity-0 w-11/12 sm:w-9/12 md:w-8/12 lg:w-7/12">
                         <!-- Awal Tombol Laporkan foto -->
-                        <button onClick="laporkanFoto(<?= $foto['id_foto']; ?>)"><img src="<?= base_url() ?>/img/components/icon/danger-sign.png" alt="" class="absolute top-3 right-3"></button>
+                        <button onClick="laporkanFoto(<?= $foto['id_foto']; ?>)"><img src="<?= base_url() ?>/img/components/icon/danger-sign.png" alt="laporkan foto" class="absolute top-3 right-3"></button>
                         <!-- Akhir Tombol Laporkan foto -->
 
                         <div class="flex flex-col justify-center items-center">
                             <div class="flex flex-row justify-center items-center gap-x-4 mt-8 mb-6">
-                                <a href="#<?= $foto['id_foto'] - 1; ?>">
-                                    <img src="<?= base_url() ?>/img/components/icon/left-on.png" alt="" class="" onclick="prev()" id="prev">
+                                <a>
+                                    <img src="<?= base_url() ?>/img/components/icon/left-on.png" alt="foto sebelumnya" class="cursor-pointer" onclick="prev('img-<?= $foto['id_foto']; ?>')" id="prev">
                                 </a>
-                                <img src="<?= base_url() ?>/img/galeri/<?= $foto['nama_file']; ?>" alt="" class="slider-img w-3/4">
-                                <a href="#<?= $foto['id_foto'] + 1; ?>">
-                                    <img src="<?= base_url() ?>/img/components/icon/right-on.png" alt="" class="" onclick="next()" id="next">
+                                <img src="<?= base_url() ?>/img/galeri/<?= $foto['nama_file']; ?>" alt="<?= $foto['nama_file']; ?>" class="slider-img w-3/4" id="img-<?= $foto['id_foto']; ?>">
+                                <a>
+                                    <img src="<?= base_url() ?>/img/components/icon/right-on.png" alt="foto selanjutnya" class="cursor-pointer" onclick="next('img-<?= $foto['id_foto']; ?>')" id="next">
                                 </a>
                             </div>
 
@@ -61,11 +61,11 @@
                                 <p class="mt-4"><?= $foto['caption'] ?></p>
                                 <div class="mt-5 text-gray-400 text-center">
                                     <?php if (count($foto['tag_name']) > 1) : ?>
-                                        <span> <img src="<?= base_url() ?>/img/components/icon/line.png" alt="" class="inline mr-1"> bersama </span> <span class=" text-white"><?= $foto['tag_name'][0]['nama'] ?> </span> <span> dan</span> <span class="text-white"> <?= count($foto['tag_name']) - 1 ?> lainnya</span> <span><img src="<?= base_url() ?>/img/components/icon/down.png" alt="" class="daftarTag inline ml-1 rounded-full w-4 hover:bg-secondary cursor-pointer" onclick="daftarTag()">
+                                        <span> <img src="<?= base_url() ?>/img/components/icon/line.png" alt="icon tag foto" class="inline mr-1"> bersama </span> <span class=" text-white"><?= $foto['tag_name'][0]['nama'] ?> </span> <span> dan</span> <span class="text-white"> <?= count($foto['tag_name']) - 1 ?> lainnya</span> <span><img src="<?= base_url() ?>/img/components/icon/down.png" alt="daftar semua tag" class="daftarTag inline ml-1 rounded-full w-4 hover:bg-secondary cursor-pointer" onclick="daftarTag()">
                                         </span>
                                         <!-- Awal Tampilan Daftar Tag -->
                                         <div class="tampilTag hidden relative" id="tampilTag">
-                                            <div class="static mt-2 p-2 rounded-2xl overflow-y-auto h-64 ml-80 bg-primary w-1/4 position-right text-white">
+                                            <div class="static mt-2 p-2 rounded-2xl overflow-y-auto ml-64 sm:ml-64 md:ml-80 lg:96 bg-primary w-32 md:w-36 position-right text-white text-xs md:text-sm">
                                                 <ul class="bg-primary">
                                                     <?php for ($n = 1; $n < count($foto['tag_name']); $n++) : ?>
                                                         <li><?= $foto['tag_name'][$n]['nama'] ?></li>
@@ -74,7 +74,7 @@
                                             </div>
                                         </div>
                                     <?php elseif (count($foto['tag_name']) < 1) : ?>
-                                        <span> <img src="<?= base_url() ?>/img/components/icon/line.png" alt="" class="inline mr-1"> bersama </span> <span class=" text-white"><?= $foto['tag_name'][0]['nama'] ?> </span>
+                                        <span> <img src="<?= base_url() ?>/img/components/icon/line.png" alt="icon tag foto" class="inline mr-1"> bersama </span> <span class=" text-white"><?= $foto['tag_name'][0]['nama'] ?> </span>
                                         </span>
                                     <?php else : ?>
                                     <?php endif ?>
@@ -147,7 +147,7 @@
     </div>
     <div class="md:col-span-2 lg:col-span-2">
         <div class="">
-            <img src="<?= base_url() ?>/img/components/galeri.png" alt="" class="w-full md:h-full md:w-auto">
+            <img src="<?= base_url() ?>/img/components/galeri.png" alt="icon galeri" class="w-full md:h-full md:w-auto">
         </div>
     </div>
     <div class="fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40 font-paragraph hidden" id='formUnggahFoto'>
@@ -208,6 +208,33 @@
 </div>
 
 <script>
+    var images = [];
+    <?php foreach ($galeri['foto'] as $foto) : ?>
+        images.push('<?= $foto['nama_file'] ?>');
+    <?php endforeach ?>
+    var i = 0;
+
+    function clicked(n) {
+        i = n;
+    }
+
+    function prev(id) {
+        if (i <= 0) i = images.length;
+        i--;
+        return setImg(id);
+    }
+
+    function next(id) {
+        if (i >= images.length - 1) i = -1;
+        i++;
+        return setImg(id);
+    }
+
+    function setImg(id) {
+        get = document.getElementById(id);
+        return get.setAttribute('src', '<?= base_url() ?>/img/galeri/' + images[i]);
+    }
+
     // buat nama di foto yang diupload
     $('#pilihFile').change(function() {
         string = $('#pilihFile').val().split("\\");
@@ -233,7 +260,8 @@
         maxItems: 10,
         options: [
             <?php foreach ($alumni as $data) {
-                echo ("{
+                if ($data->id_alumni !== session()->id_alumni)
+                    echo ("{
                         angkatan: \"Angkatan " . $data->angkatan . "\",
                         name: \"" . $data->nama . "\",
                         id_alumni: \"" . $data->id_alumni . "\"
