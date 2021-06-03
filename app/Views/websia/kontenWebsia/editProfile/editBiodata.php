@@ -3,6 +3,8 @@ if ($alumni->jenis_kelamin == 'Lk') {
     $jk = "Laki-laki";
 } else if ($alumni->jenis_kelamin == 'Pr') {
     $jk = "Perempuan";
+} else {
+    $jk = "Belum terisi";
 }
 
 if ($alumni->status_bekerja == '1') {
