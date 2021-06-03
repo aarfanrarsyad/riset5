@@ -47,11 +47,10 @@
                                     <table class="table table-hover table-sm text-sm" id="alumni-table">
                                         <thead>
                                             <tr>
-                                                <th scope="col">No.</th>
+                                                <th scope="col">ID Alumni</th>
                                                 <th scope="col">Foto</th>
                                                 <th scope="col">NIP</th>
                                                 <th scope="col">NIP BPS</th>
-                                                <th scope="col">ID Alumni</th>
                                                 <th scope="col">Nama</th>
                                                 <th scope="col">Aksi</th>
                                             </tr>
@@ -61,11 +60,10 @@
                                             <?php $i = 1 + (10 * ($currentPage - 1)); ?>
                                             <?php foreach ($alumni as $alum) : ?>
                                                 <tr>
-                                                    <th scope="row"><?= $i++; ?></th>
+                                                    <td><?= $alum['id_alumni']; ?></td>
                                                     <td><img src="/img/<?= $alum['foto_profil']; ?>" alt="Foto Profil" class="foto"></td>
                                                     <td><?= $alum['nip']; ?></td>
                                                     <td><?= $alum['nip_bps']; ?></td>
-                                                    <td><?= $alum['id_alumni']; ?></td>
                                                     <td><?= $alum['nama']; ?></td>
                                                     <td>
                                                         <a href="/admin/alumni/<?= $alum['id_alumni']; ?>" class="btn btn-xs btn-outline-primary mr-1"><i class="fas fa-search"></i>&ensp;<span class="text-xs">Detail</span></a>

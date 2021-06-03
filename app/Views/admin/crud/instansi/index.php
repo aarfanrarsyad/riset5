@@ -48,7 +48,6 @@
                                     <table class="table table-hover table-sm text-sm" id="instansi-table">
                                         <thead>
                                             <tr>
-                                                <th scope="col">No.</th>
                                                 <th scope="col">ID Instansi</th>
                                                 <th scope="col">Nama Instansi</th>
                                                 <th scope="col">Alamat Instansi</th>
@@ -59,7 +58,6 @@
                                             <?php $i = 1 + (10 * ($currentPage - 1)); ?>
                                             <?php foreach ($instansi as $inst) : ?>
                                                 <tr>
-                                                    <th scope="row"><?= $i++; ?></th>
                                                     <td><?= $inst['id_tempat_kerja']; ?></td>
                                                     <td><?= $inst['nama_instansi']; ?></td>
                                                     <td><?= $inst['alamat_instansi']; ?></td>

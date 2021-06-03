@@ -294,6 +294,7 @@
                                                     <th scope="col">#</th>
                                                     <th scope="col">Jenjang</th>
                                                     <th scope="col">Instansi</th>
+                                                    <th scope="col">Angkatan</th>
                                                     <th scope="col">Tahun Masuk</th>
                                                     <th scope="col">Tahun Lulus</th>
                                                 </tr>
@@ -305,6 +306,7 @@
                                                         <th scope="row"><?= $i++; ?></th>
                                                         <td><?= $pend->jenjang ?></td>
                                                         <td><?= $pend->instansi ?></td>
+                                                        <td><?= $pend->angkatan ?></td>
                                                         <td><?= $pend->tahun_masuk ?></td>
                                                         <td><?= $pend->tahun_lulus ?></td>
                                                     </tr>
