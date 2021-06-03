@@ -85,7 +85,7 @@
                                     <a href="/User/galeriVideo" class="bg-primaryDark hover:bg-primary text-white hover:text-secondary text-left w-full px-2 transition duration-300"> Galeri Video </a>
                                 </div>
                             </div>
-                            <a href="/User/berita">
+                            <a href="/Berita/berita">
                                 <div class="nav-menu transition-colors duration-300 <?= ($active == 'berita') ? 'activeMenu' : ''; ?>">
                                     BERITA
                                 </div>
@@ -153,7 +153,7 @@
                             </div>
                         </div>
                         <div class="nav-menu-relative px-2 py-2 <?= ($active == 'berita') ? 'activeMenu' : ''; ?>">
-                            <a href="/User/berita"> BERITA</a>
+                            <a href="/Berita/berita"> BERITA</a>
                         </div>
                         <div class="nav-menu-relative px-2 py-2">
                             <a href="/User/developer"> WEBSERVICE</a>

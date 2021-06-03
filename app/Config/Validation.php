@@ -92,7 +92,14 @@ class Validation
 		'header'   => 'required',
 		'access' => 'required|in_list[public,private,other]',
 		'author' => 'required',
-		// 'thumbnail' => 'uploaded[thumbnail]|max_size[thumbnail,1024]|mime_in[thumbnail,image/png,image/jpg]|ext_in[thumbnail,png,jpg]'
+		'thumbnail' => 'uploaded[thumbnail]|max_size[thumbnail,1024]|ext_in[thumbnail,png,jpg,jpeg,img]'
+	];
+
+	public $create_user_news = [
+		'header'   => 'required',
+		'author' => 'required',
+		'content' => 'required',
+		'thumbnail' => 'uploaded[thumbnail]|max_size[thumbnail,1024]|ext_in[thumbnail,png,jpg,jpeg,img]',
 	];
 
 	public $update_news = [

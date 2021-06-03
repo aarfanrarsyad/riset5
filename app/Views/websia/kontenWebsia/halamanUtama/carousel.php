@@ -8,7 +8,7 @@
             </div>
             <div class="swiper-slide bg-cover bg-left w-full py-20 md:py-32 lg:py-56 cursor-pointer" style="background-image: url('/img/components/carousel/carousel-02.png');" onclick="location.href='/User/galeriFoto';">
             </div>
-            <div class="swiper-slide bg-cover bg-left w-full py-20 md:py-32 lg:py-56 cursor-pointer" style="background-image: url('/img/components/carousel/carousel-03.png');" onclick="location.href='/User/berita';">
+            <div class="swiper-slide bg-cover bg-left w-full py-20 md:py-32 lg:py-56 cursor-pointer" style="background-image: url('/img/components/carousel/carousel-03.png');" onclick="location.href='/Berita/berita';">
             </div>
             <div class="swiper-slide bg-cover bg-left w-full py-20 md:py-32 lg:py-56 cursor-pointer" style="background-image: url('/img/components/carousel/carousel-04.png');" onclick="location.href='#';">
             </div>

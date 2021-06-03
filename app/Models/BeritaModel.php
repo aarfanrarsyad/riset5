@@ -13,10 +13,37 @@ class BeritaModel extends Model
         return $this->db->query("SELECT * FROM berita ORDER BY id DESC");
     }
 
+    public function getNewsPop()
+    {
+        $curdate = get_date(true);
+        $query = "SELECT berita.*, COUNT(news_visited.id) AS visited, SUM(news_visited.hits) AS hits FROM berita JOIN news_visited ON berita.id = news_visited.news_id WHERE (berita.aktif = 1 AND berita.akses != 'review'  AND tanggal_publish <= '$curdate' ) GROUP BY berita.id ORDER BY visited DESC";
+        return $this->db->query($query);
+    }
+
+    public function getHotNews()
+    {
+        $curdate = get_date(true);
+        $query = "SELECT * FROM berita WHERE (aktif = 1 AND akses != 'review'  AND tanggal_publish <= '$curdate') ORDER BY tanggal_publish DESC LIMIT 20";
+        return $this->db->query($query);
+    }
+
+    public function getNewsForLandingPage()
+    {
+        $curdate = get_date(true);
+        $query = "SELECT * FROM berita WHERE (aktif = 1 AND akses = 'public' AND tanggal_publish <= '$curdate') ORDER BY tanggal_publish DESC LIMIT 4";
+        return $this->db->query($query);
+    }
+
     public function getNewsById($id)
     {
         if (!isset($id) || empty($id))  redirect('auth/server-error', 'refresh');
         return $this->db->query("SELECT * FROM berita WHERE id=$id");
+    }
+
+    public function getNewsByUserId($id)
+    {
+        if (!isset($id) || empty($id))  redirect('auth/server-error', 'refresh');
+        return $this->db->query("SELECT * FROM berita WHERE user_id=$id");
     }
 
     public function getLastRecordNews()
@@ -39,10 +66,10 @@ class BeritaModel extends Model
         $groups_id = is_null($data['groups_id']) ? "NULL" : "'" . $data['groups_id'] . "'";
 
         $authorize =  Services::authorization();
-
         $active = '0';
         if ($authorize->inGroup('Administrator', userdata()['id'])) {
             $active = '1';
+        } else {
             $access = 'private';
         }
 
@@ -61,6 +88,50 @@ class BeritaModel extends Model
                 return false;
             }
         } else {
+            return false;
+        }
+    }
+
+    public function insertUserNews($data)
+    {
+        if (!isset($data) || empty($data))  redirect('auth/server-error', 'refresh');
+
+        $date = $data['date'];
+        $header = $data['header'];
+        $content = $data['content'];
+        $access = $data['access'];
+        $thumbnail = $data['thumbnail'];
+        $author = $data['author'];
+
+        $user_id = userdata()['id'];
+
+        $query = "INSERT INTO berita VALUES('','$date','$header','$thumbnail','$content','$access',$user_id,NULL,'$author','0')";
+        if ($this->db->query($query)) {
+            $insert_id = $this->insertID();
+            $curr_folder = ROOTPATH . '/public/berita/';
+
+            if (!rename($curr_folder . session()->get('folder_name'), $curr_folder . "berita_" . $insert_id)) {
+                $dirname = ROOTPATH . session()->get('folder_name');
+                array_map('unlink', glob("$dirname/*.*"));
+                rmdir($dirname);
+                return false;
+            }
+            $content = str_replace(session()->get('folder_name'), "berita_" . $insert_id, $content);
+            $query = "UPDATE berita SET konten = '$content' WHERE id = $insert_id";
+
+            if ($this->db->query($query)) {
+                return true;
+            } else {
+                $dirname = ROOTPATH . '/public/berita/berita_' . $insert_id;
+                array_map('unlink', glob("$dirname/*.*"));
+                rmdir($dirname);
+                return false;
+            }
+        } else {
+
+            $dirname = ROOTPATH . session()->get('folder_name');
+            array_map('unlink', glob("$dirname/*.*"));
+            rmdir($dirname);
             return false;
         }
     }
@@ -197,9 +268,15 @@ class BeritaModel extends Model
         return $this->db->query($query);
     }
 
-    public function changeAccessNews($id, $val)
+    public function changeAccessNews($id, $val, $groups = null)
     {
-        $query = "UPDATE berita SET akses = '$val' WHERE id = $id";
+        if (!$groups) {
+            $query = "UPDATE berita SET akses = '$val',groups_id=NULL WHERE id = $id";
+        } else {
+            $groups = preg_replace("/[\s\/.]/", "", array_to_string($groups, 1));
+            $query = "UPDATE berita SET akses = '$val',groups_id='$groups' WHERE id = $id";
+        }
+
         if ($this->db->query($query)) {
             return true;
         } else {
@@ -212,8 +289,13 @@ class BeritaModel extends Model
         $status = $this->getNewsById($id)->getRowArray();
         if (!$status || empty($status)) return false;
 
-        $active = 0;
-        if ($status['aktif'] == 0) $active = 1;
+        $last_data = $this->getNewsById($id)->getRowArray();
+        if (!$last_data) return false;
+
+        $active = 1;
+        if ($last_data['aktif'] == 1) {
+            $active = 0;
+        }
 
         $query = "UPDATE berita SET aktif = '$active' WHERE id = $id";
         if ($this->db->query($query)) {

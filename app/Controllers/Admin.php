@@ -1575,9 +1575,6 @@ class Admin extends BaseController
 			'album'		=> $out_album,
 			'isGalery'	=> TRUE
 		];
-
-		// $report = implode(";", )
-		// dd($data['foto'][5]['report']);
 		return view('admin' . DIRECTORY_SEPARATOR . 'galeri' . DIRECTORY_SEPARATOR . 'foto', $data);
 	}
 
@@ -1690,7 +1687,6 @@ class Admin extends BaseController
 					->withResource()
 					->convert(IMAGETYPE_JPEG)
 					->save($file  . '.jpeg', 50);
-				// unlink($file . $ext);
 
 				$file = str_replace(ROOTPATH . '/public/img/galeri/', "", $file);
 				$data = [
@@ -1709,7 +1705,6 @@ class Admin extends BaseController
 					->withResource()
 					->convert(IMAGETYPE_JPEG)
 					->save($new_name  . '.jpeg', 50);
-				// unlink($new_name . $ext);
 
 				$new_name = str_replace(ROOTPATH . '/public/img/galeri/', "", $new_name);
 				$data = [
