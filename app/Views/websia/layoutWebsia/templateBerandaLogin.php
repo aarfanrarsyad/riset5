@@ -54,7 +54,7 @@
     <div class="navbar w-full fixed z-30 bg-cover bg-no-repeat bg-left transition duration-700 ease-out" style="background-image: url(/img/components/bgHeader.png)" id="navbar">
         <header>
             <div class="flex flex-col">
-                <div class="flex items-center justify-between px-6 pt-3 ">
+                <div class="flex items-center justify-between px-6 md:pt-3 pt-1 ">
                     <div class="">
                         <div class="flex">
                             <a href="<?= base_url(); ?>">
@@ -168,9 +168,11 @@
                                 <input type="text" name="cari" placeholder="    |  CARI" id="inputCari" class="placeholder-white bg-transparent ml-6 text-xs text-center w-2/3 outline-none ">
                             </form>
                         </div>
-                        <div class=" mt-1 px-2 py-2 w-11/12 mx-auto font-medium bg-secondary hover:bg-secondaryhover transition-colors duration-200 text-xs text-center text-white ">
-                            <a href="/auth/logout">KELUAR</a>
-                        </div>
+                        <a href="/auth/logout">
+                            <div class=" mt-1 px-2 py-2 w-11/12 mx-auto font-medium bg-secondary hover:bg-secondaryhover transition-colors duration-200 text-xs text-center text-white ">
+                                KELUAR
+                            </div>
+                        </a>
                     </div>
                 </div>
 
@@ -191,14 +193,15 @@
 
     <!-- FOOTER -->
     <div class="bg-primary w-full pt-6 pb-3 lg:px-20 md:px-8 px-3">
-        <div class="flex flex-col md:flex-row md:justify-around md:text-sm text-xs">
+        <div class="flex flex-col md:flex-row md:justify-around md:text-sm text-xs items-center">
             <!-- awal footer stis -->
-            <div class="flex items-center gap-x-2 mx-auto md:mx-0">
-                <div class="w-36 md:w-auto">
+            <div class="flex  gap-x-2 mx-auto md:mx-0 mb-2 md:mb-0">
+                <div class=" md:w-auto">
                     <a href="https://stis.ac.id/"><img class="lg:w-24 lg:h-24 w-20 h-20" src="/img/components/logo/logo_stis.png" alt="logo STIS"></a>
                 </div>
                 <div class="text-white font-heading">
-                    <h3>Jl. Otto Iskandardinata No.64C Jakarta 13330</h3>
+                    <h3>Jl. Otto Iskandardinata </h3>
+                    <h3>No.64C Jakarta 13330</h3>
                     <h3>Telp. (021) 8191437, 8508812</h3>
                     <h3>Fax. (021) 8197577</h3>
                     <div class="flex gap-x-2 mt-2">
@@ -212,7 +215,7 @@
             <!-- akhir footer stis -->
 
             <!-- awal footer haistis -->
-            <div class="md:mt-0 mx-auto md:mx-0">
+            <div class="md:mt-0 mx-auto md:mx-0 mb-2 md:mb-0 md:-mt-5">
                 <a href="https://haisstis.org/"><img class="lg:h-28 h-20 w-36 lg:w-auto lg:-mt-6" src="/img/components/logo/logo_haisstis.png" alt="logo HAISSTIS"></a>
                 <div class="flex gap-x-2 -mt-2 lg:-mt-4 mx-4 lg:mx-16">
                     <div><img class="lg:h-5 h-4" src="/img/components/icon/message_white.png" alt="icon message"></div>
@@ -224,7 +227,7 @@
             <!-- akhir footer haistis -->
 
             <!-- awal link ke webservice  -->
-            <div class="flex flex-col text-white font-heading mx-auto md:mx-5 mt-4 md:mt-0">
+            <div class="flex flex-col text-white font-heading mx-auto md:mx-5 mt-4 md:mt-0 mb-2 md:mb-0">
                 <a href="https://pkl.stis.ac.id/60/" class="mb-2 hover:text-secondary">
                     <h3 class="underline md:no-underline">Website PKL60</h3>
                 </a>
