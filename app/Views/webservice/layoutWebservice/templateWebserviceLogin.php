@@ -68,6 +68,7 @@
                     <a href="/developer/edit/akun">
                         <li class="bg-secondary text-white py-1.5 sm:px-1 md:w-24 text-center cursor-pointer border-secondary border-2 hover:text-secondary hover:bg-white transition-colors duration-300">EDIT AKUN</li>
                     </a>
+                    <?php }; if(session()->has('id_user')){?>
                     <a href="/logout">
                         <li class="bg-secondary text-white py-1.5 sm:px-1 md:w-24 text-center cursor-pointer border-secondary border-2 hover:text-secondary hover:bg-white transition-colors duration-300">KELUAR</li>
                     </a>
