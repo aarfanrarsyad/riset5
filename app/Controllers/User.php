@@ -28,47 +28,179 @@ class User extends BaseController
 
 	public function searchAndFilter()
 	{
-		$pager = \Config\Services::pager();
+		$db = \Config\Database::connect();
 		$model = new \App\Models\AlumniModel;
-		if (isset($_GET['min']))
-			$minAng = $_GET['min'];
-		else
-			$minAng = $model->getMinAngkatan()[0]->angkatan;
 
-		if (isset($_GET['max']))
-			$maxAng = $_GET['max'];
-		else
-			$maxAng = $model->getMaxAngkatan()[0]->angkatan;
+		$cari = $this->request->getVar('cari');
+		$cari = (is_null($cari)) ? '' : $cari;
+		$kerja = $this->request->getVar('kerja');
+		$kerja = (is_null($kerja)) ? '' : $kerja;
+		$prodi = $this->request->getVar('prodi');
+		$pro = (is_null($prodi)) ? [] : $prodi;
+		// dd($this->request->getVar());
 
-		if ($minAng > $maxAng) {
-			$temp = $minAng;
-			$minAng = $maxAng;
-			$maxAng = $temp;
-		}
-		if ($minAng != NULL && $minAng >= $model->getMinAngkatan()[0]->angkatan) {
-			$min_angkatan  = $minAng;
+		if ($kerja !== '' && $prodi != []  && $this->request->getVar('angkatan') !== '') {
+			$id_alumni = '';
 		} else {
-			$min_angkatan  = $model->getMinAngkatan()[0]->angkatan;
+			if ($kerja !== '') {
+				$query = $db->table('tempat_kerja');
+				$id_alumni = $query->select('alumni_tempat_kerja.id_alumni')->orderBy('id_alumni')
+					->join('alumni_tempat_kerja', 'alumni_tempat_kerja.id_tempat_kerja = tempat_kerja.id_tempat_kerja')
+					->like('nama_instansi', $kerja)->orLike('alamat_instansi', $kerja)->get()->getResult();
+				$kerja = array_map(function ($n) {
+					return $n->id_alumni;
+				}, $id_alumni);
+			}
+
+			if ($prodi !== '') {
+				$listProdi = [
+					'DI' => ['Ak. Ilmu Statistik'],
+					'DIII' => ['D-III AIS', 'D-III STIS', 'DIII-AIS'],
+					'KS' => ['D-IV Komputasi Statistik', 'Komputasi Statistik'],
+					'ST' => ['Statistik Sosial Kependudukan', 'D-IV Statistik Sosial Kependudukan', 'D-IV Statistik Ekonomi', 'D-IV SK', 'Statistik Ekonomi', 'D-IV SE']
+				];
+				$prodi = [];
+				foreach (array_keys($listProdi) as $p) {
+					if (in_array($p, $pro)) {
+						foreach ($listProdi[$p] as $di) {
+							array_push($prodi, $di);
+						}
+						array_push($prodi, $p);
+					}
+				}
+				$query = $db->table('pendidikan');
+				$query = $query->select('pendidikan.id_alumni')->orderBy('id_alumni')
+					->join('pendidikan_tinggi', 'pendidikan_tinggi.id_pendidikan = pendidikan.id_pendidikan');
+				foreach ($prodi as $p) {
+					$query->orLike('program_studi', $p);
+				}
+				$prodi = array_map(function ($n) {
+					return $n->id_alumni;
+				}, $query->get()->getResult());
+			}
+			// dd(get_by_id(433,'nim'));
+			// dd($prodi);
+
+			// logic pecarian angkatan
+			$reg = '1234567890-,';
+			$parse = '';
+			$max_angkatan = $db->table('pendidikan')->selectMax('angkatan')->get()->getRow()->angkatan;
+			foreach (str_split($this->request->getVar('akt')) as $key) {
+				if (in_array($key, str_split($reg))) $parse .= $key;
+			}
+			$parse = ($parse == '') ? '1-' . $max_angkatan : $parse;
+			$query = $db->table('pendidikan');
+			$query->select('pendidikan.id_alumni')->orderBy('id_alumni');
+			foreach (explode(',', $parse) as $key) {
+				$range = explode('-', $key);
+				if (isset($range[1]) && intval($range[0]) > intval(end($range))) {
+					$range[1] = intval($range[0]) + intval($range[1]);
+					$range[0] = intval($range[1]) - intval($range[0]);
+					$range[1] = intval($range[1]) - intval($range[0]);
+				} elseif (!isset($range[1])) {
+					$range[1] = intval($range[0]);
+				};
+				$range[0] = ($range[0] >= 1) ? $range[0] :  1;
+				$range[1] = (end($range) <= $max_angkatan) ? end($range) :  $max_angkatan;
+				$query->orWhere("angkatan BETWEEN $range[0] AND $range[1]");
+			}
+			// dd($parse);
+			$id_alumni = $query->get()->getResult();
+			$angkatan = array_map(function ($n) {
+				return $n->id_alumni;
+			}, $id_alumni);
+			// dd(['prodi'=>$prodi,'angkatan'=>$angkatan,'kerja'=>$kerja]);
+
+			$kerja = (is_array($kerja)) ? $kerja : $prodi;
+			$id_alumni = [];
+			if (count($angkatan) > count($prodi) && count($kerja) > count($prodi)) {
+				// $id_alumni = $prodi;
+				foreach ($prodi as $p) {
+					if (in_array($p, $angkatan) && in_array($p, $kerja) && !in_array($p, $id_alumni))
+						array_push($id_alumni, $p);
+				}
+			} elseif (count($angkatan) > count($prodi) && count($kerja) < count($prodi)) {
+				// $id_alumni = $kerja;
+				foreach ($kerja as $k) {
+					if (in_array($k, $angkatan) && in_array($k, $prodi) && !in_array($k, $id_alumni))
+						array_push($id_alumni, $k);
+				}
+			} else {
+				// $id_alumni = $angkatan;
+				foreach ($angkatan as $a) {
+					if (in_array($a, $prodi) && in_array($a, $kerja) && !in_array($a, $id_alumni))
+						array_push($id_alumni, $a);
+				}
+			}
 		}
-		if ($maxAng != NULL && $maxAng <= $model->getMaxAngkatan()[0]->angkatan) {
-			$max_angkatan  = $maxAng;
+		// dd($id_alumni);
+		//query utama
+		$query = $db->table('alumni')->select('alumni.id_alumni,nama,foto_profil,nim,angkatan')
+			->groupBy('alumni.id_alumni')->orderBy('alumni.id_alumni')
+			->join('pendidikan', 'alumni.id_alumni = pendidikan.id_alumni', 'inner')
+			->join('pendidikan_tinggi', 'pendidikan_tinggi.id_pendidikan = pendidikan.id_pendidikan', 'inner')
+			->groupStart()->like('nama', $cari)
+			->orLike('tempat_lahir', $cari)->orLike('tanggal_lahir', $cari)
+			->orLike('telp_alumni', $cari)->orLike('email', $cari)
+			->orLike('alamat_alumni', $cari)->orLike('perkiraan_pensiun', $cari)
+			->orLike('jabatan_terakhir', $cari)->orLike('ig', $cari)
+			->orLike('fb', $cari)->orLike('twitter', $cari)
+			->orLike('nip', $cari)->orLike('nip_bps', $cari)
+			->groupEnd();
+
+		if ($id_alumni != '') {
+			$query->groupStart();
+			// $query->havingIn('alumni.id_alumni',$angkatan);
+			foreach ($id_alumni as $id) {
+				// $query->orGroupStart()->where(["angkatan >="=>$akt[0],"angkatan <="=>$akt[1]])->groupEnd();
+				$query->orWhere('alumni.id_alumni', $id);
+			};
+			$query->groupEnd();
+		}
+
+		if (is_null($this->request->getVar('t'))) {
+			$query->limit(5);
 		} else {
-			$max_angkatan  = $model->getMaxAngkatan()[0]->angkatan;
+			$limit = (is_null($this->request->getVar('limit'))) ? 10 : $this->request->getVar('limit');
+			$start = (is_null($this->request->getVar('start'))) ? 0 : $this->request->getVar('start');
+			$query->limit($limit, $start);
+		}
+		$compiled = $query->getCompiledSelect(false);
+		$countAllResults = $query->countAllResults(false);
+		$alumni = $query->get()->getResultArray();
+		$jumlah = [
+			'text' => (!empty($cari)) ?
+				"Terdapat " . $countAllResults . " alumni dengan kata kunci `<B>$cari</B>` ditemukan." :
+				"Memuat " . $countAllResults . " data alumni.",
+			'ret' => $countAllResults
+		];
+		// dd($alumni);
+		// dd($jumlah);
+		#prncarian berita
+		$berita = $db->table('berita')->limit(5)->get()->getResultArray();
+
+		if ($this->request->isAJAX()) { // repond ajax live search
+			// $query = $model->getAlumniFilter($cari, $min_angkatan, $max_angkatan);
+			dd(json_encode([
+			'alumni' => $alumni,
+			'berita' => $berita,
+			'jumlah' => $jumlah['text'],
+			'ret' => $jumlah['ret'],
+			'search' => $this->request->getVar(),
+			'query' => $query,
+			]));
+			return json_encode([
+				'alumni' => $alumni,
+				'berita' => $berita,
+				'jumlah' => $jumlah['text'],
+				'ret' => $jumlah['ret'],
+				'search' => $this->request->getVar(),
+				'query' => $query,
+			]);
 		}
 
-		if (isset($_GET['cari']))
-			$cari = $_GET['cari'];
-		else
-			$cari = "";
-
-		$query = $model->orderBy('nama', $direction = 'ASC')->getAlumniFilter($cari, $min_angkatan, $max_angkatan);
-		if (!empty($cari)) {
-			$jumlah = "Terdapat " . $query->countAllResults(false) . " alumni dengan kata kunci `<B>$cari</B>` ditemukan.";
-		} else {
-			$jumlah = "Memuat " . $query->countAllResults(false) . " data alumni.";
-		}
-
-		if ($query->countAllResults(false) == 0) {
+		if ($countAllResults == 0) {
+			// pencarian dari halaman lain / by ENTER kosong
 			$data = [
 				'judulHalaman' => 'Pencarian Alumni | Website Riset 5',
 				'active' => '',
@@ -80,15 +212,21 @@ class User extends BaseController
 				'judulHalaman' => 'Pencarian Alumni | Website Riset 5',
 				'active' => '',
 				'cari' => $cari,
-				'alumni1' => $query->paginate(5),
-				'alumni2' => $model->orderBy('nama', $direction = 'ASC')->getAlumniFilter($cari, $min_angkatan, $max_angkatan)->get()->getResult(),
-				'pager' => $model->pager,
-				'page'  => isset($_GET['page']) ? (int)$_GET["page"] : 1,
+				'alumni' => $alumni,
 				'jumlah' => $jumlah,
-				'min_angkatan' => $model->getMinAngkatan()[0]->angkatan,
-				'max_angkatan' => $model->getMaxAngkatan()[0]->angkatan
 			];
-			return view('websia/kontenWebsia/searchAndFilter/searchAndFilter', $data);
+			// dd($data['alumni1']);
+			switch ($this->request->getVar('t')) {
+				case 'alumni':
+					return view('websia/kontenWebsia/searchAndFilter/semuaAlumni', $data);
+					break;
+				case 'berita':
+					return view('websia/kontenWebsia/searchAndFilter/semuaBerita', $data);
+					break;
+				default:
+					return view('websia/kontenWebsia/searchAndFilter/searchAndFilter', $data);
+					break;
+			}
 		}
 	}
 
@@ -252,6 +390,18 @@ class User extends BaseController
 		$model = new AlumniModel();
 		// $kunci = $_GET['id_alumni'];
 		// $kunci = get_alumni_by_nim($nim);
+		$fotoModel = new \App\Models\FotoModel;
+		$galeri_profil = $fotoModel->getForProfil($id);
+		$i = 0;
+		foreach ($galeri_profil as $foto) {
+			$tag = explode(',', $foto['tag']);
+			$j = 0;
+			foreach ($tag as $t) {
+				$galeri_profil[$i]['tag_name'][$j] = $model->getTags($t);
+				$j++;
+			}
+			$i++;
+		}
 		$kunci = htmlspecialchars($id);
 		$query1 = $model->bukaProfile($kunci)->getRow();
 		// dd($query1);
@@ -385,6 +535,8 @@ class User extends BaseController
 			'pendidikan' => $query6,
 			'user' => $query7,
 			'rekomendasi'          => $query4,
+			'foto'				=> $galeri_profil,
+			'count'				=> count($galeri_profil),
 		];
 		return view('websia/kontenWebsia/userProfile/userProfile', $data);
 	}
@@ -517,10 +669,16 @@ class User extends BaseController
 	{
 
 		$model = new AlumniModel();
+		$tempat_lahir   	= htmlspecialchars($_POST['tempat_lahir']);
+		$tanggal_lahir   	= htmlspecialchars($_POST['tanggal_lahir']);
 		$telp_alumni   	= htmlspecialchars($_POST['telp_alumni']);
 		$email			= htmlspecialchars($_POST['email']);
 		$alamat       	= htmlspecialchars($_POST['alamat']);
-		$negara       	= htmlspecialchars($_POST['negara']);
+		if (isset($_POST['negara'])) {
+			$negara       	= htmlspecialchars($_POST['negara']);
+		} else {
+			$negara = NULL;
+		}
 		$negara2       	= htmlspecialchars($_POST['negaraLainnya']);
 		if (isset($_POST['prov'])) {
 			$provinsi 		= htmlspecialchars($_POST['prov']);
@@ -572,6 +730,8 @@ class User extends BaseController
 
 		$data = [
 			'id_alumni'		=> session('id_alumni'),
+			'tempat_lahir'	=> $tempat_lahir,
+			'tanggal_lahir'	=> $tanggal_lahir,
 			'telp_alumni'    => $telp_alumni,
 			'email'			=> $email,
 			'alamat_alumni'        => $alamat,
@@ -593,7 +753,11 @@ class User extends BaseController
 		if ($this->form_validation->run($data, 'editProfil') === FALSE) {
 			session()->setFlashdata('edit-bio-fail', 'Biodata gagal Disimpan');
 			session()->setFlashdata('inputs', $this->request->getPost());
+			session()->setFlashdata('error-tempat_lahir', $this->form_validation->getError('tempat_lahir'));
 			session()->setFlashdata('error-email', $this->form_validation->getError('email'));
+			session()->setFlashdata('error-fb', $this->form_validation->getError('fb'));
+			session()->setFlashdata('error-linkedin', $this->form_validation->getError('linkedin'));
+			session()->setFlashdata('error-gscholar', $this->form_validation->getError('gscholar'));
 			session()->setFlashdata('error-telp_alumni', $this->form_validation->getError('telp_alumni'));
 		} else {
 			$model->db->table('alumni')->set($data)->where('id_alumni', session('id_alumni'))->update();
@@ -786,6 +950,8 @@ class User extends BaseController
 			session()->setFlashdata('add-tk-fail', 'Tempat Kerja gagal ditambahkan');
 			session()->setFlashdata('error-nama_instansi', $this->form_validation->getError('nama_instansi'));
 			session()->setFlashdata('error-email_instansi', $this->form_validation->getError('email_instansi'));
+			session()->setFlashdata('error-telp_instansi', $this->form_validation->getError('telp_instansi'));
+			session()->setFlashdata('error-faks_instansi', $this->form_validation->getError('faks_instansi'));
 			return redirect()->to(base_url('User/editTempatKerja'));
 		} else {
 			$data1 = [
@@ -1496,31 +1662,31 @@ class User extends BaseController
 		return view('websia/kontenWebsia/galeri/albumVideo', $data);
 	}
 
-	public function berita()
-	{
-		$init = new BeritaModel();
+	// public function berita()
+	// {
+	// 	$init = new BeritaModel();
 
-		$dataset = $init->getAllNews()->getResultArray();
+	// 	$dataset = $init->getAllNews()->getResultArray();
 
-		for ($i = 0; $i < count($dataset); $i++) {
-			$visited = $init->getVisitedPage($dataset[$i]['id'])->getRowArray();
-			$dataset[$i]['tanggal_publish'] = date('d F Y', strtotime($dataset[$i]['tanggal_publish']));
-			if (!$visited || empty($visited)) {
-				$dataset[$i]['visited'] = 0;
-			} else {
-				$dataset[$i]['visited'] = $visited['visited'];
-			}
-		}
+	// 	for ($i = 0; $i < count($dataset); $i++) {
+	// 		$visited = $init->getVisitedPage($dataset[$i]['id'])->getRowArray();
+	// 		$dataset[$i]['tanggal_publish'] = date('d F Y', strtotime($dataset[$i]['tanggal_publish']));
+	// 		if (!$visited || empty($visited)) {
+	// 			$dataset[$i]['visited'] = 0;
+	// 		} else {
+	// 			$dataset[$i]['visited'] = $visited['visited'];
+	// 		}
+	// 	}
 
-		sortByOrder($dataset, 'visited', false);
+	// 	sortByOrder($dataset, 'visited', false);
 
-		$data['dataset'] = $dataset;
-		$data['judulHalaman'] = 'Berita';
-		$data['active'] = 'berita';
-		$data['login'] = 'sudah';
+	// 	$data['dataset'] = $dataset;
+	// 	$data['judulHalaman'] = 'Berita';
+	// 	$data['active'] = 'berita';
+	// 	$data['login'] = 'sudah';
 
-		return view('websia/kontenWebsia/beritaArtikel/berandaBerita', $data);
-	}
+	// 	return view('websia/kontenWebsia/beritaArtikel/berandaBerita', $data);
+	// }
 
 	public function unggahBerita()
 	{

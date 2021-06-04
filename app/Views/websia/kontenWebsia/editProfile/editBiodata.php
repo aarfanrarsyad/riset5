@@ -3,6 +3,8 @@ if ($alumni->jenis_kelamin == 'Lk') {
     $jk = "Laki-laki";
 } else if ($alumni->jenis_kelamin == 'Pr') {
     $jk = "Perempuan";
+} else {
+    $jk = "Belum terisi";
 }
 
 if ($alumni->status_bekerja == '1') {
@@ -94,14 +96,25 @@ if ($alumni->cprestasi == 0) {
                 <div class="md:grid md:grid-cols-2 md:gap-x-4">
                     <div class="mr-1">
                         <div class="font-medium" id="labelTempatLahir">Tempat Lahir:</div>
-                        <input type="text" name="tempatLahir" id="tempatLahir" class="inputForm" placeholder="Tempat Lahir" value="<?= $alumni->tempat_lahir ?>">
+                        <?php if (session()->getFlashdata('error-tempat_lahir') != "") { ?>
+                            <p class="text-xs text-red-500 text-justify" id="errorNoTelp">
+                                <?= session('error-tempat_lahir') ?>
+                            </p>
+                            <?php if (session()->getFlashdata()['inputs']['tempat_lahir'] != $alumni->tempat_lahir) { ?>
+                                <input type="text" name="tempat_lahir" id="tempatLahir" class="inputFormError" placeholder="Tempat Lahir" value="<?= session('inputs')['tempat_lahir'] ?>" required>
+                            <?php } else { ?>
+                                <input type="text" name="tempat_lahir" id="tempatLahir" class="inputForm" placeholder="Tempat Lahir" value="<?= $alumni->tempat_lahir ?>" required>
+                            <?php } ?>
+                        <?php } else { ?>
+                            <input type="text" name="tempat_lahir" id="tempat_lahir" class="inputForm" placeholder="Tempat Lahir" value="<?= $alumni->tempat_lahir ?>" required>
+                        <?php } ?>
                     </div>
                     <div>
                         <div class="flex justify-between items-center">
                             <div class="font-medium" id="labelTanggalLahir">Tanggal Lahir:</div>
                             <input type="checkbox" <?= $cttl ?> name="checkTanggalLahir" id="checkTanggalLahir" class="cursor-pointer focus:outline-none editTampilan hidden">
                         </div>
-                        <input type="date" name="tanggalLahir" data-id="TanggalLahir" id="tanggalLahir" class="inputForm" value="<?= $alumni->tanggal_lahir ?>">
+                        <input type="date" name="tanggal_lahir" data-id="TanggalLahir" id="tanggalLahir" class="inputForm" value="<?= $alumni->tanggal_lahir ?>">
                     </div>
                 </div>
                 <div class="flex justify-between items-center md:mr-6">
@@ -114,12 +127,12 @@ if ($alumni->cprestasi == 0) {
                                 <?= session('error-telp_alumni') ?>
                             </p>
                             <?php if (session()->getFlashdata()['inputs']['telp_alumni'] != $alumni->telp_alumni) { ?>
-                                <input type="text" name="telp_alumni" id="notelepon" class="inputFormError" placeholder="Nomor telfon WA aktif" value="<?= session('inputs')['telp_alumni'] ?>" required>
+                                <input type="text" name="telp_alumni" id="notelepon" class="inputFormError" placeholder="Nomor telfon WA aktif" value="<?= session('inputs')['telp_alumni'] ?>" >
                             <?php } else { ?>
-                                <input type="text" name="telp_alumni" id="notelepon" class="inputForm" placeholder="Nomor telfon WA aktif" value="<?= $alumni->telp_alumni ?>" required>
+                                <input type="text" name="telp_alumni" id="notelepon" class="inputForm" placeholder="Nomor telfon WA aktif" value="<?= $alumni->telp_alumni ?>" >
                             <?php } ?>
                         <?php } else { ?>
-                            <input type="text" name="telp_alumni" id="notelepon" class="inputForm" placeholder="Nomor telfon WA aktif" value="<?= $alumni->telp_alumni ?>" required>
+                            <input type="text" name="telp_alumni" id="notelepon" class="inputForm" placeholder="Nomor telfon WA aktif" value="<?= $alumni->telp_alumni ?>" >
                         <?php } ?>
                     </div>
                 </div>
@@ -284,10 +297,17 @@ if ($alumni->cprestasi == 0) {
                                 <label for="facebook" class="font-medium" id="labelFacebook">Facebook</label>
                             </div>
                             <div class="md:w-3/4 w-2/3 gap-x-3 flex justify-between items-center">
-                                <?php if (session('inputs')) { ?>
-                                    <input type="text" name="fb" id="facebook" class="w-full md:p-2 p-1 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-primary text-black" placeholder="Nama Akun Facebook" value="<?= session('inputs')['fb'] ?>">
+                                <?php if (session()->getFlashdata('error-fb') != "") { ?>
+                                    <p class="text-xs text-red-500 text-justify" id="errorNoTelp">
+                                        <?= session('error-fb') ?>
+                                    </p>
+                                    <?php if (session()->getFlashdata()['inputs']['fb'] != $alumni->fb) { ?>
+                                        <input type="text" name="fb" id="notelepon" class="inputFormError" placeholder="Link Akun Facebook" value="<?= session('inputs')['fb'] ?>" >
+                                    <?php } else { ?>
+                                        <input type="text" name="fb" id="notelepon" class="inputForm" placeholder="Link Akun Facebook" value="<?= $alumni->fb ?>" >
+                                    <?php } ?>
                                 <?php } else { ?>
-                                    <input type="text" name="fb" id="facebook" class="w-full md:p-2 p-1 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-primary text-black" placeholder="Nama Akun Facebook" value="<?= $alumni->fb ?>">
+                                    <input type="text" name="fb" id="notelepon" class="inputForm" placeholder="Link Akun Facebook" value="<?= $alumni->fb ?>" >
                                 <?php } ?>
                             </div>
                         </div>
@@ -296,10 +316,17 @@ if ($alumni->cprestasi == 0) {
                                 <label for="scholar" class="font-medium" id="labelScholar">Google Scholar</label>
                             </div>
                             <div class="md:w-3/4 w-2/3 gap-x-3 flex justify-between items-center">
-                                <?php if (session('inputs')) { ?>
-                                    <input type="text" name="gscholar" id="scholar" class="w-full md:p-2 p-1 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-primary text-black" placeholder="Link Akun Google Scholar" value="<?= session('inputs')['gscholar'] ?>">
+                                <?php if (session()->getFlashdata('error-gscholar') != "") { ?>
+                                    <p class="text-xs text-red-500 text-justify" id="errorNoTelp">
+                                        <?= session('error-gscholar') ?>
+                                    </p>
+                                    <?php if (session()->getFlashdata()['inputs']['gscholar'] != $alumni->gscholar) { ?>
+                                        <input type="text" name="gscholar" id="notelepon" class="inputFormError" placeholder="Link Akun Google Scholar" value="<?= session('inputs')['gscholar'] ?>" >
+                                    <?php } else { ?>
+                                        <input type="text" name="gscholar" id="notelepon" class="inputForm" placeholder="Link Akun Google Scholar" value="<?= $alumni->gscholar ?>" >
+                                    <?php } ?>
                                 <?php } else { ?>
-                                    <input type="text" name="gscholar" id="scholar" class="w-full md:p-2 p-1 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-primary text-black" placeholder="Link Akun Google Scholar" value="<?= $alumni->gscholar ?>">
+                                    <input type="text" name="gscholar" id="notelepon" class="inputForm" placeholder="Link Akun Google Scholar" value="<?= $alumni->gscholar ?>" >
                                 <?php } ?>
                             </div>
                         </div>
@@ -308,10 +335,17 @@ if ($alumni->cprestasi == 0) {
                                 <label for="linkedin" class="font-medium" id="labelFacebook">LinkedIn</label>
                             </div>
                             <div class="md:w-3/4 w-2/3 gap-x-3 flex justify-between items-center">
-                                <?php if (session('inputs')) { ?>
-                                    <input type="text" name="linkedin" id="linkedin" class="w-full md:p-2 p-1 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-primary text-black" placeholder="Link Akun LinkedIn" value="<?= session('inputs')['linkedin'] ?>">
+                                <?php if (session()->getFlashdata('error-linkedin') != "") { ?>
+                                    <p class="text-xs text-red-500 text-justify" id="errorNoTelp">
+                                        <?= session('error-linkedin') ?>
+                                    </p>
+                                    <?php if (session()->getFlashdata()['inputs']['linkedin'] != $alumni->linkedin) { ?>
+                                        <input type="text" name="linkedin" id="notelepon" class="inputFormError" placeholder="Link Akun LinkedIn" value="<?= session('inputs')['linkedin'] ?>" >
+                                    <?php } else { ?>
+                                        <input type="text" name="linkedin" id="notelepon" class="inputForm" placeholder="Link Akun LinkedIn" value="<?= $alumni->linkedin ?>" >
+                                    <?php } ?>
                                 <?php } else { ?>
-                                    <input type="text" name="linkedin" id="linkedin" class="w-full md:p-2 p-1 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-primary text-black" placeholder="Link Akun LinkedIn" value="<?= $alumni->linkedin ?>">
+                                    <input type="text" name="linkedin" id="notelepon" class="inputForm" placeholder="Link Akun LinkedIn" value="<?= $alumni->linkedin ?>" >
                                 <?php } ?>
                             </div>
                         </div>
@@ -320,9 +354,9 @@ if ($alumni->cprestasi == 0) {
                 <div>
                     <label for="biografi" class="font-medium">Biografi:</label>
                     <?php if (session('inputs')) { ?>
-                        <textarea name="biografi" id="biografi" cols="30" rows="5" placeholder="Tambahkan biografi Anda di sini" class="inputForm resize-none" required><?= htmlspecialchars(session('inputs')['biografi']) ?></textarea>
+                        <textarea name="biografi" id="biografi" cols="30" rows="5" placeholder="Tambahkan biografi Anda di sini" class="inputForm resize-none"><?= htmlspecialchars(session('inputs')['biografi']) ?></textarea>
                     <?php } else { ?>
-                        <textarea name="biografi" id="biografi" cols="30" rows="5" placeholder="Tambahkan biografi Anda di sini" class="inputForm resize-none" required><?= $alumni->deskripsi ?></textarea>
+                        <textarea name="biografi" id="biografi" cols="30" rows="5" placeholder="Tambahkan biografi Anda di sini" class="inputForm resize-none"><?= $alumni->deskripsi ?></textarea>
                     <?php } ?>
                 </div>
                 <div class="editTampilan hidden">

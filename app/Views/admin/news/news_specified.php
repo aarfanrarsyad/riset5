@@ -210,7 +210,7 @@
                             <?php $i = 1 ?>
                             <?php foreach ($dataset['comments'] as $comment) : ?>
                                 <div class="card-comment <?= $i > 5 ? 'd-none' : '' ?>">
-                                    <img class="img-circle img-sm" src="<?= base_url('users/profile/' . $comment['image']) ?>" alt="User Image">
+                                    <img class="img-circle img-sm" src="<?= base_url($comment['image']) ?>" alt="User Image">
                                     <div class="comment-text">
                                         <span class="username">
                                             <?= $comment['name'] ?>
@@ -239,7 +239,7 @@
                         </div>
 
                         <div class="card-footer">
-                            <img class="img-fluid img-circle img-sm" src="<?= base_url('users/profile/' . userdata()['image']) ?>" alt="Image User">
+                            <img class="img-fluid img-circle img-sm" src="<?= base_url(userdata()['image']) ?>" alt="Image User">
                             <div class="img-push row">
                                 <input type="text" class="form-control form-control-sm col-md-11" placeholder="Press enter to post comment" id="comments-<?= $dataset['id'] ?>">
                                 <span class="input-group-append col-md-1">

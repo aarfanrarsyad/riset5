@@ -750,7 +750,27 @@ class Admin extends BaseController
 	{
 		$init = new admin_model();
 		$alumni = $init->getAllAlumni($id)->getResultArray()[0];
-		$instansi = $init->getTempatKerjabyIdAlumni($id)->getResultArray()[0];
+		$instansialumni = $init->getTempatKerjabyIdAlumni($id)->getRow();
+		if(!is_null($instansialumni)){
+			$instansialumni=$instansialumni->id_tempat_kerja;
+			$instansi = $init->getTempatKerjaById($instansialumni)->getRow();
+		}else{
+			$instansi = array(
+				"alamat_instansi"=>'-',
+				"email_instansi"=>'-',
+				"faks_instansi"=>'-',
+				"id_tempat_kerja"=>'-',
+				"kota"=>'-',
+				"nama_instansi"=>'-',
+				"negara"=>'-',
+				"provinsi"=>'-',
+				"telp_instansi"=>'-',
+			);
+			$instansi=(object) $instansi;
+		}
+		// dd($instansialumni);
+		
+		// dd($instansi);
 		$pendidikan = $init->getPendidikanById($id)->getResult();
 		$prestasi = $init->getPrestasiById($id)->getResult();
 
@@ -925,8 +945,8 @@ class Admin extends BaseController
 			$avatar = $this->request->getFile('file_upload');
 			$avatar->move(ROOTPATH . '/public/img/components/user/userid_' . session('idAlumni'));
 
-			if ($foto != $query1->jenis_kelamin . '/default.svg' && $foto != 'default.svg') {
-				$url = ROOTPATH . '/public/img/components/' . $foto;
+			if ($foto != 'components/icon/' . $query1->jenis_kelamin . '-icon.svg') {
+				$url = ROOTPATH . '/public/img/' . $foto;
 				if (is_file($url))
 					unlink($url);
 			}
@@ -955,8 +975,8 @@ class Admin extends BaseController
 		$query1 = $model->bukaProfile(session('idAlumni'))->getRow();
 		$foto = $query1->foto_profil;
 
-		if ($foto != $query1->jenis_kelamin . '/default.svg' && $foto != 'default.svg') {
-			$url = ROOTPATH . '/public/img/components/' . $foto;
+		if ($foto != 'components/icon/' . $query1->jenis_kelamin . '-icon.svg') {
+			$url = ROOTPATH . '/public/img/' . $foto;
 			if (is_file($url))
 				unlink($url);
 		}
@@ -1067,7 +1087,7 @@ class Admin extends BaseController
 			'tanggal_lahir' => htmlspecialchars($_POST['tanggal_lahir']),
 			'telp_alumni' => htmlspecialchars($_POST['telp_alumni']),
 			'alamat_alumni' => htmlspecialchars($_POST['alamat']),
-			'kota' => htmlspecialchars($_POST['kota']),
+			'kota' => htmlspecialchars($_POST['kabkota'] ?? ''),
 			'provinsi' => htmlspecialchars($_POST['provinsi']),
 			'negara' => htmlspecialchars($_POST['negara']),
 			'status_bekerja' => htmlspecialchars($_POST['status_bekerja']),
@@ -1572,9 +1592,6 @@ class Admin extends BaseController
 			'album'		=> $out_album,
 			'isGalery'	=> TRUE
 		];
-
-		// $report = implode(";", )
-		// dd($data['foto'][5]['report']);
 		return view('admin' . DIRECTORY_SEPARATOR . 'galeri' . DIRECTORY_SEPARATOR . 'foto', $data);
 	}
 
@@ -1687,7 +1704,6 @@ class Admin extends BaseController
 					->withResource()
 					->convert(IMAGETYPE_JPEG)
 					->save($file  . '.jpeg', 50);
-				// unlink($file . $ext);
 
 				$file = str_replace(ROOTPATH . '/public/img/galeri/', "", $file);
 				$data = [
@@ -1706,7 +1722,6 @@ class Admin extends BaseController
 					->withResource()
 					->convert(IMAGETYPE_JPEG)
 					->save($new_name  . '.jpeg', 50);
-				// unlink($new_name . $ext);
 
 				$new_name = str_replace(ROOTPATH . '/public/img/galeri/', "", $new_name);
 				$data = [

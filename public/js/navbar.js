@@ -222,10 +222,10 @@ $('#burgerDok').click(function () {
 
 // js layoutDokumentasi
 $(document).ready(function () {
-    $('ul li div img').click(function () {
-        $(this).toggleClass('rotate-180');
-        ($(this).parent().next().hasClass('close-submenu')) ? $(this).parent().next().removeClass('close-submenu').addClass('open-submenu'): $(this).parent().next().removeClass('open-submenu').addClass('close-submenu')
-        $(this).parent().parent().next().toggleClass('translate-y-24')
+    $('#side-drop-down').click(function () {
+        $(this).children().last().toggleClass('rotate-180');
+        ($(this).next().hasClass('close-submenu')) ? $(this).next().removeClass('close-submenu').addClass('open-submenu'): $(this).next().removeClass('open-submenu').addClass('close-submenu')
+        $(this).next().toggleClass('translate-y-24')
     })
 
 });

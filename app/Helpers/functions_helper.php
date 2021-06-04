@@ -153,6 +153,9 @@ function userdata()
     }
 
     $user = $authenticate->user();
+
+    $default = ["Lk-icon.svg", "Pr-icon.svg"];
+
     $data = [
         'id' => $user->id,
         'fullname' => $user->fullname,
@@ -160,6 +163,13 @@ function userdata()
         'nim' => $user->nim,
         'image' => $user->user_image,
     ];
+
+    if ($user->id_alumni) {
+        $alumni = $init->getAlumniById($user->id_alumni)->getRowArray();
+        $check_img = in_array_help(strtolower($alumni['foto_profil']), $default);
+        $tmp =  $check_img !== FALSE ? "/img/components/user/userid_" . $data['id'] . "/" . $alumni['foto_profil'] :  "/img/components/icon/" . $default[$check_img];
+        $data['image'] = $tmp;
+    }
 
     return $data;
 }
@@ -458,4 +468,36 @@ function get_nim_by_id_alumni($id = null, $select = 'nim')
         $result = $db->query($query)->getRow()->nim;
     }
     return $result;
+}
+
+
+function get_by_id($id = null, $select = '*', $table = 'pendidikan', $array = false)
+{
+    $db = \Config\Database::connect();
+
+    switch ($table) {
+        case 'pendidikan':
+            $return = $db->table('pendidikan')->select($select)
+                ->join('pendidikan_tinggi', 'pendidikan_tinggi.id_pendidikan = pendidikan.id_pendidikan');
+            break;
+        case 'tempat_kerja':
+            $return = $db->table('tempat_kerja')->select($select)
+                ->join('alumni_tempat_kerja', 'tempat_kerja.id_tempat_kerja = alumni_tempat_kerja.id_tempat_kerja');
+            break;
+        default:
+            $return = $db->table($table)->select($select);
+            break;
+    }
+
+    $GLOBALS['select'] = $select;
+    if (count(explode(',', $select)) == 1 && $select !== '*') {
+        $return = array_map(function ($val) {
+            return $val[$GLOBALS['select']];
+        }, $return->getWhere(['id_alumni' => $id])->getResultArray());
+    } else {
+        $return = $return->getWhere(['id_alumni' => $id])->getResultArray();
+    }
+    $return = (!$array && isset($return[0])) ? $return[0] : $return;
+
+    return $return;
 }

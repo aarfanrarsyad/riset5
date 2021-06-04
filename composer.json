@@ -11,7 +11,9 @@
 		"codeigniter4/framework": "^4.0",
 		"irsadarief/jkd-sso": "^1.6",
 		"fzaninotto/faker": "^1.9",
-		"myth/auth": "^1.0@beta"
+		"myth/auth": "^1.0@beta",
+		"phpoffice/phpspreadsheet": "^1.18",
+		"mistic100/randomcolor": "^1.0"
 	},
 	"require-dev": {
 		"mikey179/vfsstream": "1.6.*",
