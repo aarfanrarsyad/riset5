@@ -41,11 +41,11 @@
                         <div id="lisAlumni">
                             <?php foreach ($alumni as $row) : ?>
                                 <!-- Awal Card Alumni -->
-                                <a href="/User/profilAlumni/<?= $row['nim'] ?>">
+                                <a href="/User/profilAlumni/<?= $row['id_alumni'] ?>">
                                     <div class="mx-2">
                                         <div class="flex gap-x-4">
                                             <div class="flex items-center">
-                                                <img src="/img/components/<?= $row['foto_profil'] ?>" class="lg:w-18 w-12 mx-auto" alt="<?= $row['nama'] ?>">
+                                                <img src="/img/<?= $row['foto_profil'] ?>" class="lg:w-18 w-12 mx-auto" alt="<?= $row['nama'] ?>">
                                             </div>
                                             <div class="flex items-center">
                                                 <div>
@@ -54,7 +54,7 @@
                                                     <!-- Akhir Nama Alumni -->
 
                                                     <!-- Awal Atribut Alumni -->
-                                                    <div class="md:text-sm text-xs font-paragraph text-primary">Angkatan <?= implode(', ', get_by_id($row['id_alumni'],'angkatan','pendidikan',true)) ?></div>
+                                                    <div class="md:text-sm text-xs font-paragraph text-primary">Angkatan <?= implode(', ', get_by_id($row['id_alumni'], 'angkatan', 'pendidikan', true)) ?></div>
                                                     <!-- Akhir Atribut Alumni -->
 
                                                 </div>
@@ -71,10 +71,12 @@
 
                         <!-- awal tulisan "Selengkapnya" di hasil pencarian -->
                         <div class="flex justify-end mt-12">
-                            <a id="semuaAlumni" href="<?= base_url('User/searchAndFilter?t=alumni'); ?>" ><div class="flex bg-secondary text-white rounded-full md:py-2 py-1 md:px-3 px-2 items-center gap-x-2 cursor-pointer md:text-sm text-xs">
-                                Selengkapnya
-                                <img src="/img/right-off.png" class="md:w-4 md:h-4 w-3 h-3 my-auto" alt="">
-                            </div></a>
+                            <a id="semuaAlumni" href="<?= base_url('User/searchAndFilter?t=alumni'); ?>">
+                                <div class="flex bg-secondary text-white rounded-full md:py-2 py-1 md:px-3 px-2 items-center gap-x-2 cursor-pointer md:text-sm text-xs">
+                                    Selengkapnya
+                                    <img src="/img/right-off.png" class="md:w-4 md:h-4 w-3 h-3 my-auto" alt="">
+                                </div>
+                            </a>
                         </div>
                         <!-- akhir tulisan "Selengkapnya" di hasil pencarian -->
 
@@ -134,10 +136,12 @@
 
                         <!-- awal tulisan "Selengkapnya" di hasil pencarian -->
                         <div class="flex justify-end mt-12" id="beritaSelengkapnya">
-                            <a id="semuaBerita" href="<?= base_url('User/searchAndFilter?page=berita'); ?>"><div class="flex bg-secondary text-white rounded-full md:py-2 py-1 md:px-3 px-2 items-center gap-x-2 cursor-pointer md:text-sm text-xs">
-                                Selengkapnya
-                                <img src="/img/right-off.png" class="md:w-4 md:h-4 w-3 h-3" alt="">
-                            </div></a>
+                            <a id="semuaBerita" href="<?= base_url('User/searchAndFilter?page=berita'); ?>">
+                                <div class="flex bg-secondary text-white rounded-full md:py-2 py-1 md:px-3 px-2 items-center gap-x-2 cursor-pointer md:text-sm text-xs">
+                                    Selengkapnya
+                                    <img src="/img/right-off.png" class="md:w-4 md:h-4 w-3 h-3" alt="">
+                                </div>
+                            </a>
                         </div>
                         <!-- akhir tulisan "Selengkapnya" di hasil pencarian -->
 
@@ -156,7 +160,7 @@
 
 
 <script>
-    let x,data,s;
+    let x, data, s;
     let string = `<!-- Awal Card Alumni --><a href="/User/profilAlumni/{nim}"><div class="mx-2"><div class="flex gap-x-4"><div class="flex items-center"><img src="/img/{foto_profil}" class="lg:w-18 w-12 mx-auto" alt=""></div><div class="flex items-center"><div><!-- Awal Nama Alumni --><h2 class="md:text-lg font-heading text-primary font-semibold">{nama}</h2><!-- Akhir Nama Alumni --><!-- Awal Atribut Alumni --><div class="md:text-sm text-xs font-paragraph text-primary">Angkatan {akt}</div><!-- Akhir Atribut Alumni --></div></div></div></div></a><!-- Akhir Card Alumni --><hr class="my-4 border-gray-400">`;
 
     function search($tipe = 'alumni') {
@@ -164,20 +168,20 @@
         x = setTimeout(function() {
 
             if ($tipe == 'alumni') {
-                data = $('#filterAlumni').serialize()+'&cari='+$("input[name=cari]").val()
+                data = $('#filterAlumni').serialize() + '&cari=' + $("input[name=cari]").val()
             } else {
                 data = {
                     'cari': $("input[name=cari]").val(),
-                    'beritaAwal':$("input[name=beritaAwal]").val(),
-                    'beritaAkhir':$("input[name=beritaAkhir]").val()
+                    'beritaAwal': $("input[name=beritaAwal]").val(),
+                    'beritaAkhir': $("input[name=beritaAkhir]").val()
                 }
             }
             console.log(data)
             $.ajax({
                 url: "#",
-                type:'POST',
+                type: 'POST',
                 data: data,
-                dataType:'JSON',
+                dataType: 'JSON',
                 success: (data) => {
                     $('#lisAlumni').empty()
                     $('#jumlahAlumni').html(data.jumlah)
@@ -190,35 +194,35 @@
                     } else {
                         $('#lisAlumni').append(`<div class=" ml-2 flex-grow min-h-screen "><img src="/img/pencarianKosong.png" class="w-96 mx-auto" alt=""><div class="text-primary text-center font-bold md:text-xl -mt-8 mx-auto">Hasil Pencarian Tidak Ditemukan</div><hr class="border-b-2 border-t-0 w-32 border-gray-400 mx-auto"></div>`)
                     }
-                    s = 'cari='+ $("input[name=cari]").val() +'&'+data.search.prodi.map((val)=>{return 'prodi[]='+val}).join('&')
-                    s += '&akt='+ data.search.akt + '&kerja=' + data.search.kerja
-                    b = 'cari='+ $("input[name=cari]").val()+'&akt='+ data.search.akt + '&kerja=' + data.search.kerja
+                    s = 'cari=' + $("input[name=cari]").val() + '&' + data.search.prodi.map((val) => {
+                        return 'prodi[]=' + val
+                    }).join('&')
+                    s += '&akt=' + data.search.akt + '&kerja=' + data.search.kerja
+                    b = 'cari=' + $("input[name=cari]").val() + '&akt=' + data.search.akt + '&kerja=' + data.search.kerja
                     $('#semuaAlumni').get(0).href = '<?= base_url('User/searchAndFilter?t=alumni'); ?>&' + s
                     $('#semuaBerita').get(0).href = '<?= base_url('User/searchAndFilter?t=berita'); ?>&' + b
                 }
             })
         }, 300)
     }
-    
-    $('.listProdi svg').click(function(){
+
+    $('.listProdi svg').click(function() {
         let prodi = $(this).parent().find('.cari')
         if (prodi.attr('name') == 'prodi[]') {
-            prodi.attr('name','p')
+            prodi.attr('name', 'p')
         } else {
-            prodi.attr('name','prodi[]')
+            prodi.attr('name', 'prodi[]')
         }
         search('alumni')
     })
 
-    $("input[name=cari], .search").keyup( function() {
+    $("input[name=cari], .search").keyup(function() {
         search('alumni')
     })
 
-    $(".beritaAwal, .beritaAkhir").keyup( function() {
+    $(".beritaAwal, .beritaAkhir").keyup(function() {
         search('berita')
     })
-
-
 </script>
 <script type="text/javascript" src="/js/search.js"></script>
 <?= $this->endSection(); ?>

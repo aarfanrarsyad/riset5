@@ -41,7 +41,7 @@
                         <div id="lisAlumni">
                             <?php foreach ($alumni as $row) : ?>
                                 <!-- Awal Card Alumni -->
-                                <a href="/User/profilAlumni/<?= $row['nim'] ?>">
+                                <a href="/User/profilAlumni/<?= $row['id_alumni'] ?>">
                                     <div class="mx-2">
                                         <div class="flex gap-x-4">
                                             <div class="flex items-center">
@@ -54,7 +54,7 @@
                                                     <!-- Akhir Nama Alumni -->
 
                                                     <!-- Awal Atribut Alumni -->
-                                                    <div class="md:text-sm text-xs font-paragraph text-primary">Angkatan <?= implode(', ', get_by_id($row['id_alumni'],'angkatan','pendidikan',true)) ?></div>
+                                                    <div class="md:text-sm text-xs font-paragraph text-primary">Angkatan <?= implode(', ', get_by_id($row['id_alumni'], 'angkatan', 'pendidikan', true)) ?></div>
                                                     <!-- Akhir Atribut Alumni -->
 
                                                 </div>
@@ -87,33 +87,33 @@
     var limit = 10;
     var start = <?= count($alumni) ?>;
     var action = 'inactive';
-    let x,data,s;
+    let x, data, s;
     let string = `<!-- Awal Card Alumni --><a href="/User/profilAlumni/{nim}"><div class="mx-2"><div class="flex gap-x-4"><div class="flex items-center"><img src="/img/{foto_profil}" class="lg:w-18 w-12 mx-auto" alt=""></div><div class="flex items-center"><div><!-- Awal Nama Alumni --><h2 class="md:text-lg font-heading text-primary font-semibold">{nama}</h2><!-- Akhir Nama Alumni --><!-- Awal Atribut Alumni --><div class="md:text-sm text-xs font-paragraph text-primary">Angkatan {akt}</div><!-- Akhir Atribut Alumni --></div></div></div></div></a><!-- Akhir Card Alumni --><hr class="my-4 border-gray-400">`;
 
-    function search(tipe = 'alumni',limit,start) {
+    function search(tipe = 'alumni', limit, start) {
         if (x) window.clearTimeout(x);
         x = setTimeout(function() {
 
             if (tipe == 'alumni') {
-                data = $('#filterAlumni').serialize()+'&cari='+$("input[name=cari]").val()+'&limit='+limit+'&start='+start
+                data = $('#filterAlumni').serialize() + '&cari=' + $("input[name=cari]").val() + '&limit=' + limit + '&start=' + start
             } else {
                 data = {
                     cari: $("input[name=cari]").val(),
-                    beritaAwal:$("input[name=beritaAwal]").val(),
-                    beritaAkhir:$("input[name=beritaAkhir]").val(),
-                    limit:limit,
-                    start:start
+                    beritaAwal: $("input[name=beritaAwal]").val(),
+                    beritaAkhir: $("input[name=beritaAkhir]").val(),
+                    limit: limit,
+                    start: start
                 }
             }
 
             $.ajax({
                 url: "#",
-                type:'POST',
+                type: 'POST',
                 data: data,
-                dataType:'JSON',
-                cache:false,
+                dataType: 'JSON',
+                cache: false,
                 success: (data) => {
-                        // console.log(data.alumni)
+                    // console.log(data.alumni)
                     $('#jumlahAlumni').html(data.jumlah)
                     $('#lisAlumni').find('hr.border-2').remove()
                     if (Boolean(data.alumni.length)) {
@@ -121,53 +121,52 @@
                             $('#lisAlumni').append(string.replace('{nim}', item.nim).replace('{nama}', item.nama).replace('{foto_profil}', item.foto_profil).replace('{akt}', item.angkatan))
                         })
                         $('#lisAlumni').append("<hr class='-my-4 border-2 border-gray-400'>")
-                        if(data.alumni.length == 10)
+                        if (data.alumni.length == 10)
                             $('#load_data_message').html("Memuat data....");
                         action = "inactive";
                     } else {
                         $('#load_data_message').html("");
                         action = 'active';
                     }
-                    if(data.ret == 0)
+                    if (data.ret == 0)
                         $('#lisAlumni').append(`<div class=" ml-2 flex-grow min-h-screen "><img src="/img/pencarianKosong.png" class="w-96 mx-auto" alt=""><div class="text-primary text-center font-bold md:text-xl -mt-8 mx-auto">Hasil Pencarian Tidak Ditemukan</div><hr class="border-b-2 border-t-0 w-32 border-gray-400 mx-auto"></div>`)
                 }
             })
         }, 300)
     }
-    
-    $('.listProdi svg').click(function(){
+
+    $('.listProdi svg').click(function() {
         let prodi = $(this).parent().find('.cari')
         if (prodi.attr('name') == 'prodi[]') {
-            prodi.attr('name','p')
+            prodi.attr('name', 'p')
         } else {
-            prodi.attr('name','prodi[]')
+            prodi.attr('name', 'prodi[]')
         }
         $('#lisAlumni').empty()
         start = 0;
-        search('alumni',limit, start)
+        search('alumni', limit, start)
     })
 
-    $("input[name=cari], .cari").keyup( function() {
+    $("input[name=cari], .cari").keyup(function() {
         $('#lisAlumni').empty()
         start = 0;
-        search('alumni',limit, start)
-    })    
+        search('alumni', limit, start)
+    })
 
-    if(action == 'inactive'){
+    if (action == 'inactive') {
         action = 'active';
-        search('alumni',limit, start);
+        search('alumni', limit, start);
     }
 
-    $(window).scroll(function(){
-        if($(window).scrollTop() + $(window).height() > $("#lisAlumni").height() && action == 'inactive'){
+    $(window).scroll(function() {
+        if ($(window).scrollTop() + $(window).height() > $("#lisAlumni").height() && action == 'inactive') {
             action = 'active';
             start = start + limit;
-            setTimeout(function(){
-                search('alumni',limit, start);
+            setTimeout(function() {
+                search('alumni', limit, start);
             }, 1000);
         }
     });
-
 </script>
 
 <script type="text/javascript" src="/js/search.js"></script>
