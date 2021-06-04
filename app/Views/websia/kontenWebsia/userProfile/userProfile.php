@@ -4,6 +4,7 @@ Hal ini berpengaruh pada ada tidaknya tampilan tombol edit profil di halaman pro
 <?php
 if ($status == 'bukan user') {
     $tombolEdit = 'hidden';
+    $usernya = "Alumni ini"; 
 
     // berfungsi, tapi butuh tempat tersendiri biar bisa di hidden, sekarang masih gabung sama tempat lahir
     if ($alumni->cttl == 1) {
@@ -27,6 +28,7 @@ if ($status == 'bukan user') {
         $cprestasi = "0";
     }
 } else if ($status == 'user') {
+    $usernya = "Anda"; 
     $tombolEdit = '';
     $cttl = "";
     $cemail = "";
@@ -118,11 +120,12 @@ if ($status == 'bukan user') {
         <div class="md:pl-5 lg:pl-6">
             <?php if ($calamat == "") : ?>
                 <p class="font-heading text-primary text-xs px-5 md:px-0 mt-6">Lokasi Tempat Tinggal Saat Ini</p>
-                <span class="font-heading flex justify-start px-3 md:px-0 text-base text-left mb-5 md:mb-0">
+                <span class="font-heading flex justify-start px-3 md:px-0 text-base text-left mb-2 md:mb-0">
                     <img class="my-2 mt-2 mr-0 md:mr-2 ml-1 md:ml-0 w-6 h-6 md:w-6 float-left" src="/img/components/icon/maps_flag.png" alt="alamat">
                     <!-- Lokasi tempat tinggal -->
                     <p class="font-heading my-2 mt-2"> <?= $alumni->alamat_alumni ?> </p>
                 </span>
+                <hr class="visible sm:invisible border-primary border-opacity-75 w-4/5 object-center mx-auto mb-6 md:mb-0">
             <?php endif ?>
             <!-- Awal media sosial-->
             <div class="md:space-x-4 md:flex md:flex-row items-start justify-center lg:justify-start md:py-4 px-5 md:px-0">
@@ -251,8 +254,8 @@ if ($status == 'bukan user') {
             <?php endforeach; ?>
         </div>
         <div class="visible sm:invisible">
-            <a class="bg-secondary mb-8 -mt-14 mr-2 md:mt-0 float-right font-paragraph text-sm text-white text-center py-1 px-4 mx-auto rounded-full cursor-pointer hover:bg-secondaryhover transition-colors duration-300" href="/User/rekomendasi">
-                Lihat Semua
+            <a class="bg-secondary mb-2 md:mb-6 mr-2 mt-3 md:mt-0 float-right font-paragraph text-sm text-white text-center py-1 px-4 mx-auto rounded-full cursor-pointer hover:bg-secondaryhover transition-colors duration-300" href="/User/rekomendasi">
+                Lihat Semua Rekomendasi
                 <img src="/img/components/icon/panah_kanan.png" alt="lihat semua rekomendasi" class="float-right pl-2">
             </a>
         </div>
@@ -262,7 +265,7 @@ if ($status == 'bukan user') {
 
 <!-- Atribut pada section ini belum ditentukan -->
 <!-- Awal Informasi Instansi -->
-<div class="w-full my-8 lg:px-20 md:px-8 px-2">
+<div class="w-full my-6 lg:my-8 lg:px-20 md:px-8 px-2">
     <h3 class="font-heading font-bold text-xl text-center md:text-left text-secondary">Informasi Instansi</h3>
     <div class="md:shadow-lg lg:shadow-xl rounded-2xl px-3 py-3 md:px-7 md:py-5 lg:mx-14 lg:py-8 lg:px-11 md:mt-3">
         <div class="font-heading">
@@ -315,17 +318,17 @@ if ($status == 'bukan user') {
             </div>
         </div>
     </div>
-    <hr class="visible sm:invisible border-primary border-opacity-75 w-4/5 object-center mx-auto mt-8">
+    <hr class="visible sm:invisible border-primary border-opacity-75 w-4/5 object-center mx-auto mt-5">
 </div>
 <!-- Akhir Informasi Intsansi -->
 
 <?php if ($cprestasi == 1) { ?>
     <!-- Awal Riwayat Prestasi -->
-    <div class="w-full my-8 lg:px-20 md:px-8 px-2">
+    <div class="w-full my-2 lg:my-6 lg:px-20 md:px-8 px-2">
         <h3 class="font-heading font-bold text-xl text-secondary text-center md:text-left ">Riwayat Prestasi</h3>
         <div class="md:shadow-lg lg:shadow-xl rounded-2xl px-0 py-1 md:px-5 md:py-5 lg:mx-14 lg:p-8 mb-1 md:mt-3">
             <?php if ($prestasi == NULL) {
-                echo "<p class='text-center md:text-left '>Riwayat Prestasi tidak ditemukan.</p>";
+                echo "<p class='text-center'>Riwayat Prestasi tidak ditemukan.</p>";
             } else { ?>
                 <?php foreach ($prestasi as $row) : ?>
                     <div class="flex justify-between px-3 font-heading text-primary mt-2 md:mt-2 lg:mt-3">
@@ -336,14 +339,14 @@ if ($status == 'bukan user') {
             } ?>
             <!-- Jika data prestasi belum diinput, ditampilkan "belum ada riwayat prestasi" -->
         </div>
-        <hr class="visible sm:invisible border-primary border-opacity-75 w-4/5 object-center mx-auto mt-8">
+        <hr class="visible sm:invisible border-primary border-opacity-75 w-4/5 object-center mx-auto mt-5">
     </div>
     <!-- Akhir Riwayat Prestasi -->
 <?php } ?>
 
 <?php if ($cpendidikan == 1) { ?>
     <!-- Awal Riwayat Pendidikan -->
-    <div class="w-full my-8 lg:px-20 md:px-8 px-2 mb-6 md:mb-12">
+    <div class="w-full my-6 lg:my-8 lg:px-20 md:px-8 px-2 mb-6 md:mb-12">
         <h3 class="font-heading font-bold text-xl text-secondary text-center md:text-left ">Riwayat Pendidikan</h3>
         <div class="lg:px-16">
             <div class="md:shadow-lg lg:shadow-xl rounded-3xl w-full mx-auto mt-5">
@@ -425,22 +428,22 @@ if ($status == 'bukan user') {
         </div>
     </div>
     <!-- Akhir Riwayat Pendidikan -->
-    <hr class="visible sm:invisible border-primary border-opacity-75 w-4/5 object-center mx-auto mt-8">
+    <hr class="visible sm:invisible border-primary border-opacity-75 w-4/5 object-center mx-auto mt-3">
 
 <?php } ?>
 
 <!-- Awal Foto Tentang Anda -->
-<div class="w-full my-8 lg:px-20 md:px-8 px-2">
+<div class="w-full my-2 lg:my-8 lg:px-20 md:px-8 px-2">
     <div class="font-heading">
         <!-- link ini mengarah ke halaman tampilan semua galeri -->
         <div class="invisible sm:visible">
-            <a class="bg-secondary mb-8 mt-1 md:mt-0 float-right font-paragraph text-sm text-white text-center py-1 px-4 mx-auto rounded-full cursor-pointer hover:bg-secondaryhover transition-colors duration-100" href="/User/galeriFoto">
+            <a class="bg-secondary md:mb-8 mt-1 md:mt-0 md:float-right font-paragraph text-sm text-white text-center md:py-1 md:px-4 mx-auto rounded-full cursor-pointer hover:bg-secondaryhover transition-colors duration-100" href="/User/galeriFoto">
                 Lihat Semua Foto
                 <img src="/img/components/icon/panah_kanan.png" alt="icon panah kanan" class="float-right pl-2">
             </a>
         </div>
     </div>
-    <h3 class="font-heading ml-2 font-bold text-xl text-center md:text-left text-secondary inline-block">Foto Tentang Anda</h3>
+    <h3 class="font-heading ml-2 font-bold text-xl text-center md:text-left text-secondary md:inline-block">Foto Tentang <?= $usernya ?></h3>
 
     <div class="md:shadow-lg lg:shadow-xl rounded-2xl px-3 py-3 md:px-7 md:py-5 lg:mx-14 lg:py-8 lg:px-11 md:mt-3">
         <?php for ($x = 0; $x < 6; $x++) : ?>
@@ -519,7 +522,7 @@ if ($status == 'bukan user') {
         <?php endfor; ?>
 
         <?php if ($foto == null) : ?>
-            <p class="text-sm text-center px-3 lg:px-5 sm:mt-4 mt-10 pb-2 lg:py-4"> Belum terdapat foto yang berhubungan dengan anda.
+            <p class="text-center px-3 lg:px-5 mt-1 md:mt-0 pb-2 lg:py-4"> Belum terdapat foto yang berhubungan dengan <?= $usernya ?>.
             </p>
             <!-- <tr>
                 <td class="text-sm text-center border-b-2 border-gray-200 px-3 lg:px-5 py-2 md:py-3 lg:py-4">Belum terdapat foto yang berhubungan dengan anda.</td>
@@ -630,13 +633,13 @@ if ($status == 'bukan user') {
 
     </div>
     <div class="visible sm:invisible">
-        <a class="bg-secondary mb-8 -mt-28 mr-2 sm:mt-0 float-right font-paragraph text-sm text-white text-center py-1 px-4 mx-auto rounded-full cursor-pointer hover:bg-secondaryhover transition-colors duration-300" href="/User/rekomendasi">
+        <a class="bg-secondary mr-2 mt-4 mb-3 float-right font-paragraph text-sm text-white text-center py-1 px-4 mx-auto rounded-full cursor-pointer hover:bg-secondaryhover transition-colors duration-300" href="/User/galeriFoto">
             Lihat Semua
             <img src="/img/components/icon/panah_kanan.png" alt="lihat semua foto" class="float-right pl-2">
         </a>
     </div>
 </div>
-<hr class="visible sm:invisible border-primary border-opacity-75 w-4/5 object-center mx-auto mt-8">
+<hr class="visible sm:invisible border-primary border-opacity-75 w-4/5 object-center mx-auto mb-8">
 </div>
 <!-- Akhir Foto Tentang Anda -->
 

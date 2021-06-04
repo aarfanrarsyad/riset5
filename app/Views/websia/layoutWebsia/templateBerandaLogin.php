@@ -32,6 +32,13 @@
         <script src="/js/selectize.js"></script>
     <?php endif; ?>
 
+    <?php if ($judulHalaman == "Berita") : ?>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+        <link rel="stylesheet" href="<?= base_url() ?>/vendor/AdminLTE/plugins/fontawesome-free/css/all.min.css">
+        <script src="/js/selectize.js"></script>
+    <?php endif; ?>
+
+
     <title><?php echo $judulHalaman ?></title>
 </head>
 
@@ -85,7 +92,7 @@
                                     <a href="/User/galeriVideo" class="bg-primaryDark hover:bg-primary text-white hover:text-secondary text-left w-full px-2 transition duration-300"> Galeri Video </a>
                                 </div>
                             </div>
-                            <a href="/User/berita">
+                            <a href="/Berita/berita">
                                 <div class="nav-menu transition-colors duration-300 <?= ($active == 'berita') ? 'activeMenu' : ''; ?>">
                                     BERITA
                                 </div>
@@ -108,7 +115,7 @@
                                     <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
                                 </svg>
                                 <form action="/User/searchAndFilter" method="get">
-                                    <input type="text" name="cari" placeholder="|  CARI" autocomplete="off" class="placeholder-white bg-transparent focus:outline-none ml-6 font-paragraph p-1" value="<?= isset($_GET['cari'])?$_GET['cari']:'' ?>">
+                                    <input type="text" name="cari" placeholder="|  CARI" autocomplete="off" class="placeholder-white bg-transparent focus:outline-none ml-6 font-paragraph p-1" value="<?= isset($_GET['cari']) ? $_GET['cari'] : '' ?>">
                                 </form>
                             </div>
                         </div>
@@ -153,7 +160,7 @@
                             </div>
                         </div>
                         <div class="nav-menu-relative px-2 py-2 <?= ($active == 'berita') ? 'activeMenu' : ''; ?>">
-                            <a href="/User/berita"> BERITA</a>
+                            <a href="/Berita/berita"> BERITA</a>
                         </div>
                         <div class="nav-menu-relative px-2 py-2">
                             <a href="/User/developer"> WEBSERVICE</a>
@@ -168,7 +175,7 @@
                                 <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
                             </svg>
                             <form action="/User/searchAndFilter" method="get">
-                                <input type="text" name="cari" placeholder="    |  CARI" id="inputCari" class="placeholder-white bg-transparent ml-6 text-xs text-center w-2/3 outline-none " value="<?= isset($_GET['cari'])?$_GET['cari']:'' ?>">
+                                <input type="text" name="cari" placeholder="    |  CARI" id="inputCari" class="placeholder-white bg-transparent ml-6 text-xs text-center w-2/3 outline-none " value="<?= isset($_GET['cari']) ? $_GET['cari'] : '' ?>">
                             </form>
                         </div>
                         <a href="/auth/logout">
@@ -196,7 +203,7 @@
 
     <!-- FOOTER -->
     <div class="bg-primary w-full pt-6 pb-3 lg:px-20 md:px-8 px-3">
-        <div class="flex flex-col md:flex-row md:justify-around md:text-sm text-xs items-center">
+        <div class="flex flex-col md:flex-row md:justify-around md:text-sm text-xs  items-center md:items-start">
             <!-- awal footer stis -->
             <div class="flex  gap-x-2 mx-auto md:mx-0 mb-2 md:mb-0">
                 <div class=" md:w-auto">
@@ -218,9 +225,9 @@
             <!-- akhir footer stis -->
 
             <!-- awal footer haistis -->
-            <div class="md:mt-0 mx-auto md:mx-0 mb-2 md:mb-0 md:-mt-5">
+            <div class="md:mt-0 mx-auto md:mx-0 mb-2 md:mb-0">
                 <a href="https://haisstis.org/"><img class="lg:h-28 h-20 w-36 lg:w-auto lg:-mt-6" src="/img/components/logo/logo_haisstis.png" alt="logo HAISSTIS"></a>
-                <div class="flex gap-x-2 -mt-2 lg:-mt-4 mx-4 lg:mx-16">
+                <div class="flex justify-start gap-x-2 -mt-2 lg:-mt-4">
                     <div><img class="lg:h-5 h-4" src="/img/components/icon/message_white.png" alt="icon message"></div>
                     <div>
                         <h3 class="text-white font-heading">sia@stis.ac.id</h3>
@@ -230,8 +237,8 @@
             <!-- akhir footer haistis -->
 
             <!-- awal link ke webservice  -->
-            <div class="flex flex-col text-white font-heading mx-auto md:mx-5 mt-4 md:mt-0 mb-2 md:mb-0">
-                <a href="https://pkl.stis.ac.id/60/" class="mb-2 hover:text-secondary">
+            <div class="flex flex-col text-white font-heading mx-auto md:mx-5 mt-4 md:mt-0">
+                <a href="/" class="mb-2 hover:text-secondary">
                     <h3 class="underline md:no-underline">Website PKL60</h3>
                 </a>
                 <a href="/developer/" class="hover:text-secondary">

@@ -6,7 +6,7 @@
 
 <div class="w-full">
     <div class="flex w-full h-full relative">
-        <div id="sidebarDok" class="md:top-20 sm:top-16 top-11 bottom-0 xl:w-80 lg:w-64 lg:left-0 -left-64 w-64 transition-all duration-700 easy-out md:-mt-20 sm:-mt-16 -mt-11 z-20 fixed bg-primarySidebar">
+        <div id="sidebarDok" class="md:top-20 sm:top-16 top-11 bottom-0 xl:w-80 lg:w-64 lg:left-0 -left-64 w-64 transition-all duration-500 easy-out md:-mt-20 sm:-mt-16 -mt-11 fixed z-20 bg-primarySidebar">
             <!-- start sidebar posisi buka -->
 
             <img src="/img/components/logo/logo_sia.png" class="md:w-20 sm:w-16 w-10 md:mb-1.5 md:mt-2.5 my-2 mx-auto" alt="Logo SIA">
@@ -39,48 +39,42 @@
 
             </div>
 
-            <ul class="mr-4 mt-5" id="menuDok">
-                <li class="itemSideDok pl-7 rounded-r-lg md:text-xl text-secondary font-semibold mb-1 py-0.5 hover:bg-primary">
-                    <a href="#memintaData" class="py-1">Meminta Data</a>
-                </li>
-                <li class="text-secondary relative mb-1">
-                    <div class="itemSideDok pl-5 rounded-r-lg flex justify-between items-center pr-4 md:text-xl font-semibold hover:bg-primary">
-                        <a href="#data" class="py-0.5 px-2 cursor-pointer select-none">Data</a>
-                        <img src="/img/components/icon/drop-down.svg" class="text-red-500 cursor-pointer transform transition-all duration-300" alt="icon drop-down">
+            <div class="mr-4 mt-5" id="menuDok">
+                <a href="#memintaData">
+                    <div class="pl-7 rounded-r-lg md:text-xl text-secondary font-semibold mb-1 md:py-1.5 py-1 hover:bg-primary">
+                        Meminta Data
                     </div>
-                    <ul class="text-white text-white transition-all duration-300 easy-out absolute overflow-hidden open-submenu w-full">
-                        <li class="itemSideDok pl-12 py-0.5 rounded-r-lg md:text-lg hover:bg-primary">
-                            <a href="#dataUser" class="py-1">Detail User</a>
-                        </li>
-                        <li class="itemSideDok pl-12 py-0.5 rounded-r-lg md:text-lg hover:bg-primary">
-                            <a href="#dataAlumni" class="py-1">Detail Alumni</a>
-                        </li>
-                        <li class="itemSideDok pl-12 py-0.5 rounded-r-lg md:text-lg hover:bg-primary">
-                            <a href="#dataListAlumni" class="py-1">Daftar Detail Alumni</a>
-                        </li>
-                    </ul>
-                </li>
-                <!-- <li class="text-secondary relative transform translate-y-24 duration-300">
-                    <div class="itemSideDok pl-5 rounded-r-lg flex justify-between items-center pr-4 md:text-xl font-semibold hover:bg-primary">
-                        <a href="#judul" class="py-0.5 px-2 cursor-pointer select-none">Judul</a>
-                        <img src="/img/components/icon/drop-down.svg" class="text-red-500 cursor-pointer transform transition-all duration-300" alt="icon drop-down">
+                </a>
+                <div class="text-secondary relative mb-1">
+                    <div id="side-drop-down" class="select-none cursor-pointer md:py-1.5 py-1 pl-5 rounded-r-lg flex justify-between items-center pr-4 md:text-xl font-semibold hover:bg-primary">
+                        <p class="px-2 cursor-pointer">Data</p>
+                        <img src="/img/components/icon/drop-down.svg" class="transform transition-all duration-300" alt="icon drop-down">
                     </div>
-                    <ul class="text-white text-white transition-all duration-300 easy-out absolute overflow-hidden open-submenu w-full">
-                        <li class="itemSideDok pl-12 py-0.5 rounded-r-lg md:text-lg hover:bg-primary cursor-pointer">
-                            <span class="py-1">Sub-Judul 1.1</span>
-                        </li>
-                        <li class="itemSideDok pl-12 py-0.5 rounded-r-lg md:text-lg hover:bg-primary cursor-pointer">
-                            <span class="py-1">Sub-Judul 1.2</span>
-                        </li>
-                    </ul>
-                </li>
-            </ul> -->
-                <!-- end sidebar posisi buka -->
+                    <div class="text-white text-white transition-all duration-300 easy-out absolute overflow-hidden open-submenu w-full">
+                        <a href="#dataUser">
+                            <div class="pl-12 md:py-1 py-0.5 rounded-r-lg md:text-lg hover:bg-primary">
+                                Detail User
+                            </div>
+                        </a>
+                        <a href="#dataAlumni">
+                            <div class="pl-12 md:py-1 py-0.5 rounded-r-lg md:text-lg hover:bg-primary">
+                                Detail Alumni
+                            </div>
+                        </a>
+                        <a href="#dataListAlumni">
+                            <div class="pl-12 md:py-1 py-0.5 rounded-r-lg md:text-lg hover:bg-primary">
+                                Detail Detail Alumni
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- end sidebar posisi buka -->
 
         </div>
 
         <!-- content edit di sini -->
-        <div class="xl:mx-4 lg:mx-0 relative w-full xl:left-72 lg:left-64 -left-4 transition-all duration-700 easy-out xl:ml-10 xl:mr-80 xl:pr-2 lg:mr-72 ">
+        <div class="xl:mx-4 lg:mx-0 relative w-full xl:left-72 lg:left-64 -left-4 transition-all duration-500 easy-out xl:ml-10 xl:mr-80 xl:pr-2 lg:mr-72 ">
             <?php $this->renderSection('dokumentasi'); ?>
         </div>
         <!-- end content edit -->
