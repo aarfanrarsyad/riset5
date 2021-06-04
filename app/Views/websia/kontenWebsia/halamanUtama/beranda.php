@@ -46,7 +46,7 @@ if (session()->getFlashdata('role')) { ?>
     <div class="md:w-2/3 block md:px-2 md:py-8 pb-4">
         <div class="md:mb-6 mb-2 text-xl text-center md:text-left text-black font-heading font-semibold">HASIL DARI PROYEK PKL RISET 5</div>
         <!-- awal keterangan hasil proyek pkl riset 5 -->
-        <p class="text-primary text-justify md:text-left font-paragraph">
+        <p class="text-primary text-justify font-paragraph">
             Riset 5 merupakan salah satu dari enam riset yang ada dalam PKL Tahun Akademik 2020/2021 Politeknik Statistika STIS. Riset 5 sendiri memiliki topik
             “Pengembangan Sistem Database Alumni AIS/STIS/Politeknik Statistika STIS”. Riset 5 memiliki tujuan untuk menjadi penyedia data alumni AIS/STIS/Politeknik
             Statistika STIS yang lengkap, terintegrasi, dan up to date sehingga dapat menjadi penghubung antaralumni maupun antara alumni dengan Politeknik Statistika
@@ -71,7 +71,7 @@ if (session()->getFlashdata('role')) { ?>
     <div class="md:w-2/3 block md:px-2 md:py-16 pb-4 ">
         <div class="md:mb-6 mb-2 text-xl text-center md:text-left text-secondary font-heading font-semibold">SEJARAH SINGKAT HAISTIS</div>
         <!-- awal keterangan hasil proyek pkl riset 5 -->
-        <p class="text-white text-justify md:text-left font-paragraph">
+        <p class="text-white text-justify font-paragraph">
             Himpunan alumni AIS/STIS (HAISSTIS) merupakan organisasi yang dibentuk sebagai wadah silaturahmi alumni AIS/STIS/Polstat STIS yang beragam suku, agama dan
             budaya agar terjalin hubungan kekeluargaan. HAISSTIS bertujuan untuk menjunjung tinggi nama baik almamater, membina dan mengembangkan semangat kebersamaan,
             ikut mengembangkan perstatistikan Indonesia, dan ikut meningkatkan kesadaran masyarakat akan arti dan kegunaan statistik.
@@ -88,21 +88,21 @@ if (session()->getFlashdata('role')) { ?>
     <div class="flex flex-col items-center md:flex-row md:justify-around w-full mt-4">
         <!-- Awal Jumlah Alumni AIS/STIS/Polstat STIS I -->
         <div class="w-min mb-2 md:mb-0 py-6 px-6 bg-contain bg-no-repeat bg-center" style="background-image: url(/img/components/atribut_beranda_sia/bulat.png)">
-            <div class="angka text-primary md:text-6xl text-3xl font-bold md:mb-4 mb-2 font-heading">38500</div>
+            <div class="angka text-primary md:text-6xl text-3xl font-bold md:mb-4 mb-2 font-heading">2032</div>
             <div class="text-gray-500 text-sm font-semibold text-center font-paragraph">Lulusan AIS</div>
         </div>
         <!-- Akhir Jumlah Alumni AIS/STIS/Polstat STIS I-->
 
         <!-- Awal Jumlah Alumni AIS/STIS/Polstat STIS II-->
         <div class="w-min mb-2 md:mb-0 py-6 px-6 bg-contain bg-no-repeat bg-center" style="background-image: url(/img/components/atribut_beranda_sia/bulat.png)">
-            <div class="angka text-primary md:text-6xl text-3xl font-bold md:mb-4 mb-2 font-heading">38400</div>
+            <div class="angka text-primary md:text-6xl text-3xl font-bold md:mb-4 mb-2 font-heading">6022</div>
             <div class="text-gray-500 text-sm font-semibold text-center font-paragraph">Lulusan STIS</div>
         </div>
         <!-- Akhir Jumlah Alumni AIS/STIS/Polstat STIS II-->
 
         <!-- Awal Jumlah Alumni AIS/STIS/Polstat STIS III-->
         <div class="w-min mb-2 md:mb-0 py-6 px-6 bg-contain bg-no-repeat bg-center" style="background-image: url(/img/components/atribut_beranda_sia/bulat.png)">
-            <div class="angka text-primary md:text-6xl text-3xl font-bold md:mb-4 mb-2 font-heading">38300</div>
+            <div class="angka text-primary md:text-6xl text-3xl font-bold md:mb-4 mb-2 font-heading">1068</div>
             <div class="text-gray-500 text-sm font-semibold text-center font-paragraph">Lulusan Polstat STIS</div>
         </div>
         <!-- Akhir Jumlah Alumni AIS/STIS/Polstat STIS III-->
@@ -176,7 +176,7 @@ if (session()->getFlashdata('role')) { ?>
     </div>
     <!-- akhir gambar peta alumni -->
 </div>
-<div class="md:text-sm text-xs w-full font-heading text-xs text-white italic lg:px-16 md:px-8 px-2 py-2 bg-gradient-to-r from-primaryHover mb-8 to bg-primary">Data sebaran alumni diambil berdasarkan lokasi tempat instansi alumni tersebut bekerja (baik itu di BPS maupun di luar BPS)</div>
+<div class="md:text-sm text-xs w-full font-heading text-white italic lg:px-16 md:px-8 px-2 py-2 bg-gradient-to-r from-primaryHover mb-8 to bg-primary">Data sebaran alumni diambil berdasarkan lokasi tempat instansi alumni tersebut bekerja (baik itu di BPS maupun di luar BPS)</div>
 
 <!-- Akhir Peta Sebaran ALUMNI -->
 
@@ -223,7 +223,7 @@ if (session()->getFlashdata('role')) { ?>
 </div>
 
 <!-- awal tombol "Lihat Berita Selanjutnya" -->
-<div class="flex w-full justify-end lg:px-20 md:px-8 px-5 mb-8">
+<!-- <div class="flex w-full justify-end lg:px-20 md:px-8 px-5 mb-8">
     <div class="text-primary font-paragraph my-auto"><a href="/Berita/berita">Lihat Berita Selanjutnya</a> </div>
     <div>
         <a href="/websia/berandaBerita">
@@ -232,7 +232,7 @@ if (session()->getFlashdata('role')) { ?>
             </svg>
         </a>
     </div>
-</div>
+</div> -->
 <!-- akhir tombol "Lihat Berita Selanjutnya" -->
 
 <!-- akhir card -->

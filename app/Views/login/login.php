@@ -93,7 +93,7 @@
 
             <!-- login with BPS -->
             <div class="lg:mx-8 sm:mx-6 mx-3" onclick="loginBPS()">
-                <div class="sso flex justify-center rounded-2xl w-full border-2 border-secondary py-1 cursor-pointer transform hover:scale-105 duration-300 hover:bg-yellow-200 hover:border-yellow-600 translate-x-0.5">
+                <div class="sso flex justify-center rounded-2xl w-full border-2 border-secondary py-1.5 cursor-pointer transform hover:scale-105 duration-300 hover:bg-yellow-200 hover:border-yellow-600 translate-x-0.5">
                     <img src="/img/components/logo/logo_bps.png" alt="logo BPS" width="25" height="25" class="mr-2">
                     <h3 class="flex items-center text-sm text-secondary font-bold">BPS</h3>
                 </div>

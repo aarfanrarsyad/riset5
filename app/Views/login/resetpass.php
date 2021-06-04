@@ -2,7 +2,7 @@
 
 <?= $this->section('content'); ?>
 
-<div class="xl:w-7/12 md:w-10/12 flex items-center">
+<div class="xl:w-7/12 md:w-10/12 py-8 flex items-center">
     <form method="POST" action="" class="rounded-3xl shadow-2xl xl:px-16 md:px-8 px-4 sm:mx-0 mx-4 w-full" data-aos="zoom-in">
         <?= csrf_field() ?>
         <h2 class="sm:text-2xl text-lg mb-3 font-bold text-center pt-8 text-primary">ATUR ULANG KATA SANDI</h2>
