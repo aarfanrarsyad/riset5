@@ -154,7 +154,8 @@ function userdata()
 
     $user = $authenticate->user();
 
-    $default = ["components/icon/Lk-icon.svg", "components/icon/Pr-icon.svg"];
+    $default = ["Lk-icon.svg", "Pr-icon.svg"];
+
     $data = [
         'id' => $user->id,
         'fullname' => $user->fullname,
@@ -162,6 +163,13 @@ function userdata()
         'nim' => $user->nim,
         'image' => $user->user_image,
     ];
+
+    if ($user->id_alumni) {
+        $alumni = $init->getAlumniById($user->id_alumni)->getRowArray();
+        $check_img = in_array_help(strtolower($alumni['foto_profil']), $default);
+        $tmp =  $check_img !== FALSE ? "/img/components/user/userid_" . $data['id'] . "/" . $alumni['foto_profil'] :  "/img/components/icon/" . $default[$check_img];
+        $data['image'] = $tmp;
+    }
 
     return $data;
 }

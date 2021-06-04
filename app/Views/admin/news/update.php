@@ -102,6 +102,12 @@ $errors = session()->getFlashdata('errors');
                                         </label>
                                     </div>
                                     <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="access" id="access-review" value="review" onclick="hide_access()" <?= ($data['akses'] == 'review') ? 'checked' : '' ?>>
+                                        <label class="form-check-label" for="access-review">
+                                            Review
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
                                         <input class="form-check-input" type="radio" name="access" id="access-other" value="other" onclick="show_access()" <?= ($data['akses'] == 'other') ? 'checked' : '' ?>>
                                         <label class="form-check-label" for="access-other">
                                             Other
@@ -149,7 +155,7 @@ $errors = session()->getFlashdata('errors');
                                     <label class="custom-file-label form-control-sm" for="thumbnail"><span id="oldfileLabel"><?= $data['thumbnail'] ?></span></label>
                                 </div>
                                 <div class="col-sm-4">
-                                    <img src="<?= base_url('berita/berita_' . $data['id'] . '/' . $data['thumbnail']) ?>" class="img-fluid border" id="previewHolder" onclick="show_img(event)" alt="Thumbnail Berita">
+                                    <img src="<?= base_url('berita/berita_' . $data['id'] . '/' . $data['thumbnail']) ?>" class="img-fluid border" id="previewHolder" onclick="show_img(event)">
                                 </div>
                             </div>
                             <div class="form-group row">

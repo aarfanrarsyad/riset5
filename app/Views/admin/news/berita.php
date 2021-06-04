@@ -2,15 +2,133 @@
 
 <?= $this->section('content'); ?>
 
+<script>
+    let show = [];
+    let Toast = Swal.mixin({
+        toast: true,
+        position: 'center',
+        showConfirmButton: false,
+        timer: 3000
+    });
 
+    function get_comments(data, all = null) {
 
-<div class="md:mt-8 mt-4 lg:px-20 md:px-8 px-3 text-sm">
+        $.ajax({
+            url: "<?= base_url('admin/berita/get-comments') ?>",
+            method: "POST",
+            dataType: "JSON",
+            cache: false,
+            data: {
+                data: data,
+                all: all
+            },
+            success: function(result) {
+                // return console.log(result)
+
+                for (let i = 0; i < result.length; i++) {
+                    let comments = $('#comments-content-' + result[i].news_id);
+                    let comm_count = $('#count-comment-' + result[i].news_id);
+
+                    comments.empty();
+                    comm_count.empty();
+                    comments.html(result[i].html);
+                    comm_count.html(result[i].count + ' Komentar');
+                }
+            }
+        })
+    }
+
+    function show_less_comments(id) {
+        $('#set-length-comments-' + id).html('Lihat semua komentar');
+        $('#set-length-comments-' + id).attr('onclick', 'show_all_comments(' + id + ')');
+
+        get_comments([id])
+    }
+
+    function show_all_comments(id) {
+        $('#set-length-comments-' + id).html('Tampilkan lebih sedikit')
+        $('#set-length-comments-' + id).attr('onclick', 'show_less_comments(' + id + ')')
+
+        get_comments([id], all = true)
+
+    }
+
+    function post_comment(id) {
+        let comment = $('#comments-' + id).val();
+        if (comment.trim().length === 0) return false;
+
+        $.ajax({
+            url: "<?= base_url('admin/berita/post-comment') ?>",
+            method: "POST",
+            dataType: "JSON",
+            cache: false,
+            data: {
+                news_id: id,
+                data: comment,
+            },
+            success: function(result) {
+                if (result === true) {
+                    get_comments([id])
+                    $('#comments-' + id).val('');
+                } else {
+                    $(document).Toasts('create', {
+                        title: 'Terjadi Kesalahan',
+                        subtitle: 'Error',
+                        autohide: true,
+                        delay: 2000,
+                        body: 'Tidak dapat mengirimkan komentar.'
+                    })
+                }
+            }
+        })
+    }
+
+    function delete_comment(id, news_id) {
+        Swal.fire({
+            icon: 'question',
+            text: 'Apakah anda yakin ingin menghapus komentar ini?',
+            showCancelButton: true,
+            confirmButtonColor: '#4248ED',
+            cancelButtonColor: '#33A1C4',
+            confirmButtonText: 'Ya, Hapus!',
+            cancelButtonText: 'Batal',
+        }).then((result) => {
+            if (result.value) {
+                $.ajax({
+                    url: "<?= base_url('admin/berita/delete-comment') ?>",
+                    method: "POST",
+                    dataType: "JSON",
+                    cache: false,
+                    data: {
+                        id: id,
+                    },
+                    success: function(result) {
+                        if (result === true) {
+                            get_comments([news_id])
+                        } else {
+                            $(document).Toasts('create', {
+                                title: 'Terjadi Kesalahan',
+                                subtitle: 'Error',
+                                autohide: true,
+                                delay: 2000,
+                                body: 'Tidak dapat menghapus komentar.'
+                            })
+                        }
+                    }
+                })
+            }
+        })
+    }
+</script>
+<div class="md:mt-8 mt-4 lg:px-20 md:px-8 px-3">
     <div class="flex justify-between items-end">
         <div class="text-sm text-primary font-medium">
             <div class="flex gap-x-2">
                 <a href="/" class="hover:text-primaryHover">Beranda</a>
                 <p>></p>
                 <a href="/berita/berita" class="hover:text-primaryHover">Berita</a>
+                <p>></p>
+                <a href="javascript:void(0)" class="hover:text-primaryHover"><?= ucwords(strtolower($dataset['judul'])) ?></a>
             </div>
         </div>
         <div>
@@ -33,127 +151,178 @@
 
                 <div class="hidden lg:w-2/5 md:w-2/3 w-3/4 opacity-0 transition-all duration-300 rounded-xl text-primary py-2 text-sm absolute lg:right-18 -lg:right-2 md:right-6 right-1 md:top-48 top-28">
                     <div class="font-bold px-2">Status Unggah Berita</div>
-
                     <?php foreach ($notifications as $notification) : ?>
                         <div class="bg-gray-100 flex p-2 gap-x-2 mb-2">
                             <div class="lg:w-3/4 md:w-4/5 w-2/3">
                                 <?= $notification['msg'] ?>
                                 <div class="flex gap-x-2 items-center">
-                                    <img src="/img/components/icon/calendar.png" class="w-5 h-5" alt="">
+                                    <img src="<?= base_url('berita/berita_' . $notification['id'] . '/' . $notification['thumbnail']) ?>" class="w-5 h-5" alt="">
                                     <p class="text-xs"><?= $notification['date'] ?></p>
                                 </div>
                             </div>
-
-                            <div class="lg:w-1/4 md:w-1/5 w-1/3 lg:h-16 h-12" style="background-image: url('<?= base_url('berita/berita_' . $notification['id'] . '/' . $notification['thumbnail']) ?>'); background-repeat: no-repeat;background-size:cover">
+                            <div class="lg:w-1/4 md:w-1/5 w-1/3 lg:h-16 h-12 bg-gray-300">
                             </div>
                         </div>
                     <?php endforeach; ?>
                 </div>
 
-                
             </div>
         </div>
     </div>
-    <hr class="border-primary border-t-2 border-b-0 mt-3">
-    <?php if (count($newsPop) >= 3) : ?>
-        <div class="mt-4 bg-primary md:p-6 p-3">
-            <h2 class="font-bold text-secondary text-center font-heading lg:text-2xl md:text-xl text-lg">Berita Terpopuler</h2>
-            <div class="md:grid md:grid-cols-3 md:gap-x-6 mt-4">
-                <div class="md:col-span-2 md:h-full h-32 flex items-end p-2 sm:mb-6 mb-2 md:mb-0" style="background-image: url('<?= base_url('berita/berita_' . $newsPop[0]['id'] . '/' . $newsPop[0]['thumbnail']) ?>'); background-repeat: no-repeat;background-size:cover">
+    <hr class="lg:mb-8 md:mb-6 mb-4 mt-3 border-t-2 border-b-0 border-primary">
 
-                    <a href="<?= base_url('/berita/news_view/' . $newsPop[0]['id']) ?>" style="position:absolute;">
-                        <h1 class="text-white font-heading font-bold text-xl"><?= $newsPop[0]['judul'] ?></h1>
-                    </a>
+    <div class="flex justify-between">
+        <div class="flex-grow">
+            <div class="flex flex-col mr-16">
+                <div class="text-secondary font-heading font-bold lg:text-4xl md:text-3xl text-2xl"><?= ucwords(strtolower($dataset['judul'])) ?></div>
+                <div class="flex lg:my-3 my-2">
+                    <div class="flex text-primary">
+                        <svg class="w-4 h-4 mr-2 my-auto" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path>
+                        </svg>
 
+                        <div class="lg:text-sm md:text-xs text-xs font-paragraph font-medium my-auto"><?= $dataset['tanggal_publish'] ?></div>
+                    </div>
+
+                    <div class="flex text-primary lg:ml-6 md:ml-4 ml-2">
+                        <svg class="w-4 h-4 mr-2 my-auto" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z" clip-rule="evenodd"></path>
+                        </svg>
+
+                        <div class="lg:text-sm md:text-xs text-xs font-paragraph font-medium my-auto"><a href="<?= base_url('User/profilAlumni/' . $dataset['user_id']) ?>" target="_blank"><?= $dataset['author'] ?></a></div>
+                    </div>
+
+                    <div class="flex text-primary lg:ml-6 md:ml-4 ml-2">
+                        <svg class="w-4 h-4 mr-2 my-auto" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M10 12a2 2 0 100-4 2 2 0 000 4z"></path>
+                            <path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd"></path>
+                        </svg>
+                        <div class="lg:text-sm md:text-xs text-xs font-paragraph font-medium my-auto"><?= $dataset['visited'] ?></div>
+                    </div>
                 </div>
-                <div class="md:grid md:grid-rows-2 md:gap-y-6">
-                    <div class="lg:h-48 h-32 flex items-end p-2 sm:mb-6 mb-2 md:mb-0" style="background-image: url('<?= base_url('berita/berita_' . $newsPop[1]['id'] . '/' . $newsPop[1]['thumbnail']) ?>');background-repeat: no-repeat;background-size:cover">
-                        <a href="<?= base_url('/berita/news_view/' . $newsPop[1]['id']) ?>" style="position:absolute;">
-                            <h1 class="text-white font-heading font-bold text-lg"><?= $newsPop[1]['judul'] ?></h1>
-                        </a>
+
+                <div class="lg:h-72 h-60 p-2 mb-2" style="background-image: url('<?= base_url('berita/berita_' . $dataset['id'] . '/' . $dataset['thumbnail']) ?>'); background-repeat: no-repeat;background-size:cover">
+                </div>
+
+                <div class="lg:text-sm md:text-xs text-xs text-primary font-paragraph font-medium mb-4">Foto oleh : <?= $dataset['author'] ?></div>
+
+                <div class="text-justify break-words font-paragraph w-full">
+                    <div class="container">
+                        <?= $dataset['konten'] ?>
                     </div>
-                    <div class="lg:h-48 h-32 flex items-end p-2" style="background-image: url('<?= base_url('berita/berita_' . $newsPop[2]['id'] . '/' . $newsPop[2]['thumbnail']) ?>'); background-repeat: no-repeat;">
-                        <a href="<?= base_url('/berita/news_view/' . $newsPop[2]['id']) ?>" style="position:absolute;background-size:cover">
-                            <h1 class="text-white font-heading font-bold text-lg"><?= $newsPop[2]['judul'] ?></h1>
-                        </a>
+                    <hr class="lg:mb-2 mb-1 border-t-1 border-b-0 border-primary">
+
+                    <div class="text-primary text-center font-heading lg:text-lg md:text-base text-sm">Bagikan:</div>
+                    <div class="flex justify-center lg:mt-3 mt-2 lg:mb-16 md:mb-12 mb-8">
+                        <img class="lg:h-6 h-4 mx-1" src="/img/components/icon/fb.png">
+                        <img class="lg:h-6 h-4 mx-1" src="/img/components/icon/twit.png">
+                        <img class="lg:h-6 h-4 mx-1" src="/img/components/icon/whatsapp.png">
+                        <img class="lg:h-6 h-4 mx-1" src="/img/components/icon/linkedin.png">
                     </div>
+                    <div class="flex items-center font-paragraph text-primary mb-3">
+                        <img class="lg:h-10 h-6 mx-1" src="/img/components/icon/komen.png">
+                        <div class="lg:mx-4 mx-2 lg:text-xl md:text-lg text-base font-bold"><a href="javascript:void(0)" id="count-comment-<?= $dataset['id'] ?>" onclick="show_all_comments(<?= $dataset['id'] ?>)"> <?= $dataset['count_comments'] ?> Komentar</a></div>
+                    </div>
+
+                    <?php $i = 1 ?>
+
+                    <div id="comments-content-<?= $dataset['id'] ?>" data-news="<?= $dataset['id'] ?>">
+                        <?php foreach ($dataset['comments'] as $dts) : ?>
+                            <div class="flex items-center text-primary lg:mb-4 mb-3" <?= $i > 4 ? 'style="display: none;"' : '' ?>>
+                                <img class="lg:h-14 md:h-12 h-8 lg:mr-4 mr-2" src="<?= base_url($dts['image']) ?>">
+                                <div class="bg-gray-200 lg:pl-6 pl-4 py-3 gap-x-2 rounded-lg w-full">
+                                    <div class="flex justify-between">
+                                        <div class="w-7/8">
+                                            <div class="text-primary lg:text-xl md:text-lg text-base font-bold"><?= $dts['name'] ?></div>
+                                            <div class="lg:text-base md:text-sm text-xs"><?= $dts['komentar'] ?></div>
+                                        </div>
+                                        <div class="w-1/8">
+                                            <span class="text-muted mr-3"><?= $dts['time'] ?></span>
+                                            <?php if ($is_admin) : ?>
+                                                <div class="float-right mr-4">
+                                                    <div class="btn-group dropleft">
+                                                        <a class="text-secondary" href="javascript:void(0)" role="button" data-toggle="dropdown" style="font-weight: 100;" onclick="delete_comment(<?= $dts['id'] ?>,<?= $dts['berita_id'] ?>)">
+                                                            <i class="fas fa-trash-alt text-lg"></i>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            <?php endif ?>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <?php $i++ ?>
+                        <?php endforeach ?>
+                        <?php if (count($dataset['comments']) > 4) : ?>
+                            <div class="flex justify-end text-secondary lg:text-xl md:text-lg text-base lg:mb-8 md:mb-6 mb-4">
+                                <a href="javascript:void(0)" id="set-length-comments-<?= $dataset['id'] ?>" onclick="show_all_comments(<?= $dataset['id'] ?>)">Lihat semua komentar</a>
+                            </div>
+                        <?php endif; ?>
+                    </div>
+                    <div class="flex items-center text-primary mb-2">
+                        <img class="lg:h-14 md:h-12 h-8 lg:mr-4 mr-2" src="<?= base_url() . userdata()['image'] ?>">
+                        <textarea class="border-4 rounded-lg w-full shadow-lg px-4 py-4 mb-4" placeholder="Tambah komentar Anda." name="tambahKomentar" id="comments-<?= $dataset['id'] ?>" cols="10" rows="5"></textarea>
+                    </div>
+                    <div class="flex justify-end lg:mb-12 mb-8">
+                        <button role="button" class="bg-secondary text-white rounded-full lg:w-20 w-16 py-1 text-center cursor-pointer hover:bg-secondaryhover transition-colors duration-300 outline-none" onclick="post_comment(<?= $dataset['id'] ?>)">Kirim</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="flex-grow-0">
+            <div class="flex flex-col lg:w-96 md:w-72 w-48">
+                <div>
+                    <div class="text-secondary font-heading font-semibold lg:text-2xl md:text-xl text-lg">Berita Terpopuler</div>
+                    <?php for ($i = 0; $i < count($berita_popular); $i++) : ?>
+                        <?php if ($i > 2) break ?>
+                        <hr class="lg:my-3 my-2 border-gray-400">
+                        <div class="flex justify between">
+                            <div class="lg:h-34 h-28 lg:w-3/7 w-2/5 bg-gray-200" style="background:url('<?= base_url('berita/berita_' . $berita_popular[$i]['id'] . '/' . $berita_popular[$i]['thumbnail']) ?>'); background-repeat: no-repeat;background-size:contain">
+                            </div>
+                            <div class="lg:ml-4 md:ml-3 ml-2 lg:w-4/7 w-3/5">
+                                <a href="<?= base_url('berita/news_view/' . $berita_popular[$i]['id']) ?>">
+                                    <h3 class="font-heading font-semibold text-primary lg:text-lg md:text-base text-sm"><?= $berita_popular[$i]['judul'] ?></h3>
+                                </a>
+                                <div class="flex gap-x-1 items-center">
+                                    <p class="text-xs text-primary lg:mb-2 mb-1"><?= $berita_popular[$i]['tanggal_publish'] ?></p>
+                                </div>
+                                <p class="lg:text-sm text-xs text-justify">
+                                    <?= $berita_popular[$i]['konten'] ?>
+                                </p>
+                            </div>
+                        </div>
+                    <?php endfor; ?>
+                </div>
+                <div>
+                    <div class="text-secondary font-heading font-semibold lg:text-2xl md:text-xl text-lg lg:mt-8 mt-6">Berita Terbaru</div>
+                    <?php for ($i = 0; $i < count($berita); $i++) : ?>
+                        <hr class="lg:my-3 my-2 border-gray-400">
+                        <div class="flex justify between">
+                            <div class="lg:h-34 h-28 lg:w-3/7 w-2/5 bg-gray-200" style="background:url('<?= base_url('berita/berita_' . $berita[$i]['id'] . '/' . $berita[$i]['thumbnail']) ?>'); background-repeat: no-repeat;background-size:contain">
+                            </div>
+                            <div class="lg:ml-4 md:ml-3 ml-2 lg:w-4/7 w-3/5">
+                                <a href="<?= base_url('berita/news_view/' . $berita[$i]['id']) ?>">
+                                    <h3 class="font-heading font-semibold text-primary lg:text-lg md:text-base text-sm"><?= $berita[$i]['judul'] ?></h3>
+                                </a>
+                                <div class="flex gap-x-1 items-center">
+                                    <p class="text-xs text-primary lg:mb-2 mb-1"><?= $berita[$i]['tanggal_publish'] ?></p>
+                                </div>
+                                <p class="lg:text-sm text-xs text-justify">
+                                    <?= $berita[$i]['konten'] ?>
+                                </p>
+                            </div>
+                        </div>
+                    <?php endfor; ?>
                 </div>
             </div>
         </div>
-        <hr class="border-primary border-t-2 border-b-0 mt-4 mb-3">
-    <?php endif ?>
-
-    <div class="mt-4">
-        <h2 class="font-bold text-secondary font-heading md:text-xl text-lg mb-4"> <?= count($dataset) >= 3 ? 'Berita Lainnya' : 'Berita Terbaru' ?> </h2>
-        <!-- start card berita -->
-        <div class="md:grid md:grid-cols-2 md:gap-x-6">
-
-            <?php for ($i = 0; $i < count($dataset); $i++) : ?>
-                <?php if ($i % 2 == 0) : ?>
-                    <div>
-                        <div class="flex gap-x-2 items-center">
-                            <div class="lg:w-1/4 w-1/3 lg:h-24 h-20 bg-gray-200" style="background-image: url('<?= base_url('berita/berita_' . $dataset[$i]['id'] . '/' . $dataset[$i]['thumbnail']) ?>'); background-repeat: no-repeat;background-size:cover">
-                            </div>
-                            <div class="lg:w-3/4 w-2/3">
-                                <a href="<?= base_url('/berita/news_view/' . $dataset[$i]['id']) ?>">
-                                    <h3 class="font-heading font-semibold text-primary text-lg"><?= $dataset[$i]['judul'] ?></h3>
-                                </a>
-                                <div class="flex gap-x-1 items-center">
-                                    <img src="/img/icon/clock.png" class="w-3 h-3" alt="">
-                                    <p class="text-xs text-primary"><?= $dataset[$i]['tanggal_publish'] ?></p>
-                                    <img src="/img/icon/profile.png" class="w-3 h-3 ml-2" alt="">
-                                    <p class="text-xs text-primary"><?= $dataset[$i]['author'] ?></p>
-                                </div>
-                                <p style="text-align:justify">
-                                    <?= $dataset[$i]['konten'] ?>
-                                </p>
-                            </div>
-                        </div>
-                        <hr class="my-3 border-gray-400">
-                    </div>
-                <?php else : ?>
-                    <div class="md:block hidden">
-                        <div class="flex gap-x-2 items-center">
-                            <div class="lg:w-1/4 w-1/3 lg:h-24 h-20 bg-gray-200" style="background-image: url('<?= base_url('berita/berita_' . $dataset[$i]['id'] . '/' . $dataset[$i]['thumbnail']) ?>'); background-repeat: no-repeat;background-size:cover">
-                            </div>
-
-                            <div class="lg:w-3/4 w-2/3">
-                                <a href="<?= base_url('/berita/news_view/' . $dataset[$i]['id']) ?>">
-                                    <h3 class="font-heading font-semibold text-primary text-lg"><?= $dataset[$i]['judul'] ?></h3>
-                                </a>
-                                <div class="flex gap-x-1 items-center">
-                                    <img src="/img/icon/clock.png" class="w-3 h-3" alt="">
-                                    <p class="text-xs text-primary"><?= $dataset[$i]['tanggal_publish'] ?></p>
-                                    <img src="/img/icon/profile.png" class="w-3 h-3 ml-2" alt="">
-                                    <p class="text-xs text-primary"><?= $dataset[$i]['author'] ?></p>
-                                </div>
-                                <p style="text-align:justify">
-                                    <?= $dataset[$i]['konten'] ?>
-                                </p>
-                            </div>
-                        </div>
-                        <hr class="my-3 border-gray-400">
-                    </div>
-                <?php endif; ?>
-            <?php endfor; ?>
-        </div>
-        <!-- end card berita -->
-
-        <div class="flex gap-x-2 items-center justify-end mb-8">
-            <a href="<?= $pagination['page'] > 1 ? '?page=' . $pagination['previous'] . '' : '' ?>">
-                <img src="/img/components/icon/left-on.png" class="w-4 h-4 cursor-pointer" alt="">
-            </a>
-
-            <?php for ($x = 1; $x <= $pagination['total_page']; $x++) : ?>
-                <a href="?page=<?= $x ?>" class="text-secondary"><?= $x ?></a>
-            <?php endfor ?>
-
-            <a href="<?= $pagination['page'] < $pagination['total_page'] ? '?page=' . $pagination['next'] . '' : '' ?>">
-                <img src="/img/components/icon/right-on.png" class="w-4 h-4 cursor-pointer" alt="">
-            </a>
-        </div>
-
     </div>
+
+
 </div>
 
+<script type="text/javascript" src="/js/berita.js"></script>
 <?= $this->endSection(); ?>

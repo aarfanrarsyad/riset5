@@ -32,6 +32,13 @@
         <script src="/js/selectize.js"></script>
     <?php endif; ?>
 
+    <?php if ($judulHalaman == "Berita") : ?>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+        <link rel="stylesheet" href="<?= base_url() ?>/vendor/AdminLTE/plugins/fontawesome-free/css/all.min.css">
+        <script src="/js/selectize.js"></script>
+    <?php endif; ?>
+
+
     <title><?php echo $judulHalaman ?></title>
 </head>
 

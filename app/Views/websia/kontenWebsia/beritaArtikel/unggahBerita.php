@@ -136,7 +136,7 @@
                 contentType: false,
                 processData: false,
                 success: function(result) {
-                    return console.log(result)
+
                     if (result == "true") {
                         $('#konfirUnggahBerita').html(`
                             <div class="hidden opacity-0 duration-700 transition-all p-3 rounded-lg flex items-center" style="background-color: #B1FF66;">

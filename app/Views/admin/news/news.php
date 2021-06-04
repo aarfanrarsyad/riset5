@@ -11,85 +11,6 @@
         timer: 3000
     });
 
-    function get_comments(data, all = null) {
-
-        $.ajax({
-            url: "<?= base_url('admin/berita/get-comments') ?>",
-            method: "POST",
-            dataType: "JSON",
-            cache: false,
-            data: {
-                data: data,
-                all: all
-            },
-            success: function(result) {
-                for (let i = 0; i < result.length; i++) {
-                    let comments = $('#comments-content-' + result[i].news_id);
-                    let comm_count = $('#count-comment-' + result[i].news_id);
-
-                    comments.empty();
-                    comm_count.empty();
-                    comments.html(result[i].html);
-                    comm_count.html(result[i].count + ' comments');
-                }
-            }
-        })
-    }
-
-    function show_less_comments(id) {
-        $('#set-length-comments-' + id).html('Lihat semua komentar');
-        $('#set-length-comments-' + id).attr('onclick', 'show_all_comments(' + id + ')');
-
-        get_comments([id])
-    }
-
-    function show_all_comments(id) {
-        $('#set-length-comments-' + id).html('Tampilkan lebih sedikit')
-        $('#set-length-comments-' + id).attr('onclick', 'show_less_comments(' + id + ')')
-
-        get_comments([id], all = true)
-    }
-
-    function push_comment() { //Ini kan reload semua comment dengan limit, mungkin biar engga berat difokuskan saja cuman sebagian berita
-        let news = [];
-
-        $('.comments-content').each(function(i) {
-            news.push($(this).data('news'));
-        })
-
-        get_comments(news)
-    }
-
-    function post_comment(id) {
-        let comment = $('#comments-' + id).val();
-        if (comment.trim().length === 0) return false;
-
-        $.ajax({
-            url: "<?= base_url('admin/berita/post-comment') ?>",
-            method: "POST",
-            dataType: "JSON",
-            cache: false,
-            data: {
-                news_id: id,
-                data: comment,
-            },
-            success: function(result) {
-                if (result === true) {
-                    push_comment();
-                    $('#comments-' + id).val('');
-                } else {
-                    $(document).Toasts('create', {
-                        title: 'Terjadi Kesalahan',
-                        subtitle: 'Error',
-                        autohide: true,
-                        delay: 2000,
-                        body: 'Tidak dapat mengirimkan komentar.'
-                    })
-                }
-            }
-        })
-    }
-
     function delete_news(id) {
         Swal.fire({
             icon: 'question',
@@ -104,43 +25,6 @@
             }
         })
     }
-
-    function delete_comment(id, news_id) {
-        Swal.fire({
-            icon: 'question',
-            text: 'Apakah anda yakin ingin menghapus komentar ini?',
-            showCancelButton: true,
-            confirmButtonColor: '#4248ED',
-            cancelButtonColor: '#33A1C4',
-            confirmButtonText: 'Ya, Hapus!',
-            cancelButtonText: 'Batal',
-        }).then((result) => {
-            if (result.value) {
-                $.ajax({
-                    url: "<?= base_url('admin/berita/delete-comment') ?>",
-                    method: "POST",
-                    dataType: "JSON",
-                    cache: false,
-                    data: {
-                        id: id,
-                    },
-                    success: function(result) {
-                        if (result === true) {
-                            get_comments([news_id])
-                        } else {
-                            $(document).Toasts('create', {
-                                title: 'Terjadi Kesalahan',
-                                subtitle: 'Error',
-                                autohide: true,
-                                delay: 2000,
-                                body: 'Tidak dapat menghapus komentar.'
-                            })
-                        }
-                    }
-                })
-            }
-        })
-    }
 </script>
 
 <div class="content-wrapper pb-5">
@@ -151,9 +35,9 @@
             </div><!-- /.col -->
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right text-sm mr-3">
-                    <li class="breadcrumb-item"><a href="<?= base_url("/") ?>">Home</a></li>
-                    <li class="breadcrumb-item"><a href="<?= base_url("setting-aplikasi/berita/umum") ?>">Berita</a></li>
-                    <li class="breadcrumb-item active"><span class="text-secondary">Umum</span></li>
+                    <li class="breadcrumb-item"><a href="<?= base_url("/admin") ?>">Home</a></li>
+                    <li class="breadcrumb-item"><a href="<?= base_url("admin/berita") ?>">Berita</a></li>
+                    <li class="breadcrumb-item active"><span class="text-secondary">List Berita</span></li>
                 </ol>
             </div><!-- /.col -->
         </div><!-- /.row -->
@@ -202,52 +86,12 @@
                                 <!-- post text -->
                                 <?= $dataset['konten'] ?>
                                 <br>
-                                <a href="javascript:void(0)" onclick="show_all_comments(<?= $dataset['id'] ?>)" class="float-right text-muted" id="count-comment-<?= $dataset['id'] ?>"><?= $dataset['count_comments'] ?> comments</a>
+                                <a href="javascript:void(0)" class="float-right text-muted" id="count-comment-<?= $dataset['id'] ?>"><?= $dataset['count_comments'] ?> comments</a>
                                 <button type="button" class="btn btn-default btn-sm" onclick=" window.location.href = '<?= base_url('/admin/berita/update/' . $dataset['id']) ?>'"><i class="fas fa-pen"></i> Edit</button>
                                 <button type="button" class="btn btn-default btn-sm" onclick="delete_news('<?= $dataset['id'] ?>')"><i class="fas fa-trash"></i> Delete</button>
                             </div>
-                            <div class="card-footer card-comments comments-content" id="comments-content-<?= $dataset['id'] ?>" data-news="<?= $dataset['id'] ?>">
-
-                                <?php $i = 1 ?>
-                                <?php foreach ($dataset['comments'] as $comment) : ?>
-                                    <div class="card-comment <?= $i > 5 ? 'd-none' : '' ?>">
-                                        <img class="img-circle img-sm" src="<?= base_url('users/profile/' . $comment['image']) ?>" alt="User Image">
-                                        <div class="comment-text">
-                                            <span class="username">
-                                                <?= $comment['name'] ?>
-                                                <div class="float-right">
-                                                    <span class="text-muted"><?= $comment['time'] ?></span>
-                                                    <div class="btn-group dropleft ml-2">
-                                                        <a class="text-secondary" href="#" role="button" data-toggle="dropdown" style="font-weight: 100;">
-                                                            <i class="fas fa-ellipsis-v"></i>
-                                                        </a>
-                                                        <div class="dropdown-menu">
-                                                            <a class="dropdown-item" href="javascript:void(0)" onclick="delete_comment(<?= $comment['id'] ?>,<?= $dataset['id'] ?>)" style="font-size: 12px;">Hapus Komentar</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </span>
-                                            <?= $comment['komentar'] ?>
-                                        </div>
-                                    </div>
-                                    <?php $i++ ?>
-                                <?php endforeach; ?>
-                                <?php if ($dataset['count_comments'] > 5) : ?>
-                                    <br>,
-                                    <a href="javascript:void(0)" id="set-length-comments-<?= $dataset['id'] ?>" onclick="show_all_comments(<?= $dataset['id'] ?>)">Lihat semua komentar</a>
-                                <?php endif; ?>
-                            </div>
-
-                            <div class="card-footer">
-                                <img class="img-fluid img-circle img-sm" src="<?= base_url('users/profile/' . userdata()['image']) ?>" alt="Image User">
-                                <div class="img-push row">
-                                    <input type="text" class="form-control form-control-sm col-md-11" placeholder="Press enter to post comment" id="comments-<?= $dataset['id'] ?>">
-                                    <span class="input-group-append col-md-1">
-                                        <button type="button" class="btn btn-sm btn-primary" onclick="post_comment(<?= $dataset['id'] ?>)">Send</button>
-                                    </span>
-                                </div>
-                            </div>
                         </div>
+                        <br>
                     <?php endforeach ?>
                 </div>
             </div>
