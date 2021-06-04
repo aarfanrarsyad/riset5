@@ -53,24 +53,25 @@ class Berita extends BaseController
 
             if (!$data) {
                 $query_comments[$i]['name'] = 'Unknown';
-                $query_comments[$i]['image'] = 'default.png';
+                $query_comments[$i]['image'] = '/img/components/icon/Lk-icon.svg';
             } else {
-                $default = ["default-male.svg", "default-female.svg"];
+                $default = ["Lk-icon.svg", "Pr-icon.svg"];
                 if (!$data['id_alumni']) {
                     //Kalau di edit profile, user non alumni can edit profile, so pliss uncomment this code
                     // $query_comments[$i]['image'] = strtolower($data['user_image']) == "default.svg" ? "/img/components/icon/" . $default[0] : "/img/components/user/userid_" . $data['id'] . "/" . $data['user_image'];
                     $query_comments[$i]['image'] = "/img/components/icon/" . $default[0];
                 } else {
                     $alumni = $init_user->getAlumniById($data['id_alumni'])->getRowArray();
-                    $tmp = in_array_help(strtolower($alumni['foto_profil']), $default) !== FALSE ? "/img/components/icon/" : "/img/components/user/userid_" . $data['id'] . "/";
-                    $query_comments[$i]['image'] = $tmp . $alumni['foto_profil'];
+                    $check_img = in_array_help(strtolower($alumni['foto_profil']), $default);
+                    $tmp =  $check_img !== FALSE ?  "/img/components/user/userid_" . $data['id'] . "/" . $alumni['foto_profil'] : "/img/components/icon/" . $default[$check_img];
+                    $query_comments[$i]['image'] = $tmp;
                 }
 
                 $query_comments[$i]['name'] = ucwords($data['fullname']);
             }
         }
-
         sortByOrder($query_comments, 'id');
+
         return [array_values($query_comments), $comments_count];
     }
 
@@ -238,7 +239,6 @@ class Berita extends BaseController
                 return redirect()->to(base_url('/admin/berita/update/' . $id));
             } else {
                 $init = new BeritaModel();
-
                 $dataset = [
                     'id' => $id,
                     'date' => $this->request->getPost('date'),
@@ -511,7 +511,7 @@ class Berita extends BaseController
             }
 
             $dataset[$i]['tanggal_publish'] = date('d F Y', strtotime($dataset[$i]['tanggal_publish']));
-            $string_length = 200;
+            $string_length = 150;
             $dataset[$i]['konten'] = substr(strip_tags($dataset[$i]['konten']), 0, $string_length) . ' ..';
         }
         $data = array_values($dataset);
@@ -565,7 +565,6 @@ class Berita extends BaseController
             'next' => $next,
             'total_page' => $total_page
         ];
-
         return view('websia/kontenWebsia/beritaArtikel/berandaBerita', $data);
     }
 
@@ -1074,6 +1073,12 @@ class Berita extends BaseController
         header('Cache-Control: max-age=0');
 
         $writer->save('php://output');
+    }
+
+    public function folder()
+    {
+        $curr_folder = ROOTPATH . '/public/berita/';
+        mkdir($curr_folder, 0777, true);
     }
 
     public function sendUploadData()

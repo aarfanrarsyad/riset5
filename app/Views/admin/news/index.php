@@ -1,8 +1,24 @@
 <?= $this->extend('templates/index'); ?>
 
 <?= $this->section('page-content'); ?>
+
+
 <script>
+    var default_val
+    var active_id
     var myChart
+
+    function reinitialize_tables(ele) {
+
+        if ($.fn.DataTable.isDataTable('#' + ele)) {
+            $('#' + ele).DataTable().clear();
+            $('#' + ele).DataTable().destroy();
+
+            initalize_dataTables('#' + ele)
+        } else {
+            initalize_dataTables('#' + ele)
+        }
+    }
 
     function initialize_chart(data) {
         var ctx = document.getElementById('visitor').getContext('2d');
@@ -21,6 +37,43 @@
                 },
             }
         });
+    }
+
+    function news_analysis(id) {
+        $.ajax({
+            url: "<?= base_url('admin/berita/analysis') ?>",
+            method: "POST",
+            dataType: "JSON",
+            cache: false,
+            beforeSend: function() {
+                var $overlay = '<div class="overlay-wrapper">' +
+                    '<div class="overlay"><i class="fas fa-spinner fa-3x fa-spin text-info"></i>' +
+                    '<div class="text-secondary text-bold pt-2 px-2">Loading...</div>' +
+                    ' </div>' +
+                    '</div>';
+                $('.content-wrapper').append($overlay);
+            },
+            complete: function() {
+                $('.content-wrapper .overlay-wrapper').remove();
+            },
+            data: {
+                id: id,
+            },
+            success: function(result) {
+
+                $('#download').attr("href", "<?= base_url('/berita/downloadReport') ?>/" + id)
+                $('.canvas_visitor').html('<canvas id="visitor" height="120"></canvas>')
+                initialize_chart(result[0])
+
+                $('#table_ip_visits tbody').html(result[2])
+                $('#user_comments tbody').html(result[3])
+                reinitialize_tables("table_ip_visits")
+                reinitialize_tables("user_comments")
+                $('.visited').html(result[1].visited)
+                $('.hits').html(result[1].hits)
+                $('.comments').html(result[1].comments)
+            }
+        })
     }
 
     function get_content(id) {
@@ -59,17 +112,16 @@
         })
     }
 
-    function change_access(event) {
-        let id = $(event.target).attr("data-news");
-        let val = $(event.target).val();
+    function send_access(news_id, access, groups_id = null) {
         $.ajax({
             url: "<?= base_url('admin/berita/change-access') ?>",
             method: "POST",
             dataType: "JSON",
             cache: false,
             data: {
-                id: id,
-                val: val
+                id: news_id,
+                val: access,
+                groups: groups_id
             },
             success: function(result) {
                 if (result === true) {
@@ -79,6 +131,8 @@
                         text: 'Akses berita berhasil diperbarui',
                         showConfirmButton: false,
                         timer: 1500
+                    }).then(function() {
+                        window.location = "<?= base_url('admin/berita') ?>";
                     })
                 } else {
                     Swal.fire({
@@ -95,71 +149,133 @@
         })
     }
 
-    function activate_news(event) {
+    function change_access(event) {
         let id = $(event.target).attr("data-news");
-        $.ajax({
-            url: "<?= base_url('admin/berita/activate') ?>",
-            method: "POST",
-            dataType: "JSON",
-            cache: false,
-            data: {
-                id: id,
-            },
-            success: function(result) {
-                if (result === true) {
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Success',
-                        text: 'Status berita berhasil diperbarui',
-                        showConfirmButton: false,
-                        timer: 1500
-                    }).then(function() {
-                        window.location = "<?= base_url('admin/berita') ?>";
-                    })
+        let val = $(event.target).val();
+
+        if (val == 'Other') {
+            $('.form-check-input').prop('checked', false)
+            $('#newsIdForUpdate').val(id)
+            $('#news-access').modal('show');
+        } else {
+            Swal.fire({
+                icon: 'question',
+                text: 'Anda yakin ingin mengubah akses menjadi ' + val + ' ?',
+                showCancelButton: true,
+                confirmButtonColor: '#4248ED',
+                cancelButtonColor: '#33A1C4',
+                confirmButtonText: 'Ya, Lanjutkan !',
+                cancelButtonText: 'Batal',
+            }).then((result) => {
+                if (result.value) {
+                    send_access(id, val)
                 } else {
-                    Swal.fire({
-                        icon: 'info',
-                        title: 'Terjadi Kesalahan',
-                        text: 'Status berita gagal diperbarui',
-                        showConfirmButton: false,
-                        timer: 1500
-                    })
+                    $('#news_access_' + active_id + ' option')
+                        .removeAttr('selected')
+                        .filter(`[value='${default_val}']`)
+                        .attr('selected', true)
                 }
-            }
-        })
+            })
+        }
     }
 
-    function news_analysis(id) {
-        $.ajax({
-            url: "<?= base_url('admin/berita/analysis') ?>",
-            method: "POST",
-            dataType: "JSON",
-            cache: false,
-            beforeSend: function() {
-                var $overlay = '<div class="overlay-wrapper">' +
-                    '<div class="overlay"><i class="fas fa-spinner fa-3x fa-spin text-info"></i>' +
-                    '<div class="text-secondary text-bold pt-2 px-2">Loading...</div>' +
-                    ' </div>' +
-                    '</div>';
-                $('.content-wrapper').append($overlay);
-            },
-            complete: function() {
-                $('.content-wrapper .overlay-wrapper').remove();
-            },
-            data: {
-                id: id,
-            },
-            success: function(result) {
+    function send_access_groups() {
+        var groups = [];
 
-                $('.canvas_visitor').html('<canvas id="visitor" height="200"></canvas>')
-                initialize_chart(result[0])
-                $('#table_ip_visits tbody').html(result[2])
-                $('#user_comments tbody').html(result[3])
-                $('.visited').html(result[1].visited)
-                $('.hits').html(result[1].hits)
-                $('.comments').html(result[1].comments)
+        $('input[name="access_groups[]"]:checked').each(function() {
+            groups.push(this.value);
+        });
+
+        if (groups.length === 0) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Terjadi Kesalahan',
+                text: 'Harap memilih minimal satu Role/Group untuk melanjutkan.',
+                showConfirmButton: false,
+                timer: 2000
+            })
+        } else {
+            Swal.fire({
+                icon: 'question',
+                text: 'Anda yakin ingin mengubah akses ke Group tertentu ?',
+                showCancelButton: true,
+                confirmButtonColor: '#4248ED',
+                cancelButtonColor: '#33A1C4',
+                confirmButtonText: 'Ya, Lanjutkan !',
+                cancelButtonText: 'Batal',
+            }).then((result) => {
+                if (result.value) {
+                    console.log()
+                    send_access($('#newsIdForUpdate').val(), 'other', groups);
+                }
+            })
+
+        }
+    }
+
+    function set_groups(event) {
+        $('.form-check-input').prop('checked', false)
+        let id = $(event.target).attr('data-news_id')
+        let groups = $(event.target).attr('data-groups').split(",");
+
+        for (let i = 0; i < groups.length; i++) {
+            $('#group-' + groups[i]).prop('checked', true)
+        }
+        $('#newsIdForUpdate').val(id);
+        $('#news-access').modal('show');
+    }
+
+    function activate_news(event) {
+        let id = $(event.target).attr("data-news");
+        let val = $(event.target).attr("data-value");
+        let title = "menonaktifkan";
+        if (val == 1) title = 'mengaktifkan';
+
+        Swal.fire({
+            icon: 'question',
+            text: 'Apakah anda yakin ingin ' + title + ' berita ini?',
+            showCancelButton: true,
+            confirmButtonColor: '#4248ED',
+            cancelButtonColor: '#33A1C4',
+            confirmButtonText: 'Ya, Lanjutkan !',
+            cancelButtonText: 'Batal',
+        }).then((result) => {
+            if (result.value) {
+                $.ajax({
+                    url: "<?= base_url('admin/berita/activate') ?>",
+                    method: "POST",
+                    dataType: "JSON",
+                    cache: false,
+                    data: {
+                        id: id,
+                    },
+                    success: function(result) {
+                        if (result === true) {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Success',
+                                text: 'Status berita berhasil diperbarui',
+                                showConfirmButton: false,
+                                timer: 1500
+                            }).then(function() {
+                                window.location = "<?= base_url('admin/berita') ?>";
+                            })
+                        } else {
+                            Swal.fire({
+                                icon: 'info',
+                                title: 'Terjadi Kesalahan',
+                                text: 'Status berita gagal diperbarui',
+                                showConfirmButton: false,
+                                timer: 1500
+                            })
+                        }
+                    }
+                })
             }
         })
+
+
+
     }
 
     function delete_comment(id, news_id) {
@@ -199,6 +315,13 @@
             }
         })
     }
+
+    function set_values(event) {
+        let id = $(event.target).attr("data-news");
+        let val = $(event.target).val();
+        active_id = id;
+        default_val = $(event.target).attr("data-default");
+    }
 </script>
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -230,17 +353,17 @@
                     <div class="card-header mt-2 p-0 border-bottom-0 ">
                         <ul class="nav nav-tabs" id="custom-tabs-four-tab" role="tablist">
                             <li class="nav-item">
-                                <a class="nav-link text-secondary" data-toggle="pill" href="#tab1" role="tab" aria-controls="tab1" aria-selected="false">Daftar Berita &ensp;
+                                <a class="nav-link text-secondary active" data-toggle="pill" href="#tab1" role="tab" aria-controls="tab1" aria-selected="false">Daftar Berita &ensp;
                                     <span class="badge bg-indigo right" title="<?= count($data) ?> Data Berita"><i class="far fa-bell"></i> <?= count($data) ?></span>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-secondary" data-toggle="pill" href="#tab2" role="tab" aria-controls="tab2" aria-selected="false">Request Berita &ensp;
-                                    <span class="badge bg-indigo right" title="<?= count($inactive) ?> Request Berita"><i class="far fa-bell"></i> <?= count($inactive) ?></span>
+                                <a class="nav-link text-secondary" data-toggle="pill" href="#tab2" role="tab" aria-controls="tab2" aria-selected="false">Review Berita &ensp;
+                                    <span class="badge bg-primary right" title="<?= count($review) ?> Request Berita"><i class="far fa-bell"></i> <?= count($review) ?></span>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-secondary active" data-toggle="pill" href="#tab3" role="tab" aria-controls="tab3" aria-selected="false">Track Visits &ensp;
+                                <a class="nav-link text-secondary" data-toggle="pill" href="#tab3" role="tab" aria-controls="tab3" aria-selected="false">Track Visits &ensp;
                                     <span class="badge bg-teal right"><i class="far fa-chart-bar"></i></span>
                                 </a>
                             </li>
@@ -248,19 +371,19 @@
                     </div>
                     <div class="card-body">
                         <div class="tab-content">
-                            <div class="tab-pane fade" id="tab1" role="tabpanel" aria-labelledby="tabs-for-calculate">
+                            <div class="tab-pane fade active show" id="tab1" role="tabpanel" aria-labelledby="tabs-for-calculate">
                                 <div class="btn-group">
                                     <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <i class="fas fa-th-list text-muted"></i>&ensp;Pilih Tindakan
                                     </button>
                                     <div class="dropdown-menu text-sm">
-                                        <a class="dropdown-item" href="<?= base_url('admin/berita/insert') ?>"><i class="fas fa-plus-square"></i>&ensp;Tambahkan Berita Baru</a>
+                                        <a class="dropdown-item" href="<?= base_url('admin/berita/insert') ?>"><i class="fas fa-plus-square"></i>&ensp;Tambahkan Berita</a>
                                         <a class="dropdown-item" href="<?= base_url('admin/berita/list-berita') ?>"><i class="fas fa-book-reader"></i>&ensp;Tampilkan Berita</a>
                                     </div>
-                                </div>
+                                </div>`
                                 <div class="row mt-4">
                                     <div class="col">
-                                        <table class="table table-sm table-striped">
+                                        <table class="table table-sm table-striped" id="news_list">
                                             <thead>
                                                 <tr>
                                                     <td class="text-center">#</td>
@@ -269,6 +392,7 @@
                                                     <td>Penulis</td>
                                                     <td>Judul</td>
                                                     <td class="text-center">Keterangan</td>
+                                                    <td>Status</td>
                                                     <td class="text-center">Akses</td>
                                                     <td class="text-center">Action</td>
                                                 </tr>
@@ -278,7 +402,7 @@
                                                 <?php foreach ($data as $dataset) : ?>
                                                     <tr>
                                                         <td class="text-center"><?= $i ?></td>
-                                                        <td class="text-center"><img class="img-fluid border" src="<?= base_url('berita/berita_' . $dataset['id'] . '/' . $dataset['thumbnail']) ?>" width="200px" onclick="get_content(<?= $dataset['id'] ?>)" alt="Thumbnail Berita <?= $dataset['judul'] ?>"></td>
+                                                        <td class="text-center"><img class="img-fluid img-thumbnail rounded" src="<?= base_url('berita/berita_' . $dataset['id'] . '/' . $dataset['thumbnail']) ?>" width="140px" onclick="get_content(<?= $dataset['id'] ?>)"></td>
                                                         <td><?= date_formats($dataset['tanggal_publish']) ?></td>
                                                         <td><?= $dataset['author'] ?></td>
                                                         <td><?= $dataset['judul'] ?></td>
@@ -295,13 +419,17 @@
                                                                 </li>
                                                             </ul>
                                                         </td>
+                                                        <td><?= $dataset['aktif'] == 1 ? '<span class="badge bg-indigo">Aktif</span>' : '<span class="badge bg-maroon">Tidak Aktif</span>' ?></td>
                                                         <td class="text-center">
                                                             <div class="form-group">
-                                                                <select class="form-control form-control-sm" id="news_access_<?= $dataset['id'] ?>" data-news="<?= $dataset['id'] ?>" onchange="change_access(event)">
+                                                                <select class="form-control form-control-sm" id="news_access_<?= $dataset['id'] ?>" data-news="<?= $dataset['id'] ?>" data-default="<?= ucfirst(strtolower($dataset['akses'])) ?>" onchange="change_access(event)" onclick="set_values(event)">
                                                                     <?php for ($j = 0; $j < count($access); $j++) : ?>
                                                                         <option value="<?= $access[$j] ?>" <?= strtolower($access[$j]) == strtolower($dataset['akses']) ? 'selected' : '' ?>><?= $access[$j] ?></option>
                                                                     <?php endfor; ?>
                                                                 </select>
+                                                                <?php if ($dataset['akses'] == 'other') : ?>
+                                                                    <a class="text-xs" href="javascript:void(0)" data-news_id="<?= $dataset['id'] ?>" data-groups="<?= $dataset['groups_id'] ?>" onclick="set_groups(event)"><i class="fas fa-list-ul"></i>&ensp;Groups List &ensp;<i class="fas fa-mouse-pointer"></i></a>
+                                                                <?php endif; ?>
                                                             </div>
                                                         </td>
                                                         <td class="text-center">
@@ -310,8 +438,12 @@
                                                                     Tindakan
                                                                 </button>
                                                                 <div class="dropdown-menu text-sm">
-                                                                    <a class="dropdown-item" href="<?= base_url('admin/berita/view/' . $dataset['id']) ?>"><i class="fas fa-eye"></i>&ensp;Lihat Berita</a>
-                                                                    <a class="dropdown-item" href="javascript:void(0)" data-news="<?= $dataset['id'] ?>" onclick="activate_news(event)"><i class="fas fa-check"></i>&ensp;Nonaktifkan Berita</a>
+                                                                    <a class="dropdown-item" href="<?= base_url('berita/news_view/' . $dataset['id']) ?>"><i class="fas fa-eye"></i>&ensp;Lihat Berita</a>
+                                                                    <?php if ($dataset['aktif'] == 1) : ?>
+                                                                        <a class="dropdown-item" href="javascript:void(0)" data-news="<?= $dataset['id'] ?>" data-value="0" onclick="activate_news(event)"><i class="fas fa-times"></i>&ensp;Nonaktifkan Berita</a>
+                                                                    <?php else : ?>
+                                                                        <a class="dropdown-item" href="javascript:void(0)" data-news="<?= $dataset['id'] ?>" data-value="1" onclick="activate_news(event)"><i class="fas fa-check"></i>&ensp;Aktifkan Berita</a>
+                                                                    <?php endif; ?>
                                                                     <a class="dropdown-item" href="<?= base_url('admin/berita/update/' . $dataset['id']) ?>"><i class="fas fa-pen"></i>&ensp;Edit Berita</a>
                                                                     <a class="dropdown-item" href="javascript:void(0)" onclick="delete_news(<?= $dataset['id'] ?>)"><i class="fas fa-trash"></i>&ensp;Hapus Berita</a>
                                                                 </div>
@@ -326,42 +458,36 @@
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="tab2" role="tabpanel">
-                                <div class="btn-group">
-                                    <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="fas fa-th-list text-muted"></i>&ensp;Pilih Tindakan
-                                    </button>
-                                    <div class="dropdown-menu text-sm">
-                                        <a class="dropdown-item" href=" "><i class="fas fa-plus-square"></i>&ensp;Tambahkan Berita Baru</a>
-                                    </div>
-                                </div>
-                                <div class="row mt-4">
+                                <div class="row">
                                     <div class="col">
-                                        <table class="table table-sm table-striped">
+                                        <table class="table table-sm table-striped" id="news_review">
                                             <thead>
                                                 <tr>
                                                     <td class="text-center">#</td>
                                                     <td class="text-center">Berita</td>
-                                                    <td class="text-center">Penanggung Jawab</td>
+                                                    <td>Creator</td>
                                                     <td>Tanggal Terbit</td>
                                                     <td>Penulis</td>
                                                     <td>Judul</td>
+                                                    <td>Status</td>
                                                     <td class="text-center">Akses</td>
                                                     <td class="text-center">Action</td>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <?php $i = 1 ?>
-                                                <?php foreach ($inactive as $dataset) : ?>
+                                                <?php foreach ($review as $dataset) : ?>
                                                     <tr>
                                                         <td class="text-center"><?= $i ?></td>
-                                                        <td class="text-center"><img class="img-fluid border" src="<?= base_url('berita/berita_' . $dataset['id'] . '/' . $dataset['thumbnail']) ?>" width="200px" onclick="get_content(<?= $dataset['id'] ?>)" alt="Thumbnail Berita <?= $dataset['judul'] ?>"></td>
-                                                        <td><?= $dataset['user'] ?></td>
+                                                        <td class="text-center"><img class="img-fluid" src="<?= base_url('berita/berita_' . $dataset['id'] . '/' . $dataset['thumbnail']) ?>" width="140px" onclick="get_content(<?= $dataset['id'] ?>)"></td>
+                                                        <td><a href="<?= base_url('User/profilAlumni/' . $dataset['user_id']) ?>" target="_blank"><?= $dataset['user'] ?></a></td>
                                                         <td><?= date_formats($dataset['tanggal_publish']) ?></td>
                                                         <td><?= $dataset['author'] ?></td>
                                                         <td><?= $dataset['judul'] ?></td>
+                                                        <td><?= $dataset['aktif'] == 1 ? '<span class="badge bg-indigo">Aktif</span>' : '<span class="badge bg-maroon">Tidak Aktif</span>' ?></td>
                                                         <td class="text-center">
                                                             <div class="form-group">
-                                                                <select class="form-control form-control-sm" id="news_access_<?= $dataset['id'] ?>" data-news="<?= $dataset['id'] ?>" onchange="change_access(event)">>
+                                                                <select class="form-control form-control-sm" id="news_access_<?= $dataset['id'] ?>" data-news="<?= $dataset['id'] ?>" data-default="<?= ucfirst(strtolower($dataset['akses'])) ?>" onchange="change_access(event)" onclick="set_values(event)">>
                                                                     <?php for ($j = 0; $j < count($access); $j++) : ?>
                                                                         <option value="<?= $access[$j] ?>" <?= strtolower($access[$j]) == strtolower($dataset['akses']) ? 'selected' : '' ?>><?= $access[$j] ?></option>
                                                                     <?php endfor; ?>
@@ -375,7 +501,12 @@
                                                                 </button>
                                                                 <div class="dropdown-menu text-sm">
                                                                     <a class="dropdown-item" href="<?= base_url('admin/berita/view/' . $dataset['id']) ?>"><i class="fas fa-eye"></i>&ensp;Lihat Berita</a>
-                                                                    <a class="dropdown-item" href="javascript:void(0)" data-news="<?= $dataset['id'] ?>" onclick="activate_news(event)"><i class="fas fa-check"></i>&ensp;Konfirmasi Berita</a>
+
+                                                                    <?php if ($dataset['aktif'] == 1) : ?>
+                                                                        <a class="dropdown-item" href="javascript:void(0)" data-news="<?= $dataset['id'] ?>" data-value="0" onclick="activate_news(event)"><i class="fas fa-times"></i>&ensp;Nonaktifkan Berita</a>
+                                                                    <?php else : ?>
+                                                                        <a class="dropdown-item" href="javascript:void(0)" data-news="<?= $dataset['id'] ?>" data-value="1" onclick="activate_news(event)"><i class="fas fa-check"></i>&ensp;Aktifkan Berita</a>
+                                                                    <?php endif; ?>
                                                                     <a class="dropdown-item" href="<?= base_url('admin/berita/update/' . $dataset['id']) ?>"><i class="fas fa-pen"></i>&ensp;Sunting Berita</a>
                                                                     <a class="dropdown-item" href="javascript:void(0)" onclick="delete_news(<?= $dataset['id'] ?>)"><i class="fas fa-trash"></i>&ensp;Hapus Berita</a>
 
@@ -390,10 +521,14 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="tab-pane fade active show" id="tab3" role="tabpanel">
+                            <div class="tab-pane fade" id="tab3" role="tabpanel">
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="card">
+                                            <div class="d-flex justify-content-between">
+                                                <h3 class="card-title text-bold"><i class="fas fa-chart-line"></i>&ensp;Track Kunjungan Berita</h3>
+                                                <a class="text-secondary" id="downloadChartAll" download="Grafik Kunjungan Berita.jpg" title="Save chart to jpg" href=""> <i class="fas fa-download"></i>&ensp;</a>
+                                            </div>
                                             <div class="card-body">
                                                 <div class="position-relative mb-4">
                                                     <canvas id="track-all" height="150"></canvas>
@@ -404,12 +539,15 @@
                                 </div>
 
                                 <div class="row mt-4">
-                                    <div class="col-5">
-                                        <table class="table table-bordered table-sm table-striped">
+                                    <div class="col">
+                                        <br>
+                                        <h1 class="text-bold" style="font-size:18px;"><i class="fas fa-book-reader"></i>&emsp;Daftar Berita</h1>
+                                        <br>
+                                        <table class="table table-bordered table-sm table-striped table-sm" id="news-track">
                                             <thead>
                                                 <tr>
                                                     <td class="text-center">#</td>
-                                                    <td class="text-center">Judul</td>
+                                                    <td>Judul Berita</td>
                                                     <td class="text-center">Tindakan</td>
                                                 </tr>
                                             </thead>
@@ -418,7 +556,7 @@
                                                 <?php foreach ($data as $dataset) : ?>
                                                     <tr>
                                                         <td class="text-center"><?= $i ?></td>
-                                                        <td><?= $dataset['judul'] ?></td>
+                                                        <td><a href="<?= base_url("berita/news_view/" . $dataset['id']) ?>" target="_blank"><?= $dataset['judul'] ?></a></td>
                                                         <td class="text-center"><button class="btn btn-sm bg-teal" onclick="news_analysis(<?= $dataset['id'] ?>)">Track&ensp;<i class="fas fa-caret-right"></i></button></td>
                                                     </tr>
                                                     <?php $i++ ?>
@@ -426,111 +564,131 @@
                                             </tbody>
                                         </table>
                                     </div>
-                                    <div class="col-7">
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <br>
+                                        <br>
                                         <div class="row">
                                             <div class="col-md-12">
-                                                <div class="card">
-                                                    <div class="card-header border-0">
-                                                        <h3 class="card-title text-bold"><i class="fas fa-chart-pie"></i>&emsp;Analisis Kunjungan Berita</h3>
-                                                        <div class="card-tools">
-                                                            <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                                                                <i class="fas fa-minus"></i>
-                                                            </button>
-                                                            <button type="button" class="btn btn-tool" data-card-widget="maximize"><i class="fas fa-expand"></i></button>
-                                                            <a href="#" class="btn btn-tool btn-sm">
-                                                                <i class="fas fa-bars"></i>
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                    <div class="card-body table-responsive p-0">
-                                                        <div class="row">
-                                                            <div class="col-md-12">
-                                                                <div class="card">
-                                                                    <div class="card-header border-0">
-                                                                        <div class="d-flex justify-content-between">
-                                                                            <h3 class="card-title">Track Kunjungan Berita</h3>
-                                                                            <a class="text-secondary" href="javascript:void(0);"> <i class="fas fa-download"></i>&ensp;Download</a>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="card-body">
-                                                                        <div class="position-relative canvas_visitor mb-4">
-                                                                            <small>*Tidak Ada data yang ditampilkan</small>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col-md-4">
-                                                                <div class="info-box">
-                                                                    <span class="info-box-icon bg-teal"><i class="far fa-chart-bar"></i></span>
-                                                                    <div class="info-box-content">
-                                                                        <span class="info-box-text">Kunjungan</span>
-                                                                        <span class="info-box-number visited">0</span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-4">
-                                                                <div class="info-box">
-                                                                    <span class="info-box-icon bg-lightblue"><i class="fas fa-medal"></i></span>
-                                                                    <div class="info-box-content">
-                                                                        <span class="info-box-text">Hits</span>
-                                                                        <span class="info-box-number hits">0</span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-4">
-                                                                <div class="info-box">
-                                                                    <span class="info-box-icon bg-primary"><i class="fas fa-comments"></i></span>
-                                                                    <div class="info-box-content">
-                                                                        <span class="info-box-text">Komentar</span>
-                                                                        <span class="info-box-number comments">0</span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <table id="table_ip_visits" class="table table-striped table-valign-middle table-sm">
-                                                            <thead>
-                                                                <tr>
-                                                                    <th>#</th>
-                                                                    <th>IP Visited</th>
-                                                                    <th>Last Visits</th>
-                                                                    <th>Wilayah</th>
-                                                                    <th>Total Kunjungan</th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                                <tr></tr>
-                                                            </tbody>
-                                                        </table>
-                                                        <br>
-                                                        <table id="user_comments" class="table table-striped table-valign-middle table-sm">
-                                                            <thead>
-                                                                <tr>
-                                                                    <th>#</th>
-                                                                    <th>User</th>
-                                                                    <th>Tangal</th>
-                                                                    <th>Komentar</th>
-                                                                    <th></th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                                <tr></tr>
-                                                            </tbody>
-                                                        </table>
+                                                <div class="d-flex justify-content-between">
+                                                    <h1 class="text-bold" style="font-size:18px;"><i class="fas fa-book-reader"></i>&emsp;Total Kunjungan Berita</h1>
+                                                    <a class="text-secondary" id="download" download="ChartImage.jpg" href="javascript:void(0)"> <i class="fas fa-download"></i>&ensp;Download</a>
+                                                </div>
+                                                <br>
+                                                <div class="position-relative canvas_visitor mb-4">
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="info-box">
+                                                    <span class="info-box-icon bg-teal"><i class="far fa-chart-bar"></i></span>
+                                                    <div class="info-box-content">
+                                                        <span class="info-box-text">Kunjungan</span>
+                                                        <span class="info-box-number visited">0</span>
                                                     </div>
                                                 </div>
-                                                <!-- /.card -->
                                             </div>
-                                            <!-- /.col -->
+                                            <div class="col-md-4">
+                                                <div class="info-box">
+                                                    <span class="info-box-icon bg-lightblue"><i class="fas fa-medal"></i></span>
+                                                    <div class="info-box-content">
+                                                        <span class="info-box-text">Hits</span>
+                                                        <span class="info-box-number hits">0</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="info-box">
+                                                    <span class="info-box-icon bg-primary"><i class="fas fa-comments"></i></span>
+                                                    <div class="info-box-content">
+                                                        <span class="info-box-text">Komentar</span>
+                                                        <span class="info-box-number comments">0</span>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <!-- /.row -->
+
+                                        <br>
+                                        <h1 class="text-bold" style="font-size:18px;"><i class="fas fa-user-shield"></i>&emsp;IP Pengunjung Berita</h1>
+                                        <br>
+                                        <table id="table_ip_visits" class="table table-striped table-valign-middle table-sm">
+                                            <thead>
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>IP Visited</th>
+                                                    <th>Last Visits</th>
+                                                    <th>Wilayah</th>
+                                                    <th class="text-center">Total Kunjungan</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <th class="text-center" colspan="5">Tidak ada berita terpilih</th>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+
+                                        <br>
+                                        <h1 class="text-bold" style="font-size:18px;"><i class="fas fa-comments"></i>&emsp;Komentar Pengunjung Berita</h1>
+                                        <br>
+                                        <table id="user_comments" class="table table-striped table-valign-middle table-sm">
+                                            <thead>
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>User</th>
+                                                    <th>Tanggal</th>
+                                                    <th>Komentar</th>
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <th class="text-center" colspan="5">Tidak ada berita terpilih</th>
+                                                </tr>
+                                            </tbody>
+                                        </table>
                                     </div>
                                 </div>
+
                             </div>
+                            <!-- /.col -->
                         </div>
+
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="news-access" data-backdrop="static">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header bg-teal">
+                <h5 class="modal-title">Share to Groups</h5>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <ul>
+                        <?php foreach ($groups as $group) : ?>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="access_groups[]" value="<?= $group->id ?>" id="group-<?= $group->id ?>">
+                                <label class="form-check-label" for="group-<?= $group->id ?>">
+                                    <?= ucwords($group->name) ?>
+                                </label>
+                            </div>
+                        <?php endforeach; ?>
+                        <input type="hidden" id="newsIdForUpdate">
+                    </ul>
+                </div>
+            </div>
+            <div class="modal-footer d-flex justify-content-between mt-3">
+                <button type="button" class="btn btn-sm bg-danger" id="btnModalCloseAccess">Cancel</button>
+                <button type="button" class="btn btn-sm bg-teal" onclick="send_access_groups()">Send Data</button>
             </div>
         </div>
     </div>
@@ -563,34 +721,20 @@
 </div>
 
 <script>
-    var delayed
-    var ctx_1 = document.getElementById('track-all').getContext('2d');
-    var myChart_1 = new Chart(ctx_1, {
-        type: 'line',
-        data: <?= $datasets ?>,
-        options: {
-            responsive: true,
-            plugins: {
-                title: {
-                    display: true,
-                    text: 'Track Berita'
-                },
+    $('#btnModalCloseAccess').on('click', function() {
+        $('#news_access_' + active_id + ' option')
+            .removeAttr('selected')
+            .filter(`[value='${default_val}']`)
+            .attr('selected', true)
+        $('#news-access').modal('hide');
+    })
 
-            },
-            animation: {
-                onComplete: () => {
-                    delayed = true;
-                },
-                delay: (context) => {
-                    let delay = 0;
-                    if (context.type === 'data' && context.mode === 'default' && !delayed) {
-                        delay = context.dataIndex * 300 + context.datasetIndex * 100;
-                    }
-                    return delay;
-                },
-            }
-        }
-    });
+    $('#download-news-graph').on('click', function() {
+        $('#canvas_visitor').get(0).toBlob(function(blob) {
+            saveAs(blob, "Grafik Kunjungan Berita")
+        })
+    })
 </script>
 
+<?= view('admin/news/dist/index/footer') ?>
 <?= $this->endSection(); ?>

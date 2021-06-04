@@ -105,7 +105,7 @@ class Validation
 	public $update_news = [
 		'date'     => 'required',
 		'header'   => 'required',
-		'access' => 'required|in_list[public,private,other]',
+		'access' => 'required|in_list[public,private,review,other]',
 		'author' => 'required',
 	];
 
