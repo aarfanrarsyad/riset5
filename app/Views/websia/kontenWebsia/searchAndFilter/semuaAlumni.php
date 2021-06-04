@@ -86,8 +86,8 @@
 <script type="text/javascript">
     var limit = 10;
     var start = <?= count($alumni) ?>;
-    var action = 'inactive';
-    let x,data,s;
+    var action = false;
+    let x,data;
     let string = `<!-- Awal Card Alumni --><a href="/User/profilAlumni/{nim}"><div class="mx-2"><div class="flex gap-x-4"><div class="flex items-center"><img src="/img/{foto_profil}" class="lg:w-18 w-12 mx-auto" alt=""></div><div class="flex items-center"><div><!-- Awal Nama Alumni --><h2 class="md:text-lg font-heading text-primary font-semibold">{nama}</h2><!-- Akhir Nama Alumni --><!-- Awal Atribut Alumni --><div class="md:text-sm text-xs font-paragraph text-primary">Angkatan {akt}</div><!-- Akhir Atribut Alumni --></div></div></div></div></a><!-- Akhir Card Alumni --><hr class="my-4 border-gray-400">`;
 
     function search(tipe = 'alumni',limit,start) {
@@ -105,6 +105,7 @@
                     start:start
                 }
             }
+            console.log(data)
 
             $.ajax({
                 url: "#",
@@ -113,7 +114,7 @@
                 dataType:'JSON',
                 cache:false,
                 success: (data) => {
-                        // console.log(data.alumni)
+                        console.log(data)
                     $('#jumlahAlumni').html(data.jumlah)
                     $('#lisAlumni').find('hr.border-2').remove()
                     if (Boolean(data.alumni.length)) {
@@ -123,10 +124,10 @@
                         $('#lisAlumni').append("<hr class='-my-4 border-2 border-gray-400'>")
                         if(data.alumni.length == 10)
                             $('#load_data_message').html("Memuat data....");
-                        action = "inactive";
+                        action = false;
                     } else {
                         $('#load_data_message').html("");
-                        action = 'active';
+                        action = true;
                     }
                     if(data.ret == 0)
                         $('#lisAlumni').append(`<div class=" ml-2 flex-grow min-h-screen "><img src="/img/pencarianKosong.png" class="w-96 mx-auto" alt=""><div class="text-primary text-center font-bold md:text-xl -mt-8 mx-auto">Hasil Pencarian Tidak Ditemukan</div><hr class="border-b-2 border-t-0 w-32 border-gray-400 mx-auto"></div>`)
@@ -153,15 +154,15 @@
         search('alumni',limit, start)
     })    
 
-    if(action == 'inactive'){
-        action = 'active';
+    if(!action){
+        action = true;
         search('alumni',limit, start);
     }
 
     $(window).scroll(function(){
-        if($(window).scrollTop() + $(window).height() > $("#lisAlumni").height() && action == 'inactive'){
-            action = 'active';
-            start = start + limit;
+        if($(window).scrollTop() + $(window).height() > $("#lisAlumni").height() && !action){
+            action = true;
+            start += limit;
             setTimeout(function(){
                 search('alumni',limit, start);
             }, 1000);

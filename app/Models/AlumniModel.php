@@ -47,10 +47,20 @@ class AlumniModel extends Model
         return $this->db->query($query);
     }
 
-    public function getAlumniFilter($cari='', $filter='')
+    public function getAlumniFilter($cari='', $pro=[], $akt='', $kerja='',$limit=5,$start=0)
     {
-        $query = $this->table('alumni')->groupStart()
-            ->like('nama',$cari)->orLike('alumni.id_alumni',$cari)
+        //query utama
+        $query = $this->table('alumni')->select('alumni.id_alumni,nama,foto_profil,nim,angkatan,program_studi')
+            ->orderBy('alumni.id_alumni')->groupBy('alumni.id_alumni')->limit($limit)
+            ->join('pendidikan', 'alumni.id_alumni = pendidikan.id_alumni','inner')
+            ->join('pendidikan_tinggi', 'pendidikan_tinggi.id_pendidikan = pendidikan.id_pendidikan','inner');
+        
+        if ($start>0) {
+            $query->offset(intval($start));
+        }
+
+        if($cari != ''){
+            $query->groupStart()->like('nama',$cari)
             ->orLike('tempat_lahir',$cari)->orLike('tanggal_lahir',$cari)
             ->orLike('telp_alumni',$cari)->orLike('email',$cari)
             ->orLike('alamat_alumni',$cari)->orLike('perkiraan_pensiun',$cari)
@@ -58,28 +68,85 @@ class AlumniModel extends Model
             ->orLike('fb',$cari)->orLike('twitter',$cari)
             ->orLike('nip',$cari)->orLike('nip_bps',$cari)
             ->groupEnd();
+        }
 
-        if ($filter != '') {
+        // logic pecarian prodi
+        $listProdi = [
+            'DI' => ['Ak. Ilmu Statistik'],
+            'DIII' => ['D-III AIS','D-III STIS', 'DIII-AIS'],
+            'KS' => ['D-IV Komputasi Statistik','Komputasi Statistik'],
+            'ST' => ['Statistik Sosial Kependudukan', 'D-IV Statistik Sosial Kependudukan', 'D-IV Statistik Ekonomi', 'D-IV SK', 'Statistik Ekonomi', 'D-IV SE']
+        ];
+        $prodi = ['in'=>[],'notIn'=>[]];
+        foreach (array_keys($listProdi) as $p) {
+            if(in_array($p, $pro)){
+                foreach ($listProdi[$p] as $di) {
+                    array_push($prodi['in'], $di);
+                }
+                array_push($prodi['in'], $p);
+            } else {
+                foreach ($listProdi[$p] as $di) {
+                    array_push($prodi['notIn'], $di);
+                }
+                array_push($prodi['notIn'], $p);                        
+            }
+        }
+        if(count($prodi['in'])>0) $query->whereIn('program_studi', $prodi['in']);
+        // if(count($prodi['notIn'])>0) $query->whereNotIn('program_studi', $prodi['notIn']);
+
+        // logic pecarian angkatan
+        if ($akt != '') {
+            $reg = '1234567890-,';
+            $parse = '';
+            $max_angkatan = $this->getMaxAngkatan();
+
+            foreach (str_split($akt) as $key) {
+                if (in_array($key, str_split($reg))) $parse .= $key;
+            }
+            $parse = ($parse=='') ? '1-'.$max_angkatan : $parse ;
+
             $query->groupStart();
-            // $query->havingIn('alumni.id_alumni',$angkatan);
-            foreach ($filter as $f) {
-                // $query->orGroupStart()->where(["angkatan >="=>$akt[0],"angkatan <="=>$akt[1]])->groupEnd();
-                $query->orWhere('alumni.id_alumni',$f);
-            };
+            foreach (explode(',', $parse) as $key) {
+                $range = explode('-', $key);
+                $range[0] = (intval($range[0]) >= 1) ? intval($range[0]) :  1;
+                if (isset($range[1]) && $range[0] > intval(end($range))) {
+                    $range[1] = (end($range) <= $max_angkatan) ? end($range) :  $max_angkatan;
+                    $range[1] = intval($range[0]) + intval($range[1]);
+                    $range[0] = intval($range[1]) - intval($range[0]);
+                    $range[1] = intval($range[1]) - intval($range[0]);
+                } elseif (!isset($range[1])) {
+                    $range[1] = intval($range[0]);
+                };
+                $query->orWhere("angkatan BETWEEN $range[0] AND $range[1]");
+            }
+            // dd($parse);
             $query->groupEnd();
         }
+    
+        // logic pecarian tempat kerja
+        if ($kerja!=='') {
+            $query->select('nama_instansi,alamat_instansi')
+            ->join('alumni_tempat_kerja', 'alumni.id_alumni = alumni_tempat_kerja.id_alumni','inner')
+            ->join('tempat_kerja', 'alumni_tempat_kerja.id_tempat_kerja = tempat_kerja.id_tempat_kerja','inner')
+            ->groupStart()->like('nama_instansi',$kerja)
+            ->orLike('alamat_instansi',$kerja)->groupEnd();
+        }
         
-        return $query;
+        return [
+            'compiled' => $query->getCompiledSelect(false),
+            'jumlahAlumni' => $query->countAllResults(false),
+            'alumni' => $query->get()->getResultArray()
+        ];
     }
 
     public function getMaxAngkatan()
     {
-        return $this->table('alumni')->selectMax('angkatan')->get()->getResult();
+        return $this->db->table('pendidikan')->selectMax('angkatan')->get()->getRow()->angkatan;
     }
 
     public function getMinAngkatan()
     {
-        return $this->table('alumni')->selectMin('angkatan')->get()->getResult();
+        return $this->db->table('pendidikan')->selectMin('angkatan')->get()->getRow()->angkatan;
     }
 
     public function getRole($user_id)

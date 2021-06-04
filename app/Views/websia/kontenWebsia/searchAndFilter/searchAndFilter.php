@@ -26,7 +26,7 @@
                 <!-- Catatan : jika hasil tidak ada, bisa isi id="hasilPencarian" dengan coding yang ada pada searchKosong.php  -->
 
                 <!-- HASIL PENCARIAN ALUMNI -->
-                <div class="md:ml-12 mx-3 mb-6" id="cariAlumni">
+                <div class="md:ml-60 mx-3 mb-6" id="cariAlumni">
                     <div>
                         <h1 class="text-secondary font-heading text-2xl font-bold">ALUMNI</h1>
 
@@ -45,7 +45,7 @@
                                     <div class="mx-2">
                                         <div class="flex gap-x-4">
                                             <div class="flex items-center">
-                                                <img src="/img/components/<?= $row['foto_profil'] ?>" class="lg:w-18 w-12 mx-auto" alt="<?= $row['nama'] ?>">
+                                                <img src="/img/<?= $row['foto_profil'] ?>" class="lg:w-18 w-12 mx-auto" alt="<?= $row['nama'] ?>">
                                             </div>
                                             <div class="flex items-center">
                                                 <div>
@@ -103,7 +103,7 @@
                                 <!-- Awal Card Berita  -->
                                 <a href="">
                                     <div class="flex px-2 md:flex-row flex-col md:gap-x-4 gap-x-0 items-center">
-                                        <img src="/img/sampel.jpeg" alt="" class="md:w-48 w-full gambarBerita ">
+                                        <img src="/img/components/sampel.jpeg" alt="" class="md:w-48 w-full gambarBerita ">
                                         <div class="flex-grow">
                                             <div class="flex flex-col">
 
@@ -177,22 +177,23 @@
                 url: "#",
                 type:'POST',
                 data: data,
-                dataType:'JSON',
-                success: (data) => {
+                dataType:'json',
+                success: (ret) => {
                     $('#lisAlumni').empty()
-                    $('#jumlahAlumni').html(data.jumlah)
-                    if (data.ret) {
-                        $.each(data.alumni, (i, item) => {
-                            // console.log(item)
+                    $('#jumlahAlumni').html(ret.jumlah)
+                    if (ret.ret) {
+                        $.each(ret.alumni, (i, item) => {
+                            console.log(item)
                             $('#lisAlumni').append(string.replace('{nim}', item.nim).replace('{nama}', item.nama).replace('{foto_profil}', item.foto_profil).replace('{akt}', item.angkatan))
                         })
                         $('#lisAlumni').append("<hr class='-my-4 border-2 border-gray-400'>")
                     } else {
-                        $('#lisAlumni').append(`<div class=" ml-2 flex-grow min-h-screen "><img src="/img/pencarianKosong.png" class="w-96 mx-auto" alt=""><div class="text-primary text-center font-bold md:text-xl -mt-8 mx-auto">Hasil Pencarian Tidak Ditemukan</div><hr class="border-b-2 border-t-0 w-32 border-gray-400 mx-auto"></div>`)
+                        $('#lisAlumni').append(`<div class=" ml-2 flex-grow min-h-screen "><img src="/img/components/pencarianKosong.png" class="w-96 mx-auto" alt=""><div class="text-primary text-center font-bold md:text-xl -mt-8 mx-auto">Hasil Pencarian Tidak Ditemukan</div><hr class="border-b-2 border-t-0 w-32 border-gray-400 mx-auto"></div>`)
                     }
-                    s = 'cari='+ $("input[name=cari]").val() +'&'+data.search.prodi.map((val)=>{return 'prodi[]='+val}).join('&')
-                    s += '&akt='+ data.search.akt + '&kerja=' + data.search.kerja
-                    b = 'cari='+ $("input[name=cari]").val()+'&akt='+ data.search.akt + '&kerja=' + data.search.kerja
+                    console.log(ret)
+                    s = 'cari='+ $("input[name=cari]").val() +'&'+ret.search.prodi.map((val)=>{return 'prodi[]='+val}).join('&')
+                    s += '&akt='+ ret.search.akt + '&kerja=' + ret.search.kerja
+                    b = 'cari='+ $("input[name=cari]").val()+'&akt='+ ret.search.akt + '&kerja=' + ret.search.kerja
                     $('#semuaAlumni').get(0).href = '<?= base_url('User/searchAndFilter?t=alumni'); ?>&' + s
                     $('#semuaBerita').get(0).href = '<?= base_url('User/searchAndFilter?t=berita'); ?>&' + b
                 }
