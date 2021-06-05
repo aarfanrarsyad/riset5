@@ -64,7 +64,7 @@
                         <td><?= $row->program_studi ?></td>
                         <td><?= $row->tahun_masuk ?></td>
                         <td><?= $row->tahun_lulus ?></td>
-                        <td><?= $row->judul_tulisan ?></td>
+                        <td class="py-1.5"><?= $row->judul_tulisan ?></td>
                     </tr>
                 <?php $n = $n + 1;
                 endforeach; ?>
