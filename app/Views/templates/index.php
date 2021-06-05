@@ -28,6 +28,7 @@
     <!-- Tailwind -->
     <link rel="stylesheet" href="/css/tailwind.css">
     <link rel="stylesheet" href="/css/navbar.css">
+    <link rel="shortcut icon" type="image/png" href="/img/components/logo/logo_sia.png" />
 
 
     <!-- jQuery -->

@@ -18,6 +18,8 @@
     <script type="text/javascript" src="/js/leaflet.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="/css/add_style.css">
+    <link rel="shortcut icon" type="image/png" href="/img/components/logo/logo_sia.png" />
+
 
     <!-- link utk manggil font nya  -->
     <link rel="preconnect" href="https://fonts.gstatic.com">

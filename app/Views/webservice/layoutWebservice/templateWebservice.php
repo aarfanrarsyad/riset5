@@ -10,6 +10,8 @@
     <link rel="stylesheet" href="/css/add_style.css">
     <script type="text/javascript" src="/js/jquery.js"></script>
     <title>Web Service | SIA</title>
+    <link rel="shortcut icon" type="image/png" href="/img/components/logo/logo_sia.png" />
+
 
     <!-- link utk manggil font nya  -->
     <link rel="preconnect" href="https://fonts.gstatic.com">

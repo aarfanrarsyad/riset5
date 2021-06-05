@@ -12,6 +12,8 @@
     <link rel="stylesheet" href="/css/scrollbar.css">
     <script type="text/javascript" src="/js/jquery.js"></script>
     <title><?php echo $judulHalaman ?></title>
+    <link rel="shortcut icon" type="image/png" href="/img/components/logo/logo_sia.png" />
+
 
     <!-- link utk manggil font nya  -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
