@@ -254,8 +254,8 @@ if ($status == 'bukan user') {
             <?php endforeach; ?>
         </div>
         <div class="visible sm:invisible">
-            <a class="bg-secondary mb-2 md:mb-6 mr-2 mt-3 md:mt-0 float-right font-paragraph text-sm text-white text-center py-1 px-4 mx-auto rounded-full cursor-pointer hover:bg-secondaryhover transition-colors duration-300" href="/User/rekomendasi">
-                Lihat Semua Rekomendasi
+            <a class="bg-secondary mb-8 -mt-14 mr-2 md:mt-0 float-right font-paragraph text-sm text-white text-center py-1 px-4 mx-auto rounded-full cursor-pointer hover:bg-secondaryhover transition-colors duration-300" href="/User/rekomendasi">
+                Lihat Semua
                 <img src="/img/components/icon/panah_kanan.png" alt="lihat semua rekomendasi" class="float-right pl-2">
             </a>
         </div>
@@ -437,13 +437,13 @@ if ($status == 'bukan user') {
     <div class="font-heading">
         <!-- link ini mengarah ke halaman tampilan semua galeri -->
         <div class="invisible sm:visible">
-            <a class="bg-secondary md:mb-8 mt-1 md:mt-0 md:float-right font-paragraph text-sm text-white text-center md:py-1 md:px-4 mx-auto rounded-full cursor-pointer hover:bg-secondaryhover transition-colors duration-100" href="/User/galeriFoto">
+            <a class="bg-secondary mb-8 mt-1 mr-2 md:mt-0 float-right font-paragraph text-sm text-white text-center py-1 px-4 mx-auto rounded-full cursor-pointer hover:bg-secondaryhover transition-colors duration-100" href="/User/galeriFoto">
                 Lihat Semua Foto
                 <img src="/img/components/icon/panah_kanan.png" alt="icon panah kanan" class="float-right pl-2">
             </a>
         </div>
     </div>
-    <h3 class="font-heading ml-2 font-bold text-xl text-center md:text-left text-secondary md:inline-block">Foto Tentang <?= $usernya ?></h3>
+    <h3 class="font-heading ml-2 font-bold text-xl text-center md:text-left text-secondary inline-block">Foto Tentang <?= $usernya ?></h3>
 
     <div class="md:shadow-lg lg:shadow-xl rounded-2xl px-3 py-3 md:px-7 md:py-5 lg:mx-14 lg:py-8 lg:px-11 md:mt-3">
         <?php for ($x = 0; $x < 6; $x++) : ?>
@@ -529,7 +529,7 @@ if ($status == 'bukan user') {
             </tr> -->
         <?php else : ?>
             <div class="holder mx-auto w-11/12 md:w-full lg:w-11/12 grid grid-cols-2 md:grid-cols-3 gap-x-4 md:gap-x-0 lg:gap-x-8">
-                <?php for ($i = 0; $i < 6; $i++) :
+                <?php for ($i = 0; $i < 12; $i++) :
                     if (isset($foto[$i])) : ?>
                         <!-- 1 gambar -->
                         <a onclick="clicked(<?= $i ?>)" href="#<?= $foto[$i]['id_foto']; ?>" id="foto<?= $foto[$i]['id_foto']; ?>">
@@ -629,11 +629,31 @@ if ($status == 'bukan user') {
                 endfor; ?>
             </div>
         <?php endif; ?>
-
+        <!-- Awal Navigasi -->
+        <div class="flex justify-center md:justify-end items-center mx-8 p-2 text-secondary font-paragraph">
+            <a href="" class="p-1 rounded-full w-7 transform hover:scale-110">
+                <img src="/img/components/icon/left-on.png" alt="">
+            </a>
+            <a href="" class="p-1 hover:text-primary">
+                1
+            </a>
+            <a href="" class="p-1 hover:text-primary">
+                2
+            </a>
+            <a href="" class="p-1 hover:text-primary">
+                ..
+            </a>
+            <a href="" class="p-1 hover:text-primary">
+                45
+            </a>
+            <a href="" class="p-1 rounded-full w-7 transform hover:scale-110">
+                <img src="/img/components/icon/right-on.png" alt=""></a>
+        </div>
+        <!-- Akhir Navigasi -->
 
     </div>
     <div class="visible sm:invisible">
-        <a class="bg-secondary mr-2 mt-4 mb-3 float-right font-paragraph text-sm text-white text-center py-1 px-4 mx-auto rounded-full cursor-pointer hover:bg-secondaryhover transition-colors duration-300" href="/User/galeriFoto">
+        <a class="bg-secondary mb-8 -mt-28 mr-2 sm:mt-0 float-right font-paragraph text-sm text-white text-center py-1 px-4 mx-auto rounded-full cursor-pointer hover:bg-secondaryhover transition-colors duration-300" href="/User/rekomendasi">
             Lihat Semua
             <img src="/img/components/icon/panah_kanan.png" alt="lihat semua foto" class="float-right pl-2">
         </a>
