@@ -4,7 +4,7 @@ Hal ini berpengaruh pada ada tidaknya tampilan tombol edit profil di halaman pro
 <?php
 if ($status == 'bukan user') {
     $tombolEdit = 'hidden';
-    $usernya = "Alumni ini"; 
+    $usernya = "Alumni ini";
 
     // berfungsi, tapi butuh tempat tersendiri biar bisa di hidden, sekarang masih gabung sama tempat lahir
     if ($alumni->cttl == 1) {
@@ -28,7 +28,7 @@ if ($status == 'bukan user') {
         $cprestasi = "0";
     }
 } else if ($status == 'user') {
-    $usernya = "Anda"; 
+    $usernya = "Anda";
     $tombolEdit = '';
     $cttl = "";
     $cemail = "";
@@ -265,7 +265,7 @@ if ($status == 'bukan user') {
 
 <!-- Atribut pada section ini belum ditentukan -->
 <!-- Awal Informasi Instansi -->
-<div class="w-full my-6 lg:my-8 lg:px-20 md:px-8 px-2">
+<div class="w-full my-6 lg:my-2 lg:px-20 md:px-8 px-2">
     <h3 class="font-heading font-bold text-xl text-center md:text-left text-secondary">Informasi Instansi</h3>
     <div class="md:shadow-lg lg:shadow-xl rounded-2xl px-3 py-3 md:px-7 md:py-5 lg:mx-14 lg:py-8 lg:px-11 md:mt-3">
         <div class="font-heading">
@@ -324,9 +324,9 @@ if ($status == 'bukan user') {
 
 <?php if ($cprestasi == 1) { ?>
     <!-- Awal Riwayat Prestasi -->
-    <div class="w-full my-2 lg:my-6 lg:px-20 md:px-8 px-2">
+    <div class="w-full my-6 lg:my-2 lg:px-20 md:px-8 px-2">
         <h3 class="font-heading font-bold text-xl text-secondary text-center md:text-left ">Riwayat Prestasi</h3>
-        <div class="md:shadow-lg lg:shadow-xl rounded-2xl px-0 py-1 md:px-5 md:py-5 lg:mx-14 lg:p-8 mb-1 md:mt-3">
+        <div class="md:shadow-lg lg:shadow-xl rounded-2xl px-0 py-1 md:px-5 lg:mx-14 lg:p-8 mb-1">
             <?php if ($prestasi == NULL) {
                 echo "<p class='text-center'>Riwayat Prestasi tidak ditemukan.</p>";
             } else { ?>
@@ -346,7 +346,7 @@ if ($status == 'bukan user') {
 
 <?php if ($cpendidikan == 1) { ?>
     <!-- Awal Riwayat Pendidikan -->
-    <div class="w-full my-6 lg:my-8 lg:px-20 md:px-8 px-2 mb-6 md:mb-12">
+    <div class="w-full my-6 lg:my-2 lg:px-20 md:px-8 px-2">
         <h3 class="font-heading font-bold text-xl text-secondary text-center md:text-left ">Riwayat Pendidikan</h3>
         <div class="lg:px-16">
             <div class="md:shadow-lg lg:shadow-xl rounded-3xl w-full mx-auto mt-5">
@@ -433,7 +433,7 @@ if ($status == 'bukan user') {
 <?php } ?>
 
 <!-- Awal Foto Tentang Anda -->
-<div class="w-full my-2 lg:my-8 lg:px-20 md:px-8 px-2">
+<div class="w-full my-6 lg:my-2 lg:px-20 md:px-8 px-2">
     <div class="font-heading">
         <!-- link ini mengarah ke halaman tampilan semua galeri -->
         <div class="invisible sm:visible">
