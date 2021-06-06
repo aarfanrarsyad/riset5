@@ -74,7 +74,7 @@
                             <a id="semuaAlumni" href="<?= base_url('User/searchAndFilter?t=alumni'); ?>">
                                 <div class="flex bg-secondary text-white rounded-full md:py-2 py-1 md:px-3 px-2 items-center gap-x-2 cursor-pointer md:text-sm text-xs">
                                     Selengkapnya
-                                    <img src="/img/right-off.png" class="md:w-4 md:h-4 w-3 h-3 my-auto" alt="">
+                                    <img src="/img/components/icon/right-off.png" class="md:w-4 md:h-4 w-3 h-3 my-auto" alt="">
                                 </div>
                             </a>
                         </div>
@@ -139,7 +139,7 @@
                             <a id="semuaBerita" href="<?= base_url('User/searchAndFilter?page=berita'); ?>">
                                 <div class="flex bg-secondary text-white rounded-full md:py-2 py-1 md:px-3 px-2 items-center gap-x-2 cursor-pointer md:text-sm text-xs">
                                     Selengkapnya
-                                    <img src="/img/right-off.png" class="md:w-4 md:h-4 w-3 h-3" alt="">
+                                    <img src="/img/components/icon/right-off.png" class="md:w-4 md:h-4 w-3 h-3" alt="">
                                 </div>
                             </a>
                         </div>
