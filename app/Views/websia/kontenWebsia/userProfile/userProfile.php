@@ -553,7 +553,7 @@ if ($status == 'bukan user') {
             </tr> -->
         <?php else : ?>
             <div class="holder mx-auto w-11/12 md:w-full lg:w-11/12 grid grid-cols-2 md:grid-cols-3 gap-x-4 md:gap-x-0 lg:gap-x-8">
-                <?php for ($i = 0; $i < 12; $i++) :
+                <?php for ($i = 0; $i < 6; $i++) :
                     if (isset($foto[$i])) : ?>
                         <!-- 1 gambar -->
                         <a onclick="clicked(<?= $i ?>)" href="#<?= $foto[$i]['id_foto']; ?>" id="foto<?= $foto[$i]['id_foto']; ?>">
@@ -654,7 +654,7 @@ if ($status == 'bukan user') {
             </div>
         <?php endif; ?>
         <!-- Awal Navigasi -->
-        <div class="flex justify-center md:justify-end items-center mx-8 p-2 text-secondary font-paragraph">
+        <!-- <div class="flex justify-center md:justify-end items-center mx-8 p-2 text-secondary font-paragraph">
             <a href="" class="p-1 rounded-full w-7 transform hover:scale-110">
                 <img src="/img/components/icon/left-on.png" alt="">
             </a>
@@ -672,7 +672,7 @@ if ($status == 'bukan user') {
             </a>
             <a href="" class="p-1 rounded-full w-7 transform hover:scale-110">
                 <img src="/img/components/icon/right-on.png" alt=""></a>
-        </div>
+        </div> -->
         <!-- Akhir Navigasi -->
 
     </div>
