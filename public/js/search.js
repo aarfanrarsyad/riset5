@@ -1,6 +1,6 @@
 // awal sidebar
 
-$('.hamburgerSidebar').click(function(){
+$('.boxFilter').click(function(){
     $('.param1').toggleClass('hidden');
     $('.param2').toggleClass('hidden');
     $('.sidebarSearch').toggleClass('w-10/12 md:w-auto');
