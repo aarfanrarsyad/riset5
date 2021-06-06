@@ -18,18 +18,18 @@ class Webservice extends BaseController
 
 	public function index()
 	{
-		if(session()->has('role')){
-		$role=array_search('4',session('role'), true);
-		} else $role=false;
-		if ($role==false){
-			$login=0;
+		if (session()->has('role')) {
+			$role = array_search('4', session('role'), true);
+		} else $role = false;
+		if ($role == false) {
+			$login = 0;
 		} else {
-			$login=1;
+			$login = 1;
 		};
 
 		$data = [
 			'login' => 'sudah',
-			'statusLog'=>$login,
+			'statusLog' => $login,
 			'judul' => 'Web Service | SIA',
 		];
 
@@ -38,17 +38,17 @@ class Webservice extends BaseController
 
 	public function dokumentasi()
 	{
-		if(session()->has('role')){
-			$role=array_search('4',session('role'), true);
-			} else $role=false;
-		if ($role==false){
-			$login=0;
+		if (session()->has('role')) {
+			$role = array_search('4', session('role'), true);
+		} else $role = false;
+		if ($role == false) {
+			$login = 0;
 		} else {
-			$login=1;
+			$login = 1;
 		};
 		$data = [
 			'login' => 'sudah',
-			'statusLog'=>$login,
+			'statusLog' => $login,
 			'judul' => 'Dokumentasi Web Service | SIA'
 		];
 		return view('webservice/kontenWebservice/dokumentasi/dokumentasi.php', $data);
@@ -56,21 +56,21 @@ class Webservice extends BaseController
 
 	public function proyek()
 	{
-		if(session()->has('role')){
-			$role=array_search('4',session('role'), true);
-			} else $role=false;
-		if ($role==false){
-			$login=0;
+		if (session()->has('role')) {
+			$role = array_search('4', session('role'), true);
+		} else $role = false;
+		if ($role == false) {
+			$login = 0;
 			echo '<script>window.location.replace("' . base_url('login') . '");</script>';
 		} else {
-			$login=1;
+			$login = 1;
 		};
 		//user id dapat dari session
 		$uid = session('id_user');
 
 		$data = [
 			'login' => 'sudah',
-			'statusLog'=> $login,
+			'statusLog' => $login,
 			'judul' => 'Proyek Web Service | SIA',
 			'client_app' => $this->model->getApp($uid)->getResultArray(),
 		];
@@ -79,17 +79,17 @@ class Webservice extends BaseController
 
 	public function buatProyek()
 	{
-		if(session()->has('role')){
-			$role=array_search('4',session('role'), true);
-			} else $role=false;
-		if ($role==false){
-			$login=0;
+		if (session()->has('role')) {
+			$role = array_search('4', session('role'), true);
+		} else $role = false;
+		if ($role == false) {
+			$login = 0;
 			echo '<script>window.location.replace("' . base_url('login') . '");</script>';
 		} else {
-			$login=1;
+			$login = 1;
 		};
 		$data['login'] = 'sudah';
-		$data['statusLog']= $login;
+		$data['statusLog'] = $login;
 		$data['judul'] = 'Proyek Web Service | SIA';
 		$data['scope_app'] = $this->model->getScope()->getResultArray();
 		return view('webservice/kontenWebservice/proyek/buatProyek.php', $data);
@@ -97,10 +97,10 @@ class Webservice extends BaseController
 
 	public function insertProyek()
 	{
-		if(session()->has('role')){
-			$role=array_search('4',session('role'), true);
-			} else $role=false;
-		if ($role==false){
+		if (session()->has('role')) {
+			$role = array_search('4', session('role'), true);
+		} else $role = false;
+		if ($role == false) {
 			echo '<script>window.location.replace("' . base_url('login') . '");</script>';
 		}
 
@@ -151,25 +151,25 @@ class Webservice extends BaseController
 	// }
 	public function editAkun()
 	{
-		if(session()->has('role')){
-			$role=array_search('4',session('role'), true);
-			} else $role=false;
-		if ($role==false){
-			$login=0;
+		if (session()->has('role')) {
+			$role = array_search('4', session('role'), true);
+		} else $role = false;
+		if ($role == false) {
+			$login = 0;
 			echo '<script>window.location.replace("' . base_url('login') . '");</script>';
 		} else {
-			$login=1;
+			$login = 1;
 		};
 		$data = [
 			'login' => 'sudah',
-			'statusLog'=>$login,
+			'statusLog' => $login,
 		];
 
 		$data['judul'] = 'Edit Profil | SIA';
 		$data['active'] = 'akunDev';
 		$dt = new AuthModel();
 
-		if($dt->getUserById(session('id_user'))['password_hash']==NULL){
+		if ($dt->getUserById(session('id_user'))['password_hash'] == NULL) {
 			return redirect()->to(base_url('User/editprofil'));
 		} else return view('webservice/kontenWebservice/profilDeveloper/editAkunWS.php', $data);
 	}

@@ -12,35 +12,34 @@ class Alumni extends Seeder
 
 		$data = [
 			[
-				"nama" => "Admin Yami",
+				"nama" => "Dummy_dummy",
 				"jenis_kelamin" => "Lk",
-				"tempat_lahir" => "Tuban",
+				"tempat_lahir" => "Sungai Penuh",
 				"tanggal_lahir" => "1997-01-25",
-				"telp_alumni" => "",
-				"alamat_alumni" => "Pokoknya ngikutin jalan aja",
-				"email"	=> "adminyami@gmail.com",
-				"kota" => "",
-				"provinsi" => "",
-				"negara" => "",
-				"status_bekerja" => "1",
+				"telp_alumni" => "081299594151",
+				"alamat_alumni" => "Jr. Abdul Rahmat No. 755, Tangerang 47637, SulUt",
+				"kota" => "Kabupaten Tuban",
+				"provinsi" => "Jawa Timur",
+				"negara" => "Indonesia",
+				"status_bekerja" => "0",
 				"perkiraan_pensiun" => "1978",
 				"jabatan_terakhir" => "amet",
 				"aktif_pns" => "0",
-				"deskripsi" => "",
-				"ig" => "",
+				"deskripsi" => "Maiores ut quasi beatae vel quisquam. Quo aut iusto et nobis et blanditiis non. Animi in architecto et iusto occaecati mollitia vel.",
+				"ig" => "dummy_igza__",
 				"fb" => "",
-				"twitter" => "",
+				"twitter" => "Dummy__",
 				"linkedin" => "",
 				"gscholar" => "",
 				"nip" => "198109262004122002",
 				"nip_bps" => "301820912",
 				"foto_profil" => "components/icon/Lk-icon.svg",
-				"cttl" => "1",
-				"calamat" => "1",
-				"cpendidikan" => "1",
-				"cprestasi" => "1",
-				],
-				[
+				"cttl" => "0",
+				"calamat" => "0",
+				"cpendidikan" => "0",
+				"cprestasi" => "0",
+			],
+			[
 				"nama" => "Kartika Lismawati",
 				"jenis_kelamin" => "Pr",
 				"tempat_lahir" => "Palembang",
@@ -62,13 +61,13 @@ class Alumni extends Seeder
 				"gscholar" => "",
 				"nip" => "196411191987022003",
 				"nip_bps" => "340011691",
-				"foto_profil" => "components/icon/Pr-icon.svg",
+				"foto_profil" => "components/icon/PR-icon.svg",
 				"cttl" => "0",
 				"calamat" => "0",
 				"cpendidikan" => "0",
 				"cprestasi" => "0",
-				],
-				[
+			],
+			[
 				"nama" => "Budi Cahyono",
 				"jenis_kelamin" => "Lk",
 				"tempat_lahir" => "Bojonegoro",
@@ -95,8 +94,8 @@ class Alumni extends Seeder
 				"calamat" => "1",
 				"cpendidikan" => "1",
 				"cprestasi" => "0",
-				],
-				[
+			],
+			[
 				"nama" => "Indra Susilo",
 				"jenis_kelamin" => "Lk",
 				"tempat_lahir" => "Jakarta Pusat",
@@ -123,8 +122,8 @@ class Alumni extends Seeder
 				"calamat" => "1",
 				"cpendidikan" => "0",
 				"cprestasi" => "0",
-				],
-				[
+			],
+			[
 				"nama" => "Erisman",
 				"jenis_kelamin" => "Lk",
 				"tempat_lahir" => "Jakarta Timur",
@@ -151,8 +150,8 @@ class Alumni extends Seeder
 				"calamat" => "1",
 				"cpendidikan" => "0",
 				"cprestasi" => "0",
-				],
-				[
+			],
+			[
 				"nama" => "Ono Margiono",
 				"jenis_kelamin" => "LK",
 				"tempat_lahir" => "Jakarta Timur",
@@ -174,13 +173,13 @@ class Alumni extends Seeder
 				"gscholar" => "",
 				"nip" => "196605131988021001",
 				"nip_bps" => "340011828",
-				"foto_profil" => "components/icon/LK-icon.svg",
+				"foto_profil" => "components/icon/Lk-icon.svg",
 				"cttl" => "0",
 				"calamat" => "0",
 				"cpendidikan" => "0",
 				"cprestasi" => "0",
-				],
-				[
+			],
+			[
 				"nama" => "Sofan",
 				"jenis_kelamin" => "LK",
 				"tempat_lahir" => "Kebumen",
@@ -202,13 +201,13 @@ class Alumni extends Seeder
 				"gscholar" => "",
 				"nip" => "196410211988021001",
 				"nip_bps" => "340011829",
-				"foto_profil" => "components/icon/LK-icon.svg",
+				"foto_profil" => "components/icon/Lk-icon.svg",
 				"cttl" => "0",
 				"calamat" => "0",
 				"cpendidikan" => "0",
 				"cprestasi" => "0",
-				],
-				[
+			],
+			[
 				"nama" => "Efliza",
 				"jenis_kelamin" => "PR",
 				"tempat_lahir" => "Medan",
@@ -235,8 +234,8 @@ class Alumni extends Seeder
 				"calamat" => "0",
 				"cpendidikan" => "0",
 				"cprestasi" => "0",
-				],
-				[
+			],
+			[
 				"nama" => "Oldestia Vianny",
 				"jenis_kelamin" => "Pr",
 				"tempat_lahir" => "Payakumbuh",
@@ -258,13 +257,13 @@ class Alumni extends Seeder
 				"gscholar" => "",
 				"nip" => "197906111999122001",
 				"nip_bps" => "340015996",
-				"foto_profil" => "components/icon/Pr-icon.svg",
+				"foto_profil" => "components/icon/PR-icon.svg",
 				"cttl" => "0",
 				"calamat" => "0",
 				"cpendidikan" => "0",
 				"cprestasi" => "0",
-				],
-				[
+			],
+			[
 				"nama" => "Oemar Syarief Wibisono",
 				"jenis_kelamin" => "Lk",
 				"tempat_lahir" => "Jakarta",
@@ -291,8 +290,8 @@ class Alumni extends Seeder
 				"calamat" => "0",
 				"cpendidikan" => "0",
 				"cprestasi" => "0",
-				],
-				[
+			],
+			[
 				"nama" => "Odry Syafwil",
 				"jenis_kelamin" => "Lk",
 				"tempat_lahir" => "Jakarta",
@@ -319,8 +318,8 @@ class Alumni extends Seeder
 				"calamat" => "0",
 				"cpendidikan" => "0",
 				"cprestasi" => "0",
-				],
-				[
+			],
+			[
 				"nama" => "Pradini Ajeng Gemellia",
 				"jenis_kelamin" => "Pr",
 				"tempat_lahir" => "Bandung",
@@ -342,13 +341,13 @@ class Alumni extends Seeder
 				"gscholar" => "",
 				"nip" => "198910132012112001",
 				"nip_bps" => "340055881",
-				"foto_profil" => "components/icon/Pr-icon.svg",
+				"foto_profil" => "components/icon/PR-icon.svg",
 				"cttl" => "0",
 				"calamat" => "0",
 				"cpendidikan" => "0",
 				"cprestasi" => "0",
-				],
-				[
+			],
+			[
 				"nama" => "Lisiana Imana Yesani",
 				"jenis_kelamin" => "PR",
 				"tempat_lahir" => "Jakarta Pusat",
@@ -375,8 +374,8 @@ class Alumni extends Seeder
 				"calamat" => "0",
 				"cpendidikan" => "0",
 				"cprestasi" => "0",
-				],
-				[
+			],
+			[
 				"nama" => "Sana Damarhita",
 				"jenis_kelamin" => "PR",
 				"tempat_lahir" => "Jakarta Selatan",
@@ -403,8 +402,8 @@ class Alumni extends Seeder
 				"calamat" => "0",
 				"cpendidikan" => "0",
 				"cprestasi" => "0",
-				],
-				[
+			],
+			[
 				"nama" => "Krisdiana Galih",
 				"jenis_kelamin" => "LK",
 				"tempat_lahir" => "Bandung",
@@ -426,13 +425,13 @@ class Alumni extends Seeder
 				"gscholar" => "",
 				"nip" => "199012302014101001",
 				"nip_bps" => "340056726",
-				"foto_profil" => "components/icon/LK-icon.svg",
+				"foto_profil" => "components/icon/Lk-icon.svg",
 				"cttl" => "0",
 				"calamat" => "0",
 				"cpendidikan" => "0",
 				"cprestasi" => "0",
-				],
-				[
+			],
+			[
 				"nama" => "La Ode Ahmad Arafat",
 				"jenis_kelamin" => "LK",
 				"tempat_lahir" => "Ambon",
@@ -454,13 +453,13 @@ class Alumni extends Seeder
 				"gscholar" => "",
 				"nip" => "340056728",
 				"nip_bps" => "199109162014101002",
-				"foto_profil" => "components/icon/LK-icon.svg",
+				"foto_profil" => "components/icon/Lk-icon.svg",
 				"cttl" => "0",
 				"calamat" => "0",
 				"cpendidikan" => "0",
 				"cprestasi" => "0",
-				],
-				[
+			],
+			[
 				"nama" => "Aan Sujanah",
 				"jenis_kelamin" => "Pr",
 				"tempat_lahir" => "Jakarta Timur",
@@ -482,13 +481,13 @@ class Alumni extends Seeder
 				"gscholar" => "",
 				"nip" => "196210021986012001",
 				"nip_bps" => "340011224",
-				"foto_profil" => "components/icon/Pr-icon.svg",
+				"foto_profil" => "components/icon/PR-icon.svg",
 				"cttl" => "0",
 				"calamat" => "0",
 				"cpendidikan" => "0",
 				"cprestasi" => "0",
-				],
-				[
+			],
+			[
 				"nama" => "Risma Pijayantini",
 				"jenis_kelamin" => "Pr",
 				"tempat_lahir" => "Palembang",
@@ -510,13 +509,13 @@ class Alumni extends Seeder
 				"gscholar" => "",
 				"nip" => "196306091986012001",
 				"nip_bps" => "340011225",
-				"foto_profil" => "components/icon/Pr-icon.svg",
+				"foto_profil" => "components/icon/PR-icon.svg",
 				"cttl" => "0",
 				"calamat" => "0",
 				"cpendidikan" => "0",
 				"cprestasi" => "0",
-				],
-				[
+			],
+			[
 				"nama" => "Ade Rika Agus",
 				"jenis_kelamin" => "Pr",
 				"tempat_lahir" => "Bogor",
@@ -527,7 +526,7 @@ class Alumni extends Seeder
 				"provinsi" => "",
 				"negara" => "Indonesia",
 				"status_bekerja" => "0",
-				"perkiraan_pensiun" => "0000",
+				"perkiraan_pensiun" => "",
 				"jabatan_terakhir" => "Staf Seksi Neraca Produksi",
 				"aktif_pns" => "0",
 				"deskripsi" => "",
@@ -538,13 +537,13 @@ class Alumni extends Seeder
 				"gscholar" => "",
 				"nip" => "196310141986012001",
 				"nip_bps" => "340011226",
-				"foto_profil" => "components/icon/Pr-icon.svg",
+				"foto_profil" => "components/icon/PR-icon.svg",
 				"cttl" => "0",
 				"calamat" => "0",
 				"cpendidikan" => "0",
 				"cprestasi" => "0",
-				],
-				[
+			],
+			[
 				"nama" => "Haryoto Sutomo",
 				"jenis_kelamin" => "Lk",
 				"tempat_lahir" => "Jakarta Selatan",
@@ -571,8 +570,8 @@ class Alumni extends Seeder
 				"calamat" => "0",
 				"cpendidikan" => "0",
 				"cprestasi" => "0",
-				],
-				[
+			],
+			[
 				"nama" => "I Ketut Mertayasa",
 				"jenis_kelamin" => "Lk",
 				"tempat_lahir" => "Padangbae",
@@ -599,8 +598,8 @@ class Alumni extends Seeder
 				"calamat" => "0",
 				"cpendidikan" => "0",
 				"cprestasi" => "0",
-				],
-				[
+			],
+			[
 				"nama" => "Ni Putu Beliana Puspita Sari",
 				"jenis_kelamin" => "Pr",
 				"tempat_lahir" => "Tabanan",
@@ -622,13 +621,13 @@ class Alumni extends Seeder
 				"gscholar" => "",
 				"nip" => "199611292019012002",
 				"nip_bps" => "340058885",
-				"foto_profil" => "components/icon/Pr-icon.svg",
+				"foto_profil" => "components/icon/PR-icon.svg",
 				"cttl" => "0",
 				"calamat" => "0",
 				"cpendidikan" => "0",
 				"cprestasi" => "0",
-				],
-				[
+			],
+			[
 				"nama" => "Putu Yogi Wigunanca",
 				"jenis_kelamin" => "Lk",
 				"tempat_lahir" => "Tabanan",
@@ -655,8 +654,8 @@ class Alumni extends Seeder
 				"calamat" => "0",
 				"cpendidikan" => "0",
 				"cprestasi" => "0",
-				],
-				[
+			],
+			[
 				"nama" => "Ni Putu Ayu Mila Dewi",
 				"jenis_kelamin" => "Pr",
 				"tempat_lahir" => "Karangasem",
@@ -678,13 +677,13 @@ class Alumni extends Seeder
 				"gscholar" => "",
 				"nip" => "199212282014122001",
 				"nip_bps" => "340057159",
-				"foto_profil" => "components/icon/Pr-icon.svg",
+				"foto_profil" => "components/icon/PR-icon.svg",
 				"cttl" => "0",
 				"calamat" => "0",
 				"cpendidikan" => "0",
 				"cprestasi" => "0",
-				],
-				[
+			],
+			[
 				"nama" => "Ratna Rosmayanti",
 				"jenis_kelamin" => "Pr",
 				"tempat_lahir" => "Cianjur",
@@ -706,13 +705,13 @@ class Alumni extends Seeder
 				"gscholar" => "",
 				"nip" => "197210111992032001",
 				"nip_bps" => "340013242",
-				"foto_profil" => "components/icon/Pr-icon.svg",
+				"foto_profil" => "components/icon/PR-icon.svg",
 				"cttl" => "0",
 				"calamat" => "0",
 				"cpendidikan" => "0",
 				"cprestasi" => "0",
-				],
-				[
+			],
+			[
 				"nama" => "Aris Muji Atmoko",
 				"jenis_kelamin" => "Lk",
 				"tempat_lahir" => "Karawang",
@@ -739,8 +738,8 @@ class Alumni extends Seeder
 				"calamat" => "0",
 				"cpendidikan" => "0",
 				"cprestasi" => "0",
-				],
-				[
+			],
+			[
 				"nama" => "Efran Feri Kriswanto",
 				"jenis_kelamin" => "Lk",
 				"tempat_lahir" => "Palembang",
@@ -767,8 +766,8 @@ class Alumni extends Seeder
 				"calamat" => "0",
 				"cpendidikan" => "0",
 				"cprestasi" => "0",
-				],
-				[
+			],
+			[
 				"nama" => "Husin Maulana",
 				"jenis_kelamin" => "LK",
 				"tempat_lahir" => "Jakarta Selatan",
@@ -790,13 +789,13 @@ class Alumni extends Seeder
 				"gscholar" => "",
 				"nip" => "197504231996121001",
 				"nip_bps" => "340015382",
-				"foto_profil" => "components/icon/LK-icon.svg",
+				"foto_profil" => "components/icon/Lk-icon.svg",
 				"cttl" => "0",
 				"calamat" => "0",
 				"cpendidikan" => "0",
 				"cprestasi" => "0",
-				],
-				[
+			],
+			[
 				"nama" => "Toto E Sastrasuanda",
 				"jenis_kelamin" => "LK",
 				"tempat_lahir" => "Cirebon",
@@ -818,13 +817,13 @@ class Alumni extends Seeder
 				"gscholar" => "",
 				"nip" => "",
 				"nip_bps" => "340003304",
-				"foto_profil" => "components/icon/LK-icon.svg",
+				"foto_profil" => "components/icon/Lk-icon.svg",
 				"cttl" => "0",
 				"calamat" => "0",
 				"cpendidikan" => "0",
 				"cprestasi" => "0",
-				],
-				[
+			],
+			[
 				"nama" => "Anik Triani",
 				"jenis_kelamin" => "PR",
 				"tempat_lahir" => "Semarang",
@@ -851,8 +850,8 @@ class Alumni extends Seeder
 				"calamat" => "0",
 				"cpendidikan" => "0",
 				"cprestasi" => "0",
-				],
-				[
+			],
+			[
 				"nama" => "Maya Harsanti",
 				"jenis_kelamin" => "PR",
 				"tempat_lahir" => "Jakarta",
@@ -879,8 +878,8 @@ class Alumni extends Seeder
 				"calamat" => "0",
 				"cpendidikan" => "0",
 				"cprestasi" => "0",
-				],
-				[
+			],
+			[
 				"nama" => "Lestari Utaminingsih",
 				"jenis_kelamin" => "PR",
 				"tempat_lahir" => "Kendal",
@@ -907,8 +906,8 @@ class Alumni extends Seeder
 				"calamat" => "0",
 				"cpendidikan" => "0",
 				"cprestasi" => "0",
-				],
-				[
+			],
+			[
 				"nama" => "Hengki Eko Riyadi",
 				"jenis_kelamin" => "LK",
 				"tempat_lahir" => "Lubang Lor (Purworejo)",
@@ -930,13 +929,13 @@ class Alumni extends Seeder
 				"gscholar" => "",
 				"nip" => "197809032000121002",
 				"nip_bps" => "340016113",
-				"foto_profil" => "components/icon/LK-icon.svg",
+				"foto_profil" => "components/icon/Lk-icon.svg",
 				"cttl" => "0",
 				"calamat" => "0",
 				"cpendidikan" => "0",
 				"cprestasi" => "0",
-				],
-				[
+			],
+			[
 				"nama" => "Eddy Prayitno",
 				"jenis_kelamin" => "LK",
 				"tempat_lahir" => "Bandar Lampung",
@@ -958,13 +957,13 @@ class Alumni extends Seeder
 				"gscholar" => "",
 				"nip" => "197701151999011001",
 				"nip_bps" => "340015736",
-				"foto_profil" => "components/icon/LK-icon.svg",
+				"foto_profil" => "components/icon/Lk-icon.svg",
 				"cttl" => "0",
 				"calamat" => "0",
 				"cpendidikan" => "0",
 				"cprestasi" => "0",
-				],
-				[
+			],
+			[
 				"nama" => "Edison Manurung",
 				"jenis_kelamin" => "LK",
 				"tempat_lahir" => "Tapanuli Utara",
@@ -986,13 +985,13 @@ class Alumni extends Seeder
 				"gscholar" => "",
 				"nip" => "196211101988021001",
 				"nip_bps" => "340011827",
-				"foto_profil" => "components/icon/LK-icon.svg",
+				"foto_profil" => "components/icon/Lk-icon.svg",
 				"cttl" => "0",
 				"calamat" => "0",
 				"cpendidikan" => "0",
 				"cprestasi" => "0",
-				],
-				[
+			],
+			[
 				"nama" => "Bambang Susilo",
 				"jenis_kelamin" => "Lk",
 				"tempat_lahir" => "Blora",
@@ -1019,8 +1018,8 @@ class Alumni extends Seeder
 				"calamat" => "0",
 				"cpendidikan" => "0",
 				"cprestasi" => "0",
-				],
-				[
+			],
+			[
 				"nama" => "Hotbel Purba",
 				"jenis_kelamin" => "Lk",
 				"tempat_lahir" => "Pasir/Banjar Tongga",
@@ -1047,8 +1046,8 @@ class Alumni extends Seeder
 				"calamat" => "0",
 				"cpendidikan" => "0",
 				"cprestasi" => "0",
-				],
-				[
+			],
+			[
 				"nama" => "Edison Situmorang",
 				"jenis_kelamin" => "Lk",
 				"tempat_lahir" => "Simarsoituruk",
@@ -1075,8 +1074,8 @@ class Alumni extends Seeder
 				"calamat" => "0",
 				"cpendidikan" => "0",
 				"cprestasi" => "0",
-				],
-				[
+			],
+			[
 				"nama" => "Chatarina Budi Anggarini",
 				"jenis_kelamin" => "Pr",
 				"tempat_lahir" => "Bantul",
@@ -1098,13 +1097,13 @@ class Alumni extends Seeder
 				"gscholar" => "",
 				"nip" => "196904291989022001",
 				"nip_bps" => "340012122",
-				"foto_profil" => "components/icon/Pr-icon.svg",
+				"foto_profil" => "components/icon/PR-icon.svg",
 				"cttl" => "0",
 				"calamat" => "0",
 				"cpendidikan" => "0",
 				"cprestasi" => "0",
-				],
-				[
+			],
+			[
 				"nama" => "Muhammad Dedy",
 				"jenis_kelamin" => "LK",
 				"tempat_lahir" => "Palembang",
@@ -1126,13 +1125,13 @@ class Alumni extends Seeder
 				"gscholar" => "",
 				"nip" => "197808052000121001",
 				"nip_bps" => "340016240",
-				"foto_profil" => "components/icon/LK-icon.svg",
+				"foto_profil" => "components/icon/Lk-icon.svg",
 				"cttl" => "0",
 				"calamat" => "0",
 				"cpendidikan" => "0",
 				"cprestasi" => "0",
-				],
-				[
+			],
+			[
 				"nama" => "Ayu Setiawaty",
 				"jenis_kelamin" => "PR",
 				"tempat_lahir" => "Jakarta Barat",
@@ -1159,8 +1158,8 @@ class Alumni extends Seeder
 				"calamat" => "0",
 				"cpendidikan" => "0",
 				"cprestasi" => "0",
-				],
-				[
+			],
+			[
 				"nama" => "Shanti Kartika Astrilestari",
 				"jenis_kelamin" => "PR",
 				"tempat_lahir" => "Surabaya",
@@ -1187,8 +1186,8 @@ class Alumni extends Seeder
 				"calamat" => "0",
 				"cpendidikan" => "0",
 				"cprestasi" => "0",
-				],
-				[
+			],
+			[
 				"nama" => "Bambang Pamungkas",
 				"jenis_kelamin" => "LK",
 				"tempat_lahir" => "Semarang",
@@ -1210,13 +1209,13 @@ class Alumni extends Seeder
 				"gscholar" => "",
 				"nip" => "197909172000121003",
 				"nip_bps" => "340016243",
-				"foto_profil" => "components/icon/LK-icon.svg",
+				"foto_profil" => "components/icon/Lk-icon.svg",
 				"cttl" => "0",
 				"calamat" => "0",
 				"cpendidikan" => "0",
 				"cprestasi" => "0",
-				],
-				[
+			],
+			[
 				"nama" => "Johanes Supranto",
 				"jenis_kelamin" => "Lk",
 				"tempat_lahir" => "Semarang",
@@ -1243,8 +1242,8 @@ class Alumni extends Seeder
 				"calamat" => "0",
 				"cpendidikan" => "0",
 				"cprestasi" => "0",
-				],
-				[
+			],
+			[
 				"nama" => "Gita Devi Asyarita",
 				"jenis_kelamin" => "Pr",
 				"tempat_lahir" => "Bekasi",
@@ -1266,13 +1265,13 @@ class Alumni extends Seeder
 				"gscholar" => "",
 				"nip" => "199408052017012001",
 				"nip_bps" => "340058000",
-				"foto_profil" => "components/icon/Pr-icon.svg",
+				"foto_profil" => "components/icon/PR-icon.svg",
 				"cttl" => "1",
 				"calamat" => "0",
 				"cpendidikan" => "0",
 				"cprestasi" => "0",
-				],
-				[
+			],
+			[
 				"nama" => "Galang Retno Winarko",
 				"jenis_kelamin" => "Lk",
 				"tempat_lahir" => "Blitar",
@@ -1299,8 +1298,8 @@ class Alumni extends Seeder
 				"calamat" => "0",
 				"cpendidikan" => "0",
 				"cprestasi" => "0",
-				],
-				[
+			],
+			[
 				"nama" => "Timbang Sirait",
 				"jenis_kelamin" => "Lk",
 				"tempat_lahir" => "Labuhan Batu",
@@ -1327,8 +1326,8 @@ class Alumni extends Seeder
 				"calamat" => "0",
 				"cpendidikan" => "0",
 				"cprestasi" => "0",
-				],
-				[
+			],
+			[
 				"nama" => "Khaerul Anwar",
 				"jenis_kelamin" => "LK",
 				"tempat_lahir" => "Demak",
@@ -1350,13 +1349,13 @@ class Alumni extends Seeder
 				"gscholar" => "",
 				"nip" => "197003291991021001",
 				"nip_bps" => "340012773",
-				"foto_profil" => "components/icon/LK-icon.svg",
+				"foto_profil" => "components/icon/Lk-icon.svg",
 				"cttl" => "0",
 				"calamat" => "0",
 				"cpendidikan" => "0",
 				"cprestasi" => "0",
-				],
-				[
+			],
+			[
 				"nama" => "Achmad Rifai",
 				"jenis_kelamin" => "LK",
 				"tempat_lahir" => "Jakarta Utara",
@@ -1378,13 +1377,13 @@ class Alumni extends Seeder
 				"gscholar" => "",
 				"nip" => "197412052000031001",
 				"nip_bps" => "340016107",
-				"foto_profil" => "components/icon/LK-icon.svg",
+				"foto_profil" => "components/icon/Lk-icon.svg",
 				"cttl" => "0",
 				"calamat" => "0",
 				"cpendidikan" => "0",
 				"cprestasi" => "0",
-				],
-				[
+			],
+			[
 				"nama" => "Apriliya Puput Nadea",
 				"jenis_kelamin" => "PR",
 				"tempat_lahir" => "Klaten",
@@ -1411,8 +1410,8 @@ class Alumni extends Seeder
 				"calamat" => "0",
 				"cpendidikan" => "0",
 				"cprestasi" => "0",
-				],
-				[
+			],
+			[
 				"nama" => "Arini Ismiati",
 				"jenis_kelamin" => "PR",
 				"tempat_lahir" => "Malang",
@@ -1439,8 +1438,8 @@ class Alumni extends Seeder
 				"calamat" => "0",
 				"cpendidikan" => "0",
 				"cprestasi" => "0",
-				],
-				[
+			],
+			[
 				"nama" => "Dea Venditama",
 				"jenis_kelamin" => "LK",
 				"tempat_lahir" => "Bantul",
@@ -1462,13 +1461,13 @@ class Alumni extends Seeder
 				"gscholar" => "",
 				"nip" => "199106022014101001",
 				"nip_bps" => "340056757",
-				"foto_profil" => "components/icon/LK-icon.svg",
+				"foto_profil" => "components/icon/Lk-icon.svg",
 				"cttl" => "0",
 				"calamat" => "0",
 				"cpendidikan" => "0",
 				"cprestasi" => "0",
-				],
-				[
+			],
+			[
 				"nama" => "Delly Rakasiwi",
 				"jenis_kelamin" => "LK",
 				"tempat_lahir" => "Jakarta",
@@ -1490,13 +1489,13 @@ class Alumni extends Seeder
 				"gscholar" => "",
 				"nip" => "199103052014101002",
 				"nip_bps" => "340056758",
-				"foto_profil" => "components/icon/LK-icon.svg",
+				"foto_profil" => "components/icon/Lk-icon.svg",
 				"cttl" => "0",
 				"calamat" => "0",
 				"cpendidikan" => "0",
 				"cprestasi" => "0",
-				],
-				[
+			],
+			[
 				"nama" => "Dhoni Eko Wahyu Nugroho",
 				"jenis_kelamin" => "LK",
 				"tempat_lahir" => "Kediri",
@@ -1518,13 +1517,13 @@ class Alumni extends Seeder
 				"gscholar" => "",
 				"nip" => "199107282014101001",
 				"nip_bps" => "340056759",
-				"foto_profil" => "components/icon/LK-icon.svg",
+				"foto_profil" => "components/icon/Lk-icon.svg",
 				"cttl" => "0",
 				"calamat" => "0",
 				"cpendidikan" => "0",
 				"cprestasi" => "0",
-				],
-				[
+			],
+			[
 				"nama" => "Poltak Sutrisno Siahaan",
 				"jenis_kelamin" => "Lk",
 				"tempat_lahir" => "Tebing Tinggi",
@@ -1551,8 +1550,8 @@ class Alumni extends Seeder
 				"calamat" => "0",
 				"cpendidikan" => "0",
 				"cprestasi" => "0",
-				],
-				[
+			],
+			[
 				"nama" => "Weni Lidya Sukma",
 				"jenis_kelamin" => "Pr",
 				"tempat_lahir" => "Padang Pariaman",
@@ -1574,13 +1573,13 @@ class Alumni extends Seeder
 				"gscholar" => "",
 				"nip" => "198909122012112001",
 				"nip_bps" => "340055951",
-				"foto_profil" => "components/icon/Pr-icon.svg",
+				"foto_profil" => "components/icon/PR-icon.svg",
 				"cttl" => "0",
 				"calamat" => "0",
 				"cpendidikan" => "0",
 				"cprestasi" => "0",
-				],
-				[
+			],
+			[
 				"nama" => "Tri Hayuni Syardi",
 				"jenis_kelamin" => "Pr",
 				"tempat_lahir" => "Padang",
@@ -1602,13 +1601,13 @@ class Alumni extends Seeder
 				"gscholar" => "",
 				"nip" => "199010302012112001",
 				"nip_bps" => "340055938",
-				"foto_profil" => "components/icon/Pr-icon.svg",
+				"foto_profil" => "components/icon/PR-icon.svg",
 				"cttl" => "0",
 				"calamat" => "0",
 				"cpendidikan" => "0",
 				"cprestasi" => "0",
-				],
-				[
+			],
+			[
 				"nama" => "Subuh Sukmono Putro",
 				"jenis_kelamin" => "Lk",
 				"tempat_lahir" => "Sragen",
@@ -1635,8 +1634,8 @@ class Alumni extends Seeder
 				"calamat" => "0",
 				"cpendidikan" => "0",
 				"cprestasi" => "0",
-				],
-				[
+			],
+			[
 				"nama" => "Sigit Purnomo",
 				"jenis_kelamin" => "LK",
 				"tempat_lahir" => "Kulon Progo",
@@ -1658,13 +1657,13 @@ class Alumni extends Seeder
 				"gscholar" => "",
 				"nip" => "196502171988021001",
 				"nip_bps" => "340011821",
-				"foto_profil" => "components/icon/LK-icon.svg",
+				"foto_profil" => "components/icon/Lk-icon.svg",
 				"cttl" => "0",
 				"calamat" => "0",
 				"cpendidikan" => "0",
 				"cprestasi" => "0",
-				],
-			];
+			],
+		];
 		$this->db->table('alumni')->insertBatch($data);
 
 		// $data = [
