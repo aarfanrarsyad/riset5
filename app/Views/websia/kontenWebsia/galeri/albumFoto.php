@@ -49,12 +49,12 @@
 
                         <div class="flex flex-col justify-center items-center">
                             <div class="flex flex-row justify-center items-center gap-x-4 mt-8 mb-6">
-                                <a href="#<?= $foto['id_foto'] - 1; ?>">
-                                    <img src="<?= base_url() ?>/img/components/icon/left-on.png" alt="foto sebelumnya" class="">
+                                <a>
+                                    <img src="<?= base_url() ?>/img/components/icon/left-on.png" alt="foto sebelumnya" class="cursor-pointer" onclick="prev('img-<?= $foto['id_foto']; ?>')" id="prev">
                                 </a>
-                                <img src="/img/galeri/<?= $foto['nama_file']; ?>" alt="<?= $foto['nama_file']; ?>" class="w-3/4">
-                                <a href="#<?= $foto['id_foto'] + 1; ?>">
-                                    <img src="<?= base_url() ?>/img/components/icon/right-on.png" alt="foto selanjutnya" class="">
+                                <img src="<?= base_url() ?>/img/galeri/<?= $foto['nama_file']; ?>" alt="<?= $foto['nama_file']; ?>" class="slider-img w-3/4" id="img-<?= $foto['id_foto']; ?>">
+                                <a>
+                                    <img src="<?= base_url() ?>/img/components/icon/right-on.png" alt="foto selanjutnya" class="cursor-pointer" onclick="next('img-<?= $foto['id_foto']; ?>')" id="next">
                                 </a>
                             </div>
 
@@ -153,7 +153,7 @@
                 <div class="text-red-500">
                     <?= service('validation')->getError('file_upload'); ?>
                 </div>
-                <label for="albumFoto" class="text-primary font-medium mt-2">Album Foto:</label>
+                <label for="albumFoto" class="text-primary font-medium mt-2">*Album Foto:</label>
                 <select name="albumFoto" id="albumFoto" class="inputForm font-heading text-xs">
                     <option class="text-gray-500" value="" disabled selected>Pilih Album</option>
                     <?php foreach ($album as $alb) : ?>
@@ -177,7 +177,7 @@
                     </div>
                 </div>
                 <div class="font-heading text-xs text-primary">
-                    <p class="mb-2"> *Required </p>
+                    <p class="mb-2"> *Harus Diisi </p>
                     <p> Format file harus .jpg/.jpeg/.png </p>
                     <p> Ukuran file maksimum 2 MB </p>
                 </div>
@@ -192,6 +192,34 @@
 </div>
 
 <script>
+    var images = [];
+    <?php foreach ($galeri['foto'] as $foto) : ?>
+        images.push('<?= $foto['nama_file'] ?>');
+    <?php endforeach ?>
+    var i = 0;
+
+    function clicked(n) {
+        i = n;
+    }
+
+    function prev(id) {
+        if (i <= 0) i = images.length;
+        i--;
+        return setImg(id);
+    }
+
+    function next(id) {
+        if (i >= images.length - 1) i = -1;
+        i++;
+        return setImg(id);
+    }
+
+    function setImg(id) {
+        get = document.getElementById(id);
+        return get.setAttribute('src', '<?= base_url() ?>/img/galeri/' + images[i]);
+    }
+
+
     // buat nama di foto yang diupload
     $('#pilihFile').change(function() {
         string = $('#pilihFile').val().split("\\");
@@ -271,18 +299,12 @@
     function suksesUnggahFoto() {
 
         $('body').prepend(`
-            <div class="fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40 font-paragraph" id='suksesUnggahFoto'>
-                <div class="hidden opacity-0 duration-700 transition-all lg:w-1/3 md:w-2/3 sm:w-3/4 w-11/12 bg-gray bg-opacity-0">
-                    <div class="flex flex-col items-center bg-white py-8 rounded-2xl shadow-md">
-                        <svg class="h-20 w-20 bg-primary text-white rounded-full mb-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
-                        </svg>
-                        <p class="sm:text-base text-sm font-heading font-bold text-primary mb-2">Foto Berhasil Terunggah</p>
-                        <input type="button" value="OKE" class="closeSuksesUnggahFoto bg-secondary text-white rounded-full w-24 py-1 text-center cursor-pointer hover:bg-secondaryhover transition-colors duration-300 text-sm mr-4 outline-none" id='backUnggahFoto'>
-
-                    </div>
-                </div>
+        <div class="fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40 font-paragraph" id='suksesUnggahFoto'>
+            <div class="hidden opacity-0 duration-700 transition-all p-3 rounded-lg flex items-center" style="background-color: #B1FF66;">
+                <img src="/img/components/icon/check.png" class="h-5 mr-2" style="color: #54AC00;" alt="icon check">
+                <p class="sm:text-base text-sm font-heading font-bold" style="color: #54AC00">Foto Anda Berhasil Diunggah</p>
             </div>
+        </div>
         `);
 
         $('#suksesUnggahFoto').children().first().removeClass('hidden')
@@ -320,18 +342,12 @@
     function suksesLaporFoto() {
 
         $('body').prepend(`
-            <div class="fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40 font-paragraph" id='suksesLaporFoto'>
-                <div class=" duration-700 transition-all lg:w-1/3 md:w-2/3 sm:w-3/4 w-11/12 bg-gray bg-opacity-0">
-                    <div class="flex flex-col items-center bg-white py-8 rounded-2xl shadow-md">
-                        <svg class="h-20 w-20 bg-primary text-white rounded-full mb-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
-                        </svg>
-                        <p class="sm:text-base text-sm font-heading font-bold text-primary mb-2">Laporan Anda berhasil dikirim</p>
-                        <input type="button" value="OKE" class="closeSuksesLaporFoto bg-secondary text-white rounded-full w-24 py-1 text-center cursor-pointer hover:bg-secondaryhover transition-colors duration-300 text-sm mr-4 outline-none" id='backSuksesLaporFoto'>
-
-                    </div>
-                </div>
+        <div class="fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40 font-paragraph" id='suksesLaporFoto'>
+            <div class="hidden opacity-0 duration-700 transition-all p-3 rounded-lg flex items-center" style="background-color: #B1FF66;">
+                <img src="/img/components/icon/check.png" class="h-5 mr-2" style="color: #54AC00;" alt="icon check">
+                <p class="sm:text-base text-sm font-heading font-bold" style="color: #54AC00">Laporan Anda Berhasil Dikirim</p>
             </div>
+        </div>
         `)
 
         $('#suksesLaporFoto').children().first().removeClass('hidden')
