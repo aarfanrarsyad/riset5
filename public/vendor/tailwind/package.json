@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build-css": "tailwindcss build styles.css -o ../../css/tailwind.css"
+    "build-css": "tailwindcss build styles.css -o ../../css/tailwind.css",
+    "prod:build": "NODE_ENV=production npm run build-css react-scripts build"
   },
   "keywords": [],
   "author": "",

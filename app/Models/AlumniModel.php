@@ -55,9 +55,7 @@ class AlumniModel extends Model
             ->join('pendidikan', 'alumni.id_alumni = pendidikan.id_alumni','inner')
             ->join('pendidikan_tinggi', 'pendidikan_tinggi.id_pendidikan = pendidikan.id_pendidikan','inner');
         
-        if ($start>0) {
-            $query->offset(intval($start));
-        }
+        if ($start>0) $query->offset(intval($start));
 
         if($cari != ''){
             $query->groupStart()->like('nama',$cari)

@@ -131,3 +131,8 @@ nb-configuration.xml
 /public/vendor/tailwind/package-lock.json
 /resources/
 workspace.code-workspace
+
+# Galeri dan Berita
+img/components/user/*
+/public/berita/*
+/public/img/galeri/*

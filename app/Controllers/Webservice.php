@@ -3,6 +3,8 @@
 namespace App\Controllers;
 
 use App\Models\WebserviceModel;
+use App\Models\AuthModel;
+use App\Models\AlumniModel;
 use CodeIgniter\I18n\Time;
 
 
@@ -11,22 +13,23 @@ class Webservice extends BaseController
 	public function __construct()
 	{
 		$this->model = new WebserviceModel();
+		$this->form_validation = \Config\Services::validation();
 	}
 
 	public function index()
 	{
-		if(session()->has('role')){
-		$role=array_search('4',session('role'), true);
-		} else $role=false;
-		if ($role==false){
-			$login=0;
+		if (session()->has('role')) {
+			$role = array_search('4', session('role'), true);
+		} else $role = false;
+		if ($role == false) {
+			$login = 0;
 		} else {
-			$login=1;
+			$login = 1;
 		};
 
 		$data = [
 			'login' => 'sudah',
-			'statusLog'=>$login,
+			'statusLog' => $login,
 			'judul' => 'Web Service | SIA',
 		];
 
@@ -35,17 +38,17 @@ class Webservice extends BaseController
 
 	public function dokumentasi()
 	{
-		if(session()->has('role')){
-			$role=array_search('4',session('role'), true);
-			} else $role=false;
-		if ($role==false){
-			$login=0;
+		if (session()->has('role')) {
+			$role = array_search('4', session('role'), true);
+		} else $role = false;
+		if ($role == false) {
+			$login = 0;
 		} else {
-			$login=1;
+			$login = 1;
 		};
 		$data = [
 			'login' => 'sudah',
-			'statusLog'=>$login,
+			'statusLog' => $login,
 			'judul' => 'Dokumentasi Web Service | SIA'
 		];
 		return view('webservice/kontenWebservice/dokumentasi/dokumentasi.php', $data);
@@ -53,21 +56,21 @@ class Webservice extends BaseController
 
 	public function proyek()
 	{
-		if(session()->has('role')){
-			$role=array_search('4',session('role'), true);
-			} else $role=false;
-		if ($role==false){
-			$login=0;
+		if (session()->has('role')) {
+			$role = array_search('4', session('role'), true);
+		} else $role = false;
+		if ($role == false) {
+			$login = 0;
 			echo '<script>window.location.replace("' . base_url('login') . '");</script>';
 		} else {
-			$login=1;
+			$login = 1;
 		};
 		//user id dapat dari session
 		$uid = session('id_user');
 
 		$data = [
 			'login' => 'sudah',
-			'statusLog'=> $login,
+			'statusLog' => $login,
 			'judul' => 'Proyek Web Service | SIA',
 			'client_app' => $this->model->getApp($uid)->getResultArray(),
 		];
@@ -76,17 +79,17 @@ class Webservice extends BaseController
 
 	public function buatProyek()
 	{
-		if(session()->has('role')){
-			$role=array_search('4',session('role'), true);
-			} else $role=false;
-		if ($role==false){
-			$login=0;
+		if (session()->has('role')) {
+			$role = array_search('4', session('role'), true);
+		} else $role = false;
+		if ($role == false) {
+			$login = 0;
 			echo '<script>window.location.replace("' . base_url('login') . '");</script>';
 		} else {
-			$login=1;
+			$login = 1;
 		};
 		$data['login'] = 'sudah';
-		$data['statusLog']= $login;
+		$data['statusLog'] = $login;
 		$data['judul'] = 'Proyek Web Service | SIA';
 		$data['scope_app'] = $this->model->getScope()->getResultArray();
 		return view('webservice/kontenWebservice/proyek/buatProyek.php', $data);
@@ -94,10 +97,10 @@ class Webservice extends BaseController
 
 	public function insertProyek()
 	{
-		if(session()->has('role')){
-			$role=array_search('4',session('role'), true);
-			} else $role=false;
-		if ($role==false){
+		if (session()->has('role')) {
+			$role = array_search('4', session('role'), true);
+		} else $role = false;
+		if ($role == false) {
 			echo '<script>window.location.replace("' . base_url('login') . '");</script>';
 		}
 
@@ -148,23 +151,59 @@ class Webservice extends BaseController
 	// }
 	public function editAkun()
 	{
-		if(session()->has('role')){
-			$role=array_search('4',session('role'), true);
-			} else $role=false;
-		if ($role==false){
-			$login=0;
+		if (session()->has('role')) {
+			$role = array_search('4', session('role'), true);
+		} else $role = false;
+		if ($role == false) {
+			$login = 0;
 			echo '<script>window.location.replace("' . base_url('login') . '");</script>';
 		} else {
-			$login=1;
+			$login = 1;
 		};
 		$data = [
 			'login' => 'sudah',
-			'statusLog'=>$login,
+			'statusLog' => $login,
 		];
 
 		$data['judul'] = 'Edit Profil | SIA';
 		$data['active'] = 'akunDev';
-		return view('webservice/kontenWebservice/profilDeveloper/editAkunWS.php', $data);
+		$dt = new AuthModel();
+
+		if ($dt->getUserById(session('id_user'))['password_hash'] == NULL) {
+			return redirect()->to(base_url('User/editprofil'));
+		} else return view('webservice/kontenWebservice/profilDeveloper/editAkunWS.php', $data);
+	}
+
+	public function updateAkun()
+	{
+
+		$model = new AlumniModel();
+		$curpass = $model->getAlumni(session('id_user'))->getRow()->password_hash;
+		$inputpass = htmlspecialchars($_POST['passlama']);
+		$newpass = htmlspecialchars($_POST['passbaru']);
+		$renewpass = htmlspecialchars($_POST['ulangpassbaru']);
+
+		if (password_verify(base64_encode(hash('sha384', $inputpass, true)), $curpass)) {
+			$validate = [
+				'new_password'	=> $newpass,
+				'conf_password' => $renewpass,
+			];
+
+			if ($this->form_validation->run($validate, 'editAkun') === FALSE) {
+				session()->setFlashdata('edit-pass2-fail', 'Kata sandi baru gagal diperbaharui');
+				session()->setFlashdata('error-new_password', $this->form_validation->getError('new_password'));
+				session()->setFlashdata('error-conf_password', $this->form_validation->getError('conf_password'));
+			} else {
+				$data = [
+					'password_hash' => password_hash(base64_encode(hash('sha384', $newpass, true)), PASSWORD_DEFAULT),
+				];
+				$model->db->table('users')->set($data)->where('id', session('id_user'))->update();
+				session()->setFlashdata('edit-pass-success', 'Kata sandi baru berhasil diperbaharui');
+			}
+		} else {
+			session()->setFlashdata('edit-pass-fail', 'Kata sandi lama tidak sesuai.');
+		}
+		return redirect()->to(base_url('developer/edit/akun'));
 	}
 
 	//--------------------------------------------------------------------

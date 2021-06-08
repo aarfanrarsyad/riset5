@@ -50,7 +50,7 @@
                         <p class="px-2 cursor-pointer">Data</p>
                         <img src="/img/components/icon/drop-down.svg" class="transform transition-all duration-300" alt="icon drop-down">
                     </div>
-                    <div class="text-white text-white transition-all duration-300 easy-out absolute overflow-hidden open-submenu w-full">
+                    <div class="text-white transition-all duration-300 easy-out absolute overflow-hidden open-submenu w-full">
                         <a href="#dataUser">
                             <div class="pl-12 md:py-1 py-0.5 rounded-r-lg md:text-lg hover:bg-primary">
                                 Detail User

@@ -9,6 +9,7 @@
     <script type="text/javascript" src="/js/jquery.js"></script>
     <link rel="stylesheet" href="/css/aos.css" />
     <title>Sistem Informasi Alumni</title>
+    <link rel="shortcut icon" type="image/png" href="/img/components/logo/logo_sia.png" />
 
     <!-- link utk manggil font nya  -->
     <link rel="preconnect" href="https://fonts.gstatic.com">

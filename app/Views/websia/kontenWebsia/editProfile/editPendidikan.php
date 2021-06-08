@@ -8,7 +8,7 @@
 </style>
 
 <div class="w-full bg-white mb-8" id="pagePendidikan">
-    <!--<div class="flex justify-end w-full mb-4 w-36">
+    <!--<div class="flex justify-end w-full mb-4">
         <div class="bg-secondary hover:bg-secondaryhover text-white lg:py-1.5 py-1 px-3 lg:text-sm text-xs outline-none cursor-pointer rounded-full flex gap-x-2 items-center" id="buttonEditTampilanPendidikan">
             <div>
                 Edit Tampilan
@@ -64,7 +64,7 @@
                         <td><?= $row->program_studi ?></td>
                         <td><?= $row->tahun_masuk ?></td>
                         <td><?= $row->tahun_lulus ?></td>
-                        <td><?= $row->judul_tulisan ?></td>
+                        <td class="py-1.5"><?= $row->judul_tulisan ?></td>
                     </tr>
                 <?php $n = $n + 1;
                 endforeach; ?>
