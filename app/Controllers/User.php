@@ -9,7 +9,6 @@ use App\Models\BeritaModel;
 class User extends BaseController
 {
 	public function __construct()
-	{
 		if (!session()->has('id_user'))
 			echo '<script>window.location.replace("' . base_url('login') . '");</script>';
 
@@ -55,6 +54,7 @@ class User extends BaseController
 		$kerja = (is_null($kerja)) ? '' : $kerja;
 		// dd([$cari,$pro,$akt,$kerja]);
 		
+
 		if ($tipe=='all' || $tipe=='alumni') { //query alumni utama
 			$dbAlumni = new \App\Models\AlumniModel;
 	        if (is_null($this->request->getVar('t'))) {
