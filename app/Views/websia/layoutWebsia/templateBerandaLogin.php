@@ -99,7 +99,7 @@
                                     BERITA
                                 </div>
                             </a>
-                            <a href="/developer/">
+                            <a href="/developer">
                                 <div class="nav-menu transition-colors duration-300">
                                     WEBSERVICE
                                 </div>
@@ -243,7 +243,7 @@
                 <a href="/" class="mb-2 hover:text-secondary">
                     <h3 class="underline md:no-underline">Website PKL60</h3>
                 </a>
-                <a href="/developer/" class="hover:text-secondary">
+                <a href="/developer" class="hover:text-secondary">
                     <h3 class="underline md:no-underline">Webservice(API)</h3>
                 </a>
             </div>

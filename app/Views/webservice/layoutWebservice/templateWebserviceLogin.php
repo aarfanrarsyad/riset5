@@ -47,7 +47,7 @@
             </div>
             <div id="nav" class="hidden sm:flex sm:items-center">
                 <ul class="flex items-center xl:gap-x-6 lg:gap-x-2 md:gap-x-1.5 gap-x-2 relative">
-                    <a href="/developer/">
+                    <a href="/developer">
                         <li class="bg-secondary text-white py-1.5 sm:px-1 md:w-24 text-center cursor-pointer border-secondary border-2 hover:text-secondary hover:bg-white transition-colors duration-300">BERANDA</li>
                     </a>
                     <li style="min-width: 55px;" class="bg-secondary text-white py-1.5 sm:px-1 md:w-24 text-center cursor-pointer border-secondary border-2 hover:text-secondary hover:bg-white transition-colors duration-300 relative">API
@@ -92,7 +92,7 @@
         <div class="sm:hidden hidden menuWebService navbar" id="menuApi">
             <div class="menu border-b flex justify-center">
                 <ul class="w-min">
-                    <a href="/developer/">
+                    <a href="/developer">
                         <li class="cursor-pointer flex justify-center text-white py-1">
                             <div class="bg-secondary w-28 flex justify-center hover:bg-white hover:text-secondary py-0.5">BERANDA</div>
                         </li>

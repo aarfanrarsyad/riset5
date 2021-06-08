@@ -206,7 +206,7 @@ if ($status == 'bukan user') {
 <!-- Akhir User Profile-->
 
 <!-- Awal Rekomendasi -->
-<div class="bg-primary py-8 md:py-4 lg:px-20 md:px-8 px-3">
+<div class="bg-primary pt-8 pb-2 sm:py-8 md:py-4 lg:px-20 md:px-8 px-3">
     <div class="static md:w-full md:px-2 md:py-8 pb-8">
 
         <!-- <div class="md:mb-6 mb-2 text-left text-secondary font-semibold">
@@ -228,12 +228,6 @@ if ($status == 'bukan user') {
                 </a>
             </div>
             <h2 class="font-heading -mb-2 sm:mb-6 ml-2 text-base sm:text-xl inline-block">Alumni yang mungkin Anda kenal</h2>
-            <div class="visible sm:invisible">
-                <a class="bg-secondary mb-8 -mt-8 mr-2 md:mt-0 float-right font-paragraph text-sm text-white text-center py-1 px-4 mx-auto rounded-full cursor-pointer hover:bg-secondaryhover transition-colors duration-300" href="/User/rekomendasi">
-                    Lihat Semua
-                    <img src="/img/components/icon/panah_kanan.png" alt="lihat semua rekomendasi" class="float-right pl-2">
-                </a>
-            </div>
         </div>
         <div class="holder mx-auto w-11/12 md:w-full lg:w-11/12 grid grid-cols-2 md:grid-cols-4 gap-x-4 md:gap-x-0 lg:gap-x-8" data-aos="zoom-in">
             <?php foreach ($rekomendasi as $row) :  ?>
@@ -260,6 +254,12 @@ if ($status == 'bukan user') {
             <?php endforeach; ?>
         </div>
 
+    </div>
+    <div class="visible sm:invisible">
+        <a class="bg-secondary mb-2 -mt-8 mr-2 float-right font-paragraph text-sm text-white text-center py-1 px-4 mx-auto rounded-full cursor-pointer transition-colors duration-300" href="/User/rekomendasi">
+            Lihat Semua
+            <img src="/img/components/icon/panah_kanan.png" alt="lihat semua rekomendasi" class="float-right pl-2">
+        </a>
     </div>
 </div>
 <!-- Akhir Rekomendasi -->
@@ -461,12 +461,6 @@ if ($status == 'bukan user') {
             </a>
         </div>
         <h2 class="font-heading -mb-2 -mt-1 sm:mt-0 sm:mb-6 ml-2 text-xl inline-block">Foto Tentang <?= $usernya ?></h2>
-        <div class="visible sm:invisible">
-            <a class="bg-secondary mb-8 -mt-8 mr-2 md:mt-0 float-right font-paragraph text-sm text-white text-center py-1 px-4 mx-auto rounded-full cursor-pointer hover:bg-secondaryhover transition-colors duration-300" href="/User/galeriFoto">
-                Lihat Semua
-                <img src="/img/components/icon/panah_kanan.png" alt="lihat semua rekomendasi" class="float-right pl-2">
-            </a>
-        </div>
     </div>
 
     <div class="md:shadow-lg lg:shadow-xl rounded-2xl px-3 py-3 md:px-7 md:py-5 lg:mx-14 lg:py-8 lg:px-11 md:mt-3">
@@ -676,6 +670,13 @@ if ($status == 'bukan user') {
         <!-- Akhir Navigasi -->
 
     </div>
+
+</div>
+<div class="visible sm:invisible">
+    <a class="bg-secondary mb-2 -mt-8 mr-2 float-right font-paragraph text-sm text-white text-center py-1 px-4 mx-auto rounded-full cursor-pointer transition-colors duration-300" href="/User/galeriFoto">
+        Lihat Semua
+        <img src=" /img/components/icon/panah_kanan.png" alt="lihat semua rekomendasi" class="float-right pl-2">
+    </a>
 </div>
 <hr class="visible sm:invisible border-primary border-opacity-75 w-4/5 object-center mx-auto mb-8">
 </div>

@@ -9,6 +9,7 @@ use App\Models\BeritaModel;
 class User extends BaseController
 {
 	public function __construct()
+	{
 		if (!session()->has('id_user'))
 			echo '<script>window.location.replace("' . base_url('login') . '");</script>';
 
@@ -25,19 +26,20 @@ class User extends BaseController
 
 	//--------------------------------------------------------------------
 
-	public function searchAndFilter(){
+	public function searchAndFilter()
+	{
 		helper('text');
 
 		$tipe = $this->request->getVar('t');
 		if ($this->request->isAJAX()) {
-			$cari = $this->request->getPost('cari') ;
+			$cari = $this->request->getPost('cari');
 			$prodi = $this->request->getPost('prodi');
 			$akt = $this->request->getPost('akt');
 			$kerja = $this->request->getPost('kerja');
 			$awal = $this->request->getPost('awal');
 			$akhir = $this->request->getPost('akhir');
 		} else {
-			$cari = $this->request->getVar('cari') ;
+			$cari = $this->request->getVar('cari');
 			$prodi = $this->request->getVar('prodi');
 			$akt = $this->request->getVar('akt');
 			$kerja = $this->request->getVar('kerja');
@@ -45,7 +47,7 @@ class User extends BaseController
 			$akhir = $this->request->getVar('akhir');
 		}
 		// dd($this->request->getVar('start'));
-		
+
 		$tipe = (is_null($tipe)) ? $this->request->getVar('tipe') : $tipe;
 		$tipe = (is_null($tipe)) ? 'all' : $tipe;
 		$cari = (is_null($cari)) ? '' : $cari;
@@ -53,75 +55,75 @@ class User extends BaseController
 		$akt = (is_null($akt)) ? '' : $akt;
 		$kerja = (is_null($kerja)) ? '' : $kerja;
 		// dd([$cari,$pro,$akt,$kerja]);
-		
 
-		if ($tipe=='all' || $tipe=='alumni') { //query alumni utama
+
+		if ($tipe == 'all' || $tipe == 'alumni') { //query alumni utama
 			$dbAlumni = new \App\Models\AlumniModel;
-	        if (is_null($this->request->getVar('t'))) {
-	        	$query = $dbAlumni->getAlumniFilter($cari, $prodi, $akt, $kerja);
-	        } else {
-	        	$limit = (is_null($this->request->getVar('limit')))?10:$this->request->getVar('limit');
-	        	$start = (is_null($this->request->getVar('start')))?0:$this->request->getVar('start');
-	        	$query = $dbAlumni->getAlumniFilter($cari, $prodi, $akt, $kerja, $limit, $start);
-	        	// return json_encode($start);
-	        }
+			if (is_null($this->request->getVar('t'))) {
+				$query = $dbAlumni->getAlumniFilter($cari, $prodi, $akt, $kerja);
+			} else {
+				$limit = (is_null($this->request->getVar('limit'))) ? 10 : $this->request->getVar('limit');
+				$start = (is_null($this->request->getVar('start'))) ? 0 : $this->request->getVar('start');
+				$query = $dbAlumni->getAlumniFilter($cari, $prodi, $akt, $kerja, $limit, $start);
+				// return json_encode($start);
+			}
 
-	        $compiled['alumni'] = $query['compiled'];
+			$compiled['alumni'] = $query['compiled'];
 			$jumlah['alumni'] = $query['jumlahAlumni'];
-	        $data['alumni'] = $query['alumni'];
+			$data['alumni'] = $query['alumni'];
 
 			$jumlah['alumni'] = [
-				'text' => (!empty($cari)) ? 
-							"Terdapat " . $jumlah['alumni'] . " alumni dengan kata kunci `<B>$cari</B>` ditemukan." :
-							"Memuat " . $jumlah['alumni'] . " data alumni.",
+				'text' => (!empty($cari)) ?
+					"Terdapat " . $jumlah['alumni'] . " alumni dengan kata kunci `<B>$cari</B>` ditemukan." :
+					"Memuat " . $jumlah['alumni'] . " data alumni.",
 				'ret' => $jumlah['alumni']
 			];
 			// dd($alumni);
 		}
 
-		if ($tipe=='all' || $tipe=='berita') {#pencarian berita
+		if ($tipe == 'all' || $tipe == 'berita') { #pencarian berita
 			$dbBerita = new \App\Models\BeritaModel;
-			$awal = (is_null($awal) || $awal == '') ? '2000' : $awal ;
-			$akhir = (is_null($akhir) || $akhir == '') ? date('Y') : $akhir ;
+			$awal = (is_null($awal) || $awal == '') ? '2000' : $awal;
+			$akhir = (is_null($akhir) || $akhir == '') ? date('Y') : $akhir;
 
-	        if (is_null($this->request->getVar('t'))) {
-	        	$query = $dbBerita->getBeritaFilter($cari, $awal, $akhir);
-	        } else {
-	        	$limit = (is_null($this->request->getVar('limit')))?10:$this->request->getVar('limit');
-	        	$start = (is_null($this->request->getVar('start')))?0:$this->request->getVar('start');
-	        	$query = $dbBerita->getBeritaFilter($cari, $awal, $akhir, $limit, $start);
-	        	// return json_encode($start);
-	        }
+			if (is_null($this->request->getVar('t'))) {
+				$query = $dbBerita->getBeritaFilter($cari, $awal, $akhir);
+			} else {
+				$limit = (is_null($this->request->getVar('limit'))) ? 10 : $this->request->getVar('limit');
+				$start = (is_null($this->request->getVar('start'))) ? 0 : $this->request->getVar('start');
+				$query = $dbBerita->getBeritaFilter($cari, $awal, $akhir, $limit, $start);
+				// return json_encode($start);
+			}
 
-	        $compiled['berita'] = $query['compiled'];
+			$compiled['berita'] = $query['compiled'];
 			$jumlah['berita'] = $query['jumlahBerita'];
-	        $data['berita'] = array_map(function($val){
-	        	return [
-	        		'id' => $val['id'],
-	        		'tanggal_publish' => $val['tanggal_publish'],
-	        		'judul' => $val['judul'],
-	        		'thumbnail' => $val['thumbnail'],
-	        		'konten' => word_limiter($val['konten'],45)
-	        	];
-	        }, $query['berita']);
+			$data['berita'] = array_map(function ($val) {
+				return [
+					'id' => $val['id'],
+					'tanggal_publish' => $val['tanggal_publish'],
+					'judul' => $val['judul'],
+					'thumbnail' => $val['thumbnail'],
+					'konten' => word_limiter($val['konten'], 45)
+				];
+			}, $query['berita']);
 
 			$jumlah['berita'] = [
-				'text' => (!empty($cari)) ? 
-							"Terdapat " . $jumlah['berita'] . " berita dengan kata kunci `<B>$cari</B>` ditemukan." :
-							"Memuat " . $jumlah['berita'] . " berita.",
+				'text' => (!empty($cari)) ?
+					"Terdapat " . $jumlah['berita'] . " berita dengan kata kunci `<B>$cari</B>` ditemukan." :
+					"Memuat " . $jumlah['berita'] . " berita.",
 				'ret' => $jumlah['berita']
 			];
 		}
-		
+
 		if ($this->request->isAJAX()) { // repond ajax live search
 			// $query = $model->getAlumniFilter($cari, $min_angkatan, $max_angkatan);
 			dd(json_encode([
-			'alumni' => $alumni,
-			'berita' => $berita,
-			'jumlah' => $jumlah['text'],
-			'ret' => $jumlah['ret'],
-			'search' => $this->request->getVar(),
-			'query' => $query,
+				'alumni' => $alumni,
+				'berita' => $berita,
+				'jumlah' => $jumlah['text'],
+				'ret' => $jumlah['ret'],
+				'search' => $this->request->getVar(),
+				'query' => $query,
 			]));
 			return json_encode([
 				'data' => $data,
@@ -141,16 +143,15 @@ class User extends BaseController
 		// dd($data['berita']);
 		switch ($this->request->getVar('t')) {
 			case 'alumni':
-			return view('websia/kontenWebsia/searchAndFilter/semuaAlumni', $data);
+				return view('websia/kontenWebsia/searchAndFilter/semuaAlumni', $data);
 				break;
 			case 'berita':
-			return view('websia/kontenWebsia/searchAndFilter/semuaBerita', $data);
-				break;				
+				return view('websia/kontenWebsia/searchAndFilter/semuaBerita', $data);
+				break;
 			default:
-			return view('websia/kontenWebsia/searchAndFilter/searchAndFilter', $data);
+				return view('websia/kontenWebsia/searchAndFilter/searchAndFilter', $data);
 				break;
 		}
-		
 	}
 
 	public function profil()
