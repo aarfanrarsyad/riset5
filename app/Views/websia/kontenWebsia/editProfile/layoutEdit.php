@@ -2,6 +2,19 @@
 
 <?= $this->section('content'); ?>
 
+<?php 
+		$model = new App\Models\AlumniModel();
+		$ambigu = $model->getTempatKerjaByNIM(session('id_alumni'))->getRow()->ambigu;
+        if ($ambigu == 1) {
+			session()->set([	//cek ambigu atau bukan
+				'ambigu' => 'yes',
+			]);
+		} else {
+			session()->set([	//cek ambigu atau bukan
+				'ambigu' => 'no',
+			]);
+		}?>
+
 <script src="https://code.jquery.com/jquery-1.10.1.min.js" integrity="sha256-SDf34fFWX/ZnUozXXEH0AeB+Ip3hvRsjLwp6QNTEb3k=" crossorigin="anonymous"></script>
 
 <div class="flex w-full relative flex-1">

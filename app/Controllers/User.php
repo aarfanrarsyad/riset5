@@ -850,10 +850,11 @@ class User extends BaseController
 
 		$data = [
 			'id_tempat_kerja'      => $_POST['id_tempat_kerja'],
+			'ambigu'			   => 0,
 		];
 
 		$model->db->table('alumni_tempat_kerja')->set($data)->where('id_alumni', session('id_alumni'))->update();
-		session()->setFlashdata('edit-tk-success', 'Tempat Kerja berhasil diperbaharui');
+		session()->setFlashdata('edit-tk-success', 'Tempat Kerja berhasil diperbaharui');		
 		return redirect()->to(base_url('User/editTempatKerja'));
 	}
 
@@ -902,6 +903,8 @@ class User extends BaseController
 			$model->db->table('tempat_kerja')->insert($data1);
 			$data2 = [
 				'id_tempat_kerja'      => $model->getIdTempatKerja(htmlspecialchars($_POST['nama_instansi'])),
+				'ambigu'			   => 0,
+
 			];
 			$model->db->table('alumni_tempat_kerja')->set($data2)->where('id_alumni', session('id_alumni'))->update();
 			session()->setFlashdata('add-tk-success', 'Tempat Kerja berhasil ditambahkan');
