@@ -33,10 +33,9 @@ function standardPendidikanTerakhir($key)
         'S-3 Doktor' => 'S-3',
         'S-3 Of Engenering' => 'S-3 Of Engineering',
     ];
-    $standard = $arr_standar[$key];
 
-    if (isset($standard) || $standard != NULL) {
-        $value = $standard;
+    if (isset($arr_standar[$key])) {
+        $value = $arr_standar[$key];
     } else {
         $value = $key;
     }
@@ -104,10 +103,9 @@ function standardProdiJurusan($key)
         'SMU IPA' => 'SMA IPA',
         'SMU IPS' => 'SMA IPS'
     ];
-    $standard = $arr_standar[$key];
 
-    if (isset($standard) || $standard != NULL) {
-        $value = $standard;
+    if (isset($arr_standar[$key])) {
+        $value = $arr_standar[$key];
     } else {
         $value = $key;
     }
@@ -227,7 +225,7 @@ function kabprovinsi($key)
         $ko = "Kota";
         $kot = $ko . " " . $key;
         $query = "SELECT A.*, B.nama_provinsi FROM kabkota AS A JOIN provinsi AS B ON A.id_provinsi=B.id_provinsi WHERE A.nama_kabkota LIKE '%$kot'";
-        $kota = $db->query($query)->getRow()->nama_kabkota;
+        $kota = $db->query($query)->getRow();
         $query = "SELECT * FROM provinsi WHERE nama_provinsi LIKE '%$key'";
         $provinsi = $db->query($query)->getRow();
         // Semua null
@@ -310,10 +308,9 @@ function standardTempatLahir($key)
         'toli-toli' => 'Toli-Toli',
         'tojo una-una' => 'Tojo Una-Una'
     ];
-    $standard = $arr_standar[strtolower($key)];
 
-    if (isset($standard) || $standard != NULL) {
-        return $standard;
+    if (isset($arr_standar[strtolower($key)])) {
+        return $arr_standar[strtolower($key)];
     } else {
         $tempat = ucwords(strtolower($key));
         if (strpos($tempat, '/') !== false) {
@@ -330,23 +327,21 @@ function standardTempatLahir($key)
 
 function standardNim($nim)
 {
-    return str_replace(".","",$nim);
+    return str_replace(".", "", $nim);
 }
 
 
-function csv_to_array($filename='', $delimiter=',')
+function csv_to_array($filename = '', $delimiter = ',')
 {
-    if(!file_exists($filename) || !is_readable($filename))
+    if (!file_exists($filename) || !is_readable($filename))
         return FALSE;
 
     $header = NULL;
     $data = array();
 
-    if (($handle = fopen($filename, 'r')) !== FALSE)
-    {
-        while (($row = fgetcsv($handle, 1000, $delimiter)) !== FALSE)
-        {
-            if(!$header)
+    if (($handle = fopen($filename, 'r')) !== FALSE) {
+        while (($row = fgetcsv($handle, 1000, $delimiter)) !== FALSE) {
+            if (!$header)
                 $header = $row;
             else
                 $data[] = array_combine($header, $row);
