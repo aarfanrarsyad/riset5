@@ -25,6 +25,14 @@
                     <?php endif; ?>">
                     Email yang anda masukkan tidak cocok
                 </p>
+                <p class="text-xs text-red-500 w-3/4 text-justify 
+                    <?php if (session('errors.login') == "The login field is required.") : ?> 
+                        is-invalid
+                    <?php else : ?> 
+                        hidden
+                    <?php endif; ?>">
+                    Email tidak boleh kosong
+                </p>
             </div>
 
             <div class="flex lg:mx-8 sm:mx-6 mx-3 mt-2 mb-1 h-10 relative">
@@ -46,6 +54,14 @@
                         hidden
                     <?php endif; ?>">
                     Kata sandi yang anda masukkan kurang tepat
+                </p>
+                <p class="text-xs text-red-500 w-3/4 text-justify 
+                    <?php if (session('errors.password') == "The password field is required.") : ?> 
+                        is-invalid
+                    <?php else : ?> 
+                        hidden
+                    <?php endif; ?>">
+                    Kata sandi tidak boleh kosong
                 </p>
             </div>
 

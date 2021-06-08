@@ -20,7 +20,7 @@
         </svg>
 
         <div class="z-20 transition-all duration-300 rounded-xl text-primary px-5 py-2 sm:text-sm text-xs absolute -right-1 top-10 transform origin-top-right" style="max-width: 550px;">
-            <div class="font-bold">Ketentuan Pembuatan Berita</div>
+            <div class="font-bold">Ketentuan Pembuatan Berita :</div>
             <ul class="list-inside text-justify">
                 <li><span class="mr-2">1.</span>Isi konten terkait Alumni AIS/STIS/Polstat STIS</li>
                 <li><span class="mr-2">2.</span>Berita tidak diperkenankan mengandung unsur SARA, Hoaks, pelanggaran karya cipta, atau berisi tuduhan kepada pihak tertentu tanpa dasar</li>
@@ -149,9 +149,9 @@
                         window.location.href = "<?= base_url("Berita/uploadBerita") ?>"
                     } else if (result == "false") {
                         $('#konfirUnggahBerita').html(`
-                            <div class="hidden opacity-0 duration-700 transition-all p-3 rounded-lg flex items-center" style="background-color: #B1FF66;">
+                            <div class="hidden opacity-0 duration-700 transition-all p-3 rounded-lg flex items-center" style="background-color: #FF7474;">
                                 <img src="/img/components/icon/warning.png" class="h-5 mr-2" style="color: #AC1700;">
-                            <p class="sm:text-base text-sm font-heading font-bold" style="color: #AC1700;">Berita Tidak Terkirim</p>
+                            <p class="sm:text-base text-sm font-heading font-bold" style="color: #000000;">Berita Tidak Terkirim</p>
                             </div>  
                         `)
                     } else {
@@ -166,9 +166,9 @@
                         $('#formErrors').css("display", "");
 
                         $('#konfirUnggahBerita').html(`
-                            <div class="hidden opacity-0 duration-700 transition-all p-3 rounded-lg flex items-center" style="background-color: #B1FF66;">
+                            <div class="hidden opacity-0 duration-700 transition-all p-3 rounded-lg flex items-center" style="background-color: #FF7474;">
                                 <img src="/img/components/icon/warning.png" class="h-5 mr-2" style="color: #AC1700;">
-                            <p class="sm:text-base text-sm font-heading font-bold" style="color: #AC1700;">Berita Tidak Terkirim</p>
+                            <p class="sm:text-base text-sm font-heading font-bold" style="color: #000000;">Berita Tidak Terkirim</p>
                             </div>  
                         `)
                     }
