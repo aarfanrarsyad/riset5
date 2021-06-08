@@ -50,8 +50,18 @@
                 <textarea type="text" name="alamat_instansi" id="alamat" class="inputForm resize-none" placeholder="Masukkan alamat instansi"></textarea>
                 <div class="md:w-1/2 w-full">
                     <label for="telepon" class="font-medium">No Telepon Instansi:</label>
+                    <?php if (session()->getFlashdata('error-telp_instansi') != "") { ?>
+                        <p class="text-xs text-red-500 text-justify" id="errorEmailInstansi">
+                            <?= session('error-telp_instansi') ?>
+                        </p>
+                    <?php } ?>
                     <input type="text" name="telp_instansi" id="telepon" class="inputForm" placeholder="Masukkan telepon instansi">
                     <label for="faks" class="font-medium">Faks Instansi:</label>
+                    <?php if (session()->getFlashdata('error-faks_instansi') != "") { ?>
+                        <p class="text-xs text-red-500 text-justify" id="errorEmailInstansi">
+                            <?= session('error-faks_instansi') ?>
+                        </p>
+                    <?php } ?>
                     <input type="text" name="faks_instansi" id="faks" class="inputForm" placeholder="Masukkan faks instansi">
                     <label for="email" class="font-medium">Email:</label>
                     <?php if (session()->getFlashdata('error-email_instansi') != "") { ?>

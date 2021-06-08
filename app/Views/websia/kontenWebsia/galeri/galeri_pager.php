@@ -9,7 +9,7 @@
 <?php endif ?>
 
 <?php foreach ($pager->links() as $link) : ?>
-    <a href="<?= $link['uri'] ?>" class="p-1 hover:text-white <?= $link['active'] ? 'activeMenu' : '' ?>">
+    <a href="<?= $link['uri'] ?>" class="p-1 text-lg hover:text-white <?= $link['active'] ? 'activeMenu' : '' ?>">
         <?= $link['title'] ?>
     </a>
 <?php endforeach ?>

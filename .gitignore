@@ -132,4 +132,7 @@ nb-configuration.xml
 /resources/
 workspace.code-workspace
 
+# Galeri dan Berita
 img/components/user/*
+/public/berita/*
+/public/img/galeri/*

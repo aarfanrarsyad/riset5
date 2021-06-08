@@ -241,7 +241,7 @@
                                                 <h6 class="mb-0">Nama</h6>
                                             </div>
                                             <div class="col-sm-9 text-secondary">
-                                                <?= $instansi['nama_instansi']; ?>
+                                                <?= $instansi->nama_instansi; ?>
                                             </div>
                                         </div>
                                         <hr>
@@ -250,7 +250,7 @@
                                                 <h6 class="mb-0">Alamat</h6>
                                             </div>
                                             <div class="col-sm-9 text-secondary">
-                                                <?= $instansi['alamat_instansi']; ?>, <?= $instansi['kota']; ?> , <?= $instansi['provinsi']; ?>, <?= $instansi['negara']; ?>
+                                                <?= $instansi->alamat_instansi; ?>, <?= $instansi->kota; ?> , <?= $instansi->provinsi; ?>, <?= $instansi->negara; ?>
                                             </div>
                                         </div>
                                         <hr>
@@ -259,7 +259,7 @@
                                                 <h6 class="mb-0">Telepon</h6>
                                             </div>
                                             <div class="col-sm-9 text-secondary">
-                                                <?= $instansi['telp_instansi']; ?>
+                                                <?= $instansi->telp_instansi; ?>
                                             </div>
                                         </div>
                                         <hr>
@@ -268,7 +268,7 @@
                                                 <h6 class="mb-0">Faks</h6>
                                             </div>
                                             <div class="col-sm-9 text-secondary">
-                                                <?= $instansi['faks_instansi']; ?>
+                                                <?= $instansi->faks_instansi; ?>
                                             </div>
                                         </div>
                                         <hr>
@@ -277,7 +277,7 @@
                                                 <h6 class="mb-0">Email</h6>
                                             </div>
                                             <div class="col-sm-9 text-secondary">
-                                                <?= $instansi['email_instansi']; ?>
+                                                <?= $instansi->email_instansi; ?>
                                             </div>
                                         </div>
                                     </div>

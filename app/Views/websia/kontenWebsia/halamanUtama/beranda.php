@@ -88,21 +88,21 @@ if (session()->getFlashdata('role')) { ?>
     <div class="flex flex-col items-center md:flex-row md:justify-around w-full mt-4">
         <!-- Awal Jumlah Alumni AIS/STIS/Polstat STIS I -->
         <div class="w-min mb-2 md:mb-0 py-6 px-6 bg-contain bg-no-repeat bg-center" style="background-image: url(/img/components/atribut_beranda_sia/bulat.png)">
-            <div class="angka text-primary md:text-6xl text-3xl font-bold md:mb-4 mb-2 font-heading">38500</div>
+            <div class="angka text-primary md:text-6xl text-3xl font-bold md:mb-4 mb-2 font-heading">2032</div>
             <div class="text-gray-500 text-sm font-semibold text-center font-paragraph">Lulusan AIS</div>
         </div>
         <!-- Akhir Jumlah Alumni AIS/STIS/Polstat STIS I-->
 
         <!-- Awal Jumlah Alumni AIS/STIS/Polstat STIS II-->
         <div class="w-min mb-2 md:mb-0 py-6 px-6 bg-contain bg-no-repeat bg-center" style="background-image: url(/img/components/atribut_beranda_sia/bulat.png)">
-            <div class="angka text-primary md:text-6xl text-3xl font-bold md:mb-4 mb-2 font-heading">38400</div>
+            <div class="angka text-primary md:text-6xl text-3xl font-bold md:mb-4 mb-2 font-heading">6022</div>
             <div class="text-gray-500 text-sm font-semibold text-center font-paragraph">Lulusan STIS</div>
         </div>
         <!-- Akhir Jumlah Alumni AIS/STIS/Polstat STIS II-->
 
         <!-- Awal Jumlah Alumni AIS/STIS/Polstat STIS III-->
         <div class="w-min mb-2 md:mb-0 py-6 px-6 bg-contain bg-no-repeat bg-center" style="background-image: url(/img/components/atribut_beranda_sia/bulat.png)">
-            <div class="angka text-primary md:text-6xl text-3xl font-bold md:mb-4 mb-2 font-heading">38300</div>
+            <div class="angka text-primary md:text-6xl text-3xl font-bold md:mb-4 mb-2 font-heading">1068</div>
             <div class="text-gray-500 text-sm font-semibold text-center font-paragraph">Lulusan Polstat STIS</div>
         </div>
         <!-- Akhir Jumlah Alumni AIS/STIS/Polstat STIS III-->
@@ -176,64 +176,58 @@ if (session()->getFlashdata('role')) { ?>
     </div>
     <!-- akhir gambar peta alumni -->
 </div>
-<div class="md:text-sm text-xs w-full font-heading text-xs text-white italic lg:px-16 md:px-8 px-2 py-2 bg-gradient-to-r from-primaryHover mb-8 to bg-primary">Data sebaran alumni diambil berdasarkan lokasi tempat instansi alumni tersebut bekerja (baik itu di BPS maupun di luar BPS)</div>
+<div class="md:text-sm text-xs w-full font-heading text-white italic lg:px-16 md:px-8 px-2 py-2 bg-gradient-to-r from-primaryHover mb-8 to bg-primary">Data sebaran alumni diambil berdasarkan lokasi tempat instansi alumni tersebut bekerja (baik itu di BPS maupun di luar BPS)</div>
 
 <!-- Akhir Peta Sebaran ALUMNI -->
 
 
-<!-- awal card -->
-<div class="w-full mt-8 lg:px-20 md:px-8 px-5">
-    <div class="w-full md:mb-6 mb-4 text-center text-xl text-black font-bold font-heading">BERITA TERBARU</div>
+<?php if (!empty($Allnews)) : ?>
+    <!-- awal card -->
+    <div class="w-full mt-8 lg:px-20 md:px-8 px-3">
+        <div class="w-full md:mb-6 mb-4 text-center text-xl text-black font-bold font-heading">BERITA TERBARU</div>
+        <div class="flex flex-col md:flex-row md:justify-between w-full mt-4">
+            <?php $i = 0 ?>
+            <?php foreach ($Allnews as $news) : ?>
+                <?php
+                if ($i > 2) {
+                    break;
+                }; ?>
+                <!-- awal card-->
+                <div class="mb-6 lg:w-1/4 md:w-1/3 lg:mx-0 md:mx-2 mx-0  w-full md:border-0 border-b-2 border-gray-300" data-aos="zoom-in">
+                    <a href="/User/judulBerita" class="mb-4">
+                        <img class="w-full gambarBerita" src="<?= base_url() ?>/berita/berita_<?= $news['id'] ?>/<?= $news['thumbnail'] ?>">
+                    </a>
+                    <div class="py-4">
+                        <!-- Awal judul berita -->
+                        <div>
+                            <a href="/berita/news_view/<?= $news['id'] ?>" class="text-black text-xl font-heading font-semibold hover:font-bold">
+                                <?= $news['judul'] ?>
+                            </a>
+                        </div>
+                        <!-- akhir judul berita -->
 
-    <div class="flex flex-col md:flex-row md:justify-between w-full mt-4">
+                        <!-- awal tanggal berita -->
+                        <div class="text-gray-700 text-sm font-paragraph font-semibold "><?= $news['tanggal_publish'] ?></div>
+                        <!-- akhir tanggal berita -->
 
-        <?php for ($x = 0; $x < 3; $x++) : ?>
+                        <!-- awal isi berita -->
+                        <p class="text-gray-600 break-words font-paragraph text-justify leading-none mt-4">
+                            <?= $news['konten'] ?>
+                        </p>
+                        <!-- akhir isi berita -->
 
-            <!-- awal card-->
-            <div class="<?= ($x == 2) ? 'hidden md:flex md:flex-col ' : ' '; ?>  mb-6 lg:w-1/4 md:w-1/3 lg:mx-0 md:mx-2 mx-0  w-full md:border-0 border-b-4 border-gray-500" data-aos="zoom-in">
-                <a href="/User/judulBerita" class="mb-4">
-                    <img class="w-full gambarBerita" src="/img/components/sampel.jpeg" alt="thumbnail berita">
-                </a>
-                <div class="py-4">
-                    <!-- Awal judul berita -->
-                    <div>
-                        <a href="/User/judulBerita" class="text-black text-xl font-heading font-semibold hover:font-bold">
-                            Pelatihan Kepegawaian di Masa Pandemi
-                        </a>
                     </div>
-                    <!-- akhir judul berita -->
-
-                    <!-- awal tanggal berita -->
-                    <div class="text-gray-700 text-sm font-paragraph font-semibold ">1 Januari 2020</div>
-                    <!-- akhir tanggal berita -->
-
-                    <!-- awal isi berita -->
-                    <p class="text-gray-600 break-words font-paragraph text-justify leading-none mt-4">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo voluptatum quibusdam nemo, incidunt dolorem voluptatem, rem eligendi beatae numquam a rerum debitis omnis ratione tempora, quisquam ullam id aperiam quam.
-                    </p>
-                    <!-- akhir isi berita -->
-
                 </div>
-            </div>
-            <!-- akhir card-->
-        <?php endfor; ?>
-
+                <!-- akhir card-->
+                <?php $i++ ?>
+            <?php endforeach; ?>
+        </div>
     </div>
 
-</div>
 
-<!-- awal tombol "Lihat Berita Selanjutnya" -->
-<div class="flex w-full justify-end lg:px-20 md:px-8 px-5 mb-8">
-    <div class="text-primary font-paragraph my-auto"><a href="/User/berita">Lihat Berita Selanjutnya</a> </div>
-    <div>
-        <a href="/websia/berandaBerita">
-            <svg class="w-6 h-6 font-bold text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-            </svg>
-        </a>
-    </div>
-</div>
-<!-- akhir tombol "Lihat Berita Selanjutnya" -->
+    <!-- akhir card -->
+<?php endif ?>
+
 
 <!-- akhir card -->
 

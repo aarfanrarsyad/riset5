@@ -34,8 +34,8 @@ class Berita extends Migration
 			],
 			'akses'             => [
 				'type' => 'enum',
-				'constraint'  => ['public', 'private', 'other', 'Review'],
-				'default' => 'Review',
+				'constraint'  => ['public', 'private', 'other', 'review'],
+				'default' => 'review',
 			],
 			'user_id'           => [
 				'type' => 'int',

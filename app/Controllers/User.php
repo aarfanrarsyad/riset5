@@ -26,8 +26,7 @@ class User extends BaseController
 
 	//--------------------------------------------------------------------
 
-	public function searchAndFilter()
-	{
+	public function searchAndFilter(){
 		helper('text');
 
 		$tipe = $this->request->getVar('t');
@@ -114,9 +113,16 @@ class User extends BaseController
 			];
 		}
 		
-	
 		if ($this->request->isAJAX()) { // repond ajax live search
 			// $query = $model->getAlumniFilter($cari, $min_angkatan, $max_angkatan);
+			dd(json_encode([
+			'alumni' => $alumni,
+			'berita' => $berita,
+			'jumlah' => $jumlah['text'],
+			'ret' => $jumlah['ret'],
+			'search' => $this->request->getVar(),
+			'query' => $query,
+			]));
 			return json_encode([
 				'data' => $data,
 				'jumlah' => $jumlah,
@@ -307,6 +313,18 @@ class User extends BaseController
 		$model = new AlumniModel();
 		// $kunci = $_GET['id_alumni'];
 		// $kunci = get_alumni_by_nim($nim);
+		$fotoModel = new \App\Models\FotoModel;
+		$galeri_profil = $fotoModel->getForProfil($id);
+		$i = 0;
+		foreach ($galeri_profil as $foto) {
+			$tag = explode(',', $foto['tag']);
+			$j = 0;
+			foreach ($tag as $t) {
+				$galeri_profil[$i]['tag_name'][$j] = $model->getTags($t);
+				$j++;
+			}
+			$i++;
+		}
 		$kunci = htmlspecialchars($id);
 		$query1 = $model->bukaProfile($kunci)->getRow();
 		// dd($query1);
@@ -440,6 +458,8 @@ class User extends BaseController
 			'pendidikan' => $query6,
 			'user' => $query7,
 			'rekomendasi'          => $query4,
+			'foto'				=> $galeri_profil,
+			'count'				=> count($galeri_profil),
 		];
 		return view('websia/kontenWebsia/userProfile/userProfile', $data);
 	}
@@ -572,10 +592,16 @@ class User extends BaseController
 	{
 
 		$model = new AlumniModel();
+		$tempat_lahir   	= htmlspecialchars($_POST['tempat_lahir']);
+		$tanggal_lahir   	= htmlspecialchars($_POST['tanggal_lahir']);
 		$telp_alumni   	= htmlspecialchars($_POST['telp_alumni']);
 		$email			= htmlspecialchars($_POST['email']);
 		$alamat       	= htmlspecialchars($_POST['alamat']);
-		$negara       	= htmlspecialchars($_POST['negara']);
+		if (isset($_POST['negara'])) {
+			$negara       	= htmlspecialchars($_POST['negara']);
+		} else {
+			$negara = NULL;
+		}
 		$negara2       	= htmlspecialchars($_POST['negaraLainnya']);
 		if (isset($_POST['prov'])) {
 			$provinsi 		= htmlspecialchars($_POST['prov']);
@@ -627,6 +653,8 @@ class User extends BaseController
 
 		$data = [
 			'id_alumni'		=> session('id_alumni'),
+			'tempat_lahir'	=> $tempat_lahir,
+			'tanggal_lahir'	=> $tanggal_lahir,
 			'telp_alumni'    => $telp_alumni,
 			'email'			=> $email,
 			'alamat_alumni'        => $alamat,
@@ -648,7 +676,11 @@ class User extends BaseController
 		if ($this->form_validation->run($data, 'editProfil') === FALSE) {
 			session()->setFlashdata('edit-bio-fail', 'Biodata gagal Disimpan');
 			session()->setFlashdata('inputs', $this->request->getPost());
+			session()->setFlashdata('error-tempat_lahir', $this->form_validation->getError('tempat_lahir'));
 			session()->setFlashdata('error-email', $this->form_validation->getError('email'));
+			session()->setFlashdata('error-fb', $this->form_validation->getError('fb'));
+			session()->setFlashdata('error-linkedin', $this->form_validation->getError('linkedin'));
+			session()->setFlashdata('error-gscholar', $this->form_validation->getError('gscholar'));
 			session()->setFlashdata('error-telp_alumni', $this->form_validation->getError('telp_alumni'));
 		} else {
 			$model->db->table('alumni')->set($data)->where('id_alumni', session('id_alumni'))->update();
@@ -841,6 +873,8 @@ class User extends BaseController
 			session()->setFlashdata('add-tk-fail', 'Tempat Kerja gagal ditambahkan');
 			session()->setFlashdata('error-nama_instansi', $this->form_validation->getError('nama_instansi'));
 			session()->setFlashdata('error-email_instansi', $this->form_validation->getError('email_instansi'));
+			session()->setFlashdata('error-telp_instansi', $this->form_validation->getError('telp_instansi'));
+			session()->setFlashdata('error-faks_instansi', $this->form_validation->getError('faks_instansi'));
 			return redirect()->to(base_url('User/editTempatKerja'));
 		} else {
 			$data1 = [
@@ -1551,31 +1585,31 @@ class User extends BaseController
 		return view('websia/kontenWebsia/galeri/albumVideo', $data);
 	}
 
-	public function berita()
-	{
-		$init = new BeritaModel();
+	// public function berita()
+	// {
+	// 	$init = new BeritaModel();
 
-		$dataset = $init->getAllNews()->getResultArray();
+	// 	$dataset = $init->getAllNews()->getResultArray();
 
-		for ($i = 0; $i < count($dataset); $i++) {
-			$visited = $init->getVisitedPage($dataset[$i]['id'])->getRowArray();
-			$dataset[$i]['tanggal_publish'] = date('d F Y', strtotime($dataset[$i]['tanggal_publish']));
-			if (!$visited || empty($visited)) {
-				$dataset[$i]['visited'] = 0;
-			} else {
-				$dataset[$i]['visited'] = $visited['visited'];
-			}
-		}
+	// 	for ($i = 0; $i < count($dataset); $i++) {
+	// 		$visited = $init->getVisitedPage($dataset[$i]['id'])->getRowArray();
+	// 		$dataset[$i]['tanggal_publish'] = date('d F Y', strtotime($dataset[$i]['tanggal_publish']));
+	// 		if (!$visited || empty($visited)) {
+	// 			$dataset[$i]['visited'] = 0;
+	// 		} else {
+	// 			$dataset[$i]['visited'] = $visited['visited'];
+	// 		}
+	// 	}
 
-		sortByOrder($dataset, 'visited', false);
+	// 	sortByOrder($dataset, 'visited', false);
 
-		$data['dataset'] = $dataset;
-		$data['judulHalaman'] = 'Berita';
-		$data['active'] = 'berita';
-		$data['login'] = 'sudah';
+	// 	$data['dataset'] = $dataset;
+	// 	$data['judulHalaman'] = 'Berita';
+	// 	$data['active'] = 'berita';
+	// 	$data['login'] = 'sudah';
 
-		return view('websia/kontenWebsia/beritaArtikel/berandaBerita', $data);
-	}
+	// 	return view('websia/kontenWebsia/beritaArtikel/berandaBerita', $data);
+	// }
 
 	public function unggahBerita()
 	{

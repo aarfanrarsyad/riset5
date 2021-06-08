@@ -41,7 +41,7 @@
                         <div id="lisAlumni">
                             <?php foreach ($data['alumni'] as $row) : ?>
                                 <!-- Awal Card Alumni -->
-                                <a href="/User/profilAlumni/<?= $row['nim'] ?>">
+                                <a href="/User/profilAlumni/<?= $row['id_alumni'] ?>">
                                     <div class="mx-2">
                                         <div class="flex gap-x-4">
                                             <div class="flex items-center">
@@ -54,7 +54,7 @@
                                                     <!-- Akhir Nama Alumni -->
 
                                                     <!-- Awal Atribut Alumni -->
-                                                    <div class="md:text-sm text-xs font-paragraph text-primary">Angkatan <?= implode(', ', get_by_id($row['id_alumni'],'angkatan','pendidikan',true)) ?></div>
+                                                    <div class="md:text-sm text-xs font-paragraph text-primary">Angkatan <?= implode(', ', get_by_id($row['id_alumni'], 'angkatan', 'pendidikan', true)) ?></div>
                                                     <!-- Akhir Atribut Alumni -->
 
                                                 </div>
@@ -99,20 +99,20 @@ $(document).ready(()=>{
         x = setTimeout(function() {
 
             if (tipe == 'alumni') {
-                data = $('#filterAlumni').serialize()+'&cari='+$("input[name=cari]").val()+'&limit='+limit+'&start='+start
+                data = $('#filterAlumni').serialize() + '&cari=' + $("input[name=cari]").val() + '&limit=' + limit + '&start=' + start
             } else {
                 data = {
                     cari: $("input[name=cari]").val(),
-                    beritaAwal:$("input[name=beritaAwal]").val(),
-                    beritaAkhir:$("input[name=beritaAkhir]").val(),
-                    limit:limit,
-                    start:start
+                    beritaAwal: $("input[name=beritaAwal]").val(),
+                    beritaAkhir: $("input[name=beritaAkhir]").val(),
+                    limit: limit,
+                    start: start
                 }
             }
             console.log(data)
             $.ajax({
                 url: "#",
-                type:'POST',
+                type: 'POST',
                 data: data,
                 dataType:'JSON',
                 cache:false,
@@ -145,7 +145,7 @@ $(document).ready(()=>{
     $("input[name=cari], .search").keyup( function() { 
         $('#lisAlumni').empty()
         start = 0;
-        search('alumni',limit, start)
+        search('alumni', limit, start)
     })
     
     $('.listProdi svg').click(function(){

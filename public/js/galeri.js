@@ -251,7 +251,7 @@ function laporkanFoto(id){
     
                 <div class="flex justify-end my-4">
                     <input type="button" value="BATAL" class="closeFormLaporFoto bg-secondary text-white rounded-full w-24 py-1 text-center cursor-pointer hover:bg-secondaryhover transition-colors duration-300 text-sm mr-4 outline-none" id='backFormLaporFoto'>
-                    <input type="submit" value="UNGGAH" class="submitFormLaporFoto bg-secondary text-white rounded-full w-24 py-1 text-center cursor-pointer hover:bg-secondaryhover transition-colors duration-300 text-sm outline-none">
+                    <input type="submit" value="KIRIM" class="submitFormLaporFoto bg-secondary text-white rounded-full w-24 py-1 text-center cursor-pointer hover:bg-secondaryhover transition-colors duration-300 text-sm outline-none">
                 </div>
             </form>
         </div>

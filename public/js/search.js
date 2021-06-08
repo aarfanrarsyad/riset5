@@ -1,6 +1,6 @@
 // awal sidebar
 
-$('.hamburgerSidebar').click(function(){
+$('.boxFilter').click(function(){
     $('.param1, .param2').toggleClass('hidden md:block md:hidden');
     $('.sidebarSearch').toggleClass('w-10/12 md:w-auto');
     $('#cariBerita, #cariAlumni').toggleClass('md:ml-60 md:ml-6');

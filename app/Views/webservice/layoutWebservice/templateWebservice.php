@@ -10,6 +10,8 @@
     <link rel="stylesheet" href="/css/add_style.css">
     <script type="text/javascript" src="/js/jquery.js"></script>
     <title>Web Service | SIA</title>
+    <link rel="shortcut icon" type="image/png" href="/img/components/logo/logo_sia.png" />
+
 
     <!-- link utk manggil font nya  -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -126,7 +128,7 @@
     <div class="bg-primary w-full pt-6 pb-3 lg:px-20 md:px-8 px-3">
         <div class="flex flex-col md:flex-row md:justify-around md:text-sm text-xs items-center">
             <!-- awal footer stis -->
-            <div class="flex  gap-x-2 mx-auto md:mx-0 mb-2 md:mb-0">
+            <div class="flex items-center md:items-start gap-x-2 mx-auto md:mx-0 mb-2 md:mb-0">
                 <div class=" md:w-auto">
                     <a href="https://stis.ac.id/"><img class="lg:w-24 lg:h-24 w-20 h-20" src="/img/components/logo/logo_stis.png" alt="logo STIS"></a>
                 </div>
@@ -146,9 +148,9 @@
             <!-- akhir footer stis -->
 
             <!-- awal footer haistis -->
-            <div class="md:mt-0 mx-auto md:mx-0 mb-2 md:mb-0 md:-mt-5">
+            <div class="md:mt-0 mx-auto md:mx-0 mb-2 md:mb-0">
                 <a href="https://haisstis.org/"><img class="lg:h-28 h-20 w-36 lg:w-auto lg:-mt-6" src="/img/components/logo/logo_haisstis.png" alt="logo HAISSTIS"></a>
-                <div class="flex gap-x-2 -mt-2 lg:-mt-4 mx-4 lg:mx-16">
+                <div class="flex justify-start gap-x-2 -mt-2 lg:-mt-4">
                     <div><img class="lg:h-5 h-4" src="/img/components/icon/message_white.png" alt="icon message"></div>
                     <div>
                         <h3 class="text-white font-heading">sia@stis.ac.id</h3>
@@ -162,8 +164,8 @@
                 <a href="https://pkl.stis.ac.id/60/" class="mb-2 hover:text-secondary">
                     <h3 class="underline md:no-underline">Website PKL60</h3>
                 </a>
-                <a href="/developer/" class="hover:text-secondary">
-                    <h3 class="underline md:no-underline">Webservice(API)</h3>
+                <a href="<?= base_url(); ?>" class="hover:text-secondary">
+                    <h3 class="underline md:no-underline">Website SIA</h3>
                 </a>
             </div>
             <!-- akhir link ke webservice  -->

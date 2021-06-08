@@ -1066,7 +1066,6 @@ class admin_model extends Model
     public function getTempatKerjabyIdAlumni($id)
     {
         $query = "SELECT * FROM alumni_tempat_kerja
-        JOIN tempat_kerja ON alumni_tempat_kerja.id_tempat_kerja=tempat_kerja.id_tempat_kerja
         WHERE alumni_tempat_kerja.id_alumni = $id";
         return $this->db->query($query);
     }

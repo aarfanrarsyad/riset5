@@ -122,7 +122,7 @@ $(".delete-project").click(function () {
     })
 })
 
-let mainNavLinks = document.querySelectorAll("#menuDok .itemSideDok a");
+let mainNavLinks = document.querySelectorAll("#menuDok a");
 let mainSections = document.querySelectorAll("section");
 $(window).scroll(function () {
     let fromTop = window.scrollY;
@@ -130,9 +130,9 @@ $(window).scroll(function () {
         let section = document.querySelector(`${link.hash}`);
         if (section !== null) {
             if (section.offsetTop <= fromTop && section.offsetTop + section.offsetHeight > fromTop) {
-                link.parentElement.classList.add("bg-primaryDark");
+                link.children[0].classList.add("bg-primaryDark");
             } else {
-                link.parentElement.classList.remove("bg-primaryDark");
+                link.children[0].classList.remove("bg-primaryDark");
             }
         }
     });

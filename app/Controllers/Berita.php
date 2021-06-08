@@ -6,9 +6,9 @@ use Config\Services;
 use App\Models\BeritaModel;
 use App\Models\admin_model;
 
-use Config\Email;
-use Myth\Auth\Entities\User;
-
+use Colors\RandomColor;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 class Berita extends BaseController
 {
@@ -29,7 +29,7 @@ class Berita extends BaseController
         echo (json_encode($data));
     }
 
-    protected function getPostComment($id, $all = null)  #SOLVED
+    protected function getPostComment($id, $all = null, $html = true)  #SOLVED
     {
         $init = new BeritaModel();
         $init_user = new admin_model();
@@ -45,17 +45,33 @@ class Berita extends BaseController
         for ($i = 0; $i < count($query_comments); $i++) {
             $data = $init_user->getUserById($query_comments[$i]['user_id'])->getRowArray();
 
-            $query_comments[$i]['time'] = time_for_comment($query_comments[$i]['time']);
+            if ($html) {
+                $query_comments[$i]['time'] = time_for_comment($query_comments[$i]['time']);
+            } else {
+                $query_comments[$i]['time'] = date("d M Y H:i", strtotime($query_comments[$i]['time']));
+            }
+
             if (!$data) {
                 $query_comments[$i]['name'] = 'Unknown';
-                $query_comments[$i]['image'] = 'default.png';
+                $query_comments[$i]['image'] = '/img/components/icon/Lk-icon.svg';
             } else {
+                $default = ["Lk-icon.svg", "Pr-icon.svg"];
+                if (!$data['id_alumni']) {
+                    //Kalau di edit profile, user non alumni can edit profile, so pliss uncomment this code
+                    // $query_comments[$i]['image'] = strtolower($data['user_image']) == "default.svg" ? "/img/components/icon/" . $default[0] : "/img/components/user/userid_" . $data['id'] . "/" . $data['user_image'];
+                    $query_comments[$i]['image'] = "/img/components/icon/" . $default[0];
+                } else {
+                    $alumni = $init_user->getAlumniById($data['id_alumni'])->getRowArray();
+                    $check_img = in_array_help(strtolower($alumni['foto_profil']), $default);
+                    $tmp =  $check_img !== FALSE ?  "/img/components/user/userid_" . $data['id'] . "/" . $alumni['foto_profil'] : "/img/components/icon/" . $default[$check_img];
+                    $query_comments[$i]['image'] = $tmp;
+                }
+
                 $query_comments[$i]['name'] = ucwords($data['fullname']);
-                $query_comments[$i]['image'] = $data['user_image'];
             }
         }
-
         sortByOrder($query_comments, 'id');
+
         return [array_values($query_comments), $comments_count];
     }
 
@@ -65,7 +81,7 @@ class Berita extends BaseController
         $init_user = new admin_model();
         $data = $init->getAllNews()->getResultArray();
 
-        $inactive = [];
+        $review = [];
         $count_data = count($data);
         for ($i = 0; $i < $count_data; $i++) {
             $user = $init_user->getUserById($data[$i]['user_id'])->getRowArray();
@@ -77,20 +93,24 @@ class Berita extends BaseController
             $data[$i]['count_comments'] = $this->getPostComment($data[$i]['id'])[1]['total'];
             $data[$i]['visited'] = $init->getVisitedPage($data[$i]['id'])->getRowArray();
 
-            if ($data[$i]['aktif'] != 1) {
-                $inactive[] = $data[$i];
+            if ($data[$i]['akses'] == 'review') {
+                $review[] = $data[$i];
                 unset($data[$i]);
             }
         }
 
         $data = array_values($data);
 
+        $authorize = Services::authorization();
+        $groups = $authorize->groups();
+
         $this->data =  [
             'title' => 'Management Berita',
             'data' => $data,
-            'inactive' => $inactive,
-            'access' => ['Public', 'Private', 'Other'],
-            'datasets' => json_encode($this->get_all_datasets())
+            'review' => $review,
+            'access' => ['Public', 'Private', 'Other', 'Review'],
+            'datasets' => json_encode($this->get_all_datasets()),
+            'groups' => $groups
         ];
 
         return view('admin' . DIRECTORY_SEPARATOR . 'news' . DIRECTORY_SEPARATOR . 'index', $this->data);
@@ -124,7 +144,7 @@ class Berita extends BaseController
         $news_id = $this->request->getPost('id');
 
         $query = $init->getNewsById($news_id)->getRowArray();
-        if (!$news_id || empty($query)) {
+        if (!$news_id || !$query) {
             $this->output_json(false);
         } else {
             $query['count_comments'] = $this->getPostComment($query['id'])[1]['total'];
@@ -143,6 +163,7 @@ class Berita extends BaseController
                 session()->setFlashdata('errors', $this->form_validation->getErrors());
                 return redirect()->to(base_url('/admin/berita/insert'));
             } else {
+
                 if (!session()->has('folder_name')) {
                     $name_folder = 'raw_file' . round(microtime(true));
                     $curr_folder = ROOTPATH . '/public/berita' . '/' . $name_folder;
@@ -174,10 +195,9 @@ class Berita extends BaseController
                         $err = ['access_groups' => 'Group access data is required if you set access for specific groups.'];
                         session()->setFlashdata('errors', $err);
                         return redirect()->to(base_url('/admin/berita/insert'));
+                    } else {
+                        $dataset['groups_id'] = preg_replace("/[\s\/.]/", "", array_to_string($access_groups, 1));
                     }
-                    $dataset['groups_id'] = preg_replace("/[\s\/.]/", "", array_to_string($access_groups, 1));
-                } else  if ($dataset['access'] == 'private') {
-                    $dataset['user_id'] = userdata()['id'];
                 }
 
                 $query = $init->insertNews($dataset);
@@ -205,6 +225,13 @@ class Berita extends BaseController
 
     public function update_news($id) #SOLVED
     {
+
+        $init = new BeritaModel();
+        $data = $init->getNewsById($id)->getRowArray();
+
+        $authorize = Services::authorization();
+        $groups = $authorize->groups();
+
         if (isset($_POST['update_news'])) {
             if ($this->form_validation->run($this->request->getPost(), 'update_news') === FALSE) {
                 session()->setFlashdata('inputs', $this->request->getPost());
@@ -212,7 +239,6 @@ class Berita extends BaseController
                 return redirect()->to(base_url('/admin/berita/update/' . $id));
             } else {
                 $init = new BeritaModel();
-
                 $dataset = [
                     'id' => $id,
                     'date' => $this->request->getPost('date'),
@@ -256,11 +282,6 @@ class Berita extends BaseController
             }
         }
 
-        $init = new BeritaModel();
-        $data = $init->getNewsById($id)->getRowArray();
-
-        $authorize = Services::authorization();
-        $groups = $authorize->groups();
         if ($data['groups_id']) $data['groups_id'] = explode(',', $data['groups_id']);
 
         $this->data =  [
@@ -286,7 +307,7 @@ class Berita extends BaseController
         if (!$id) {
             if (session()->has('folder_name')) {
                 $name_folder = session()->get('folder_name');
-                $curr_folder = $dir . '/' . session()->get('folder_name');
+                $curr_folder = $dir . '/' . $name_folder;
             } else {
                 $name_folder = 'raw_file' . round(microtime(true));
                 $curr_folder = $dir . '/' . $name_folder;
@@ -363,40 +384,46 @@ class Berita extends BaseController
             $html = '';
             $data_comments = $this->getPostComment($news[$i], $is_all);
             $comments = $data_comments[0];
+
             if (!$is_all) {
-                if (count($comments) > 5) $comments = array_values(array_slice($comments, -5, 5, true));
+                if (count($comments) > 4) $comments = array_values(array_slice($comments, -4, 4, true));
             }
 
             for ($j = 0; $j < count($comments); $j++) {
-                $html .= '<div class="card-comment">
-                <img class="img-circle img-sm" src="' . base_url('users/profile/' . $comments[$j]['image']) . '" alt="User Image">
-                	<div class="comment-text">
-                    	<span class="username">
-                            ' . $comments[$j]['name'] . '
-                            	<div class="float-right">
-                                	<span class="text-muted">' . $comments[$j]['time'] . '</span>
-									<div class="btn-group dropleft ml-2">
-                                        <a class="text-secondary" href="#" role="button" data-toggle="dropdown" style="font-weight: 100;">
-                                        	<i class="fas fa-ellipsis-v"></i>
-                                        </a>
-                                        <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="javascript:void(0)" onclick="delete_comment(' . $comments[$j]['id'] . ',' . $news[$i] . ')" style="font-size: 12px;">Hapus Komentar</a>
+                $html .= '<div class="flex items-center text-primary lg:mb-4 mb-3">
+                                <img class="lg:h-14 md:h-12 h-8 lg:mr-4 mr-2" src="' . base_url($comments[$j]['image']) . '">
+                                <div class="bg-gray-200 lg:pl-6 pl-4 py-3 gap-x-2 rounded-lg w-full">
+                                    <div class="flex justify-between">
+                                        <div class="w-7/8">
+                                            <div class="text-primary lg:text-xl md:text-lg text-base font-bold">' . $comments[$j]['name'] . '</div>
+                                            <div class="lg:text-base md:text-sm text-xs">' . $comments[$j]['komentar'] . '</div>
                                         </div>
+                                        <div class="w-1/8">
+                                            <div class="float-right">
+                                                <div class="btn-group dropleft mr-4">
+                                                    <a class="text-secondary" href="javascript:void(0)" role="button" data-toggle="dropdown" style="font-weight: 100;" onclick="delete_comment(' . $comments[$j]['id'] . ',' . $news[$i] . ')">
+                                                        <i class="fas fa-trash-alt text-lg"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+
                                     </div>
                                 </div>
-                        </span>
-                        ' . $comments[$j]['komentar'] . '
-                	</div>
-            	</div>';
+                            </div>';
             }
 
             if (!$is_all) {
-                if ($data_comments[1]['total'] > 5) {
-                    $html .=  '<br><a href="javascript:void(0)" id="set-length-comments-' . $news[$i] . '" onclick="show_all_comments(' . $news[$i] . ')">Lihat semua komentar</a>';
+                if ($data_comments[1]['total'] > 4) {
+                    $html .=   '<div class="flex justify-end text-secondary lg:text-xl md:text-lg text-base lg:mb-8 md:mb-6 mb-4">
+                                <a href="javascript:void(0)" id="set-length-comments-' . $news[$i] . '" onclick="show_all_comments(' . $news[$i] . ')">Lihat semua komentar</a>
+                            </div>';
                 }
             } else {
-                if ($data_comments[1]['total'] > 5) {
-                    $html .=  '<br><a href="javascript:void(0)" id="set-length-comments-' . $news[$i] . '" onclick="show_less_comments(' . $news[$i] . ')">Tampilkan lebih sedikit</a>';
+                if ($data_comments[1]['total'] > 4) {
+                    $html .=   '<div class="flex justify-end text-secondary lg:text-xl md:text-lg text-base lg:mb-8 md:mb-6 mb-4">
+                                <a href="javascript:void(0)" id="set-length-comments-' . $news[$i] . '" onclick="show_less_comments(' . $news[$i] . ')">Tampilkan lebih sedikit</a>
+                            </div>';
                 }
             }
 
@@ -420,22 +447,278 @@ class Berita extends BaseController
         $this->output_json($query);
     }
 
-    public function news_view($id) #SOLVED
+    public function berita()
     {
         $init = new BeritaModel();
-        $data = $init->getNewsById($id)->getRowArray();
 
-        $data['comments'] = $this->getPostComment($data['id'])[0];
-        $data['count_comments'] = $this->getPostComment($data['id'])[1]['total'];
-        $data['visited'] = $init->getVisitedPage($id)->getRowArray();
+        $dataset = $init->getAllNews()->getResultArray();
+        $news_pop = $init->getNewsPop()->getResultArray();
+        $count = count($news_pop);
+
+        $current_date = strtotime(get_date());
+        for ($i = 0; $i < $count; $i++) {
+            if ($news_pop[$i]['akses'] == 'private') {
+                if (userdata()['id'] != $news_pop[$i]['user_id']) {
+                    unset($news_pop[$i]);
+                }
+            } else if ($news_pop[$i]['akses'] == 'other') {
+                $groups_access = explode(',', $news_pop[$i]['groups_id']);
+                $user_groups = role_user();
+                $permission = false;
+                for ($j = 0; $j < count($user_groups); $j++) {
+                    if (in_array_help($user_groups[$j]['group_id'], $groups_access, true) !== FALSE) {
+                        $permission = true;
+                    }
+                }
+                if (!$permission) {
+                    unset($news_pop[$i]);
+                }
+            }
+        }
+        $news_pop = array_values($news_pop);
+
+        $count_data = count($dataset);
+        for ($i = 0; $i < $count_data; $i++) {
+            $PublishDate = strtotime($dataset[$i]['tanggal_publish']);
+            if ($current_date < $PublishDate) {
+                unset($dataset[$i]);
+                continue;
+            }
+
+            if ($dataset[$i]['akses'] == 'review' || $dataset[$i]['aktif'] != 1) {
+                unset($dataset[$i]);
+                continue;
+            } else {
+                if ($dataset[$i]['akses'] == 'private') {
+                    if (userdata()['id'] != $dataset[$i]['user_id']) {
+                        unset($dataset[$i]);
+                        continue;
+                    }
+                } else if ($dataset[$i]['akses'] == 'other') {
+                    $groups_access = explode(',', $dataset[$i]['groups_id']);
+                    $user_groups = role_user();
+                    $permission = false;
+                    for ($j = 0; $j < count($user_groups); $j++) {
+                        if (in_array_help($user_groups[$j]['group_id'], $groups_access, true) !== FALSE) {
+                            $permission = true;
+                        }
+                    }
+                    if (!$permission) {
+                        unset($dataset[$i]);
+                        continue;
+                    }
+                }
+            }
+
+            $dataset[$i]['tanggal_publish'] = date('d F Y', strtotime($dataset[$i]['tanggal_publish']));
+            $string_length = 150;
+            $dataset[$i]['konten'] = substr(strip_tags($dataset[$i]['konten']), 0, $string_length) . ' ..';
+        }
+        $data = array_values($dataset);
+
+        $limit = 10;
+        $page = isset($_GET['page']) ? (int)$this->request->getGet('page') : 1;
+        $number_of_page = ($page > 1) ? ($page * $limit) - $limit : 0;
+
+        $total_data = count($data);
+        $total_page = ceil($total_data / $limit);
+
+        $data_berita = array_slice($data, $number_of_page, $limit);
+
+        $previous = $page - 1;
+        $next = $page + 1;
+
+        $dataUserNews = [];
+        $userNews = $init->getNewsByUserId(userdata()['id'])->getResultArray();
+
+        for ($i = 0; $i < count($userNews); $i++) {
+            if ($userNews[$i]['akses'] == 'review' && $userNews[$i]['aktif'] == '0') {
+                $msg = 'Berita dengan judul ' . $userNews[$i]['judul'] . ' oleh ' . $userNews[$i]['author'] . ' sedang menunggu konfirmasi Administrator.';
+            } else if ($userNews[$i]['akses'] != 'review' && $userNews[$i]['akses'] != 'private' && $userNews[$i]['aktif'] == '1' && (strtotime(get_date()) <= strtotime($userNews[$i]['aktif']))) {
+                $msg = 'Berita dengan judul ' . $userNews[$i]['judul'] . ' oleh ' . $userNews[$i]['author'] . ' telah dikonfirmasi dan dipublikasikan.';
+            } else if ($userNews[$i]['akses'] != 'review' && $userNews[$i]['akses'] != 'private' && $userNews[$i]['aktif'] == '1' && (strtotime(get_date()) > strtotime($userNews[$i]['aktif']))) {
+                $msg = 'Berita dengan judul ' . $userNews[$i]['judul'] . ' oleh ' . $userNews[$i]['author'] . ' telah dikonfirmasi dan belum dipublikasikan.';
+            } else if ($userNews[$i]['akses'] != 'review' && $userNews[$i]['akses'] != 'private' && $userNews[$i]['aktif'] == '0' && (strtotime(get_date()) <= strtotime($userNews[$i]['aktif']))) {
+                $msg = 'Berita dengan judul ' . $userNews[$i]['judul'] . ' oleh ' . $userNews[$i]['author'] . ' dinonaktifkan.';
+            } else {
+                $msg = 'Berita dengan judul ' . $userNews[$i]['judul'] . ' oleh ' . $userNews[$i]['author'] . ' telah diterima dan sedang menunggu review Administrator.';
+            }
+
+            $dataUserNews[] = [
+                'id' => $userNews[$i]['id'],
+                'msg' => $msg,
+                'date' => date('d M Y', strtotime($userNews[$i]['tanggal_publish'])),
+                'thumbnail' => $userNews[$i]['thumbnail'],
+            ];
+        }
+
+        $data['dataset'] = $data_berita;
+        $data['judulHalaman'] = 'Berita';
+        $data['active'] = 'berita';
+        $data['login'] = 'sudah';
+        $data['notifications'] = $dataUserNews;
+        $data['newsPop'] = $news_pop;
+        $data['pagination'] = [
+            'number' => $number_of_page + 1,
+            'page' => $page,
+            'previous' => $previous,
+            'next' => $next,
+            'total_page' => $total_page
+        ];
+        return view('websia/kontenWebsia/beritaArtikel/berandaBerita', $data);
+    }
+
+    public function news_view($id) #SOLVED
+    {
+        $id = esc($id);
+        $init = new BeritaModel();
+        $data = $init->getNewsById($id)->getRowArray();
+        $current_date = strtotime(get_date());
+
+        if (!$data) return redirect()->to(base_url('/berita/berita'));
+
+        if ($current_date < strtotime($data['tanggal_publish']))
+            return redirect()->to(base_url('/berita/berita'));
+
+        if ($data['akses'] == 'review' || $data['aktif'] != 1) {
+            return redirect()->to(base_url('/berita/berita'));
+        }
+
+        if ($data['akses'] == 'private') {
+            if (userdata()['id'] != $data['user_id']) {
+                return redirect()->to(base_url('/berita/berita'));
+            }
+        } else if ($data['akses'] == 'other') {
+            $groups_access = explode(',', $data['groups_id']);
+            $user_groups = role_user();
+            $permission = false;
+            for ($j = 0; $j < count($user_groups); $j++) {
+                if (in_array_help($user_groups[$j]['group_id'], $groups_access, true) !== FALSE) {
+                    $permission = true;
+                }
+            }
+            if (!$permission) {
+                return redirect()->to(base_url('/berita/berita'));
+            }
+        }
+
+        $getComments = $this->getPostComment($data['id']);
+
+        $data['tanggal_publish'] = date('d F Y', strtotime($data['tanggal_publish']));
+        $data['comments'] = $getComments[0];
+        $data['count_comments'] = $getComments[1]['total'];
+        $data['visited'] = $init->getVisitedPage($id)->getRowArray()['visited'];
         record_visits($id);
 
+        $news_pop = $init->getNewsPop()->getResultArray();
+        $count = count($news_pop);
+
+        for ($i = 0; $i < $count; $i++) {
+
+            if ($news_pop[$i]['akses'] == 'private') {
+                if (userdata()['id'] != $news_pop[$i]['user_id']) {
+                    unset($news_pop[$i]);
+                    continue;
+                }
+            } else if ($news_pop[$i]['akses'] == 'other') {
+                $groups_access = explode(',', $news_pop[$i]['groups_id']);
+                $user_groups = role_user();
+                $permission = false;
+                for ($j = 0; $j < count($user_groups); $j++) {
+                    if (in_array_help($user_groups[$j]['group_id'], $groups_access, true) !== FALSE) {
+                        $permission = true;
+                    }
+                }
+                if (!$permission) {
+                    unset($news_pop[$i]);
+                    continue;
+                }
+            }
+
+            $news_pop[$i]['tanggal_publish'] = date('d F Y', strtotime($news_pop[$i]['tanggal_publish']));
+            $news_pop[$i]['konten'] = substr(strip_tags($news_pop[$i]['konten']), 0, 65) . ' ..';
+        }
+        $news_pop = array_values($news_pop);
+
+        $hotNews = $init->getHotNews()->getResultArray();
+        $count_data = count($hotNews);
+        for ($i = 0; $i < $count_data; $i++) {
+            $PublishDate = strtotime($hotNews[$i]['tanggal_publish']);
+            if ($current_date < $PublishDate) {
+                unset($hotNews[$i]);
+                continue;
+            }
+
+            if ($hotNews[$i]['akses'] == 'private') {
+                if (userdata()['id'] != $hotNews[$i]['user_id']) {
+                    unset($hotNews[$i]);
+                    continue;
+                }
+            } else if ($hotNews[$i]['akses'] == 'other') {
+                $groups_access = explode(',', $hotNews[$i]['groups_id']);
+                $user_groups = role_user();
+                $permission = false;
+                for ($j = 0; $j < count($user_groups); $j++) {
+                    if (in_array_help($user_groups[$j]['group_id'], $groups_access, true) !== FALSE) {
+                        $permission = true;
+                    }
+                }
+                if (!$permission) {
+                    unset($hotNews[$i]);
+                    continue;
+                }
+            }
+            $hotNews[$i]['tanggal_publish'] = date('d F Y', strtotime($hotNews[$i]['tanggal_publish']));
+            $hotNews[$i]['konten'] = substr(strip_tags($hotNews[$i]['konten']), 0, 65) . ' ..';
+        }
+
+        $hotNews = array_values($hotNews);
+        $hotNews = array_slice($hotNews, 0, 5);
+
+        record_visits($id);
+
+        $dataUserNews = [];
+        $userNews = $init->getNewsByUserId(userdata()['id'])->getResultArray();
+
+        for ($i = 0; $i < count($userNews); $i++) {
+            if ($userNews[$i]['akses'] == 'review' && $userNews[$i]['aktif'] == '0') {
+                $msg = 'Berita dengan judul ' . $userNews[$i]['judul'] . ' oleh ' . $userNews[$i]['author'] . ' sedang menunggu konfirmasi Administrator.';
+            } else if ($userNews[$i]['akses'] != 'review' && $userNews[$i]['akses'] != 'private' && $userNews[$i]['aktif'] == '1' && (strtotime(get_date()) <= strtotime($userNews[$i]['aktif']))) {
+                $msg = 'Berita dengan judul ' . $userNews[$i]['judul'] . ' oleh ' . $userNews[$i]['author'] . ' telah dikonfirmasi dan dipublikasikan.';
+            } else if ($userNews[$i]['akses'] != 'review' && $userNews[$i]['akses'] != 'private' && $userNews[$i]['aktif'] == '1' && (strtotime(get_date()) > strtotime($userNews[$i]['aktif']))) {
+                $msg = 'Berita dengan judul ' . $userNews[$i]['judul'] . ' oleh ' . $userNews[$i]['author'] . ' telah dikonfirmasi dan belum dipublikasikan.';
+            } else if ($userNews[$i]['akses'] != 'review' && $userNews[$i]['akses'] != 'private' && $userNews[$i]['aktif'] == '0' && (strtotime(get_date()) <= strtotime($userNews[$i]['aktif']))) {
+                $msg = 'Berita dengan judul ' . $userNews[$i]['judul'] . ' oleh ' . $userNews[$i]['author'] . ' dinonaktifkan.';
+            } else {
+                $msg = 'Berita dengan judul ' . $userNews[$i]['judul'] . ' oleh ' . $userNews[$i]['author'] . ' telah diterima dan sedang menunggu review Administrator.';
+            }
+
+            $dataUserNews[] = [
+                'id' => $userNews[$i]['id'],
+                'msg' => $msg,
+                'date' => date('d M Y', strtotime($userNews[$i]['tanggal_publish'])),
+                'thumbnail' => $userNews[$i]['thumbnail'],
+
+            ];
+        }
+
         $this->data =  [
+            'active' => '',
             'title' => 'Management Berita',
+            'judulHalaman' => 'Berita',
+            'berita' =>  $hotNews,
+            'berita_popular' =>  $news_pop,
             'dataset' => $data,
+            'is_admin' => false,
+            'notifications' => $dataUserNews,
         ];
 
-        return view('admin' . DIRECTORY_SEPARATOR . 'news' . DIRECTORY_SEPARATOR . 'news_specified', $this->data);
+        $authorize =  Services::authorization();
+        if ($authorize->inGroup('Administrator', userdata()['id'])) {
+            $this->data['is_admin'] = true;
+        }
+
+        return view('admin' . DIRECTORY_SEPARATOR . 'news' . DIRECTORY_SEPARATOR . 'berita', $this->data);
     }
 
     public function change_access()  #SOLVED
@@ -446,12 +729,22 @@ class Berita extends BaseController
 
         $id = $this->request->getPost('id');
         $val = strtolower($this->request->getPost('val'));
+        $groups = $this->request->getPost('groups');
 
-        if ($val != 'public' && $val != 'private' && $val != 'other') {
+        if ($val != 'public' && $val != 'private' && $val != 'other' && $val != 'review') {
             $this->output_json(false);
         } else {
-            $query = $init->changeAccessNews($id, $val);
-            $this->output_json($query);
+            if ($val == 'other') {
+                if ($groups && !empty($groups)) {
+                    $query = $init->changeAccessNews($id, $val, $groups);
+                    $this->output_json($query);
+                } else {
+                    return $this->output_json(false);
+                }
+            } else {
+                $query = $init->changeAccessNews($id, $val);
+                $this->output_json($query);
+            }
         }
     }
 
@@ -496,6 +789,11 @@ class Berita extends BaseController
         $labels = date_short($labels);
 
         $c = [];
+
+        $color = RandomColor::many(count($datasets), array(
+            'hue' => 'purple'
+        ));
+
         for ($i = 0; $i < count($datasets); $i++) {
             $VAL_BERITA = [];
             for ($j = 0; $j < count($datasets[$i]['date']); $j++) {
@@ -511,19 +809,20 @@ class Berita extends BaseController
                 }
             }
             ksort($VAL_BERITA, 1);
-            $color = getRGBColor(rand(10, 85));
+
             $c[] = [
                 'label' => $datasets[$i]['judul'],
                 'data' => $VAL_BERITA,
                 'fill' => false,
-                'borderColor' => 'rgb(' . $color[0] . ',' . $color[1] . ',' . $color[2] . ')'
+                'lineTension' => 0.16,
+                'borderColor' => $color[$i]
             ];
         }
-        $retur = [
+        $return = [
             'labels' => $labels,
             'datasets' => $c,
         ];
-        return $retur;
+        return $return;
     }
 
     protected function get_datasets($id, $return_obj = true)
@@ -539,8 +838,9 @@ class Berita extends BaseController
         for ($i = 0; $i < count($ip); $i++) {
             $chk = search_array_2($data, 'date',  explode(' ', $ip[$i]['date'])[0]);
             if ($chk === FALSE) {
+                $date = explode(' ', $ip[$i]['date'])[0];
                 $data[] = [
-                    'date' => explode(' ', $ip[$i]['date'])[0],
+                    'date' => date('d M Y', strtotime($date)),
                     'hits' => (int)$ip[$i]['hits'],
                 ];
             } else {
@@ -595,7 +895,7 @@ class Berita extends BaseController
             $tr_ip .= '<tr>
 			<td>' . ($i + 1) . '</td>
 			<td>' . $ip_visited[$i]['ip'] . '</td>
-			<td>' . date('d-m-Y H:i', strtotime($ip_visited[$i]['date'])) . '</td>
+			<td>' . date('d M Y H:i', strtotime($ip_visited[$i]['date'])) . '</td>
 			<td>' . $loc . '</td>
 			<td class="text-center">' . $ip_visited[$i]['hits'] . '</td>
 			</tr>';
@@ -617,5 +917,219 @@ class Berita extends BaseController
         $object = $this->get_datasets($id);
 
         $this->output_json([$object, $count_visits, $tr_ip, $tr_comments]);
+    }
+
+    public function downloadReport($id)
+    {
+        $init = new BeritaModel();
+        $init_admin = new admin_model();
+
+        $Newsdata = $init->getNewsById($id)->getRowArray();
+        if (!$Newsdata) return redirect()->to(base_url('/admin/berita'));
+        $userData = $init_admin->getUserById($Newsdata['user_id'])->getRowArray();
+
+
+        $spreadsheet = new Spreadsheet();
+        $spreadsheet->getSheet(0);
+        $spreadsheet->getActiveSheet()->getColumnDimension('A')->setWidth(30);
+        $spreadsheet->getActiveSheet()->getColumnDimension('B')->setAutoSize(true);
+        $spreadsheet->getActiveSheet()->getStyle('A')->getFont()->setBold(true);
+        $spreadsheet->getActiveSheet()->getStyle('A1:AT100')->getFill()
+            ->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)
+            ->getStartColor()->setARGB('ffffff');
+
+        $spreadsheet->getActiveSheet()->getStyle('A1')->getAlignment()->setVertical('center');
+        $spreadsheet->getActiveSheet()->getRowDimension('1')->setRowHeight(30);
+
+        $sheet = $spreadsheet->getActiveSheet()->setTitle("Data Berita");
+
+        $ip_visited = $init->getIPVisits($id)->getResultArray(); //List of IP
+        $count_visits = $init->getVisitedPage($id)->getRowArray();
+        $comments = $this->getPostComment($id, $all = true, $html = false); //List of Komen
+
+        $username = 'User Tidak Diketahui';
+        $status = 'Aktif';
+        if ($userData) $username = $userData['fullname'];
+        if ($Newsdata['aktif'] != 1) $status = 'Tidak Aktif';
+
+        $access = ucwords(strtolower($Newsdata['akses']));
+        if ($Newsdata['akses'] == 'other') {
+            $groups = explode(',', $Newsdata['groups_id']);
+            $groupsName = '';
+            for ($i = 0; $i < count($groups); $i++) {
+                $group = $init_admin->getGroupById($groups[$i])->getRowArray();
+                if ($group) {
+                    if ($i != count($groups) - 1) {
+                        $groupsName .= ucwords(strtolower($group['name'])) . ", ";
+                    } else {
+                        $groupsName .= ucwords(strtolower($group['name']));
+                    }
+                }
+            }
+            $access = 'Lainnya [' . $groupsName . ']';
+        };
+
+        $sheet->setCellValue('A1', 'Informasi Berita');
+        $sheet->setCellValue('A2', 'Judul Berita');
+        $sheet->setCellValue('A3', 'Tanggal Publish');
+        $sheet->setCellValue('A4', 'Penanggung Jawab');
+        $sheet->setCellValue('A5', 'Penulis');
+        $sheet->setCellValue('A6', 'Status Berita');
+        $sheet->setCellValue('A7', 'Akses Berita');
+
+        $sheet->setCellValue('B2', ': ' . ucwords(strtolower($Newsdata['judul'])));
+        $sheet->setCellValue('B3', ': ' . date("d M Y H:i", strtotime($Newsdata['tanggal_publish'])));
+        $sheet->setCellValue('B4', ': ' . $username);
+        $sheet->setCellValue('B5', ': ' . ucwords(strtolower($Newsdata['author'])));
+        $sheet->setCellValue('B6', ': ' . $status);
+        $sheet->setCellValue('B7', ': ' . $access);
+
+
+        $spreadsheet->createSheet();
+        $spreadsheet->setActiveSheetIndex(1);
+        $spreadsheet->getActiveSheet()->getColumnDimension('A')->setWidth(10);
+        $spreadsheet->getActiveSheet()->getColumnDimension('B')->setWidth(30);
+        $spreadsheet->getActiveSheet()->getColumnDimension('C')->setWidth(20);
+        $spreadsheet->getActiveSheet()->getColumnDimension('D')->setAutoSize(true);
+        $spreadsheet->getActiveSheet()->getColumnDimension('E')->setAutoSize(true);
+
+        $spreadsheet->getActiveSheet()->getStyle('1')->getFont()->setBold(true);
+        $spreadsheet->getActiveSheet()->getRowDimension('1')->setRowHeight(30);
+        $spreadsheet->getActiveSheet()->getStyle('A1:E1')->getAlignment()->setHorizontal('center');
+        $spreadsheet->getActiveSheet()->getStyle('A1:E1')->getAlignment()->setVertical('center');
+        $spreadsheet->getActiveSheet()->getStyle('A')->getAlignment()->setHorizontal('center');
+        $spreadsheet->getActiveSheet()->getStyle('A')->getAlignment()->setVertical('center');
+        $spreadsheet->getActiveSheet()->getStyle('C')->getAlignment()->setHorizontal('center');
+        $spreadsheet->getActiveSheet()->getStyle('C')->getAlignment()->setVertical('center');
+
+        $spreadsheet->getActiveSheet()->getStyle('A1:AT100')->getFill()
+            ->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)
+            ->getStartColor()->setARGB('ffffff');
+
+        $sheet = $spreadsheet->getActiveSheet()->setTitle("Data Pengunjung Berita");
+
+        $sheet->setCellValue('A1', 'No');
+        $sheet->setCellValue('B1', 'IP Pengunjung');
+        $sheet->setCellValue('C1', 'Kunjungan Terakhir');
+        $sheet->setCellValue('D1', 'Lokasi');
+        $sheet->setCellValue('E1', 'Total Kunjungan');
+
+        $no = 1;
+        $index = 2;
+
+        foreach ($ip_visited as $ip) {
+            if ($ip['ip'] == '::1') {
+                $loc = 'Localhost';
+            } else if (is_connected()) {
+                $loc = json_decode(file_get_contents("http://ipinfo.io/{$ip['ip']}/json"))->city;
+            } else {
+                $loc = 'Request Time Out (Unknown)';
+            }
+
+            $sheet->getStyle('A' . $index . ':E' . $index)->getAlignment()->setVertical('center');
+            $sheet->getStyle('E' . $index)->getAlignment()->setHorizontal('center');
+
+            $sheet->setCellValue('A' . $index, $no);
+            $sheet->setCellValue('B' . $index, $ip['ip']);
+            $sheet->setCellValue('C' . $index, date('d M Y H:i', strtotime($ip['date'])));
+            $sheet->setCellValue('D' . $index, $loc);
+            $sheet->setCellValue('E' . $index, $ip['hits']);
+            $no++;
+            $index++;
+        }
+
+        $index++;
+
+        $spreadsheet->getActiveSheet()->getStyle($index)->getFont()->setBold(true);
+        $spreadsheet->getActiveSheet()->getRowDimension($index)->setRowHeight(30);
+        $spreadsheet->getActiveSheet()->getStyle('A' . $index . ':E' . $index)->getAlignment()->setHorizontal('center');
+        $spreadsheet->getActiveSheet()->getStyle('A' . $index . ':E' . $index)->getAlignment()->setVertical('center');
+        $sheet->setCellValue('A' . $index, 'No');
+        $sheet->setCellValue('B' . $index, 'User');
+        $sheet->setCellValue('C' . $index, 'Tanggal');
+        $sheet->setCellValue('D' . $index, 'Komentar');
+
+        $index++;
+        $no = 1;
+        foreach ($comments[0] as $comment) {
+
+            $sheet->getStyle('A' . $index . ':D' . $index)->getAlignment()->setVertical('center');
+
+            $sheet->setCellValue('A' . $index, $no);
+            $sheet->setCellValue('B' . $index, $comment['name']);
+            $sheet->setCellValue('C' . $index, $comment['time']);
+            $sheet->setCellValue('D' . $index, $comment['komentar']);
+            $no++;
+            $index++;
+        }
+
+        $spreadsheet->setActiveSheetIndex(0);
+        $writer = new xlsx($spreadsheet);
+
+        $filename = 'Laporan Kunjungan Berita ' . ucwords(strtolower($Newsdata['judul'])) . ' - ' . date('d M Y', strtotime(get_date(false)));
+
+        header('Content-Type: application/vnd.ms-excel');
+        header('Content-Disposition: attachment;filename="' . $filename . '.xlsx"');
+        header('Cache-Control: max-age=0');
+
+        $writer->save('php://output');
+    }
+
+    public function folder()
+    {
+        $curr_folder = ROOTPATH . '/public/berita/';
+        mkdir($curr_folder, 0777, true);
+    }
+
+    public function sendUploadData()
+    {
+        if (!$this->request->isAJAX()) $this->output_json(false);
+
+        if ($this->form_validation->run($this->request->getPost(), 'create_user_news') === FALSE) {
+            $this->output_json(array_values($this->form_validation->getErrors()));
+        } else {
+            session()->remove('folder_name');
+            if (!session()->has('folder_name')) {
+                $name_folder = 'raw_file' . round(microtime(true));
+                $curr_folder = ROOTPATH . '/public/berita/' . $name_folder;
+                mkdir($curr_folder, 0777, true);
+                session()->set('folder_name', $name_folder);
+                // $this->output_json(session()->get('folder_name')); #Outputnya raw_file1622721146
+            }
+
+            $init = new BeritaModel();
+            $dataset = [
+                'date' => $this->request->getPost('date'),
+                'header' => $this->request->getPost('header'),
+                'content' =>  $this->request->getPost('content'),
+                'access' =>  'review',
+                'author' =>  $this->request->getPost('author'),
+                'thumbnail' => NULL,
+                'user_id' => NULL,
+                'groups_id' => NULL,
+            ];
+
+            $thumbnail = $_FILES['thumbnail'];
+
+            $file_name = "thumbnail_" . $thumbnail['name'];
+            $tmp_name =  $thumbnail['tmp_name'];
+
+            $upload_file = move_uploaded_file($tmp_name, ROOTPATH . '/public/berita/' . session()->get('folder_name')  . '/' .  $file_name);
+            if (!$upload_file) return $this->output_json(false);
+            $dataset['thumbnail'] = esc($file_name);
+
+            $query = $init->insertUserNews($dataset);
+            session()->remove('folder_name');
+
+            $this->output_json($query);
+        }
+    }
+
+    public function uploadBerita()
+    {
+        $data['judulHalaman'] = 'Unggah Berita/Artikel';
+        // $data['login'] = 'sudah';
+        $data['active'] = '';
+        return view('websia/kontenWebsia/beritaArtikel/unggahBerita.php', $data);
     }
 }
