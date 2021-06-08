@@ -9,6 +9,7 @@
     <div class="w-full flex justify-center items-center mt-4">
         <form method="POST" action="<?= route_to('login') ?>" class="pt-6 pb-16 md:mb-8 md:mt-4 rounded-3xl md:shadow-2xl flex flex-col justify-center 2xl:w-7/12 xl:w-8/12 lg:w-3/4 md:w-7/12 sm:w-2/3 w-full lg:mx-0 mx-5" data-aos="fade-left">
             <?= csrf_field(); ?>
+            <input type="hidden" name="checkForgot" value="<?= (session('message') !== null) ? session('message') : 'null' ?>">
             <h2 class="text-2xl mb-4 font-bold text-center cursor-default text-primary">MASUK PENGGUNA</h2>
             <div class="flex lg:mx-8 sm:mx-6 mx-3 h-10 mb-1">
                 <label for="email" class="w-1/4 text-primary font-medium flex items-center text-sm md:text-base">Email</label>
@@ -53,7 +54,7 @@
                 <div class="w-3/4 flex justify-between">
                     <div class="transform -translate-y-1">
                         <input id="remember-me" type="checkbox" class="cursor-pointer transform translate-y-0.5 sm:w-5 w-3">
-                        <label for="remember-me" id="remember" class="sm:text-sm text-xs text-primary font-medium select-none">Ingat saya</label>
+                        <label for="remember-me" id="remember" class="sm:text-sm text-xs text-primary font-medium select-none cursor-pointer">Ingat saya</label>
                     </div>
                     <a href="<?= route_to('forgot'); ?>" class="sm:text-sm text-xs cursor-pointer text-secondary font-medium hover:text-yellow-700">Lupa kata sandi?</a>
                 </div>
@@ -76,41 +77,15 @@
                     <h3 class="flex items-center text-sm text-secondary font-bold">SIPADU</h3>
                 </div>
             </div>
-
-            <script>
-                function loginSipadu() {
-                    var win = window.open(`http://localhost:8080/auth/sipadu`, "_blank", "height=700,width=550,status=no,titlebar=no,menubar=no,top=10,left=300", true);
-                    var timer = setInterval(function() {
-                        if (win.closed) {
-                            clearInterval(timer);
-                            if (document.cookie.includes('login=yes'))
-                                location.reload();
-                        }
-                    }, 1000);
-                }
-            </script>
             <!-- login with sipadu -->
 
             <!-- login with BPS -->
             <div class="lg:mx-8 sm:mx-6 mx-3" onclick="loginBPS()">
-                <div class="sso flex justify-center rounded-2xl w-full border-2 border-secondary py-1.5 cursor-pointer transform hover:scale-105 duration-300 hover:bg-yellow-200 hover:border-yellow-600 translate-x-0.5">
+                <div class="sso flex justify-center rounded-2xl w-full border-2 border-secondary py-1.5 cursor-pointer transform hover:scale-105 duration-300 hover:bg-yellow-200 hover:border-yellow-600">
                     <img src="/img/components/logo/logo_bps.png" alt="logo BPS" width="25" height="25" class="mr-2">
                     <h3 class="flex items-center text-sm text-secondary font-bold">BPS</h3>
                 </div>
             </div>
-
-            <script>
-                function loginBPS() {
-                    var win = window.open(`http://localhost:8080/auth/bps`, "_blank", "height=700,width=900,status=no,titlebar=no,menubar=no,top=10,left=300", true);
-                    var timer = setInterval(function() {
-                        if (win.closed) {
-                            clearInterval(timer);
-                            if (document.cookie.includes('login=yes'))
-                                location.reload();
-                        }
-                    }, 1000);
-                }
-            </script>
             <!-- login with BPS -->
             <p class="text-center mt-3 -mb-9 text-primary font-medium cursor-default">Akun belum terdaftar? <span><a href="/home/daftar" class="text-secondary hover:text-yellow-700 font-medium">Daftar</a></span></p>
         </form>
@@ -133,5 +108,51 @@ if (session('error')) : ?>
         }, 1500);
     </script>
 <?php endif; ?>
+
+<script>
+    // jangan dipindah ke login.js
+    if ($('input[name=checkForgot]').val() !== 'null') {
+        $('body').prepend(`
+    <div class="fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40" id='modalResetPass'>
+        <div class="hidden transform scale-0 opacity-0 duration-300 transition-all bg-gray bg-opacity-0">
+            <div class="mx-3 sm:px-6 px-2 py-3 rounded-lg bg-white flex items-center text-justify" style="background-color: #B1FF66;">
+                <img src="/img/components/icon/check.png" class="h-5 mr-2" alt="icon check">
+                <p class="sm:text-lg text-base" style="color: #54AC00;">Kata sandi Anda berhasil diubah. Silakan login dengan kata sandi baru.</p>
+            </div>
+        </div>
+    </div>
+    `)
+
+        $('#modalResetPass').children().first().removeClass('hidden')
+        setTimeout(function() {
+            $('#modalResetPass').children().first().removeClass('opacity-0 scale-0')
+        }, 10);
+
+        $(window).click(function(e) {
+            var modal = document.getElementById('modalResetPass')
+            if (!!modal) {
+                if (e.target === modal) {
+                    $('#modalResetPass').children().first().addClass('opacity-0 scale-0')
+                    $('#modalResetPass').children().first().on('transitionend MSTransitionEnd webkitTransitionEnd oTransitionEnd', function() {
+                        $('#modalResetPass').children().first().addClass('hidden')
+                    });
+                    setTimeout(function() {
+                        $('#modalResetPass').remove()
+                    }, 200);
+                }
+            }
+        })
+
+        setTimeout(() => {
+            $('#modalResetPass').children().first().addClass('opacity-0 scale-0')
+            $('#modalResetPass').children().first().on('transitionend MSTransitionEnd webkitTransitionEnd oTransitionEnd', function() {
+                $('#modalResetPass').children().first().addClass('hidden')
+            });
+            setTimeout(function() {
+                $('#modalResetPass').remove()
+            }, 200);
+        }, 2400);
+    }
+</script>
 
 <?= $this->endSection(); ?>

@@ -18,7 +18,7 @@
         <p class="text-primary font-medium mb-4 mt-1 xl:text-base sm:text-sm text-xs text-justify">Masukkan email yang terdaftar. Instruksi untuk mengatur ulang kata sandi akan dikirimkan melalui email tersebut.</p>
         <div class="flex sm:h-10 h-8 mb-5">
             <label for="email" class="w-1/4 text-primary font-medium flex items-center sm:text-lg text-base">Email</label>
-            <input type="text" name="email" class="input pl-2 w-3/4 rounded-lg border-gray-400 outline-none text-gray-400 border-2" id=email placeholder="Ketik email di sini">
+            <input type="text" name="email" class="input pl-2 w-3/4 rounded-lg border-gray-400 outline-none text-black border-2" id=email placeholder="Ketik email di sini">
         </div>
 
         <div class="flex pb-10">
@@ -27,7 +27,7 @@
             <div class="w-3/4 flex sm:flex-row flex-col sm:items-center">
                 <form action="">
                     <input type="submit" class="px-8 shadow-2xl sm:h-9 h-8 rounded-2xl text-base outline-none border-none bg-secondary cursor-pointer text-white duration-300 hover:bg-yellow-400 sm:w-max w-1/2" value="Kirim">
-                    <a href="/login/" class="text-secondary font-medium sm:ml-6 ml-0 mt-2 sm:mt-0 hover:text-yellow-700">Kembali</a>
+                    <a href="/login" class="text-secondary font-medium sm:ml-6 ml-0 mt-2 sm:mt-0 hover:text-yellow-700">Kembali</a>
                 </form>
             </div>
         </div>

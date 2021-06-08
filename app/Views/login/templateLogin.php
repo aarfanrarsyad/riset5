@@ -25,7 +25,7 @@
             background-position: right;
         }
 
-        body>div:first-child {
+        #headerLogin {
             background-image: url('/img/components/bgHeader.png');
         }
 
@@ -69,7 +69,7 @@
     </div>
     <!-- loading -->
     <!-- HEADER -->
-    <div class="bg-primary md:px-12 sm:px-8 px-4 w-full navbar fixed z-20 bg-no-repeat bg-cover bg-left">
+    <div id="headerLogin" class="bg-primary md:px-12 sm:px-8 px-4 w-full navbar fixed z-20 bg-no-repeat bg-cover bg-left">
 
         <div class="flex justify-between sm:my-2 my-1">
             <div class="font-heading flex items-center sm:gap-x-6 gap-x-3">
@@ -156,7 +156,6 @@
     <script type="text/javascript" src="/js/login.js"></script>
     <script type="text/javascript" src="/js/navbar.js"></script>
     <script src="/js/aos.js"></script>
-    <script type="text/javascript" src="/js/resetPass.js"></script>
     <script>
         AOS.init();
     </script>
