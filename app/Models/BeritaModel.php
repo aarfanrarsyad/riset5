@@ -222,4 +222,17 @@ class BeritaModel extends Model
             return false;
         }
     }
+
+    public function getBeritaFilter($cari = null, $awal = null, $akhir= null, $limit = 5, $start = 0){
+        //  2010-05-28 13:58:08
+        $query = $this->db->table('berita')->where('akses','public')->limit($limit);
+        if ($start>0) $query->offset(intval($start));
+        if (!is_null($cari)) $query->groupStart()->orLike(['judul' => $cari,'thumbnail' => $cari,'konten' => $cari])->groupEnd();
+        if (!is_null($akhir)) $query->where("tanggal_publish BETWEEN '$awal-01-01 00:00:01' AND '$akhir-12-30 23:59:59'");    
+        return [
+            'compiled' => $query->getCompiledSelect(false),
+            'jumlahBerita' => $query->countAllResults(false),
+            'berita' => $query->get()->getResultArray()
+        ];
+    }
 }

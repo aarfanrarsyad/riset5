@@ -1,13 +1,13 @@
 <div class="fixed flex flex-col bg-primary rounded-r h-screen sidebarSearch">
 
     <div class="flex md:px-5 px-2 py-2 justify-between bg-primaryHover items-center ">
-        <div class="md:text-2xl text-base font-heading font-semibold text-secondary hidden md:mr-32 param1"> FILTER</div>
+        <div class="md:text-2xl text-base font-heading font-semibold text-secondary hidden md:block md:mr-32 param1"> FILTER</div>
         <svg class="md:w-7 w-4 fill-current text-secondary cursor-pointer hamburgerSidebar" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
         </svg>
     </div>
 
-    <div class="flex flex-col mt-4 hidden param2">
+    <div class="flex flex-col mt-4 hidden md:block param2">
 
         <!-- Awal tombol filter "Semua" -->
         <a href="<?= base_url('user/searchAndFilter') ?>">
@@ -17,11 +17,11 @@
 
         <!-- Awal filter "Alumni" -->
         <!-- Catatan : kalo di halaman semuaAlumni masukkan css "hidden" di div yang ada class "listFilterSidebarBerita" -->
-        <a href="" >
+        <a href="" class="<?= (!isset($_GET['t']) || $_GET['t'] == 'alumni')?'':'hidden' ?>">
             <div class="md:text-base text-sm  text-white hover:bg-primaryDark font-heading font-medium px-4 py-1 cursor-pointer filterSidebar">Alumni</div>
         </a>
 
-        <div class="flex flex-col py-1 px-6 w-full listFilterSidebarAlumni">
+        <div class="flex flex-col py-1 px-6 w-full listFilterSidebarAlumni <?= (!isset($_GET['t']) || $_GET['t'] == 'alumni')?'':'hidden' ?>">
             <form id="filterAlumni" action="">
 
             <!-- Awal Filter "Prodi" Untuk Alumni  -->
