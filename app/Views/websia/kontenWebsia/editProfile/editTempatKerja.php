@@ -17,7 +17,7 @@
                         <?php endforeach; ?>
                     </datalist>
                     <input type="hidden" name="id_tempat_kerja" id="instansi-hidden">
-                    <?php if(session('ambigu') == "yes" && session('BPS') != "no") : ?>
+                    <?php if(session('ambigu') == "yes" && !session('BPS') == "no") : ?>
                     <?php else : ?>
                     <div class="flex gap-x-2 items-center">
                         <div>
@@ -49,6 +49,38 @@
                     </p>
                 <?php } ?>
                 <input type="text" name="nama_instansi" id="nama" class="inputForm" placeholder="Masukkan nama Instansi">
+                <div class="flex justify-between items-center">
+                    <label for="negara" class="font-medium" id="labelNegara">Negara:</label>    
+                </div>
+                <select name="negara" id="negara" class="inputForm" onchange="displayDiv2('negaraLainIndonesia','negaraIndonesia',this)">
+                        <option selected value="Indonesia">Indonesia</option>
+                        <option value="lainnya">Lainnya...</option>
+                </select>
+
+                <div class="hidden" id="negaraLainIndonesia">
+                    <input type="text" name="negaraLainnya" id="negaraLainnya" class="inputForm" placeholder="Masukkan nama negara">
+                </div>
+                <div class="hidden" id="negaraIndonesia">
+                    <div class="md:grid md:grid-cols-2 md:gap-x-4">
+                        <div>
+                            <label for="provinsi" class="font-medium" id="labelProvinsi">Provinsi:</label>
+                            <select name="provinsi" id="provinsi" class="inputForm">
+                                    <option selected disabled>Pilih Provinsi</option>
+                                    <?php foreach ($daftarProv as $prov) : ?>
+                                        <option id="<?= $prov->id_provinsi ?>" value="<?= $prov->nama_provinsi ?>"><?= $prov->nama_provinsi ?></option>
+                                    <?php endforeach ?>
+                            </select>
+                            <input hidden type="text" name="prov" id="prov-hidden">
+                        </div>
+                        <div>
+                            <label for='kabkota' class='font-medium' id='labelKabkot'>Kabupaten/Kota:</label>
+                            <select name='kabkota' id='kabkota' class='inputForm'>
+                                    <option selected disabled>Pilih Kabupaten/Kota</option>
+                            </select>
+                            <input hidden type="text" name="kab" id="kab-hidden">
+                        </div>
+                    </div>
+                </div>
                 <label for="alamat" class="font-medium">Alamat Instansi:</label>
                 <textarea type="text" name="alamat_instansi" id="alamat" class="inputForm resize-none" placeholder="Masukkan alamat instansi"></textarea>
                 <div class="md:w-1/2 w-full">

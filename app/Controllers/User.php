@@ -288,9 +288,7 @@ class User extends BaseController
 			]);
 		} else {
 			$ap = "Aktif sebagai PNS";
-			session()->set([	//cek BPS atau bukan
-				'BPS' => 'yes',
-			]);
+            session()->remove('BPS');
 		}
 
 		if ($ambigu == 1) {
@@ -832,9 +830,11 @@ class User extends BaseController
 		$model = new AlumniModel();
 		$query = $model->getTempatKerjaByNIM(session('id_alumni'));
 		$listtk = $model->getTempatKerja()->getResult();
+		$daftarProv = $model->getProv();
 		$data = [
 			'judulHalaman' => 'Edit Profil',
 			'login' => 'sudah',
+			'daftarProv' => $daftarProv,
 			'activeEditProfil' => 'tempatKerja',
 			'active' 		=> 'profil',
 			'tempat_kerja'      => $query->getRow(),
@@ -864,6 +864,36 @@ class User extends BaseController
 		$alamat = NULL;
 		$telp = NULL;
 		$faks = NULL;
+		if (isset($_POST['negara'])) {
+			$negara       	= htmlspecialchars($_POST['negara']);
+		} else {
+			$negara = NULL;
+		}
+		$negara2       	= htmlspecialchars($_POST['negaraLainnya']);
+		if (isset($_POST['prov'])) {
+			$provinsi 		= htmlspecialchars($_POST['prov']);
+		} else {
+			$provinsi = NULL;
+		}
+		$kota			= NULL;
+		if ($negara == "Indonesia") {
+			if ($provinsi != NULL) {
+				$provinsi       = ucwords(htmlspecialchars($_POST['prov']));
+				if (isset($_POST['kab'])) {
+					$kota       	= ucwords(htmlspecialchars($_POST['kab']));
+				}
+			} else {
+				$provinsi = NULL;
+			}
+		} else {
+			if ($negara2 == "") {
+				$negara = NULL;
+				$provinsi = NULL;
+			} else {
+				$negara = htmlspecialchars($negara2);
+				$provinsi = NULL;
+			}
+		}
 		if (isset($_POST['alamat_instansi'])) {
 			$alamat = htmlspecialchars($_POST['alamat_instansi']);
 		}
@@ -880,6 +910,9 @@ class User extends BaseController
 		$data1 = [
 			'nama_instansi'      => $instansi,
 			'alamat_instansi'  		=> $alamat,
+			'kota'			=> $kota,
+			'provinsi'		=> $provinsi,
+			'negara'		=> $negara,
 			'telp_instansi'  => $telp,
 			'faks_instansi'   => $faks,
 			'email_instansi'  => $email,
@@ -896,6 +929,9 @@ class User extends BaseController
 			$data1 = [
 				'nama_instansi'      => $instansi,
 				'alamat_instansi'  		=> $alamat,
+				'kota'			=> $kota,
+				'provinsi'		=> $provinsi,
+				'negara'		=> $negara,
 				'telp_instansi'  => $telp,
 				'faks_instansi'   => $faks,
 				'email_instansi'  => $email,
