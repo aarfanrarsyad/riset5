@@ -20,12 +20,14 @@
         </svg>
 
         <div class="z-20 transition-all duration-300 rounded-xl text-primary px-5 py-2 sm:text-sm text-xs absolute -right-1 top-10 transform origin-top-right">
-            <div class="font-bold">Ketentuan Pembuatan Berita</div>
+            <div class="font-bold">Ketentuan :</div>
             <ol class="list-decimal list-inside text-justify">
-                <li>Berita tidak diperkenankan mengandung unsur SARA dan hoaks</li>
+                <li>Isi konten terkait Alumni AIS/STIS/Polstat STIS</li>
+                <li>Berita tidak diperkenankan mengandung unsur SARA, hoaks, pelanggaran karya cipta, atau berisi tuduhan kepada pihak tertentu tanpa dasar</li>
+                <li>Menggunakan bahasa yang santun dan mudah dipahami</li>
                 <li>Berita memiliki minimal dua paragraf</li>
-                <li>Nama pena boleh digunakan sebagai nama penulis</li>
-                <li>dll.</li>
+                <li>Nama penulis boleh diisi dengan nama pena</li>
+                <li>Berita yang diunggah akan melalui proses validasi oleh admin yang tidak dapat diganggu gugat</li>
             </ol>
         </div>
 
@@ -147,9 +149,9 @@
                         window.location.href = "<?= base_url("Berita/uploadBerita") ?>"
                     } else if (result == "false") {
                         $('#konfirUnggahBerita').html(`
-                            <div class="hidden opacity-0 duration-700 transition-all p-3 rounded-lg flex items-center" style="background-color: #B1FF66;">
+                            <div class="hidden opacity-0 duration-700 transition-all p-3 rounded-lg flex items-center" style="background-color: #FF7474;">
                                 <img src="/img/components/icon/warning.png" class="h-5 mr-2" style="color: #AC1700;">
-                            <p class="sm:text-base text-sm font-heading font-bold" style="color: #AC1700;">Berita Tidak Terkirim</p>
+                            <p class="sm:text-base text-sm font-heading font-bold" style="color: #000000;">Berita Tidak Terkirim</p>
                             </div>  
                         `)
                     } else {
@@ -164,9 +166,9 @@
                         $('#formErrors').css("display", "");
 
                         $('#konfirUnggahBerita').html(`
-                            <div class="hidden opacity-0 duration-700 transition-all p-3 rounded-lg flex items-center" style="background-color: #B1FF66;">
+                            <div class="hidden opacity-0 duration-700 transition-all p-3 rounded-lg flex items-center" style="background-color: #FF7474;">
                                 <img src="/img/components/icon/warning.png" class="h-5 mr-2" style="color: #AC1700;">
-                            <p class="sm:text-base text-sm font-heading font-bold" style="color: #AC1700;">Berita Tidak Terkirim</p>
+                            <p class="sm:text-base text-sm font-heading font-bold" style="color: #000000;">Berita Tidak Terkirim</p>
                             </div>  
                         `)
                     }
