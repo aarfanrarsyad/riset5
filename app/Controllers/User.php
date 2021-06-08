@@ -263,6 +263,7 @@ class User extends BaseController
 		$jk = $query1->jenis_kelamin;
 		$sb = $query1->status_bekerja;
 		$ap = $query1->aktif_pns;
+		$ambigu = $query2->ambigu;
 		//angkatan terakhir yang diambil
 		// $angkatan = $model->getAngkatanByIdAlumni(session('id_alumni'));
 
@@ -287,6 +288,19 @@ class User extends BaseController
 			]);
 		} else {
 			$ap = "Aktif sebagai PNS";
+			session()->set([	//cek BPS atau bukan
+				'BPS' => 'yes',
+			]);
+		}
+
+		if ($ambigu == 1) {
+			session()->set([	//cek ambigu atau bukan
+				'ambigu' => 'yes',
+			]);
+		} else {
+			session()->set([	//cek ambigu atau bukan
+				'ambigu' => 'no',
+			]);
 		}
 
 		$data = [

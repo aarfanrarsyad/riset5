@@ -17,12 +17,15 @@
                         <?php endforeach; ?>
                     </datalist>
                     <input type="hidden" name="id_tempat_kerja" id="instansi-hidden">
+                    <?php if(session('ambigu') == "yes" && session('BPS') != "no") : ?>
+                    <?php else : ?>
                     <div class="flex gap-x-2 items-center">
                         <div>
                             Jika nama instansi Anda tidak terdaftar pada daftar di atas, tambahkan instansi Anda di sini:
                         </div>
                         <div class="bg-primary text-white rounded-full py-1 px-3 text-center cursor-pointer hover:bg-primaryHover transition-colors duration-300 my-2 tambahInstansi">TAMBAH</div>
                     </div>
+                    <?php endif; ?>
                     <div class="flex justify-end md:mb-6 mt-12">
                         <input type="submit" value="SIMPAN" class="w-24 text-center py-1 bg-secondary hover:bg-secondaryhover text-white rounded-full cursor-pointer focus:outline-none" id="submitTempatKerja">
                     </div>

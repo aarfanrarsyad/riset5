@@ -212,6 +212,10 @@ class Alumni extends Migration
 				'constraint'     => 16,
 				'unsigned'       => true,
 			],
+			'ambigu' => [
+				'type' => 'Boolean',
+				'default' => 0,
+			],
 		]);
 
 		//primary key

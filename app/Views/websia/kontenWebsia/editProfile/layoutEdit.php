@@ -30,7 +30,7 @@
                     <a href="/User/editPendidikan">
                         <li id="pendidikan" class="button font-heading lg:p-3 p-2 pl-3 lg:pl-7 mr-4 rounded-r-lg text-sm text-white <?= ($activeEditProfil == 'pendidikan') ? 'activeMenu' : ''; ?> hover:text-secondary hover:bg-primaryDark font-semibold">Pendidikan</li>
                     </a>
-                <?php if (session('BPS') == "no") : ?>
+                <?php if (session('BPS') == "no" || session('ambigu') == "yes" ) : ?>
                     <a href="/User/editTempatKerja">
                         <li id="tempatkerja" class="button font-heading lg:p-3 p-2 pl-3 lg:pl-7 mr-4 rounded-r-lg text-sm text-white <?= ($activeEditProfil == 'tempatKerja') ? 'activeMenu' : ''; ?> hover:text-secondary hover:bg-primaryDark font-semibold">Tempat Kerja</li>
                     </a>

@@ -172,7 +172,8 @@ class AlumniModel extends Model
         tempat_kerja.faks_instansi,
         tempat_kerja.email_instansi,
         alumni_tempat_kerja.id_alumni, 
-        alumni_tempat_kerja.id_tempat_kerja 
+        alumni_tempat_kerja.id_tempat_kerja,
+        alumni_tempat_kerja.ambigu
         FROM tempat_kerja, alumni_tempat_kerja 
         WHERE 
         tempat_kerja.id_tempat_kerja = alumni_tempat_kerja.id_tempat_kerja 
