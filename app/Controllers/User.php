@@ -1338,6 +1338,18 @@ class User extends BaseController
 		$galeri = $fotoModel->getByAlbum($key);
 		$count = $fotoModel->getCountAlbum($key);
 
+		$i = 0;
+
+		foreach ($galeri['foto'] as $foto) {
+			$tag = explode(',', $foto['tag']);
+			$j = 0;
+			foreach ($tag as $t) {
+				$galeri['foto'][$i]['tag_name'][$j] = $model->getTags($t);
+				$j++;
+			}
+			$i++;
+		}
+
 		$data = [
 			'alumni' 		=> $alumni,
 			'count'			=> $count,

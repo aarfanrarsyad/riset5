@@ -46,6 +46,71 @@ if ($status == 'bukan user') {
 <?= $this->extend('websia/layoutWebsia/templateBerandaLogin.php'); ?>
 
 <?= $this->section('content'); ?>
+
+<style>
+    .prev,
+    .next {
+        top: 50%;
+    }
+
+    .next {
+        right: 5%;
+    }
+
+    .prev {
+        left: 5%;
+    }
+
+    .pageFoto {
+        bottom: 0px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    @media only screen and (min-width: 600px) {
+
+        .prev,
+        .next {
+            width: 30px;
+        }
+
+        .prev {
+            left: 8%;
+        }
+
+        .next {
+            right: 8%;
+        }
+    }
+
+    @media only screen and (min-width: 768px) {
+
+        .prev,
+        .next {
+            width: 40px;
+        }
+
+        .prev {
+            left: 14%;
+        }
+
+        .next {
+            right: 14%;
+        }
+    }
+
+    @media only screen and (min-width: 1000px) {
+
+        .prev {
+            left: 20%;
+        }
+
+        .next {
+            right: 20%;
+        }
+    }
+</style>
+
 <!-- Awal User Profile-->
 <div class="md:flex block items-center md:flex-col lg:flex-row flex-col-reverse mt-10 md:mt-6 lg:mt-10 mb-8 pt-0 lg:px-20 md:px-8">
     <div class="lg:w-7/12 w-full md:flex items-center font-paragraph text-sm">
@@ -559,66 +624,74 @@ if ($status == 'bukan user') {
                         </a>
                         <!-- <php endfor; ?> -->
 
-                        <div class="fixed overflow-auto top-0 bottom-0 right-0 left-0 z-40 bg-black bg-opacity-80 text-center font-paragraph hidden" id="<?= $foto[$i]['id_foto']; ?>">
+                        <div class="popUpFoto fixed overflow-auto top-0 bottom-0 right-0 left-0 z-40 bg-black bg-opacity-80 text-center font-paragraph hidden" id="<?= $foto[$i]['id_foto']; ?>">
                             <div class="m-auto duration-700 transition-all bg-gray bg-opacity-0 w-11/12 sm:w-9/12 md:w-8/12 lg:w-7/12">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="closePopUpFoto absolute h-8 w-8 top-3 left-3 text-gray-100 cursor-pointer" viewBox="0 0 20 20" fill="currentColor" id='backPopUpFoto'>
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
+                                </svg>
                                 <!-- Awal Tombol Laporkan foto -->
                                 <button onClick="laporkanFoto(<?= $foto[$i]['id_foto']; ?>)"><img src="<?= base_url() ?>/img/components/icon/danger-sign.png" alt="laporkan foto" class="absolute top-3 right-3"></button>
                                 <!-- Akhir Tombol Laporkan foto -->
 
-                                <div class="flex flex-col justify-center items-center">
-                                    <div class="flex flex-row justify-center items-center gap-x-4 mt-8 mb-6">
-                                        <a>
-                                            <img src="<?= base_url() ?>/img/components/icon/left-on.png" alt="foto sebelumnya" class="cursor-pointer" onclick="prev('img-<?= $foto[$i]['id_foto']; ?>')" id="prev">
-                                        </a>
-                                        <img src="<?= base_url() ?>/img/galeri/<?= $foto[$i]['nama_file']; ?>" alt="<?= $foto[$i]['nama_file']; ?>" class="slider-img w-3/4" id="img-<?= $foto[$i]['id_foto']; ?>">
-                                        <a>
-                                            <img src="<?= base_url() ?>/img/components/icon/right-on.png" alt="foto selanjutnya" class="cursor-pointer" onclick="next('img-<?= $foto[$i]['id_foto']; ?>')" id="next">
-                                        </a>
-                                        <!-- <a href="#<?= $foto[$i]['id_foto'] - 1; ?>">
-                                                <img src="<?= base_url() ?>/img/components/icon/left-on.png" alt="foto sebelumnya" class="" onclick="prev()" id="prev">
-                                            </a>
-                                            <img src="<?= base_url() ?>/img/galeri/<?= $foto[$i]['nama_file']; ?>" alt="<?= $foto[$i]['nama_file']; ?>" class="slider-img w-3/4">
-                                            <a href="#<?= $foto[$i]['id_foto'] + 1; ?>">
-                                                <img src="<?= base_url() ?>/img/components/icon/right-on.png" alt="foto berikutnya" class="" onclick="next()" id="next">
-                                            </a> -->
-                                    </div>
+                                <div class="relative">
+                                    <a>
+                                        <img src="<?= base_url() ?>/img/components/icon/left-on.png" alt="foto sebelumnya" class="prev fixed cursor-pointer w-6" onclick="prev('img-<?= $foto[$i]['id_foto']; ?>')" id="prev">
+                                    </a>
+                                    <a>
+                                        <img src="<?= base_url() ?>/img/components/icon/right-on.png" alt="foto selanjutnya" class="next fixed cursor-pointer w-6 sm:right-10" onclick="next('img-<?= $foto[$i]['id_foto']; ?>')" id="next">
+                                    </a>
+                                    <div class="flex flex-col justify-center items-center">
+                                        <div class="flex flex-row justify-center items-center gap-x-4 mt-8 mb-6">
+                                            <img src="<?= base_url() ?>/img/galeri/<?= $foto[$i]['nama_file']; ?>" alt="<?= $foto[$i]['nama_file']; ?>" class="slider-img w-3/4" id="img-<?= $foto[$i]['id_foto']; ?>">
 
-                                    <!-- Awal Caption -->
-                                    <div class="text-white w-3/4 h-3/4 mx-2 text-base">
-                                        <!-- <p class="mb-2">Oleh : Si Fulan (59)</p> -->
-                                        <p class="mb-2">Oleh : <?= $foto[$i]['nama'] ?></p>
-                                        <!-- <p class="">Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam impedit optio praesentium soluta quasi. Voluptatibus molestias sequi inventore odit voluptas pariatur a ut, totam obcaecati accusamus iure, labore dolorum dolor.</p> -->
-                                        <p class="mt-4"><?= $foto[$i]['caption'] ?></p>
-                                        <div class="mt-5 text-gray-400 text-center">
-                                            <?php if (count($foto[$i]['tag_name']) > 1) : ?>
-                                                <span> <img src="<?= base_url() ?>/img/components/icon/line.png" alt="icon tag foto" class="inline mr-1"> bersama </span> <span class=" text-white"><?= $foto[$i]['tag_name'][0]['nama'] ?> </span> <span> dan</span> <span class="text-white"> <?= count($foto[$i]['tag_name']) - 1 ?> lainnya</span> <span><img src="<?= base_url() ?>/img/components/icon/down.png" alt="daftar tag" class="daftarTag inline ml-1 rounded-full w-4 hover:bg-secondary cursor-pointer" onclick="daftarTag()">
-                                                </span>
-                                                <!-- Awal Tampilan Daftar Tag -->
-                                                <div class="tampilTag hidden relative" id="tampilTag">
-                                                    <div class="static mt-2 p-2 rounded-2xl overflow-y-auto ml-64 sm:ml-64 md:ml-80 lg:96 bg-primary w-32 md:w-36 position-right text-white text-xs md:text-sm">
-                                                        <ul class="bg-primary">
-                                                            <?php for ($n = 1; $n < count($foto[$i]['tag_name']); $n++) : ?>
-                                                                <li><?= $foto[$i]['tag_name'][$n]['nama'] ?></li>
-                                                            <?php endfor ?>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            <?php elseif (count($foto[$i]['tag_name']) < 1) : ?>
-                                                <span> <img src="<?= base_url() ?>/img/components/icon/line.png" alt="icon tag foto" class="inline mr-1"> bersama </span> <span class=" text-white"><?= $foto[$i]['tag_name'][0]['nama'] ?> </span>
-                                                </span>
-                                            <?php else : ?>
-                                            <?php endif ?>
-                                            <!-- Akhir Tampilan Daftar Tag -->
+                                            <!-- <a href="#<?= $foto[$i]['id_foto'] - 1; ?>">
+                                                    <img src="<?= base_url() ?>/img/components/icon/left-on.png" alt="foto sebelumnya" class="" onclick="prev()" id="prev">
+                                                </a>
+                                                <img src="<?= base_url() ?>/img/galeri/<?= $foto[$i]['nama_file']; ?>" alt="<?= $foto[$i]['nama_file']; ?>" class="slider-img w-3/4">
+                                                <a href="#<?= $foto[$i]['id_foto'] + 1; ?>">
+                                                    <img src="<?= base_url() ?>/img/components/icon/right-on.png" alt="foto berikutnya" class="" onclick="next()" id="next">
+                                                </a> -->
                                         </div>
 
-                                    </div>
-                                    <!-- Akhir Caption -->
+                                        <!-- Awal Caption -->
+                                        <div class="text-white w-3/4 h-3/4 mx-2 text-base">
+                                            <!-- <p class="mb-2">Oleh : Si Fulan (59)</p> -->
+                                            <p class="mb-2">Oleh : <?= $foto[$i]['nama'] ?></p>
+                                            <!-- <p class="">Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam impedit optio praesentium soluta quasi. Voluptatibus molestias sequi inventore odit voluptas pariatur a ut, totam obcaecati accusamus iure, labore dolorum dolor.</p> -->
+                                            <p class="mt-4 pb-6"><?= $foto[$i]['caption'] ?></p>
+                                            <div class="mt-5 text-gray-400 text-center pb-10">
+                                                <?php if (count($foto[$i]['tag_name']) > 1) : ?>
+                                                    <span> <img src="<?= base_url() ?>/img/components/icon/line.png" alt="icon tag foto" class="inline mr-1"> bersama </span> <span class=" text-white"><?= $foto[$i]['tag_name'][0]['nama'] ?> </span> <span> dan</span> <span class="text-white"> <?= count($foto[$i]['tag_name']) - 1 ?> lainnya</span> <span><img src="<?= base_url() ?>/img/components/icon/down.png" alt="daftar tag" class="daftarTag inline ml-1 rounded-full w-4 hover:bg-secondary cursor-pointer" onclick="daftarTag()">
+                                                    </span>
+                                                    <!-- Awal Tampilan Daftar Tag -->
+                                                    <div class="tampilTag hidden relative" id="tampilTag">
+                                                        <div class="z-50 static mt-2 mb-8 p-2 rounded-2xl overflow-y-auto ml-64 sm:ml-64 md:ml-80 lg:ml-96 bg-primary w-32 md:w-36 position-right text-white text-xs md:text-sm">
+                                                            <ul class="bg-primary">
+                                                                <?php for ($n = 1; $n < count($foto[$i]['tag_name']); $n++) : ?>
+                                                                    <li><?= $foto[$i]['tag_name'][$n]['nama'] ?></li>
+                                                                    <hr>
+                                                                <?php endfor ?>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                <?php elseif (count($foto[$i]['tag_name']) < 1) : ?>
+                                                    <span> <img src="<?= base_url() ?>/img/components/icon/line.png" alt="icon tag foto" class="inline mr-1"> bersama </span> <span class=" text-white"><?= $foto[$i]['tag_name'][0]['nama'] ?> </span>
+                                                    </span>
+                                                <?php else : ?>
+                                                <?php endif ?>
+                                                <!-- Akhir Tampilan Daftar Tag -->
+                                            </div>
 
-                                    <div class="text-white w-3/4 mx-2 mt-10 md:text-xl">
-                                        <p class="mb-2">
-                                            <?= ($i + 1) ?> dari <?= $count ?></p>
-                                    </div>
+                                        </div>
+                                        <!-- Akhir Caption -->
 
+
+                                    </div>
+                                </div>
+
+                                <div class="pageFoto fixed text-white text-center text-base">
+                                    <p class="bg-secondary rounded-full text-center py-1 px-2">
+                                        <?= ($i + 1) ?> dari <?= $count ?></p>
                                 </div>
                             </div>
                         </div>
@@ -709,5 +782,11 @@ if ($status == 'bukan user') {
         get = document.getElementById(id);
         return get.setAttribute('src', '<?= base_url() ?>/img/galeri/' + images[i]);
     }
+
+    $('.closePopUpFoto').click(function() {
+        setTimeout(function() {
+            $('.popUpFoto').addClass('hidden')
+        }, 100);
+    })
 </script>
 <?= $this->endSection(); ?>

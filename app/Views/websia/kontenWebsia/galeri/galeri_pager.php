@@ -16,7 +16,7 @@
 
 <?php if ($pager->hasNext()) : ?>
     <a href="<?= $pager->getNext() ?>" class="p-1 rounded-full w-7 transform hover:scale-110">
-        <img src="/img/components/icon/right-on.png" alt="halaman selanjtnya"></a>
+        <img src="/img/components/icon/right-on.png" alt="halaman selanjutnya"></a>
     <a href="<?= $pager->getLast() ?>" class="p-1 rounded-full w-7 transform hover:scale-110">
         <img src="/img/components/icon/right-double.png" alt="halaman terakhir"></a>
 <?php endif ?>

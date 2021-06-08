@@ -52,7 +52,7 @@ class FotoModel extends Model
     public function getByAlbum($key)
     {
         $this->builder()
-            ->select('foto.id_foto AS id_foto, foto.nama_file AS nama_file, foto.caption AS caption, foto.album AS album, foto.created_at AS created_at, foto.approval AS approval, alumni.nama AS nama')
+            ->select('foto.id_foto AS id_foto, foto.tag AS tag, foto.nama_file AS nama_file, foto.caption AS caption, foto.album AS album, foto.created_at AS created_at, foto.approval AS approval, alumni.nama AS nama')
             ->join('alumni', 'alumni.id_alumni = foto.id_alumni', 'left')
             ->where('approval', 1)
             ->where('album', $key)
