@@ -112,14 +112,19 @@
                                     </div>
                                 </a>
                             <?php endif; ?>
-                            <div class="flex items-end text-sm relative text-white ml-1 p-1 bg-primaryLight cursor-pointer transition-colors duration-300 md:w-32 lg:w-48 w-full">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="absolute h-5 w-5 m-1 text-white">
-                                    <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
-                                </svg>
-                                <form action="/User/searchAndFilter" method="get">
+
+                            <form action="/User/searchAndFilter" method="get">
+                                <div class="flex items-end text-sm relative text-white ml-1 p-1 bg-primaryLight cursor-pointer transition-colors duration-300 md:w-32 lg:w-48 w-full">
+
+                                    <button type="submit" class="absolute h-5 w-5 m-1 text-white focus:outline-none">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                            <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
+                                        </svg>
+                                    </button>
                                     <input type="text" name="cari" placeholder="|  CARI" autocomplete="off" class="placeholder-white bg-transparent focus:outline-none ml-6 font-paragraph p-1" value="<?= isset($_GET['cari']) ? $_GET['cari'] : '' ?>">
-                                </form>
-                            </div>
+                                </div>
+
+                            </form>
                         </div>
                     </div>
                     <div class="flex my-auto">
@@ -172,14 +177,17 @@
                                 <a href="/admin"> ADMIN</a>
                             </div>
                         <?php endif; ?>
-                        <div class="flex  justify-center text-sm relative text-white p-3 cari mt-1 px-2">
-                            <svg xmlns=" http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" id="tombolCari" class="absolute -ml-12 h-5 w-5 text-white">
-                                <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
-                            </svg>
-                            <form action="/User/searchAndFilter" method="get">
+                        <form action="/User/searchAndFilter" method="get">
+                            <div class="flex  justify-center text-sm relative text-white p-3 cari mt-1 px-2">
+
+                                <button type="submit" class="absolute -ml-12 h-5 w-5 text-white focus:outline-none ">
+                                    <svg xmlns=" http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" id="tombolCari">
+                                        <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
+                                    </svg>
+                                </button>
                                 <input type="text" name="cari" placeholder="    |  CARI" id="inputCari" class="placeholder-white bg-transparent ml-6 text-xs text-center w-2/3 outline-none " value="<?= isset($_GET['cari']) ? $_GET['cari'] : '' ?>">
-                            </form>
-                        </div>
+                            </div>
+                        </form>
                         <a href="/auth/logout">
                             <div class=" mt-1 px-2 py-2 w-11/12 mx-auto font-medium bg-secondary hover:bg-secondaryhover transition-colors duration-200 text-xs text-center text-white ">
                                 KELUAR

@@ -1,6 +1,6 @@
-<div class="fixed md:static flex flex-col bg-primary rounded-r min-h-screen  sidebarSearch">
+<div class="fixed md:static flex flex-col bg-primary rounded-r min-h-screen sidebarSearch">
 
-    <div class="flex md:px-5 px-2 py-2 justify-between bg-primaryHover items-center ">
+    <div class="flex md:px-5 px-2 py-2 justify-between bg-primaryHover items-center cursor-pointer boxFilter">
         <div class="md:text-2xl text-base font-heading font-semibold text-secondary hidden md:block md:mr-32 param1"> FILTER</div>
         <svg class="md:w-7 w-4 fill-current text-secondary cursor-pointer hamburgerSidebar" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
@@ -11,17 +11,17 @@
 
         <!-- Awal tombol filter "Semua" -->
         <a href="<?= base_url('user/searchAndFilter') ?>">
-            <div class="md:text-base text-sm text-secondary hover:bg-primaryDark font-heading font-medium px-4 py-1 cursor-pointer filterSidebar">Semua</div>
+            <div class="md:text-base text-sm <?= (!isset($_GET['t'])) ? 'text-secondary' : 'text-white' ?> hover:bg-primaryDark font-heading font-medium px-4 py-1 cursor-pointer filterSidebar">Semua</div>
         </a>
         <!-- Akhir tombol filter "Semua" -->
 
         <!-- Awal filter "Alumni" -->
         <!-- Catatan : kalo di halaman semuaAlumni masukkan css "hidden" di div yang ada class "listFilterSidebarBerita" -->
-        <a href="" class="<?= (!isset($_GET['t']) || $_GET['t'] == 'alumni')?'':'hidden' ?>">
-            <div class="md:text-base text-sm  text-white hover:bg-primaryDark font-heading font-medium px-4 py-1 cursor-pointer filterSidebar">Alumni</div>
+        <a href="">
+            <div class="md:text-base text-sm <?= (isset($_GET['t'])) ? (($_GET['t'] == 'alumni') ? 'text-secondary' : 'text-white') : 'text-white' ?>  hover:bg-primaryDark font-heading font-medium px-4 py-1 cursor-pointer filterSidebar">Alumni</div>
         </a>
 
-        <div class="flex flex-col py-1 px-6 w-full listFilterSidebarAlumni <?= (!isset($_GET['t']) || $_GET['t'] == 'alumni')?'':'hidden' ?>">
+        <div class="flex flex-col py-1 px-6 w-full listFilterSidebarAlumni <?= (!isset($_GET['t']) || $_GET['t'] == 'alumni') ? '' : 'hidden' ?>">
             <form id="filterAlumni" action="">
 
                 <!-- Awal Filter "Prodi" Untuk Alumni  -->
@@ -124,7 +124,7 @@
                     <!-- Awal Input Filter "Prodi" Untuk Alumni  -->
                     <div class="mb-1 px-4 hidden listAngkatan">
                         <div class="flex w-full outline-none rounded-lg items-center">
-                            <input type="text" name="akt" placeholder="Angkatan 60" autocomplete="off" class="search w-full placeholder-gray-300 text-primary outline-none focus:ring-2 focus:ring-secondary font-paragraph text-xs px-2 py-1 font-paragraph rounded-lg" value="<?= isset($_GET['akt']) ? $_GET['akt'] : '' ?>">
+                            <input type="text" name="akt" placeholder="60" autocomplete="off" class="search w-full placeholder-gray-300 text-primary outline-none focus:ring-2 focus:ring-secondary font-paragraph text-xs px-2 py-1 font-paragraph rounded-lg" value="<?= isset($_GET['akt']) ? $_GET['akt'] : '' ?>">
 
                             <svg class="w-3 h-3 text-primary stroke-current stroke-2 -ml-5 cursor-pointer" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
@@ -168,8 +168,8 @@
 
         <!-- Awal filter "Berita" -->
         <!-- Catatan : kalo di halaman semuaBerita masukkan css "hidden" di div yang ada class "listFilterSidebarAlumni" -->
-        <a href="" class="<?= (!isset($_GET['t']) || $_GET['t'] == 'berita') ? '' : 'hidden' ?>">
-            <div class="md:text-base text-sm text-white hover:bg-primaryDark font-medium px-4 py-1 cursor-pointer filterSidebar">Artikel/Berita</div>
+        <a href="">
+            <div class="md:text-base text-sm <?= (isset($_GET['t'])) ? (($_GET['t'] == 'berita') ? 'text-secondary' : 'text-white') : 'text-white' ?> hover:bg-primaryDark font-medium px-4 py-1 cursor-pointer filterSidebar">Artikel/Berita</div>
         </a>
 
         <div class="flex flex-col py-1 px-7 w-full listFilterSidebarBerita <?= (!isset($_GET['t']) || $_GET['t'] == 'berita') ? '' : 'hidden' ?>">
@@ -194,8 +194,8 @@
                     <div class="flex justify-between gap-x-1 mb-2">
 
                         <!-- Awal Input Filter "Rentang Waktu Awal" Untuk Berita  -->
-                        <div class="flex w-1/2 outline-none rounded-lg items-center mb-1 text-primary inputTahunAwal">
-                            <input type="text" name="beritaAwal" placeholder="Awal" class="placeholder-gray-300 text-xs font-paragraph px-2 py-1 outline-none focus:ring-2 focus:ring-secondary font-paragraph rounded-lg w-full">
+                        <div class="flex w-1/2 rounded-lg items-center mb-1 text-primary inputTahunAwal">
+                            <input type="text" name="beritaAwal" placeholder="Awal" class="placeholder-gray-300 text-xs px-2 py-1 outline-none focus:ring-2 focus:ring-secondary font-paragraph rounded-lg w-full">
 
                             <svg class="w-3 h-3 stroke-current stroke-2 -ml-5 cursor-pointer" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>

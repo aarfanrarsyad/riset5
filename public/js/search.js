@@ -114,73 +114,6 @@ var tahunAwal = tahunfix;
 var tahunAkhir = tahunfix;
 var tahunPertamaBerita = 2010;
 
-// akhir input tahun awal berita
-$('.inputTahunAwal svg').click(function(){
-    $('.inputTahunAwal input').val('');
-    getWaktuKalenderAwal(tahunfix);
-});
-
-$('.inputTahunAwal input').keyup(function(){
-    clearTimeout(typingTimer);
-    if ($('.inputTahunAwal input').val()) {
-        typingTimer = setTimeout(selesaiInputTahunAwal, doneTypingInterval);
-    }
-    
-});
-
-function selesaiInputTahunAwal(){
-    if(parseInt($('.inputTahunAwal input').val()) <= tahunfix && parseInt($('.inputTahunAwal input').val()) >= tahunPertamaBerita){
-        if (parseInt($('.inputTahunAwal input').val()) > parseInt($('.inputTahunAkhir input').val())){
-            $('.inputTahunAwal input').addClass('border-2');
-            $('.inputTahunAwal input').addClass('border-red-600');
-        } else {
-            $('.inputTahunAwal input').removeClass('border-2');
-            $('.inputTahunAwal input').removeClass('border-red-600');
-            getWaktuKalenderAwal(parseInt($('.inputTahunAwal input').val()));
-        };
-    } else {
-            getWaktuKalenderAwal(tahunPertamaBerita);
-            $('.inputTahunAwal input').val(tahunPertamaBerita);
-    };
-
-}
-// Awal tempat tahun awal berita
-
-// akhir input tahun akhir berita
-$('.inputTahunAkhir svg').click(function(){
-    $('.inputTahunAkhir input').val('');
-    getWaktuKalenderAwal(tahunfix);
-});
-
-$('.inputTahunAkhir input').keyup(function(){
-    clearTimeout(typingTimer);
-    if ($('.inputTahunAkhir input').val()) {
-        typingTimer = setTimeout(selesaiInputTahunAkhir, doneTypingInterval);
-    }
-    
-});
-
-function selesaiInputTahunAkhir(){
-    if(parseInt($('.inputTahunAkhir input').val()) <= tahunfix && parseInt($('.inputTahunAkhir input').val()) >= tahunPertamaBerita ){
-        if (parseInt($('.inputTahunAwal input').val()) > parseInt($('.inputTahunAkhir input').val())){
-            $('.inputTahunAkhir input').addClass('border-2');
-            $('.inputTahunAkhir input').addClass('border-red-600');
-        } else {
-            $('.inputTahunAkhir input').removeClass('border-2');
-            $('.inputTahunAkhir input').removeClass('border-red-600');
-            getWaktuKalenderAkhir(parseInt($('.inputTahunAkhir input').val()));
-        };
-    } else {
-            getWaktuKalenderAkhir(tahunfix);
-            $('.inputTahunAkhir input').val(tahunfix);
-    };
-
-
-}
-// Awal input tempat akhir berita
-
-
-
 // Awal kalender Tahun Awal
 $('.inputTahunAwal input').focus(function(){
     $('.kalenderAwal').removeClass('hidden');
@@ -192,13 +125,13 @@ const inputTahunAwal = document.querySelector(".inputTahunAwal input");
 const rentangTahunAwal = document.querySelector(".rentangTahunAwal");
 
 function getWaktuKalenderAwal(param){
-    tahunAwal = param;
     var input = param;
-    var bantu = tahunfix;
+    var bantu = tahunAwal;
+    tahunAwal = param;
 
-    do {
+    // do {
         bantu = bantu - 12; 
-    } while (bantu >= param);
+    // } while (bantu >= param);
 
     var param = bantu + 1;
     rentangTahunAwal.innerHTML = param+"-"+ (param + 11);
@@ -214,35 +147,33 @@ function getWaktuKalenderAwal(param){
 getWaktuKalenderAwal(tahunfix)
 
 $('.perviousTahunAwal').click(function(){
-    if(tahunAkhir - 12 >= tahunPertamaBerita){
+    // if(tahunAkhir - 12 >= tahunPertamaBerita){
         tahunAwal = tahunAwal - 12;
         getWaktuKalenderAwal(tahunAwal);
-    }
-})	
+    // }
+});
 
 $('.nextTahunAwal').click(function(){
-    if(tahunAwal + 12 <= tahunfix){
+    // if(tahunAwal + 12 <= tahunfix){
         tahunAwal = tahunAwal + 12;	
         getWaktuKalenderAwal(tahunAwal);
-    }	    
-})
+    // }	    
+});
 
 tahunKalenderAwal.forEach(o => {
     o.addEventListener("click", () => {
         param = o.innerHTML;
         if(inputTahunAkhir.value != ""){
-            if(param < inputTahunAkhir.value ){
+            if(param <= inputTahunAkhir.value ){
                 inputTahunAwal.value=param;
-                inputTahunAwal.classList.remove('border-2');
-                inputTahunAwal.classList.remove('border-red-600');
+                inputTahunAwal.classList.remove('inputMerah');
             } else {
-                inputTahunAwal.classList.add('border-2');
-                inputTahunAwal.classList.add('border-red-600');
+                inputTahunAwal.value="";
+                inputTahunAwal.classList.add('inputMerah');
             }
         } else {
             inputTahunAwal.value=param;
-            inputTahunAwal.classList.remove('border-2');
-            inputTahunAwal.classList.remove('border-red-600');
+            inputTahunAwal.classList.remove('inputMerah');
         }
     })
 })
@@ -260,12 +191,13 @@ const inputTahunAkhir = document.querySelector(".inputTahunAkhir input");
 const rentangTahunAkhir = document.querySelector(".rentangTahunAkhir");
 
 function getWaktuKalenderAkhir(param){
-    tahunAkhir = param;
     var input = param;
-    var bantu = tahunfix;
-    do {
+    var bantu = tahunAkhir;
+    tahunAkhir = param;
+
+    // do {
         bantu = bantu - 12; 
-    } while (bantu >= param);
+    // } while (bantu >= param);
 
     var param = bantu + 1;
     rentangTahunAkhir.innerHTML = param+"-"+ (param + 11);
@@ -279,17 +211,17 @@ function getWaktuKalenderAkhir(param){
 getWaktuKalenderAkhir(tahunfix)
 
 $('.perviousTahunAkhir').click(function(){
-    if(tahunAkhir - 12 >= tahunPertamaBerita){
+    // if(tahunAkhir - 12 >= tahunPertamaBerita){
         tahunAkhir = tahunAkhir - 12;
         getWaktuKalenderAkhir(tahunAkhir);
-    }
+    // }
 })	
 
 $('.nextTahunAkhir').click(function(){
-    if(tahunAkhir + 12 <= tahunfix){
+    // if(tahunAkhir + 12 <= tahunfix){
         tahunAkhir = tahunAkhir + 12;	
         getWaktuKalenderAkhir(tahunAkhir);
-    }	    
+    // }	    
 })
 
 tahunKalenderAkhir.forEach(o => {
@@ -298,16 +230,14 @@ tahunKalenderAkhir.forEach(o => {
         if(inputTahunAwal.value != ""){
             if(param > inputTahunAwal.value ){
                 inputTahunAkhir.value=param;
-                inputTahunAkhir.classList.remove('border-2');
-                inputTahunAkhir.classList.remove('border-red-600');
+                inputTahunAkhir.classList.remove('inputMerah');
             } else {
-                inputTahunAkhir.classList.add('border-2');
-                inputTahunAkhir.classList.add('border-red-600');
+                inputTahunAkhir.value="";
+                inputTahunAkhir.classList.add('inputMerah');
             }
         } else {
             inputTahunAkhir.value=param;
-            inputTahunAkhir.classList.remove('border-2');
-            inputTahunAkhir.classList.remove('border-red-600');
+            inputTahunAkhir.classList.remove('inputMerah');
         }
     })
 })
@@ -316,5 +246,72 @@ tahunKalenderAkhir.forEach(o => {
 
 
 // Akhir Kaleneder
+
+// akhir input tahun awal berita
+$('.inputTahunAwal svg').click(function(){
+    $('.inputTahunAwal input').val('');
+    getWaktuKalenderAwal(tahunfix);
+});
+
+$('.inputTahunAwal input').keyup(function(){
+    // clearTimeout(typingTimer);
+    if ($('.inputTahunAwal input').val()) {
+        setTimeout(selesaiInputTahunAwal, doneTypingInterval);
+        // typingTimer = setTimeout(selesaiInputTahunAwal, doneTypingInterval);
+    }
+    
+});
+
+function selesaiInputTahunAwal(){
+    // if(parseInt($('.inputTahunAwal input').val()) <= tahunfix && parseInt($('.inputTahunAwal input').val()) >= tahunPertamaBerita){
+        if (parseInt($('.inputTahunAwal input').val()) > parseInt($('.inputTahunAkhir input').val())){
+            $('.inputTahunAwal input').addClass('inputMerah');
+            $('.inputTahunAwal input').val("");
+        } else {
+            $('.inputTahunAwal input').removeClass('inputMerah');
+            $('.inputTahunAkhir input').removeClass('inputMerah');
+            getWaktuKalenderAwal(parseInt($('.inputTahunAwal input').val()));
+        };
+    // } else {
+    //         getWaktuKalenderAwal(tahunPertamaBerita);
+    //         $('.inputTahunAwal input').val(tahunPertamaBerita);
+    // };
+
+}
+// Awal tempat tahun awal berita
+
+// akhir input tahun akhir berita
+$('.inputTahunAkhir svg').click(function(){
+    $('.inputTahunAkhir input').val('');
+    getWaktuKalenderAwal(tahunfix);
+});
+
+$('.inputTahunAkhir input').keyup(function(){
+    // clearTimeout(typingTimer);
+    if ($('.inputTahunAkhir input').val()) {
+        setTimeout(selesaiInputTahunAkhir, doneTypingInterval);
+        // typingTimer = setTimeout(selesaiInputTahunAkhir, doneTypingInterval);
+    }
+    
+});
+
+function selesaiInputTahunAkhir(){
+    // if(parseInt($('.inputTahunAkhir input').val()) <= tahunfix && parseInt($('.inputTahunAkhir input').val()) >= tahunPertamaBerita ){
+        if (parseInt($('.inputTahunAwal input').val()) > parseInt($('.inputTahunAkhir input').val())){
+            $('.inputTahunAkhir input').addClass('inputMerah');
+            $('.inputTahunAkhir input').val('');
+        } else {
+            $('.inputTahunAkhir input').removeClass('inputMerah');
+            $('.inputTahunAwal input').removeClass('inputMerah');
+            getWaktuKalenderAkhir(parseInt($('.inputTahunAkhir input').val()));
+        };
+    // } else {
+    //         getWaktuKalenderAkhir(tahunfix);
+    //         $('.inputTahunAkhir input').val(tahunfix);
+    // };
+
+
+}
+
 
 // akhir sidebar

@@ -64,7 +64,7 @@ body div.loading {
     top: 6.5rem;
   }
 
-  #sidebarDok>img {
+  #sidebarDok > img {
     margin-top: 1.3rem;
     margin-bottom: 1.3rem;
   }
@@ -88,7 +88,7 @@ body div.loading {
     top: 4rem;
   }
 
-  #sidebarDok>img {
+  #sidebarDok > img {
     margin-top: 1.2rem;
     margin-bottom: 1.2rem;
   }
@@ -103,8 +103,8 @@ body div.loading {
 }
 
 #menu1:hover,
-#menu1+ul>li>div:hover,
-#menu1+ul>li>ul>li:hover {
+#menu1 + ul > li > div:hover,
+#menu1 + ul > li > ul > li:hover {
   background-color: rgb(1, 89, 152);
 }
 
@@ -118,7 +118,7 @@ body div.loading {
 
 /* style layoutDokumentasi */
 
-#nav ul li:hover>ul {
+#nav ul li:hover > ul {
   max-height: 5em;
 }
 
@@ -188,11 +188,11 @@ input[type="checkbox"] {
 }
 
 /* style unggah berita */
-#infoBerita~div {
+#infoBerita ~ div {
   background-color: #6cf;
 }
 
-#infoBerita~div:before {
+#infoBerita ~ div:before {
   position: absolute;
   top: -10px;
   content: "";
@@ -202,11 +202,11 @@ input[type="checkbox"] {
   border-color: transparent transparent #6cf transparent;
 }
 
-#notif~div {
+#notif ~ div {
   background-color: #6cf;
 }
 
-#notif~div:before {
+#notif ~ div:before {
   position: absolute;
   top: -10px;
   content: "";
@@ -216,11 +216,11 @@ input[type="checkbox"] {
   border-color: transparent transparent #6cf transparent;
 }
 
-#notif1~div {
+#notif1 ~ div {
   background-color: #6cf;
 }
 
-#notif1~div:before {
+#notif1 ~ div:before {
   position: absolute;
   top: -10px;
   content: "";
@@ -230,11 +230,11 @@ input[type="checkbox"] {
   border-color: transparent transparent #6cf transparent;
 }
 
-#infoMedsos~div {
+#infoMedsos ~ div {
   background-color: #6cf;
 }
 
-#infoMedsos~div:before {
+#infoMedsos ~ div:before {
   position: absolute;
   top: -10px;
   content: "";
@@ -245,6 +245,12 @@ input[type="checkbox"] {
 }
 
 /* style proyek WS */
-.proyek+div {
+.proyek + div {
   box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.1), 0 0px 3px 3px rgba(0, 0, 0, 0.06);
+}
+
+.inputMerah {
+  border-style: solid;
+  border-width: 2px;
+  border-color: red;
 }
