@@ -94,25 +94,25 @@
             <?php $i = 0;
             foreach ($galeri['foto'] as $foto) : ?>
                 <!-- 1 gambar -->
-                <a onclick="clicked(<?= $i ?>)" href="#<?= $foto['id_foto']; ?>" id="foto<?= $foto['id_foto']; ?>">
+                <a href="#<?= $foto['id_foto']; ?>" id="foto<?= $foto['id_foto']; ?>" data-toggle="modal" data-target="#popUp<?= $foto['id_foto']; ?>">
                     <div class="rounded-3xl m-2 relative hover:shadow-xl transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105 cursor-pointer">
                         <img id="slide" class="object-cover w-96 h-48 rounded-3xl mx-auto" src="<?= base_url() ?>/img/galeri/<?= $foto['nama_file']; ?>" alt="<?= $foto['nama_file']; ?>" />
                     </div>
                 </a>
                 <!-- <php endfor; ?> -->
 
-                <div class="popUpFoto fixed overflow-auto top-0 bottom-0 right-0 left-0 z-40 bg-black bg-opacity-80 text-center font-paragraph hidden" id="<?= $foto['id_foto']; ?>">
+                <div class="modal fixed overflow-auto top-0 bottom-0 right-0 left-0 z-40 bg-black bg-opacity-80 text-center font-paragraph hidden" id="popUp<?= $foto['id_foto']; ?>">
                     <div class="m-auto duration-700 transition-all bg-gray bg-opacity-0 w-11/12 sm:w-9/12 md:w-8/12 lg:w-7/12">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="closePopUpFoto absolute h-8 w-8 top-3 left-3 text-gray-100 cursor-pointer" viewBox="0 0 20 20" fill="currentColor" id='backPopUpFoto'>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="absolute h-8 w-8 top-3 left-3 text-gray-100 cursor-pointer" viewBox="0 0 20 20" fill="currentColor" data-dismiss="modal">
                             <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
                         </svg>
                         <!-- Awal Tombol Laporkan foto -->
                         <button onClick="laporkanFoto(<?= $foto['id_foto']; ?>)"><img src="<?= base_url() ?>/img/components/icon/danger-sign.png" alt="laporkan foto" class="absolute top-3 right-3"></button>
                         <!-- Akhir Tombol Laporkan foto -->
                         <div class="relative">
-                            <img src="<?= base_url() ?>/img/components/icon/left-on.png" alt="foto sebelumnya" class="prev fixed cursor-pointer w-6" onclick="prev('img-<?= $foto['id_foto']; ?>')" id="prev">
+                            <img src="<?= base_url() ?>/img/components/icon/left-on.png" alt="foto sebelumnya" class="prev fixed cursor-pointer w-6" id="prev">
 
-                            <img src="<?= base_url() ?>/img/components/icon/right-on.png" alt="foto selanjutnya" class="next fixed cursor-pointer w-6 sm:right-10" onclick="next('img-<?= $foto['id_foto']; ?>')" id="next">
+                            <img src="<?= base_url() ?>/img/components/icon/right-on.png" alt="foto selanjutnya" class="next fixed cursor-pointer w-6 sm:right-10" id="next">
 
                             <div class="flex flex-col justify-center items-center">
                                 <div class="flex flex-row justify-center items-center gap-x-4 mt-8 mb-6">
@@ -126,7 +126,7 @@
                                     <!-- <p class="">Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam impedit optio praesentium soluta quasi. Voluptatibus molestias sequi inventore odit voluptas pariatur a ut, totam obcaecati accusamus iure, labore dolorum dolor.</p> -->
                                     <p class="mt-4 pb-6"><?= $foto['caption'] ?></p>
                                     <div class="mt-5 text-gray-400 text-center pb-10">
-                                        <?php if (count($foto['tag_name']) > 1) : ?>
+                                        <?php if (count($foto['tag_name']) > 2) : ?>
                                             <span> <img src="<?= base_url() ?>/img/components/icon/line.png" alt="icon tag foto" class="inline mr-1"> bersama </span> <span class=" text-white"><a href="/User/profilAlumni/<?= $foto['tag_name'][0]['id_alumni'] ?>"><?= $foto['tag_name'][0]['nama'] ?></a> </span> <span> dan</span> <span class="text-white"> <?= count($foto['tag_name']) - 1 ?> lainnya</span> <span><img src="<?= base_url() ?>/img/components/icon/down.png" alt="daftar semua tag" class="daftarTag inline ml-1 rounded-full w-4 hover:bg-secondary cursor-pointer" onclick="daftarTag()">
                                             </span>
                                             <!-- Awal Tampilan Daftar Tag -->
@@ -141,6 +141,11 @@
                                                         <?php endfor ?>
                                                     </ul>
                                                 </div>
+                                            </div>
+                                        <?php elseif (count($foto['tag_name']) == 2) : ?>
+                                            <div class="pb-2">
+                                                <span> <img src="<?= base_url() ?>/img/components/icon/line.png" alt="icon tag foto" class="inline mr-1"> bersama </span> <span class=" text-white"><a href="/User/profilAlumni/<?= $foto['tag_name'][0]['id_alumni'] ?>"><?= $foto['tag_name'][0]['nama'] ?></a> </span> <span> dan</span> <span class=" text-white"><a href="/User/profilAlumni/<?= $foto['tag_name'][1]['id_alumni'] ?>"><?= $foto['tag_name'][1]['nama'] ?></a></span>
+                                                </span>
                                             </div>
                                         <?php elseif (count($foto['tag_name']) == 1) : ?>
                                             <div class="pb-2">
@@ -171,23 +176,23 @@
                     </div>
                 </div>
                 <script>
-                    $('#foto<?= $foto['id_foto']; ?>').click(function() {
-                        var modal = document.getElementById('<?= $foto['id_foto']; ?>')
-                        $('#<?= $foto['id_foto']; ?>').removeClass('hidden')
-                        $(window).click(function(e) {
-                            if (e.target === modal) {
-                                setTimeout(function() {
-                                    $('#<?= $foto['id_foto']; ?>').addClass('hidden')
-                                }, 100);
-                            }
-                        });
+                    // $('#foto<?= $foto['id_foto']; ?>').click(function() {
+                    //     var modal = document.getElementById('popUp<?= $foto['id_foto']; ?>')
+                    //     $('#popUp<?= $foto['id_foto']; ?>').removeClass('hidden')
+                    //     $(window).click(function(e) {
+                    //         if (e.target === modal) {
+                    //             setTimeout(function() {
+                    //                 $('#popUp<?= $foto['id_foto']; ?>').addClass('hidden')
+                    //             }, 100);
+                    //         }
+                    //     });
 
-                        // $('.closeFormUnggahFoto').click(function() {
-                        //     setTimeout(function() {
-                        //         $('#formUnggahFoto').addClass('hidden')
-                        //     }, 100);
-                        // });
-                    })
+                    // $('.closeFormUnggahFoto').click(function() {
+                    //     setTimeout(function() {
+                    //         $('#formUnggahFoto').addClass('hidden')
+                    //     }, 100);
+                    // });
+                    // })
                 </script>
             <?php $i++;
             endforeach; ?>
@@ -279,32 +284,24 @@
 </div>
 
 <script>
-    var images = [];
-    <?php foreach ($galeri['foto'] as $foto) : ?>
-        images.push('<?= $foto['nama_file'] ?>');
-    <?php endforeach ?>
-    var i = 0;
+    $("div[id^='popUp']").each(function() {
 
-    function clicked(n) {
-        i = n;
-    }
+        var currentModal = $(this);
 
-    function prev(id) {
-        if (i <= 0) i = images.length;
-        i--;
-        return setImg(id);
-    }
+        //click next
+        currentModal.find('.next').click(function() {
+            currentModal.modal('hide');
+            currentModal.closest("div[id^='popUp']").nextAll("div[id^='popUp']").first().modal('show');
+        });
 
-    function next(id) {
-        if (i >= images.length - 1) i = -1;
-        i++;
-        return setImg(id);
-    }
+        //click prev
+        currentModal.find('.prev').click(function() {
+            currentModal.modal('hide');
+            currentModal.closest("div[id^='popUp']").prevAll("div[id^='popUp']").first().modal('show');
+        });
 
-    function setImg(id) {
-        get = document.getElementById(id);
-        return get.setAttribute('src', '<?= base_url() ?>/img/galeri/' + images[i]);
-    }
+    });
+
 
     // buat nama di foto yang diupload
     $('#pilihFile').change(function() {
@@ -377,11 +374,11 @@
         });
     })
 
-    $('.closePopUpFoto').click(function() {
-        setTimeout(function() {
-            $('.popUpFoto').addClass('hidden')
-        }, 100);
-    })
+    // $('.closePopUpFoto').click(function() {
+    //     setTimeout(function() {
+    //         $('.popUpFoto').addClass('hidden')
+    //     }, 100);
+    // })
 
     $('#tags').change(function() {
         $tags = $('#tags').val();
