@@ -656,27 +656,31 @@ if ($status == 'bukan user') {
                                         <!-- Awal Caption -->
                                         <div class="text-white w-3/4 h-3/4 mx-2 text-base">
                                             <!-- <p class="mb-2">Oleh : Si Fulan (59)</p> -->
-                                            <p class="mb-2">Oleh : <?= $foto[$i]['nama'] ?></p>
+                                            <p class="mb-2">Oleh : <a href="/User/profilAlumni/<?= $foto[$i]['id_alumni'] ?>"><?= $foto[$i]['nama'] ?></a></p>
                                             <!-- <p class="">Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam impedit optio praesentium soluta quasi. Voluptatibus molestias sequi inventore odit voluptas pariatur a ut, totam obcaecati accusamus iure, labore dolorum dolor.</p> -->
                                             <p class="mt-4 pb-6"><?= $foto[$i]['caption'] ?></p>
                                             <div class="mt-5 text-gray-400 text-center pb-10">
                                                 <?php if (count($foto[$i]['tag_name']) > 1) : ?>
-                                                    <span> <img src="<?= base_url() ?>/img/components/icon/line.png" alt="icon tag foto" class="inline mr-1"> bersama </span> <span class=" text-white"><?= $foto[$i]['tag_name'][0]['nama'] ?> </span> <span> dan</span> <span class="text-white"> <?= count($foto[$i]['tag_name']) - 1 ?> lainnya</span> <span><img src="<?= base_url() ?>/img/components/icon/down.png" alt="daftar tag" class="daftarTag inline ml-1 rounded-full w-4 hover:bg-secondary cursor-pointer" onclick="daftarTag()">
+                                                    <span> <img src="<?= base_url() ?>/img/components/icon/line.png" alt="icon tag foto" class="inline mr-1"> bersama </span> <span class=" text-white"><a href="/User/profilAlumni/<?= $foto[$i]['tag_name'][0]['id_alumni'] ?>"><?= $foto[$i]['tag_name'][0]['nama'] ?></a> </span> <span> dan</span> <span class="text-white"> <?= count($foto[$i]['tag_name']) - 1 ?> lainnya</span> <span><img src="<?= base_url() ?>/img/components/icon/down.png" alt="daftar tag" class="daftarTag inline ml-1 rounded-full w-4 hover:bg-secondary cursor-pointer" onclick="daftarTag()">
                                                     </span>
                                                     <!-- Awal Tampilan Daftar Tag -->
                                                     <div class="tampilTag hidden relative" id="tampilTag">
                                                         <div class="z-50 static mt-2 mb-8 p-2 rounded-2xl overflow-y-auto ml-64 sm:ml-64 md:ml-80 lg:ml-96 bg-primary w-32 md:w-36 position-right text-white text-xs md:text-sm">
                                                             <ul class="bg-primary">
                                                                 <?php for ($n = 1; $n < count($foto[$i]['tag_name']); $n++) : ?>
-                                                                    <li><?= $foto[$i]['tag_name'][$n]['nama'] ?></li>
+                                                                    <a href="/User/profilAlumni/<?= $foto[$i]['tag_name'][$n]['id_alumni'] ?>">
+                                                                        <li><?= $foto[$i]['tag_name'][$n]['nama'] ?></li>
+                                                                    </a>
                                                                     <hr>
                                                                 <?php endfor ?>
                                                             </ul>
                                                         </div>
                                                     </div>
-                                                <?php elseif (count($foto[$i]['tag_name']) < 1) : ?>
-                                                    <span> <img src="<?= base_url() ?>/img/components/icon/line.png" alt="icon tag foto" class="inline mr-1"> bersama </span> <span class=" text-white"><?= $foto[$i]['tag_name'][0]['nama'] ?> </span>
-                                                    </span>
+                                                <?php elseif (count($foto[$i]['tag_name']) == 1) : ?>
+                                                    <div class="pb-2">
+                                                        <span> <img src="<?= base_url() ?>/img/components/icon/line.png" alt="icon tag foto" class="inline mr-1"> bersama </span> <span class=" text-white"><a href="/User/profilAlumni/<?= $foto[$i]['tag_name'][0]['id_alumni'] ?>"><?= $foto[$i]['tag_name'][0]['nama'] ?></a> </span>
+                                                        </span>
+                                                    </div>
                                                 <?php else : ?>
                                                 <?php endif ?>
                                                 <!-- Akhir Tampilan Daftar Tag -->

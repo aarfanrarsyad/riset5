@@ -16,7 +16,7 @@ class AlumniModel extends Model
 
     public function getTags($id_alumni)
     {
-        return $this->builder()->select('nama')->where('id_alumni', $id_alumni)->get()->getFirstRow('array');
+        return $this->builder()->select('nama, id_alumni')->where('id_alumni', $id_alumni)->get()->getFirstRow('array');
     }
 
 
@@ -47,37 +47,37 @@ class AlumniModel extends Model
         return $this->db->query($query);
     }
 
-    public function getAlumniFilter($cari='', $pro=[], $akt='', $kerja='',$limit=5,$start=0)
+    public function getAlumniFilter($cari = '', $pro = [], $akt = '', $kerja = '', $limit = 5, $start = 0)
     {
         //query utama
         $query = $this->table('alumni')->select('alumni.id_alumni,nama,foto_profil,nim,angkatan,program_studi')
             ->orderBy('alumni.id_alumni')->groupBy('alumni.id_alumni')->limit($limit)
-            ->join('pendidikan', 'alumni.id_alumni = pendidikan.id_alumni','inner')
-            ->join('pendidikan_tinggi', 'pendidikan_tinggi.id_pendidikan = pendidikan.id_pendidikan','inner');
-        
-        if ($start>0) $query->offset(intval($start));
+            ->join('pendidikan', 'alumni.id_alumni = pendidikan.id_alumni', 'inner')
+            ->join('pendidikan_tinggi', 'pendidikan_tinggi.id_pendidikan = pendidikan.id_pendidikan', 'inner');
 
-        if($cari != ''){
-            $query->groupStart()->like('nama',$cari)
-            ->orLike('tempat_lahir',$cari)->orLike('tanggal_lahir',$cari)
-            ->orLike('telp_alumni',$cari)->orLike('email',$cari)
-            ->orLike('alamat_alumni',$cari)->orLike('perkiraan_pensiun',$cari)
-            ->orLike('jabatan_terakhir',$cari)->orLike('ig',$cari)
-            ->orLike('fb',$cari)->orLike('twitter',$cari)
-            ->orLike('nip',$cari)->orLike('nip_bps',$cari)
-            ->groupEnd();
+        if ($start > 0) $query->offset(intval($start));
+
+        if ($cari != '') {
+            $query->groupStart()->like('nama', $cari)
+                ->orLike('tempat_lahir', $cari)->orLike('tanggal_lahir', $cari)
+                ->orLike('telp_alumni', $cari)->orLike('email', $cari)
+                ->orLike('alamat_alumni', $cari)->orLike('perkiraan_pensiun', $cari)
+                ->orLike('jabatan_terakhir', $cari)->orLike('ig', $cari)
+                ->orLike('fb', $cari)->orLike('twitter', $cari)
+                ->orLike('nip', $cari)->orLike('nip_bps', $cari)
+                ->groupEnd();
         }
 
         // logic pecarian prodi
         $listProdi = [
             'DI' => ['Ak. Ilmu Statistik'],
-            'DIII' => ['D-III AIS','D-III STIS', 'DIII-AIS'],
-            'KS' => ['D-IV Komputasi Statistik','Komputasi Statistik'],
+            'DIII' => ['D-III AIS', 'D-III STIS', 'DIII-AIS'],
+            'KS' => ['D-IV Komputasi Statistik', 'Komputasi Statistik'],
             'ST' => ['Statistik Sosial Kependudukan', 'D-IV Statistik Sosial Kependudukan', 'D-IV Statistik Ekonomi', 'D-IV SK', 'Statistik Ekonomi', 'D-IV SE']
         ];
-        $prodi = ['in'=>[],'notIn'=>[]];
+        $prodi = ['in' => [], 'notIn' => []];
         foreach (array_keys($listProdi) as $p) {
-            if(in_array($p, $pro)){
+            if (in_array($p, $pro)) {
                 foreach ($listProdi[$p] as $di) {
                     array_push($prodi['in'], $di);
                 }
@@ -86,10 +86,10 @@ class AlumniModel extends Model
                 foreach ($listProdi[$p] as $di) {
                     array_push($prodi['notIn'], $di);
                 }
-                array_push($prodi['notIn'], $p);                        
+                array_push($prodi['notIn'], $p);
             }
         }
-        if(count($prodi['in'])>0) $query->whereIn('program_studi', $prodi['in']);
+        if (count($prodi['in']) > 0) $query->whereIn('program_studi', $prodi['in']);
         // if(count($prodi['notIn'])>0) $query->whereNotIn('program_studi', $prodi['notIn']);
 
         // logic pecarian angkatan
@@ -101,7 +101,7 @@ class AlumniModel extends Model
             foreach (str_split($akt) as $key) {
                 if (in_array($key, str_split($reg))) $parse .= $key;
             }
-            $parse = ($parse=='') ? '1-'.$max_angkatan : $parse ;
+            $parse = ($parse == '') ? '1-' . $max_angkatan : $parse;
 
             $query->groupStart();
             foreach (explode(',', $parse) as $key) {
@@ -120,16 +120,16 @@ class AlumniModel extends Model
             // dd($parse);
             $query->groupEnd();
         }
-    
+
         // logic pecarian tempat kerja
-        if ($kerja!=='') {
+        if ($kerja !== '') {
             $query->select('nama_instansi,alamat_instansi')
-            ->join('alumni_tempat_kerja', 'alumni.id_alumni = alumni_tempat_kerja.id_alumni','inner')
-            ->join('tempat_kerja', 'alumni_tempat_kerja.id_tempat_kerja = tempat_kerja.id_tempat_kerja','inner')
-            ->groupStart()->like('nama_instansi',$kerja)
-            ->orLike('alamat_instansi',$kerja)->groupEnd();
+                ->join('alumni_tempat_kerja', 'alumni.id_alumni = alumni_tempat_kerja.id_alumni', 'inner')
+                ->join('tempat_kerja', 'alumni_tempat_kerja.id_tempat_kerja = tempat_kerja.id_tempat_kerja', 'inner')
+                ->groupStart()->like('nama_instansi', $kerja)
+                ->orLike('alamat_instansi', $kerja)->groupEnd();
         }
-        
+
         return [
             'compiled' => $query->getCompiledSelect(false),
             'jumlahAlumni' => $query->countAllResults(false),
@@ -329,8 +329,9 @@ class AlumniModel extends Model
         }
     }
 
-    public function getNumAlumni(){
-        $sql ="SELECT COUNT(*) as jumlah_alumni FROM alumni";
+    public function getNumAlumni()
+    {
+        $sql = "SELECT COUNT(*) as jumlah_alumni FROM alumni";
         return $this->db->query($sql);
     }
 
