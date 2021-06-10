@@ -3,7 +3,7 @@ function loginSipadu() {
     var timer = setInterval(function () {
         if (win.closed) {
             clearInterval(timer);
-            if (document.cookie.includes('login=yes'))
+            if (document.cookie.includes('login=yes') || document.cookie.includes('account=inactivated'))
                 location.reload();
         }
     }, 1000);
@@ -13,8 +13,8 @@ function loginBPS() {
     var win = window.open(`http://localhost:8080/auth/bps`, "_blank", "height=700,width=900,status=no,titlebar=no,menubar=no,top=10,left=300", true);
     var timer = setInterval(function () {
         if (win.closed) {
-            clearInterval(timer);
-            if (document.cookie.includes('login=yes'))
+            clearInterval(timer);            
+            if (document.cookie.includes('login=yes') || document.cookie.includes('account=inactivated'))
                 location.reload();
         }
     }, 1000);

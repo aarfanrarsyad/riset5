@@ -280,18 +280,15 @@
     }],
     maxOptions: 5,
     maxItems: 10,
-    options: [ <
-      ?
-      php foreach($alumni as $data) {
-        echo("{
-          angkatan: \"Angkatan ".$data - > angkatan.
-          "\",
-          name: \"".$data - > nama.
-          "\",
-          id_alumni: \"".$data - > id_alumni.
-          "\"
-        }, ");
-      } ? >
+    options: [
+      <?php foreach ($alumni as $data) {
+        if ($data->id_alumni !== session()->id_alumni)
+          echo ("{
+                  angkatan: \"Angkatan " . $data->angkatan . "\",
+                  name: \"" . $data->nama . "\",
+                  id_alumni: \"" . $data->id_alumni . "\"
+              },");
+      } ?>
     ],
     render: {
       item: function(item, escape) {

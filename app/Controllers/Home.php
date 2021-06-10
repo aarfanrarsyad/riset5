@@ -14,6 +14,10 @@ class Home extends BaseController
 
 	public function index()
 	{
+		if (session()->has('err_sso')) {
+			return redirect()->to(base_url('login'));
+		}
+
 		$this->modelAuth = new \App\Models\AuthModel();
 		$this->modelAlumni = new \App\Models\AlumniModel();
 		$this->loginModel = new LoginModel();
@@ -160,61 +164,75 @@ class Home extends BaseController
 
 								$hasil = $this->modelAuth->getUserByUsername($user->getUsername());
 
-								session()->set([	//set session (informasi identitas) dari tabel users
-									'id_user' => $hasil['id'],
-									'id_alumni' => $hasil['id_alumni'],
-									'nama' => $hasil['fullname']
-								]);
-
-								$query = $this->roleModel->getRole(session('id_user'));
-								$role = array();
-
-								if ($query != null) {
-									foreach ($query as $arr) {
-										array_push($role, $arr->group_id);
-									}
-									session()->set([
-										'role' => $role
-									]);
-								} else {
-									$data = [
-										'group_id'	=> 2,
-										'user_id'	=> session('id_user')
-									];
-									$this->roleModel->insertRole($data);
-									$query = $this->roleModel->getRole(session('id_user'));
-									foreach ($query as $arr) {
-										array_push($role, $arr->group_id);
-									}
-									session()->set([
-										'role' => $role
-									]);
+								if (session()->has('error')) {
+									redirect()->to(base_url('auth/logout'));
 								}
 
-								$ipAddress = Services::request()->getIPAddress();
-								$this->recordLoginAttempt($hasil['email'], $ipAddress, session('id_user') ?? null, true);
+								if ($hasil['active'] == 1) {
+									session()->set([	//set session (informasi identitas) dari tabel users
+										'id_user' => $hasil['id'],
+										'id_alumni' => $hasil['id_alumni'],
+										'nama' => $hasil['fullname']
+									]);
 
-								setcookie('login', 'yes', time() + 60, $_SERVER['SERVER_NAME']);
-								echo '<script>window.close();</script>';
+									$query = $this->roleModel->getRole(session('id_user'));
+									$role = array();
 
-								$flash = '<strong>Login berhasil!</strong> selamat datang <b>' . session('nama') . '</b>.';
-								$alert = "<div id=\"alert\">
-									<div class=\"fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40\">
-										<div class=\"duration-700 transition-all p-3 rounded-lg flex items-center\" style=\"background-color: #34eb52;\">
-											<p class=\"sm:text-base text-sm font-heading font-bold\">" . $flash . "</p>
+									if ($query != null) {
+										foreach ($query as $arr) {
+											array_push($role, $arr->group_id);
+										}
+										session()->set([
+											'role' => $role
+										]);
+									} else {
+										$data = [
+											'group_id'	=> 2,
+											'user_id'	=> session('id_user')
+										];
+										$this->roleModel->insertRole($data);
+										$query = $this->roleModel->getRole(session('id_user'));
+										foreach ($query as $arr) {
+											array_push($role, $arr->group_id);
+										}
+										session()->set([
+											'role' => $role
+										]);
+									}
+
+									$ipAddress = Services::request()->getIPAddress();
+									$this->recordLoginAttempt($hasil['email'], $ipAddress, session('id_user') ?? null, true);
+
+									setcookie('login', 'yes', time() + 60, $_SERVER['SERVER_NAME']);
+									echo '<script>window.close();</script>';
+
+									$flash = '<strong>Login berhasil!</strong> selamat datang <b>' . session('nama') . '</b>.';
+									$alert = "<div id=\"alert\">
+										<div class=\"fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40\">
+											<div class=\"duration-700 transition-all p-3 rounded-lg flex items-center\" style=\"background-color: #34eb52;\">
+												<p class=\"sm:text-base text-sm font-heading font-bold\">" . $flash . "</p>
+											</div>
 										</div>
 									</div>
-								</div>
-								<script>
-									setTimeout(function() {
-										$('#alert').fadeOut();
-									}, 1800);
-								</script>";
-								session()->set([
-									'login_notif' => $alert
-								]);
+									<script>
+										setTimeout(function() {
+											$('#alert').fadeOut();
+										}, 1800);
+									</script>";
+									session()->set([
+										'login_notif' => $alert
+									]);
+									die();
+								} else {
+									session()->set([
+										'err_sso' 	=> 'non-active',
+										'logout'	=> $provider->getLogoutUrl()
+									]);
 
-								die();
+									setcookie('account', 'inactivated', time() + 10, $_SERVER['SERVER_NAME']);
+									echo '<script>window.close();</script>';
+									die();
+								}
 							} else {
 								$flash = '<strong>Login gagal!</strong> silahkan gunakan akun alumni AIS/STIS/Polstat STIS.';
 								$alert = "<div id=\"alert\">
@@ -348,60 +366,71 @@ class Home extends BaseController
 					}
 
 					$user = $this->modelAuth->getUserByUsername($hasil['profile']['nim']);
-					session()->set([	//set session (informasi identitas) dari tabel users
-						'id_user' => $user['id'],
-						'id_alumni' => $user['id_alumni'],
-						'nama' => $user['fullname']
-					]);
 
-					$query = $this->roleModel->getRole(session('id_user'));
-					$role = array();
-
-					if ($query != null) {
-						foreach ($query as $arr) {
-							array_push($role, $arr->group_id);
-						}
-						session()->set([
-							'role' => $role
+					if ($user['active'] == 1) {
+						session()->set([	//set session (informasi identitas) dari tabel users
+							'id_user' => $user['id'],
+							'id_alumni' => $user['id_alumni'],
+							'nama' => $user['fullname']
 						]);
-					} else {
-						$data = [
-							'group_id'	=> 2,
-							'user_id'	=> session('id_user')
-						];
-						$this->roleModel->insertRole($data);
+
 						$query = $this->roleModel->getRole(session('id_user'));
-						foreach ($query as $arr) {
-							array_push($role, $arr->group_id);
+						$role = array();
+
+						if ($query != null) {
+							foreach ($query as $arr) {
+								array_push($role, $arr->group_id);
+							}
+							session()->set([
+								'role' => $role
+							]);
+						} else {
+							$data = [
+								'group_id'	=> 2,
+								'user_id'	=> session('id_user')
+							];
+							$this->roleModel->insertRole($data);
+							$query = $this->roleModel->getRole(session('id_user'));
+							foreach ($query as $arr) {
+								array_push($role, $arr->group_id);
+							}
+							session()->set([
+								'role' => $role
+							]);
 						}
-						session()->set([
-							'role' => $role
-						]);
-					}
 
-					$ipAddress = Services::request()->getIPAddress();
-					$this->recordLoginAttempt(session('nim') . '@stis.ac.id', $ipAddress, session('id_user') ?? null, true);	//insert ke tabel auth_login untuk log login
-					setcookie('login', 'yes', time() + 60, $_SERVER['SERVER_NAME']);
-					echo '<script>window.close();</script>';
+						$ipAddress = Services::request()->getIPAddress();
+						$this->recordLoginAttempt(session('nim') . '@stis.ac.id', $ipAddress, session('id_user') ?? null, true);	//insert ke tabel auth_login untuk log login
+						setcookie('login', 'yes', time() + 60, $_SERVER['SERVER_NAME']);
+						echo '<script>window.close();</script>';
 
-					$flash = '<strong>Login berhasil!</strong> selamat datang <b>' . session('nama') . '</b>.';
-					$alert = "<div id=\"alert\">
-									<div class=\"fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40\">
-										<div class=\"duration-700 transition-all p-3 rounded-lg flex items-center\" style=\"background-color: #34eb52;\">
-											<p class=\"sm:text-base text-sm font-heading font-bold\">" . $flash . "</p>
+						$flash = '<strong>Login berhasil!</strong> selamat datang <b>' . session('nama') . '</b>.';
+						$alert = "<div id=\"alert\">
+										<div class=\"fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40\">
+											<div class=\"duration-700 transition-all p-3 rounded-lg flex items-center\" style=\"background-color: #34eb52;\">
+												<p class=\"sm:text-base text-sm font-heading font-bold\">" . $flash . "</p>
+											</div>
 										</div>
 									</div>
-								</div>
-								<script>
-									setTimeout(function() {
-										$('#alert').fadeOut();
-									}, 1800);
-								</script>";
-					session()->set([
-						'login_notif' => $alert
-					]);
+									<script>
+										setTimeout(function() {
+											$('#alert').fadeOut();
+										}, 1800);
+									</script>";
+						session()->set([
+							'login_notif' => $alert
+						]);
 
-					die();
+						die();
+					} else {
+						session()->set([
+							'err_sso' 	=> 'non-active',
+						]);
+
+						setcookie('account', 'inactivated', time() + 10, $_SERVER['SERVER_NAME']);
+						echo '<script>window.close();</script>';
+						die();
+					}
 				} else {	//apabila alumni memakai akun dosen
 					/* KATANYA LANGSUNG ALERT AJA */
 					// session()->setFlashdata('pesan', 'Silahkan gunakan akun Sipadu Mahasiswa atau akun BPS, atau hubungi admin website');
