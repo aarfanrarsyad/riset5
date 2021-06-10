@@ -377,7 +377,7 @@ class Alumni extends Migration
 			],
 			'caption' => [
 				'type' => 'VARCHAR',
-				'constraint' => '2200',
+				'constraint' => '150',
 				'null'	=> true,
 			],
 			'created_at' => [

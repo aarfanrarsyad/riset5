@@ -288,7 +288,7 @@ class User extends BaseController
 			]);
 		} else {
 			$ap = "Aktif sebagai PNS";
-            session()->remove('BPS');
+			session()->remove('BPS');
 		}
 
 		if ($ambigu == 1) {
@@ -854,7 +854,7 @@ class User extends BaseController
 		];
 
 		$model->db->table('alumni_tempat_kerja')->set($data)->where('id_alumni', session('id_alumni'))->update();
-		session()->setFlashdata('edit-tk-success', 'Tempat Kerja berhasil diperbaharui');		
+		session()->setFlashdata('edit-tk-success', 'Tempat Kerja berhasil diperbaharui');
 		return redirect()->to(base_url('User/editTempatKerja'));
 	}
 
@@ -1209,10 +1209,10 @@ class User extends BaseController
 				]
 			],
 			'deskripsi'			=> [
-				'rules' => 'required|max_length[2200]',
+				'rules' => 'required|max_length[150]',
 				'errors' => [
 					'required' => 'deskripsi harus diisi',
-					'max_length' => 'maksimal 2200 karakter'
+					'max_length' => 'maksimal 150 karakter'
 				]
 			],
 		]);

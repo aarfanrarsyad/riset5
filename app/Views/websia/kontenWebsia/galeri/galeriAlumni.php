@@ -90,16 +90,13 @@
     <div class="py-2">
         <div class="holder p-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-4 gap-y-2">
             <!-- Awal Tampilan Galeri (Buat ditambahkan coding sesuai gambar dari database) -->
-            <!-- <php for ($x = 0; $x < 12; $x++) : ?> -->
             <?php $i = 0;
             foreach ($galeri['foto'] as $foto) : ?>
-                <!-- 1 gambar -->
                 <a href="#<?= $foto['id_foto']; ?>" id="foto<?= $foto['id_foto']; ?>" data-toggle="modal" data-target="#popUp<?= $foto['id_foto']; ?>">
                     <div class="rounded-3xl m-2 relative hover:shadow-xl transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105 cursor-pointer">
                         <img id="slide" class="object-cover w-96 h-48 rounded-3xl mx-auto" src="<?= base_url() ?>/img/galeri/<?= $foto['nama_file']; ?>" alt="<?= $foto['nama_file']; ?>" />
                     </div>
                 </a>
-                <!-- <php endfor; ?> -->
 
                 <div class="modal fixed overflow-auto top-0 bottom-0 right-0 left-0 z-40 bg-black bg-opacity-80 text-center font-paragraph hidden" id="popUp<?= $foto['id_foto']; ?>">
                     <div class="m-auto duration-700 transition-all bg-gray bg-opacity-0 w-11/12 sm:w-9/12 md:w-8/12 lg:w-7/12">
@@ -121,9 +118,7 @@
 
                                 <!-- Awal Caption -->
                                 <div class="text-white w-3/4 h-3/4 mx-2 text-base">
-                                    <!-- <p class="mb-2">Oleh : Si Fulan (59)</p> -->
                                     <p class="mb-2">Oleh : <a href="/User/profilAlumni/<?= $foto['id_alumni'] ?>"><?= $foto['nama'] ?></a></p>
-                                    <!-- <p class="">Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam impedit optio praesentium soluta quasi. Voluptatibus molestias sequi inventore odit voluptas pariatur a ut, totam obcaecati accusamus iure, labore dolorum dolor.</p> -->
                                     <p class="mt-4 pb-6"><?= $foto['caption'] ?></p>
                                     <div class="mt-5 text-gray-400 text-center pb-10">
                                         <?php if (count($foto['tag_name']) > 2) : ?>
@@ -147,7 +142,7 @@
                                                 <span> <img src="<?= base_url() ?>/img/components/icon/line.png" alt="icon tag foto" class="inline mr-1"> bersama </span> <span class=" text-white"><a href="/User/profilAlumni/<?= $foto['tag_name'][0]['id_alumni'] ?>"><?= $foto['tag_name'][0]['nama'] ?></a> </span> <span> dan</span> <span class=" text-white"><a href="/User/profilAlumni/<?= $foto['tag_name'][1]['id_alumni'] ?>"><?= $foto['tag_name'][1]['nama'] ?></a></span>
                                                 </span>
                                             </div>
-                                        <?php elseif (count($foto['tag_name']) < 1) : ?>
+                                        <?php elseif (count($foto['tag_name']) == 1) : ?>
                                             <div class="pb-2">
                                                 <span> <img src="<?= base_url() ?>/img/components/icon/line.png" alt="icon tag foto" class="inline mr-1"> bersama </span> <span class=" text-white"><?= $foto['tag_name'][0]['nama'] ?> </span>
                                                 </span>
@@ -175,25 +170,6 @@
                         </div>
                     </div>
                 </div>
-                <script>
-                    // $('#foto<?= $foto['id_foto']; ?>').click(function() {
-                    //     var modal = document.getElementById('popUp<?= $foto['id_foto']; ?>')
-                    //     $('#popUp<?= $foto['id_foto']; ?>').removeClass('hidden')
-                    //     $(window).click(function(e) {
-                    //         if (e.target === modal) {
-                    //             setTimeout(function() {
-                    //                 $('#popUp<?= $foto['id_foto']; ?>').addClass('hidden')
-                    //             }, 100);
-                    //         }
-                    //     });
-
-                    // $('.closeFormUnggahFoto').click(function() {
-                    //     setTimeout(function() {
-                    //         $('#formUnggahFoto').addClass('hidden')
-                    //     }, 100);
-                    // });
-                    // })
-                </script>
             <?php $i++;
             endforeach; ?>
             <!-- Akhir Tampilan Galeri -->
@@ -260,7 +236,6 @@
                 <div class="text-red-500">
                     <?= service('validation')->getError('deskripsi'); ?>
                 </div>
-                <!-- <label for="angkatan" class="text-primary font-medium">*Angkatan :</label>
                 <input name="angkatan" id="angkatan" type="number" min="1" max="63" step="1" value="60" size="6" class="inputForm font-heading text-xs" required> -->
                 <label for="tags" class="text-primary font-medium">Tags :</label>
                 <div id="tags-container">

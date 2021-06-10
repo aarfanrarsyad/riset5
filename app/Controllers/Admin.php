@@ -751,25 +751,25 @@ class Admin extends BaseController
 		$init = new admin_model();
 		$alumni = $init->getAllAlumni($id)->getResultArray()[0];
 		$instansialumni = $init->getTempatKerjabyIdAlumni($id)->getRow();
-		if(!is_null($instansialumni)){
-			$instansialumni=$instansialumni->id_tempat_kerja;
+		if (!is_null($instansialumni)) {
+			$instansialumni = $instansialumni->id_tempat_kerja;
 			$instansi = $init->getTempatKerjaById($instansialumni)->getRow();
-		}else{
+		} else {
 			$instansi = array(
-				"alamat_instansi"=>'-',
-				"email_instansi"=>'-',
-				"faks_instansi"=>'-',
-				"id_tempat_kerja"=>'-',
-				"kota"=>'-',
-				"nama_instansi"=>'-',
-				"negara"=>'-',
-				"provinsi"=>'-',
-				"telp_instansi"=>'-',
+				"alamat_instansi" => '-',
+				"email_instansi" => '-',
+				"faks_instansi" => '-',
+				"id_tempat_kerja" => '-',
+				"kota" => '-',
+				"nama_instansi" => '-',
+				"negara" => '-',
+				"provinsi" => '-',
+				"telp_instansi" => '-',
 			);
-			$instansi=(object) $instansi;
+			$instansi = (object) $instansi;
 		}
 		// dd($instansialumni);
-		
+
 		// dd($instansi);
 		$pendidikan = $init->getPendidikanById($id)->getResult();
 		$prestasi = $init->getPrestasiById($id)->getResult();
@@ -1640,10 +1640,10 @@ class Admin extends BaseController
 				]
 			],
 			'deskripsi'			=> [
-				'rules' => 'required|max_length[2200]',
+				'rules' => 'required|max_length[150]',
 				'errors' => [
 					'required' => 'deskripsi harus diisi',
-					'max_length' => 'maksimal 2200 karakter'
+					'max_length' => 'maksimal 150 karakter'
 				]
 			],
 		]);
