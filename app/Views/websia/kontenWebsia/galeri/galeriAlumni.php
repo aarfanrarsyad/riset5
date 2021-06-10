@@ -142,7 +142,7 @@
                                                 <span> <img src="<?= base_url() ?>/img/components/icon/line.png" alt="icon tag foto" class="inline mr-1"> bersama </span> <span class=" text-white"><a href="/User/profilAlumni/<?= $foto['tag_name'][0]['id_alumni'] ?>"><?= $foto['tag_name'][0]['nama'] ?></a> </span> <span> dan</span> <span class=" text-white"><a href="/User/profilAlumni/<?= $foto['tag_name'][1]['id_alumni'] ?>"><?= $foto['tag_name'][1]['nama'] ?></a></span>
                                                 </span>
                                             </div>
-                                        <?php elseif (count($foto['tag_name']) == 1) : ?>
+                                        <?php elseif (count($foto['tag_name']) < 1) : ?>
                                             <div class="pb-2">
                                                 <span> <img src="<?= base_url() ?>/img/components/icon/line.png" alt="icon tag foto" class="inline mr-1"> bersama </span> <span class=" text-white"><a href="/User/profilAlumni/<?= $foto['tag_name'][0]['id_alumni'] ?>"><?= $foto['tag_name'][0]['nama'] ?></a> </span>
                                                 </span>
@@ -189,10 +189,10 @@
     <div class="md:col-span-2 lg:col-span-3 md:mx-8 mb-6">
         <div class="flex flex-col mx-6 md:m-6">
             <div class="mt-5 md:mt-1 text-center md:text-left text-3xl text-secondary font-bold font-heading">
-                Mama Lorent
+                Unggah Kenangan Manismu
             </div>
-            <div class="my-4 md:my-5 font-paragraph italic text-base lg:text-xl">
-                "Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit adipisci sed fuga, earum fugit reiciendis repellendus maxime at quia dolore similique cupiditate inventore accusantium autem exercitationem ratione, natus minus fugiat?"
+            <div class="my-4 md:my-5 font-paragraph text-base lg:text-xl">
+                Kamu bisa berbagi momen kenangan manismu semasa kuliah di AIS/STIS/POLSTAT STIS. Selain itu kamu juga bisa menandai seseorang pada unggahanmu. Ayo tunggu apa lagi? Unggah kenangan manismu!
             </div>
             <button class="unggahFoto focus:outline-none p-1 rounded-3xl bg-secondary border-2 border-secondary text-white hover:bg-white hover:border-2 hover:border-secondary hover:text-secondary transition-colors duration-300 font-paragraph text-base lg:text-xl" id="unggahFoto">UNGGAH KENANGANMU</button>
         </div>
