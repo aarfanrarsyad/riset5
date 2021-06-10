@@ -144,7 +144,7 @@
                                             </div>
                                         <?php elseif (count($foto['tag_name']) == 1) : ?>
                                             <div class="pb-2">
-                                                <span> <img src="<?= base_url() ?>/img/components/icon/line.png" alt="icon tag foto" class="inline mr-1"> bersama </span> <span class=" text-white"><?= $foto['tag_name'][0]['nama'] ?> </span>
+                                                <span> <img src="<?= base_url() ?>/img/components/icon/line.png" alt="icon tag foto" class="inline mr-1"> bersama </span> <span class=" text-white"><a href="/User/profilAlumni/<?= $foto['tag_name'][0]['id_alumni'] ?>"><?= $foto['tag_name'][0]['nama'] ?></a> </span>
                                                 </span>
                                             </div>
                                         <?php else : ?>
@@ -236,7 +236,6 @@
                 <div class="text-red-500">
                     <?= service('validation')->getError('deskripsi'); ?>
                 </div>
-                <input name="angkatan" id="angkatan" type="number" min="1" max="63" step="1" value="60" size="6" class="inputForm font-heading text-xs" required> -->
                 <label for="tags" class="text-primary font-medium">Tags :</label>
                 <div id="tags-container">
                     <div class="control-group">
