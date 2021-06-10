@@ -12,8 +12,8 @@
             icon: 'question',
             text: 'Apakah anda yakin ingin menghapus komentar ini?',
             showCancelButton: true,
-            confirmButtonColor: '#4248ED',
-            cancelButtonColor: '#33A1C4',
+            confirmButtonColor: '#54AC00',
+            cancelButtonColor: '#D81B01',
             confirmButtonText: 'Hapus',
             cancelButtonText: 'Batal',
         }).then((result) => {
@@ -163,8 +163,8 @@
             icon: 'question',
             text: 'Apakah anda yakin ingin menghapus berita ini?',
             showCancelButton: true,
-            confirmButtonColor: '#4248ED',
-            cancelButtonColor: '#33A1C4',
+            confirmButtonColor: '#54AC00',
+            cancelButtonColor: '#D81B01',
             confirmButtonText: 'Hapus',
             cancelButtonText: 'Batal',
         }).then((result) => {
