@@ -10,7 +10,7 @@
 
     function insert_group() {
         $('#form-input-group').attr('action', '<?= base_url('/admin/groups/insert') ?>');
-        $('.modal-title').html('<div class="text-primaryHover"><i class="fas fa-layer-group"></i>&ensp;Insert new group</div>').addClass('text-primaryHover');
+        $('.modal-title').html('<div class="text-primaryHover"><i class="fas fa-layer-group"></i>&ensp;Insert new group</div>');
         $('#id').val('');
         $('#name').val('');
         $('#description').val('');

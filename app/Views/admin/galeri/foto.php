@@ -55,7 +55,7 @@
                   </button>
                   <div class="dropdown-menu text-sm">
                     <!-- <a class="dropdown-item" href="<?= base_url('admin/users/register') ?>"><i class="fas fa-plus-square"></i>&ensp;add video</a> -->
-                    <a class="dropdown-item text-primaryHover" href="javascript:void(0)" onclick="add_photo()"><i class="fas fa-plus-square"></i>&ensp;add foto</a>
+                    <a class="dropdown-item" href="javascript:void(0)" onclick="add_photo()"><i class="fas fa-plus-square"></i>&ensp;add foto</a>
                   </div>
                 </div>
                 <div class="row mt-4">
@@ -146,9 +146,8 @@
           <div class="flex mt-5">
             <div class="flex justify-start items-center mb-2 w-full relative">
               <input type="file" hidden accept=".jpg, .jpeg, .img, .png" title="Pilih File" id='pilihFile' name="file_upload">
-              <label for="pilihFile" title="Harus Diisi" class="pilihFile border-2 border-primary text-sm text-secondaryhover rounded-full w-24 py-1 text-center cursor-pointer hover:text-white hover:bg-secondaryhover hover:border-secondaryhover transition-colors duration-300 mr-4 outline-none">
-                Pilih File
-              </label>
+              <label for="pilihFile" title="Harus Diisi" class="pilihFile border border-primary text-sm text-secondary rounded-full w-24 py-1 text-center cursor-pointer hover:bg-secondaryhover transition-colors duration-300 mr-4 outline-none">Pilih
+                File</label>
               <span class="text-primary absolute md:left-28 left-28 select-none cursor-default cursor md:text-sm text-sm" id="textPhoto">Tidak ada foto yang dipilih</span>
             </div>
           </div>
@@ -169,7 +168,7 @@
           </div>
           <div class="form-group">
             <label for="deskripsi" class="text-sm text-secondary">*Deskripsi</label>
-            <textarea name="deskripsi" id="deskripsi" rows="4" class="inputForm resize-none font-heading text-xs form-control border-top-0 border-right-0 border-left-0" placeholder="ex. Penggunaan Jutsu Air dalam Mengatasi Permasalahan Banjir yang Sering Terjadi di Wilayah Pemukiman Rawan Longsor" maxlength="2200" required></textarea>
+            <textarea name="deskripsi" id="deskripsi" rows="4" class="inputForm resize-none font-heading text-xs form-control border-top-0 border-right-0 border-left-0" placeholder="ex. Penggunaan Jutsu Air dalam Mengatasi Permasalahan Banjir yang Sering Terjadi di Wilayah Pemukiman Rawan Longsor" maxlength="150" required></textarea>
           </div>
           <div class="text-red-500">
             <?= service('validation')->getError('deskripsi'); ?>
@@ -188,7 +187,7 @@
             <p> Ukuran file maksimum 2 MB </p>
           </div>
           <div class="flex justify-end my-4">
-            <input type="submit" value="UNGGAH" class="suksesUnggahFoto bg-secondaryhover text-white rounded-full w-24 py-1 text-center cursor-pointer hover:bg-secondaryhover hover:bg-opacity-75 transition-colors duration-300 text-sm outline-none">
+            <input type="submit" value="UNGGAH" class="suksesUnggahFoto bg-secondary text-white rounded-full w-24 py-1 text-center cursor-pointer hover:bg-secondaryhover transition-colors duration-300 text-sm outline-none">
           </div>
           <input type="hidden" name="tags" id="tags_form">
         </form>
@@ -281,19 +280,16 @@
     }],
     maxOptions: 5,
     maxItems: 10,
-    options: [ <
-      ?
-      php foreach($alumni as $data) {
-        echo("{
-          angkatan: \"Angkatan ".$data - > angkatan.
-          "\",
-          name: \"".$data - > nama.
-          "\",
-          id_alumni: \"".$data - > id_alumni.
-          "\"
+    options: [<?php foreach ($alumni as $data) {
+                echo ("{
+          angkatan: \"Angkatan " . $data->angkatan .
+                  "\",
+          name: \"" . $data->nama .
+                  "\",
+          id_alumni: \"" . $data->id_alumni .
+                  "\"
         }, ");
-      } ? >
-    ],
+              } ?>],
     render: {
       item: function(item, escape) {
         var name = formatTags(item);

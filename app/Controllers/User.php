@@ -1209,10 +1209,10 @@ class User extends BaseController
 				]
 			],
 			'deskripsi'			=> [
-				'rules' => 'required|max_length[2200]',
+				'rules' => 'required|max_length[150]',
 				'errors' => [
 					'required' => 'deskripsi harus diisi',
-					'max_length' => 'maksimal 2200 karakter'
+					'max_length' => 'maksimal 150 karakter'
 				]
 			],
 		]);

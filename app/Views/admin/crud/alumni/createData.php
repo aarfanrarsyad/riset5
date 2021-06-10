@@ -458,7 +458,7 @@ if ($instansi != NULL) {
                             </div>
 
                             <div class="card card-secondary card-outline elevation-3">
-                                <form action="/Admin/simpanDataAlumni" method="POST" class="justify-center text-white flex justify-end">
+                                <form action="/Admin/simpanDataAlumni" method="POST" class="justify-center text-white flex">
                                     <button id="tambahDataAlumni" name="tambahDataAlumni" class="w-24 text-center py-1 bg-primarySidebar hover:bg-secondaryhover text-white rounded-full cursor-pointer focus:outline-none">SELESAI</button>
                                 </form>
                             </div>
