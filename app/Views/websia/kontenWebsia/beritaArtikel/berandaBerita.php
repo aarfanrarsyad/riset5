@@ -39,12 +39,12 @@
                             <div class="lg:w-3/4 md:w-4/5 w-2/3">
                                 <?= $notification['msg'] ?>
                                 <div class="flex gap-x-2 items-center">
-                                    <img src="/img/components/icon/calendar.png" class="w-5 h-5" alt="">
+                                    <img src="/img/components/icon/calendar.png" class="w-5 h-5" alt="tanggal upload berita">
                                     <p class="text-xs"><?= $notification['date'] ?></p>
                                 </div>
                             </div>
 
-                            <div class="lg:w-1/4 md:w-1/5 w-1/3 lg:h-16 h-12" style="background-image: url('<?= base_url('berita/berita_' . $notification['id'] . '/' . $notification['thumbnail']) ?>'); background-repeat: no-repeat;background-size:cover">
+                            <div class="lg:w-1/4 md:w-1/5 w-1/3 lg:h-16 h-12 bg-no-repeat bg-contain bg-center bg-gray-200" style="background-image: url('<?= base_url('berita/berita_' . $notification['id'] . '/' . $notification['thumbnail']) ?>');">
                             </div>
                         </div>
                     <?php endforeach; ?>

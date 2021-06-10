@@ -139,7 +139,7 @@
                     </div>
                 </a>
 
-                <svg class="w-6 cursor-pointer z-20 select-none" id="notif" width="42" height="42" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                <svg class="w-6 cursor-pointer z-20 select-none" onclick="notif(this)" id="notif1" width="42" height="42" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                     <rect width="42" height="42" fill="url(#pattern0)" />
                     <defs>
                         <pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
@@ -149,18 +149,18 @@
                     </defs>
                 </svg>
 
-                <div class="hidden lg:w-2/5 md:w-2/3 w-3/4 opacity-0 transition-all duration-300 rounded-xl text-primary py-2 text-sm absolute lg:right-18 -lg:right-2 md:right-6 right-1 md:top-48 top-28">
+                <div class="hidden lg:w-2/5 md:w-2/3 w-3/4 opacity-0 transition-all duration-300 rounded-xl text-primary py-2 text-sm absolute lg:right-18 -lg:right-2 md:right-6 right-1 md:top-48 top-28 h-72 overflow-y-auto">
                     <div class="font-bold px-2">Status Unggah Berita</div>
                     <?php foreach ($notifications as $notification) : ?>
                         <div class="bg-gray-100 flex p-2 gap-x-2 mb-2">
                             <div class="lg:w-3/4 md:w-4/5 w-2/3">
                                 <?= $notification['msg'] ?>
                                 <div class="flex gap-x-2 items-center">
-                                    <img src="<?= base_url('berita/berita_' . $notification['id'] . '/' . $notification['thumbnail']) ?>" class="w-5 h-5" alt="">
+                                    <img src="/img/components/icon/calendar.png" class="w-5 h-5" alt="tanggal upload berita">
                                     <p class="text-xs"><?= $notification['date'] ?></p>
                                 </div>
                             </div>
-                            <div class="lg:w-1/4 md:w-1/5 w-1/3 lg:h-16 h-12 bg-gray-300">
+                            <div class="lg:w-1/4 md:w-1/5 w-1/3 lg:h-16 h-12 bg-gray-200 bg-no-repeat bg-contain bg-center" style="background-image: url(<?= base_url('berita/berita_' . $notification['id'] . '/' . $notification['thumbnail']) ?>);">
                             </div>
                         </div>
                     <?php endforeach; ?>
@@ -171,9 +171,9 @@
     </div>
     <hr class="lg:mb-8 md:mb-6 mb-4 mt-3 border-t-2 border-b-0 border-primary">
 
-    <div class="flex justify-between">
+    <div class="md:flex md:justify-between">
         <div class="flex-grow">
-            <div class="flex flex-col mr-16">
+            <div class="flex flex-col md:mr-16">
                 <div class="text-secondary font-heading font-bold lg:text-4xl md:text-3xl text-2xl"><?= ucwords(strtolower($dataset['judul'])) ?></div>
                 <div class="flex lg:my-3 my-2">
                     <div class="flex text-primary">
@@ -201,7 +201,7 @@
                     </div>
                 </div>
 
-                <div class="lg:h-72 h-60 p-2 mb-2" style="background-image: url('<?= base_url('berita/berita_' . $dataset['id'] . '/' . $dataset['thumbnail']) ?>'); background-repeat: no-repeat;background-size:cover">
+                <div class="lg:h-72 h-60 mb-2 bg-no-repeat bg-contain bg-center" style="background-image: url('<?= base_url('berita/berita_' . $dataset['id'] . '/' . $dataset['thumbnail']) ?>');">
                 </div>
 
                 <div class="lg:text-sm md:text-xs text-xs text-primary font-paragraph font-medium mb-4">Foto oleh : <?= $dataset['author'] ?></div>
@@ -220,8 +220,8 @@
                         <img class="lg:h-6 h-4 mx-1" src="/img/components/icon/linkedin.png">
                     </div>
                     <div class="flex items-center font-paragraph text-primary mb-3">
-                        <img class="lg:h-10 h-6 mx-1" src="/img/components/icon/komen.png">
-                        <div class="lg:mx-4 mx-2 lg:text-xl md:text-lg text-base font-bold"><a href="javascript:void(0)" id="count-comment-<?= $dataset['id'] ?>" onclick="show_all_comments(<?= $dataset['id'] ?>)"> <?= $dataset['count_comments'] ?> Komentar</a></div>
+                        <img class="lg:h-8 h-6 mx-1" src="/img/components/icon/komen.png">
+                        <div class="lg:mx-4 mx-2  md:text-lg text-base font-bold"><a href="javascript:void(0)" id="count-comment-<?= $dataset['id'] ?>" onclick="show_all_comments(<?= $dataset['id'] ?>)"> <?= $dataset['count_comments'] ?> Komentar</a></div>
                     </div>
 
                     <?php $i = 1 ?>
@@ -229,15 +229,15 @@
                     <div id="comments-content-<?= $dataset['id'] ?>" data-news="<?= $dataset['id'] ?>">
                         <?php foreach ($dataset['comments'] as $dts) : ?>
                             <div class="flex items-center text-primary lg:mb-4 mb-3" <?= $i > 4 ? 'style="display: none;"' : '' ?>>
-                                <img class="lg:h-14 md:h-12 h-8 lg:mr-4 mr-2" src="<?= base_url($dts['image']) ?>">
-                                <div class="bg-gray-200 lg:pl-6 pl-4 py-3 gap-x-2 rounded-lg w-full">
+                                <img class="h-10 lg:mr-4 mr-2" src="<?= base_url($dts['image']) ?>">
+                                <div class="bg-gray-200 lg:pl-4 pl-3 py-2 gap-x-2 rounded-lg w-full">
                                     <div class="flex justify-between">
                                         <div class="w-7/8">
-                                            <div class="text-primary lg:text-xl md:text-lg text-base font-bold"><?= $dts['name'] ?></div>
-                                            <div class="lg:text-base md:text-sm text-xs"><?= $dts['komentar'] ?></div>
+                                            <div class="text-primary font-bold"><?= $dts['name'] ?></div>
+                                            <div class="md:text-sm text-xs"><?= $dts['komentar'] ?></div>
                                         </div>
                                         <div class="w-1/8">
-                                            <span class="text-muted mr-3"><?= $dts['time'] ?></span>
+                                            <span class="text-muted text-xs mr-3"><?= $dts['time'] ?></span>
                                             <?php if ($is_admin) : ?>
                                                 <div class="float-right mr-4">
                                                     <div class="btn-group dropleft">
@@ -261,8 +261,8 @@
                         <?php endif; ?>
                     </div>
                     <div class="flex items-center text-primary mb-2">
-                        <img class="lg:h-14 md:h-12 h-8 lg:mr-4 mr-2" src="<?= base_url() . userdata()['image'] ?>">
-                        <textarea class="border-4 rounded-lg w-full shadow-lg px-4 py-4 mb-4" placeholder="Tambah komentar Anda." name="tambahKomentar" id="comments-<?= $dataset['id'] ?>" cols="10" rows="5"></textarea>
+                        <img class="h-10 lg:mr-4 mr-2" src="<?= base_url() . userdata()['image'] ?>">
+                        <textarea class="border-4 rounded-lg w-full shadow-lg px-3 py-1 mb-4 resize-none focus:outline-none" placeholder="Tambah komentar Anda." name="tambahKomentar" id="comments-<?= $dataset['id'] ?>" cols="10" rows="5"></textarea>
                     </div>
                     <div class="flex justify-end lg:mb-12 mb-8">
                         <button role="button" class="bg-secondary text-white rounded-full lg:w-20 w-16 py-1 text-center cursor-pointer hover:bg-secondaryhover transition-colors duration-300 outline-none" onclick="post_comment(<?= $dataset['id'] ?>)">Kirim</button>
@@ -273,14 +273,14 @@
         </div>
 
         <div class="flex-grow-0">
-            <div class="flex flex-col lg:w-96 md:w-72 w-48">
+            <div class="flex flex-col lg:w-96 md:w-72 w-full">
                 <div>
                     <div class="text-secondary font-heading font-semibold lg:text-2xl md:text-xl text-lg">Berita Terpopuler</div>
                     <?php for ($i = 0; $i < count($berita_popular); $i++) : ?>
                         <?php if ($i > 2) break ?>
                         <hr class="lg:my-3 my-2 border-gray-400">
                         <div class="flex justify between">
-                            <div class="lg:h-34 h-28 lg:w-3/7 w-2/5 bg-gray-200" style="background:url('<?= base_url('berita/berita_' . $berita_popular[$i]['id'] . '/' . $berita_popular[$i]['thumbnail']) ?>'); background-repeat: no-repeat;background-size:contain">
+                            <div class="h-24 lg:w-3/7 w-2/5 bg-gray-200 bg-no-repeat bg-contain bg-center" style="background-image:url('<?= base_url('berita/berita_' . $berita_popular[$i]['id'] . '/' . $berita_popular[$i]['thumbnail']) ?>');">
                             </div>
                             <div class="lg:ml-4 md:ml-3 ml-2 lg:w-4/7 w-3/5">
                                 <a href="<?= base_url('berita/news_view/' . $berita_popular[$i]['id']) ?>">
@@ -296,12 +296,12 @@
                         </div>
                     <?php endfor; ?>
                 </div>
-                <div>
+                <div class="mb-8">
                     <div class="text-secondary font-heading font-semibold lg:text-2xl md:text-xl text-lg lg:mt-8 mt-6">Berita Terbaru</div>
                     <?php for ($i = 0; $i < count($berita); $i++) : ?>
                         <hr class="lg:my-3 my-2 border-gray-400">
                         <div class="flex justify between">
-                            <div class="lg:h-34 h-28 lg:w-3/7 w-2/5 bg-gray-200" style="background:url('<?= base_url('berita/berita_' . $berita[$i]['id'] . '/' . $berita[$i]['thumbnail']) ?>'); background-repeat: no-repeat;background-size:contain">
+                            <div class="h-24 lg:w-3/7 w-2/5 bg-gray-200 bg-no-repeat bg-contain bg-center" style="background-image:url('<?= base_url('berita/berita_' . $berita[$i]['id'] . '/' . $berita[$i]['thumbnail']) ?>');">
                             </div>
                             <div class="lg:ml-4 md:ml-3 ml-2 lg:w-4/7 w-3/5">
                                 <a href="<?= base_url('berita/news_view/' . $berita[$i]['id']) ?>">
