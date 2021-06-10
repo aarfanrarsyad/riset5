@@ -31,7 +31,7 @@
                     </defs>
                 </svg>
 
-                <div class="hidden lg:w-2/5 md:w-2/3 w-3/4 opacity-0 transition-all duration-300 rounded-xl text-primary py-2 text-sm absolute lg:right-18 -lg:right-2 md:right-6 right-1 md:top-48 top-28">
+                <div class="hidden lg:w-2/5 md:w-2/3 w-3/4 opacity-0 transition-all duration-300 rounded-xl text-primary py-2 text-sm absolute lg:right-18 -lg:right-2 md:right-6 right-1 md:top-48 top-28 overflow-y-auto h-72">
                     <div class="font-bold px-2">Status Unggah Berita</div>
 
                     <?php foreach ($notifications as $notification) : ?>
@@ -56,26 +56,24 @@
     </div>
     <hr class="border-primary border-t-2 border-b-0 mt-3">
     <?php if (count($newsPop) >= 3) : ?>
-        <div class="mt-4 bg-primary md:p-6 p-3">
+        <div class="mt-4 bg-primary md:p-8 p-3">
             <h2 class="font-bold text-secondary text-center font-heading lg:text-2xl md:text-xl text-lg">Berita Terpopuler
             </h2>
-            <div class="md:grid md:grid-cols-3 md:gap-x-6 mt-4">
-                <div class="md:col-span-2 md:h-full h-32 flex items-end p-2 sm:mb-6 mb-2 md:mb-0" style="background-image: url('<?= base_url('berita/berita_' . $newsPop[0]['id'] . '/' . $newsPop[0]['thumbnail']) ?>'); background-repeat: no-repeat;background-size:cover">
-
-                    <a href="<?= base_url('/berita/news_view/' . $newsPop[0]['id']) ?>" style="position:absolute;">
-                        <h1 class="text-white font-heading font-bold text-xl"><?= $newsPop[0]['judul'] ?></h1>
+            <div class="md:grid md:grid-cols-3 md:gap-x-8 mt-4">
+                <div class="md:col-span-2 w-full lg:h-96 md:h-80 h-36 flex items-end sm:mb-8 mb-2 md:mb-0 bg-gray-200 bg-no-repeat bg-contain bg-center" style="background-image: url(<?= base_url('berita/berita_' . $newsPop[0]['id'] . '/' . $newsPop[0]['thumbnail']) ?>);">
+                    <a href="<?= base_url('/berita/news_view/' . $newsPop[0]['id']) ?>" class="bg-black bg-opacity-70 w-full lg:p-2 p-1">
+                        <h1 class="text-white font-heading font-bold lg:text-xl md:text-lg text-base"><?= $newsPop[0]['judul'] ?></h1>
                     </a>
-
                 </div>
                 <div class="md:grid md:grid-rows-2 md:gap-y-6">
-                    <div class="lg:h-48 h-32 flex items-end p-2 sm:mb-6 mb-2 md:mb-0" style="background-image: url('<?= base_url('berita/berita_' . $newsPop[1]['id'] . '/' . $newsPop[1]['thumbnail']) ?>');background-repeat: no-repeat;background-size:cover">
-                        <a href="<?= base_url('/berita/news_view/' . $newsPop[1]['id']) ?>" style="position:absolute;">
-                            <h1 class="text-white font-heading font-bold text-lg"><?= $newsPop[1]['judul'] ?></h1>
+                    <div class="lg:h-44 h-36 flex items-end sm:mb-6 mb-2 md:mb-0 bg-gray-200 bg-no-repeat bg-contain bg-center" style="background-image: url(<?= base_url('berita/berita_' . $newsPop[1]['id'] . '/' . $newsPop[1]['thumbnail']) ?>);">
+                        <a href="<?= base_url('/berita/news_view/' . $newsPop[1]['id']) ?>" class="bg-black bg-opacity-70 w-full p-1">
+                            <h1 class="text-white font-heading font-bold lg:text-lg text-base"><?= $newsPop[1]['judul'] ?></h1>
                         </a>
                     </div>
-                    <div class="lg:h-48 h-32 flex items-end p-2" style="background-image: url('<?= base_url('berita/berita_' . $newsPop[2]['id'] . '/' . $newsPop[2]['thumbnail']) ?>'); background-repeat: no-repeat;">
-                        <a href="<?= base_url('/berita/news_view/' . $newsPop[2]['id']) ?>" style="position:absolute;background-size:cover">
-                            <h1 class="text-white font-heading font-bold text-lg"><?= $newsPop[2]['judul'] ?></h1>
+                    <div class="lg:h-44 h-36 flex items-end bg-gray-200 bg-no-repeat bg-contain bg-center" style="background-image: url(<?= base_url('berita/berita_' . $newsPop[2]['id'] . '/' . $newsPop[2]['thumbnail']) ?>);">
+                        <a href="<?= base_url('/berita/news_view/' . $newsPop[2]['id']) ?>" class="bg-black bg-opacity-80 w-full p-1">
+                            <h1 class="text-white font-heading font-bold lg:text-lg text-base"><?= $newsPop[2]['judul'] ?></h1>
                         </a>
                     </div>
                 </div>
@@ -94,8 +92,7 @@
                 <?php if ($i % 2 == 0) : ?>
                     <div>
                         <div class="flex gap-x-2 items-center">
-                            <div class="lg:w-1/4 w-1/3 lg:h-24 h-20 bg-gray-200">
-                                <img src="<?= base_url('berita/berita_' . $dataset[$i]['id'] . '/' . $dataset[$i]['thumbnail']) ?>" alt="thumbnail" class="w-full h-full object-contain">
+                            <div class="lg:w-1/4 w-1/3 lg:h-24 h-20 bg-gray-200 bg-no-repeat bg-contain bg-center" style="background-image: url(<?= base_url('berita/berita_' . $dataset[$i]['id'] . '/' . $dataset[$i]['thumbnail']) ?>);">
                             </div>
                             <div class="lg:w-3/4 w-2/3">
                                 <a href="<?= base_url('/berita/news_view/' . $dataset[$i]['id']) ?>">
@@ -118,8 +115,7 @@
                 <?php else : ?>
                     <div class="md:block hidden">
                         <div class="flex gap-x-2 items-center">
-                            <div class="lg:w-1/4 w-1/3 lg:h-24 h-20 bg-gray-200">
-                                <img src="<?= base_url('berita/berita_' . $dataset[$i]['id'] . '/' . $dataset[$i]['thumbnail']) ?>" alt="thumbnail" class="h-full w-full object-contain">
+                            <div class="lg:w-1/4 w-1/3 lg:h-24 h-20 bg-gray-200 bg-no-repeat bg-center bg-contain" style="background-image: url(<?= base_url('berita/berita_' . $dataset[$i]['id'] . '/' . $dataset[$i]['thumbnail']) ?>);">
                             </div>
 
                             <div class="lg:w-3/4 w-2/3">
