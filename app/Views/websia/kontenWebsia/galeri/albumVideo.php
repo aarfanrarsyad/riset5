@@ -49,10 +49,10 @@
     <div class="md:col-span-2 lg:col-span-3">
         <div class="flex flex-col mb-10 mx-6 md:m-10 text-center md:text-left">
             <div class="mt-5 md:mt-1 text-3xl text-secondary font-bold font-heading">
-                Mama Lorent
+                Unggah Video Kenanganmu
             </div>
-            <div class="my-4 lg:mr-18 md:my-5 font-paragraph italic text-base lg:text-xl">
-                "Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit adipisci sed fuga, earum fugit reiciendis repellendus maxime at quia dolore similique cupiditate inventore accusantium autem exercitationem ratione, natus minus fugiat?"
+            <div class="my-4 lg:mr-18 md:my-5 font-paragraph text-base lg:text-xl">
+                Kamu bisa berbagi momen kenanganmu semasa kuliah di AIS/STIS/POLSTAT STIS. Selain itu kamu juga bisa mengunggah vide kegiatan/acara alumni. Ayo tunggu apa agi? Unggah video kenanganmu!
             </div>
             <button class="unggahVideo focus:outline-none lg:mr-24 p-1 rounded-3xl bg-secondary border-2 border-secondary text-white hover:bg-white hover:border-2 hover:border-secondary hover:text-secondary transition-colors duration-300 font-paragraph text-base lg:text-xl">UNGGAH VIDEO KENANGANMU</button>
         </div>

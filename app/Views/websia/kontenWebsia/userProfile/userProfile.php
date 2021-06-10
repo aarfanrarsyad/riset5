@@ -681,7 +681,7 @@ if ($status == 'bukan user') {
                                                         <span> <img src="<?= base_url() ?>/img/components/icon/line.png" alt="icon tag foto" class="inline mr-1"> bersama </span> <span class=" text-white"><a href="/User/profilAlumni/<?= $foto[$i]['tag_name'][0]['id_alumni'] ?>"><?= $foto[$i]['tag_name'][0]['nama'] ?></a> </span> <span> dan</span> <span class=" text-white"><a href="/User/profilAlumni/<?= $foto[$i]['tag_name'][1]['id_alumni'] ?>"><?= $foto[$i]['tag_name'][1]['nama'] ?></a></span>
                                                         </span>
                                                     </div>
-                                                <?php elseif (count($foto[$i]['tag_name']) == 1) : ?>
+                                                <?php elseif (count($foto[$i]['tag_name']) < 1) : ?>
                                                     <div class="pb-2">
                                                         <span> <img src="<?= base_url() ?>/img/components/icon/line.png" alt="icon tag foto" class="inline mr-1"> bersama </span> <span class=" text-white"><a href="/User/profilAlumni/<?= $foto[$i]['tag_name'][0]['id_alumni'] ?>"><?= $foto[$i]['tag_name'][0]['nama'] ?></a> </span>
                                                         </span>
