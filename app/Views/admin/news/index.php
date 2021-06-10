@@ -235,8 +235,8 @@
             icon: 'question',
             text: 'Apakah anda yakin ingin ' + title + ' berita ini?',
             showCancelButton: true,
-            confirmButtonColor: '#4248ED',
-            cancelButtonColor: '#33A1C4',
+            confirmButtonColor: '#54AC00',
+            cancelButtonColor: '#D81B01',
             confirmButtonText: 'Ya, Lanjutkan !',
             cancelButtonText: 'Batal',
         }).then((result) => {

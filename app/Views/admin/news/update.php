@@ -83,7 +83,7 @@ $errors = session()->getFlashdata('errors');
                             <div class="form-group row">
                                 <label for="date" class="col-sm-2 col-form-label">Tanggal</label>
                                 <div class="col-sm-5">
-                                    <input type="datetime-local" name="date" class="form-control form-control-sm " id="date" placeholder="Tanggal" value="<?= date("Y-m-d\TH:i:s", strtotime($data['tanggal_publish']))  ?>" required>
+                                    <input type="datetime-local" name="date" class="inputForm form-control" id="date" placeholder="Tanggal" value="<?= date("Y-m-d\TH:i:s", strtotime($data['tanggal_publish']))  ?>" required>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -138,21 +138,21 @@ $errors = session()->getFlashdata('errors');
                                 <label for="author" class="col-sm-2 col-form-label">Author</label>
                                 <div class="col-sm-7">
                                     <div class="form-group">
-                                        <input type="text" name="author" class="form-control form-control-sm border-top-0 border-right-0 border-left-0" style="border-radius:0" id="author" value="<?= $data['author'] ?>" placeholder="Penulis">
+                                        <input type="text" name="author" class="inputForm form-control" id="author" value="<?= $data['author'] ?>" placeholder="Penulis">
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="header" class="col-sm-2 col-form-label">Header</label>
                                 <div class="col-sm-10">
-                                    <input type="text" name="header" class="form-control border-top-0 border-right-0 border-left-0" style="border-radius:0" id="header" placeholder="Judul Berita" value="<?= $data['judul'] ?>" required>
+                                    <input type="text" name="header" class="inputForm form-control" id="header" placeholder="Judul Berita" value="<?= $data['judul'] ?>" required>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="thumbnail" class="col-sm-2 col-form-label">Thumbnail</label>
                                 <div class="col-sm-6">
-                                    <input type="file" name="thumbnail" class="border-top-0 border-right-0 border-left-0" style="border-radius:0" id="thumbnail" placeholder="Thumbnail Berita" onchange="addlabel(event)">
-                                    <label class="custom-file-label form-control-sm" for="thumbnail"><span id="oldfileLabel"><?= $data['thumbnail'] ?></span></label>
+                                    <input type="file" name="thumbnail" class="" style="border-radius:0" id="thumbnail" placeholder="Thumbnail Berita" onchange="addlabel(event)">
+                                    <label class="custom-file-label form-control-sm inputForm" for="thumbnail"><span id="oldfileLabel"><?= $data['thumbnail'] ?></span></label>
                                 </div>
                                 <div class="col-sm-4">
                                     <img src="<?= base_url('berita/berita_' . $data['id'] . '/' . $data['thumbnail']) ?>" class="img-fluid border" id="previewHolder" onclick="show_img(event)">
