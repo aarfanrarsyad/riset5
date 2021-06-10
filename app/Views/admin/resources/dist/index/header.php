@@ -2,7 +2,7 @@
     function edit_menu(id, menu, icon) {
         $('#form-input-group').attr('action', '<?= base_url('/admin/resources/menu/update') ?>');
         $('#id').val(id);
-        $('.modal-title').html('<i class="fas fa-chevron-circle-down text-secondary"></i>&ensp;Update menu ' + name);
+        $('.modal-title').html('<div class="text-primaryHover"><i class="fas fa-chevron-circle-down"></i>&ensp;Update menu ' + name + '</div>');
         $('#menu').val(menu);
         $('#icon').val(icon);
         $('#btn-submit').attr('name', 'update_menu');
@@ -11,7 +11,7 @@
 
     function insert_menu() {
         $('#form-input-group').attr('action', '<?= base_url('/admin/resources/menu/insert') ?>');
-        $('.modal-title').html('<i class="fas fa-chevron-circle-down text-secondary"></i>&ensp;Insert new menu');
+        $('.modal-title').html('<div class="text-primaryHover"><i class="fas fa-chevron-circle-down"></i>&ensp;Insert new menu</div>');
         $('#id').val('');
         $('#menu').val('');
         $('#icon').val('');

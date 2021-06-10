@@ -237,9 +237,9 @@ class Home extends BaseController
 								$flash = '<strong>Login gagal!</strong> silahkan gunakan akun alumni AIS/STIS/Polstat STIS.';
 								$alert = "<div id=\"alert\">
 									<div class=\"fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40\">
-										<div class=\"duration-700 transition-all p-3 rounded-lg flex items-center\" style=\"background-color: #FF7474;\">
+										<div class=\"duration-700 transition-all p-3 rounded-lg flex items-center bg-redAlert\">
 											<img src=\"/img/components/icon/warning.png\" class=\"h-5 mr-2\" style=\"color: #C51800;\" alt=\"Warning\">
-											<p class=\"sm:text-base text-sm font-heading font-bold\">" . $flash . "</p>
+											<p class=\"sm:text-base text-sm text-danger font-heading\">" . $flash . "</p>
 										</div>
 									</div>
 								</div>
@@ -437,9 +437,9 @@ class Home extends BaseController
 					$flash = '<strong>Login gagal!</strong> silahkan gunakan akun Sipadu Mahasiswa atau akun BPS, atau hubungi admin website.';
 					$alert = "<div id=\"alert\">
 									<div class=\"fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40\">
-										<div class=\"duration-700 transition-all p-3 rounded-lg flex items-center\" style=\"background-color: #FF7474;\">
+										<div class=\"duration-700 transition-all p-3 rounded-lg flex items-center bg-redAlert\">
 											<img src=\"/img/components/icon/warning.png\" class=\"h-5 mr-2\" style=\"color: #C51800;\" alt=\"Warning\">
-											<p class=\"sm:text-base text-sm font-heading font-bold\">" . $flash . "</p>
+											<p class=\"sm:text-base text-sm text-danger font-heading\">" . $flash . "</p>
 										</div>
 									</div>
 								</div>

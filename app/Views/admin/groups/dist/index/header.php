@@ -2,7 +2,7 @@
     function edit_group(id, name, desc) {
         $('#form-input-group').attr('action', '<?= base_url('/admin/groups/update') ?>');
         $('#id').val(id);
-        $('.modal-title').html('<i class="fas fa-layer-group text-secondary"></i>&ensp;Update group ' + name);
+        $('.modal-title').html('<div class="text-primaryHover"><i class="fas fa-layer-group"></i>&ensp;Update group ' + name + '</div>');
         $('#name').val(name);
         $('#description').val(desc);
         $('.modal').modal('show')
@@ -10,7 +10,7 @@
 
     function insert_group() {
         $('#form-input-group').attr('action', '<?= base_url('/admin/groups/insert') ?>');
-        $('.modal-title').html('<i class="fas fa-layer-group text-secondary"></i>&ensp;Insert new group');
+        $('.modal-title').html('<div class="text-primaryHover"><i class="fas fa-layer-group"></i>&ensp;Insert new group</div>');
         $('#id').val('');
         $('#name').val('');
         $('#description').val('');

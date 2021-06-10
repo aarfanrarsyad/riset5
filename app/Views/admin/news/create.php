@@ -66,7 +66,7 @@ $errors = session()->getFlashdata('errors');
                             <div class="form-group row">
                                 <label for="date" class="col-sm-2 col-form-label">Tanggal</label>
                                 <div class="col-sm-5">
-                                    <input type="datetime-local" name="date" class="form-control form-control-sm " id="date" placeholder="Tanggal" required>
+                                    <input type="datetime-local" name="date" class="inputForm form-control" id="date" placeholder="Tanggal" required>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -106,16 +106,16 @@ $errors = session()->getFlashdata('errors');
                             <br>
                             <div class="form-group row">
                                 <label for="author" class="col-sm-2 col-form-label">Author</label>
-                                <div class="col-sm-7">
+                                <div class="col-sm-10">
                                     <div class="form-group">
-                                        <input type="text" name="author" class="form-control form-control-sm border-top-0 border-right-0 border-left-0" style="border-radius:0" id="author" placeholder="Penulis">
+                                        <input type="text" name="author" class="inputForm form-control" id="author" placeholder="Penulis">
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="header" class="col-sm-2 col-form-label">Header</label>
                                 <div class="col-sm-10">
-                                    <input type="text" name="header" class="form-control border-top-0 border-right-0 border-left-0" style="border-radius:0" id="header" placeholder="Judul Berita" required>
+                                    <input type="text" name="header" class="inputForm form-control" id="header" placeholder="Judul Berita" required>
                                 </div>
                             </div>
                             <div class="form-group row">

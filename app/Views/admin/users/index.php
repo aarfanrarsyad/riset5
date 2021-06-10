@@ -50,7 +50,7 @@
                     <i class="fas fa-th-list text-muted"></i>&ensp;Pilih Tindakan
                   </button>
                   <div class="dropdown-menu text-sm">
-                    <a class="dropdown-item" href="<?= base_url('admin/users/register') ?>"><i class="fas fa-plus-square"></i>&ensp;Tambahkan User Baru</a>
+                    <a class="dropdown-item text-primaryHover" href="<?= base_url('admin/users/register') ?>"><i class="fas fa-plus-square"></i>&ensp;Tambahkan User Baru</a>
                   </div>
                 </div>
                 <div class="row mt-4">

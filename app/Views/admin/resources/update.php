@@ -52,7 +52,7 @@
 
             <div class="card elevation-3">
                 <div class="card-header bg-light">
-                    <h5><i class="fas fa-tasks text-secondary"></i>&ensp;Insert New Resource</h5>
+                    <h5 class="text-primaryHover"><i class="fas fa-tasks"></i>&ensp;Insert New Resource</h5>
                 </div>
                 <div class="card-body">
                     <div class="row">
@@ -126,7 +126,7 @@
                                 </div>
                                 <br>
                                 <div class="form-group row pl-4">
-                                    <button type="submit" name="update_resources" class="btn btn-outline-info"><i class="fas fa-paper-plane"></i>&ensp;Submit</button>
+                                    <button type="submit" name="update_resources" class="btn btn-sm text-white bg-secondaryhover hover:bg-opacity-75"><i class="fas fa-paper-plane"></i>&ensp;Submit</button>
                                 </div>
                             </form>
                         </div>

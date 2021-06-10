@@ -122,7 +122,7 @@
                                         <i class="fas fa-th-list text-muted"></i>&ensp;Pilih Tindakan
                                     </button>
                                     <div class="dropdown-menu text-sm">
-                                        <a class="dropdown-item" href="javascript:void(0)" onclick="add_scope()"><i class="fas fa-plus-square"></i>&ensp;Add Scope</a>
+                                        <a class="dropdown-item text-primaryHover" href="javascript:void(0)" onclick="add_scope()"><i class="fas fa-plus-square"></i>&ensp;Add Scope</a>
                                     </div>
                                 </div>
                                 <div class="row mt-3">
@@ -197,20 +197,21 @@
 <div class="modal fade" id="token-modal" tabindex="-1">
     <div class="modal-dialog">
         <div class="modal-content card card-white card-outline px-2 py-2">
-            <h5 class="modal-title text-secondary mx-2"><i class="fas fa-qrcode"></i>&ensp;Tambah Scope Baru</h5>
+            <h5 class="modal-title text-primaryHover mx-2"><i class="fas fa-qrcode"></i>&ensp;Tambah Scope Baru</h5>
             <div class="modal-body mt-2">
                 <form id="form-input-scope" action="<?= base_url('admin/request-api/create-scope') ?>" method="POST">
                     <input type="hidden" name="id" id="id">
                     <div class="form-group">
                         <label for="scope"><span class="text-sm text-secondary">Scope :</span></label>
-                        <input type="text" name="scope" class="form-control text-sm border-top-0 border-right-0 border-left-0" id="scope" placeholder="Ex : Mengakses informasi dasar pengguna." style="border-radius:0" autocomplete="off" required>
+                        <!-- <input type="text" name="scope" class="form-control text-sm border-top-0 border-right-0 border-left-0" id="scope" placeholder="Ex : Mengakses informasi dasar pengguna." style="border-radius:0" autocomplete="off" required> -->
+                        <input type="text" name="scope" class="inputForm form-control text-sm" id="scope" placeholder="Ex : Mengakses informasi dasar pengguna." autocomplete="off" required>
                     </div>
                     <div class="form-group">
                         <label for="detail_scope"><span class="text-sm text-secondary">Detail Scope :</span></label>
-                        <input type="text" class="form-control text-sm border-top-0 border-right-0 border-left-0" name="detail_scope" id="detail_scope" placeholder="Contoh : user:profile:read." style="border-radius:0" autocomplete="off" required>
+                        <input type="text" class="inputForm form-control text-sm" name="detail_scope" id="detail_scope" placeholder="Contoh : user:profile:read." autocomplete="off" required>
                     </div>
                     <div class="d-flex justify-content-end">
-                        <button type="submit" id="btn-submit" class="btn btn-sm text-secondaryhover border-secondaryhover hover:text-white hover:bg-secondaryhover"><i class="fas fa-paper-plane"></i>&ensp;Send data</button>
+                        <button type="submit" id="btn-submit" class="btn btn-sm text-white bg-secondaryhover hover:bg-opacity-75"><i class="fas fa-paper-plane"></i>&ensp;Send data</button>
                     </div>
                 </form>
             </div>

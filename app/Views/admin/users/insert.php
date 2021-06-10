@@ -30,10 +30,10 @@
                 <div class="card-header bg-light">
                     <div class="row">
                         <div class="col-md">
-                            <h5><i class="fas fa-users text-secondary"></i>&ensp;Registrasi User</h5>
+                            <h5 class="text-primaryHover"><i class="fas fa-users"></i>&ensp;Registrasi User</h5>
                         </div>
                         <div class="col-md d-flex justify-content-end">
-                            <button onclick="submit()" class="btn btn-sm bg-primary btn-user">
+                            <button onclick="submit()" class="btn btn-sm text-white bg-secondaryhover hover:bg-opacity-75">
                                 <i class="fas fa-paper-plane"></i>&ensp;
                                 Registrasi User
                             </button>
@@ -44,7 +44,7 @@
                     <br>
                     <div class="row">
                         <div class="col">
-                            <a class="text-secondary" href="<?= base_url('admin/users') ?>"><i class="fas fa-long-arrow-alt-left"></i>&ensp;Kembali</a>
+                            <a class="text-secondaryhover" href="<?= base_url('admin/users') ?>"><i class="fas fa-long-arrow-alt-left"></i>&ensp;Kembali</a>
                         </div>
                     </div>
                     <div class="row mt-3">
@@ -55,21 +55,21 @@
                                     <label for="id_alumni" class="col-sm-2 col-form-label text-secondary"><span class="text-center">ID Alumni</span></label>
                                     <div class="col-sm-1 d-flex justify-content-end align-items-center">:</div>
                                     <div class="col-sm-6">
-                                        <input type="text" class="form-control form-control-sm border border-secondary border-top-0 border-right-0 border-left-0 <?php if (session('errors.id_alumni')) : ?>is-invalid<?php endif ?>" name="id_alumni" id="id_alumni" placeholder="ID Alumni" value="<?= old('id_alumni') ?>" style="border-radius: 0;" autocomplete="off">
+                                        <input type="text" class="form-control form-control-sm inputForm <?php if (session('errors.id_alumni')) : ?>is-invalid<?php endif ?>" name="id_alumni" id="id_alumni" placeholder="ID Alumni" value="<?= old('id_alumni') ?>" autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="form-group row pl-4">
                                     <label for="fullname" class="col-sm-2 col-form-label text-secondary"><span class="text-center">Nama Lengkap</span></label>
                                     <div class="col-sm-1 d-flex justify-content-end align-items-center">:</div>
                                     <div class="col-sm-6">
-                                        <input type="text" class="form-control form-control-sm border border-secondary border-top-0 border-right-0 border-left-0 <?php if (session('errors.fullname')) : ?>is-invalid<?php endif ?>" name="fullname" id="fullname" placeholder="Nama lengkap" value="<?= old('fullname') ?>" style="border-radius: 0;" autocomplete="off">
+                                        <input type="text" class="form-control form-control-sm inputForm <?php if (session('errors.fullname')) : ?>is-invalid<?php endif ?>" name="fullname" id="fullname" placeholder="Nama lengkap" value="<?= old('fullname') ?>" autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="form-group row pl-4">
                                     <label for="email" class="col-sm-2 col-form-label text-secondary">Email</label>
                                     <div class="col-sm-1 d-flex justify-content-end align-items-center">:</div>
                                     <div class="col-sm-6">
-                                        <input type="email" class="form-control form-control-sm border border-secondary border-top-0 border-right-0 border-left-0  <?php if (session('errors.email')) : ?>is-invalid<?php endif ?>" id="email" name="email" placeholder="<?= lang('Auth.email') ?>" value="<?= old('email') ?>" style="border-radius: 0;" autocomplete="off">
+                                        <input type="email" class="form-control form-control-sm inputForm <?php if (session('errors.email')) : ?>is-invalid<?php endif ?>" id="email" name="email" placeholder="<?= lang('Auth.email') ?>" value="<?= old('email') ?>" autocomplete="off">
                                     </div>
                                 </div>
                                 <br>
@@ -78,7 +78,7 @@
                                     <label for="password" class="col-sm-2 col-form-label text-secondary">Password</label>
                                     <div class="col-sm-1 d-flex justify-content-end align-items-center">:</div>
                                     <div class="col-sm-4">
-                                        <input type="password" name="password" id="password" value="<?= $genr_pass ?>" class="form-control form-control-sm password-input border border-secondary <?php if (session('errors.password')) : ?>is-invalid<?php endif ?>" placeholder="<?= lang('Auth.password') ?>" autocomplete="off" autocomplete="off">
+                                        <input type="password" name="password" id="password" value="<?= $genr_pass ?>" class="form-control form-control-sm password-input border border-secondary <?php if (session('errors.password')) : ?>is-invalid<?php endif ?>" placeholder="<?= lang('Auth.password') ?>" autocomplete="off">
                                         <a id="icon-button" class="text-secondary pr-1" onclick="see_password(event)" title="Tampilkan password" href="javascript:void(0)"><span class="password-icon"><i class="fas fa-eye"></i></span></a>
                                     </div>
                                 </div>

@@ -146,7 +146,7 @@
           <div class="flex mt-5">
             <div class="flex justify-start items-center mb-2 w-full relative">
               <input type="file" hidden accept=".jpg, .jpeg, .img, .png" title="Pilih File" id='pilihFile' name="file_upload">
-              <label for="pilihFile" title="Harus Diisi" class="pilihFile border border-primary text-sm text-secondary rounded-full w-24 py-1 text-center cursor-pointer hover:bg-secondaryhover transition-colors duration-300 text-sm mr-4 outline-none">Pilih
+              <label for="pilihFile" title="Harus Diisi" class="pilihFile border border-primary text-sm text-secondary rounded-full w-24 py-1 text-center cursor-pointer hover:bg-secondaryhover transition-colors duration-300 mr-4 outline-none">Pilih
                 File</label>
               <span class="text-primary absolute md:left-28 left-28 select-none cursor-default cursor md:text-sm text-sm" id="textPhoto">Tidak ada foto yang dipilih</span>
             </div>
@@ -168,7 +168,7 @@
           </div>
           <div class="form-group">
             <label for="deskripsi" class="text-sm text-secondary">*Deskripsi</label>
-            <textarea name="deskripsi" id="deskripsi" rows="4" class="inputForm resize-none font-heading text-xs form-control text-sm border-top-0 border-right-0 border-left-0" placeholder="ex. Penggunaan Jutsu Air dalam Mengatasi Permasalahan Banjir yang Sering Terjadi di Wilayah Pemukiman Rawan Longsor" maxlength="150" required></textarea>
+            <textarea name="deskripsi" id="deskripsi" rows="4" class="inputForm resize-none font-heading text-xs form-control border-top-0 border-right-0 border-left-0" placeholder="ex. Penggunaan Jutsu Air dalam Mengatasi Permasalahan Banjir yang Sering Terjadi di Wilayah Pemukiman Rawan Longsor" maxlength="150" required></textarea>
           </div>
           <div class="text-red-500">
             <?= service('validation')->getError('deskripsi'); ?>
@@ -178,7 +178,7 @@
           <label for="tags" class="text-primary font-medium">Tags :</label>
           <div id="tags-container">
             <div class="control-group">
-              <select id="tags" class="tags inputForm font-heading text-xs text-sm border-top-0 border-right-0 border-left-0" placeholder="Tandai orang"></select>
+              <select id="tags" class="tags inputForm font-heading text-xs border-top-0 border-right-0 border-left-0" placeholder="Tandai orang"></select>
             </div>
           </div>
           <div class="font-heading text-xs text-primary">

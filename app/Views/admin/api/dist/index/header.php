@@ -11,8 +11,8 @@
             icon: 'question',
             text: 'Anda yakin ingin mengubah status request aplikasi "' + name + '" menjadi "' + name_status + '"?',
             showCancelButton: true,
-            confirmButtonColor: '#4248ED',
-            cancelButtonColor: '#33A1C4',
+            confirmButtonColor: '#54AC00',
+            cancelButtonColor: '#D81B01',
             confirmButtonText: 'Ya, Lanjutkan!'
         }).then((result) => {
             if (result.isConfirmed) {
@@ -96,8 +96,8 @@
             icon: 'question',
             text: 'Anda yakin ingin menghapus data scope?',
             showCancelButton: true,
-            confirmButtonColor: '#4248ED',
-            cancelButtonColor: '#33A1C4',
+            confirmButtonColor: '#54AC00',
+            cancelButtonColor: '#D81B01',
             confirmButtonText: 'Ya, Lanjutkan!'
         }).then((result) => {
             if (result.isConfirmed) {

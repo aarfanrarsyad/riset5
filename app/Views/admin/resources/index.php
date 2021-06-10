@@ -54,7 +54,7 @@
                     <i class="fas fa-th-list text-muted"></i>&ensp;Pilih Tindakan
                   </button>
                   <div class="dropdown-menu text-sm">
-                    <a class="dropdown-item" href="javascript:void(0)" onclick="insert_menu()"><i class="fas fa-plus-square"></i>&ensp;Add new menu</a>
+                    <a class="dropdown-item text-primaryHover" href="javascript:void(0)" onclick="insert_menu()"><i class="fas fa-plus-square"></i>&ensp;Add new menu</a>
                   </div>
                 </div>
                 <div class="row mt-4">
@@ -74,10 +74,10 @@
                           <tr>
                             <td class="text-center"><?= $i ?></td>
                             <td><?= $dataset['menu_name'] ?></td>
-                            <td><i class="<?= $dataset['menu_icon'] ?> text-secondary"></i></td>
+                            <td><i class="<?= $dataset['menu_icon'] ?> text-primaryHover"></i></td>
                             <td class="text-center">
-                              <button type="button" class="btn btn-xs btn-outline-secondary mr-1" onclick="edit_menu(<?= $dataset['menu_id'] ?>,'<?= $dataset['menu_name'] ?>','<?= $dataset['menu_icon'] ?>')"><i class="fas fa-edit"></i>&ensp;<span class="text-xs">Update</span></button>
-                              <button type="button" class="btn btn-xs btn-outline-secondary" onclick="delete_menu(<?= $dataset['menu_id'] ?>, '<?= $dataset['menu_name'] ?>')"><i class="fas fa-trash"></i>&ensp;<span class="text-xs">Delete</span></button>
+                              <button type="button" class="btn btn-xs btn-outline-primary mr-1" onclick="edit_menu(<?= $dataset['menu_id'] ?>,'<?= $dataset['menu_name'] ?>','<?= $dataset['menu_icon'] ?>')"><i class="fas fa-edit"></i>&ensp;<span class="text-xs">Update</span></button>
+                              <button type="button" class="btn btn-xs btn-outline-primary" onclick="delete_menu(<?= $dataset['menu_id'] ?>, '<?= $dataset['menu_name'] ?>')"><i class="fas fa-trash"></i>&ensp;<span class="text-xs">Delete</span></button>
                             </td>
                           </tr>
                           <?php $i++ ?>
@@ -93,7 +93,7 @@
                     <i class="fas fa-th-list text-muted"></i>&ensp;Pilih Tindakan
                   </button>
                   <div class="dropdown-menu text-sm">
-                    <a class="dropdown-item" href="<?= base_url('/admin/resources/insert') ?>"><i class="fas fa-plus-square"></i>&ensp;Add new resource</a>
+                    <a class="dropdown-item text-primaryHover" href="<?= base_url('/admin/resources/insert') ?>"><i class="fas fa-plus-square"></i>&ensp;Add new resource</a>
                   </div>
                 </div>
                 <div class="row mt-4">
@@ -159,10 +159,10 @@
           </div>
           <div class="form-group">
             <label for="icon"><span class="text-sm text-secondary">Icon :</span></label>
-            <input type="text" class="form-control text-sm border-top-0 border-right-0 border-left-0" name="icon" id="icon" placeholder="Insert class from font awesome icon. Ex : 'fa-user'" style="border-radius:0" autocomplete="off" required>
+            <input type="text" class="inputForm form-control text-sm" name="icon" id="icon" placeholder="Insert class from font awesome icon. Ex : 'fa-user'" autocomplete="off" required>
           </div>
           <div class="d-flex justify-content-end">
-            <button type="submit" id="btn-submit" name="insert_menu" class="btn btn-sm  text-secondaryhover border-secondaryhover hover:text-white hover:bg-secondaryhover"><i class="fas fa-paper-plane"></i>&ensp;Send data</button>
+            <button type="submit" id="btn-submit" name="insert_menu" class="btn btn-sm text-white bg-secondaryhover hover:bg-opacity-75"><i class="fas fa-paper-plane"></i>&ensp;Send data</button>
           </div>
         </form>
       </div>

@@ -162,8 +162,8 @@
                 icon: 'question',
                 text: 'Anda yakin ingin mengubah akses menjadi ' + val + ' ?',
                 showCancelButton: true,
-                confirmButtonColor: '#4248ED',
-                cancelButtonColor: '#33A1C4',
+                confirmButtonColor: '#54AC00',
+                cancelButtonColor: '#D81B01',
                 confirmButtonText: 'Ya, Lanjutkan !',
                 cancelButtonText: 'Batal',
             }).then((result) => {
@@ -199,8 +199,8 @@
                 icon: 'question',
                 text: 'Anda yakin ingin mengubah akses ke Group tertentu ?',
                 showCancelButton: true,
-                confirmButtonColor: '#4248ED',
-                cancelButtonColor: '#33A1C4',
+                confirmButtonColor: '#54AC00',
+                cancelButtonColor: '#D81B01',
                 confirmButtonText: 'Ya, Lanjutkan !',
                 cancelButtonText: 'Batal',
             }).then((result) => {
@@ -235,8 +235,8 @@
             icon: 'question',
             text: 'Apakah anda yakin ingin ' + title + ' berita ini?',
             showCancelButton: true,
-            confirmButtonColor: '#4248ED',
-            cancelButtonColor: '#33A1C4',
+            confirmButtonColor: '#54AC00',
+            cancelButtonColor: '#D81B01',
             confirmButtonText: 'Ya, Lanjutkan !',
             cancelButtonText: 'Batal',
         }).then((result) => {
@@ -283,8 +283,8 @@
             icon: 'question',
             text: 'Apakah anda yakin ingin menghapus komentar ini?',
             showCancelButton: true,
-            confirmButtonColor: '#4248ED',
-            cancelButtonColor: '#33A1C4',
+            confirmButtonColor: '#54AC00',
+            cancelButtonColor: '#D81B01',
             confirmButtonText: 'Ya, Hapus!',
             cancelButtonText: 'Batal',
         }).then((result) => {
@@ -377,8 +377,8 @@
                                         <i class="fas fa-th-list text-muted"></i>&ensp;Pilih Tindakan
                                     </button>
                                     <div class="dropdown-menu text-sm">
-                                        <a class="dropdown-item" href="<?= base_url('admin/berita/insert') ?>"><i class="fas fa-plus-square"></i>&ensp;Tambahkan Berita</a>
-                                        <a class="dropdown-item" href="<?= base_url('admin/berita/list-berita') ?>"><i class="fas fa-book-reader"></i>&ensp;Tampilkan Berita</a>
+                                        <a class="dropdown-item text-primaryHover" href="<?= base_url('admin/berita/insert') ?>"><i class="fas fa-plus-square"></i>&ensp;Tambahkan Berita</a>
+                                        <a class="dropdown-item text-primaryHover" href="<?= base_url('admin/berita/list-berita') ?>"><i class="fas fa-book-reader"></i>&ensp;Tampilkan Berita</a>
                                     </div>
                                 </div>`
                                 <div class="row mt-4">
