@@ -58,8 +58,8 @@
             icon: 'question',
             text: 'Are you sure to ' + active + ' ' + name + ' user ?',
             showCancelButton: true,
-            confirmButtonColor: '#4248ED',
-            cancelButtonColor: '#33A1C4',
+            confirmButtonColor: '#54AC00',
+            cancelButtonColor: '#D81B01',
             confirmButtonText: 'Yes, do it!'
         }).then((result) => {
             if (result.isConfirmed) {

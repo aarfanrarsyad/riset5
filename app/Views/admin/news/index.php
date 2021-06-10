@@ -377,8 +377,8 @@
                                         <i class="fas fa-th-list text-muted"></i>&ensp;Pilih Tindakan
                                     </button>
                                     <div class="dropdown-menu text-sm">
-                                        <a class="dropdown-item" href="<?= base_url('admin/berita/insert') ?>"><i class="fas fa-plus-square"></i>&ensp;Tambahkan Berita</a>
-                                        <a class="dropdown-item" href="<?= base_url('admin/berita/list-berita') ?>"><i class="fas fa-book-reader"></i>&ensp;Tampilkan Berita</a>
+                                        <a class="dropdown-item text-primaryHover" href="<?= base_url('admin/berita/insert') ?>"><i class="fas fa-plus-square"></i>&ensp;Tambahkan Berita</a>
+                                        <a class="dropdown-item text-primaryHover" href="<?= base_url('admin/berita/list-berita') ?>"><i class="fas fa-book-reader"></i>&ensp;Tampilkan Berita</a>
                                     </div>
                                 </div>`
                                 <div class="row mt-4">

@@ -42,7 +42,7 @@
                             <div class="row mb-3">
                                 <label for="nama" class="col-sm-2 col-form-label">Nama</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control <?= ($validation->hasError('nama')) ? 'is-invalid' : ''; ?>" placeholder="Masukkan nama" id="nama" name="nama" value="<?= old('nama'); ?>" require>
+                                    <input type="text" class="form-control inputForm <?= ($validation->hasError('nama')) ? 'is-invalid' : ''; ?>" placeholder="Masukkan nama" id="nama" name="nama" value="<?= old('nama'); ?>" require>
                                     <div class="invalid-feedback">
                                         <?= $validation->getError('nama'); ?>
                                     </div>
@@ -64,14 +64,14 @@
                             <div class="row g-3 row mb-3">
                                 <label for="tempat_lahir" class="col-sm-2 col-form-label">Tempat Lahir</label>
                                 <div class="col-sm-5">
-                                    <input type="text" class="form-control <?= ($validation->hasError('tempat_lahir')) ? 'is-invalid' : ''; ?>" placeholder="Masukkan Tempat Lahir" id="tempat_lahir" name="tempat_lahir" value="<?= old('tempat_lahir'); ?>">
+                                    <input type="text" class="form-control inputForm <?= ($validation->hasError('tempat_lahir')) ? 'is-invalid' : ''; ?>" placeholder="Masukkan Tempat Lahir" id="tempat_lahir" name="tempat_lahir" value="<?= old('tempat_lahir'); ?>">
                                     <div class="invalid-feedback">
                                         <?= $validation->getError('tempat_lahir'); ?>
                                     </div>
                                 </div>
                                 <div class="input-group col-sm">
-                                    <span class="input-group-text">Tanggal Lahir</span>
-                                    <input type="date" class="form-control <?= ($validation->hasError('tanggal_lahir')) ? 'is-invalid' : ''; ?>" id="tanggal_lahir" name="tanggal_lahir" placeholder="Tanggal Lahir" value="<?= old('tanggal_lahir'); ?>">
+                                    <span class="input-group-text mb-2">Tanggal Lahir</span>
+                                    <input type="date" class="form-control inputForm <?= ($validation->hasError('tanggal_lahir')) ? 'is-invalid' : ''; ?>" id="tanggal_lahir" name="tanggal_lahir" placeholder="Tanggal Lahir" value="<?= old('tanggal_lahir'); ?>">
                                     <div class="invalid-feedback">
                                         <?= $validation->getError('tanggal_lahir'); ?>
                                     </div>
@@ -80,49 +80,49 @@
                             <div class="row mb-3">
                                 <label for="telp_alumni" class="col-sm-2 col-form-label">Telepon Alumni</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" placeholder="Masukkan Nomor HP" id="telp_alumni" name="telp_alumni" value="<?= old('telp_alumni'); ?>">
+                                    <input type="text" class="form-control inputForm" placeholder="Masukkan Nomor HP" id="telp_alumni" name="telp_alumni" value="<?= old('telp_alumni'); ?>">
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <label for="email" class="col-sm-2 col-form-label">Email</label>
                                 <div class="col-sm-10">
-                                    <input type="email" class="form-control" placeholder="Masukkan Email" id="email" name="email" value="<?= old('email'); ?>">
+                                    <input type="email" class="form-control inputForm" placeholder="Masukkan Email" id="email" name="email" value="<?= old('email'); ?>">
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <label for="ig" class="col-sm-2 col-form-label">Instagram</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" placeholder="Masukkan Username Instagram" id="ig" name="ig" value="<?= old('ig'); ?>">
+                                    <input type="text" class="form-control inputForm" placeholder="Masukkan Username Instagram" id="ig" name="ig" value="<?= old('ig'); ?>">
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <label for="twitter" class="col-sm-2 col-form-label">Twitter</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" placeholder="Masukkan username Twitter" id="twitter" name="twitter" value="<?= old('twitter'); ?>">
+                                    <input type="text" class="form-control inputForm" placeholder="Masukkan username Twitter" id="twitter" name="twitter" value="<?= old('twitter'); ?>">
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <label for="fb" class="col-sm-2 col-form-label">Facebook</label>
                                 <div class="col-sm-10">
-                                    <input type="url" class="form-control" placeholder="Masukkan link Facebook" id="fb" name="fb" value="<?= old('fb'); ?>">
+                                    <input type="url" class="form-control inputForm" placeholder="Masukkan link Facebook" id="fb" name="fb" value="<?= old('fb'); ?>">
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <label for="linkedin" class="col-sm-2 col-form-label">Linkedin</label>
                                 <div class="col-sm-10">
-                                    <input type="url" class="form-control" placeholder="Masukkan link linkedin" id="linkedin" name="linkedin" value="<?= old('linkedin'); ?>">
+                                    <input type="url" class="form-control inputForm" placeholder="Masukkan link linkedin" id="linkedin" name="linkedin" value="<?= old('linkedin'); ?>">
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <label for="gscholar" class="col-sm-2 col-form-label">Google Scholar</label>
                                 <div class="col-sm-10">
-                                    <input type="url" class="form-control" placeholder="Masukkan link gscholar" id="gscholar" name="gscholar" value="<?= old('gscholar'); ?>">
+                                    <input type="url" class="form-control inputForm" placeholder="Masukkan link gscholar" id="gscholar" name="gscholar" value="<?= old('gscholar'); ?>">
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <label for="alamat" class="col-sm-2 col-form-label">Alamat</label>
                                 <div class="col-sm-10">
-                                    <textarea type="text" class="form-control" placeholder="Masukkan alamat lengkap" id="alamat" name="alamat" rows="2"><?= old('alamat'); ?></textarea>
+                                    <textarea type="text" class="form-control inputForm" placeholder="Masukkan alamat lengkap" id="alamat" name="alamat" rows="2"><?= old('alamat'); ?></textarea>
                                 </div>
                             </div>
                             <div class="row mb-3">
@@ -163,14 +163,14 @@
                                                 <option selected disabled>Pilih Kabupaten/Kota</option>                                                        
                                             </select> -->
                                         <input hidden type="text" name="kab" id="kab-hidden">
-                                        <input type="text" class="form-control" placeholder="Masukkan nama kabupaten" id="kota" name="kota" value="<?= old('kota'); ?>">
+                                        <input type="text" class="form-control inputForm" placeholder="Masukkan nama kabupaten" id="kota" name="kota" value="<?= old('kota'); ?>">
                                     </div>
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <label for="jabatan_terakhir" class="col-sm-2 col-form-label">Jabatan Terakhir</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control <?= ($validation->hasError('jabatan_terakhir')) ? 'is-invalid' : ''; ?>" placeholder="Masukkan Jabatan Terakhir" id="jabatan_terakhir" name="jabatan_terakhir" value="<?= old('jabatan_terakhir'); ?>">
+                                    <input type="text" class="form-control inputForm <?= ($validation->hasError('jabatan_terakhir')) ? 'is-invalid' : ''; ?>" placeholder="Masukkan Jabatan Terakhir" id="jabatan_terakhir" name="jabatan_terakhir" value="<?= old('jabatan_terakhir'); ?>">
                                     <div class="invalid-feedback">
                                         <?= $validation->getError('jabatan_terakhir'); ?>
                                     </div>
@@ -179,13 +179,13 @@
                             <div class="row mb-3">
                                 <label for="nip" class="col-sm-2 col-form-label">NIP</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" placeholder="Masukkan NIP" id="nip" name="nip" value="<?= old('nip'); ?>">
+                                    <input type="text" class="form-control inputForm" placeholder="Masukkan NIP" id="nip" name="nip" value="<?= old('nip'); ?>">
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <label for="nip_bps" class="col-sm-2 col-form-label">NIP BPS</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" placeholder="Masukkan NIP BPS" id="nip_bps" name="nip_bps" value="<?= old('nip_bps'); ?>">
+                                    <input type="text" class="form-control inputForm" placeholder="Masukkan NIP BPS" id="nip_bps" name="nip_bps" value="<?= old('nip_bps'); ?>">
                                 </div>
                             </div>
                             <div class="row mb-3">
@@ -229,7 +229,7 @@
                             <div class="row mb-3">
                                 <label for="deskripsi" class="col-sm-2 col-form-label">Deskripsi</label>
                                 <div class="col-sm-10">
-                                    <textarea type="text" class="form-control" placeholder="Masukkan Deskripsi" id="deskripsi" name="deskripsi" rows="2"><?= old('deskripsi'); ?></textarea>
+                                    <textarea type="text" class="form-control inputForm" placeholder="Masukkan Deskripsi" id="deskripsi" name="deskripsi" rows="2"><?= old('deskripsi'); ?></textarea>
                                 </div>
                             </div>
                             <div class="flex justify-end">

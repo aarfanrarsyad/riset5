@@ -122,7 +122,7 @@
                                         <i class="fas fa-th-list text-muted"></i>&ensp;Pilih Tindakan
                                     </button>
                                     <div class="dropdown-menu text-sm">
-                                        <a class="dropdown-item" href="javascript:void(0)" onclick="add_scope()"><i class="fas fa-plus-square"></i>&ensp;Add Scope</a>
+                                        <a class="dropdown-item text-primaryHover" href="javascript:void(0)" onclick="add_scope()"><i class="fas fa-plus-square"></i>&ensp;Add Scope</a>
                                     </div>
                                 </div>
                                 <div class="row mt-3">
@@ -210,7 +210,7 @@
                         <input type="text" class="form-control text-sm border-top-0 border-right-0 border-left-0" name="detail_scope" id="detail_scope" placeholder="Contoh : user:profile:read." style="border-radius:0" autocomplete="off" required>
                     </div>
                     <div class="d-flex justify-content-end">
-                        <button type="submit" id="btn-submit" class="btn btn-sm text-secondaryhover border-secondaryhover hover:text-white hover:bg-secondaryhover"><i class="fas fa-paper-plane"></i>&ensp;Send data</button>
+                        <button type="submit" id="btn-submit" class="btn btn-sm text-white bg-secondaryhover hover:bg-opacity-75"><i class="fas fa-paper-plane"></i>&ensp;Send data</button>
                     </div>
                 </form>
             </div>

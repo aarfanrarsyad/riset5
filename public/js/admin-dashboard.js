@@ -42,6 +42,7 @@ function initalize_dataTables(element, config = null) {
 
     $('.dataTables_filter input[type="search"]').
     attr('placeholder', 'Find something ...').
+    addClass('inputForm').
     css({
         'width': '250px',
         'display': 'inline-block',

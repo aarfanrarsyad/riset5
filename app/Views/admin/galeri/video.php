@@ -55,7 +55,7 @@
                   </button>
                   <div class="dropdown-menu text-sm">
                     <!-- <a class="dropdown-item" href="<?= base_url('admin/users/register') ?>"><i class="fas fa-plus-square"></i>&ensp;add video</a> -->
-                    <a class="dropdown-item" href="javascript:void(0)" onclick="add_video()"><i class="fas fa-plus-square"></i>&ensp;add video</a>
+                    <a class="dropdown-item text-primaryHover" href="javascript:void(0)" onclick="add_video()"><i class="fas fa-plus-square"></i>&ensp;add video</a>
                   </div>
                 </div>
                 <div class="row mt-4">
@@ -122,7 +122,7 @@
 <div class="modal fade" id="token-modal" tabindex="-1">
   <div class="modal-dialog">
     <div class="modal-content card card-white card-outline px-2 py-2">
-      <h5 class="modal-title text-secondary mx-2"><i class="fas fa-qrcode"></i>&ensp;Tambah Video Baru</h5>
+      <h5 class="modal-title text-primaryHover mx-2"><i class="fas fa-qrcode"></i>&ensp;Tambah Video Baru</h5>
       <div class="modal-body mt-2">
         <form id="form-input-upload" action="<?= base_url('admin/video_upload') ?>" method="POST">
           <div class="form-group">
@@ -142,7 +142,7 @@
             </datalist>
           </div>
           <div class="d-flex justify-content-end">
-            <button type="submit" id="btn-submit" class="btn btn-sm btn-outline-primary"><i class="fas fa-paper-plane"></i>&ensp;Submit</button>
+            <button type="submit" id="btn-submit" class="btn btn-sm text-white bg-secondaryhover hover:bg-opacity-75"><i class="fas fa-paper-plane"></i>&ensp;Submit</button>
           </div>
         </form>
       </div>

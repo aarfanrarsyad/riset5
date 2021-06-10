@@ -49,7 +49,7 @@
                     <i class="fas fa-th-list text-muted"></i>&ensp;Pilih Tindakan
                   </button>
                   <div class="dropdown-menu text-sm">
-                    <a class="dropdown-item" href="javascript:void(0)" onclick="insert_group()"><i class="fas fa-plus-square"></i>&ensp;Add new group</a>
+                    <a class="dropdown-item text-primaryHover" href="javascript:void(0)" onclick="insert_group()"><i class="fas fa-plus-square"></i>&ensp;Add new group</a>
                   </div>
                 </div>
                 <div class="row mt-4">
@@ -99,14 +99,14 @@
           <input type="hidden" name="id" id="id">
           <div class="form-group">
             <label for="name"><span class="text-sm text-secondary">Group Name :</span></label>
-            <input type="text" name="name" class="form-control text-sm border-top-0 border-right-0 border-left-0" id="name" placeholder="Ex : Administrator" style="border-radius:0" autocomplete="off">
+            <input type="text" name="name" class="inputForm form-control text-sm" id="name" placeholder="Ex : Administrator" autocomplete="off">
           </div>
           <div class="form-group">
             <label for="description"><span class="text-sm text-secondary">Description :</span></label>
-            <input type="text" class="form-control text-sm border-top-0 border-right-0 border-left-0" name="description" id="description" placeholder="Ex : this role will be used for ...." style="border-radius:0" autocomplete="off">
+            <input type="text" class="inputForm form-control text-sm" name="description" id="description" placeholder="Ex : this role will be used for ...." autocomplete="off">
           </div>
           <div class="d-flex justify-content-end">
-            <button type="submit" id="btn-submit" name="insert_group" class="btn btn-sm text-secondaryhover border-secondaryhover hover:text-white hover:bg-secondaryhover"><i class="fas fa-paper-plane"></i>&ensp;Send data</button>
+            <button type="submit" id="btn-submit" name="insert_group" class="btn btn-sm text-white bg-secondaryhover hover:bg-opacity-75"><i class="fas fa-paper-plane"></i>&ensp;Send data</button>
           </div>
         </form>
       </div>

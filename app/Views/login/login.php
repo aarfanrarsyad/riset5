@@ -112,9 +112,9 @@
 if (session('error')) : ?>
     <div id="alert">
         <div class="fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40">
-            <div class="duration-700 transition-all p-3 rounded-lg flex items-center" style="background-color: #FF7474;">
+            <div class="duration-700 transition-all p-3 rounded-lg flex items-center bg-redAlert">
                 <img src="/img/components/icon/warning.png" class="h-5 mr-2" style="color: #C51800;" alt="Icon Warning">
-                <p class="sm:text-base text-sm font-heading font-bold"><strong>Login gagal!</strong> username atau password anda salah.</p>
+                <p class="sm:text-base text-sm text-danger font-heading"><strong>Login gagal!</strong> username atau password anda salah.</p>
             </div>
         </div>
     </div>

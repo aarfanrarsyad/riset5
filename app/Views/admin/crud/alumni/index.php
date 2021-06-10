@@ -39,7 +39,7 @@
                                     <i class="fas fa-th-list text-muted"></i>&ensp;Pilih Tindakan
                                 </button>
                                 <div class="dropdown-menu text-sm">
-                                    <a class="dropdown-item" href="<?= base_url('/admin/alumni/tambah-alumni') ?>" onclick="CRUD_createAlumni()"><i class="fas fa-plus-square"></i>&ensp;Add new alumni</a>
+                                    <a class="dropdown-item text-primaryHover" href="<?= base_url('/admin/alumni/tambah-alumni') ?>" onclick="CRUD_createAlumni()"><i class="fas fa-plus-square"></i>&ensp;Add new alumni</a>
                                 </div>
                             </div>
                             <div class="row">

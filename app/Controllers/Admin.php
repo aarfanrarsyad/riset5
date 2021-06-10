@@ -751,25 +751,25 @@ class Admin extends BaseController
 		$init = new admin_model();
 		$alumni = $init->getAllAlumni($id)->getResultArray()[0];
 		$instansialumni = $init->getTempatKerjabyIdAlumni($id)->getRow();
-		if(!is_null($instansialumni)){
-			$instansialumni=$instansialumni->id_tempat_kerja;
+		if (!is_null($instansialumni)) {
+			$instansialumni = $instansialumni->id_tempat_kerja;
 			$instansi = $init->getTempatKerjaById($instansialumni)->getRow();
-		}else{
+		} else {
 			$instansi = array(
-				"alamat_instansi"=>'-',
-				"email_instansi"=>'-',
-				"faks_instansi"=>'-',
-				"id_tempat_kerja"=>'-',
-				"kota"=>'-',
-				"nama_instansi"=>'-',
-				"negara"=>'-',
-				"provinsi"=>'-',
-				"telp_instansi"=>'-',
+				"alamat_instansi" => '-',
+				"email_instansi" => '-',
+				"faks_instansi" => '-',
+				"id_tempat_kerja" => '-',
+				"kota" => '-',
+				"nama_instansi" => '-',
+				"negara" => '-',
+				"provinsi" => '-',
+				"telp_instansi" => '-',
 			);
-			$instansi=(object) $instansi;
+			$instansi = (object) $instansi;
 		}
 		// dd($instansialumni);
-		
+
 		// dd($instansi);
 		$pendidikan = $init->getPendidikanById($id)->getResult();
 		$prestasi = $init->getPrestasiById($id)->getResult();
@@ -1652,9 +1652,9 @@ class Admin extends BaseController
 			$flash = '<strong>Upload gagal!</strong> format upload tidak sesuai ketentuan.';
 			$alert = "<div id=\"alert\">
 				<div class=\"fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40\">
-					<div class=\"duration-700 transition-all p-3 rounded-lg flex items-center\" style=\"background-color: #FF7474;\">
+					<div class=\"duration-700 transition-all p-3 rounded-lg flex items-center bg-redAlert\">
 						<img src=\"/img/components/icon/warning.png\" class=\"h-5 mr-2\" style=\"color: #C51800;\" alt=\"Warning\">
-						<p class=\"sm:text-base text-sm font-heading font-bold\">" . $flash . "</p>
+						<p class=\"sm:text-base text-sm text-danger font-heading\">" . $flash . "</p>
 					</div>
 				</div>
 			</div>
