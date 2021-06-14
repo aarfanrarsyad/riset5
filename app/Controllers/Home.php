@@ -146,7 +146,7 @@ class Home extends BaseController
 								// $cek = $this->modelAlumni->getAlumniByEmail($user->getEmail());
 
 								if ($this->modelAuth->getUserByUsername($user->getUsername()) == NULL) {
-									date_default_timezone_set("Asia/Bangkok");
+									date_default_timezone_set("Asia/Jakarta");
 									$now = date("Y-m-d H:i:s");
 									$data = [
 										'email'				=> $user->getEmail(),
@@ -348,7 +348,7 @@ class Home extends BaseController
 
 					//insert new user sipadu (mahasiswa)
 					if ($this->modelAuth->getUserByUsername($hasil['profile']['nim']) == NULL) {
-						date_default_timezone_set("Asia/Bangkok");
+						date_default_timezone_set("Asia/Jakarta");
 						$now = date("Y-m-d H:i:s");
 
 						$data = [

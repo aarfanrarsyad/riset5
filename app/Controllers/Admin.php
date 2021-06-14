@@ -1666,7 +1666,7 @@ class Admin extends BaseController
 			session()->setFlashdata('flash', $alert);
 			return redirect()->to(base_url('admin/galeri-foto'))->withInput();
 		} else {
-			date_default_timezone_set("Asia/Bangkok");
+			date_default_timezone_set("Asia/Jakarta");
 			$model = new \App\Models\FotoModel;
 
 			$foto = $this->request->getFile('file_upload');
@@ -1880,7 +1880,7 @@ class Admin extends BaseController
 						$link = $v_link[3];
 					}
 				}
-				date_default_timezone_set("Asia/Bangkok");
+				date_default_timezone_set("Asia/Jakarta");
 				$now = date("Y-m-d");
 
 				$model = new \App\Models\VideoModel();

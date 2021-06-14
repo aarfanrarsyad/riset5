@@ -179,7 +179,7 @@ class Auth extends BaseController
 
 				//insert new user sipadu (mahasiswa)
 				if ($this->modelAuth->getUserByUsername($hasil['profile']['nim']) == NULL) {
-					date_default_timezone_set("Asia/Bangkok");
+					date_default_timezone_set("Asia/Jakarta");
 					$now = date("Y-m-d H:i:s");
 
 					$data = [
@@ -196,7 +196,7 @@ class Auth extends BaseController
 					];
 					$this->modelAuth->insertUser($data);
 				} else {
-					date_default_timezone_set("Asia/Bangkok");
+					date_default_timezone_set("Asia/Jakarta");
 					$now = date("Y-m-d H:i:s");
 					$email = $user['nim'] . "@stis.ac.id";
 					$this->modelAuth->isLogin($now, $email);
@@ -366,7 +366,7 @@ class Auth extends BaseController
 						}
 
 						if ($this->modelAuth->getUserByUsername($user->getUsername()) == NULL) {
-							date_default_timezone_set("Asia/Bangkok");
+							date_default_timezone_set("Asia/Jakarta");
 							$now = date("Y-m-d H:i:s");
 							$data = [
 								'email'				=> $user->getEmail(),
@@ -383,7 +383,7 @@ class Auth extends BaseController
 							];
 							$this->modelAuth->insertUser($data);
 						} else {
-							date_default_timezone_set("Asia/Bangkok");
+							date_default_timezone_set("Asia/Jakarta");
 							$now = date("Y-m-d H:i:s");
 							$email = $user->getEmail();
 							$this->modelAuth->isLogin($now, $email);

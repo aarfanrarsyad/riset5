@@ -8,7 +8,7 @@ class Rbac extends Seeder
 {
 	public function run()
 	{
-		date_default_timezone_set("Asia/Bangkok");
+		date_default_timezone_set("Asia/Jakarta");
 		$now = date("Y-m-d H:i:s");
 		$data = [
 			[
