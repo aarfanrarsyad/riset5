@@ -1,20 +1,20 @@
 function loginSipadu() {
-    var win = window.open(`http://localhost:8080/auth/sipadu`, "_blank", "height=700,width=550,status=no,titlebar=no,menubar=no,top=10,left=300", true);
+    var win = window.open(`https://alumni.stis.ac.id/auth/sipadu`, "_blank", "height=700,width=550,status=no,titlebar=no,menubar=no,top=10,left=300", true);
     var timer = setInterval(function () {
         if (win.closed) {
             clearInterval(timer);
-            if (document.cookie.includes('login=yes') || document.cookie.includes('account=inactivated'))
+            if (document.cookie.includes('login=yes') || document.cookie.includes('login=failed'))
                 location.reload();
         }
     }, 1000);
 }
 
 function loginBPS() {
-    var win = window.open(`http://localhost:8080/auth/bps`, "_blank", "height=700,width=900,status=no,titlebar=no,menubar=no,top=10,left=300", true);
+    var win = window.open(`https://alumni.stis.ac.id/auth/bps`, "_blank", "height=700,width=900,status=no,titlebar=no,menubar=no,top=10,left=300", true);
     var timer = setInterval(function () {
         if (win.closed) {
             clearInterval(timer);            
-            if (document.cookie.includes('login=yes') || document.cookie.includes('account=inactivated'))
+            if (document.cookie.includes('login=yes') || document.cookie.includes('login=failed'))
                 location.reload();
         }
     }, 1000);

@@ -11,6 +11,14 @@ use \JKD\SSO\Client\Provider\Keycloak;
 class Auth extends BaseController
 {
 
+	public function __construct()
+	{
+		$this->loginModel = new LoginModel();
+		$this->modelAuth = new \App\Models\AuthModel();
+		$this->modelAlumni = new \App\Models\AlumniModel();
+		$this->roleModel = new \App\Models\RoleModel();
+	}
+
 	public function index() //login
 	{
 	}
@@ -74,7 +82,7 @@ class Auth extends BaseController
 
 		$query = http_build_query([
 			'client_id' => "14",
-			'redirect_uri' => 'http://localhost:8080',
+			'redirect_uri' => 'https://alumni.stis.ac.id/validate_sipadu',
 			'response_type' => 'code', //gak usah diubah
 			'scope' => 'user:profile:read'
 		]);
@@ -84,13 +92,8 @@ class Auth extends BaseController
 
 	public function validate_sipadu()	//masuk()
 	{
-		$this->modelAuth = new \App\Models\AuthModel();
-		$this->modelAlumni = new \App\Models\AlumniModel();
-		$this->roleModel = new \App\Models\RoleModel();
-		$faker = \Faker\Factory::create('id_ID');
-
-		// processing data sipadu
-		if (isset($_REQUEST['code']) && $_REQUEST['code']) {
+		if (isset($_GET['code']) && $_GET['code']) {
+			$faker = \Faker\Factory::create('id_ID');
 
 			$curl_status = curl_init();
 
@@ -103,8 +106,8 @@ class Auth extends BaseController
 					'grant_type' => 'authorization_code',
 					'client_id' => '14',
 					'client_secret' => '3r3grLcMKEEqhq1gHbks1ZzztbFdasLbzpg0YDj0',
-					'redirect_uri' => 'http://localhost:8080',
-					'code' => $_REQUEST['code']
+					'redirect_uri' => 'https://alumni.stis.ac.id/validate_sipadu',
+					'code' => $_GET['code']
 				]
 			]);
 			curl_setopt($curl_status, CURLOPT_FRESH_CONNECT, TRUE);
@@ -137,119 +140,170 @@ class Auth extends BaseController
 			$hasil = json_decode($result, true);	// hasil akhir sipadu
 
 			if (isset($hasil['profile']['nim'])) {	//apabila alumni login dengan akun sipadu mahasiswa
-				$user = $hasil['profile'];
+				date_default_timezone_set("Asia/Jakarta");
+				$year_now = date("Y");
 
-				// binding session dengan database (insert data ke tabel alumni kalau belum terdaftar di tabel alumni) 
-				if ($this->modelAlumni->getUserByNIM($user['nim']) == NULL) {
-					$data = [
-						'nim'                => $user['nim'],
-						'angkatan'           => $faker->numberBetween($min = 1, $max = 62),
-						'nama'               => $user['nama'],
-						'jenis_kelamin'      => $faker->randomElement($array = array('L', 'P')),
-						'tempat_lahir'       => $faker->city,
-						'tanggal_lahir'      => $faker->date($format = 'Y-m-d', $max = 'now'),
-						'telp_alumni'        => $faker->phoneNumber,
-						'email'              => $user['nim'] . "@stis.ac.id",
-						'alamat'             => $faker->address,
-						'status_bekerja'     => $faker->boolean,
-						'perkiraan_pensiun'  => $faker->year,
-						'jabatan_terakhir'   => $faker->jobTitle,
-						'aktif_pns'          => $faker->boolean,
-						'nip_bps'            => $user['nim']
-					];
-					$this->modelAlumni->db->table('alumni')->insert($data);
+				$alumni = false;
 
-					$data = [
-						'nim'             => $user['nim'],
-						'id_tempat_kerja' => $faker->numberBetween($min = 1, $max = 100),
-					];
-					$this->modelAlumni->db->table('alumni_tempat_kerja')->insert($data);
-
-					// $data = [
-					// 	'jenjang' => $faker->randomElement($array = array('S1', 'S2', 'S3')),
-					// 	'universitas' => $faker->sentence($nbWords = 3, $variableNbWords = true),
-					// 	'program_studi' => $faker->sentence($nbWords = 2, $variableNbWords = true),
-					// 	'tahun_lulus' => $faker->year,
-					// 	'tahun_masuk' => $faker->year,
-					// 	'judul_tulisan' => $faker->sentence($nbWords = 5, $variableNbWords = true),
-					// 	'nim'             => $user['nim'],
-					// ];
-					// $this->modelAlumni->db->table('pendidikan')->insert($data);
-				}
-
-				//insert new user sipadu (mahasiswa)
-				if ($this->modelAuth->getUserByUsername($hasil['profile']['nim']) == NULL) {
-					date_default_timezone_set("Asia/Jakarta");
-					$now = date("Y-m-d H:i:s");
-
-					$data = [
-						'email'				=> $user['nim'] . "@stis.ac.id",
-						'username'			=> $user['nim'],
-						'nim'				=> $user['nim'],
-						'fullname'			=> $user['nama'],
-						'password_hash'		=> null,
-						'reset_at'			=> null,
-						'active'			=> 1,
-						'force_pass_reset'	=> 0,
-						'created_at'		=> $now,
-						'updated_at'		=> $now,
-					];
-					$this->modelAuth->insertUser($data);
-				} else {
-					date_default_timezone_set("Asia/Jakarta");
-					$now = date("Y-m-d H:i:s");
-					$email = $user['nim'] . "@stis.ac.id";
-					$this->modelAuth->isLogin($now, $email);
-				}
-
-				$user = $this->modelAuth->getUserByUsername($hasil['profile']['nim']);
-				session()->set([	//set session (informasi identitas) dari tabel users
-					'id_user' => $user['id'],
-					'nim' => $user['nim'],
-					'nama' => $user['fullname']
-				]);
-
-				$query = $this->roleModel->getRole(session('id_user'));
-				$role = array();
-
-				if ($query != null) {
-					foreach ($query as $arr) {
-						array_push($role, $arr->group_id);
+				foreach ($hasil['profile']['kelas'] as $kelas) {
+					if (strpos($kelas['kode_kelas'], '3D3') !== false || strpos($kelas['kode_kelas'], '4SI') !== false || strpos($kelas['kode_kelas'], '4SD') !== false || strpos($kelas['kode_kelas'], '4SE') !== false || strpos($kelas['kode_kelas'], '4SK') !== false || strpos($kelas['kode_kelas'], '4KS') !== false || strpos($kelas['kode_kelas'], '4ST') !== false) {
+						if ($year_now - $kelas['tahun_akademik'] > 1) {
+							$alumni = true;
+							break;
+						} else {
+							$alumni = false;
+						}
 					}
-					session()->set([
-						'role' => $role
-					]);
-				} else {
-					$data = [
-						'group_id'	=> 2,
-						'user_id'	=> session('id_user')
-					];
-					$this->roleModel->insertRole($data);
-					$query = $this->roleModel->getRole(session('id_user'));
-					foreach ($query as $arr) {
-						array_push($role, $arr->group_id);
-					}
-					session()->set([
-						'role' => $role
-					]);
 				}
 
-				$ipAddress = Services::request()->getIPAddress();
-				$this->recordLoginAttempt(session('nim') . '@stis.ac.id', $ipAddress, session('id_user') ?? null, true);	//insert ke tabel auth_login untuk log login
+				if ($alumni == true) {
+					$user = $hasil['profile'];
+
+					$cek = $this->modelAlumni->getAlumniByEmail($user['nim'] . "@stis.ac.id");
+
+					// binding session dengan database (insert data ke tabel alumni kalau belum terdaftar di tabel alumni) 
+					if ($cek == NULL) {
+						$data = [
+							'nama'               => $user['nama'],
+							'jenis_kelamin'      => $faker->randomElement($array = array('Lk', 'Pr')),
+							'tempat_lahir'       => $faker->city,
+							'tanggal_lahir'      => $faker->date($format = 'Y-m-d', $max = 'now'),
+							'telp_alumni'        => $faker->phoneNumber,
+							'alamat_alumni'      => $faker->address,
+							'kota'      	 	 => $faker->city,
+							'provinsi'      	 => $faker->state,
+							'negara'      		 => $faker->country,
+							'status_bekerja'     => $faker->boolean,
+							'perkiraan_pensiun'  => $faker->year,
+							'jabatan_terakhir'   => $faker->jobTitle,
+							'aktif_pns'          => $faker->boolean,
+							'deskripsi'          => $faker->text,
+							'email'				 => $user['nim'] . "@stis.ac.id",
+							'nip'          	 	 => $faker->creditCardNumber,
+							'nip_bps'          	 => $user['nim'],
+
+						];
+						if ($data['jenis_kelamin'] == 'Lk0') {
+							$data['foto_profil'] = "components/icon/Lk-icon.svg";
+						} else {
+							$data['foto_profil'] = "components/icon/PR-icon.svg";
+						}
+
+						$this->modelAlumni->db->table('alumni')->insert($data);
+
+						$cek = $this->modelAlumni->getAlumniByEmail($user['nim'] . "@stis.ac.id");
+
+						$data = [
+							'id_alumni'       => $cek['id_alumni'],
+							'id_tempat_kerja' => 1,
+						];
+						$this->modelAlumni->db->table('alumni_tempat_kerja')->insert($data);
+					}
+
+					//insert new user sipadu (mahasiswa)
+					if ($this->modelAuth->getUserByUsername($hasil['profile']['nim']) == NULL) {
+						// date_default_timezone_set("Asia/Jakarta");
+						$now = date("Y-m-d H:i:s");
+
+						$data = [
+							'email'				=> $user['nim'] . "@stis.ac.id",
+							'username'			=> $user['nim'],
+							'id_alumni'			=> $cek['id_alumni'],
+							'fullname'			=> $user['nama'],
+							'user_image'		=> "default.svg",
+							'active'			=> 1,
+							'force_pass_reset'	=> 0,
+							'created_at'		=> $now,
+							'updated_at'		=> $now
+						];
+						$this->modelAuth->insertUser($data);
+					}
+
+					$user = $this->modelAuth->getUserByUsername($hasil['profile']['nim']);
+
+					if ($user['active'] == 1) {
+						session()->set([	//set session (informasi identitas) dari tabel users
+							'id_user' => $user['id'],
+							'id_alumni' => $user['id_alumni'],
+							'nama' => $user['fullname']
+						]);
+
+						$query = $this->roleModel->getRole(session('id_user'));
+						$role = array();
+
+						if ($query != null) {
+							foreach ($query as $arr) {
+								array_push($role, $arr->group_id);
+							}
+							session()->set([
+								'role' => $role
+							]);
+						} else {
+							$data = [
+								'group_id'	=> 2,
+								'user_id'	=> session('id_user')
+							];
+							$this->roleModel->insertRole($data);
+							$query = $this->roleModel->getRole(session('id_user'));
+							foreach ($query as $arr) {
+								array_push($role, $arr->group_id);
+							}
+							session()->set([
+								'role' => $role
+							]);
+						}
+
+						$ipAddress = Services::request()->getIPAddress();
+						$this->recordLoginAttempt(session('nim') . '@stis.ac.id', $ipAddress, session('id_user') ?? null, true);	//insert ke tabel auth_login untuk log login
+						setcookie('login', 'yes', time() + 60, $_SERVER['SERVER_NAME']);
+						echo '<script>window.close();</script>';
+
+						$flash = '<strong>Login berhasil!</strong> selamat datang <b>' . session('nama') . '</b>.';
+						$alert = "<div id=\"alert\">
+										<div class=\"fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40\">
+											<div class=\"duration-700 transition-all p-3 rounded-lg flex items-center\" style=\"background-color: #34eb52;\">
+												<p class=\"sm:text-base text-sm font-heading font-bold\">" . $flash . "</p>
+											</div>
+										</div>
+									</div>
+									<script>
+										setTimeout(function() {
+											$('#alert').fadeOut();
+										}, 1800);
+									</script>";
+						session()->set([
+							'login_notif' => $alert
+						]);
+
+						// 		die();
+					} else {
+						session()->set([
+							'err_sso' 	=> 'non-active',
+						]);
+
+						setcookie('login', 'failed', time() + 10, $_SERVER['SERVER_NAME']);
+						echo '<script>window.close();</script>';
+						die();
+					}
+				} else {
+					session()->set([
+						'not_alumni' 	=> true,
+					]);
+
+					setcookie('login', 'failed', time() + 10, $_SERVER['SERVER_NAME']);
+					echo '<script>window.close();</script>';
+					die();
+				}
 			} else {	//apabila alumni memakai akun dosen
 				/* KATANYA LANGSUNG ALERT AJA */
-				// session()->setFlashdata('pesan', 'Silahkan gunakan akun Sipadu Mahasiswa atau akun BPS, atau hubungi admin website');
-				echo '<script>alert(\'Silahkan gunakan akun Sipadu Mahasiswa atau akun BPS, atau hubungi admin website\')</script>';
+				session()->set([
+					'error' 	=> 'sipadu_dosen',
+				]);
+
+				setcookie('login', 'failed', time() + 10, $_SERVER['SERVER_NAME']);
+				echo '<script>window.close();</script>';
 				die();
 			}
-
-			setcookie('login', 'yes', time() + 60, $_SERVER['SERVER_NAME']);
-
-			echo '<script>window.close();</script>';
-
-			session()->setFlashdata('pesan', 'Login berhasil. Hai, <b>' . session('username') . '!</b>');
-			session()->setFlashdata('warna', 'success');
-			die();
 		}
 	}
 
