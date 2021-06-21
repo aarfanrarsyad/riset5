@@ -7,11 +7,10 @@ if ($('#negara').val() === "Indonesia") {
         $('#provinsi').val(prov)
         $('#prov-hidden').val($('#provinsi').val())
 
-        if ($('#kabkota option:selected').val() === "Pilih Kabupaten/Kota") {
+        if ($('#kabkota option:selected').val() !== "Pilih Kabupaten/Kota") {
             let kab = $('#kabkota option:selected').val()
             $('#kabkota option:selected').remove()
-
-            $.post("daftarKab", {
+            $.post("../../../User/daftarKab", {
                     'id': $('#provinsi option:selected').attr('id')
                 },
                 function (data) {
@@ -35,7 +34,7 @@ $('#negara').change(function () {
 $('#provinsi').change(function () {
     $('#prov-hidden').val($('#provinsi option:selected').val())
 
-    $.post("daftarKab", {
+    $.post("../../../User/daftarKab", {
             'id': $('#provinsi option:selected').attr('id')
         },
         function (data) {
@@ -234,15 +233,15 @@ $('#checkPendidikan').click(function () {
 })
 
 function formPendidikan(
-  id,
-  jenjang,
-  instansi,
-  studi,
-  masuk,
-  lulus,
-  angkatan,
-  nim,
-  tulisan
+    id,
+    jenjang,
+    instansi,
+    studi,
+    masuk,
+    lulus,
+    angkatan,
+    nim,
+    tulisan
 
 ) {
     $("body").prepend(`
@@ -313,21 +312,21 @@ function formPendidikan(
 
     var modal = document.getElementById("formEditPendidikan");
     $(window).click(function (e) {
-      if (e.target === modal) {
-        $("#formEditPendidikan").children().first().addClass("opacity-0");
-        $("#formEditPendidikan")
-          .children()
-          .first()
-          .on(
-            "transitionend MSTransitionEnd webkitTransitionEnd oTransitionEnd",
-            function () {
-              $("#formEditPendidikan").children().first().addClass("hidden");
-            }
-          );
-        setTimeout(function () {
-          $("#formEditPendidikan").remove();
-        }, 400);
-      }
+        if (e.target === modal) {
+            $("#formEditPendidikan").children().first().addClass("opacity-0");
+            $("#formEditPendidikan")
+                .children()
+                .first()
+                .on(
+                    "transitionend MSTransitionEnd webkitTransitionEnd oTransitionEnd",
+                    function () {
+                        $("#formEditPendidikan").children().first().addClass("hidden");
+                    }
+                );
+            setTimeout(function () {
+                $("#formEditPendidikan").remove();
+            }, 400);
+        }
     });
     $("#editId").val(id);
     $("#editJenjang").val(jenjang);
@@ -338,7 +337,7 @@ function formPendidikan(
     $("#editAngkatan").val(angkatan);
     $("#editNIM").val(nim);
     $("#editTulisan").val(tulisan);
-  };
+};
 
 $('.tambahPendidikan').click(function () {
     $("body").prepend(`
@@ -417,7 +416,8 @@ $('.tambahPendidikan').click(function () {
             setTimeout(function () {
                 $('#formTambahPendidikan').remove()
             }, 400);
-        }e
+        }
+        e
     })
 })
 
@@ -652,13 +652,13 @@ function previewImg() {
     const foto = document.querySelector('#foto_profil');
     const fotoLabel = document.querySelector('.custom-file-label');
     const imgPreview = document.querySelector('.img-preview');
-  
+
     fotoLabel.textContent = foto.files[0].name;
-  
+
     const filefoto = new FileReader();
     filefoto.readAsDataURL(foto.files[0]);
-  
-    filefoto.onload = function(e) {
+
+    filefoto.onload = function (e) {
         imgPreview.src = e.target.result;
     }
-  } 
+}

@@ -680,14 +680,6 @@ class Admin extends BaseController
 		return view('admin' . DIRECTORY_SEPARATOR . 'crud' . DIRECTORY_SEPARATOR . 'alumni' . DIRECTORY_SEPARATOR . 'create', $data);
 	}
 
-	public function daftarKab()
-	{
-		$model = new AlumniModel();
-		$idProv = (int)$_POST['id'];
-		$daftarKab = $model->getKab($idProv);
-		echo json_encode($daftarKab);
-	}
-
 	# method untuk halaman tambah-data-alumni
 	public function CRUD_createDataAlumni()
 	{

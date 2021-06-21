@@ -2,8 +2,6 @@
 
 <?= $this->section('content'); ?>
 
-<script src="https://code.jquery.com/jquery-1.10.1.min.js" integrity="sha256-SDf34fFWX/ZnUozXXEH0AeB+Ip3hvRsjLwp6QNTEb3k=" crossorigin="anonymous"></script>
-
 <div class="w-full">
     <div class="flex w-full h-full relative">
         <div id="sidebarDok" class="md:top-20 sm:top-16 top-11 bottom-0 xl:w-80 lg:w-64 lg:left-0 -left-64 w-64 transition-all duration-500 easy-out md:-mt-20 sm:-mt-16 -mt-11 fixed z-20 bg-primarySidebar">

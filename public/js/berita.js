@@ -15,16 +15,10 @@ $('#fotoSampul').change(function () {
   $(this).next().next().text(this.files[0].name)
 });
 $('#infoBerita').click(function () {
-  if ($(this).next().hasClass('hidden')) {
-    $(this).next().removeClass('hidden')
-    setTimeout(() => {
-      $(this).next().removeClass('opacity-0')
-      $(this).next().removeClass('scale-0')
-    }, 5);
+  if ($(this).next().hasClass('opacity-0')) {
+    $(this).next().removeClass('opacity-0')
+    $(this).next().removeClass('scale-0')
   } else {
-    setTimeout(() => {
-      $(this).next().addClass('hidden')
-    }, 300);
     $(this).next().addClass('opacity-0')
     $(this).next().addClass('scale-0')
   }
