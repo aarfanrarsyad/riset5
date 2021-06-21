@@ -90,7 +90,7 @@ class AlumniModel extends Model
             }
         }
         if (count($prodi['in']) > 0) $query->whereIn('program_studi', $prodi['in']);
-        // if(count($prodi['notIn'])>0) $query->whereNotIn('program_studi', $prodi['notIn']);
+        if(count($prodi['notIn'])>0) $query->whereNotIn('program_studi', $prodi['notIn']);
 
         // logic pecarian angkatan
         if ($akt != '') {
