@@ -11,18 +11,20 @@ if ($('#negara').val() === "Indonesia") {
             let kab = $('#kabkota option:selected').val()
             $('#kabkota option:selected').remove()
 
-            $.post("/Admin/daftarKab", {
-                'id': $('#nama-provinsi option:selected').attr('id')
-            },
-                function (data) {
-                    JSON.parse(data).forEach(el => {
-                        $('#kabkota').append(`
-                        <option id="${el['id_kabkota']}" value="${el['nama_kabkota']}">${el['nama_kabkota']}</option>
-                        `)
-                    });
-                    $('#kabkota').val(kab)
-                    $('#kab-hidden').val($('#kabkota').val())
-                },
+            $.post(
+              "../../../User/daftarKab",
+              {
+                id: $("#nama-provinsi option:selected").attr("id"),
+              },
+              function (data) {
+                JSON.parse(data).forEach((el) => {
+                  $("#kabkota").append(`
+                        <option id="${el["id_kabkota"]}" value="${el["nama_kabkota"]}">${el["nama_kabkota"]}</option>
+                        `);
+                });
+                $("#kabkota").val(kab);
+                $("#kab-hidden").val($("#kabkota").val());
+              }
             );
         }
     }
@@ -35,20 +37,22 @@ $('#negara').change(function () {
 $('#nama-provinsi').change(function () {
     $('#prov-hidden').val($('#nama-provinsi option:selected').val())
 
-    $.post("/Admin/daftarKab", {
-        'id': $('#nama-provinsi option:selected').attr('id')
-    },
-        function (data) {
-            $('#kabkota').html('')
-            JSON.parse(data).forEach(el => {
-                $('#kabkota').append(`
-                        <option id="${el['id_kabkota']}" value="${el['nama_kabkota']}">${el['nama_kabkota']}</option>
-                    `)
-            });
-            $('#kabkota').prepend(`
+    $.post(
+      "../../../User/daftarKab",
+      {
+        id: $("#nama-provinsi option:selected").attr("id"),
+      },
+      function (data) {
+        $("#kabkota").html("");
+        JSON.parse(data).forEach((el) => {
+          $("#kabkota").append(`
+                        <option id="${el["id_kabkota"]}" value="${el["nama_kabkota"]}">${el["nama_kabkota"]}</option>
+                    `);
+        });
+        $("#kabkota").prepend(`
                         <option disabled value="Select">Pilih Kabupaten/Kota</option>
                     `);
-        },
+      }
     );
 
 })
