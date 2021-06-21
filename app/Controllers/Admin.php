@@ -831,12 +831,6 @@ class Admin extends BaseController
 					'required' => 'Status Bekerja alumni harus diisi.'
 				]
 			],
-			'jabatan_terakhir' => [
-				'rules' => 'required',
-				'errors' => [
-					'required' => 'Jabatan Terakhir alumni harus diisi.'
-				]
-			],
 			'aktif_pns' => [
 				'rules' => 'required',
 				'errors' => [
@@ -854,20 +848,25 @@ class Admin extends BaseController
 		}
 
 		$negara		= htmlspecialchars($_POST['negara']);
-		$negara2    = htmlspecialchars($_POST['negaraLainnya']);
-		$kota = NULL;
+		$negara2    = htmlspecialchars($_POST['negaraLainnya']);		
 
+		if (isset($_POST['negara'])) {
+			$negara       	= htmlspecialchars($_POST['negara']);
+		} else {
+			$negara = NULL;
+		}
+		$negara2       	= htmlspecialchars($_POST['negaraLainnya']);
 		if (isset($_POST['prov'])) {
-			$provinsi = htmlspecialchars($_POST['prov']);
+			$provinsi 		= htmlspecialchars($_POST['prov']);
 		} else {
 			$provinsi = NULL;
 		}
-
+		$kota = NULL;
 		if ($negara == "Indonesia") {
 			if ($provinsi != NULL) {
-				$provinsi = ucwords(htmlspecialchars($_POST['prov']));
+				$provinsi       = ucwords(htmlspecialchars($_POST['prov']));
 				if (isset($_POST['kab'])) {
-					$kota = ucwords(htmlspecialchars($_POST['kab']));
+					$kota       	= ucwords(htmlspecialchars($_POST['kab']));
 				}
 			} else {
 				$provinsi = NULL;
@@ -1042,21 +1041,25 @@ class Admin extends BaseController
 		}
 
 		$negara		= htmlspecialchars($_POST['negara']);
-		$negara2    = htmlspecialchars($_POST['negaraLainnya']);
+		$negara2    = htmlspecialchars($_POST['negaraLainnya']);		
 
-		$kota = NULL;
-
+		if (isset($_POST['negara'])) {
+			$negara       	= htmlspecialchars($_POST['negara']);
+		} else {
+			$negara = NULL;
+		}
+		$negara2       	= htmlspecialchars($_POST['negaraLainnya']);
 		if (isset($_POST['prov'])) {
-			$provinsi = htmlspecialchars($_POST['prov']);
+			$provinsi 		= htmlspecialchars($_POST['prov']);
 		} else {
 			$provinsi = NULL;
 		}
-
+		$kota = NULL;
 		if ($negara == "Indonesia") {
 			if ($provinsi != NULL) {
-				$provinsi = ucwords(htmlspecialchars($_POST['prov']));
+				$provinsi       = ucwords(htmlspecialchars($_POST['prov']));
 				if (isset($_POST['kab'])) {
-					$kota = ucwords(htmlspecialchars($_POST['kab']));
+					$kota       	= ucwords(htmlspecialchars($_POST['kab']));
 				}
 			} else {
 				$provinsi = NULL;
@@ -1079,9 +1082,9 @@ class Admin extends BaseController
 			'tanggal_lahir' => htmlspecialchars($_POST['tanggal_lahir']),
 			'telp_alumni' => htmlspecialchars($_POST['telp_alumni']),
 			'alamat_alumni' => htmlspecialchars($_POST['alamat']),
-			'kota' => htmlspecialchars($_POST['kabkota'] ?? ''),
-			'provinsi' => htmlspecialchars($_POST['provinsi']),
-			'negara' => htmlspecialchars($_POST['negara']),
+			'kota'			=> $kota,
+			'provinsi'		=> $provinsi,
+			'negara'		=> $negara,
 			'status_bekerja' => htmlspecialchars($_POST['status_bekerja']),
 			'perkiraan_pensiun' => htmlspecialchars($_POST['perkiraan_pensiun']),
 			'jabatan_terakhir' => htmlspecialchars($_POST['jabatan_terakhir']),
@@ -1113,6 +1116,23 @@ class Admin extends BaseController
 		];
 
 		$model->db->table('alumni_tempat_kerja')->insert($data);
+
+		session()->setFlashdata('edit-tk-success', 'Tempat Kerja berhasil diperbaharui');
+
+		return redirect()->to(previous_url());
+	}
+	
+	# method untuk tambah tempat kerja (instansi) Alumni
+	public function updateTempatKerja()
+	{
+		$model = new AlumniModel();
+
+		$data = [
+			'id_tempat_kerja' => $model->getIdTempatKerja(htmlspecialchars($_POST['nama_instansi'])),
+			'ambigu'=> 0
+		];
+
+		$model->db->table('alumni_tempat_kerja')->set($data)->where('id_alumni', session('idAlumni'))->update();
 
 		session()->setFlashdata('edit-tk-success', 'Tempat Kerja berhasil diperbaharui');
 
@@ -1277,9 +1297,11 @@ class Admin extends BaseController
 	public function CRUD_createInstansi()
 	{
 		$init = new AlumniModel();
+		$daftarProv = $init->getProv();
 
 		$data = [
 			'title' => 'Create Instansi | Website Riset 5',
+			'daftarProv' => $daftarProv,
 			'validation' => \Config\Services::validation()
 		];
 
@@ -1310,11 +1332,42 @@ class Admin extends BaseController
 			return redirect()->to('/admin/CRUD_createInstansi')->withInput();
 		}
 
+		if (isset($_POST['negara'])) {
+			$negara = htmlspecialchars($_POST['negara']);
+		} else {
+			$negara = NULL;
+		}
+		$negara2 = htmlspecialchars($_POST['negaraLainnya']);
+		if (isset($_POST['prov'])) {
+			$provinsi = htmlspecialchars($_POST['prov']);
+		} else {
+			$provinsi = NULL;
+		}
+		$kota = NULL;
+		if ($negara == "Indonesia") {
+			if ($provinsi != NULL) {
+				$provinsi = ucwords(htmlspecialchars($_POST['prov']));
+				if (isset($_POST['kab'])) {
+					$kota = ucwords(htmlspecialchars($_POST['kab']));
+				}
+			} else {
+				$provinsi = NULL;
+			}
+		} else {
+			if ($negara2 == "") {
+				$negara = NULL;
+				$provinsi = NULL;
+			} else {
+				$negara = htmlspecialchars($negara2);
+				$provinsi = NULL;
+			}
+		}
+
 		$instansi = [
 			'nama_instansi' => htmlspecialchars($_POST['nama_instansi']),
-			'kota' => htmlspecialchars($_POST['kota']),
-			'provinsi' => htmlspecialchars($_POST['provinsi']),
-			'negara' => htmlspecialchars($_POST['negara']),
+			'kota' => $kota,
+			'provinsi' => $provinsi,
+			'negara' => $negara,
 			'alamat_instansi' => htmlspecialchars($_POST['alamat_instansi']),
 			'telp_instansi' => htmlspecialchars($_POST['telp_instansi']),
 			'faks_instansi' => htmlspecialchars($_POST['faks_instansi']),
@@ -1335,10 +1388,12 @@ class Admin extends BaseController
 		$model = new AlumniModel();
 
 		$tempat_kerja = $model->getTempatKerjaById($id_tempat_kerja)->getRow();
+		$daftarProv = $model->getProv();
 
 		$data = [
 			'title' => 'Update Instansi | Website Riset 5',
 			'instansi' => $tempat_kerja,
+			'daftarProv' => $daftarProv,
 			'validation' => \Config\Services::validation()
 		];
 
@@ -1346,41 +1401,83 @@ class Admin extends BaseController
 	}
 
 	#method untuk update Instansi
-	public function updateInstansi()
+	public function updateInstansi($id_tempat_kerja)
 	{
 		$init = new AlumniModel();
 
+		$instansi = $init->getTempatKerjaById($id_tempat_kerja)->getRow();
+		if ($instansi->nama_instansi == htmlspecialchars($_POST['nama_instansi'])) {
+            $rule_namaInstansi = 'required';
+        } else {
+            $rule_namaInstansi = 'required|is_unique[tempat_kerja.nama_instansi]';
+        }
+
+		if ($instansi->email_instansi == htmlspecialchars($_POST['email_instansi'])) {
+            $rule_emailInstansi = 'required';
+        } else {
+            $rule_emailInstansi = 'required|is_unique[tempat_kerja.email_instansi]';
+        }
+
 		if (!$this->validate([
 			'nama_instansi' => [
-				'rules' => 'required|is_unique[tempat_kerja.nama_instansi]',
+				'rules' => $rule_namaInstansi,
 				'errors' => [
 					'required' => 'Nama Instansi harus diisi.',
 					'is_unique' => 'Nama Instansi sudah terdaftar'
 				]
 			],
 			'email_instansi' => [
-				'rules' => 'required|is_unique[tempat_kerja.email_instansi]',
+				'rules' => $rule_emailInstansi,
 				'errors' => [
 					'required' => 'Email Instansi harus diisi.',
 					'is_unique' => 'Email Instansi sudah terdaftar'
 				]
 			]
 		])) {
-			return redirect()->to('/admin/CRUD_createInstansi')->withInput();
+			return redirect()->to('/admin/instansi/update-instansi/' . $id_tempat_kerja)->withInput();
 		}
 
-		$id_tempat_kerja = htmlspecialchars($_POST['id_tempat_kerja']);
+		if (isset($_POST['negara'])) {
+			$negara = htmlspecialchars($_POST['negara']);
+		} else {
+			$negara = NULL;
+		}
+		$negara2 = htmlspecialchars($_POST['negaraLainnya']);
+		if (isset($_POST['prov'])) {
+			$provinsi = htmlspecialchars($_POST['prov']);
+		} else {
+			$provinsi = NULL;
+		}
+		$kota = NULL;
+		if ($negara == "Indonesia") {
+			if ($provinsi != NULL) {
+				$provinsi = ucwords(htmlspecialchars($_POST['prov']));
+				if (isset($_POST['kab'])) {
+					$kota = ucwords(htmlspecialchars($_POST['kab']));
+				}
+			} else {
+				$provinsi = NULL;
+			}
+		} else {
+			if ($negara2 == "") {
+				$negara = NULL;
+				$provinsi = NULL;
+			} else {
+				$negara = htmlspecialchars($negara2);
+				$provinsi = NULL;
+			}
+		}
 
 		$instansi = [
 			'id_tempat_kerja' => $id_tempat_kerja,
 			'nama_instansi' => htmlspecialchars($_POST['nama_instansi']),
-			'kota' => htmlspecialchars($_POST['kota']),
-			'provinsi' => htmlspecialchars($_POST['provinsi']),
-			'negara' => htmlspecialchars($_POST['negara']),
+			'kota' => $kota,
+			'provinsi' => $provinsi,
+			'negara' => $negara,
 			'alamat_instansi' => htmlspecialchars($_POST['alamat_instansi']),
 			'telp_instansi' => htmlspecialchars($_POST['telp_instansi']),
 			'faks_instansi' => htmlspecialchars($_POST['faks_instansi']),
-			'email_instansi' => htmlspecialchars($_POST['email_instansi']),
+			'email_instansi' => htmlspecialchars($_POST['email_instansi'])
 		];
 
 		$init->db->table('tempat_kerja')->set($instansi)->where('id_tempat_kerja', $id_tempat_kerja)->update();
@@ -1389,7 +1486,7 @@ class Admin extends BaseController
 
 		return redirect()->to('/admin/CRUD_indexInstansi');
 	}
-
+	
 	#method untuk detail CRUD Instansi
 	public function CRUD_detailInstansi($id)
 	{
