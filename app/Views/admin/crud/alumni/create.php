@@ -147,23 +147,22 @@
                                 <div class="row mb-3">
                                     <label for="provinsi" class="col-sm-2 col-form-label">Provinsi</label>
                                     <div class="col-sm-10">
-                                        <select name="provinsi" id="provinsi" class="inputForm">
+                                        <select name="provinsi" id="nama-provinsi" class="inputForm">
                                             <option selected disabled>Pilih Provinsi</option>
                                             <?php foreach ($daftarProv as $prov) : ?>
-                                                <option id="<?= $prov->id_provinsi ?>" value="<?= $prov->nama_provinsi ?>"><?= $prov->nama_provinsi ?></option>
+                                                <option id="<?= $prov->id_provinsi ?>" value="<?= $prov->nama_provinsi ?>"><?= $prov->nama_provinsi ?></option>                                                
                                             <?php endforeach ?>
                                         </select>
                                         <input hidden type="text" name="prov" id="prov-hidden">
                                     </div>
                                 </div>
                                 <div class="row mb-3">
-                                    <label for="kota" class="col-sm-2 col-form-label">Kota/Kabupaten</label>
+                                    <label for="kabkota" class="col-sm-2 col-form-label" id='labelKabkot'>Kota/Kabupaten</label>
                                     <div class="col-sm-10">
-                                        <!-- <select name='kabkota' id='kabkota' class='inputForm'>
-                                                <option selected disabled>Pilih Kabupaten/Kota</option>                                                        
-                                            </select> -->
-                                        <input hidden type="text" name="kab" id="kab-hidden">
-                                        <input type="text" class="form-control inputForm" placeholder="Masukkan nama kabupaten" id="kota" name="kota" value="<?= old('kota'); ?>">
+                                        <select name='kabkota' id='kabkota' class='inputForm'>                                        
+                                            <option selected disabled>Pilih Kabupaten/Kota</option>
+                                        </select>
+                                        <input hidden type="text" name="kab" id="kab-hidden">                                        
                                     </div>
                                 </div>
                             </div>
@@ -191,7 +190,7 @@
                             <div class="row mb-3">
                                 <label for="perkiraanpensiun" class="col-sm-2 col-form-label pt-0">Perkiraan Pensiun</label>
                                 <div class="col-sm-3">
-                                    <input type="number" name="perkiraan_pensiun" id="perkiraan_pensiun" placeholder="2050" min="1950" max="2100" class="inputForm" value="<?= old('perkiraan_pensiun'); ?>" required>
+                                    <input type="number" name="perkiraan_pensiun" id="perkiraan_pensiun" placeholder="2050" min="1950" max="2100" class="inputForm" value="<?= old('perkiraan_pensiun'); ?>">
                                 </div>
                             </div>
                             <fieldset class="row mb-3">
