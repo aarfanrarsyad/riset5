@@ -44,7 +44,6 @@ if ($instansi != NULL) {
                             <form action="/admin/updateAlumni" method="post" enctype="multipart/form-data">
                                 <?= csrf_field(); ?>
                                 <input type="hidden" id="id_alumni" name="id_alumni" value="<?= $alumni['id_alumni']; ?>">
-
                                 <div class="row mb-3">
                                     <div class="col-6 col-md-4 align-self-center">
                                         <div class="card  card-secondary card-outline elevation-3">
@@ -200,7 +199,7 @@ if ($instansi != NULL) {
                                             <div class="row mb-3">
                                                 <label for="provinsi" class="col-sm-2 col-form-label">Provinsi</label>
                                                 <div class="col-sm-10">
-                                                    <select name="provinsi" id="provinsi" class="inputForm">
+                                                    <select name="provinsi" id="nama-provinsi" class="inputForm">
                                                         <?php if ($alumni['provinsi'] != NULL) : ?>
                                                             <option selected disabled>
                                                                 <?= $alumni['provinsi'] ?>
@@ -310,7 +309,7 @@ if ($instansi != NULL) {
                             <div class="card card-secondary card-outline elevation-3">
                                 <div class="card-body">
                                     <h2 class="row mb-3 text-info">Instansi</h2>
-                                    <form action="/admin/addTempatKerja" method="post" enctype="multipart/form-data">
+                                    <form action="/admin/updateTempatKerja" method="post" enctype="multipart/form-data">
                                         <div class="row mb-3">
                                             <label for="nama_instansi" class="col-sm-2 col-form-label">Nama Instansi</label>
                                             <div class="col-sm-10">
