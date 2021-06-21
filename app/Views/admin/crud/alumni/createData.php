@@ -44,14 +44,13 @@ if ($instansi != NULL) {
                             <form action="/admin/updateAlumni" method="post" enctype="multipart/form-data">
                                 <?= csrf_field(); ?>
                                 <input type="hidden" id="id_alumni" name="id_alumni" value="<?= $alumni['id_alumni']; ?>">
-
                                 <div class="row mb-3">
                                     <div class="col-6 col-md-4 align-self-center">
                                         <div class="card  card-secondary card-outline elevation-3">
                                             <div class="flex items-center justify-center lg:flex-none">
                                                 <div class="md:w-2/3 w-1/2 lg:w-full">
                                                     <div class="flex justify-center">
-                                                        <img src="/img/<?= $alumni['foto_profil'] ?>" alt="Foto Profil" class="mb-6 md:w-48 md:h-48 w-28 h-28 rounded-full">
+                                                        <img src="/img/<?= $alumni['foto_profil'] ?>" alt="Foto Profil <?= $alumni['nama']; ?>" class="mb-6 md:w-48 md:h-48 w-28 h-28 rounded-full">
                                                     </div>
                                                     <div class="flex justify-center">
                                                         <div class="updateFotoProfil bg-primarySidebar rounded-full font-paragraph text-white px-3 py-1 hover:bg-secondaryhover lg:text-base text-sm focus:outline-none" onclick="updateFotoProfil()">Ubah foto profil</div>
@@ -200,7 +199,7 @@ if ($instansi != NULL) {
                                             <div class="row mb-3">
                                                 <label for="provinsi" class="col-sm-2 col-form-label">Provinsi</label>
                                                 <div class="col-sm-10">
-                                                    <select name="provinsi" id="provinsi" class="inputForm">
+                                                    <select name="provinsi" id="nama-provinsi" class="inputForm">
                                                         <?php if ($alumni['provinsi'] != NULL) : ?>
                                                             <option selected disabled>
                                                                 <?= $alumni['provinsi'] ?>
@@ -310,7 +309,7 @@ if ($instansi != NULL) {
                             <div class="card card-secondary card-outline elevation-3">
                                 <div class="card-body">
                                     <h2 class="row mb-3 text-info">Instansi</h2>
-                                    <form action="/admin/addTempatKerja" method="post" enctype="multipart/form-data">
+                                    <form action="/admin/updateTempatKerja" method="post" enctype="multipart/form-data">
                                         <div class="row mb-3">
                                             <label for="nama_instansi" class="col-sm-2 col-form-label">Nama Instansi</label>
                                             <div class="col-sm-10">
@@ -458,7 +457,7 @@ if ($instansi != NULL) {
                             </div>
 
                             <div class="card card-secondary card-outline elevation-3">
-                                <form action="/Admin/simpanDataAlumni" method="POST" class="justify-center text-white flex">
+                                <form action="/Admin/simpanDataAlumni" method="POST" class="justify-center text-white flex justify-end">
                                     <button id="tambahDataAlumni" name="tambahDataAlumni" class="w-24 text-center py-1 bg-primarySidebar hover:bg-secondaryhover text-white rounded-full cursor-pointer focus:outline-none">SELESAI</button>
                                 </form>
                             </div>
