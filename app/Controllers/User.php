@@ -41,6 +41,7 @@ class User extends BaseController
 		} else {
 			$cari = $this->request->getVar('cari');
 			$prodi = $this->request->getVar('prodi');
+			$prodi = (is_null($prodi)) ? ["DI", "DIII", "ST", "KS"] : $prodi;
 			$akt = $this->request->getVar('akt');
 			$kerja = $this->request->getVar('kerja');
 			$awal = $this->request->getVar('awal');
@@ -78,7 +79,7 @@ class User extends BaseController
 					"Memuat " . $jumlah['alumni'] . " data alumni.",
 				'ret' => $jumlah['alumni']
 			];
-			// dd($alumni);
+			// dd($data);
 		}
 
 		if ($tipe == 'all' || $tipe == 'berita') { #pencarian berita
@@ -117,14 +118,6 @@ class User extends BaseController
 
 		if ($this->request->isAJAX()) { // repond ajax live search
 			// $query = $model->getAlumniFilter($cari, $min_angkatan, $max_angkatan);
-			dd(json_encode([
-				'alumni' => $alumni,
-				'berita' => $berita,
-				'jumlah' => $jumlah['text'],
-				'ret' => $jumlah['ret'],
-				'search' => $this->request->getVar(),
-				'query' => $query,
-			]));
 			return json_encode([
 				'data' => $data,
 				'jumlah' => $jumlah,
@@ -140,7 +133,8 @@ class User extends BaseController
 			'data' => $data,
 			'jumlah' => $jumlah,
 		];
-		// dd($data['berita']);
+		// dd($compiled);
+		// return view('websia/kontenWebsia/searchAndFilter/searchKosong', $data);
 		switch ($this->request->getVar('t')) {
 			case 'alumni':
 				return view('websia/kontenWebsia/searchAndFilter/semuaAlumni', $data);

@@ -26,7 +26,7 @@
                 <!-- Catatan : jika hasil tidak ada, bisa isi id="hasilPencarian" dengan coding yang ada pada searchKosong.php  -->
 
                 <!-- HASIL PENCARIAN ALUMNI -->
-                <div class="md:ml-60 mx-3 mb-6" id="cariAlumni" <?php if($jumlah['alumni']['ret'] == 0): ?>style="display:none;"<?php endif; ?>>
+                <div class="mx-3 mb-6" id="cariAlumni" <?php if($jumlah['alumni']['ret'] == 0): ?>style="display:none;"<?php endif; ?>>
                     <div>
                         <h1 class="text-secondary font-heading text-2xl font-bold">ALUMNI</h1>
 
@@ -85,7 +85,7 @@
                 <!-- AKHIR HASIL PENCARIAN ALUMNI -->
 
                 <!-- HASIL PENCARIAN BERITA -->
-                <div class="md:ml-60 mx-3 mt-2" id="cariBerita" <?php if($jumlah['berita']['ret'] == 0): ?>style="display:none;"<?php endif; ?>>
+                <div class="mx-3 mt-2" id="cariBerita" <?php if($jumlah['berita']['ret'] == 0): ?>style="display:none;"<?php endif; ?>>
                     <div>
                         <h1 class="text-secondary font-heading text-2xl font-bold">BERITA</h1>
 
@@ -143,6 +143,9 @@
                     </div>
                 </div>
 
+                <!-- HASIL PENCARIAN KOSONG -->
+                <div id="kosong" class=" ml-2 flex-grow min-h-screen"></div>
+
                 <!-- END HASIL PENCARIAN BERITA -->
             </div>
         </div>
@@ -178,11 +181,10 @@ $(document).ready(()=>{
                 }
             }
             console.log(data)
-            $.ajax({
+            $.post({
                 url: "#",
-                type: 'POST',
                 data: data,
-                dataType:'JSON',
+                dataType:'json',
                 success: (ret) => {
                     let jumlahAlumniBerita = 0;
                     console.log(ret)
@@ -199,8 +201,9 @@ $(document).ready(()=>{
                             })
                             $('#lisAlumni').append("<hr class='-my-4 border-2 border-gray-400'>")
                         } else { $('#cariAlumni').hide() }
-                        s = 'cari='+ $("input[name=cari]").val() +'&'+ret.search.prodi.map((val)=>{return 'prodi[]='+val}).join('&')
-                        s += '&akt='+ ret.search.akt + '&kerja=' + ret.search.kerja
+                        s = 'cari='+ $("input[name=cari]").val() +'&akt='+ ret.search.akt + '&kerja=' + ret.search.kerja
+                        if(ret.search.prodi)
+                            s += '&'+ret.search.prodi.map((val)=>{return 'prodi[]='+val}).join('&')
                         $('#semuaAlumni').get(0).href = '<?= base_url('User/searchAndFilter?t=alumni'); ?>&' + s
                     }
 
@@ -220,8 +223,9 @@ $(document).ready(()=>{
                         $('#semuaBerita').get(0).href = '<?= base_url('User/searchAndFilter?t=berita'); ?>&' + b
                     }
 
+                    $('#kosong').hide()
                     if(jumlahAlumniBerita == 0)
-                        $('#lisAlumni,#lisBerita').append(`<div class=" ml-2 flex-grow min-h-screen "><img src="/img/components/pencarianKosong.png" class="w-96 mx-auto" alt=""><div class="text-primary text-center font-bold md:text-xl -mt-8 mx-auto">Hasil Pencarian Tidak Ditemukan</div><hr class="border-b-2 border-t-0 w-32 border-gray-400 mx-auto"><h1 class="text-secondary font-heading text-xl text-center mx-auto font-bold">Harusnya ada gambar hasil kosong, tapi hilang</h1></div>`)
+                        $('#kosong').append(`<img src="/img/components/pencarianKosong.png" class="w-96 mx-auto" alt=""><div class="text-primary text-center font-bold md:text-xl -mt-8 mx-auto">Hasil Pencarian Tidak Ditemukan</div><hr class="border-b-2 border-t-0 w-32 border-gray-400 mx-auto">`).show()
                 }
             })
         }, 300)
