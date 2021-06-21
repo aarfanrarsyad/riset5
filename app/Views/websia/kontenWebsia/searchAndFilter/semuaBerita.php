@@ -26,7 +26,7 @@
                 <!-- Catatan : jika hasil tidak ada, bisa isi id="hasilPencarian" dengan coding yang ada pada searchKosong.php  -->
 
                 <!-- HASIL PENCARIAN BERITA -->
-                <div class="md:ml-60 mx-3 mt-2" id="cariBerita">
+                <div class="mx-3 mt-2" id="cariBerita">
                     <div>
                         <h1 class="text-secondary font-heading text-2xl font-bold">BERITA</h1>
 
@@ -72,8 +72,10 @@
                         </div>
 
                         <div id="load_data_message" class="text-primary md:mb-6 my-5 font-paragraph font-extralight text-sm"></div>
-
                         <!-- Akhir DAFTAR HASIL PENCARIAN BERITA -->
+
+                        <!-- HASIL PENCARIAN KOSONG -->
+                        <div id="kosong" class=" ml-2 flex-grow min-h-screen"></div>
                     </div>
                 </div>
 
@@ -139,9 +141,9 @@ $(document).ready(()=>{
                         action = true;
                     }
                     
-
+                    $('#kosong').hide()
                     if(ret.jumlah.berita.ret == 0)
-                        $('#lisBerita').append(`<div class=" ml-2 flex-grow min-h-screen "><img src="/img/components/pencarianKosong.png" class="w-96 mx-auto" alt=""><div class="text-primary text-center font-bold md:text-xl -mt-8 mx-auto">Hasil Pencarian Tidak Ditemukan</div><hr class="border-b-2 border-t-0 w-32 border-gray-400 mx-auto"><h1 class="text-secondary font-heading text-xl text-center mx-auto font-bold">Harusnya ada gambar hasil kosong, tapi hilang</h1></div>`)
+                        $('#kosong').append(`<img src="/img/components/pencarianKosong.png" class="w-96 mx-auto" alt=""><div class="text-primary text-center font-bold md:text-xl -mt-8 mx-auto">Hasil Pencarian Tidak Ditemukan</div><hr class="border-b-2 border-t-0 w-32 border-gray-400 mx-auto">`).show()
                 }
             })
         }, 300)

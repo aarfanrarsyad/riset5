@@ -262,6 +262,8 @@
 
         var currentModal = $(this);
 
+        $("body").addClass("overflow-hidden");
+
         //click next
         currentModal.find('.next').click(function() {
             currentModal.modal('hide');
@@ -273,7 +275,7 @@
             currentModal.modal('hide');
             currentModal.closest("div[id^='popUp']").prevAll("div[id^='popUp']").first().modal('show');
         });
-
+        $("body").removeClass("overflow-hidden");
     });
 
 
