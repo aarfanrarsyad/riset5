@@ -1,18 +1,19 @@
 if ($('#negara').val() === "Indonesia") {
     $('#negaraIndonesia').removeClass("hidden")
 
-    if ($('#provinsi option:selected').val() !== "Pilih Provinsi") {
-        let prov = $('#provinsi option:selected').val()
-        $('#provinsi option:selected').remove()
-        $('#provinsi').val(prov)
-        $('#prov-hidden').val($('#provinsi').val())
+    if ($('#nama-provinsi option:selected').val() !== "Pilih Provinsi") {
+        let prov = $('#nama-provinsi option:selected').val()
+        $('#nama-provinsi option:selected').remove()
+        $('#nama-provinsi').val(prov)
+        $('#prov-hidden').val($('#nama-provinsi').val())
 
         if ($('#kabkota option:selected').val() !== "Pilih Kabupaten/Kota") {
             let kab = $('#kabkota option:selected').val()
             $('#kabkota option:selected').remove()
-            $.post("../../../User/daftarKab", {
-                    'id': $('#provinsi option:selected').attr('id')
-                },
+
+            $.post("/Admin/daftarKab", {
+                'id': $('#nama-provinsi option:selected').attr('id')
+            },
                 function (data) {
                     JSON.parse(data).forEach(el => {
                         $('#kabkota').append(`
@@ -31,12 +32,12 @@ $('#negara').change(function () {
     $('#kab-hidden').val($('#kabkota option:selected').val())
 })
 
-$('#provinsi').change(function () {
-    $('#prov-hidden').val($('#provinsi option:selected').val())
+$('#nama-provinsi').change(function () {
+    $('#prov-hidden').val($('#nama-provinsi option:selected').val())
 
-    $.post("../../../User/daftarKab", {
-            'id': $('#provinsi option:selected').attr('id')
-        },
+    $.post("/Admin/daftarKab", {
+        'id': $('#nama-provinsi option:selected').attr('id')
+    },
         function (data) {
             $('#kabkota').html('')
             JSON.parse(data).forEach(el => {
@@ -56,6 +57,10 @@ $('#kabkota').change(function () {
     $('#kab-hidden').val($('#kabkota option:selected').val())
 })
 
+function displayDiv(id, elementValue) {
+    document.getElementById(id).style.display = elementValue.value == "lainnya" ? 'block' : 'none';
+}
+
 function displayDiv2(id, id2, elementValue) {
     if (elementValue.value == "lainnya") {
         document.getElementById(id).style.display = 'block';
@@ -74,14 +79,14 @@ $('.updateFotoProfil').click(function () {
     $('body').prepend(`
     <div class="fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40" id='formEditFoto'>
         <div class="hidden transform scale-0 opacity-0 duration-300 transition-all md:w-1/4 w-2/3 bg-gray bg-opacity-0"> 
-        <div class="bg-primary py-2.5 px-6 rounded-t-2xl flex items-center justify-center text-secondary text-sm">
+        <div class="bg-primarySidebar py-2.5 px-6 rounded-t-2xl flex items-center justify-center text-white text-sm">
             <p class="font-bold font-heading">Ubah Foto Profil</p>
         </div>
         <div class="bg-gray-100 rounded-b-2xl">
             <ul class="text-center font-heading font-bold text-sm text-primaryx">
-                <li id='unggahFoto' class="p-2.5 border-b-2 border-gray-300 cursor-pointer hover:bg-gray-300">Unggah Foto</li>
-                <li class="p-2.5 border-b-2 border-gray-300 cursor-pointer hover:bg-gray-300" id="hapusFoto">Hapus Foto</li>
-                <li class="closeEditFoto p-2.5 rounded-b-lg cursor-pointer hover:bg-gray-300">Batalkan</li>
+                <li id='unggahFoto' class="p-2.5 border-b-2 border-gray-300 cursor-pointer hover:bg-gray-300 text-black">Unggah Foto</li>
+                <li class="p-2.5 border-b-2 border-gray-300 cursor-pointer hover:bg-gray-300 text-black" id="hapusFoto">Hapus Foto</li>
+                <li class="closeEditFoto p-2.5 rounded-b-lg cursor-pointer hover:bg-gray-300 text-black">Batalkan</li>
             </ul>
         </div>
         </div> 
@@ -247,7 +252,7 @@ function formPendidikan(
     $("body").prepend(`
     <div class="fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40 font-paragraph" id='formEditPendidikan'>
         <div class="hidden transform scale-0 opacity-0 duration-300 transition-all xl:w-1/2 lg:w-7/12 md:w-2/3 sm:w-3/4 w-11/12 bg-gray bg-opacity-0">
-            <div class="bg-primary py-4 px-6 rounded-t-2xl flex items-center justify-between text-secondary text-2xl">
+            <div class="bg-primarySidebar py-4 px-6 rounded-t-2xl flex items-center justify-between text-white text-2xl">
                 <p class="font-heading font-bold">Edit Pendidikan</p>
                 <svg class="closePendidikan lg:w-10 md:w-8 sm:w-7 w-6 fill-current cursor-pointer" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
@@ -288,8 +293,8 @@ function formPendidikan(
                 <label for="editTulisan" class="text-primary font-medium">Judul Tulisan:</label>
                 <textarea name="judul_tulisan" id="editTulisan" rows="2" class="inputForm" placeholder="Masukkan judul tulisan"></textarea>
                 <div class="flex justify-end my-4">
-                    <input type="submit" value="SIMPAN" class="bg-secondary text-white rounded-full w-24 py-1 text-center cursor-pointer hover:bg-secondaryhover transition-colors duration-300 text-sm mr-4 outline-none">
-                    <input type="button" value="KEMBALI" class="closePendidikan bg-secondary text-white rounded-full w-24 py-1 text-center cursor-pointer hover:bg-secondaryhover transition-colors duration-300 text-sm outline-none" id='backPendidikan'>
+                    <input type="submit" value="SIMPAN" class="bg-primarySidebar text-white rounded-full w-24 py-1 text-center cursor-pointer hover:bg-secondaryhover transition-colors duration-300 text-sm mr-4 outline-none">
+                    <input type="button" value="KEMBALI" class="closePendidikan bg-primarySidebar text-white rounded-full w-24 py-1 text-center cursor-pointer hover:bg-secondaryhover transition-colors duration-300 text-sm outline-none" id='backPendidikan'>
                 </div>
             </form>
         </div>
@@ -343,7 +348,7 @@ $('.tambahPendidikan').click(function () {
     $("body").prepend(`
     <div class="fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40 font-paragraph" id='formTambahPendidikan'>
         <div class="hidden transform scale-0 opacity-0 duration-300 transition-all xl:w-1/2 lg:w-7/12 md:w-2/3 sm:w-3/4 w-11/12 bg-gray bg-opacity-0">
-            <div class="bg-primary py-4 px-6 rounded-t-2xl flex items-center justify-between text-secondary text-2xl">
+            <div class="bg-primarySidebar py-4 px-6 rounded-t-2xl flex items-center justify-between text-white text-2xl">
                 <p class="font-heading font-bold">Tambah Pendidikan</p>
                 <svg class="closePendidikan lg:w-10 md:w-8 sm:w-7 w-6 fill-current cursor-pointer" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
@@ -381,8 +386,8 @@ $('.tambahPendidikan').click(function () {
                 <label for="editTulisan" class="text-primary font-medium">Judul Tulisan:</label>
                 <textarea name="judul_tulisan" id="editTulisan" rows="2" class="inputForm resize-none" placeholder="Masukkan judul tulisan"></textarea>
                 <div class="flex justify-end my-4">
-                    <input type="submit" value="SIMPAN" class="bg-secondary text-white rounded-full w-24 py-1 text-center cursor-pointer hover:bg-secondaryhover transition-colors duration-300 text-sm mr-4 outline-none">
-                    <input type="button" value="KEMBALI" class="closePendidikan bg-secondary text-white rounded-full w-24 py-1 text-center cursor-pointer hover:bg-secondaryhover transition-colors duration-300 text-sm outline-none" id='backPendidikan'>
+                    <input type="submit" value="SIMPAN" class="bg-primarySidebar text-white rounded-full w-24 py-1 text-center cursor-pointer hover:bg-secondaryhover transition-colors duration-300 text-sm mr-4 outline-none">
+                    <input type="button" value="KEMBALI" class="closePendidikan bg-primarySidebar text-white rounded-full w-24 py-1 text-center cursor-pointer hover:bg-secondaryhover transition-colors duration-300 text-sm outline-none" id='backPendidikan'>
                 </div>
 
             </form>
@@ -416,8 +421,7 @@ $('.tambahPendidikan').click(function () {
             setTimeout(function () {
                 $('#formTambahPendidikan').remove()
             }, 400);
-        }
-        e
+        } e
     })
 })
 
@@ -488,7 +492,7 @@ function formPrestasi(id, prestasi, tahun) {
     $('body').prepend(`
     <div class="fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40" id='formEditPrestasi'>
         <div class="hidden transform scale-0 opacity-0 duration-300 transition-all xl:w-1/2 lg:w-7/12 md:w-2/3 sm:w-3/4 w-11/12 bg-gray bg-opacity-0 font-paragraph">
-        <div class="bg-primary py-4 px-6 rounded-t-2xl flex items-center justify-between text-secondary text-2xl">
+        <div class="bg-primarySidebar py-4 px-6 rounded-t-2xl flex items-center justify-between text-white text-2xl">
             <p class="font-heading font-bold">Edit Prestasi</p>
             <svg class="closePrestasi lg:w-10 md:w-8 sm:w-7 w-6 fill-current cursor-pointer" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
@@ -503,8 +507,8 @@ function formPrestasi(id, prestasi, tahun) {
                 <input type="number" name="tahun_prestasi" id="editTahun" placeholder="1980" min="1950" max="2100" class="inputForm">
             </div>
             <div class="flex justify-end my-4">
-                <input type="submit" value="SIMPAN" class="bg-secondary text-white rounded-full w-24 py-1 text-center cursor-pointer hover:bg-secondaryhover transition-colors duration-300 text-sm mr-4 outline-none">
-                <input type="button" value="KEMBALI" class="closePrestasi bg-secondary text-white rounded-full w-24 py-1 text-center cursor-pointer hover:bg-secondaryhover transition-colors duration-300 text-sm outline-none" id='backPrestasi'>
+                <input type="submit" value="SIMPAN" class="bg-primarySidebar text-white rounded-full w-24 py-1 text-center cursor-pointer hover:bg-secondaryhover transition-colors duration-300 text-sm mr-4 outline-none">
+                <input type="button" value="KEMBALI" class="closePrestasi bg-primarySidebar text-white rounded-full w-24 py-1 text-center cursor-pointer hover:bg-secondaryhover transition-colors duration-300 text-sm outline-none" id='backPrestasi'>
             </div>
         </form>
         </div>
@@ -548,7 +552,7 @@ function tambahPrestasi() {
     $('body').prepend(`
     <div class="fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40" id='formTambahPrestasi'>
         <div class="hidden transform scale-0 opacity-0 duration-300 transition-all xl:w-1/2 lg:w-7/12 md:w-2/3 sm:w-3/4 w-11/12 bg-gray bg-opacity-0 font-paragraph">
-        <div class="bg-primary py-4 px-6 rounded-t-2xl flex items-center justify-between text-secondary text-2xl">
+        <div class="bg-primarySidebar py-4 px-6 rounded-t-2xl flex items-center justify-between text-white text-2xl">
             <p class="font-heading font-bold">Tambah Prestasi</p>
             <svg class="closePrestasi lg:w-10 md:w-8 sm:w-7 w-6 fill-current cursor-pointer" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
@@ -562,8 +566,8 @@ function tambahPrestasi() {
                 <input type="number" name="tahun_prestasi" id="editTahun" placeholder="1980" min="1950" max="2100" class="inputForm">
             </div>
             <div class="flex justify-end my-4">
-                <input type="submit" value="SIMPAN" class="bg-secondary text-white rounded-full w-24 py-1 text-center cursor-pointer hover:bg-secondaryhover transition-colors duration-300 text-sm mr-4 outline-none">
-                <input type="button" value="KEMBALI" class="closePrestasi bg-secondary text-white rounded-full w-24 py-1 text-center cursor-pointer hover:bg-secondaryhover transition-colors duration-300 text-sm outline-none" id='backPrestasi'>
+                <input type="submit" value="SIMPAN" class="bg-primarySidebar text-white rounded-full w-24 py-1 text-center cursor-pointer hover:bg-secondaryhover transition-colors duration-300 text-sm mr-4 outline-none">
+                <input type="button" value="KEMBALI" class="closePrestasi bg-primarySidebar text-white rounded-full w-24 py-1 text-center cursor-pointer hover:bg-secondaryhover transition-colors duration-300 text-sm outline-none" id='backPrestasi'>
             </div>
         </form>
         </div>
