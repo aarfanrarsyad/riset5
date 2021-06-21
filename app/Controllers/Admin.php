@@ -903,7 +903,8 @@ class Admin extends BaseController
 			'linkedin' 		=> htmlspecialchars($_POST['linkedin']),
 			'gscholar' 		=> htmlspecialchars($_POST['gscholar']),
 			'nip' 			=> htmlspecialchars($_POST['nip']),
-			'nip_bps' 		=> htmlspecialchars($_POST['nip_bps'])
+			'nip_bps' 		=> htmlspecialchars($_POST['nip_bps']),
+			'foto_profil' => 'components/icon/' . htmlspecialchars($_POST['jenis_kelamin']) . '-icon.svg'
 		];
 
 		$init->db->table('alumni')->insert($alumni);
