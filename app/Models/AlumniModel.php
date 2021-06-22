@@ -53,7 +53,9 @@ class AlumniModel extends Model
         $query = $this->table('alumni')->select('alumni.id_alumni,nama,foto_profil,nim,angkatan,program_studi')
             ->orderBy('alumni.id_alumni')->groupBy('alumni.id_alumni')->limit($limit)
             ->join('pendidikan', 'alumni.id_alumni = pendidikan.id_alumni', 'inner')
-            ->join('pendidikan_tinggi', 'pendidikan_tinggi.id_pendidikan = pendidikan.id_pendidikan', 'inner');
+            ->join('pendidikan_tinggi', 'pendidikan_tinggi.id_pendidikan = pendidikan.id_pendidikan', 'inner')
+            ->where('angkatan >',0)
+            ->whereIn('instansi',['Sekolah Tinggi Ilmu Statistik','Akademi Ilmu Statistik']);
 
         if ($start > 0) $query->offset(intval($start));
 

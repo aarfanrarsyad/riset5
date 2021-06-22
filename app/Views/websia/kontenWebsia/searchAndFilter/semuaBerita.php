@@ -152,6 +152,7 @@ $(document).ready(()=>{
             })
         }, 300)
     }
+    $('#kosong').hide()
     
     $("input[name=cari]").keyup( function() {
         $('#lisBerita').empty()
