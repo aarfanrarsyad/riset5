@@ -19,7 +19,7 @@
                 <input type="password" name="passlama" id="passlama" class="inputForm mb-2" placeholder="🞄🞄🞄🞄🞄🞄🞄🞄">
             </div>
             <div class="flex justify-end">
-                <a href="/developer/profil" class="mt-8 flex items-center mr-4">
+                <a href="<?= base_url('developer');?>" class="mt-8 flex items-center mr-4">
                     <div class="flex items-center gap-x-2">
                         <img src="/img/components/icon/left-on.png" class="w-3 h-3" alt="icon panah kiri on">
                         <div class="text-secondary">KEMBALI</div>
