@@ -848,7 +848,7 @@ class Admin extends BaseController
 		}
 
 		$negara		= htmlspecialchars($_POST['negara']);
-		$negara2    = htmlspecialchars($_POST['negaraLainnya']);		
+		$negara2    = htmlspecialchars($_POST['negaraLainnya']);
 
 		if (isset($_POST['negara'])) {
 			$negara       	= htmlspecialchars($_POST['negara']);
@@ -1042,7 +1042,7 @@ class Admin extends BaseController
 		}
 
 		$negara		= htmlspecialchars($_POST['negara']);
-		$negara2    = htmlspecialchars($_POST['negaraLainnya']);		
+		$negara2    = htmlspecialchars($_POST['negaraLainnya']);
 
 		if (isset($_POST['negara'])) {
 			$negara       	= htmlspecialchars($_POST['negara']);
@@ -1122,7 +1122,7 @@ class Admin extends BaseController
 
 		return redirect()->to(previous_url());
 	}
-	
+
 	# method untuk tambah tempat kerja (instansi) Alumni
 	public function updateTempatKerja()
 	{
@@ -1130,7 +1130,7 @@ class Admin extends BaseController
 
 		$data = [
 			'id_tempat_kerja' => $model->getIdTempatKerja(htmlspecialchars($_POST['nama_instansi'])),
-			'ambigu'=> 0
+			'ambigu' => 0
 		];
 
 		$model->db->table('alumni_tempat_kerja')->set($data)->where('id_alumni', session('idAlumni'))->update();
@@ -1408,16 +1408,16 @@ class Admin extends BaseController
 
 		$instansi = $init->getTempatKerjaById($id_tempat_kerja)->getRow();
 		if ($instansi->nama_instansi == htmlspecialchars($_POST['nama_instansi'])) {
-            $rule_namaInstansi = 'required';
-        } else {
-            $rule_namaInstansi = 'required|is_unique[tempat_kerja.nama_instansi]';
-        }
+			$rule_namaInstansi = 'required';
+		} else {
+			$rule_namaInstansi = 'required|is_unique[tempat_kerja.nama_instansi]';
+		}
 
 		if ($instansi->email_instansi == htmlspecialchars($_POST['email_instansi'])) {
-            $rule_emailInstansi = 'required';
-        } else {
-            $rule_emailInstansi = 'required|is_unique[tempat_kerja.email_instansi]';
-        }
+			$rule_emailInstansi = 'required';
+		} else {
+			$rule_emailInstansi = 'required|is_unique[tempat_kerja.email_instansi]';
+		}
 
 		if (!$this->validate([
 			'nama_instansi' => [
@@ -1487,7 +1487,7 @@ class Admin extends BaseController
 
 		return redirect()->to('/admin/CRUD_indexInstansi');
 	}
-	
+
 	#method untuk detail CRUD Instansi
 	public function CRUD_detailInstansi($id)
 	{
@@ -1642,13 +1642,15 @@ class Admin extends BaseController
 		$model = new \App\Models\FotoModel;
 
 		$album = $model->getAlbum();
-		if (count($album) > 3) {
-			$out_album = $album;
-		} else {
-			$out_album[0] = ['album' => 'Alumni'];
-			$out_album[1] = ['album' => 'Wisuda'];
-			$out_album[2] = ['album' => 'Kenangan'];
+		for ($n = 0; $n < count($album); $n++) {
+			if ($album[$n]['album'] == 'Alumni' || $album[$n]['album'] == 'Wisuda' || $album[$n]['album'] == 'Kenangan') {
+				unset($album[$n]);
+			}
 		}
+		$out_album = $album;
+		$out_album[count($out_album) + 1] = ['album' => 'Alumni'];
+		$out_album[count($out_album) + 2] = ['album' => 'Wisuda'];
+		$out_album[count($out_album) + 3] = ['album' => 'Kenangan'];
 
 		$alumni = $alumni_model->getForTags()->getResult();
 		foreach ($alumni as $dt) {
@@ -1693,13 +1695,15 @@ class Admin extends BaseController
 		$video = $model->findAll();
 
 		$album = $model->getAlbum();
-		if (count($album) > 3) {
-			$out_album = $album;
-		} else {
-			$out_album[0] = ['album' => 'Alumni'];
-			$out_album[1] = ['album' => 'Wisuda'];
-			$out_album[2] = ['album' => 'Kenangan'];
+		for ($n = 0; $n < count($album); $n++) {
+			if ($album[$n]['album'] == 'Alumni' || $album[$n]['album'] == 'Wisuda' || $album[$n]['album'] == 'Kenangan') {
+				unset($album[$n]);
+			}
 		}
+		$out_album = $album;
+		$out_album[count($out_album) + 1] = ['album' => 'Alumni'];
+		$out_album[count($out_album) + 2] = ['album' => 'Wisuda'];
+		$out_album[count($out_album) + 3] = ['album' => 'Kenangan'];
 
 		$i = 0;
 		foreach ($video as $dt) {

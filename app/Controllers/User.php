@@ -1141,13 +1141,15 @@ class User extends BaseController
 		$fotoModel = new \App\Models\FotoModel;
 
 		$album = $fotoModel->getAlbum();
-		if (count($album) > 3) {
-			$out_album = $album;
-		} else {
-			$out_album[0] = ['album' => 'Alumni'];
-			$out_album[1] = ['album' => 'Wisuda'];
-			$out_album[2] = ['album' => 'Kenangan'];
+		for ($n = 0; $n < count($album); $n++) {
+			if ($album[$n]['album'] == 'Alumni' || $album[$n]['album'] == 'Wisuda' || $album[$n]['album'] == 'Kenangan') {
+				unset($album[$n]);
+			}
 		}
+		$out_album = $album;
+		$out_album[count($out_album) + 1] = ['album' => 'Alumni'];
+		$out_album[count($out_album) + 2] = ['album' => 'Wisuda'];
+		$out_album[count($out_album) + 3] = ['album' => 'Kenangan'];
 
 		$alumni = $model->getForTags()->getResult();
 		foreach ($alumni as $dt) {
@@ -1177,7 +1179,6 @@ class User extends BaseController
 			}
 			$i++;
 		}
-		// dd($galeri['foto']);
 
 		$data = [
 			'alumni' 		=> $alumni,
@@ -1241,8 +1242,6 @@ class User extends BaseController
 			$caption = str_replace(array("\r", "\n"), ' ', $caption);
 			$year = date("Y");
 			$path = ROOTPATH . '/public/img/galeri/' . $year;
-
-			// $foto->move($path);
 
 			//cek apakah sudah terdapat foldernya
 			if (!is_dir($path))
@@ -1322,13 +1321,16 @@ class User extends BaseController
 		$fotoModel = new \App\Models\FotoModel;
 
 		$album = $fotoModel->getAlbum();
-		if (count($album) > 3) {
-			$out_album = $album;
-		} else {
-			$out_album[0] = ['album' => 'Alumni'];
-			$out_album[1] = ['album' => 'Wisuda'];
-			$out_album[2] = ['album' => 'Kenangan'];
+		for ($n = 0; $n < count($album); $n++) {
+			if ($album[$n]['album'] == 'Alumni' || $album[$n]['album'] == 'Wisuda' || $album[$n]['album'] == 'Kenangan') {
+				unset($album[$n]);
+			}
 		}
+		$out_album = $album;
+		$out_album[count($out_album) + 1] = ['album' => 'Alumni'];
+		$out_album[count($out_album) + 2] = ['album' => 'Wisuda'];
+		$out_album[count($out_album) + 3] = ['album' => 'Kenangan'];
+
 		$alumni = $model->getForTags()->getResult();
 		foreach ($alumni as $dt) {
 			$alumni_angktn = array();
@@ -1361,13 +1363,16 @@ class User extends BaseController
 		$fotoModel = new \App\Models\FotoModel;
 
 		$album = $fotoModel->getAlbum();
-		if (count($album) > 3) {
-			$out_album = $album;
-		} else {
-			$out_album[0] = ['album' => 'Alumni'];
-			$out_album[1] = ['album' => 'Wisuda'];
-			$out_album[2] = ['album' => 'Kenangan'];
+		for ($n = 0; $n < count($album); $n++) {
+			if ($album[$n]['album'] == 'Alumni' || $album[$n]['album'] == 'Wisuda' || $album[$n]['album'] == 'Kenangan') {
+				unset($album[$n]);
+			}
 		}
+		$out_album = $album;
+		$out_album[count($out_album) + 1] = ['album' => 'Alumni'];
+		$out_album[count($out_album) + 2] = ['album' => 'Wisuda'];
+		$out_album[count($out_album) + 3] = ['album' => 'Kenangan'];
+
 		$alumni = $model->getForTags()->getResult();
 		foreach ($alumni as $dt) {
 			$alumni_angktn = array();
@@ -1414,14 +1419,17 @@ class User extends BaseController
 	{
 		$model = new \App\Models\VideoModel;
 
+		// $album = $model->getAlbum();
 		$album = $model->getAlbum();
-		if (count($album) > 3) {
-			$out_album = $album;
-		} else {
-			$out_album[0] = ['album' => 'Alumni'];
-			$out_album[1] = ['album' => 'Wisuda'];
-			$out_album[2] = ['album' => 'Kenangan'];
+		for ($n = 0; $n < count($album); $n++) {
+			if ($album[$n]['album'] == 'Alumni' || $album[$n]['album'] == 'Wisuda' || $album[$n]['album'] == 'Kenangan') {
+				unset($album[$n]);
+			}
 		}
+		$out_album = $album;
+		$out_album[count($out_album) + 1] = ['album' => 'Alumni'];
+		$out_album[count($out_album) + 2] = ['album' => 'Wisuda'];
+		$out_album[count($out_album) + 3] = ['album' => 'Kenangan'];
 
 		$data = [
 			'video'			=> $model->getApproveVideo(),
@@ -1601,13 +1609,15 @@ class User extends BaseController
 		$model = new \App\Models\VideoModel;
 
 		$album = $model->getAlbum();
-		if (count($album) > 3) {
-			$out_album = $album;
-		} else {
-			$out_album[0] = ['album' => 'Alumni'];
-			$out_album[1] = ['album' => 'Wisuda'];
-			$out_album[2] = ['album' => 'Kenangan'];
+		for ($n = 0; $n < count($album); $n++) {
+			if ($album[$n]['album'] == 'Alumni' || $album[$n]['album'] == 'Wisuda' || $album[$n]['album'] == 'Kenangan') {
+				unset($album[$n]);
+			}
 		}
+		$out_album = $album;
+		$out_album[count($out_album) + 1] = ['album' => 'Alumni'];
+		$out_album[count($out_album) + 2] = ['album' => 'Wisuda'];
+		$out_album[count($out_album) + 3] = ['album' => 'Kenangan'];
 
 		$data = [
 			'list'			=> $model->getOrderAlbum(),
@@ -1624,13 +1634,15 @@ class User extends BaseController
 		$model = new \App\Models\VideoModel;
 
 		$album = $model->getAlbum();
-		if (count($album) > 3) {
-			$out_album = $album;
-		} else {
-			$out_album[0] = ['album' => 'Alumni'];
-			$out_album[1] = ['album' => 'Wisuda'];
-			$out_album[2] = ['album' => 'Kenangan'];
+		for ($n = 0; $n < count($album); $n++) {
+			if ($album[$n]['album'] == 'Alumni' || $album[$n]['album'] == 'Wisuda' || $album[$n]['album'] == 'Kenangan') {
+				unset($album[$n]);
+			}
 		}
+		$out_album = $album;
+		$out_album[count($out_album) + 1] = ['album' => 'Alumni'];
+		$out_album[count($out_album) + 2] = ['album' => 'Wisuda'];
+		$out_album[count($out_album) + 3] = ['album' => 'Kenangan'];
 
 		$data = [
 			'video'			=> $model->getByAlbum($key),
