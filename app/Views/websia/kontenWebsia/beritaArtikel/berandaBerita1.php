@@ -114,7 +114,7 @@
                             <p class="text-xs text-primary"><?=$value->penulis ?></p>
                         </div>
                         <p>
-                            <?php if(strlen($value->konten_berita)<100) echo $value->konten_berita; else substr($value->konten_berita,0,strpos($value->konten_berita, ' ', 100)); ?>...
+                            <?php if(strlen($value->konten_berita)<100) echo $value->konten_berita; else echo substr($value->konten_berita,0,strpos($value->konten_berita, ' ', 100)); ?>...
                         </p>
                     </div>
                 </div>
