@@ -130,9 +130,9 @@ class Webservice extends BaseController
 
 		$id = $this->request->getPost('id_app');
 		$id_token = $this->model->getTokenId($id)->getRow()->id_token;
-
 		$this->model->deleteToken($id_token);
 		$this->model->deleteApp($id);
+		
 		echo json_encode('data sukses dihapus');
 	}
 

@@ -119,6 +119,9 @@ class WebserviceModel extends Model
 
     public function deleteToken($id)
     {
+        $query2 = $this->db
+            ->table('token_scope')
+            ->delete(array('id_token'=> $id));
         $query = $this->db
             ->table('token_app')
             ->delete(array('id' => $id));
