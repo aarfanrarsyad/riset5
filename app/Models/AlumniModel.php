@@ -70,11 +70,12 @@ class AlumniModel extends Model
 
         // logic pecarian prodi
         $listProdi = [
-            'DI' => ['Ak. Ilmu Statistik'],
-            'DIII' => ['D-III AIS', 'D-III STIS', 'DIII-AIS'],
-            'KS' => ['D-IV Komputasi Statistik', 'Komputasi Statistik'],
-            'ST' => ['Statistik Sosial Kependudukan', 'D-IV Statistik Sosial Kependudukan', 'D-IV Statistik Ekonomi', 'D-IV SK', 'Statistik Ekonomi', 'D-IV SE']
+            'DI' => ['Ak. Ilmu Statistik','D-I Statistika'],
+            'DIII' => ['D-III AIS', 'D-III STIS', 'DIII-AIS','Akademi D-III','D-III Statistika'],
+            'KS' => ['D-IV Komputasi Statistik', 'Komputasi Statistik',],
+            'ST' => ['Statistik Sosial Kependudukan', 'D-IV Statistik Sosial Kependudukan', 'D-IV Statistik Ekonomi', 'D-IV SK', 'D-IV SE', 'Statistik Ekonomi','D-IV Statistika Ekonomi','D-IV Statistika Sosial & Kependudukan']
         ];
+
         $prodi = ['in' => [], 'notIn' => []];
         foreach (array_keys($listProdi) as $p) {
             if (in_array($p, $pro)) {

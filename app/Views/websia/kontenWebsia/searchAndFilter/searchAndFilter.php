@@ -73,7 +73,7 @@
                         <div class="flex justify-end mt-12">
                             <a id="semuaAlumni" href="<?= base_url('User/searchAndFilter?t=alumni&cari='.$cari); ?>" ><div class="flex bg-secondary text-white rounded-full md:py-2 py-1 md:px-3 px-2 items-center gap-x-2 cursor-pointer md:text-sm text-xs">
                                 Selengkapnya
-                                <img src="/img/right-off.png" class="md:w-4 md:h-4 w-3 h-3 my-auto" alt="">
+                                <img src="/img/components/icon/right-off.png" class="md:w-4 md:h-4 w-3 h-3 my-auto" alt="">
                             </div></a>
                         </div>
                         <!-- akhir tulisan "Selengkapnya" di hasil pencarian -->
@@ -134,7 +134,7 @@
                         <div class="flex justify-end mt-12" id="beritaSelengkapnya">
                             <a id="semuaBerita" href="<?= base_url('User/searchAndFilter?t=berita&cari='.$cari); ?>"><div class="flex bg-secondary text-white rounded-full md:py-2 py-1 md:px-3 px-2 items-center gap-x-2 cursor-pointer md:text-sm text-xs">
                                 Selengkapnya
-                                <img src="/img/right-off.png" class="md:w-4 md:h-4 w-3 h-3" alt="">
+                                <img src="/img/components/icon/right-off.png" class="md:w-4 md:h-4 w-3 h-3" alt="">
                             </div></a>
                         </div>
                         <!-- akhir tulisan "Selengkapnya" di hasil pencarian -->
@@ -144,7 +144,11 @@
                 </div>
 
                 <!-- HASIL PENCARIAN KOSONG -->
-                <div id="kosong" class=" ml-2 flex-grow min-h-screen"></div>
+                <div id="kosong" class=" ml-2 flex-grow min-h-screen">
+                    <img src="/img/components/pencarianKosong.png" class="w-96 mx-auto" alt="">
+                    <div class="text-primary text-center font-bold md:text-xl -mt-8 mx-auto">Hasil Pencarian Tidak Ditemukan</div>
+                    <hr class="border-b-2 border-t-0 w-32 border-gray-400 mx-auto">
+                </div>
 
                 <!-- END HASIL PENCARIAN BERITA -->
             </div>
@@ -159,7 +163,7 @@
 <script>
 $(document).ready(()=>{
     let x,data,s;
-    let stringAlumni = `<!-- Awal Card Alumni --><a href="/User/profilAlumni/{nim}"><div class="mx-2"><div class="flex gap-x-4"><div class="flex items-center"><img src="/img/{foto_profil}" class="lg:w-18 w-12 mx-auto" alt=""></div><div class="flex items-center"><div><!-- Awal Nama Alumni --><h2 class="md:text-lg font-heading text-primary font-semibold">{nama}</h2><!-- Akhir Nama Alumni --><!-- Awal Atribut Alumni --><div class="md:text-sm text-xs font-paragraph text-primary">Angkatan {akt}</div><!-- Akhir Atribut Alumni --></div></div></div></div></a><!-- Akhir Card Alumni --><hr class="my-4 border-gray-400">`;
+    let stringAlumni = `<!-- Awal Card Alumni --><a href="/User/profilAlumni/{idAlumni}"><div class="mx-2"><div class="flex gap-x-4"><div class="flex items-center"><img src="/img/{foto_profil}" class="lg:w-18 w-12 mx-auto" alt=""></div><div class="flex items-center"><div><!-- Awal Nama Alumni --><h2 class="md:text-lg font-heading text-primary font-semibold">{nama}</h2><!-- Akhir Nama Alumni --><!-- Awal Atribut Alumni --><div class="md:text-sm text-xs font-paragraph text-primary">Angkatan {akt}</div><!-- Akhir Atribut Alumni --></div></div></div></div></a><!-- Akhir Card Alumni --><hr class="my-4 border-gray-400">`;
     let stringBerita = `<!-- Awal Card Berita  --><a href="/User/viewBerita/{id}"><div class="flex px-2 md:flex-row flex-col md:gap-x-4 gap-x-0 items-center"><img src="/img/berita/{thumbnail}" alt="{thumbnail}" class="md:w-48 w-full gambarBerita "><div class="flex-grow"><div class="flex flex-col"><!-- Awal Judul Berita  --><h2 class="text-lg font-heading text-primary font-semibold mb-2">{judul}</h2><!-- Akhir Judul Berita  --><!-- Awal Tanggal Berita  --><div class="text-xs font-paragraph text-primary">{tanggal_publish}</div><!-- Akhir Tanggal Berita  --><!-- Awal Deskripsi Berita  --><div class="text-sm font-paragraph break-words">{konten}</div><!-- Akhir Tanggal Berita  --></div></div></div></a><!-- Akhir Card Berita  --><hr class="my-4 border-gray-400">`;
 
     function search(tipe) {
@@ -197,7 +201,7 @@ $(document).ready(()=>{
                             jumlahAlumniBerita += ret.jumlah.alumni.ret
                             console.log(ret.data.alumni)
                             $.each(ret.data.alumni, (i, item) => {
-                                $('#lisAlumni').append(stringAlumni.replace('{nim}', item.nim).replace('{nama}', item.nama).replace('{foto_profil}', item.foto_profil).replace('{akt}', item.angkatan))
+                                $('#lisAlumni').append(stringAlumni.replace('{idAlumni}', item.id).replace('{nama}', item.nama).replace('{foto_profil}', item.foto_profil).replace('{akt}', item.angkatan))
                             })
                             $('#lisAlumni').append("<hr class='-my-4 border-2 border-gray-400'>")
                         } else { $('#cariAlumni').hide() }
@@ -225,7 +229,7 @@ $(document).ready(()=>{
 
                     $('#kosong').hide()
                     if(jumlahAlumniBerita == 0)
-                        $('#kosong').append(`<img src="/img/components/pencarianKosong.png" class="w-96 mx-auto" alt=""><div class="text-primary text-center font-bold md:text-xl -mt-8 mx-auto">Hasil Pencarian Tidak Ditemukan</div><hr class="border-b-2 border-t-0 w-32 border-gray-400 mx-auto">`).show()
+                        $('#kosong').show()
                 }
             })
         }, 300)

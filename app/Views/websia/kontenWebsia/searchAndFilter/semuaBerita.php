@@ -75,7 +75,11 @@
                         <!-- Akhir DAFTAR HASIL PENCARIAN BERITA -->
 
                         <!-- HASIL PENCARIAN KOSONG -->
-                        <div id="kosong" class=" ml-2 flex-grow min-h-screen"></div>
+                        <div id="kosong" class=" ml-2 flex-grow min-h-screen">
+                            <img src="/img/components/pencarianKosong.png" class="w-96 mx-auto" alt="">
+                            <div class="text-primary text-center font-bold md:text-xl -mt-8 mx-auto">Hasil Pencarian Tidak Ditemukan</div>
+                            <hr class="border-b-2 border-t-0 w-32 border-gray-400 mx-auto">
+                        </div>
                     </div>
                 </div>
 
@@ -143,7 +147,7 @@ $(document).ready(()=>{
                     
                     $('#kosong').hide()
                     if(ret.jumlah.berita.ret == 0)
-                        $('#kosong').append(`<img src="/img/components/pencarianKosong.png" class="w-96 mx-auto" alt=""><div class="text-primary text-center font-bold md:text-xl -mt-8 mx-auto">Hasil Pencarian Tidak Ditemukan</div><hr class="border-b-2 border-t-0 w-32 border-gray-400 mx-auto">`).show()
+                        $('#kosong').show()
                 }
             })
         }, 300)
