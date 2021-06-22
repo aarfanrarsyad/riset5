@@ -53,7 +53,9 @@ class AlumniModel extends Model
         $query = $this->table('alumni')->select('alumni.id_alumni,nama,foto_profil,nim,angkatan,program_studi')
             ->orderBy('alumni.id_alumni')->groupBy('alumni.id_alumni')->limit($limit)
             ->join('pendidikan', 'alumni.id_alumni = pendidikan.id_alumni', 'inner')
-            ->join('pendidikan_tinggi', 'pendidikan_tinggi.id_pendidikan = pendidikan.id_pendidikan', 'inner');
+            ->join('pendidikan_tinggi', 'pendidikan_tinggi.id_pendidikan = pendidikan.id_pendidikan', 'inner')
+            ->where('angkatan >',0)
+            ->whereIn('instansi',['Sekolah Tinggi Ilmu Statistik','Akademi Ilmu Statistik']);
 
         if ($start > 0) $query->offset(intval($start));
 
@@ -70,11 +72,12 @@ class AlumniModel extends Model
 
         // logic pecarian prodi
         $listProdi = [
-            'DI' => ['Ak. Ilmu Statistik'],
-            'DIII' => ['D-III AIS', 'D-III STIS', 'DIII-AIS'],
-            'KS' => ['D-IV Komputasi Statistik', 'Komputasi Statistik'],
-            'ST' => ['Statistik Sosial Kependudukan', 'D-IV Statistik Sosial Kependudukan', 'D-IV Statistik Ekonomi', 'D-IV SK', 'Statistik Ekonomi', 'D-IV SE']
+            'DI' => ['Ak. Ilmu Statistik','D-I Statistika'],
+            'DIII' => ['D-III AIS', 'D-III STIS', 'DIII-AIS','Akademi D-III','D-III Statistika'],
+            'KS' => ['D-IV Komputasi Statistik', 'Komputasi Statistik',],
+            'ST' => ['Statistik Sosial Kependudukan', 'D-IV Statistik Sosial Kependudukan', 'D-IV Statistik Ekonomi', 'D-IV SK', 'D-IV SE', 'Statistik Ekonomi','D-IV Statistika Ekonomi','D-IV Statistika Sosial & Kependudukan']
         ];
+
         $prodi = ['in' => [], 'notIn' => []];
         foreach (array_keys($listProdi) as $p) {
             if (in_array($p, $pro)) {
