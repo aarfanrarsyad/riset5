@@ -8,9 +8,10 @@
             <div class="flex gap-x-2">
                 <a href="/" class="hover:text-primaryHover">Beranda</a>
                 <p>></p>
-                <a href="/Berita/berita" class="hover:text-primaryHover">Berita</a>
+                <a href="/Berita/apiberita" class="hover:text-primaryHover">API Berita</a>
             </div>
         </div>
+        <!--
         <div>
             <div class="flex items-center gap-x-2">
                 <a href="/User/unggahBerita">
@@ -29,7 +30,7 @@
                     </defs>
                 </svg>
 
-                <!--<div id="popupnotif" class="w-2/5 hidden opacity-0 transition-all duration-300 rounded-xl text-primary py-2 text-sm absolute lg:right-16 right-8 top-48" style="background-color: #5EBCFF;">
+                <div id="popupnotif" class="w-2/5 hidden opacity-0 transition-all duration-300 rounded-xl text-primary py-2 text-sm absolute lg:right-16 right-8 top-48" style="background-color: #5EBCFF;">
                     <div class="font-bold px-2">Status Unggah Berita</div>
                     <div class="bg-gray-100 flex p-2 gap-x-2">
                         <div>
@@ -42,7 +43,7 @@
                         <div class="w-1/4 h-12 bg-gray-300">
                         </div>
                     </div>
-                </div>-->
+                </div>
                 <div class="hidden lg:w-2/5 md:w-2/3 w-3/4 opacity-0 transition-all duration-300 rounded-xl text-primary py-2 text-sm absolute lg:right-18 -lg:right-2 md:right-6 right-1 md:top-48 top-28">
                     <div class="font-bold px-2">Status Unggah Berita</div>
                     <div class="bg-gray-100 flex p-2 gap-x-2 mb-2">
@@ -88,177 +89,49 @@
             </div>
         </div>
     </div>
+    -->
+    </div>
     <hr class="border-primary border-t-2 border-b-0 mt-4 mb-3">
     <div>
-        <h2 class="font-bold text-secondary font-heading md:text-xl text-lg mb-4">Berita Lainnya</h2>
+        <h2 class="font-bold text-secondary font-heading md:text-xl text-lg mb-4">Berita API</h2>
         <!-- start card berita -->
         <div class="md:grid md:grid-cols-2 md:gap-x-6">
-            <div>
+
+            <?php foreach($apiberita as $value){?>
+            <div class="border-gray-400 border-b py-3">
                 <div class="flex gap-x-2 items-center">
                     <div class="lg:w-1/4 w-1/3 lg:h-24 h-20 bg-gray-200">
                     </div>
                     <div class="lg:w-3/4 w-2/3">
-                        <a href="">
-                            <h3 class="font-heading font-semibold text-primary text-lg">Judul Berita</h3>
+                        <a href="https://www.pusdiklat-bps.id/web/berita/<?=$value->id?>">
+                            <h3 class="font-heading font-semibold text-primary text-lg"><?=$value->judul_berita ?>
+                            </h3>
                         </a>
                         <div class="flex gap-x-1 items-center">
-                            <img src="/img/icon/clock.png" class="w-3 h-3" alt="">
-                            <p class="text-xs text-primary">11 Januari 2021</p>
-                            <img src="/img/icon/profile.png" class="w-3 h-3 ml-2" alt="">
-                            <p class="text-xs text-primary">David Smith</p>
+                            <img src="/img/components/icon/clock.png" class="w-3 h-3" alt="">
+                            <p class="text-xs text-primary"><?=$value->created_at ?></p>
+                            <img src="/img/components/icon/profile.png" class="w-3 h-3 ml-2" alt="">
+                            <p class="text-xs text-primary"><?=$value->penulis ?></p>
                         </div>
                         <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras blandit turpis sem, eu laoreet odio pretium ac. Mauris eget aliquet lorem.
+                            <?php if(strlen($value->konten_berita)<100) echo $value->konten_berita; else substr($value->konten_berita,0,strpos($value->konten_berita, ' ', 100)); ?>...
                         </p>
                     </div>
                 </div>
-                <hr class="my-3 border-gray-400">
-                <div class="flex gap-x-2 items-center">
-                    <div class="lg:w-1/4 w-1/3 lg:h-24 h-20 bg-gray-200">
-                    </div>
-                    <div class="lg:w-3/4 w-2/3">
-                        <a href="">
-                            <h3 class="font-heading font-semibold text-primary text-lg">Judul Berita</h3>
-                        </a>
-                        <div class="flex gap-x-1 items-center">
-                            <img src="/img/icon/clock.png" class="w-3 h-3" alt="">
-                            <p class="text-xs text-primary">11 Januari 2021</p>
-                            <img src="/img/icon/profile.png" class="w-3 h-3 ml-2" alt="">
-                            <p class="text-xs text-primary">David Smith</p>
-                        </div>
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras blandit turpis sem, eu laoreet odio pretium ac. Mauris eget aliquet lorem.
-                        </p>
-                    </div>
-                </div>
-                <hr class="my-3 border-gray-400">
-                <div class="flex gap-x-2 items-center">
-                    <div class="lg:w-1/4 w-1/3 lg:h-24 h-20 bg-gray-200">
-                    </div>
-                    <div class="lg:w-3/4 w-2/3">
-                        <a href="">
-                            <h3 class="font-heading font-semibold text-primary text-lg">Judul Berita</h3>
-                        </a>
-                        <div class="flex gap-x-1 items-center">
-                            <img src="/img/icon/clock.png" class="w-3 h-3" alt="">
-                            <p class="text-xs text-primary">11 Januari 2021</p>
-                            <img src="/img/icon/profile.png" class="w-3 h-3 ml-2" alt="">
-                            <p class="text-xs text-primary">David Smith</p>
-                        </div>
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras blandit turpis sem, eu laoreet odio pretium ac. Mauris eget aliquet lorem.
-                        </p>
-                    </div>
-                </div>
-                <hr class="my-3 border-gray-400">
-                <div class="flex gap-x-2 items-center">
-                    <div class="lg:w-1/4 w-1/3 lg:h-24 h-20 bg-gray-200">
-                    </div>
-                    <div class="lg:w-3/4 w-2/3">
-                        <a href="">
-                            <h3 class="font-heading font-semibold text-primary text-lg">Judul Berita</h3>
-                        </a>
-                        <div class="flex gap-x-1 items-center">
-                            <img src="/img/icon/clock.png" class="w-3 h-3" alt="">
-                            <p class="text-xs text-primary">11 Januari 2021</p>
-                            <img src="/img/icon/profile.png" class="w-3 h-3 ml-2" alt="">
-                            <p class="text-xs text-primary">David Smith</p>
-                        </div>
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras blandit turpis sem, eu laoreet odio pretium ac. Mauris eget aliquet lorem.
-                        </p>
-                    </div>
-                </div>
-                <hr class="my-3 border-gray-400">
             </div>
-            <div class="md:block hidden">
-                <div class="flex gap-x-2 items-center">
-                    <div class="lg:w-1/4 w-1/3 lg:h-24 h-20 bg-gray-200">
-                    </div>
-                    <div class="lg:w-3/4 w-2/3">
-                        <a href="">
-                            <h3 class="font-heading font-semibold text-primary text-lg">Judul Berita</h3>
-                        </a>
-                        <div class="flex gap-x-1 items-center">
-                            <img src="/img/icon/clock.png" class="w-3 h-3" alt="">
-                            <p class="text-xs text-primary">11 Januari 2021</p>
-                            <img src="/img/icon/profile.png" class="w-3 h-3 ml-2" alt="">
-                            <p class="text-xs text-primary">David Smith</p>
-                        </div>
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras blandit turpis sem, eu laoreet odio pretium ac. Mauris eget aliquet lorem.
-                        </p>
-                    </div>
-                </div>
-                <hr class="my-3 border-gray-400">
-                <div class="flex gap-x-2 items-center">
-                    <div class="lg:w-1/4 w-1/3 lg:h-24 h-20 bg-gray-200">
-                    </div>
-                    <div class="lg:w-3/4 w-2/3">
-                        <a href="">
-                            <h3 class="font-heading font-semibold text-primary text-lg">Judul Berita</h3>
-                        </a>
-                        <div class="flex gap-x-1 items-center">
-                            <img src="/img/icon/clock.png" class="w-3 h-3" alt="">
-                            <p class="text-xs text-primary">11 Januari 2021</p>
-                            <img src="/img/icon/profile.png" class="w-3 h-3 ml-2" alt="">
-                            <p class="text-xs text-primary">David Smith</p>
-                        </div>
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras blandit turpis sem, eu laoreet odio pretium ac. Mauris eget aliquet lorem.
-                        </p>
-                    </div>
-                </div>
-                <hr class="my-3 border-gray-400">
-                <div class="flex gap-x-2 items-center">
-                    <div class="lg:w-1/4 w-1/3 lg:h-24 h-20 bg-gray-200">
-                    </div>
-                    <div class="lg:w-3/4 w-2/3">
-                        <a href="">
-                            <h3 class="font-heading font-semibold text-primary text-lg">Judul Berita</h3>
-                        </a>
-                        <div class="flex gap-x-1 items-center">
-                            <img src="/img/icon/clock.png" class="w-3 h-3" alt="">
-                            <p class="text-xs text-primary">11 Januari 2021</p>
-                            <img src="/img/icon/profile.png" class="w-3 h-3 ml-2" alt="">
-                            <p class="text-xs text-primary">David Smith</p>
-                        </div>
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras blandit turpis sem, eu laoreet odio pretium ac. Mauris eget aliquet lorem.
-                        </p>
-                    </div>
-                </div>
-                <hr class="my-3 border-gray-400">
-                <div class="flex gap-x-2 items-center">
-                    <div class="lg:w-1/4 w-1/3 lg:h-24 h-20 bg-gray-200">
-                    </div>
-                    <div class="lg:w-3/4 w-2/3">
-                        <a href="">
-                            <h3 class="font-heading font-semibold text-primary text-lg">Judul Berita</h3>
-                        </a>
-                        <div class="flex gap-x-1 items-center">
-                            <img src="/img/icon/clock.png" class="w-3 h-3" alt="">
-                            <p class="text-xs text-primary">11 Januari 2021</p>
-                            <img src="/img/icon/profile.png" class="w-3 h-3 ml-2" alt="">
-                            <p class="text-xs text-primary">David Smith</p>
-                        </div>
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras blandit turpis sem, eu laoreet odio pretium ac. Mauris eget aliquet lorem.
-                        </p>
-                    </div>
-                </div>
-                <hr class="my-3 border-gray-400">
-            </div>
+            <?php }?>
+
         </div>
         <!-- end card berita -->
-        <div class="flex gap-x-2 items-center justify-end mb-8">
-            <a href="">
-                <img src="/img/left-on.png" class="w-4 h-4 cursor-pointer" alt="">
+        <div class="mt-2 flex gap-x-2 items-center justify-end mb-8">
+            <a href="?page=<?= $page-1;?>">
+                <img src="/img/components/icon/left-on.png" class="w-4 h-4 cursor-pointer" alt="">
             </a>
-            <a href="" class="text-secondary">1</a>
-            <a href="" class="text-secondary">2</a>
-            <a href="">
-                <img src="/img/right-on.png" class="w-4 h-4 cursor-pointer" alt="">
+            <?php for($i=1;$i<$tot_page+1;$i++){ ?>
+            <a href="?page=<?= $i;?>" class="<?php if($i==$page){ ?>text-primary<?php } else echo 'text-secondary font-bold' ?>"><?= $i;?></a>
+            <?php } ?>
+            <a href="?page=<?= $page+1;?>">
+                <img src="/img/components/icon/right-on.png"" class=" w-4 h-4 cursor-pointer" alt="">
             </a>
         </div>
     </div>

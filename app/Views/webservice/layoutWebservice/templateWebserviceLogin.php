@@ -112,28 +112,40 @@
                         <a href="/developer/dokumentasi">
                             <li class="list m-auto hover:text-white bg-white text-center text-secondary text-sm py-0.5 w-44 border-b-2 border-gray-500">DOKUMENTASI</li>
                         </a>
+                        <?php if ($statusLog == 1) { ?>
                         <a href="/developer/proyek">
                             <li class="list m-auto hover:text-white bg-white text-center text-secondary text-sm py-0.5 w-44 border-gray-500">PROYEK</li>
                         </a>
+                        <?php } ?>
                     </ul>
                 </ul>
             </div>
             <div class="menu border-b flex justify-center">
                 <ul class="w-min">
+                <?php if ($statusLog == 1) { ?>
                     <a href="/developer/edit/akun">
                         <li class="cursor-pointer flex justify-center text-white py-1">
                             <div class="bg-secondary w-28 flex justify-center hover:bg-white hover:text-secondary py-0.5">EDIT AKUN</div>
                         </li>
                     </a>
+                <?php } ?>
                 </ul>
             </div>
             <div class="menu flex justify-center">
                 <ul class="w-min">
+                <?php if (session()->has('id_user')) { ?>
                     <a href="/logout/">
                         <li class="cursor-pointer flex justify-center text-white py-1">
                             <div class="bg-secondary w-28 flex justify-center hover:bg-white hover:text-secondary py-0.5">KELUAR</div>
                         </li>
                     </a>
+                    <?php } else { ?>
+                        <a href="/logout/">
+                        <li class="cursor-pointer flex justify-center text-white py-1">
+                            <div class="bg-secondary w-28 flex justify-center hover:bg-white hover:text-secondary py-0.5">LOGIN</div>
+                        </li>
+                    </a>
+                    <?php }?>
                 </ul>
             </div>
         </div>

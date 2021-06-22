@@ -10,27 +10,25 @@ class Api extends ResourceController
 {
 	public function index() //project list + form create
 	{
-		$init = new AlumniModel();
-
-		$da = $init->getDetailUserApi();
-		$data = [];
-		foreach ($da as $item) {
-			$data[$item['id_alumni']]['nama'] = $item['nama'];
-			$data[$item['id_alumni']]['jenis_kelamin'] = $item['jenis_kelamin'];
-			$data[$item['id_alumni']]['status_bekerja'] = $item['status_bekerja'];
-			$data[$item['id_alumni']]['jabatan_terakhir'] = $item['jabatan_terakhir'];
-			$data[$item['id_alumni']]['aktif_pns'] = $item['aktif_pns'];
-			$data[$item['id_alumni']]['pendidikan_tinggi'][] = [
-				"instansi" => $item['instansi'],
-				"jenjang" => $item['jenjang'],
-				"prodi" => $item['prodi'],
-				"nim" => $item['nim'],
-				"angkatan" => $item['angkatan'],
-				"tahun_masuk" => $item['tahun_masuk'],
-				"tahun_lulus" => $item['tahun_lulus']
-			];
-		};
-		dd($data);
+		$client = \Config\Services::curlrequest();
+		$response = $client->request('POST', 'https://pusdiklat-bps.id/api/berita', [
+			'form_params' => [
+                'kategori' => '1',
+				'token'=>'473KpgTwt9MFxmpAYJ7aF2w5'
+				]
+			]);
+		$berita= json_decode($response->getBody()); 
+		if($berita->status=='sukses'){
+			foreach ($berita->data as $value) {
+			echo '<div><b>Judul: </b>'.$value->judul_berita
+			.'<br><b>Penulis: </b>'.$value->penulis
+			.'<br><b>Created At: </b>'.$value->created_at
+			.'<br>'. $value->image
+			.'<br><b>Isi berita: </b>'.$value->konten_berita.'</div>';
+			echo '<br>';
+			echo '<hr>';
+			}
+		}
 		die();
 	}
 
