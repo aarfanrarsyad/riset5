@@ -151,6 +151,7 @@ class Webservice extends BaseController
 	// }
 	public function editAkun()
 	{
+		$model = new AlumniModel();
 		if (session()->has('role')) {
 			$role = array_search('4', session('role'), true);
 		} else $role = false;
@@ -160,10 +161,9 @@ class Webservice extends BaseController
 		} else {
 			$login = 1;
 		};
-		$data = [
-			'login' => 'sudah',
-			'statusLog' => $login,
-		];
+		$data['login'] = 'sudah';
+		$data['statusLog'] = $login;
+		$data['email'] = $model->getAlumni(session('id_user'))->getRow()->email;
 
 		$data['judul'] = 'Edit Profil | SIA';
 		$data['active'] = 'akunDev';
@@ -190,18 +190,16 @@ class Webservice extends BaseController
 			];
 
 			if ($this->form_validation->run($validate, 'editAkun') === FALSE) {
-				session()->setFlashdata('edit-pass2-fail', 'Kata sandi baru gagal diperbaharui');
-				session()->setFlashdata('error-new_password', $this->form_validation->getError('new_password'));
-				session()->setFlashdata('error-conf_password', $this->form_validation->getError('conf_password'));
+				session()->setFlashdata('edit-bio-fail', 'Konfirmasi Password baru tidak sesuai');
 			} else {
 				$data = [
 					'password_hash' => password_hash(base64_encode(hash('sha384', $newpass, true)), PASSWORD_DEFAULT),
 				];
 				$model->db->table('users')->set($data)->where('id', session('id_user'))->update();
-				session()->setFlashdata('edit-pass-success', 'Kata sandi baru berhasil diperbaharui');
+				session()->setFlashdata('edit-bio-success', 'Kata sandi baru berhasil diperbaharui');
 			}
 		} else {
-			session()->setFlashdata('edit-pass-fail', 'Kata sandi lama tidak sesuai.');
+			session()->setFlashdata('edit-bio-fail', 'Kata sandi lama tidak sesuai.');
 		}
 		return redirect()->to(base_url('developer/edit/akun'));
 	}
