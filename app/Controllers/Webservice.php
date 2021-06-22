@@ -113,10 +113,10 @@ class Webservice extends BaseController
 				'token' => null
 			],
 
-			'token_scope' => $this->request->getPost('scope'),
+			'token_scope' => $_POST['scope'],
 			'uid' => $idUser,
-			'nama_app' => $this->request->getPost('nama'),
-			'deskripsi' => $this->request->getPost('deskripsi'),
+			'nama_app' => $_POST['nama'],
+			'deskripsi' => $_POST['deskripsi'],
 			'req_date' => $time->toDateTimeString(),
 		];
 
@@ -128,7 +128,7 @@ class Webservice extends BaseController
 	public function delete() //delete or cancel  project
 	{
 
-		$id = $this->request->getPost('id_app');
+		$id = $_POST['id_app'];
 		$id_token = $this->model->getTokenId($id)->getRow()->id_token;
 		$this->model->deleteToken($id_token);
 		$this->model->deleteApp($id);
@@ -208,7 +208,7 @@ class Webservice extends BaseController
 	//show detail app via ajax
 	public function ajax_edit()
 	{
-		$id = $this->request->getPost('id');
+		$id = $_POST['id'];
 		//$id=2;
 		$data = $this->model->editApp($id)->getRowArray();
 		$token = $this->model->getToken($data['id_token'])->getRow()->token;

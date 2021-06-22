@@ -10,26 +10,7 @@ class Api extends ResourceController
 {
 	public function index() //project list + form create
 	{
-		$client = \Config\Services::curlrequest();
-		$response = $client->request('POST', 'https://pusdiklat-bps.id/api/berita', [
-			'form_params' => [
-                'kategori' => '1',
-				'token'=>'473KpgTwt9MFxmpAYJ7aF2w5'
-				]
-			]);
-		$berita= json_decode($response->getBody()); 
-		if($berita->status=='sukses'){
-			foreach ($berita->data as $value) {
-			echo '<div><b>Judul: </b>'.$value->judul_berita
-			.'<br><b>Penulis: </b>'.$value->penulis
-			.'<br><b>Created At: </b>'.$value->created_at
-			.'<br>'. $value->image
-			.'<br><b>Isi berita: </b>'.$value->konten_berita.'</div>';
-			echo '<br>';
-			echo '<hr>';
-			}
-		}
-		die();
+		throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
 	}
 
 	//--------------------------------------------------------------------
@@ -39,8 +20,8 @@ class Api extends ResourceController
 		$cek = 0;
 		$init = new AlumniModel();
 		$init2 = new WebserviceModel();
-		$apiKey = $this->request->getPost('api-key');
-		$email = $this->request->getPost('email');
+		$apiKey = $_POST['api-key'];
+		$email = $_POST['email'];
 
 		if ($apiKey == NULL) {
 			$respond = [
@@ -100,9 +81,9 @@ class Api extends ResourceController
 		$scp3 = 0;
 		$init = new AlumniModel();
 		$init2 = new WebserviceModel();
-		$apiKey = $this->request->getPost('api-key');
-		$list = $this->request->getPost('list');
-		$nim = $this->request->getPost('nim');
+		$apiKey = $_POST['api-key'];
+		$list = $_POST['list'];
+		$nim = $_POST['nim'];
 
 		if ($apiKey == NULL) {
 			$respond = [
