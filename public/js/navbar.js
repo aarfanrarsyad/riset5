@@ -230,3 +230,45 @@ $(document).ready(function () {
 
 });
 // js layoutDokumentasi
+
+// js layoutDokumentasi - Search Features
+var TRange = null;
+
+function findString(str) {
+    if (parseInt(navigator.appVersion) < 4) return;
+    var strFound;
+    if (window.find) {
+        // CODE FOR BROWSERS THAT SUPPORT window.find
+        strFound = self.find(str);
+        if (strFound && self.getSelection && !self.getSelection().anchorNode) {
+            strFound = self.find(str)
+        }
+        if (!strFound) {
+            strFound = self.find(str, 0, 1)
+            while (self.find(str, 0, 1)) continue
+        }
+    } else if (navigator.appName.indexOf("Microsoft") != -1) {
+        // EXPLORER-SPECIFIC CODE        
+        if (TRange != null) {
+            TRange.collapse(false)
+            strFound = TRange.findText(str)
+            if (strFound) TRange.select()
+        }
+        if (TRange == null || strFound == 0) {
+            TRange = self.document.body.createTextRange()
+            strFound = TRange.findText(str)
+            if (strFound) TRange.select()
+        }
+    } else if (navigator.appName == "Opera") {
+        alert("Browser Opera tidak didukung, maaf...")
+        return;
+    }
+    if (!strFound) alert("String '" + str + "' tidak ditemukan!")
+        return;
+};
+
+document.getElementById('f1').onsubmit = function() {
+    findString(this.search.value);
+    return false;
+};
+// js layoutDokumentasi - Search Features
