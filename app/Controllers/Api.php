@@ -20,10 +20,10 @@ class Api extends ResourceController
 		$cek = 0;
 		$init = new AlumniModel();
 		$init2 = new WebserviceModel();
-		$apiKey = $_POST['api-key'];
-		$email = $_POST['email'];
+		//$apiKey = $_POST['api-key'];
+		//$email = $_POST['email'];
 
-		if ($apiKey == NULL) {
+		if (!isset($_POST['api-key'])) {
 			$respond = [
 				'status' => 401,
 				'message' => 'Please input an api-key',
@@ -31,7 +31,7 @@ class Api extends ResourceController
 			];
 
 			return $this->respond($respond, 401);
-		}
+		} else $apiKey = $_POST['api-key'];
 
 		$scope = $init2->getScopeAppToken($apiKey)->getResult();
 
@@ -46,7 +46,7 @@ class Api extends ResourceController
 		$init2->updateTokenReq($apiKey);
 
 		if ($cek == 1) {
-			if (!$email) {
+			if (!isset($_POST['email'])) {
 				$respond = [
 					'status' => 401,
 					'message' => 'Please input an email!',
@@ -54,7 +54,7 @@ class Api extends ResourceController
 				];
 
 				return $this->respond($respond, 401);
-			};
+			} else $email = $_POST['email'];
 			$alumni = $init->getUserApi($email)->getResult();
 			$respond = [
 				'status' => 200,
@@ -81,11 +81,11 @@ class Api extends ResourceController
 		$scp3 = 0;
 		$init = new AlumniModel();
 		$init2 = new WebserviceModel();
-		$apiKey = $_POST['api-key'];
-		$list = $_POST['list'];
-		$nim = $_POST['nim'];
+		//$apiKey = $_POST['api-key'];
+		//$list = $_POST['list'];
+		//$nim = $_POST['nim'];
 
-		if ($apiKey == NULL) {
+		if (!isset($_POST['api-key'])) {
 			$respond = [
 				'status' => 401,
 				'message' => 'Please input an api-key!',
@@ -93,7 +93,7 @@ class Api extends ResourceController
 			];
 
 			return $this->respond($respond, 401);
-		}
+		} else $apiKey = $_POST['api-key'];
 
 		$scope = $init2->getScopeAppToken($apiKey)->getResult();
 
@@ -109,6 +109,10 @@ class Api extends ResourceController
 		};
 
 		$init2->updateTokenReq($apiKey);
+
+		if(isset($_POST['list'])){
+			$list = $_POST['list'];
+		} else $list = 0;
 
 
 		if ($list == 1) {
@@ -132,7 +136,7 @@ class Api extends ResourceController
 		} else {
 
 			if ($scp2 == 1) {
-				if (!$nim) {
+				if (!isset($_POST['nim'])) {
 					$respond = [
 						'status' => 401,
 						'message' => 'Please input an nim!',
@@ -140,7 +144,7 @@ class Api extends ResourceController
 					];
 
 					return $this->respond($respond, 401);
-				};
+				} else $nim = $_POST['nim'];
 				$alumni = $init->getDetailUserApi($nim);
 
 				$respond = [
