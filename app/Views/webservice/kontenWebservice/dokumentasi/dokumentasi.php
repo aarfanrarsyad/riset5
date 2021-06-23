@@ -54,7 +54,7 @@
                     <h1 class="font-bold text-black lg:text-lg md:text-base text-sm mt-4 mb-1">User Profile Read</h1>
                     <div class="bg-black p-3 rounded-xl w-full sm:text-sm text-xs overflow-auto">
                         <code>
-                            <span style="color: #8bc;">http:</span><span class="text-secondary">//localhost:8080/api/user/</span>
+                            <span style="color: #8bc;">http:</span><span class="text-secondary">//alumni.stis.ac.id/api/user/</span>
                         </code>
                     </div>
                     <h1 class="font-bold text-black lg:text-lg md:text-base text-sm mt-4 mb-1">Parameter</h1>
@@ -243,7 +243,7 @@
                     <h1 class="font-bold text-black lg:text-lg md:text-base text-sm mt-4 mb-1">Alumni Profile Read</h1>
                     <div class="bg-black p-3 rounded-xl w-full sm:text-sm text-xs overflow-auto">
                         <code>
-                            <span style="color: #8bc;">http:</span><span class="text-secondary">//localhost:8080/api/alumni/</span>
+                            <span style="color: #8bc;">http:</span><span class="text-secondary">//alumni.stis.ac.id/api/alumni/</span>
                         </code>
                     </div>
                     <h1 class="font-bold text-black lg:text-lg md:text-base text-sm mt-4 mb-1">Parameter</h1>
@@ -514,7 +514,7 @@
                     <h1 class="font-bold text-black lg:text-lg md:text-base text-sm mt-4 mb-1">Alumni Profile List</h1>
                     <div class="bg-black p-3 rounded-xl w-full sm:text-sm text-xs overflow-auto">
                         <code>
-                            <span style="color: #8bc;">http:</span><span class="text-secondary">//localhost:8080/api/alumni/</span>
+                            <span style="color: #8bc;">http:</span><span class="text-secondary">//alumni.stis.ac.id/api/alumni/</span>
                         </code>
                     </div>
                     <h1 class="font-bold text-black lg:text-lg md:text-base text-sm mt-4 mb-1">Parameter</h1>
