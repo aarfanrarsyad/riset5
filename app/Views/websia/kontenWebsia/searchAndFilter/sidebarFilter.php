@@ -195,72 +195,34 @@
 
                         <!-- Awal Input Filter "Rentang Waktu Awal" Untuk Berita  -->
                         <div class="flex w-1/2 rounded-lg items-center mb-1 text-primary inputTahunAwal">
-                            <input type="text" name="beritaAwal" placeholder="Awal" class="placeholder-gray-300 text-xs px-2 py-1 outline-none focus:ring-2 focus:ring-secondary font-paragraph rounded-lg w-full">
 
-                            <svg class="w-3 h-3 stroke-current stroke-2 -ml-5 cursor-pointer" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
-                            </svg>
+                            <select name="beritaAwal" id="awalTahun" onmousedown="if(this.options.length>5){this.size=5;}" onchange="this.blur()" onblur="this.size=0;" class=" text-xs px-2 py-1 outline-none focus:ring-2 focus:ring-secondary font-paragraph font-medium rounded-lg w-full">
+                                <option selected="selected" id="awalHilang" class="mb-1">Tahun Awal</option>
+                                <?php
+                                for ($a = date('Y'); $a >= 2000; $a -= 1) {
+                                    echo "<option class='mb-1 font-medium ' value=$a> $a </option>";
+                                }
+                                ?>
+                            </select>
                         </div>
+
                         <!-- Akhir Input Filter "Rentang Waktu Awal" Untuk Berita  -->
 
                         <!-- Awal Input Filter "Rentang Waktu Akhir" Untuk Berita  -->
-                        <div class="flex w-1/2 outline-none rounded-lg items-center mb-1 text-primary  inputTahunAkhir">
-                            <input type="text" name="beritaAkhir" placeholder="Akhir" class="placeholder-gray-300 text-xs font-paragraph px-2 py-1 outline-none focus:ring-2 focus:ring-secondary font-paragraph rounded-lg w-full">
+                        <div class="flex w-1/2 outline-none rounded-lg items-center mb-1 text-primary inputTahunAkhir">
 
-                            <svg class="w-3 h-3 stroke-current stroke-2 -ml-5 cursor-pointer" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
-                            </svg>
+                            <select name="beritaAkhir" id="akhirTahun" onmousedown="if(this.options.length>5){this.size=5;}" onchange="this.blur()" onblur="this.size=0;" class=" text-xs px-2 py-1 outline-none focus:ring-2 focus:ring-secondary font-paragraph font-medium rounded-lg w-full">
+                                <option selected="selected" id="akhirHilang" class="mb-1">Tahun Akhir</option>
+                                <?php
+                                for ($a = date('Y'); $a >= 2000; $a -= 1) {
+                                    echo "<option class='mb-1 font-medium ' value=$a> $a </option>";
+                                }
+                                ?>
+                            </select>
                         </div>
                         <!-- Akhir Input Filter "Rentang Waktu Akhir" Untuk Berita  -->
 
                     </div>
-
-                    <!-- Awal Kalender Awal  -->
-                    <div class="mx-auto bg-white grid grid-cols-4 gap-1 p-2 rounded-lg font-medium hidden font-paragraph kalenderAwal">
-                        <div class="text-sm text-secondary my-auto cursor-pointer perviousTahunAwal">
-                            <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd" d="M15.707 15.707a1 1 0 01-1.414 0l-5-5a1 1 0 010-1.414l5-5a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 010 1.414zm-6 0a1 1 0 01-1.414 0l-5-5a1 1 0 010-1.414l5-5a1 1 0 011.414 1.414L5.414 10l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd"></path>
-                            </svg>
-                        </div>
-
-                        <div class="text-sm text-secondary col-span-2 rentangTahunAwal"></div>
-
-                        <div class="text-sm text-secondary my-auto flex justify-end  cursor-pointer nextTahunAwal">
-                            <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd" d="M10.293 15.707a1 1 0 010-1.414L14.586 10l-4.293-4.293a1 1 0 111.414-1.414l5 5a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
-                                <path fill-rule="evenodd" d="M4.293 15.707a1 1 0 010-1.414L8.586 10 4.293 5.707a1 1 0 011.414-1.414l5 5a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
-                            </svg>
-                        </div>
-
-                        <?php for ($x = 0; $x < 12; $x++) : ?>
-                            <div class="text-xs text-gray-400 hover:text-primary mx-auto cursor-pointer tahunKalenderAwal"></div>
-                        <?php endfor; ?>
-                    </div>
-                    <!-- Akhir Kalender Awal  -->
-
-                    <!-- Awal Kalender Akhir  -->
-                    <div class="mx-auto bg-white grid grid-cols-4 gap-1 p-2 rounded-lg font-paragraph font-medium hidden kalenderAkhir">
-                        <div class="text-sm text-secondary my-auto cursor-pointer perviousTahunAkhir">
-                            <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd" d="M15.707 15.707a1 1 0 01-1.414 0l-5-5a1 1 0 010-1.414l5-5a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 010 1.414zm-6 0a1 1 0 01-1.414 0l-5-5a1 1 0 010-1.414l5-5a1 1 0 011.414 1.414L5.414 10l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd"></path>
-                            </svg>
-                        </div>
-
-                        <div class="text-sm text-secondary col-span-2 rentangTahunAkhir"></div>
-
-                        <div class="text-sm text-secondary my-auto flex justify-end  cursor-pointer nextTahunAkhir">
-                            <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd" d="M10.293 15.707a1 1 0 010-1.414L14.586 10l-4.293-4.293a1 1 0 111.414-1.414l5 5a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
-                                <path fill-rule="evenodd" d="M4.293 15.707a1 1 0 010-1.414L8.586 10 4.293 5.707a1 1 0 011.414-1.414l5 5a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
-                            </svg>
-                        </div>
-
-                        <?php for ($x = 0; $x < 12; $x++) : ?>
-                            <div class="text-xs text-gray-400 hover:text-primary mx-auto cursor-pointer tahunKalenderAkhir"></div>
-                        <?php endfor; ?>
-                    </div>
-                    <!-- Akhir Kalender Akhir  -->
-
                 </div>
             </div>
 
