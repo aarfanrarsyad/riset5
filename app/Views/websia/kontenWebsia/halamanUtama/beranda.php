@@ -88,21 +88,21 @@ if (session()->getFlashdata('role')) { ?>
     <div class="flex flex-col items-center md:flex-row md:justify-around w-full mt-4">
         <!-- Awal Jumlah Alumni AIS/STIS/Polstat STIS I -->
         <div class="w-min mb-2 md:mb-0 py-6 px-6 bg-contain bg-no-repeat bg-center" style="background-image: url(/img/components/atribut_beranda_sia/bulat.png)">
-            <div class="angka text-primary md:text-6xl text-3xl font-bold md:mb-4 mb-2 font-heading">2032</div>
+            <div class="angka text-primary md:text-6xl text-3xl font-bold md:mb-4 mb-2 font-heading"><?= $lulusan['ais']; ?></div>
             <div class="text-gray-500 text-sm font-semibold text-center font-paragraph">Lulusan AIS</div>
         </div>
         <!-- Akhir Jumlah Alumni AIS/STIS/Polstat STIS I-->
 
         <!-- Awal Jumlah Alumni AIS/STIS/Polstat STIS II-->
         <div class="w-min mb-2 md:mb-0 py-6 px-6 bg-contain bg-no-repeat bg-center" style="background-image: url(/img/components/atribut_beranda_sia/bulat.png)">
-            <div class="angka text-primary md:text-6xl text-3xl font-bold md:mb-4 mb-2 font-heading">6022</div>
+            <div class="angka text-primary md:text-6xl text-3xl font-bold md:mb-4 mb-2 font-heading"><?= $lulusan['stis']; ?></div>
             <div class="text-gray-500 text-sm font-semibold text-center font-paragraph">Lulusan STIS</div>
         </div>
         <!-- Akhir Jumlah Alumni AIS/STIS/Polstat STIS II-->
 
         <!-- Awal Jumlah Alumni AIS/STIS/Polstat STIS III-->
         <div class="w-min mb-2 md:mb-0 py-6 px-6 bg-contain bg-no-repeat bg-center" style="background-image: url(/img/components/atribut_beranda_sia/bulat.png)">
-            <div class="angka text-primary md:text-6xl text-3xl font-bold md:mb-4 mb-2 font-heading">1068</div>
+            <div class="angka text-primary md:text-6xl text-3xl font-bold md:mb-4 mb-2 font-heading"><?= $lulusan['pstis']; ?></div>
             <div class="text-gray-500 text-sm font-semibold text-center font-paragraph">Lulusan Polstat STIS</div>
         </div>
         <!-- Akhir Jumlah Alumni AIS/STIS/Polstat STIS III-->
@@ -161,13 +161,13 @@ if (session()->getFlashdata('role')) { ?>
                 <div class="flex items-center text-xs font-paragraph">
                     <span class="font-heading flex justify-start text-left">
                         <img class="mr-0 md:mr-2 ml-1 md:ml-0 w-4 h-4 md:w-4 float-left" src="/img/components/icon/peta_lokasi.png" alt="peta lokasi">
-                        <p class="font-heading text-xs">Terdapat total 2000 Alumni yang berada di luar Indonesia</p>
+                        <p class="font-heading text-xs">Terdapat total <?= $sebaran['luar'] ?> Alumni yang berada di luar Indonesia</p>
                     </span>
                 </div>
                 <div class="flex items-center text-xs font-paragraph">
                     <span class="font-heading flex justify-start text-left">
                         <img class="mr-0 md:mr-2 ml-1 md:ml-0 w-4 h-4 md:w-4 float-left" src="/img/components/icon/peta_beluminput.png" alt="alumni yang belum menginput data">
-                        <p class="font-heading text-xs">Terdapat total 300 Alumni yang belum menginput data</p>
+                        <p class="font-heading text-xs">Terdapat total <?= $sebaran['belum'] ?> Alumni yang belum menginput data</p>
                     </span>
                 </div>
             </div>

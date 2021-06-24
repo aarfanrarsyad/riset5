@@ -467,16 +467,65 @@ class Home extends BaseController
 			$hotNews[$i]['konten'] = substr(strip_tags($hotNews[$i]['konten']), 0, 215) . ' ..';
 		}
 
+		// Load Data jumlah lulusan
+		$lulus = [
+			'1' => 'Akademi Ilmu Statistik',
+			'2' => 'Sekolah Tinggi Ilmu Statistik',
+			'3' => 'Politeknik Statistika STIS',
+		];
+
+		foreach ($lulus as $row) {
+			$model = new \App\Models\AlumniModel();
+			$query = "SELECT count(*) AS count FROM `pendidikan` where instansi = '$row' and angkatan != 0";
+			$lulusan[$row] = $model->db->query($query)->getRow()->count;
+		}
+
+		// Load Jumlah Alumni bekerja dan tidak
+		// $jumlahSemua = "SELECT count(*) as semua FROM `alumni` as a LEFT JOIN `alumni_tempat_kerja` as b on a.id_alumni = b.id_alumni";
+		// $semua = $model->db->query($jumlahSemua)->getRow()->semua;
+		// yang sudah memiliki tempat kerja
+		$jumlahInput = "SELECT count(*) as diket FROM `alumni` as a RIGHT JOIN `alumni_tempat_kerja` as b on a.id_alumni = b.id_alumni";
+		$diket = $model->db->query($jumlahInput)->getRow()->diket;
+		// yang belum memiliki tempat kerja
+		$jumlahBelumInput = "SELECT count(*) as gatau FROM `alumni` as a LEFT JOIN `alumni_tempat_kerja` as b on a.id_alumni = b.id_alumni WHERE b.id_alumni IS NULL";
+		$gatau = $model->db->query($jumlahBelumInput)->getRow()->gatau;
+		// irisan Indonesia dan sudah input
+		$jumlahIndonesia = "SELECT count(*) as indo FROM `tempat_kerja` as a JOIN `alumni_tempat_kerja` as b on a.id_tempat_kerja = b.id_tempat_kerja WHERE a.negara = 'Indonesia'";
+		$indo = $model->db->query($jumlahIndonesia)->getRow()->indo;
+
+		$sebaran =[
+			'luar'	=> ($diket - $indo),
+			'belum'	=> $gatau,
+		];
+
 		if (session()->has('id_user')) {
 			$data = [
 				'judulHalaman' 	=> 'Beranda WEBSIA',
 				'active' 		=> 'beranda',
-				'login'			=> 'sudah'
+				'login'			=> 'sudah',
+				'lulusan'		=> [
+					'ais'	=> $lulusan['Akademi Ilmu Statistik'],
+					'stis'	=> $lulusan['Sekolah Tinggi Ilmu Statistik'],
+					'pstis'	=> $lulusan['Politeknik Statistika STIS']
+				],
+				'sebaran'	=> [
+					'luar'	=> $sebaran['luar'],
+					'belum'	=> $sebaran['belum']
+				]
 			];
 		} else {
 			$data = [
 				'judulHalaman' 	=> 'Beranda WEBSIA',
-				'login'			=> 'belum'
+				'login'			=> 'belum',
+				'lulusan'		=> [
+					'ais'	=> $lulusan['Akademi Ilmu Statistik'],
+					'stis'	=> $lulusan['Sekolah Tinggi Ilmu Statistik'],
+					'pstis'	=> $lulusan['Politeknik Statistika STIS']
+				],
+				'sebaran'	=> [
+					'luar'	=> $sebaran['luar'],
+					'belum'	=> $sebaran['belum']
+				]
 			];
 		}
 		$data['Allnews'] = $hotNews;
