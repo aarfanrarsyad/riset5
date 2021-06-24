@@ -54,8 +54,8 @@ class AlumniModel extends Model
             ->orderBy('alumni.id_alumni')->groupBy('alumni.id_alumni')->limit($limit)
             ->join('pendidikan', 'alumni.id_alumni = pendidikan.id_alumni', 'inner')
             ->join('pendidikan_tinggi', 'pendidikan_tinggi.id_pendidikan = pendidikan.id_pendidikan', 'inner')
-            ->where('angkatan >',0)
-            ->whereIn('instansi',['Sekolah Tinggi Ilmu Statistik','Akademi Ilmu Statistik']);
+            ->where('angkatan >', 0)
+            ->whereIn('instansi', ['Sekolah Tinggi Ilmu Statistik', 'Akademi Ilmu Statistik']);
 
         if ($start > 0) $query->offset(intval($start));
 
@@ -72,10 +72,10 @@ class AlumniModel extends Model
 
         // logic pecarian prodi
         $listProdi = [
-            'DI' => ['Ak. Ilmu Statistik','D-I Statistika'],
-            'DIII' => ['D-III AIS', 'D-III STIS', 'DIII-AIS','Akademi D-III','D-III Statistika'],
+            'DI' => ['Ak. Ilmu Statistik', 'D-I Statistika'],
+            'DIII' => ['D-III AIS', 'D-III STIS', 'DIII-AIS', 'Akademi D-III', 'D-III Statistika'],
             'KS' => ['D-IV Komputasi Statistik', 'Komputasi Statistik',],
-            'ST' => ['Statistik Sosial Kependudukan', 'D-IV Statistik Sosial Kependudukan', 'D-IV Statistik Ekonomi', 'D-IV SK', 'D-IV SE', 'Statistik Ekonomi','D-IV Statistika Ekonomi','D-IV Statistika Sosial & Kependudukan']
+            'ST' => ['Statistik Sosial Kependudukan', 'D-IV Statistik Sosial Kependudukan', 'D-IV Statistik Ekonomi', 'D-IV SK', 'D-IV SE', 'Statistik Ekonomi', 'D-IV Statistika Ekonomi', 'D-IV Statistika Sosial & Kependudukan']
         ];
 
         $prodi = ['in' => [], 'notIn' => []];
@@ -93,7 +93,7 @@ class AlumniModel extends Model
             }
         }
         if (count($prodi['in']) > 0) $query->whereIn('program_studi', $prodi['in']);
-        if(count($prodi['notIn'])>0) $query->whereNotIn('program_studi', $prodi['notIn']);
+        if (count($prodi['notIn']) > 0) $query->whereNotIn('program_studi', $prodi['notIn']);
 
         // logic pecarian angkatan
         if ($akt != '') {
@@ -403,14 +403,23 @@ class AlumniModel extends Model
         return $this->db->query($query);
     }
 
-    // kanddidat untuk binding sso bps
-    public function getAlumniByEmail($email)
+    // untuk binding sso sipadu
+    public function bindingSipadu($nim)
     {
-        return $this->builder()->where('email', $email)->get()->getFirstRow('array');
+        return $this->db->table('pendidikan_tinggi')
+            ->select('pendidikan_tinggi.nim AS nim, pendidikan_tinggi.id_pendidikan AS id_pendidikan, pendidikan.id_alumni AS id_alumni')
+            ->join('pendidikan', 'pendidikan.id_pendidikan = pendidikan_tinggi.id_pendidikan')
+            ->where('nim', $nim)
+            ->get()
+            ->getFirstRow('array');
     }
 
-    public function getAlumniByNipBPS($nip)
+    // untuk binding sso bps
+    public function bindingBPS($nip)
     {
-        return $this->builder()->where('nip_bps', $nip)->get()->getFirstRow('array');
+        return $this->builder()
+            ->where('nip_bps', $nip)
+            ->get()
+            ->getFirstRow('array');
     }
 }
