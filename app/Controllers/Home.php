@@ -328,8 +328,20 @@ class Home extends BaseController
 		return view('login/lamanResetPass.php');
 	}
 
-	public function coba()
+	public function petaProv($namaProv)
 	{
-		return view('cobaWebsia/map');
+		$model = new \App\Models\AlumniModel();
+		$jumlah = "SELECT count(*) as prov FROM `tempat_kerja` as a RIGHT JOIN `alumni_tempat_kerja` as b 
+		on a.id_tempat_kerja = b.id_tempat_kerja where a.provinsi = '$namaProv'";
+		$jumlahProv = $model->db->query($jumlah)->getRow()->prov;
+		return $jumlahProv;
+	}
+
+	public function petaKabKota($namaKabKota)
+	{
+		$model = new \App\Models\AlumniModel();
+		$jumlah = "SELECT count(*) as kabkota FROM `tempat_kerja` as a RIGHT JOIN `alumni_tempat_kerja` as b on a.id_tempat_kerja = b.id_tempat_kerja where a.kota = '$namaKabKota'";
+		$jumlahKabKota = $model->db->query($jumlah)->getRow()->kabkota;
+		return $jumlahKabKota;
 	}
 }
