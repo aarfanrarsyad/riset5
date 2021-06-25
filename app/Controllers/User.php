@@ -69,13 +69,14 @@ class User extends BaseController
 				// return json_encode($start);
 			}
 
-			$compiled['alumni'] = $query['compiled'];
-			$jumlah['alumni'] = $query['jumlahAlumni'];
-			$data['alumni'] = $query['alumni'];
+        	$compiled['alumni'] = $query->getCompiledSelect(false);
+			$jumlah['alumni'] = $query->countAllResults(false);
+			$data['alumni'] = $query->get()->getResultArray();
 
 			$jumlah['alumni'] = [
-				'text' => (!empty($cari)) ?
+				'text' => (!empty($cari)) ? ($jumlah['alumni']>0) ? 
 					"Terdapat " . $jumlah['alumni'] . " alumni dengan kata kunci `<B>$cari</B>` ditemukan." :
+					"Hasil pencarian alumni tidak ditemukan" :
 					"Memuat " . $jumlah['alumni'] . " data alumni.",
 				'ret' => $jumlah['alumni']
 			];
@@ -93,24 +94,24 @@ class User extends BaseController
 				$limit = (is_null($this->request->getVar('limit'))) ? 10 : $this->request->getVar('limit');
 				$start = (is_null($this->request->getVar('start'))) ? 0 : $this->request->getVar('start');
 				$query = $dbBerita->getBeritaFilter($cari, $awal, $akhir, $limit, $start);
-				// return json_encode($start);
 			}
 
-			$compiled['berita'] = $query['compiled'];
-			$jumlah['berita'] = $query['jumlahBerita'];
+			$compiled['berita'] = $query->getCompiledSelect(false);
+			$jumlah['berita'] = $query->countAllResults(false);
 			$data['berita'] = array_map(function ($val) {
 				return [
 					'id' => $val['id'],
-					'tanggal_publish' => $val['tanggal_publish'],
+					'tanggal_publish' => date('d-m-Y',strtotime($val['tanggal_publish'])),
 					'judul' => $val['judul'],
 					'thumbnail' => $val['thumbnail'],
 					'konten' => word_limiter($val['konten'], 45)
 				];
-			}, $query['berita']);
+			}, $query->get()->getResultArray());
 
 			$jumlah['berita'] = [
-				'text' => (!empty($cari)) ?
+				'text' => (!empty($cari)) ? ($jumlah['berita']>0) ? 
 					"Terdapat " . $jumlah['berita'] . " berita dengan kata kunci `<B>$cari</B>` ditemukan." :
+					"Hasil pencarian berita tidak ditemukan" :
 					"Memuat " . $jumlah['berita'] . " berita.",
 				'ret' => $jumlah['berita']
 			];

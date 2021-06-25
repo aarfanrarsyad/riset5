@@ -26,7 +26,7 @@
                 <!-- Catatan : jika hasil tidak ada, bisa isi id="hasilPencarian" dengan coding yang ada pada searchKosong.php  -->
 
                 <!-- HASIL PENCARIAN ALUMNI -->
-                <div class="mx-3 mb-6" id="cariAlumni" <?php if ($jumlah['alumni']['ret'] == 0) : ?>style="display:none;" <?php endif; ?>>
+                <div class="mx-3 mb-6" id="cariAlumni">
                     <div>
                         <h1 class="text-secondary font-heading text-2xl font-bold">ALUMNI</h1>
 
@@ -70,13 +70,10 @@
                         </div>
 
                         <!-- awal tulisan "Selengkapnya" di hasil pencarian -->
-                        <div class="flex justify-end mt-12">
-                            <a id="semuaAlumni" href="<?= base_url('User/searchAndFilter?t=alumni&cari=' . $cari); ?>">
-                                <div class="flex bg-secondary text-white rounded-full md:py-2 py-1 md:px-3 px-2 items-center gap-x-2 cursor-pointer md:text-sm text-xs">
-                                    Selengkapnya
-                                    <img src="/img/components/icon/right-off.png" class="md:w-4 md:h-4 w-3 h-3 my-auto" alt="">
-                                </div>
-                            </a>
+                        <div class="flex justify-end mt-12" id="alumniSelengkapnya">
+                            <a href="<?= base_url('User/searchAndFilter?t=alumni&cari='.$cari); ?>" class="semuaAlumni" id="semuaAlumni"><div class="flex bg-secondary text-white rounded-full md:py-2 py-1 md:px-3 px-2 items-center gap-x-2 cursor-pointer md:text-sm text-xs">
+                                Selengkapnya<img src="/img/components/icon/right-off.png" class="md:w-4 md:h-4 w-3 h-3 my-auto" alt="">
+                            </div></a>
                         </div>
                         <!-- akhir tulisan "Selengkapnya" di hasil pencarian -->
 
@@ -87,7 +84,7 @@
                 <!-- AKHIR HASIL PENCARIAN ALUMNI -->
 
                 <!-- HASIL PENCARIAN BERITA -->
-                <div class="mx-3 mt-2" id="cariBerita" <?php if ($jumlah['berita']['ret'] == 0) : ?>style="display:none;" <?php endif; ?>>
+                <div class="mx-3 mt-2" id="cariBerita">
                     <div>
                         <h1 class="text-secondary font-heading text-2xl font-bold">BERITA</h1>
 
@@ -105,7 +102,7 @@
                                 <!-- Awal Card Berita  -->
                                 <a href="<?= base_url('user/viewBerita/' . $row['id']) ?>">
                                     <div class="flex px-2 md:flex-row flex-col md:gap-x-4 gap-x-0 items-center">
-                                        <img src="/img/berita/<?= $row['thumbnail'] ?>" alt="<?= $row['thumbnail'] ?>" class="md:w-48 w-full gambarBerita ">
+                                        <img src="/berita/berita_<?= $row['id'].'/'.$row['thumbnail'] ?>" alt="<?= $row['thumbnail'] ?>" class="md:w-48 w-full gambarBerita ">
                                         <div class="flex-grow">
                                             <div class="flex flex-col">
 
@@ -134,12 +131,9 @@
 
                         <!-- awal tulisan "Selengkapnya" di hasil pencarian -->
                         <div class="flex justify-end mt-12" id="beritaSelengkapnya">
-                            <a id="semuaBerita" href="<?= base_url('User/searchAndFilter?t=berita&cari=' . $cari); ?>">
-                                <div class="flex bg-secondary text-white rounded-full md:py-2 py-1 md:px-3 px-2 items-center gap-x-2 cursor-pointer md:text-sm text-xs">
-                                    Selengkapnya
-                                    <img src="/img/components/icon/right-off.png" class="md:w-4 md:h-4 w-3 h-3" alt="">
-                                </div>
-                            </a>
+                            <a href="<?= base_url('User/searchAndFilter?t=berita&cari='.$cari); ?>" class="semuaBerita" id="semuaBerita"><div class="flex bg-secondary text-white rounded-full md:py-2 py-1 md:px-3 px-2 items-center gap-x-2 cursor-pointer md:text-sm text-xs">
+                                Selengkapnya <img src="/img/components/icon/right-off.png" class="md:w-4 md:h-4 w-3 h-3" alt="">
+                            </div></a>
                         </div>
                         <!-- akhir tulisan "Selengkapnya" di hasil pencarian -->
 
@@ -165,107 +159,100 @@
 
 
 <script>
-    $(document).ready(() => {
-        let x, data, s;
-        let stringAlumni = `<!-- Awal Card Alumni --><a href="/User/profilAlumni/{idAlumni}"><div class="mx-2"><div class="flex gap-x-4"><div class="flex items-center"><img src="/img/{foto_profil}" class="lg:w-18 w-12 mx-auto rounded-full" alt=""></div><div class="flex items-center"><div><!-- Awal Nama Alumni --><h2 class="md:text-lg font-heading text-primary font-semibold">{nama}</h2><!-- Akhir Nama Alumni --><!-- Awal Atribut Alumni --><div class="md:text-sm text-xs font-paragraph text-primary">Angkatan {akt}</div><!-- Akhir Atribut Alumni --></div></div></div></div></a><!-- Akhir Card Alumni --><hr class="my-4 border-gray-400">`;
-        let stringBerita = `<!-- Awal Card Berita  --><a href="/User/viewBerita/{id}"><div class="flex px-2 md:flex-row flex-col md:gap-x-4 gap-x-0 items-center"><img src="/img/berita/{thumbnail}" alt="{thumbnail}" class="md:w-48 w-full gambarBerita "><div class="flex-grow"><div class="flex flex-col"><!-- Awal Judul Berita  --><h2 class="text-lg font-heading text-primary font-semibold mb-2">{judul}</h2><!-- Akhir Judul Berita  --><!-- Awal Tanggal Berita  --><div class="text-xs font-paragraph text-primary">{tanggal_publish}</div><!-- Akhir Tanggal Berita  --><!-- Awal Deskripsi Berita  --><div class="text-sm font-paragraph break-words">{konten}</div><!-- Akhir Tanggal Berita  --></div></div></div></a><!-- Akhir Card Berita  --><hr class="my-4 border-gray-400">`;
+$(document).ready(()=>{
+    let x,data,s;
+    let stringAlumni = `<!-- Awal Card Alumni --><a href="/User/profilAlumni/{idAlumni}"><div class="mx-2"><div class="flex gap-x-4"><div class="flex items-center"><img src="/img/{foto_profil}" class="lg:w-18 w-12 mx-auto rounded-full" alt=""></div><div class="flex items-center"><div><!-- Awal Nama Alumni --><h2 class="md:text-lg font-heading text-primary font-semibold">{nama}</h2><!-- Akhir Nama Alumni --><!-- Awal Atribut Alumni --><div class="md:text-sm text-xs font-paragraph text-primary">Angkatan {akt}</div><!-- Akhir Atribut Alumni --></div></div></div></div></a><!-- Akhir Card Alumni --><hr class="my-4 border-gray-400">`;
+    let stringBerita = `<!-- Awal Card Berita  --><a href="/User/viewBerita/{id}"><div class="flex px-2 md:flex-row flex-col md:gap-x-4 gap-x-0 items-center"><img src="/berita/berita_{thumbnail}" alt="{thumbnail}" class="md:w-48 w-full gambarBerita "><div class="flex-grow"><div class="flex flex-col"><!-- Awal Judul Berita  --><h2 class="text-lg font-heading text-primary font-semibold mb-2">{judul}</h2><!-- Akhir Judul Berita  --><!-- Awal Tanggal Berita  --><div class="text-xs font-paragraph text-primary">{tanggal_publish}</div><!-- Akhir Tanggal Berita  --><!-- Awal Deskripsi Berita  --><div class="text-sm font-paragraph break-words">{konten}</div><!-- Akhir Tanggal Berita  --></div></div></div></a><!-- Akhir Card Berita  --><hr class="my-4 border-gray-400">`;
 
-        function search(tipe) {
-            if (x) window.clearTimeout(x);
-            x = setTimeout(function() {
-
-                if (tipe == 'all') {
-                    data = $('#filterAlumni').serialize() + '&cari=' + $("input[name=cari]").val();
-                    data += '&awal=' + $("input[name=beritaAwal]").val() + '&akhir=' + $("input[name=beritaAkhir]").val();
-                    data += '&tipe=' + tipe;
-                } else if (tipe == 'alumni') {
-                    data = $('#filterAlumni').serialize() + '&cari=' + $("input[name=cari]").val() + '&tipe=' + tipe
-                } else {
-                    data = {
-                        'cari': $("input[name=cari]").val(),
-                        'awal': $("input[name=beritaAwal]").val(),
-                        'akhir': $("input[name=beritaAkhir]").val(),
-                        'tipe': tipe
-                    }
-                }
-                console.log(data)
-                $.post({
-                    url: "#",
-                    data: data,
-                    dataType: 'json',
-                    success: (ret) => {
-                        let jumlahAlumniBerita = 0;
-                        console.log(ret)
-
-                        if (tipe == 'all' || tipe == 'alumni') {
-                            $('#lisAlumni').empty()
-                            $('#cariAlumni').show()
-                            $('#jumlahAlumni').html(ret.jumlah.alumni.text)
-                            if (ret.jumlah.alumni.ret > 0) {
-                                jumlahAlumniBerita += ret.jumlah.alumni.ret
-                                console.log(ret.data.alumni)
-                                $.each(ret.data.alumni, (i, item) => {
-                                    $('#lisAlumni').append(stringAlumni.replace('{idAlumni}', item.id_alumni).replace('{nama}', item.nama).replace('{foto_profil}', item.foto_profil).replace('{akt}', item.angkatan))
-                                })
-                                $('#lisAlumni').append("<hr class='-my-4 border-2 border-gray-400'>")
-                            } else {
-                                $('#cariAlumni').hide()
-                            }
-                            s = 'cari=' + $("input[name=cari]").val() + '&akt=' + ret.search.akt + '&kerja=' + ret.search.kerja
-                            if (ret.search.prodi)
-                                s += '&' + ret.search.prodi.map((val) => {
-                                    return 'prodi[]=' + val
-                                }).join('&')
-                            $('#semuaAlumni').get(0).href = '<?= base_url('User/searchAndFilter?t=alumni'); ?>&' + s
-                        }
-
-                        if (tipe == 'all' || tipe == 'berita') {
-                            $('#lisBerita').empty()
-                            $('#cariBerita').show()
-                            $('#jumlahBerita').html(ret.jumlah.berita.text)
-                            if (ret.jumlah.berita.ret > 0) {
-                                jumlahAlumniBerita += ret.jumlah.berita.ret
-                                console.log(ret.data.berita)
-                                $.each(ret.data.berita, (i, item) => {
-                                    $('#lisBerita').append(stringBerita.replace('{id}', item.id).replaceAll('{thumbnail}', item.thumbnail).replace('{judul}', item.judul).replace('{konten}', item.konten).replace('{tanggal_publish}', item.tanggal_publish))
-                                })
-                                $('#lisBerita').append("<hr class='-my-4 border-2 border-gray-400'>")
-                            } else {
-                                $('#cariBerita').hide()
-                            }
-                            b = 'cari=' + $("input[name=cari]").val() + '&awal=' + ret.search.awal + '&akhir=' + ret.search.akhir
-                            $('#semuaBerita').get(0).href = '<?= base_url('User/searchAndFilter?t=berita'); ?>&' + b
-                        }
-
-                        $('#kosong').hide()
-                        if (jumlahAlumniBerita == 0)
-                            $('#kosong').show()
-                    }
-                })
-            }, 300)
-        }
-
-        $('#kosong').hide()
-        $("input[name=cari]").keyup(function() {
-            search('all')
-        })
-        $('.listProdi svg').click(function() {
-            let prodi = $(this).parent().find('.cari')
-            if (prodi.attr('name') == 'prodi[]') {
-                prodi.attr('name', 'p')
-            } else {
-                prodi.attr('name', 'prodi[]')
+    function search(tipe) {
+        if (tipe == 'all') {
+            data = $('#filterAlumni').serialize()+'&cari='+$("input[name=cari]").val();
+            data += '&awal='+$("input[name=awal]").val()+'&akhir='+$("input[name=akhir]").val();
+            data += '&tipe='+tipe;
+        } else if (tipe == 'alumni') {
+            data = $('#filterAlumni').serialize()+'&cari='+$("input[name=cari]").val()+'&tipe='+tipe
+        } else {
+            data = {
+                'cari': $("input[name=cari]").val(),
+                'awal':$("input[name=awal]").val(),
+                'akhir':$("input[name=akhir]").val(),
+                'tipe':tipe
             }
-            search('alumni')
-        })
-        $(".search").keyup(function() {
-            search('alumni')
-        })
-        $(".kalenderAwal div.text-xs, .kalenderAkhir div.text-xs").click(function() {
-            search('berita')
-        })
+        }
+        console.log(data.split('&'))
+        // if(false)
+        $.post({
+            url: "#",
+            data: data,
+            dataType:'json',
+            success: (ret) => {
+                let jumlahAlumniBerita = 0;
+                console.log(ret)
 
+                if(tipe=='all' || tipe=='alumni'){
+                    $('#lisAlumni').empty()
+                    $('#jumlahAlumni').html(ret.jumlah.alumni.text)
+                    if (ret.jumlah.alumni.ret>0) {
+                        jumlahAlumniBerita += ret.jumlah.alumni.ret
+                        $.each(ret.data.alumni, (i, item) => {
+                            $('#lisAlumni').append(stringAlumni.replace('{idAlumni}', item.id_alumni).replace('{nama}', item.nama).replace('{foto_profil}', item.foto_profil).replace('{akt}', item.angkatan))
+                        })
+                        $('#lisAlumni').append("<hr class='-my-4 border-2 border-gray-400'>")
+                    } 
+                    if (ret.data.alumni.length <5) {$('#semuaAlumni').hide()} else {$('#semuaAlumni').show()}
+                    s = 'cari='+ $("input[name=cari]").val() +'&akt='+ ret.search.akt + '&kerja=' + ret.search.kerja
+                    if(ret.search.prodi)
+                        s += '&'+ret.search.prodi.map((val)=>{return 'prodi[]='+val}).join('&')
+                    $('.semuaAlumni').removeAttr('href').attr('href','<?= base_url('User/searchAndFilter?t=alumni'); ?>&' + s);
+                }
+
+                if(tipe=='all' || tipe=='berita') {
+                    $('#lisBerita').empty()
+                    $('#jumlahBerita').html(ret.jumlah.berita.text)
+                    if (ret.jumlah.berita.ret>0) {
+                        jumlahAlumniBerita += ret.jumlah.berita.ret
+                        console.log(ret.data.berita)
+                        $.each(ret.data.berita, (i, item) => {
+                            $('#lisBerita').append(stringBerita.replace('{id}', item.id).replaceAll('{thumbnail}', item.id+'/'+item.thumbnail).replace('{judul}', item.judul).replace('{konten}', item.konten).replace('{tanggal_publish}', item.tanggal_publish))
+                        })
+                        $('#lisBerita').append("<hr class='-my-4 border-2 border-gray-400'>")
+                    }
+                    if (ret.data.berita.length <5) {$('#semuaBerita').hide()} else {$('#semuaBerita').show()}
+                    b = 'cari='+ $("input[name=cari]").val()+'&awal='+ ret.search.awal + '&akhir=' + ret.search.akhir
+                    $('.semuaBerita').removeAttr('href').attr('href','<?= base_url('User/searchAndFilter?t=berita'); ?>&' + b);
+                }
+
+                $('#kosong').hide()
+                $('#cariAlumni , #cariBerita').show()
+                if(jumlahAlumniBerita == 0){
+                    $('#cariAlumni , #cariBerita').hide()
+                    $('#kosong').show()
+                }
+            }
+        })
+    }
+    
+    if (<?= count(array_merge($data['alumni'])) ?><5) $('#semuaAlumni').hide()
+    if (<?= count(array_merge($data['berita'])) ?><5) $('#semuaBerita').hide()
+    if (<?= count(array_merge($data['alumni'],$data['berita'])) ?>>0) {$('#kosong').hide()}
+        else {$('#cariAlumni , #cariBerita').hide()}
+
+    $("input[name=cari]").keyup( function() { search('all') })
+    $('.listProdi svg').click(function(){
+        let prodi = $(this).parent().find('.cari')
+        if (prodi.attr('checked') == 'true') { prodi.removeAttr('checked') } 
+            else { prodi.attr('checked','true') }
+        setTimeout(function() { search('alumni') }, 50)
+        // setTimeout(function() { console.log($('#filterAlumni').serialize().split('&')) }, 50)
     })
+    $(".search").keyup( function() {
+        if (x) window.clearTimeout(x);
+        x = setTimeout(function() { search('alumni') }, 300)
+    })
+    $("input[name=akt], input[name=kerja]").siblings().click( function() { search('alumni') })
+    $(".kalenderAwal div.text-xs, .kalenderAkhir div.text-xs").click( function() { search('berita') })
+
+})
 </script>
 <!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <link rel="stylesheet" href="/resources/demos/style.css">

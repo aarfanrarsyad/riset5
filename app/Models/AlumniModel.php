@@ -50,12 +50,11 @@ class AlumniModel extends Model
     public function getAlumniFilter($cari = '', $pro = [], $akt = '', $kerja = '', $limit = 5, $start = 0)
     {
         //query utama
-        $query = $this->table('alumni')->select('alumni.id_alumni,nama,foto_profil,nim,angkatan,program_studi')
+        $query = $this->table('alumni')->select('alumni.id_alumni,nama,foto_profil,nim,MAX(angkatan) AS angkatan,program_studi')
             ->orderBy('alumni.id_alumni')->groupBy('alumni.id_alumni')->limit($limit)
+            ->where('angkatan >',0)->whereIn('instansi',['Sekolah Tinggi Ilmu Statistik','Akademi Ilmu Statistik'])
             ->join('pendidikan', 'alumni.id_alumni = pendidikan.id_alumni', 'inner')
-            ->join('pendidikan_tinggi', 'pendidikan_tinggi.id_pendidikan = pendidikan.id_pendidikan', 'inner')
-            ->where('angkatan >', 0)
-            ->whereIn('instansi', ['Sekolah Tinggi Ilmu Statistik', 'Akademi Ilmu Statistik']);
+            ->join('pendidikan_tinggi', 'pendidikan_tinggi.id_pendidikan = pendidikan.id_pendidikan', 'inner');
 
         if ($start > 0) $query->offset(intval($start));
 
@@ -71,29 +70,22 @@ class AlumniModel extends Model
         }
 
         // logic pecarian prodi
-        $listProdi = [
-            'DI' => ['Ak. Ilmu Statistik', 'D-I Statistika'],
-            'DIII' => ['D-III AIS', 'D-III STIS', 'DIII-AIS', 'Akademi D-III', 'D-III Statistika'],
-            'KS' => ['D-IV Komputasi Statistik', 'Komputasi Statistik',],
-            'ST' => ['Statistik Sosial Kependudukan', 'D-IV Statistik Sosial Kependudukan', 'D-IV Statistik Ekonomi', 'D-IV SK', 'D-IV SE', 'Statistik Ekonomi', 'D-IV Statistika Ekonomi', 'D-IV Statistika Sosial & Kependudukan']
-        ];
+        if (count($pro)<4) {
+            $listProdi = [
+                'DI' => ['Ak. Ilmu Statistik','D-I Statistika'],
+                'DIII' => ['Akademi D-III','D-III Statistika'],
+                'KS' => ['D-IV Komputasi Statistik','D-IV Sistem Informasi','D-IV Sains Data'],
+                'ST' => ['D-IV Statistika Ekonomi','D-IV Statistika Sosial & Kependudukan']
+            ];
 
-        $prodi = ['in' => [], 'notIn' => []];
-        foreach (array_keys($listProdi) as $p) {
-            if (in_array($p, $pro)) {
-                foreach ($listProdi[$p] as $di) {
-                    array_push($prodi['in'], $di);
-                }
-                array_push($prodi['in'], $p);
-            } else {
-                foreach ($listProdi[$p] as $di) {
-                    array_push($prodi['notIn'], $di);
-                }
-                array_push($prodi['notIn'], $p);
+            $prodi = ['in' => [], 'notIn' => []];
+            foreach (array_keys($listProdi) as $p) {
+                if (in_array($p, $pro)) foreach ($listProdi[$p] as $di) array_push($prodi['in'], $di);
+                else foreach ($listProdi[$p] as $di) array_push($prodi['notIn'], $di);
             }
+            if (count($prodi['in']) > 0) $query->whereIn('program_studi', $prodi['in']);
+            if(count($prodi['notIn'])>0) $query->whereNotIn('program_studi', $prodi['notIn']);
         }
-        if (count($prodi['in']) > 0) $query->whereIn('program_studi', $prodi['in']);
-        if (count($prodi['notIn']) > 0) $query->whereNotIn('program_studi', $prodi['notIn']);
 
         // logic pecarian angkatan
         if ($akt != '') {
@@ -105,22 +97,23 @@ class AlumniModel extends Model
                 if (in_array($key, str_split($reg))) $parse .= $key;
             }
             $parse = ($parse == '') ? '1-' . $max_angkatan : $parse;
+            $akt = [];
 
             $query->groupStart();
             foreach (explode(',', $parse) as $key) {
-                $range = explode('-', $key);
-                $range[0] = (intval($range[0]) >= 1) ? intval($range[0]) :  1;
-                if (isset($range[1]) && $range[0] > intval(end($range))) {
-                    $range[1] = (end($range) <= $max_angkatan) ? end($range) :  $max_angkatan;
-                    $range[1] = intval($range[0]) + intval($range[1]);
-                    $range[0] = intval($range[1]) - intval($range[0]);
-                    $range[1] = intval($range[1]) - intval($range[0]);
-                } elseif (!isset($range[1])) {
-                    $range[1] = intval($range[0]);
-                };
-                $query->orWhere("angkatan BETWEEN $range[0] AND $range[1]");
+                if ($key!= '') {
+                    $range = explode('-', $key);
+                    $range[0] = (intval($range[0]) >= 1) ? intval($range[0]) :  1;
+                    $range[1] = (intval(end($range)) <= $max_angkatan) ? intval(end($range)) :  $max_angkatan;
+
+                    if ($range[0] > $range[1]) {
+                        $range[1] = $range[0] + $range[1];
+                        $range[0] = $range[1] - $range[0];
+                        $range[1] = $range[1] - $range[0];
+                    }
+                    $query->orWhere("angkatan BETWEEN $range[0] AND $range[1]");
+                }
             }
-            // dd($parse);
             $query->groupEnd();
         }
 
@@ -133,11 +126,7 @@ class AlumniModel extends Model
                 ->orLike('alamat_instansi', $kerja)->groupEnd();
         }
 
-        return [
-            'compiled' => $query->getCompiledSelect(false),
-            'jumlahAlumni' => $query->countAllResults(false),
-            'alumni' => $query->get()->getResultArray()
-        ];
+        return $query;
     }
 
     public function getMaxAngkatan()
