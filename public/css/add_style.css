@@ -232,6 +232,27 @@ input[type="checkbox"] {
 
 #infoMedsos ~ div {
   background-color: #6cf;
+  position: absolute;
+  top: 1148px;
+  right: 38px;
+}
+
+@media (min-width: 768px) {
+  #infoMedsos ~ div {
+    background-color: #6cf;
+    position: absolute;
+    top: 1140px;
+    right: 220px;
+  }
+}
+
+@media (min-width: 1024px) {
+  #infoMedsos ~ div {
+    background-color: #6cf;
+    position: absolute;
+    top: 853px;
+    right: 126px;
+  }
 }
 
 #infoMedsos ~ div:before {
