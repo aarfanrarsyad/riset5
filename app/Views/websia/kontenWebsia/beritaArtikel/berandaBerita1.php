@@ -104,17 +104,20 @@
                     </div>
                     <div class="lg:w-3/4 w-2/3">
                         <a href="https://www.pusdiklat-bps.id/web/berita/<?=$value->id?>">
-                            <h3 class="font-heading font-semibold text-primary text-lg"><?=$value->judul_berita ?>
+                            <h3 class="font-heading font-semibold text-primary text-lg"><?php if(strlen($value->judul_berita)<30) echo $value->judul_berita; else echo substr($value->judul_berita,0,strpos($value->judul_berita, ' ', 30)).'...'; ?>
                             </h3>
                         </a>
                         <div class="flex gap-x-1 items-center">
                             <img src="/img/components/icon/clock.png" class="w-3 h-3" alt="">
-                            <p class="text-xs text-primary"><?=$value->created_at ?></p>
+                            <?php $tgl = strtotime($value->created_at); 
+                            $tgl =date('d F Y',$tgl);
+                            ?>
+                            <p class="text-xs text-primary"><?=$tgl ?></p>
                             <img src="/img/components/icon/profile.png" class="w-3 h-3 ml-2" alt="">
                             <p class="text-xs text-primary"><?=$value->penulis ?></p>
                         </div>
                         <p>
-                            <?php if(strlen($value->konten_berita)<100) echo $value->konten_berita; else echo substr($value->konten_berita,0,strpos($value->konten_berita, ' ', 100)); ?>...
+                            <?php if(strlen($value->konten_berita)<100) echo $value->konten_berita; else echo substr($value->konten_berita,0,strpos($value->konten_berita, ' ', 100)).'...'; ?>
                         </p>
                     </div>
                 </div>
@@ -124,15 +127,19 @@
         </div>
         <!-- end card berita -->
         <div class="mt-2 flex gap-x-2 items-center justify-end mb-8">
+        <?php if($page!=1){?>
             <a href="?page=<?= $page-1;?>">
                 <img src="/img/components/icon/left-on.png" class="w-4 h-4 cursor-pointer" alt="">
             </a>
+            <?php }?>
             <?php for($i=1;$i<$tot_page+1;$i++){ ?>
             <a href="?page=<?= $i;?>" class="<?php if($i==$page){ ?>text-primary<?php } else echo 'text-secondary font-bold' ?>"><?= $i;?></a>
-            <?php } ?>
+            <?php };
+            if ($page!=$tot_page) {?>
             <a href="?page=<?= $page+1;?>">
                 <img src="/img/components/icon/right-on.png"" class=" w-4 h-4 cursor-pointer" alt="">
             </a>
+            <?php }?>
         </div>
     </div>
 </div>

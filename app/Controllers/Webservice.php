@@ -107,13 +107,16 @@ class Webservice extends BaseController
 		$time = new Time('now');
 
 		//idUser didapat dari session
+		if(isset($_POST['scope'])) 
+			$tokScope = $_POST['scope'];
+			else $tokScope = null;
 		$idUser = session('id_user');;
 		$data = [
 			'token_app' => [
 				'token' => null
 			],
 
-			'token_scope' => $_POST['scope'],
+			'token_scope' => $tokScope,
 			'uid' => $idUser,
 			'nama_app' => $_POST['nama'],
 			'deskripsi' => $_POST['deskripsi'],
@@ -122,7 +125,7 @@ class Webservice extends BaseController
 
 		$this->model->addApp($data);
 
-		return redirect()->to('/Webservice/proyek');
+		return redirect()->to('/developer/proyek');
 	}
 
 	public function delete() //delete or cancel  project
@@ -208,7 +211,9 @@ class Webservice extends BaseController
 	//show detail app via ajax
 	public function ajax_edit()
 	{
-		$id = $_POST['id'];
+		if (isset($_POST['id'])) 
+			$id = $_POST['id'];
+			else return;
 		//$id=2;
 		$data = $this->model->editApp($id)->getRowArray();
 		$token = $this->model->getToken($data['id_token'])->getRow()->token;

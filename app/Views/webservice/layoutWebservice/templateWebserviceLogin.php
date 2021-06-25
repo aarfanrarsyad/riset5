@@ -141,7 +141,7 @@
                             </li>
                         </a>
                     <?php } else { ?>
-                        <a href="/logout/">
+                        <a href="/login/">
                             <li class="cursor-pointer flex justify-center text-white py-1">
                                 <div class="bg-secondary w-28 flex justify-center hover:bg-white hover:text-secondary py-0.5">LOGIN</div>
                             </li>
