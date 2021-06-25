@@ -22,7 +22,7 @@
             </div>
             <!-- akhir -> ini hanya untuk margin sidebar jadi jangan ubah kecuali jika ubah ukuran sidebarnya  -->
 
-            <div class="flex-grow mr-2" id="hasilPencarian"><?php $cari = (isset($_GET['cari'])) ? $_GET['cari'] : '' ; ?>
+            <div class="flex-grow mr-2" id="hasilPencarian"><?php $cari = (isset($_GET['cari'])) ? $_GET['cari'] : ''; ?>
                 <!-- Catatan : jika hasil tidak ada, bisa isi id="hasilPencarian" dengan coding yang ada pada searchKosong.php  -->
 
                 <!-- HASIL PENCARIAN ALUMNI -->
@@ -100,7 +100,7 @@
                         <div id="lisBerita">
                             <?php foreach ($data['berita'] as $row) : ?>
                                 <!-- Awal Card Berita  -->
-                                <a href="<?= base_url('user/viewBerita/'.$row['id']) ?>">
+                                <a href="<?= base_url('user/viewBerita/' . $row['id']) ?>">
                                     <div class="flex px-2 md:flex-row flex-col md:gap-x-4 gap-x-0 items-center">
                                         <img src="/berita/berita_<?= $row['id'].'/'.$row['thumbnail'] ?>" alt="<?= $row['thumbnail'] ?>" class="md:w-48 w-full gambarBerita ">
                                         <div class="flex-grow">
@@ -254,5 +254,28 @@ $(document).ready(()=>{
 
 })
 </script>
+<!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+<script>
+    $(function() {
+        $("#waktuAwal").datepicker({
+            autoclose: true,
+            todayHighlight: true,
+            dateFormat: 'yy',
+            changeMonth: true,
+            changeYear: true,
+            language: 'id',
+            showAnim: 'slideDown'
+        });
+
+    });
+
+    $(function() {
+        $("#waktuAkhir").datepicker();
+    });
+</script> -->
 <script type="text/javascript" src="/js/search.js"></script>
 <?= $this->endSection(); ?>

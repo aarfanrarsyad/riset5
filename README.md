@@ -6,16 +6,7 @@
 2. composer install
 3. unzip myth.rar di .../vendor (yes all to replace all)
 4. Nyalakan mysql pada xampp
-
-OPTIONAL  
-    5. Database pakai migration
-    
-    - php spark migrate
-    - php spark db:seed DataSeeder
-OR  
-    5. Import DB dari ...\riset5\new.sql
-
-
+5. Import DB dari ...\riset5\new.sql (migration nya belum dibenerin)
 6. Siap digunakan. php spark serve
 
 ## Catatan :

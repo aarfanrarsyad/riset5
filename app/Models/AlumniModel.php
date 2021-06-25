@@ -392,14 +392,23 @@ class AlumniModel extends Model
         return $this->db->query($query);
     }
 
-    // kanddidat untuk binding sso bps
-    public function getAlumniByEmail($email)
+    // untuk binding sso sipadu
+    public function bindingSipadu($nim)
     {
-        return $this->builder()->where('email', $email)->get()->getFirstRow('array');
+        return $this->db->table('pendidikan_tinggi')
+            ->select('pendidikan_tinggi.nim AS nim, pendidikan_tinggi.id_pendidikan AS id_pendidikan, pendidikan.id_alumni AS id_alumni')
+            ->join('pendidikan', 'pendidikan.id_pendidikan = pendidikan_tinggi.id_pendidikan')
+            ->where('nim', $nim)
+            ->get()
+            ->getFirstRow('array');
     }
 
-    public function getAlumniByNipBPS($nip)
+    // untuk binding sso bps
+    public function bindingBPS($nip)
     {
-        return $this->builder()->where('nip_bps', $nip)->get()->getFirstRow('array');
+        return $this->builder()
+            ->where('nip_bps', $nip)
+            ->get()
+            ->getFirstRow('array');
     }
 }

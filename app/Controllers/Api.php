@@ -10,26 +10,7 @@ class Api extends ResourceController
 {
 	public function index() //project list + form create
 	{
-		$client = \Config\Services::curlrequest();
-		$response = $client->request('POST', 'https://pusdiklat-bps.id/api/berita', [
-			'form_params' => [
-                'kategori' => '1',
-				'token'=>'473KpgTwt9MFxmpAYJ7aF2w5'
-				]
-			]);
-		$berita= json_decode($response->getBody()); 
-		if($berita->status=='sukses'){
-			foreach ($berita->data as $value) {
-			echo '<div><b>Judul: </b>'.$value->judul_berita
-			.'<br><b>Penulis: </b>'.$value->penulis
-			.'<br><b>Created At: </b>'.$value->created_at
-			.'<br>'. $value->image
-			.'<br><b>Isi berita: </b>'.$value->konten_berita.'</div>';
-			echo '<br>';
-			echo '<hr>';
-			}
-		}
-		die();
+		throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
 	}
 
 	//--------------------------------------------------------------------
@@ -39,10 +20,10 @@ class Api extends ResourceController
 		$cek = 0;
 		$init = new AlumniModel();
 		$init2 = new WebserviceModel();
-		$apiKey = $this->request->getPost('api-key');
-		$email = $this->request->getPost('email');
+		//$apiKey = $_POST['api-key'];
+		//$email = $_POST['email'];
 
-		if ($apiKey == NULL) {
+		if (!isset($_POST['api-key'])) {
 			$respond = [
 				'status' => 401,
 				'message' => 'Please input an api-key',
@@ -50,7 +31,7 @@ class Api extends ResourceController
 			];
 
 			return $this->respond($respond, 401);
-		}
+		} else $apiKey = $_POST['api-key'];
 
 		$scope = $init2->getScopeAppToken($apiKey)->getResult();
 
@@ -65,7 +46,7 @@ class Api extends ResourceController
 		$init2->updateTokenReq($apiKey);
 
 		if ($cek == 1) {
-			if (!$email) {
+			if (!isset($_POST['email'])) {
 				$respond = [
 					'status' => 401,
 					'message' => 'Please input an email!',
@@ -73,7 +54,7 @@ class Api extends ResourceController
 				];
 
 				return $this->respond($respond, 401);
-			};
+			} else $email = $_POST['email'];
 			$alumni = $init->getUserApi($email)->getResult();
 			$respond = [
 				'status' => 200,
@@ -100,11 +81,11 @@ class Api extends ResourceController
 		$scp3 = 0;
 		$init = new AlumniModel();
 		$init2 = new WebserviceModel();
-		$apiKey = $this->request->getPost('api-key');
-		$list = $this->request->getPost('list');
-		$nim = $this->request->getPost('nim');
+		//$apiKey = $_POST['api-key'];
+		//$list = $_POST['list'];
+		//$nim = $_POST['nim'];
 
-		if ($apiKey == NULL) {
+		if (!isset($_POST['api-key'])) {
 			$respond = [
 				'status' => 401,
 				'message' => 'Please input an api-key!',
@@ -112,7 +93,7 @@ class Api extends ResourceController
 			];
 
 			return $this->respond($respond, 401);
-		}
+		} else $apiKey = $_POST['api-key'];
 
 		$scope = $init2->getScopeAppToken($apiKey)->getResult();
 
@@ -128,6 +109,10 @@ class Api extends ResourceController
 		};
 
 		$init2->updateTokenReq($apiKey);
+
+		if(isset($_POST['list'])){
+			$list = $_POST['list'];
+		} else $list = 0;
 
 
 		if ($list == 1) {
@@ -151,7 +136,7 @@ class Api extends ResourceController
 		} else {
 
 			if ($scp2 == 1) {
-				if (!$nim) {
+				if (!isset($_POST['nim'])) {
 					$respond = [
 						'status' => 401,
 						'message' => 'Please input an nim!',
@@ -159,7 +144,7 @@ class Api extends ResourceController
 					];
 
 					return $this->respond($respond, 401);
-				};
+				} else $nim = $_POST['nim'];
 				$alumni = $init->getDetailUserApi($nim);
 
 				$respond = [

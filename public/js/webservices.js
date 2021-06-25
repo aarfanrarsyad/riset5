@@ -79,7 +79,7 @@ $(".delete-project").click(function () {
                 <p class="font-bold sm:text-lg text-base mb-6 text-justify">Apakah Anda yakin ingin menghapus proyek ini?</p>
                 <div class="text-white flex justify-end">
                     <div class="buttonBatal bg-success hover:bg-successHover transition-all text-white rounded-2xl w-20 mr-2 text-sm flex justify-center items-center cursor-pointer py-1 transition-all">BATAL</div>
-                    <div class="rounded-2xl w-20 text-sm flex justify-center items-center cursor-pointer hover:bg-red-800 bg-red-600 transition-all">HAPUS</div>
+                    <div class="buttonAcc bg-danger hover:bg-dangerHover transition-all text-white rounded-2xl w-20 mr-2 text-sm flex justify-center items-center cursor-pointer py-1 transition-all">HAPUS</div>
                 </div>
             </div>
         </div>
@@ -112,7 +112,7 @@ $(".delete-project").click(function () {
         }
     })
 
-    $('.buttonBatal').next().click(function () {
+    $('.buttonAcc').click(function () {
         $.post(baseUrl + '/webservice/delete', {
             id_app: appID
         }, function () {

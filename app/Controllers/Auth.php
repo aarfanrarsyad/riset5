@@ -159,50 +159,36 @@ class Auth extends BaseController
 				if ($alumni == true) {
 					$user = $hasil['profile'];
 
-					$cek = $this->modelAlumni->getAlumniByEmail($user['nim'] . "@stis.ac.id");
+					$cek = $this->modelAlumni->bindingSipadu($user['nim']);
 
 					// binding session dengan database (insert data ke tabel alumni kalau belum terdaftar di tabel alumni) 
 					if ($cek == NULL) {
 						$data = [
 							'nama'               => $user['nama'],
-							'jenis_kelamin'      => $faker->randomElement($array = array('Lk', 'Pr')),
-							'tempat_lahir'       => $faker->city,
-							'tanggal_lahir'      => $faker->date($format = 'Y-m-d', $max = 'now'),
-							'telp_alumni'        => $faker->phoneNumber,
-							'alamat_alumni'      => $faker->address,
-							'kota'      	 	 => $faker->city,
-							'provinsi'      	 => $faker->state,
-							'negara'      		 => $faker->country,
-							'status_bekerja'     => $faker->boolean,
-							'perkiraan_pensiun'  => $faker->year,
-							'jabatan_terakhir'   => $faker->jobTitle,
-							'aktif_pns'          => $faker->boolean,
-							'deskripsi'          => $faker->text,
+							// 'jenis_kelamin'      => $user['jenis_kelamin'],
+							'status_bekerja'     => 1,
+							'aktif_pns'          => 1,
 							'email'				 => $user['nim'] . "@stis.ac.id",
-							'nip'          	 	 => $faker->creditCardNumber,
-							'nip_bps'          	 => $user['nim'],
-
 						];
-						if ($data['jenis_kelamin'] == 'Lk0') {
+
+						if ($user['jenis_kelamin'] == 'Laki-laki') {
+							$data['jenis_kelamin'] = 'Lk';
+						} else {
+							$data['jenis_kelamin'] = 'Pr';
+						}
+
+						if ($data['jenis_kelamin'] == 'Lk') {
 							$data['foto_profil'] = "components/icon/Lk-icon.svg";
 						} else {
-							$data['foto_profil'] = "components/icon/PR-icon.svg";
+							$data['foto_profil'] = "components/icon/Pr-icon.svg";
 						}
 
 						$this->modelAlumni->db->table('alumni')->insert($data);
-
-						$cek = $this->modelAlumni->getAlumniByEmail($user['nim'] . "@stis.ac.id");
-
-						$data = [
-							'id_alumni'       => $cek['id_alumni'],
-							'id_tempat_kerja' => 1,
-						];
-						$this->modelAlumni->db->table('alumni_tempat_kerja')->insert($data);
 					}
 
 					//insert new user sipadu (mahasiswa)
 					if ($this->modelAuth->getUserByUsername($hasil['profile']['nim']) == NULL) {
-						// date_default_timezone_set("Asia/Jakarta");
+						date_default_timezone_set("Asia/Jakarta");
 						$now = date("Y-m-d H:i:s");
 
 						$data = [

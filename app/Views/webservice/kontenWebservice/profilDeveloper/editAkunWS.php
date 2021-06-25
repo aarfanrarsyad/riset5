@@ -3,17 +3,14 @@
 <?= $this->section('content'); ?>
 <div class="w-full">
     <div class="shadow-2xl rounded-xl md:p-12 md:pt-4 p-4 pb-6 xl:w-1/2 sm:w-3/4 my-12 sm:mx-auto mx-4">
-        <form action="" method="POST" class="font-paragraph text-primary" id="formEditAkunDev">
+        <form action="<?= base_url('webservice/updateakun');?>" method="POST" class="font-paragraph text-primary" id="formEditAkunDev">
             <h2 class="flex justify-center lg:text-4xl md:text-3xl sm:text-2xl text-xl text-secondary font-bold md:mb-4 mb-2">EDIT AKUN</h2>
             <div class="2xl:px-20 md:px-12 sm:px-8 px-0 w-full">
                 <label for="email" class="font-medium">Email:</label>
-                <input type="text" name="email" id="email" class="inputForm mb-2" placeholder="mail@example.com">
+                <input type="text" name="email" id="email" class="inputForm mb-2" placeholder="mail@example.com" value="<?=$email?>" disabled>
                 <label for="passbaru" class="font-medium">Kata Sandi Baru:</label>
                 <input type="password" name="passbaru" id="passbaru" class="inputForm mb-2" placeholder="🞄🞄🞄🞄🞄🞄🞄🞄">
                 <label for="ulangpassbaru" class="font-medium">Ketik Ulang Kata Sandi Baru:</label>
-                <p class="text-xs text-red-500 text-justify" id="errorPassBaru">
-                    Kata sandi tidak sesuai.
-                </p>
                 <input type="password" name="ulangpassbaru" id="ulangpassbaru" class="inputForm mb-2" placeholder="🞄🞄🞄🞄🞄🞄🞄🞄">
                 <div class="text-secondary text-justify text-xs mt-6 mb-2">
                     Silakan Masukkan Kata Sandi Lama Anda untuk Verifikasi!
@@ -22,7 +19,7 @@
                 <input type="password" name="passlama" id="passlama" class="inputForm mb-2" placeholder="🞄🞄🞄🞄🞄🞄🞄🞄">
             </div>
             <div class="flex justify-end">
-                <a href="/developer/profil" class="mt-8 flex items-center mr-4">
+                <a href="<?= base_url('developer');?>" class="mt-8 flex items-center mr-4">
                     <div class="flex items-center gap-x-2">
                         <img src="/img/components/icon/left-on.png" class="w-3 h-3" alt="icon panah kiri on">
                         <div class="text-secondary">KEMBALI</div>

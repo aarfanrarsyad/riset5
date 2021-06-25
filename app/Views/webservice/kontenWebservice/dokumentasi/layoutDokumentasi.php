@@ -9,14 +9,14 @@
 
             <img src="/img/components/logo/logo_sia.png" class="md:w-20 sm:w-16 w-10 md:mb-1.5 md:mt-2.5 my-2 mx-auto" alt="Logo SIA">
             <div class="text-secondary text-xl font-bold mb-3 text-center">DOKUMENTASI</div>
-            <div class="flex justify-center mt-2 mb-5 h-9 relative w-full">
+            <form class="flex justify-center mt-2 mb-5 h-9 relative w-full" id="f1" name="f1" action="">
                 <input type="text" name="search" class="input w-5/6 pl-2 pr-8 border-2 rounded-lg border-gray-400 md:text-base outline-none text-gray-500 focus:border-secondary" spellcheck="false" id="search" placeholder="Pencarian">
-                <div class="relative right-8 flex items-center text-gray-500">
+                <button type="submit" class="relative right-8 flex items-center text-gray-500">
                     <svg class="absolute text-gray-500 hover:text-gray-600 w-7 cursor-pointer" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                         <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
                     </svg>
-                </div>
-            </div>
+                </button>
+            </form>
 
             <div class="flex justify-center items-center text-secondary bg-primaryHover md:text-xl font-bold py-3">
                 <div class="flex items-center cursor-pointer" onclick="location.href='/developer';">
