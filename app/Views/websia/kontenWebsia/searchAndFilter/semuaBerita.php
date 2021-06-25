@@ -44,7 +44,7 @@
                                 <!-- Awal Card Berita  -->
                                 <a href="<?= base_url('user/viewBerita/'.$row['id']) ?>">
                                     <div class="flex px-2 md:flex-row flex-col md:gap-x-4 gap-x-0 items-center">
-                                        <img src="/img/berita/<?= $row['thumbnail'] ?>" alt="<?= $row['thumbnail'] ?>" class="md:w-48 w-full gambarBerita ">
+                                        <img src="/berita/berita_<?= $row['id'].'/'.$row['thumbnail'] ?>" alt="<?= $row['thumbnail'] ?>" class="md:w-48 w-full gambarBerita ">
                                         <div class="flex-grow">
                                             <div class="flex flex-col">
 
@@ -98,66 +98,64 @@ $(document).ready(()=>{
     var limit = 10;
     var start = <?= count($data['berita']) ?>;
     var action = false;
-    let x,data;
     let x,data,s;
-    let stringBerita = `<!-- Awal Card Berita  --><a href="/User/viewBerita/{id}"><div class="flex px-2 md:flex-row flex-col md:gap-x-4 gap-x-0 items-center"><img src="/img/berita/{thumbnail}" alt="{thumbnail}" class="md:w-48 w-full gambarBerita "><div class="flex-grow"><div class="flex flex-col"><!-- Awal Judul Berita  --><h2 class="text-lg font-heading text-primary font-semibold mb-2">{judul}</h2><!-- Akhir Judul Berita  --><!-- Awal Tanggal Berita  --><div class="text-xs font-paragraph text-primary">{tanggal_publish}</div><!-- Akhir Tanggal Berita  --><!-- Awal Deskripsi Berita  --><div class="text-sm font-paragraph break-words">{konten}</div><!-- Akhir Tanggal Berita  --></div></div></div></a><!-- Akhir Card Berita  --><hr class="my-4 border-gray-400">`;
+    let stringBerita = `<!-- Awal Card Berita  --><a href="/User/viewBerita/{id}"><div class="flex px-2 md:flex-row flex-col md:gap-x-4 gap-x-0 items-center"><img src="/berita/berita_{thumbnail}" alt="{thumbnail}" class="md:w-48 w-full gambarBerita "><div class="flex-grow"><div class="flex flex-col"><!-- Awal Judul Berita  --><h2 class="text-lg font-heading text-primary font-semibold mb-2">{judul}</h2><!-- Akhir Judul Berita  --><!-- Awal Tanggal Berita  --><div class="text-xs font-paragraph text-primary">{tanggal_publish}</div><!-- Akhir Tanggal Berita  --><!-- Awal Deskripsi Berita  --><div class="text-sm font-paragraph break-words">{konten}</div><!-- Akhir Tanggal Berita  --></div></div></div></a><!-- Akhir Card Berita  --><hr class="my-4 border-gray-400">`;
 
-    function search(tipe) {
-        if (x) window.clearTimeout(x);
-        x = setTimeout(function() {
+    function search(tipe,limit,start) {
+        if (tipe == 'alumni') {
+            data = $('#filterAlumni').serialize()+'&cari='+$("input[name=cari]").val()+'&limit='+limit+'&start='+start
+        } else {
+            data = {
+                cari: $("input[name=cari]").val(),
+                awal:$("input[name=awal]").val(),
+                akhir:$("input[name=akhir]").val(),
+                limit:limit,
+                start:start
+            }
+        }
+        console.log(data)
+        $.ajax({
+            url: "#",
+            type:'POST',
+            data: data,
+            dataType:'JSON',
+            cache:false,
+            success: (ret) => {
+                console.log(ret)
 
-            if (tipe == 'alumni') {
-                data = $('#filterAlumni').serialize()+'&cari='+$("input[name=cari]").val()+'&limit='+limit+'&start='+start
-            } else {
-                data = {
-                    cari: $("input[name=cari]").val(),
-                    beritaAwal:$("input[name=beritaAwal]").val(),
-                    beritaAkhir:$("input[name=beritaAkhir]").val(),
-                    limit:limit,
-                    start:start
+                $('#jumlahBerita').html(ret.jumlah.berita.text)
+                $('#lisBerita').find('hr.border-2').remove()
+                if (ret.data.berita.length > 0) {
+                    console.log(ret.data.berita)
+                    $.each(ret.data.berita, (i, item) => {
+                        $('#lisBerita').append(stringBerita.replace('{id}', item.id).replaceAll('{thumbnail}', item.id+'/'+item.thumbnail).replace('{judul}', item.judul).replace('{konten}', item.konten).replace('{tanggal_publish}', item.tanggal_publish))
+                    })
+                    $('#lisBerita').append("<hr class='-my-4 border-2 border-gray-400'>")
+                    if(ret.jumlah.berita.ret >= 10)
+                        $('#load_data_message').html("Memuat data....");
+                    action = false;
+                } else {
+                    $('#load_data_message').html("");
+                    action = true;
+                }
+                
+                $('#kosong').hide()
+                $('#cariBerita').show()
+                if(ret.jumlah.berita.ret == 0){
+                    $('#kosong').show()
+                    $('#cariBerita').hide()
                 }
             }
-            console.log(data)
-            $.ajax({
-                url: "#",
-                type:'POST',
-                data: data,
-                dataType:'JSON',
-                cache:false,
-                success: (ret) => {
-                    console.log(ret)
-
-                    $('#lisBerita').empty()
-                    $('#cariBerita').show()
-                    $('#jumlahBerita').html(ret.jumlah.berita.text)
-                    if (ret.jumlah.berita.ret>0) {
-                        jumlahAlumniBerita += ret.jumlah.berita.ret
-                        console.log(ret.data.berita)
-                        $.each(ret.data.berita, (i, item) => {
-                            $('#lisBerita').append(stringBerita.replace('{id}', item.id).replaceAll('{thumbnail}', item.thumbnail).replace('{judul}', item.judul).replace('{konten}', item.konten).replace('{tanggal_publish}', item.tanggal_publish))
-                        })
-                        $('#lisBerita').append("<hr class='-my-4 border-2 border-gray-400'>")
-                        if(ret.data.berita.length >= 10)
-                            $('#load_data_message').html("Memuat data....");
-                        action = false;
-                    } else {
-                        $('#load_data_message').html("");
-                        action = true;
-                    }
-                    
-                    $('#kosong').hide()
-                    if(ret.jumlah.berita.ret == 0)
-                        $('#kosong').show()
-                }
-            })
-        }, 300)
+        })
     }
-    $('#kosong').hide()
-    
+
+    <?php if (count($data['berita'])>0): ?>$('#kosong').hide()<?php endif; ?>
+
     $("input[name=cari]").keyup( function() {
         $('#lisBerita').empty()
         start = 0;
-        search('berita',limit, start) 
+        if (x) window.clearTimeout(x);
+        x = setTimeout(function() { search('berita',limit,start) }, 300) 
     })
 
     $(".kalenderAwal div.text-xs, .kalenderAkhir div.text-xs").click( function() { 
@@ -173,6 +171,7 @@ $(document).ready(()=>{
     }
 
     $(window).scroll(function(){
+        setTimeout(()=>{$('#load_data_message').html("")},3000)
         if($(window).scrollTop() + $(window).height() > $("#lisBerita").height() && !action){
             action = true;
             start += limit;
