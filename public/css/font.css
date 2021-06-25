@@ -1,0 +1,21 @@
+@font-face {
+  font-family: "Cabin";
+  src: url("/font/Cabin/static/Cabin/Cabin-Regular.ttf");
+}
+
+@font-face {
+  font-family: "Cabin";
+  font-weight: bold;
+  src: url("/font/Cabin/static/Cabin/Cabin-Bold.ttf");
+}
+
+@font-face {
+  font-family: "Poppins";
+  src: url("/font/Poppins/Poppins-Regular.ttf");
+}
+
+@font-face {
+  font-family: "Poppins";
+  font-weight: bold;
+  src: url("/font/Poppins/Poppins-Bold.ttf");
+}
