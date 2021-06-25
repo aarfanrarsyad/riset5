@@ -8,7 +8,7 @@
     </div>
 
     <div class="flex flex-col mt-4 hidden md:block param2">
-        <?php $cari = (isset($_GET['cari'])) ? $_GET['cari'] : '' ; ?>
+        <?php $cari = (isset($_GET['cari'])) ? $_GET['cari'] : ''; ?>
 
         <!-- Awal tombol filter "Semua" -->
         <a href="<?= base_url('user/searchAndFilter') ?>">
@@ -18,7 +18,7 @@
 
         <!-- Awal filter "Alumni" -->
         <!-- Catatan : kalo di halaman semuaAlumni masukkan css "hidden" di div yang ada class "listFilterSidebarBerita" -->
-        <a href="<?= base_url('User/searchAndFilter?t=alumni&cari='.$cari); ?>" class="semuaAlumni">
+        <a href="<?= base_url('User/searchAndFilter?t=alumni&cari=' . $cari); ?>" class="semuaAlumni">
             <div class="md:text-base text-sm <?= (isset($_GET['t'])) ? (($_GET['t'] == 'alumni') ? 'text-secondary' : 'text-white') : 'text-white' ?>  hover:bg-primaryDark font-heading font-medium px-4 py-1 cursor-pointer filterSidebar">Alumni</div>
         </a>
 
@@ -169,7 +169,7 @@
 
         <!-- Awal filter "Berita" -->
         <!-- Catatan : kalo di halaman semuaBerita masukkan css "hidden" di div yang ada class "listFilterSidebarAlumni" -->
-        <a href="<?= base_url('User/searchAndFilter?t=berita&cari='.$cari); ?>" class="semuaBerita">
+        <a href="<?= base_url('User/searchAndFilter?t=berita&cari=' . $cari); ?>" class="semuaBerita">
             <div class="md:text-base text-sm <?= (isset($_GET['t'])) ? (($_GET['t'] == 'berita') ? 'text-secondary' : 'text-white') : 'text-white' ?> hover:bg-primaryDark font-medium px-4 py-1 cursor-pointer filterSidebar">Artikel/Berita</div>
         </a>
 
@@ -192,11 +192,13 @@
 
                 <div class="flex flex-col mb-1 px-4 hidden listRentangWaktu">
 
-                    <div class="flex justify-between gap-x-1 mb-2">
+                    <!-- <div class="flex justify-between gap-x-1 mb-2"> -->
 
-                        <!-- Awal Input Filter "Rentang Waktu Awal" Untuk Berita  -->
-                        <div class="flex w-1/2 rounded-lg items-center mb-1 text-primary inputTahunAwal">
-                            <select name="awal" id="awalTahun" onmousedown="if(this.options.length>5){this.size=5;}" onchange="this.blur()" onblur="this.size=0;" class=" text-xs px-2 py-1 outline-none focus:ring-2 focus:ring-secondary font-paragraph font-medium rounded-lg w-full">
+                    <!-- Awal Input Filter "Rentang Waktu Awal" Untuk Berita  -->
+                    <div class="flex w-full justify-between gap-x-1 rounded-lg items-center mb-1 text-primary inputTahunAwal">
+                        <label for="awalTahun" class="text-white" style="width: 60px;">Dari :</label>
+                        <div class="flex-grow">
+                            <select name="awalTahun" id="awalTahun" onmousedown="if(this.options.length>5){this.size=5;}" onchange="this.blur()" onblur="this.size=0;" class=" text-xs px-2 py-1 outline-none focus:ring-2 focus:ring-secondary font-paragraph font-medium rounded-lg w-full">
                                 <option selected="selected" id="awalHilang" class="mb-1">Tahun Awal</option>
                                 <?php
                                 for ($a = date('Y'); $a >= 2000; $a -= 1) {
@@ -205,12 +207,14 @@
                                 ?>
                             </select>
                         </div>
+                    </div>
 
-                        <!-- Akhir Input Filter "Rentang Waktu Awal" Untuk Berita  -->
+                    <!-- Akhir Input Filter "Rentang Waktu Awal" Untuk Berita  -->
 
-                        <!-- Awal Input Filter "Rentang Waktu Akhir" Untuk Berita  -->
-                        <div class="flex w-1/2 outline-none rounded-lg items-center mb-1 text-primary inputTahunAkhir">
-
+                    <!-- Awal Input Filter "Rentang Waktu Akhir" Untuk Berita  -->
+                    <div class="flex w-full justify-between gap-x-1 rounded-lg items-center mb-1 text-primary inputTahunAkhir">
+                        <label for="awalTahun" class="text-white" style="width: 60px;">Sampai :</label>
+                        <div class="flex-grow">
                             <select name="akhir" id="akhirTahun" onmousedown="if(this.options.length>5){this.size=5;}" onchange="this.blur()" onblur="this.size=0;" class=" text-xs px-2 py-1 outline-none focus:ring-2 focus:ring-secondary font-paragraph font-medium rounded-lg w-full">
                                 <option selected="selected" id="akhirHilang" class="mb-1">Tahun Akhir</option>
                                 <?php
@@ -220,9 +224,10 @@
                                 ?>
                             </select>
                         </div>
-                        <!-- Akhir Input Filter "Rentang Waktu Akhir" Untuk Berita  -->
-
                     </div>
+                    <!-- Akhir Input Filter "Rentang Waktu Akhir" Untuk Berita  -->
+
+                    <!-- </div> -->
                 </div>
             </div>
 

@@ -113,39 +113,39 @@
                             <li class="list m-auto hover:text-white bg-white text-center text-secondary text-sm py-0.5 w-44 border-b-2 border-gray-500">DOKUMENTASI</li>
                         </a>
                         <?php if ($statusLog == 1) { ?>
-                        <a href="/developer/proyek">
-                            <li class="list m-auto hover:text-white bg-white text-center text-secondary text-sm py-0.5 w-44 border-gray-500">PROYEK</li>
-                        </a>
+                            <a href="/developer/proyek">
+                                <li class="list m-auto hover:text-white bg-white text-center text-secondary text-sm py-0.5 w-44 border-gray-500">PROYEK</li>
+                            </a>
                         <?php } ?>
                     </ul>
                 </ul>
             </div>
             <div class="menu border-b flex justify-center">
                 <ul class="w-min">
-                <?php if ($statusLog == 1) { ?>
-                    <a href="/developer/edit/akun">
-                        <li class="cursor-pointer flex justify-center text-white py-1">
-                            <div class="bg-secondary w-28 flex justify-center hover:bg-white hover:text-secondary py-0.5">EDIT AKUN</div>
-                        </li>
-                    </a>
-                <?php } ?>
+                    <?php if ($statusLog == 1) { ?>
+                        <a href="/developer/edit/akun">
+                            <li class="cursor-pointer flex justify-center text-white py-1">
+                                <div class="bg-secondary w-28 flex justify-center hover:bg-white hover:text-secondary py-0.5">EDIT AKUN</div>
+                            </li>
+                        </a>
+                    <?php } ?>
                 </ul>
             </div>
             <div class="menu flex justify-center">
                 <ul class="w-min">
-                <?php if (session()->has('id_user')) { ?>
-                    <a href="/logout/">
-                        <li class="cursor-pointer flex justify-center text-white py-1">
-                            <div class="bg-secondary w-28 flex justify-center hover:bg-white hover:text-secondary py-0.5">KELUAR</div>
-                        </li>
-                    </a>
+                    <?php if (session()->has('id_user')) { ?>
+                        <a href="/logout/">
+                            <li class="cursor-pointer flex justify-center text-white py-1">
+                                <div class="bg-secondary w-28 flex justify-center hover:bg-white hover:text-secondary py-0.5">KELUAR</div>
+                            </li>
+                        </a>
                     <?php } else { ?>
                         <a href="/logout/">
-                        <li class="cursor-pointer flex justify-center text-white py-1">
-                            <div class="bg-secondary w-28 flex justify-center hover:bg-white hover:text-secondary py-0.5">LOGIN</div>
-                        </li>
-                    </a>
-                    <?php }?>
+                            <li class="cursor-pointer flex justify-center text-white py-1">
+                                <div class="bg-secondary w-28 flex justify-center hover:bg-white hover:text-secondary py-0.5">LOGIN</div>
+                            </li>
+                        </a>
+                    <?php } ?>
                 </ul>
             </div>
         </div>
@@ -161,15 +161,16 @@
     <!-- END CONTENT PAGE -->
 
     <!-- FOOTER -->
-    <div class="bg-primary w-full relative z-10 pt-6 pb-3 lg:px-20 md:px-8 px-3">
-        <div class="flex flex-col md:flex-row md:justify-around md:text-sm text-xs">
+    <div class="bg-primary w-full pt-6 pb-3 lg:px-20 md:px-8 px-3">
+        <div class="flex flex-col md:flex-row md:justify-around md:text-sm text-xs  items-center md:items-start">
             <!-- awal footer stis -->
-            <div class="flex items-center md:items-start gap-x-2 mx-auto md:mx-0">
-                <div class="w-36 md:w-auto">
+            <div class="flex  gap-x-2 mx-auto md:mx-0 mb-2 md:mb-0">
+                <div class=" md:w-auto">
                     <a href="https://stis.ac.id/"><img class="lg:w-24 lg:h-24 w-20 h-20" src="/img/components/logo/logo_stis.png" alt="logo STIS"></a>
                 </div>
                 <div class="text-white font-heading">
-                    <h3>Jl. Otto Iskandardinata No.64C Jakarta 13330</h3>
+                    <h3>Jl. Otto Iskandardinata </h3>
+                    <h3>No.64C Jakarta 13330</h3>
                     <h3>Telp. (021) 8191437, 8508812</h3>
                     <h3>Fax. (021) 8197577</h3>
                     <div class="flex gap-x-2 mt-2">
@@ -199,8 +200,8 @@
                 <a href="/" class="mb-2 hover:text-secondary">
                     <h3 class="underline md:no-underline">Website PKL60</h3>
                 </a>
-                <a href="<?= base_url(); ?>" class="hover:text-secondary">
-                    <h3 class="underline md:no-underline">Website SIA</h3>
+                <a href="/developer" class="hover:text-secondary">
+                    <h3 class="underline md:no-underline">Webservice(API)</h3>
                 </a>
             </div>
             <!-- akhir link ke webservice  -->
@@ -211,8 +212,6 @@
             <div class="flex-grow">
                 <hr class="text-white bg-white border my-auto">
             </div>
-
-
         </div>
 
         <h2 class="text-white text-sm text-center mt-1">Copyright &copy; PKL 60 Riset 5</h2>
