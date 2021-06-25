@@ -133,25 +133,25 @@ class Validation
 
 	public $editProfil_errors  = [
 		'tempat_lahir'   => [
-			'alpha_space'	=> 'kolom harus berisi huruf atau spasi',
+			'alpha_space'	=> 'Tempat lahir harus diisi huruf atau spasi.',
 		],
 		'telp_alumni'   => [
-			'numeric'	=> 'kolom harus berisi angka',
-			'min_length' => 'minimal memiliki panjang 9 angka',
+			'numeric'	=> 'No telepon harus diisi angka.',
+			'min_length' => 'No telepon minimal memiliki panjang 9 angka.',
 		],
 		'email'			=> [
-			'required'	=> 'kolom email harus diisi',
-			'valid_email'	=> 'harus memiliki format email',
-			'is_unique'	=> 'alamat email telah digunakan alumni lain',
+			'required'	=> 'Alamat email harus diisi.',
+			'valid_email'	=> 'Format alamat email tidak sesuai.',
+			'is_unique'	=> 'Alamat email telah digunakan alumni lain.',
 		],
 		'fb'   => [
-			'regex_match'	=> 'kolom harus berisi link/url yang valid',
+			'regex_match'	=> 'link/url facebook tidak valid.',
 		],
 		'linkedin'   => [
-			'regex_match'	=> 'kolom harus berisi link/url yang valid',
+			'regex_match'	=> 'link/url linkedin tidak valid.',
 		],
 		'gscholar'   => [
-			'regex_match'	=> 'kolom harus berisi link/url yang valid',
+			'regex_match'	=> 'link/url google scholar tidak valid.',
 		],
 	];
 
@@ -163,7 +163,7 @@ class Validation
 
 	public $editPendidikan_errors  = [
 		'nim'   => [
-			'numeric'	=> 'kolom nim harus berisi angka',
+			'numeric'	=> 'NIM harus diisi angka.',
 		]
 	];
 
@@ -178,13 +178,13 @@ class Validation
 
 	public $editAkun_errors  = [
 		'new_password'   => [
-			'required' => 'kolom ini harus diisi',
-			'regex_match' => 'Kata sandi harus terdiri dari huruf dan angka',
-			'min_length' => 'minimal memiliki panjang 8 karakter',
+			'required' => 'Kata sandi baru harus diisi.',
+			'regex_match' => 'Kata sandi baru harus terdiri dari huruf dan angka.',
+			'min_length' => 'Kata sandi baru Minimal memiliki panjang 8 karakter.',
 		],
 		'conf_password'   => [
-			'required' => 'kolom ini harus diisi',
-			'matches' => 'Konfirmasi kata sandi tidak cocok',
+			'required' => 'Konfirmasi kata sandi harus diisi.',
+			'matches' => 'Konfirmasi kata sandi tidak cocok.',
 		],
 	];
 
@@ -205,17 +205,17 @@ class Validation
 
 	public $editTempatKerja_errors  = [
 		'nama_instansi'   => [
-			'required'	=> 'kolom ini harus diisi',
+			'required'	=> 'Nama instansi harus diisi.',
 		],
 		'telp_instansi'   => [
-			'numeric'	=> 'kolom harus berisi angka',
-			'min_length' => 'minimal memiliki panjang 9 angka',
+			'numeric'	=> 'No telepon instansi harus diisi angka.',
+			'min_length' => 'No telepon instansi Minimal memiliki panjang 9 angka.',
 		],
 		'faks_instansi'   => [
-			'numeric'	=> 'kolom harus berisi angka',
+			'numeric'	=> 'Faks instansi harus diisi angka.',
 		],
 		'email_instansi'   => [
-			'required'	=> 'kolom ini harus diisi',
+			'required'	=> 'Alamat Email instansi harus diisi.',
 		],
 	];
 }
