@@ -70,12 +70,12 @@ class User extends BaseController
 				// return json_encode($start);
 			}
 
-        	$compiled['alumni'] = $query->getCompiledSelect(false);
+			$compiled['alumni'] = $query->getCompiledSelect(false);
 			$jumlah['alumni'] = $query->countAllResults(false);
 			$data['alumni'] = $query->get()->getResultArray();
 
 			$jumlah['alumni'] = [
-				'text' => (!empty($cari)) ? ($jumlah['alumni']>0) ? 
+				'text' => (!empty($cari)) ? ($jumlah['alumni'] > 0) ?
 					"Terdapat " . $jumlah['alumni'] . " alumni dengan kata kunci `<B>$cari</B>` ditemukan." :
 					"Hasil pencarian alumni tidak ditemukan" :
 					"Memuat " . $jumlah['alumni'] . " data alumni.",
@@ -101,7 +101,7 @@ class User extends BaseController
 			$data['berita'] = array_map(function ($val) {
 				return [
 					'id' => $val['id'],
-					'tanggal_publish' => date('d-m-Y',strtotime($val['tanggal_publish'])),
+					'tanggal_publish' => date('d-m-Y', strtotime($val['tanggal_publish'])),
 					'judul' => $val['judul'],
 					'thumbnail' => $val['thumbnail'],
 					'konten' => word_limiter($val['konten'], 45)
@@ -109,7 +109,7 @@ class User extends BaseController
 			}, $query->get()->getResultArray());
 
 			$jumlah['berita'] = [
-				'text' => (!empty($cari)) ? ($jumlah['berita']>0) ? 
+				'text' => (!empty($cari)) ? ($jumlah['berita'] > 0) ?
 					"Terdapat " . $jumlah['berita'] . " berita dengan kata kunci `<B>$cari</B>` ditemukan." :
 					"Hasil pencarian berita tidak ditemukan" :
 					"Memuat " . $jumlah['berita'] . " berita.",
@@ -137,9 +137,15 @@ class User extends BaseController
 		];
 		// return view('websia/kontenWebsia/searchAndFilter/searchKosong', $data);
 		switch ($this->request->getVar('t')) {
-			case 'alumni': return view('websia/kontenWebsia/searchAndFilter/semuaAlumni', $data); break;
-			case 'berita': return view('websia/kontenWebsia/searchAndFilter/semuaBerita', $data); break;
-			default: return view('websia/kontenWebsia/searchAndFilter/searchAndFilter', $data); break;
+			case 'alumni':
+				return view('websia/kontenWebsia/searchAndFilter/semuaAlumni', $data);
+				break;
+			case 'berita':
+				return view('websia/kontenWebsia/searchAndFilter/semuaBerita', $data);
+				break;
+			default:
+				return view('websia/kontenWebsia/searchAndFilter/searchAndFilter', $data);
+				break;
 		}
 	}
 
@@ -1195,20 +1201,20 @@ class User extends BaseController
 			'albumFoto'			=> [
 				'rules' => 'required',
 				'errors' => [
-					'required' => 'album harus dipilih'
+					'required' => 'Harus memilih salah satu album foto.'
 				]
 			],
 			'deskripsi'			=> [
 				'rules' => 'required|max_length[150]',
 				'errors' => [
-					'required' => 'deskripsi harus diisi',
-					'max_length' => 'maksimal 150 karakter'
+					'required' => 'Deskripsi harus diisi.',
+					'max_length' => 'Deskripsi diisi maksimal 150 karakter.'
 				]
 			],
 		]);
 
 		if ($validated == FALSE) {
-			$flash = '<strong>Upload gagal!</strong> format upload tidak sesuai ketentuan.';
+			$flash = '<strong>Foto gagal diunggah!</strong> format unggah foto tidak sesuai ketentuan.';
 			$alert = "<div id=\"alert\">
 				<div class=\"fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40\">
 					<div class=\"duration-700 transition-all p-3 rounded-lg flex items-center bg-redAlert\">
@@ -1442,19 +1448,19 @@ class User extends BaseController
 			'linkVideo'   => [
 				'rules' => 'required',
 				'errors' => [
-					'required' => 'link video harus diisi'
+					'required' => 'Link/url video harus diisi.'
 				]
 			],
 			'albumVideo'			=> [
 				'rules' => 'required',
 				'errors' => [
-					'required' => 'album harus dipilih'
+					'required' => 'Harus memilih salah satu album video.'
 				]
 			],
 		]);
 
 		if ($validated == FALSE) {
-			$flash = '<strong>Upload gagal!</strong> format upload tidak sesuai ketentuan.';
+			$flash = '<strong>Video gagal diunggah!</strong> format unggah video tidak sesuai ketentuan.';
 			$alert = "<div id=\"alert\">
 				<div class=\"fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40\">
 					<div class=\"duration-700 transition-all p-3 rounded-lg flex items-center bg-redAlert\">
@@ -1485,9 +1491,22 @@ class User extends BaseController
 					}
 				} else {
 					if (strpos($video, '/channel/')) {
-						echo $video . "<br>";
-						echo "bukan yutub";
-						die();
+						$flash = 'Link/url video harus merupakan link video youtube (bukan channel).';
+						$alert = "<div id=\"alert\">
+							<div class=\"fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40\">
+								<div class=\"duration-700 transition-all p-3 rounded-lg flex items-center bg-redAlert\">
+									<img src=\"/img/components/icon/warning.png\" class=\"h-5 mr-2\" style=\"color: #C51800;\" alt=\"Warning\">
+									<p class=\"sm:text-base text-sm text-danger font-heading\">" . $flash . "</p>
+								</div>
+							</div>
+						</div>
+						<script>
+							setTimeout(function() {
+								$('#alert').fadeOut();
+							}, 1500);
+						</script>";
+						session()->setFlashdata('flash', $alert);
+						return redirect()->to(base_url('user/galeriVideo'));
 					}
 					$v_link = explode('/', $video);
 					if (strpos($v_link[3], '?')) {
@@ -1515,7 +1534,7 @@ class User extends BaseController
 					$flash = "<script> suksesUnggahVideo(); </script>";
 					session()->setFlashdata('flash', $flash);
 				} else {
-					$flash = 'Link yang anda upload sudah terdaftar.';
+					$flash = 'Link video yang anda upload sudah terdaftar.';
 					$alert = "<div id=\"alert\">
 						<div class=\"fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40\">
 							<div class=\"duration-700 transition-all p-3 rounded-lg flex items-center bg-redAlert\">
@@ -1534,7 +1553,7 @@ class User extends BaseController
 				return redirect()->to(base_url('user/galeriVideo'));
 			} else {
 				// buat upload yang bukan link youtube
-				$flash = 'Link yang anda upload bukan link youtube.';
+				$flash = 'Link/url video harus merupakan link video youtube.';
 				$alert = "<div id=\"alert\">
 					<div class=\"fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40\">
 						<div class=\"duration-700 transition-all p-3 rounded-lg flex items-center bg-redAlert\">
