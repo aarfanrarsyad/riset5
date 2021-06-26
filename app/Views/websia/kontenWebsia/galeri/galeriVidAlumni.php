@@ -25,6 +25,17 @@
 <div class="bg-primary">
     <div class="py-4">
         <div class="p-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-10">
+
+            <!-- kalau iframenya ditaruh luar script php gini dia jalan scriptnya -->
+            <iframe frameborder="0" allowfullscreen="1" title="YouTube video player" class="h-52" src="http://www.youtube.com/embed/zXV8GMSc5Vg?enablejsapi=1&amp"></iframe>
+            <iframe frameborder="0" allowfullscreen="1" title="YouTube video player" class="h-52" src="http://www.youtube.com/embed/LTy0TzA_4DQ?enablejsapi=1&amp"></iframe>
+            <iframe frameborder="0" allowfullscreen="1" title="YouTube video player" class="h-52" src="http://www.youtube.com/embed/pRfmrE0ToTo?enablejsapi=1&amp"></iframe>
+
+            <!-- kalau ditaruh dalam gini dia gabisa kebaca di arraynya -->
+            <!-- mungkin bisa diakali biar ga usah pake tag php? -->
+            <?php foreach ($video['video'] as $vd) : ?>
+                <iframe frameborder="0" allowfullscreen="1" title="YouTube video player" class="h-52" src="https://www.youtube.com/embed/<?= $vd['link'] ?>?enablejsapi=1&amp"></iframe>
+            <?php endforeach; ?>
             <script>
                 var tag = document.createElement('script');
                 tag.src = "//www.youtube.com/iframe_api";
@@ -54,14 +65,9 @@
                             }
                         }))
                     });
+                    console.log(players); //ini buat ngecek jumlah video di arraynya aja
                 }
             </script>
-
-            <?php foreach ($video['video'] as $vd) : ?>
-                <div class="rounded-3xl m-2 relative transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105 cursor-pointer">
-                    <iframe class="w-full h-52 rounded-3xl" title="YouTube video player" src="https://www.youtube.com/embed/<?= $vd['link'] ?>?enablejsapi=1&amp;origin=http%3A%2F%2Ffiddle.jshell.net" frameborder="0" allowfullscreen></iframe>
-                </div>
-            <?php endforeach; ?>
         </div>
         <!-- Awal Navigasi -->
         <div class="flex justify-center md:justify-end items-center mx-8 p-2 text-secondary font-paragraph">
