@@ -1,3 +1,4 @@
+function map(data){
 // awal js buat map
 var mapProvinsi = L.map('mapProvinsi', {
     center: [-2.5, 118],
@@ -33,7 +34,7 @@ function popUpProvinsi(f, l) {
     var out = [];
     if (f.properties) {
         out.push("<div class='md:text-base text-xs text-primary font-semibold text-center uppercase font-heading'> " + f.properties["NAME_1"] +"</div> <hr class='my-2'>");
-        out.push("<div class='font-bold text-center md:text-base text-xs text-primary uppercase font-paragraph'>" + f.properties["ID_1"] + "</div>");
+        out.push("<div class='font-bold text-center md:text-base text-xs text-primary uppercase font-paragraph'>" + data + "</div>");
         out.push("<div class='text-center md:text-base text-xs font-semibold text-primary font-paragraph'> Alumni</div>");
         l.bindPopup(out.join(""));
     }
@@ -152,7 +153,7 @@ $('.petaKabupaten').click(function () {
     mapProvinsi.setView([-2.5, 118], 5);
     mapProvinsi.closePopup();
 });
-
+}
 // akhir js buat map
 
 // awal info map 
@@ -194,4 +195,5 @@ $(window).scroll(function () {
         }
     }
 })
+
 //akhir animasi angka alumni
