@@ -148,6 +148,24 @@ class Auth extends BaseController
 				foreach ($hasil['profile']['kelas'] as $kelas) {
 					if (strpos($kelas['kode_kelas'], '3D3') !== false || strpos($kelas['kode_kelas'], '4SI') !== false || strpos($kelas['kode_kelas'], '4SD') !== false || strpos($kelas['kode_kelas'], '4SE') !== false || strpos($kelas['kode_kelas'], '4SK') !== false || strpos($kelas['kode_kelas'], '4KS') !== false || strpos($kelas['kode_kelas'], '4ST') !== false) {
 						if ($year_now - $kelas['tahun_akademik'] > 1) {
+							$tahun_lulus = $kelas['tahun_akademik'] + 1;
+							if (strpos($kelas['kode_kelas'], '3D3')) {
+								$jenjang = 'D-III';
+								$angkatan = $tahun_lulus - 1961;
+								$prodi = 'D-III Statistika';
+							} else {
+								$jenjang = 'D-IV';
+								$angkatan = $tahun_lulus - 1962;
+								if (strpos($kelas['kode_kelas'], '4SK')) {
+									$prodi = 'D-IV Statistika Sosial & Kependudukan';
+								} elseif (strpos($kelas['kode_kelas'], '4SE')) {
+									$prodi = 'D-IV Statistika Ekonomi';
+								} elseif (strpos($kelas['kode_kelas'], '4ST')) {
+									$prodi = 'D-IV Statistika';
+								} else {
+									$prodi = 'D-IV Komputasi Statistik';
+								}
+							}
 							$alumni = true;
 							break;
 						} else {
@@ -165,7 +183,6 @@ class Auth extends BaseController
 					if ($cek == NULL) {
 						$data = [
 							'nama'               => $user['nama'],
-							// 'jenis_kelamin'      => $user['jenis_kelamin'],
 							'status_bekerja'     => 1,
 							'aktif_pns'          => 1,
 							'email'				 => $user['nim'] . "@stis.ac.id",
@@ -182,8 +199,34 @@ class Auth extends BaseController
 						} else {
 							$data['foto_profil'] = "components/icon/Pr-icon.svg";
 						}
-
 						$this->modelAlumni->db->table('alumni')->insert($data);
+
+						$sipadu = $this->modelAlumni->getAlumniByEmail($user['nim'] . "@stis.ac.id");
+						$data = [
+							'jenjang'       => $jenjang,
+							'instansi'      => 'Politeknik Statistika STIS',
+							'tahun_lulus'   => $tahun_lulus,
+							'tahun_masuk'	=> '0000',
+							'angkatan'      => $angkatan,
+							'id_alumni'     => $sipadu['id_alumni']
+						];
+						$this->modelAlumni->db->table('pendidikan')->insert($data);
+
+						$sipadu = $this->modelAlumni->getPendidikanTinggiAlumni($sipadu['id_alumni']);
+						$data = [
+							'id_pendidikan'     => $sipadu['id_pendidikan'],
+							'program_studi'     => $prodi,
+							'nim'               => $user['nim'],
+						];
+						$this->modelAlumni->db->table('pendidikan_tinggi')->insert($data);
+
+						$cek = $this->modelAlumni->bindingSipadu($user['nim']);
+						$data = [
+							'id_alumni'      	=> $cek['id_alumni'],
+							'id_tempat_kerja'  	=> 528,
+							'ambigu'			=> 1,
+						];
+						$this->modelAlumni->db->table('alumni_tempat_kerja')->insert($data);
 					}
 
 					//insert new user sipadu (mahasiswa)
