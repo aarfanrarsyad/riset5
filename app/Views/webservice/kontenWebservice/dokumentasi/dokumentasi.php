@@ -10,13 +10,13 @@
     <section>
         <div class="text-secondary lg:mx-4 mx-3">
             <h1 class="lg:text-xl">Sistem Informasi Alumni</h1>
-            <h2 class="font-bold lg:text-3xl md:text-2xl text-xl">DOKUMENTASI WEB SERVICE</h2>
+            <h2 class="font-bold lg:text-3xl md:text-2xl text-xl">DOKUMENTASI WEBSERVICE</h2>
         </div>
         <hr class="border border-gray-500 transform translate-y-2">
         <div class="lg:mx-4 mx-3 mt-4 2xl:-mb-2 mb-10">
             <h3 class="text-secondary mb-5">Penjelasan API Sistem Informasi Alumni</h3>
             <div class="flex ">
-                <p class="text-justify md:mr-8 sm:mr-2 mr-0 xl:w-10/12 lg:w-9/12">API Sistem Informasi Alumni menyediakan akses terprogram untuk membaca data User dan data Alumni. Pengguna dapat membaca tentang informasi pribadi dasar pengguna, informasi pribadi dasar alumni atas nama pengguna, dan daftar informasi pribadi dasar alumni. API Sistem Informasi Alumni mengidentifikasi pengguna dengan api-key. Pengguna bisa mendapatkan api-key dari situs Webservice Sistem Informasi Alumni. Setiap pengguna bisa mendapatkan dua hingga tiga api-key untuk mengakses API. Tanggapan tersedia dalam bentuk JSON.</p>
+                <p class="text-justify md:mr-8 sm:mr-2 mr-0 xl:w-10/12 lg:w-9/12">API Sistem Informasi Alumni menyediakan akses terprogram untuk membaca data User dan data Alumni. Pengguna dapat membaca tentang informasi pribadi dasar pengguna, informasi pribadi dasar alumni atas nama pengguna, dan daftar informasi pribadi dasar alumni. API Sistem Informasi Alumni mengidentifikasi pengguna dengan api-key. Pengguna bisa mendapatkan api-key dari situs Webservice Sistem Informasi Alumni. Tanggapan tersedia dalam bentuk JSON.</p>
                 <img src="/img/components/logo/logo_api.svg" alt="logo api" class="2xl:w-2/12 md:w-3/12 sm:w-4/12 sm:block md:ml-0 sm:ml-4 hidden">
             </div>
         </div>
@@ -51,7 +51,8 @@
                 <div class="text-primary lg:mx-4 sm:mx-2.5 mx-1 px-4 py-4">
                     <h1 class="font-bold text-black lg:text-2xl md:text-xl text-lg">Detail User</h1>
                     <p class="text-black mt-2">Layanan ini digunakan untuk menampilkan detail user</p>
-                    <h1 class="font-bold text-black lg:text-lg md:text-base text-sm mt-4 mb-1">User Profile Read</h1>
+                    <!-- <h1 class="font-bold text-black lg:text-lg md:text-base text-sm mt-4 mb-1">User Profile Read</h1> -->
+                    <br>
                     <div class="bg-black p-3 rounded-xl w-full sm:text-sm text-xs overflow-auto">
                         <code>
                             <span style="color: #8bc;">http:</span><span class="text-secondary">//alumni.stis.ac.id/api/user/</span>
@@ -90,7 +91,7 @@
                             <!-- end isi tabel Sub Data 1.1 -->
                         </table>
                     </div>
-                    <h1 class="font-bold text-black lg:text-lg md:text-base text-sm mt-4 mb-1">Success 200</h1>
+                    <h1 class="font-bold text-black lg:text-lg md:text-base text-sm mt-4 mb-1">Sukses 200</h1>
                     <div class="overflow-x-auto lg:shadow-xl shadow-lg rounded-3xl mb-3">
                         <!-- mulai tabel -->
                         <table class="w-full sm:text-sm text-xs rounded-3xl shadow-2xl sm:shadow-xl font-paragraph text-black text-justify">
@@ -144,7 +145,7 @@
                             <!-- end isi tabel Sub Data 1.1 -->
                         </table>
                     </div>
-                    <h1 class="font-bold text-black lg:text-lg md:text-base text-sm mt-4 mb-1">Success Response</h1>
+                    <h1 class="font-bold text-black lg:text-lg md:text-base text-sm mt-4 mb-1">Respon Sukses</h1>
                     <div class="bg-black p-3 rounded-xl w-full text-white sm:text-sm text-xs overflow-x-auto">
                         <code>
                             <pre>
@@ -162,7 +163,7 @@
                            </pre>
                         </code>
                     </div>
-                    <h1 class="font-bold text-black lg:text-lg md:text-base text-sm mt-4 mb-1">Error 40x</h1>
+                    <h1 class="font-bold text-black lg:text-lg md:text-base text-sm mt-4 mb-1">Kesalahan 40x</h1>
                     <div class="overflow-x-auto lg:shadow-xl shadow-lg rounded-3xl mb-3">
                         <!-- mulai tabel -->
                         <table class="w-full sm:text-sm text-xs rounded-3xl shadow-2xl sm:shadow-xl font-paragraph text-black text-justify">
@@ -197,7 +198,7 @@
                             <!-- end isi tabel Sub Data 1.1 -->
                         </table>
                     </div>
-                    <h1 class="font-bold text-black lg:text-lg md:text-base text-sm mt-4 mb-1">Error 401 Response</h1>
+                    <h1 class="font-bold text-black lg:text-lg md:text-base text-sm mt-4 mb-1">Respon Kesalahan 401</h1>
                     <div class="bg-black p-3 rounded-xl w-full text-white sm:text-sm text-xs overflow-x-auto">
                         <code>
                             <pre>
@@ -221,7 +222,7 @@
                            </pre>
                         </code>
                     </div>
-                    <h1 class="font-bold text-black lg:text-lg md:text-base text-sm mt-4 mb-1">Error 403 Response</h1>
+                    <h1 class="font-bold text-black lg:text-lg md:text-base text-sm mt-4 mb-1">Respon Kesalahan 403</h1>
                     <div class="bg-black p-3 rounded-xl w-full text-white sm:text-sm text-xs overflow-x-auto">
                         <code>
                             <pre>
@@ -240,7 +241,8 @@
                 <div class="text-primary lg:mx-4 sm:mx-2.5 mx-1 px-4 py-4">
                     <h1 class="font-bold text-black lg:text-2xl md:text-xl text-lg">Detail Alumni</h1>
                     <p class="text-black mt-2">Layanan ini digunakan untuk menampilkan detail alumni</p>
-                    <h1 class="font-bold text-black lg:text-lg md:text-base text-sm mt-4 mb-1">Alumni Profile Read</h1>
+                    <!-- <h1 class="font-bold text-black lg:text-lg md:text-base text-sm mt-4 mb-1">Alumni Profile Read</h1> -->
+                    <br>
                     <div class="bg-black p-3 rounded-xl w-full sm:text-sm text-xs overflow-auto">
                         <code>
                             <span style="color: #8bc;">http:</span><span class="text-secondary">//alumni.stis.ac.id/api/alumni/</span>
@@ -279,7 +281,7 @@
                             <!-- end isi tabel Sub Data 1.2 -->
                         </table>
                     </div>
-                    <h1 class="font-bold text-black lg:text-lg md:text-base text-sm mt-4 mb-1">Success 200</h1>
+                    <h1 class="font-bold text-black lg:text-lg md:text-base text-sm mt-4 mb-1">Sukses 200</h1>
                     <div class="overflow-x-auto lg:shadow-xl shadow-lg rounded-3xl mb-3">
                         <!-- mulai tabel -->
                         <table class="w-full sm:text-sm text-xs rounded-3xl shadow-2xl sm:shadow-xl font-paragraph text-black sm:text-justify text-left">
@@ -387,7 +389,7 @@
                             <!-- end isi tabel Sub Data 1.1 -->
                         </table>
                     </div>
-                    <h1 class="font-bold text-black lg:text-lg md:text-base text-sm mt-4 mb-1">Success Response</h1>
+                    <h1 class="font-bold text-black lg:text-lg md:text-base text-sm mt-4 mb-1">Respon Sukses</h1>
                     <div class="bg-black p-3 rounded-xl w-full text-white sm:text-sm text-xs overflow-x-auto">
                         <code>
                             <pre>
@@ -429,7 +431,7 @@
                            </pre>
                         </code>
                     </div>
-                    <h1 class="font-bold text-black lg:text-lg md:text-base text-sm mt-4 mb-1">Error 40x</h1>
+                    <h1 class="font-bold text-black lg:text-lg md:text-base text-sm mt-4 mb-1">Kesalahan 40x</h1>
                     <div class="overflow-x-auto lg:shadow-xl shadow-lg rounded-3xl mb-3">
                         <!-- mulai tabel -->
                         <table class="w-full sm:text-sm text-xs rounded-3xl shadow-2xl sm:shadow-xl font-paragraph text-black text-justify">
@@ -464,7 +466,7 @@
                             <!-- end isi tabel Sub Data 1.1 -->
                         </table>
                     </div>
-                    <h1 class="font-bold text-black lg:text-lg md:text-base text-sm mt-4 mb-1">Error 401 Response</h1>
+                    <h1 class="font-bold text-black lg:text-lg md:text-base text-sm mt-4 mb-1">Respon Kesalahan 401</h1>
                     <div class="bg-black p-3 rounded-xl w-full text-white sm:text-sm text-xs overflow-x-auto">
                         <code>
                             <pre>
@@ -488,7 +490,7 @@
                            </pre>
                         </code>
                     </div>
-                    <h1 class="font-bold text-black lg:text-lg md:text-base text-sm mt-4 mb-1">Error 403 Response</h1>
+                    <h1 class="font-bold text-black lg:text-lg md:text-base text-sm mt-4 mb-1">Respon Kesalahan 403</h1>
                     <div class="bg-black p-3 rounded-xl w-full text-white sm:text-sm text-xs overflow-x-auto">
                         <code>
                             <pre>
@@ -511,7 +513,8 @@
                 <div class="text-primary lg:mx-4 sm:mx-2.5 mx-1 px-4 py-4">
                     <h1 class="font-bold text-black lg:text-2xl md:text-xl text-lg">Daftar Detail Alumni</h1>
                     <p class="text-black mt-2">Layanan ini digunakan untuk menampilkan semua daftar detail alumni</p>
-                    <h1 class="font-bold text-black lg:text-lg md:text-base text-sm mt-4 mb-1">Alumni Profile List</h1>
+                    <!-- <h1 class="font-bold text-black lg:text-lg md:text-base text-sm mt-4 mb-1">Alumni Profile List</h1> -->
+                    <br>
                     <div class="bg-black p-3 rounded-xl w-full sm:text-sm text-xs overflow-auto">
                         <code>
                             <span style="color: #8bc;">http:</span><span class="text-secondary">//alumni.stis.ac.id/api/alumni/</span>
@@ -550,7 +553,7 @@
                             <!-- end isi tabel Sub Data 1.2 -->
                         </table>
                     </div>
-                    <h1 class="font-bold text-black lg:text-lg md:text-base text-sm mt-4 mb-1">Success 200</h1>
+                    <h1 class="font-bold text-black lg:text-lg md:text-base text-sm mt-4 mb-1">Sukses 200</h1>
                     <div class="overflow-x-auto lg:shadow-xl shadow-lg rounded-3xl mb-3">
                         <!-- mulai tabel -->
                         <table class="w-full sm:text-sm text-xs rounded-3xl shadow-2xl sm:shadow-xl font-paragraph text-black sm:text-justify text-left">
@@ -658,7 +661,7 @@
                             <!-- end isi tabel Sub Data 1.1 -->
                         </table>
                     </div>
-                    <h1 class="font-bold text-black lg:text-lg md:text-base text-sm mt-4 mb-1">Success Response</h1>
+                    <h1 class="font-bold text-black lg:text-lg md:text-base text-sm mt-4 mb-1">Respon Sukses</h1>
                     <div class="bg-black p-3 rounded-xl w-full text-white sm:text-sm text-xs overflow-x-auto">
                         <code>
                             <pre>
@@ -716,7 +719,7 @@
                            </pre>
                         </code>
                     </div>
-                    <h1 class="font-bold text-black lg:text-lg md:text-base text-sm mt-4 mb-1">Error 40x</h1>
+                    <h1 class="font-bold text-black lg:text-lg md:text-base text-sm mt-4 mb-1">Kesalahan 40x</h1>
                     <div class="overflow-x-auto lg:shadow-xl shadow-lg rounded-3xl mb-3">
                         <!-- mulai tabel -->
                         <table class="w-full sm:text-sm text-xs rounded-3xl shadow-2xl sm:shadow-xl font-paragraph text-black text-justify">
@@ -751,7 +754,7 @@
                             <!-- end isi tabel Sub Data 1.1 -->
                         </table>
                     </div>
-                    <h1 class="font-bold text-black lg:text-lg md:text-base text-sm mt-4 mb-1">Error 401 Response</h1>
+                    <h1 class="font-bold text-black lg:text-lg md:text-base text-sm mt-4 mb-1">Respon Kesalahan 401</h1>
                     <div class="bg-black p-3 rounded-xl w-full text-white sm:text-sm text-xs overflow-x-auto">
                         <code>
                             <pre>
@@ -763,7 +766,7 @@
                            </pre>
                         </code>
                     </div>
-                    <h1 class="font-bold text-black lg:text-lg md:text-base text-sm mt-4 mb-1">Error 403 Response</h1>
+                    <h1 class="font-bold text-black lg:text-lg md:text-base text-sm mt-4 mb-1">Respon Kesalahan 403</h1>
                     <div class="bg-black p-3 rounded-xl w-full text-white sm:text-sm text-xs overflow-x-auto">
                         <code>
                             <pre>

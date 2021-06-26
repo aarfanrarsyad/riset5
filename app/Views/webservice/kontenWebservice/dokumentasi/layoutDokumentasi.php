@@ -61,7 +61,7 @@
                         </a>
                         <a href="#dataListAlumni">
                             <div class="pl-12 md:py-1 py-0.5 rounded-r-lg md:text-lg hover:bg-primary">
-                                Detail Detail Alumni
+                                Daftar Detail Alumni
                             </div>
                         </a>
                     </div>
