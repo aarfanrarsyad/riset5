@@ -313,4 +313,8 @@ class BeritaModel extends Model
         if (!is_null($akhir) && $akhir != '') $query->where("tanggal_publish BETWEEN '$awal-01-01 00:00:01' AND '$akhir-12-30 23:59:59'");    
         return $query;
     }
+
+    public function getYear(){
+        return $this->db->table('berita')->select('MIN(tanggal_publish) as awal, MAX(tanggal_publish) as akhir')->get()->getRow();
+    }
 }

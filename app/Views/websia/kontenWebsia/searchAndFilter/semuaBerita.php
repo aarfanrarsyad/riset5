@@ -73,14 +73,14 @@
 
                         <div id="load_data_message" class="text-primary md:mb-6 my-5 font-paragraph font-extralight text-sm"></div>
                         <!-- Akhir DAFTAR HASIL PENCARIAN BERITA -->
-
-                        <!-- HASIL PENCARIAN KOSONG -->
-                        <div id="kosong" class=" ml-2 flex-grow min-h-screen">
-                            <img src="/img/components/pencarianKosong.png" class="w-96 mx-auto" alt="">
-                            <div class="text-primary text-center font-bold md:text-xl -mt-8 mx-auto">Hasil Pencarian Tidak Ditemukan</div>
-                            <hr class="border-b-2 border-t-0 w-32 border-gray-400 mx-auto">
-                        </div>
                     </div>
+                </div>
+
+                <!-- HASIL PENCARIAN KOSONG -->
+                <div id="kosong" class=" ml-2 flex-grow min-h-screen">
+                    <img src="/img/components/pencarianKosong.png" class="w-96 mx-auto" alt="">
+                    <div class="text-primary text-center font-bold md:text-xl -mt-8 mx-auto">Hasil Pencarian Tidak Ditemukan</div>
+                    <hr class="border-b-2 border-t-0 w-32 border-gray-400 mx-auto">
                 </div>
 
                 <!-- END HASIL PENCARIAN BERITA -->
@@ -101,19 +101,16 @@ $(document).ready(()=>{
     let x,data,s;
     let stringBerita = `<!-- Awal Card Berita  --><a href="/User/viewBerita/{id}"><div class="flex px-2 md:flex-row flex-col md:gap-x-4 gap-x-0 items-center"><img src="/berita/berita_{thumbnail}" alt="{thumbnail}" class="md:w-48 w-full gambarBerita "><div class="flex-grow"><div class="flex flex-col"><!-- Awal Judul Berita  --><h2 class="text-lg font-heading text-primary font-semibold mb-2">{judul}</h2><!-- Akhir Judul Berita  --><!-- Awal Tanggal Berita  --><div class="text-xs font-paragraph text-primary">{tanggal_publish}</div><!-- Akhir Tanggal Berita  --><!-- Awal Deskripsi Berita  --><div class="text-sm font-paragraph break-words">{konten}</div><!-- Akhir Tanggal Berita  --></div></div></div></a><!-- Akhir Card Berita  --><hr class="my-4 border-gray-400">`;
 
-    function search(tipe,limit,start) {
-        if (tipe == 'alumni') {
-            data = $('#filterAlumni').serialize()+'&cari='+$("input[name=cari]").val()+'&limit='+limit+'&start='+start
-        } else {
-            data = {
-                cari: $("input[name=cari]").val(),
-                awal:$("input[name=awal]").val(),
-                akhir:$("input[name=akhir]").val(),
-                limit:limit,
-                start:start
-            }
+    function search(limit,start) {
+        data = {
+            cari : $("input[name=cari]").val(),
+            awal : $("#awalTahun").val(),
+            akhir: $("#akhirTahun").val(),
+            limit: limit,
+            start: start
         }
         console.log(data)
+
         $.ajax({
             url: "#",
             type:'POST',
@@ -155,19 +152,19 @@ $(document).ready(()=>{
         $('#lisBerita').empty()
         start = 0;
         if (x) window.clearTimeout(x);
-        x = setTimeout(function() { search('berita',limit,start) }, 300) 
+        x = setTimeout(function() { search(limit,start) }, 300) 
     })
 
-    $(".kalenderAwal div.text-xs, .kalenderAkhir div.text-xs").click( function() { 
+    $("#awalTahun, #akhirTahun").change( function() { 
         $('#lisBerita').empty()
         start = 0;
-        search('berita',limit, start)
+        search(limit, start)
     })
 
 
     if(!action){
         action = true;
-        search('berita',limit, start);
+        search(limit, start);
     }
 
     $(window).scroll(function(){
@@ -176,7 +173,7 @@ $(document).ready(()=>{
             action = true;
             start += limit;
             setTimeout(function(){
-                search('berita',limit, start);
+                search(limit, start);
             }, 1000);
         }
     });

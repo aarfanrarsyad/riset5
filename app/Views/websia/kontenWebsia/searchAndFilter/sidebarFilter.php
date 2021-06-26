@@ -199,12 +199,12 @@
                         <label for="awalTahun" class="text-white" style="width: 60px;">Dari :</label>
                         <div class="flex-grow">
                             <select name="awalTahun" id="awalTahun" onmousedown="if(this.options.length>5){this.size=5;}" onchange="this.blur()" onblur="this.size=0;" class=" text-xs px-2 py-1 outline-none focus:ring-2 focus:ring-secondary font-paragraph font-medium rounded-lg w-full">
-                                <option selected="selected" id="awalHilang" class="mb-1">Tahun Awal</option>
-                                <?php
-                                for ($a = date('Y'); $a >= 2000; $a -= 1) {
-                                    echo "<option class='mb-1 font-medium ' value=$a> $a </option>";
-                                }
-                                ?>
+                                <option id="awalHilang" class="mb-1">Tahun Awal</option>
+                                <?php $awal = (is_null($tahunBerita->awal)) ? 2021 : $tahunBerita->awal; 
+                                for ($a = date('Y'); $a >= $awal; $a -= 1) {
+                                    $select = (isset($_GET['awal']) && $a==$_GET['awal']) ? 'selected' : '' ;
+                                    echo "<option class='mb-1 font-medium' $select value=$a> $a </option>";
+                                } ?>
                             </select>
                         </div>
                     </div>
@@ -216,12 +216,12 @@
                         <label for="awalTahun" class="text-white" style="width: 60px;">Sampai :</label>
                         <div class="flex-grow">
                             <select name="akhir" id="akhirTahun" onmousedown="if(this.options.length>5){this.size=5;}" onchange="this.blur()" onblur="this.size=0;" class=" text-xs px-2 py-1 outline-none focus:ring-2 focus:ring-secondary font-paragraph font-medium rounded-lg w-full">
-                                <option selected="selected" id="akhirHilang" class="mb-1">Tahun Akhir</option>
-                                <?php
-                                for ($a = date('Y'); $a >= 2000; $a -= 1) {
-                                    echo "<option class='mb-1 font-medium ' value=$a> $a </option>";
-                                }
-                                ?>
+                                <option id="akhirHilang" value="" class="mb-1">Tahun Akhir</option>
+                                <?php $awal = (is_null($tahunBerita->awal)) ? 2021 : $tahunBerita->awal; 
+                                for ($a = date('Y'); $a >= $awal; $a -= 1) {
+                                    $select = (isset($_GET['akhir']) && $a==$_GET['akhir']) ? 'selected' : '' ;
+                                    echo "<option class='mb-1 font-medium' $select value=$a> $a </option>";
+                                } ?>
                             </select>
                         </div>
                     </div>
