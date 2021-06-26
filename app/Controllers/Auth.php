@@ -147,7 +147,7 @@ class Auth extends BaseController
 
 				foreach ($hasil['profile']['kelas'] as $kelas) {
 					if (strpos($kelas['kode_kelas'], '3D3') !== false || strpos($kelas['kode_kelas'], '4SI') !== false || strpos($kelas['kode_kelas'], '4SD') !== false || strpos($kelas['kode_kelas'], '4SE') !== false || strpos($kelas['kode_kelas'], '4SK') !== false || strpos($kelas['kode_kelas'], '4KS') !== false || strpos($kelas['kode_kelas'], '4ST') !== false) {
-						if ($year_now - $kelas['tahun_akademik'] > 1) {
+						if ($year_now - $kelas['tahun_akademik'] >= 1) {
 							$tahun_lulus = $kelas['tahun_akademik'] + 1;
 							if (strpos($kelas['kode_kelas'], '3D3')) {
 								$jenjang = 'D-III';
@@ -160,6 +160,10 @@ class Auth extends BaseController
 									$prodi = 'D-IV Statistika Sosial & Kependudukan';
 								} elseif (strpos($kelas['kode_kelas'], '4SE')) {
 									$prodi = 'D-IV Statistika Ekonomi';
+								} elseif (strpos($kelas['kode_kelas'], '4SI')) {
+									$prodi = 'D-IV Sistem Informasi Statistik';
+								} elseif (strpos($kelas['kode_kelas'], '4SD')) {
+									$prodi = 'D-IV Sains Data';
 								} elseif (strpos($kelas['kode_kelas'], '4ST')) {
 									$prodi = 'D-IV Statistika';
 								} else {
@@ -182,7 +186,7 @@ class Auth extends BaseController
 					// binding session dengan database (insert data ke tabel alumni kalau belum terdaftar di tabel alumni) 
 					if ($cek == NULL) {
 						$data = [
-							'nama'               => $user['nama'],
+							'nama'               => ucwords(strtolower($user['nama'])),
 							'status_bekerja'     => 1,
 							'aktif_pns'          => 1,
 							'email'				 => $user['nim'] . "@stis.ac.id",
