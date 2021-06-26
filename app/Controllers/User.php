@@ -29,6 +29,8 @@ class User extends BaseController
 	public function searchAndFilter()
 	{
 		helper('text');
+		$dbAlumni = new \App\Models\AlumniModel;
+		$dbBerita = new \App\Models\BeritaModel;
 
 		$tipe = $this->request->getVar('t');
 		if ($this->request->isAJAX()) {
@@ -59,7 +61,6 @@ class User extends BaseController
 
 
 		if ($tipe == 'all' || $tipe == 'alumni') { //query alumni utama
-			$dbAlumni = new \App\Models\AlumniModel;
 			if (is_null($this->request->getVar('t'))) {
 				$query = $dbAlumni->getAlumniFilter($cari, $prodi, $akt, $kerja);
 			} else {
@@ -84,7 +85,6 @@ class User extends BaseController
 		}
 
 		if ($tipe == 'all' || $tipe == 'berita') { #pencarian berita
-			$dbBerita = new \App\Models\BeritaModel;
 			$awal = (is_null($awal) || $awal == '') ? '2000' : $awal;
 			$akhir = (is_null($akhir) || $akhir == '') ? date('Y') : $akhir;
 
@@ -133,19 +133,13 @@ class User extends BaseController
 			'cari' => $cari,
 			'data' => $data,
 			'jumlah' => $jumlah,
+			'tahunBerita' => $dbBerita->getYear()
 		];
-		// dd($compiled);
 		// return view('websia/kontenWebsia/searchAndFilter/searchKosong', $data);
 		switch ($this->request->getVar('t')) {
-			case 'alumni':
-				return view('websia/kontenWebsia/searchAndFilter/semuaAlumni', $data);
-				break;
-			case 'berita':
-				return view('websia/kontenWebsia/searchAndFilter/semuaBerita', $data);
-				break;
-			default:
-				return view('websia/kontenWebsia/searchAndFilter/searchAndFilter', $data);
-				break;
+			case 'alumni': return view('websia/kontenWebsia/searchAndFilter/semuaAlumni', $data); break;
+			case 'berita': return view('websia/kontenWebsia/searchAndFilter/semuaBerita', $data); break;
+			default: return view('websia/kontenWebsia/searchAndFilter/searchAndFilter', $data); break;
 		}
 	}
 

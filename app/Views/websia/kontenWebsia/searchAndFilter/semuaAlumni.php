@@ -99,19 +99,10 @@ $(document).ready(()=>{
     let x,data;
     let stringAlumni = `<!-- Awal Card Alumni --><a href="/User/profilAlumni/{idAlumni}"><div class="mx-2"><div class="flex gap-x-4"><div class="flex items-center"><img src="/img/{foto_profil}" class="lg:w-18 w-12 mx-auto rounded-full" alt=""></div><div class="flex items-center"><div><!-- Awal Nama Alumni --><h2 class="md:text-lg font-heading text-primary font-semibold">{nama}</h2><!-- Akhir Nama Alumni --><!-- Awal Atribut Alumni --><div class="md:text-sm text-xs font-paragraph text-primary">Angkatan {akt}</div><!-- Akhir Atribut Alumni --></div></div></div></div></a><!-- Akhir Card Alumni --><hr class="my-4 border-gray-400">`;
 
-    function search(tipe,limit,start) {
-        if (tipe == 'alumni') {
-            data = $('#filterAlumni').serialize() + '&cari=' + $("input[name=cari]").val() + '&limit=' + limit + '&start=' + start
-        } else {
-            data = {
-                cari: $("input[name=cari]").val(),
-                beritaAwal: $("input[name=beritaAwal]").val(),
-                beritaAkhir: $("input[name=beritaAkhir]").val(),
-                limit: limit,
-                start: start
-            }
-        }
+    function search(limit,start) {
+        data = $('#filterAlumni').serialize() + '&cari=' + $("input[name=cari]").val() + '&limit=' + limit + '&start=' + start
         console.log(data)
+
         $.ajax({
             url: "#",
             type: 'POST',
@@ -154,7 +145,7 @@ $(document).ready(()=>{
         $('#lisAlumni').empty()
         start = 0;
         if (x) window.clearTimeout(x);
-        x = setTimeout(function() { search('alumni',limit,start) }, 300) 
+        x = setTimeout(function() { search(limit,start) }, 300) 
     })
     
     $('.listProdi svg').click(function(){
@@ -163,14 +154,14 @@ $(document).ready(()=>{
             else { prodi.attr('name','prodi[]') }
         $('#lisAlumni').empty()
         start = 0;
-        search('alumni',limit, start)
+        search(limit, start)
     })
 
-    $("input[name=akt], input[name=kerja]").siblings().click( function() { search('alumni',limit, start) })
+    $("input[name=akt], input[name=kerja]").siblings().click( function() { search(limit, start) })
 
     if(!action){
         action = true;
-        search('alumni',limit, start);
+        search(limit, start);
     }
 
     $(window).scroll(function(){
@@ -178,7 +169,7 @@ $(document).ready(()=>{
             action = true;
             start += limit;
             setTimeout(function(){
-                search('alumni',limit, start);
+                search(limit, start);
             }, 1000);
         }
     });

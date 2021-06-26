@@ -47,7 +47,7 @@ class AlumniModel extends Model
         return $this->db->query($query);
     }
 
-    public function getAlumniFilter($cari = '', $pro = [], $akt = '', $kerja = '', $limit = 5, $start = 0)
+    public function getAlumniFilter($cari = '', $pro = [], $akt = '', $kerja = '', $limit = 4, $start = 0)
     {
         //query utama
         $query = $this->table('alumni')->select('alumni.id_alumni,nama,foto_profil,nim,MAX(angkatan) AS angkatan,program_studi')
