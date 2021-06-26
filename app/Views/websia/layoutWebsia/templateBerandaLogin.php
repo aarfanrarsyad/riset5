@@ -152,12 +152,16 @@
 
                 <div class="md:hidden">
                     <div class="flex flex-col hidden w-full border-t border-b border-white py-2 font-paragraph" id="menu">
-                        <div class="nav-menu-relative px-2 py-2 <?= ($active == 'beranda') ? 'activeMenu' : ''; ?>">
-                            <a href="<?= base_url(); ?>">BERANDA </a>
-                        </div>
-                        <div class="nav-menu-relative px-2 py-2 <?= ($active == 'profil') ? 'activeMenu' : ''; ?>">
-                            <a href="/User/profil"> PROFIL</a>
-                        </div>
+                        <a href="<?= base_url(); ?>">
+                            <div class="nav-menu-relative px-2 py-2 <?= ($active == 'beranda') ? 'activeMenu' : ''; ?>">
+                                BERANDA
+                            </div>
+                        </a>
+                        <a href="/User/profil">
+                            <div class="nav-menu-relative px-2 py-2 <?= ($active == 'profil') ? 'activeMenu' : ''; ?>">
+                                PROFIL
+                            </div>
+                        </a>
                         <div class="flex flex-col">
                             <div class="nav-menu-relative flex px-2 py-2 <?= ($active == 'galeri') ? 'activeMenu' : ''; ?>" id="galeri">
                                 <div class="mx-auto">
@@ -175,16 +179,22 @@
                                 <a href="/User/galeriVideo" class="nav-menu-relative py-2"> Galeri Video </a>
                             </div>
                         </div>
-                        <div class="nav-menu-relative px-2 py-2 <?= ($active == 'berita') ? 'activeMenu' : ''; ?>">
-                            <a href="/Berita/berita"> BERITA</a>
-                        </div>
-                        <div class="nav-menu-relative px-2 py-2">
-                            <a href="/User/developer"> WEBSERVICE</a>
-                        </div>
-                        <?php if (in_array("1", session('role'))) : ?>
-                            <div class="nav-menu-relative px-2 py-2">
-                                <a href="/admin"> ADMIN</a>
+                        <a href="/Berita/berita">
+                            <div class="nav-menu-relative px-2 py-2 <?= ($active == 'berita') ? 'activeMenu' : ''; ?>">
+                                BERITA
                             </div>
+                        </a>
+                        <a href="/developer">
+                            <div class="nav-menu-relative px-2 py-2">
+                                WEBSERVICE
+                            </div>
+                        </a>
+                        <?php if (in_array("1", session('role'))) : ?>
+                            <a href="/admin">
+                                <div class="nav-menu-relative px-2 py-2">
+                                    ADMIN
+                                </div>
+                            </a>
                         <?php endif; ?>
                         <form action="/User/searchAndFilter" method="get">
                             <div class="flex  justify-center text-sm relative text-white p-3 cari mt-1 px-2">

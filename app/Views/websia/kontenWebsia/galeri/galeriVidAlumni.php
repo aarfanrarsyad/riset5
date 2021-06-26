@@ -25,9 +25,41 @@
 <div class="bg-primary">
     <div class="py-4">
         <div class="p-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-10">
+            <script>
+                var tag = document.createElement('script');
+                tag.src = "//www.youtube.com/iframe_api";
+                var firstScriptTag = document.getElementsByTagName('script')[0];
+                firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+                function onYouTubeIframeAPIReady() {
+                    var $ = jQuery;
+                    var players = [];
+                    $('iframe').filter(function() {
+                        return this.src.indexOf('http://www.youtube.com/') == 0
+                    }).each(function(k, v) {
+                        if (!this.id) {
+                            this.id = 'embeddedvideoiframe' + k
+                        }
+                        players.push(new YT.Player(this.id, {
+                            events: {
+                                'onStateChange': function(event) {
+                                    if (event.data == YT.PlayerState.PLAYING) {
+                                        $.each(players, function(k, v) {
+                                            if (this.getIframe().id != event.target.getIframe().id) {
+                                                this.pauseVideo();
+                                            }
+                                        });
+                                    }
+                                }
+                            }
+                        }))
+                    });
+                }
+            </script>
+
             <?php foreach ($video['video'] as $vd) : ?>
                 <div class="rounded-3xl m-2 relative transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105 cursor-pointer">
-                    <iframe class="w-full h-52 rounded-3xl" src="https://www.youtube.com/embed/<?= $vd['link'] ?>" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <iframe class="w-full h-52 rounded-3xl" title="YouTube video player" src="https://www.youtube.com/embed/<?= $vd['link'] ?>?enablejsapi=1&amp;origin=http%3A%2F%2Ffiddle.jshell.net" frameborder="0" allowfullscreen></iframe>
                 </div>
             <?php endforeach; ?>
         </div>
