@@ -234,10 +234,12 @@ if (session()->getFlashdata('role')) { ?>
 <?php session()->remove(['login_notif']) ?>
 <script type="text/javascript" src="/js/leaflet.ajax.js"></script>
 <script>
-    var url = "<?= base_url(); ?>/Home/petaProv/Jawa%20Tengah";
+    var url = "<?= base_url(); ?>/Home/jumlahPeta";
     $.get(url, function(data, status) {
-        console.log(data);
-        map(data);
+        alumni = JSON.parse(data)
+        prov = alumni['Provinsi'];
+        kabKota = alumni['kabupatenKota'];
+        map(prov, kabKota);
     });
 </script>
 <script type="text/javascript" src="/js/add.js"></script>

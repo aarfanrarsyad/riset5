@@ -8,6 +8,7 @@ use Config\Services;
 use Exception;
 use Myth\Auth\Models\LoginModel;
 use \JKD\SSO\Client\Provider\Keycloak;
+use phpDocumentor\Reflection\PseudoTypes\True_;
 
 class Home extends BaseController
 {
@@ -896,5 +897,7 @@ class Home extends BaseController
 			$jumlah = "SELECT count(*) as kabkota FROM `tempat_kerja` as a RIGHT JOIN `alumni_tempat_kerja` as b on a.id_tempat_kerja = b.id_tempat_kerja where a.kota = '$row'";
 			$jumlahKabKota[$row] = $model->db->query($jumlah)->getRow()->kabkota;
 		}
+		// return [$jumlahProv, $jumlahKabKota];
+		return json_encode(['Provinsi' => $jumlahProv, 'kabupatenKota' => $jumlahKabKota]);
 	}
 }
