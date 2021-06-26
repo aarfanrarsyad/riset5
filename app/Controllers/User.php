@@ -550,7 +550,7 @@ class User extends BaseController
 			$avatar = $this->request->getFile('file_upload');
 			$avatar->move(ROOTPATH . '/public/img/components/user/userid_' . session('id_user'));
 
-			if ($foto != 'components/icon/' . $query1->jenis_kelamin . '-icon.svg') {
+			if ($foto != 'components/icon/' . $query1->jenis_kelamin . '-icon.svg' && $foto != 'components/avatar.png') {
 				$url = ROOTPATH . '/public/img/' . $foto;
 				if (is_file($url))
 					unlink($url);
@@ -580,7 +580,7 @@ class User extends BaseController
 		$query1 = $model->bukaProfile(session('id_alumni'))->getRow();
 		$foto = $query1->foto_profil;
 
-		if ($foto != 'components/icon/' . $query1->jenis_kelamin . '-icon.svg') {
+		if ($foto != 'components/icon/' . $query1->jenis_kelamin . '-icon.svg' && $foto != 'components/avatar.png') {
 			$url = ROOTPATH . '/public/img/' . $foto;
 			if (is_file($url))
 				unlink($url);
@@ -1197,6 +1197,10 @@ class User extends BaseController
 		$validated = $this->validate([
 			'file_upload'   => [
 				'rules' => 'uploaded[file_upload]|max_size[file_upload,2048]',
+				'errors' => [
+					'uploaded' => 'Harus memilih satu foto untuk diunggah.',
+					'max_size' => 'Foto yang diunggah maksimal berukuran 2 MB.',
+				]
 			],
 			'albumFoto'			=> [
 				'rules' => 'required',
