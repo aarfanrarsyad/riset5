@@ -1648,9 +1648,11 @@ class Admin extends BaseController
 			}
 		}
 		$out_album = $album;
-		$out_album[count($out_album) + 1] = ['album' => 'Alumni'];
-		$out_album[count($out_album) + 2] = ['album' => 'Wisuda'];
-		$out_album[count($out_album) + 3] = ['album' => 'Kenangan'];
+		$count = count($out_album);
+
+		$out_album[$count + 1] = ['album' => 'Alumni'];
+		$out_album[$count + 2] = ['album' => 'Wisuda'];
+		$out_album[$count + 3] = ['album' => 'Kenangan'];
 
 		$alumni = $alumni_model->getForTags()->getResult();
 		foreach ($alumni as $dt) {
@@ -1701,9 +1703,11 @@ class Admin extends BaseController
 			}
 		}
 		$out_album = $album;
-		$out_album[count($out_album) + 1] = ['album' => 'Alumni'];
-		$out_album[count($out_album) + 2] = ['album' => 'Wisuda'];
-		$out_album[count($out_album) + 3] = ['album' => 'Kenangan'];
+		$count = count($out_album);
+
+		$out_album[$count + 1] = ['album' => 'Alumni'];
+		$out_album[$count + 2] = ['album' => 'Wisuda'];
+		$out_album[$count + 3] = ['album' => 'Kenangan'];
 
 		$i = 0;
 		foreach ($video as $dt) {
