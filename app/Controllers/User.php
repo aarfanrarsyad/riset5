@@ -1252,67 +1252,41 @@ class User extends BaseController
 			if (!is_dir($path))
 				mkdir($path, 0755, true);
 
+
 			//cek apakah sudah terdapat nama file yang sama, jika sudah maka akan direname
 			$file = $path . "/" . $foto->getName();
 			$ext = "." . $foto->guessExtension();
 			$file = str_replace($ext, "", $file);
-			if (is_file($file  . '.jpeg')) {
-				$new_name = $file;
+
+			$foto->move($path);
+			if (is_file($file  . $ext)) {
+				$time = date("Ymdhis");
+				$new_name = $file . "-" . $time;
 				while (is_file($new_name  . '.jpeg')) {
 					$time = date("Ymdhis");
 					$new_name = $new_name . "-" . $time;
 				}
-				// rename($file . $ext, $new_name . $ext);
 			}
 
-			if (!isset($new_name)) {
-				$image = \Config\Services::image()
-					->withFile($foto->getPath() . '\\' . $foto->getFilename())
-					->withResource()
-					->convert(IMAGETYPE_JPEG)
-					->save($file  . '.jpeg', 50);
-				// unlink($file . $ext);
+			$image = \Config\Services::image()
+				->withFile($file . $ext)
+				->withResource()
+				->convert(IMAGETYPE_JPEG)
+				->save($new_name  . '.jpeg', 50);
+			unlink($file . $ext);
 
-				$file = str_replace(ROOTPATH . '../img/galeri/', "", $file);
-				$data = [
-					'nama_file'		=> $file  . '.jpeg',
-					'tag'			=> $tags,
-					'caption'		=> $caption,
-					'created_at'	=> $now,
-					'album' 		=> $album,
-					'approval' 		=> 1,
-					'id_alumni' 	=> session('id_alumni'),
-				];
-				$model->db->table('foto')->insert($data);
-			} else {
-				$image = \Config\Services::image()
-					->withFile($foto->getPath() . '\\' . $foto->getFilename())
-					->withResource()
-					->convert(IMAGETYPE_JPEG)
-					->save($new_name  . '.jpeg', 50);
-				// unlink($new_name . $ext);
+			$file = str_replace(ROOTPATH . '../img/galeri/', "", $new_name);
+			$data = [
+				'nama_file'		=> $file  . '.jpeg',
+				'tag'			=> $tags,
+				'caption'		=> $caption,
+				'created_at'	=> $now,
+				'album' 		=> $album,
+				'approval' 		=> 1,
+				'id_alumni' 	=> session('id_alumni'),
+			];
+			$model->db->table('foto')->insert($data);
 
-				$new_name = str_replace(ROOTPATH . '../img/galeri/', "", $new_name);
-				$data = [
-					'nama_file'		=> $new_name  . '.jpeg',
-					'tag'			=> $tags,
-					'album' 		=> $album,
-					'caption'		=> $caption,
-					'created_at'	=> $now,
-					'album' 		=> $album,
-					'approval' 		=> 1,
-					'id_alumni' 	=> session('id_alumni'),
-				];
-				$model->db->table('foto')->insert($data);
-			}
-
-			// $foto = $model->getByName($data['nama_file']);
-
-			// $data = [
-			// 	'id_foto'	=> $foto[0]->id_foto,
-			// 	'tag'		=> $tags
-			// ];
-			// $model->db->table('tag_foto')->insert($data);
 			$flash = "<script> suksesUnggahFoto(); </script>";
 			session()->setFlashdata('flash', $flash);
 			return redirect()->back();

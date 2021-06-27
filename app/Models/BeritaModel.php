@@ -76,7 +76,7 @@ class BeritaModel extends Model
         $query = "INSERT INTO berita VALUES('','$date','$header','$thumbnail','$content','$access',$user_id,$groups_id,'$author',$active)";
         if ($this->db->query($query)) {
             $insert_id = $this->insertID();
-            $curr_folder = ROOTPATH . '/public/berita/';
+            $curr_folder = ROOTPATH . '../berita/';
 
             if (!rename($curr_folder . session()->get('folder_name'), $curr_folder . "berita_" . $insert_id)) return false;
             $content = str_replace(session()->get('folder_name'), "berita_" . $insert_id, $content);
@@ -108,7 +108,7 @@ class BeritaModel extends Model
         $query = "INSERT INTO berita VALUES('','$date','$header','$thumbnail','$content','$access',$user_id,NULL,'$author','0')";
         if ($this->db->query($query)) {
             $insert_id = $this->insertID();
-            $curr_folder = ROOTPATH . '/public/berita/';
+            $curr_folder = ROOTPATH . '../berita/';
 
             if (!rename($curr_folder . session()->get('folder_name'), $curr_folder . "berita_" . $insert_id)) {
                 $dirname = ROOTPATH . session()->get('folder_name');
@@ -122,7 +122,7 @@ class BeritaModel extends Model
             if ($this->db->query($query)) {
                 return true;
             } else {
-                $dirname = ROOTPATH . '/public/berita/berita_' . $insert_id;
+                $dirname = ROOTPATH . '../berita/berita_' . $insert_id;
                 array_map('unlink', glob("$dirname/*.*"));
                 rmdir($dirname);
                 return false;
@@ -156,7 +156,7 @@ class BeritaModel extends Model
         if ($this->db->query($query)) {
             if ($data['thumbnail']) {
                 $dir_thumb = $last_data['thumbnail'];
-                $dirname = ROOTPATH . '/public/berita/berita_' . $id;
+                $dirname = ROOTPATH . '../berita/berita_' . $id;
                 array_map('unlink', glob("$dirname/$dir_thumb"));
             }
             return true;
@@ -169,7 +169,7 @@ class BeritaModel extends Model
     {
         if (!isset($id) || empty($id))  redirect('auth/server-error', 'refresh');
         if ($this->db->query("DELETE FROM berita WHERE id = $id")) {
-            $dirname = ROOTPATH . '/public/berita/berita_' . $id;
+            $dirname = ROOTPATH . '../berita/berita_' . $id;
             array_map('unlink', glob("$dirname/*.*"));
             rmdir($dirname);
             return true;
@@ -305,16 +305,18 @@ class BeritaModel extends Model
         }
     }
 
-    public function getBeritaFilter($cari = null, $awal = null, $akhir= null, $limit = 5, $start = 0){
+    public function getBeritaFilter($cari = null, $awal = null, $akhir = null, $limit = 5, $start = 0)
+    {
         //  2010-05-28 13:58:08
-        $query = $this->db->table('berita')->where('akses','public')->limit($limit);
-        if ($start>0) $query->offset(intval($start));
-        if (!is_null($cari) && $cari != '') $query->groupStart()->orLike(['judul' => $cari,'thumbnail' => $cari,'konten' => $cari])->groupEnd();
-        if (!is_null($akhir) && $akhir != '') $query->where("tanggal_publish BETWEEN '$awal-01-01 00:00:01' AND '$akhir-12-30 23:59:59'");    
+        $query = $this->db->table('berita')->where('akses', 'public')->limit($limit);
+        if ($start > 0) $query->offset(intval($start));
+        if (!is_null($cari) && $cari != '') $query->groupStart()->orLike(['judul' => $cari, 'thumbnail' => $cari, 'konten' => $cari])->groupEnd();
+        if (!is_null($akhir) && $akhir != '') $query->where("tanggal_publish BETWEEN '$awal-01-01 00:00:01' AND '$akhir-12-30 23:59:59'");
         return $query;
     }
 
-    public function getYear(){
+    public function getYear()
+    {
         return $this->db->table('berita')->select('MIN(tanggal_publish) as awal, MAX(tanggal_publish) as akhir')->get()->getRow();
     }
 }
