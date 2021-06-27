@@ -1644,13 +1644,16 @@ class Admin extends BaseController
 		$album = $model->getAlbum();
 		for ($n = 0; $n < count($album); $n++) {
 			if ($album[$n]['album'] == 'Alumni' || $album[$n]['album'] == 'Wisuda' || $album[$n]['album'] == 'Kenangan') {
+				echo $album[$n]['album'] . "<br>";
 				unset($album[$n]);
 			}
 		}
 		$out_album = $album;
-		$out_album[count($out_album) + 1] = ['album' => 'Alumni'];
-		$out_album[count($out_album) + 2] = ['album' => 'Wisuda'];
-		$out_album[count($out_album) + 3] = ['album' => 'Kenangan'];
+		$count = count($out_album);
+
+		$out_album[$count + 1] = ['album' => 'Alumni'];
+		$out_album[$count + 2] = ['album' => 'Wisuda'];
+		$out_album[$count + 3] = ['album' => 'Kenangan'];
 
 		$alumni = $alumni_model->getForTags()->getResult();
 		foreach ($alumni as $dt) {
@@ -1697,13 +1700,16 @@ class Admin extends BaseController
 		$album = $model->getAlbum();
 		for ($n = 0; $n < count($album); $n++) {
 			if ($album[$n]['album'] == 'Alumni' || $album[$n]['album'] == 'Wisuda' || $album[$n]['album'] == 'Kenangan') {
+				echo $album[$n]['album'] . "<br>";
 				unset($album[$n]);
 			}
 		}
 		$out_album = $album;
-		$out_album[count($out_album) + 1] = ['album' => 'Alumni'];
-		$out_album[count($out_album) + 2] = ['album' => 'Wisuda'];
-		$out_album[count($out_album) + 3] = ['album' => 'Kenangan'];
+		$count = count($out_album);
+
+		$out_album[$count + 1] = ['album' => 'Alumni'];
+		$out_album[$count + 2] = ['album' => 'Wisuda'];
+		$out_album[$count + 3] = ['album' => 'Kenangan'];
 
 		$i = 0;
 		foreach ($video as $dt) {
