@@ -253,7 +253,7 @@ class Home extends BaseController
 
 		foreach ($lulus as $row) {
 			$model = new \App\Models\AlumniModel();
-			$query = "SELECT count(*) AS count FROM `pendidikan` where instansi = '$row' and angkatan != 0";
+			$query = "SELECT count(*) AS count FROM `pendidikan` where instansi = '$row'";
 			$lulusan[$row] = $model->db->query($query)->getRow()->count;
 		}
 
