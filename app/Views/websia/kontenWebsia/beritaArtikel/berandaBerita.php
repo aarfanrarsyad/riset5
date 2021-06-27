@@ -155,6 +155,59 @@
             </a>
         </div>
 
+        <!--- BERITA API XYZ--->
+        <hr class="border-primary border-t-2 border-b-0 my-3">
+        <h2 class="font-bold text-secondary font-heading md:text-xl text-lg mb-4">Berita Beasiswa Pusdiklat</h2>
+
+        <div class="md:grid md:grid-cols-2 md:gap-x-6">
+
+            <?php foreach($apiberita as $value){?>
+            <div class="border-gray-400 border-b py-3">
+                <div class="flex gap-x-2 items-center">
+                    <div class="lg:w-1/4 w-1/3 lg:h-24 h-20 bg-gray-200">
+                    </div>
+                    <div class="lg:w-3/4 w-2/3">
+                        <a href="https://www.pusdiklat-bps.id/web/berita/<?=$value->id?>">
+                            <h3 class="font-heading font-semibold text-primary text-lg"><?php if(strlen($value->judul_berita)<45) echo $value->judul_berita; else echo substr($value->judul_berita,0,45).'...'; ?>
+                            </h3>
+                        </a>
+                        <div class="flex gap-x-1 items-center">
+                            <img src="/img/components/icon/clock.png" class="w-3 h-3" alt="">
+                            <?php $tgl = strtotime($value->created_at); 
+                            $tgl =date('d F Y',$tgl);
+                            ?>
+                            <p class="text-xs text-primary"><?=$tgl ?></p>
+                            <img src="/img/components/icon/profile.png" class="w-3 h-3 ml-2" alt="">
+                            <p class="text-xs text-primary"><?=$value->penulis ?></p>
+                        </div>
+                        <p>
+                            <?php if(strlen($value->konten_berita)<100) echo $value->konten_berita; else echo substr($value->konten_berita,0,strpos($value->konten_berita, ' ', 100)).'...'; ?>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <?php }?>
+
+        </div>
+        <!-- end card berita -->
+        <div class="mt-2 flex gap-x-2 items-center justify-end mb-8">
+        <?php if($pageapi!=1){?>
+            <a href="?pageapi=<?= $pageapi-1;?>">
+                <img src="/img/components/icon/left-on.png" class="w-4 h-4 cursor-pointer" alt="">
+            </a>
+            <?php }?>
+            <?php for($i=1;$i<$tot_page+1;$i++){ ?>
+            <a href="?pageapi=<?= $i;?>" class="<?php if($i==$pageapi){ ?>text-primary<?php } else echo 'text-secondary font-bold' ?>"><?= $i;?></a>
+            <?php };
+            if ($pageapi!=$tot_page) {?>
+            <a href="?pageapi=<?= $pageapi+1;?>">
+                <img src="/img/components/icon/right-on.png"" class=" w-4 h-4 cursor-pointer" alt="">
+            </a>
+            <?php }?>
+        </div>
+
+        <!--- END BERITA API XYZ--->
+
     </div>
 </div>
 

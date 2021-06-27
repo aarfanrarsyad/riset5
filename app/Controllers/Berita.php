@@ -556,6 +556,35 @@ class Berita extends BaseController
             ];
         }
 
+        //API BERITA
+        $client = \Config\Services::curlrequest();
+		$response = $client->request('POST', 'https://pusdiklat-bps.id/api/berita', [
+			'form_params' => [
+                'kategori' => '1',
+				'token'=>'473KpgTwt9MFxmpAYJ7aF2w5'
+				]
+			]);
+
+		$beritaApi= json_decode($response->getBody());
+        if($beritaApi->status=='sukses'){
+        $berita = $beritaApi->data;
+        //dd($berita);
+        $page = ! empty( $_GET['pageapi'] ) ? (int) $_GET['pageapi'] : 1;
+        $total = count( $berita ); //total items in array    
+        $limit = 8; //per page    
+        $totalPages = ceil( $total/ $limit ); //calculate total pages
+        $page = max($page, 1); //get 1 page when $_GET['page'] <= 0
+        $page = min($page, $totalPages); //get last page when $_GET['page'] > $totalPages
+        $offset = ($page - 1) * $limit;
+        if( $offset < 0 ) $offset = 0;
+        $berita = array_slice( $berita, $offset, $limit );
+
+        $data['apiberita'] = $berita;
+        $data['tot_page']=$totalPages;
+        $data['pageapi'] = $page;
+        }; 
+        // end apiberita
+
         $data['dataset'] = $data_berita;
         $data['judulHalaman'] = 'Berita';
         $data['active'] = 'berita';
@@ -849,6 +878,8 @@ class Berita extends BaseController
                 ];
             } else {
                 $data[$chk]['hits'] += (int)$ip[$i]['hits'];
+          
+          
             }
         }
 
@@ -1137,7 +1168,7 @@ class Berita extends BaseController
         return view('websia/kontenWebsia/beritaArtikel/unggahBerita.php', $data);
     }
 
-    public function apiberita()
+    /*public function apiberita()
     {
         $data['judulHalaman'] = 'API Berita';
         $data['active'] = 'API Berita';
@@ -1173,4 +1204,5 @@ class Berita extends BaseController
 
         return view('websia/kontenWebsia/beritaArtikel/berandaBerita1', $data);
     }
+    */
 }
