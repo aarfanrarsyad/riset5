@@ -259,6 +259,7 @@ class User extends BaseController
 		$sb = $query1->status_bekerja;
 		$ap = $query1->aktif_pns;
 		$ambigu = $query2->ambigu;
+		
 		//angkatan terakhir yang diambil
 		// $angkatan = $model->getAngkatanByIdAlumni(session('id_alumni'));
 
@@ -296,6 +297,15 @@ class User extends BaseController
 			]);
 		}
 
+		$kabkota = "";
+		$provinsi = "";
+		if($query1->kota != NULL){
+			$kabkota = ", ".$query1->kota;
+		}
+		if($query1->provinsi != NULL){
+			$provinsi = ", ".$query1->provinsi;
+		}
+
 		$data = [
 			'status'			=> $status,
 			'judulHalaman' 		=> 'Profil User | Website Riset 5',
@@ -312,6 +322,8 @@ class User extends BaseController
 			'rekomendasi'     	=> $query4,
 			'foto'				=> $galeri_profil,
 			'count'				=> count($galeri_profil),
+			'kabkota'			=> $kabkota,
+			'provinsi'			=> $provinsi,
 		];
 		return view('websia/kontenWebsia/userProfile/userProfile', $data);
 	}
@@ -452,6 +464,15 @@ class User extends BaseController
 			$ap = "Aktif sebagai PNS";
 		}
 
+		$kabkota = "";
+		$provinsi = "";
+		if($query1->kota != NULL){
+			$kabkota = ", ".$query1->kota;
+		}
+		if($query1->provinsi != NULL){
+			$provinsi = ", ".$query1->provinsi;
+		}
+
 		$data = [
 			'status'		=> $status,
 			'judulHalaman' 		=> 'Profil User | Website Riset 5',
@@ -468,6 +489,8 @@ class User extends BaseController
 			'rekomendasi'          => $query4,
 			'foto'				=> $galeri_profil,
 			'count'				=> count($galeri_profil),
+			'kabkota'			=> $kabkota,
+			'provinsi'			=> $provinsi,
 		];
 		return view('websia/kontenWebsia/userProfile/userProfile', $data);
 	}
