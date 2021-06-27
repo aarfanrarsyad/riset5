@@ -144,11 +144,19 @@ if ($status == 'bukan user') {
 
             </div>
             <!-- tempat dan tanggal lahir -->
-            <p class="font-heading text-primary text-center md:text-left text-sm mb-5 md:mb-3 lg:mb-5">
-                <?php if ($cttl == "") : ?>
-                    <?= $alumni->tempat_lahir ?>, <?= strftime("%d %B %Y", strtotime($alumni->tanggal_lahir)); ?>
-                <?php endif ?>
-            </p>
+            <div class="flex justify-center md:justify-start font-heading text-primary text-center md:text-left text-sm mb-5 md:mb-3 lg:mb-5">
+                <div class="flex-auto">
+                    <?php if ($cttl == "") : ?>
+                        <?= $alumni->tempat_lahir ?>, <?= strftime("%d %B %Y", strtotime($alumni->tanggal_lahir)); ?>
+                    <?php endif ?>
+                </div>
+                <div class="flex-auto text-primary ml-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="sm:w-5 w-4">
+                        <path fill-rule="evenodd" d="M3.707 2.293a1 1 0 00-1.414 1.414l14 14a1 1 0 001.414-1.414l-1.473-1.473A10.014 10.014 0 0019.542 10C18.268 5.943 14.478 3 10 3a9.958 9.958 0 00-4.512 1.074l-1.78-1.781zm4.261 4.26l1.514 1.515a2.003 2.003 0 012.45 2.45l1.514 1.514a4 4 0 00-5.478-5.478z" clip-rule="evenodd" />
+                        <path d="M12.454 16.697L9.75 13.992a4 4 0 01-3.742-3.741L2.335 6.578A9.98 9.98 0 00.458 10c1.274 4.057 5.065 7 9.542 7 .847 0 1.669-.105 2.454-.303z" />
+                    </svg>
+                </div>
+            </div>
             <p class="font-heading text-center md:text-left text-base mb-5 md:mb-3 lg:mb-5">
                 <!-- Akademi Ilmu Statistik / STIS/ POLSTAT STIS  ========>  Harusnya diatur di BE -->
                 <?php foreach ($pendidikan as $row) {
@@ -184,11 +192,21 @@ if ($status == 'bukan user') {
         <!-- Akhir Deskripsi user profile -->
         <div class="md:pl-5 lg:pl-6">
             <?php if ($calamat == "") : ?>
-                <p class="font-heading text-primary text-xs px-5 md:px-0 mt-6">Lokasi Tempat Tinggal Saat Ini</p>
+                <div class="flex">
+                    <div class="flex-auto font-heading text-primary text-xs pl-5 md:px-0 mt-6">Lokasi Tempat Tinggal Saat Ini</div>
+                    <div class="flex-auto text-primary md:px-0 mt-6 md:mt-5 ml-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="sm:w-5 w-4">
+                            <path fill-rule="evenodd" d="M3.707 2.293a1 1 0 00-1.414 1.414l14 14a1 1 0 001.414-1.414l-1.473-1.473A10.014 10.014 0 0019.542 10C18.268 5.943 14.478 3 10 3a9.958 9.958 0 00-4.512 1.074l-1.78-1.781zm4.261 4.26l1.514 1.515a2.003 2.003 0 012.45 2.45l1.514 1.514a4 4 0 00-5.478-5.478z" clip-rule="evenodd" />
+                            <path d="M12.454 16.697L9.75 13.992a4 4 0 01-3.742-3.741L2.335 6.578A9.98 9.98 0 00.458 10c1.274 4.057 5.065 7 9.542 7 .847 0 1.669-.105 2.454-.303z" />
+                        </svg>
+                    </div>
+                </div>
                 <span class="font-heading flex justify-start px-3 md:px-0 text-base text-left mb-2 md:mb-0">
                     <img class="my-2 mt-2 mr-0 md:mr-2 ml-1 md:ml-0 w-6 h-6 md:w-6 float-left" src="/img/components/icon/maps_flag.png" alt="alamat">
                     <!-- Lokasi tempat tinggal -->
-                    <p class="font-heading my-2 mt-2"> <?= ucwords($alumni->alamat_alumni);echo $kabkota;echo $provinsi; ?> </p>
+                    <p class="font-heading my-2 mt-2"> <?= ucwords($alumni->alamat_alumni);
+                                                        echo $kabkota;
+                                                        echo $provinsi; ?> </p>
                 </span>
                 <hr class="visible sm:invisible border-primary border-opacity-75 w-4/5 object-center mx-auto mb-6 md:mb-0">
             <?php endif ?>
@@ -292,7 +310,7 @@ if ($status == 'bukan user') {
                     <img src="/img/components/icon/panah_kanan.png" alt="icon panah kanan" class="float-right pl-2">
                 </a>
             </div>
-            <h2 class="font-heading -mb-2 sm:mb-6 ml-2 text-base sm:text-xl inline-block">Alumni yang mungkin Anda kenal</h2>
+            <h2 class="font-heading md:-mb-2 mb-5 ml-2 text-base sm:text-xl inline-block">Alumni yang mungkin Anda kenal</h2>
         </div>
         <div class="holder mx-auto w-11/12 md:w-full lg:w-11/12 grid grid-cols-2 md:grid-cols-4 gap-x-4 md:gap-x-0 lg:gap-x-8" data-aos="zoom-in">
             <?php foreach ($rekomendasi as $row) :  ?>
@@ -321,7 +339,7 @@ if ($status == 'bukan user') {
 
     </div>
     <div class="visible sm:invisible">
-        <a class="bg-secondary mb-2 -mt-8 mr-2 float-right font-paragraph text-sm text-white text-center py-1 px-4 mx-auto rounded-full cursor-pointer transition-colors duration-300" href="/User/rekomendasi">
+        <a class="bg-secondary mb-5 -mt-5 mr-2 float-right font-paragraph text-sm text-white text-center py-1 px-4 mx-auto rounded-full cursor-pointer transition-colors duration-300" href="/User/rekomendasi">
             Lihat Semua
             <img src="/img/components/icon/panah_kanan.png" alt="lihat semua rekomendasi" class="float-right pl-2">
         </a>
@@ -331,8 +349,8 @@ if ($status == 'bukan user') {
 
 <!-- Atribut pada section ini belum ditentukan -->
 <!-- Awal Informasi Instansi -->
-<div class="w-full my-6 lg:my-2 lg:px-20 md:px-8 px-2">
-    <h3 class="font-heading font-bold text-xl text-center md:text-left text-secondary">Informasi Instansi</h3>
+<div class="w-full my-6 md:my-0 lg:mt-12 lg:mb-8 lg:px-20 md:px-8 px-2">
+    <h3 class="flex-auto font-heading font-bold text-xl text-center md:text-left text-secondary">Informasi Instansi</h3>
     <div class="md:shadow-lg lg:shadow-xl rounded-2xl px-3 py-3 md:px-7 md:py-5 lg:mx-14 lg:py-8 lg:px-11 md:mt-3">
         <div class="font-heading">
             <?php
@@ -364,12 +382,12 @@ if ($status == 'bukan user') {
             if ($tempat_kerja->kota == "") {
                 $tkkabkota = "";
             } else {
-                $tkkabkota = ", ".$tempat_kerja->kota;
+                $tkkabkota = ", " . $tempat_kerja->kota;
             }
             if ($tempat_kerja->provinsi == "") {
                 $tkprovinsi = "";
             } else {
-                $tkprovinsi = ", ".$tempat_kerja->provinsi;
+                $tkprovinsi = ", " . $tempat_kerja->provinsi;
             }
             ?>
             <div class="flex items-start">
@@ -378,7 +396,9 @@ if ($status == 'bukan user') {
             </div>
             <div class="flex items-start">
                 <div class="font-bold text-primary w-3/12 md:w-2/12 lg:w-1/12 lg:pb-2">Alamat : </div>
-                <div class="w-9/12 md:w-10/12 lg:w-11/12 lg:ml-5"><?= $alamat_instansi; echo $tkkabkota; echo $tkprovinsi; ?></div>
+                <div class="w-9/12 md:w-10/12 lg:w-11/12 lg:ml-5"><?= $alamat_instansi;
+                                                                    echo $tkkabkota;
+                                                                    echo $tkprovinsi; ?></div>
             </div>
             <div class="flex items-start">
                 <div class="font-bold text-primary w-3/12 md:w-2/12 lg:w-1/12 lg:pb-2">Telp : </div>
@@ -400,8 +420,16 @@ if ($status == 'bukan user') {
 
 <?php if ($cprestasi == 1) { ?>
     <!-- Awal Riwayat Prestasi -->
-    <div class="w-full my-6 lg:my-2 lg:px-20 md:px-8 px-2">
-        <h3 class="font-heading font-bold text-xl text-secondary text-center md:text-left ">Riwayat Prestasi</h3>
+    <div class="w-full my-0 md:my-0 lg:mb-4 lg:px-20 md:px-8 px-2">
+        <div class="flex justify-center md:justify-start md:mb-6">
+            <h3 class="font-heading font-bold text-xl text-secondary text-center md:text-left ">Riwayat Prestasi</h3>
+            <div class="flex-auto text-primary mt-1 ml-2">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5">
+                    <path fill-rule="evenodd" d="M3.707 2.293a1 1 0 00-1.414 1.414l14 14a1 1 0 001.414-1.414l-1.473-1.473A10.014 10.014 0 0019.542 10C18.268 5.943 14.478 3 10 3a9.958 9.958 0 00-4.512 1.074l-1.78-1.781zm4.261 4.26l1.514 1.515a2.003 2.003 0 012.45 2.45l1.514 1.514a4 4 0 00-5.478-5.478z" clip-rule="evenodd" />
+                    <path d="M12.454 16.697L9.75 13.992a4 4 0 01-3.742-3.741L2.335 6.578A9.98 9.98 0 00.458 10c1.274 4.057 5.065 7 9.542 7 .847 0 1.669-.105 2.454-.303z" />
+                </svg>
+            </div>
+        </div>
         <div class="md:shadow-lg lg:shadow-xl rounded-2xl px-0 py-1 md:px-5 lg:mx-14 lg:p-8 mb-1">
             <?php if ($prestasi == NULL) {
                 echo "<p class='text-center'>Riwayat Prestasi tidak ditemukan.</p>";
@@ -415,15 +443,23 @@ if ($status == 'bukan user') {
             } ?>
             <!-- Jika data prestasi belum diinput, ditampilkan "belum ada riwayat prestasi" -->
         </div>
-        <hr class="visible sm:invisible border-primary border-opacity-75 w-4/5 object-center mx-auto mt-5">
+        <hr class="visible sm:invisible border-primary border-opacity-75 w-4/5 object-center mx-auto mt-6">
     </div>
     <!-- Akhir Riwayat Prestasi -->
 <?php } ?>
 
 <?php if ($cpendidikan == 1) { ?>
     <!-- Awal Riwayat Pendidikan -->
-    <div class="w-full my-6 lg:my-2 lg:px-20 md:px-8 px-2">
-        <h3 class="font-heading font-bold text-xl text-secondary text-center md:text-left ">Riwayat Pendidikan</h3>
+    <div class="w-full my-6 md:my-0 lg:mb-3 lg:px-20 md:px-8 px-2">
+        <div class="flex justify-center md:justify-start">
+            <h3 class="font-heading font-bold text-xl text-secondary text-center md:text-left ">Riwayat Pendidikan</h3>
+            <div class="flex-auto text-primary mt-1 ml-2">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5">
+                    <path fill-rule="evenodd" d="M3.707 2.293a1 1 0 00-1.414 1.414l14 14a1 1 0 001.414-1.414l-1.473-1.473A10.014 10.014 0 0019.542 10C18.268 5.943 14.478 3 10 3a9.958 9.958 0 00-4.512 1.074l-1.78-1.781zm4.261 4.26l1.514 1.515a2.003 2.003 0 012.45 2.45l1.514 1.514a4 4 0 00-5.478-5.478z" clip-rule="evenodd" />
+                    <path d="M12.454 16.697L9.75 13.992a4 4 0 01-3.742-3.741L2.335 6.578A9.98 9.98 0 00.458 10c1.274 4.057 5.065 7 9.542 7 .847 0 1.669-.105 2.454-.303z" />
+                </svg>
+            </div>
+        </div>
         <div class="lg:px-16">
             <div class="md:shadow-lg lg:shadow-xl rounded-3xl w-full mx-auto mt-5">
                 <div class="overflow-x-scroll md:overflow-x-hidden">
@@ -509,7 +545,7 @@ if ($status == 'bukan user') {
 <?php } ?>
 
 <!-- Awal Foto Tentang Anda -->
-<div class="w-full my-6 lg:my-2 lg:px-20 md:px-8 px-2 text-left">
+<div class="w-full my-6 md:my-0 lg:px-20 md:px-8 px-2 text-left">
     <!-- <div class="font-heading">
         link ini mengarah ke halaman tampilan semua galeri
         <div class="invisible sm:visible">
@@ -527,7 +563,7 @@ if ($status == 'bukan user') {
     </div>
     <h3 class="font-heading ml-2 font-bold text-xl text-center md:text-left text-secondary inline-block">Foto Tentang <?= $usernya ?></h3> -->
 
-    <div class="-mt-8 sm:mt-0 md:mb-6 mb-2 text-left text-secondary font-semibold">
+    <div class="-mt-8 sm:mt-0 md:mb-0 mb-2 md:text-left text-center text-secondary font-semibold">
         <!-- link ini mengarah ke halaman tampilan semua rekomendasi -->
         <div class="invisible sm:visible">
             <a class="bg-secondary mb-8 mt-1 md:mt-0 sm:float-right font-paragraph text-sm text-white text-center py-1 px-4 mx-auto rounded-full cursor-pointer hover:bg-secondaryhover transition-colors duration-100" href="/User/galeriFoto">
@@ -538,7 +574,7 @@ if ($status == 'bukan user') {
         <h2 class="font-heading -mb-2 -mt-1 sm:mt-0 sm:mb-6 ml-2 text-xl inline-block">Foto Tentang <?= $usernya ?></h2>
     </div>
 
-    <div class="md:shadow-lg lg:shadow-xl rounded-2xl px-3 py-3 md:px-7 md:py-5 lg:mx-14 lg:py-8 lg:px-11 md:mt-3">
+    <div class="md:shadow-lg lg:shadow-xl rounded-2xl px-3 py-3 md:px-7 md:py-5 lg:mx-14 lg:py-6 lg:px-11 md:mt-0">
         <?php for ($x = 0; $x < 6; $x++) : ?>
             <!-- 1 gambar -->
             <!-- <a href="#img-1" id="img-1">
@@ -765,12 +801,12 @@ if ($status == 'bukan user') {
 
 </div>
 <div class="visible sm:invisible">
-    <a class="bg-secondary mb-2 -mt-8 mr-2 float-right font-paragraph text-sm text-white text-center py-1 px-4 mx-auto rounded-full cursor-pointer transition-colors duration-300" href="/User/galeriFoto">
+    <a class="bg-secondary mb-2 -mt-5 mr-2 float-right font-paragraph text-sm text-white text-center py-1 px-4 mx-auto rounded-full cursor-pointer transition-colors duration-300" href="/User/galeriFoto">
         Lihat Semua
         <img src=" /img/components/icon/panah_kanan.png" alt="lihat semua rekomendasi" class="float-right pl-2">
     </a>
 </div>
-<hr class="visible sm:invisible border-primary border-opacity-75 w-4/5 object-center mx-auto mb-8">
+<hr class="invisible border-primary border-opacity-75 w-4/5 object-center mx-auto mb-8 lg:mb-12">
 </div>
 <!-- Akhir Foto Tentang Anda -->
 
