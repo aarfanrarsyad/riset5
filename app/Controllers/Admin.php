@@ -1644,7 +1644,6 @@ class Admin extends BaseController
 		$album = $model->getAlbum();
 		for ($n = 0; $n < count($album); $n++) {
 			if ($album[$n]['album'] == 'Alumni' || $album[$n]['album'] == 'Wisuda' || $album[$n]['album'] == 'Kenangan') {
-				echo $album[$n]['album'] . "<br>";
 				unset($album[$n]);
 			}
 		}
@@ -1700,7 +1699,6 @@ class Admin extends BaseController
 		$album = $model->getAlbum();
 		for ($n = 0; $n < count($album); $n++) {
 			if ($album[$n]['album'] == 'Alumni' || $album[$n]['album'] == 'Wisuda' || $album[$n]['album'] == 'Kenangan') {
-				echo $album[$n]['album'] . "<br>";
 				unset($album[$n]);
 			}
 		}
