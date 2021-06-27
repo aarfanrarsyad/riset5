@@ -18,7 +18,7 @@ class Berita extends BaseController
     public function __construct()
     {
         if (session()->has('role'))
-            if (!in_array("2", session('role')))
+            if (!in_array("2", session('role')) && !in_array("1", session('role')))
                 echo '<script>window.location.replace("' . base_url() . '");</script>';
 
         $this->form_validation = \Config\Services::validation();
