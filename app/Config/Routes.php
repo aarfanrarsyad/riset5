@@ -32,6 +32,7 @@ $routes->setAutoRoute(true);
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 $routes->get('/validate_sipadu', 'Auth::validate_sipadu');
+$routes->get('/validate-bps', 'Auth::bps');
 
 $routes->get('/developer', 'Webservice::index');
 $routes->get('/developer/edit/biodata', 'Webservice::editBiodata');
