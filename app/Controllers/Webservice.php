@@ -19,8 +19,9 @@ class Webservice extends BaseController
 	public function index()
 	{
 		if (session()->has('role')) {
-			$role = array_search('4', session('role'), true);
+			$role = in_array('4', session('role'));
 		} else $role = false;
+
 		if ($role == false) {
 			$login = 0;
 		} else {
@@ -107,9 +108,9 @@ class Webservice extends BaseController
 		$time = new Time('now');
 
 		//idUser didapat dari session
-		if(isset($_POST['scope'])) 
+		if (isset($_POST['scope']))
 			$tokScope = $_POST['scope'];
-			else $tokScope = null;
+		else $tokScope = null;
 		$idUser = session('id_user');;
 		$data = [
 			'token_app' => [
@@ -135,7 +136,7 @@ class Webservice extends BaseController
 		$id_token = $this->model->getTokenId($id)->getRow()->id_token;
 		$this->model->deleteToken($id_token);
 		$this->model->deleteApp($id);
-		
+
 		echo json_encode('data sukses dihapus');
 	}
 
@@ -211,9 +212,9 @@ class Webservice extends BaseController
 	//show detail app via ajax
 	public function ajax_edit()
 	{
-		if (isset($_POST['id'])) 
+		if (isset($_POST['id']))
 			$id = $_POST['id'];
-			else return;
+		else return;
 		//$id=2;
 		$data = $this->model->editApp($id)->getRowArray();
 		$token = $this->model->getToken($data['id_token'])->getRow()->token;
