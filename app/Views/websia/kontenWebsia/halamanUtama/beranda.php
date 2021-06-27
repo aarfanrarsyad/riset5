@@ -14,7 +14,11 @@ if ($login == 'belum') {
 
 <?= $this->section('content'); ?>
 
-<!-- <php dd(session()->flash); ?> -->
+<?php if (session('role') != null) if (!in_array("2", session('role'))) if (in_array("4", session('role'))) : ?>
+    <script>
+        window.location.replace("<?= base_url('developer') ?>")
+    </script>
+<?php endif; ?>
 <?= session()->login_notif; ?>
 
 <?php

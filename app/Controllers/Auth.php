@@ -268,6 +268,13 @@ class Auth extends BaseController
 							foreach ($query as $arr) {
 								array_push($role, $arr->group_id);
 							}
+							foreach ($query as $arr) {
+								$admin_access = $this->roleModel->db->table('groups_access')->where('group_id', $arr->group_id)->get()->getFirstRow('array');
+								if ($admin_access != null) {
+									if (!in_array("1", $role))
+										array_push($role, '1');
+								}
+							}
 							session()->set([
 								'role' => $role
 							]);

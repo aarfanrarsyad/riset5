@@ -162,6 +162,13 @@ class Home extends BaseController
 									foreach ($query as $arr) {
 										array_push($role, $arr->group_id);
 									}
+									foreach ($query as $arr) {
+										$admin_access = $this->roleModel->db->table('groups_access')->where('group_id', $arr->group_id)->get()->getFirstRow('array');
+										if ($admin_access != null) {
+											if (!in_array("1", $role))
+												array_push($role, '1');
+										}
+									}
 									session()->set([
 										'role' => $role
 									]);
@@ -253,11 +260,11 @@ class Home extends BaseController
 		// yang sudah memiliki tempat kerja
 		$jumlahInput = "SELECT COUNT(*) AS diket FROM `tempat_kerja` AS a RIGHT JOIN `alumni_tempat_kerja` AS b ON a.id_tempat_kerja = b.id_tempat_kerja WHERE a.negara != '' ";
 		$diket = $model->db->query($jumlahInput)->getRow()->diket;
-		
+
 		// yang belum memiliki tempat kerja
 		$jumlahBelumInput = "SELECT COUNT(*) AS gatau FROM `tempat_kerja` AS a LEFT JOIN `alumni_tempat_kerja` AS b ON a.id_tempat_kerja = b.id_tempat_kerja WHERE b.id_tempat_kerja = 528";
 		$gatau = $model->db->query($jumlahBelumInput)->getRow()->gatau;
-		
+
 		// irisan Indonesia dan sudah input
 		$jumlahIndonesia = "SELECT COUNT(*) AS indo FROM `tempat_kerja` AS a JOIN `alumni_tempat_kerja` AS b ON a.id_tempat_kerja = b.id_tempat_kerja WHERE a.negara = 'Indonesia'";
 		$indo = $model->db->query($jumlahIndonesia)->getRow()->indo;
@@ -298,7 +305,6 @@ class Home extends BaseController
 			];
 		}
 		$data['Allnews'] = $hotNews;
-
 		return view('websia/kontenWebsia/halamanUtama/beranda', $data);
 	}
 

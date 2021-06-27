@@ -17,6 +17,10 @@ class Berita extends BaseController
 
     public function __construct()
     {
+        if (session()->has('role'))
+            if (!in_array("2", session('role')))
+                echo '<script>window.location.replace("' . base_url() . '");</script>';
+
         $this->form_validation = \Config\Services::validation();
         $this->session = service('session');
 
@@ -1141,31 +1145,31 @@ class Berita extends BaseController
 
         $pager = \Config\Services::pager();
         $client = \Config\Services::curlrequest();
-		$response = $client->request('POST', 'https://pusdiklat-bps.id/api/berita', [
-			'form_params' => [
+        $response = $client->request('POST', 'https://pusdiklat-bps.id/api/berita', [
+            'form_params' => [
                 'kategori' => '1',
-				'token'=>'473KpgTwt9MFxmpAYJ7aF2w5'
-				]
-			]);
+                'token' => '473KpgTwt9MFxmpAYJ7aF2w5'
+            ]
+        ]);
 
-		$beritaApi= json_decode($response->getBody());
-        if($beritaApi->status=='sukses'){
-        $berita = $beritaApi->data;
-        //dd($berita);
-        $page = ! empty( $_GET['page'] ) ? (int) $_GET['page'] : 1;
-        $total = count( $berita ); //total items in array    
-        $limit = 8; //per page    
-        $totalPages = ceil( $total/ $limit ); //calculate total pages
-        $page = max($page, 1); //get 1 page when $_GET['page'] <= 0
-        $page = min($page, $totalPages); //get last page when $_GET['page'] > $totalPages
-        $offset = ($page - 1) * $limit;
-        if( $offset < 0 ) $offset = 0;
-        $berita = array_slice( $berita, $offset, $limit );
+        $beritaApi = json_decode($response->getBody());
+        if ($beritaApi->status == 'sukses') {
+            $berita = $beritaApi->data;
+            //dd($berita);
+            $page = !empty($_GET['page']) ? (int) $_GET['page'] : 1;
+            $total = count($berita); //total items in array    
+            $limit = 8; //per page    
+            $totalPages = ceil($total / $limit); //calculate total pages
+            $page = max($page, 1); //get 1 page when $_GET['page'] <= 0
+            $page = min($page, $totalPages); //get last page when $_GET['page'] > $totalPages
+            $offset = ($page - 1) * $limit;
+            if ($offset < 0) $offset = 0;
+            $berita = array_slice($berita, $offset, $limit);
 
-        $data['apiberita'] = $berita;
-        $data['tot_page']=$totalPages;
-        $data['page'] = $page;
-        }; 
+            $data['apiberita'] = $berita;
+            $data['tot_page'] = $totalPages;
+            $data['page'] = $page;
+        };
 
         return view('websia/kontenWebsia/beritaArtikel/berandaBerita1', $data);
     }
