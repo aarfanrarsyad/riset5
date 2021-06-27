@@ -17,6 +17,10 @@ class Berita extends BaseController
 
     public function __construct()
     {
+        if (session()->has('role'))
+            if (!in_array("2", session('role')) && !in_array("1", session('role')))
+                echo '<script>window.location.replace("' . base_url() . '");</script>';
+
         $this->form_validation = \Config\Services::validation();
         $this->session = service('session');
 
@@ -166,7 +170,7 @@ class Berita extends BaseController
 
                 if (!session()->has('folder_name')) {
                     $name_folder = 'raw_file' . round(microtime(true));
-                    $curr_folder = ROOTPATH . '/public/berita' . '/' . $name_folder;
+                    $curr_folder = ROOTPATH . '../berita' . '/' . $name_folder;
                     mkdir($curr_folder, 0777, true);
                     session()->set('folder_name', $name_folder);
                 }
@@ -299,7 +303,7 @@ class Berita extends BaseController
 
         $id =  $this->request->getPost('id');
 
-        $dir = ROOTPATH . '/public/berita';
+        $dir = ROOTPATH . '../berita';
         $file_name = explode(".", $_FILES['file']['name']);
         $file_name = round(microtime(true)) . '.' . end($file_name);
         $tmp_name =  $_FILES['file']['tmp_name'];
@@ -337,7 +341,7 @@ class Berita extends BaseController
         $src = $this->request->getPost('path');
         $src = explode('/', $src);
         $dir_file = array_values(array_slice($src, -2));
-        $curr_folder = ROOTPATH . '/public/berita/' . $dir_file[0] . '/' . $dir_file[1];
+        $curr_folder = ROOTPATH . '../berita/' . $dir_file[0] . '/' . $dir_file[1];
         if (file_exists($curr_folder)) {
             $this->output_json(unlink($curr_folder));
         } else {
@@ -1077,7 +1081,7 @@ class Berita extends BaseController
 
     public function folder()
     {
-        $curr_folder = ROOTPATH . '/public/berita/';
+        $curr_folder = ROOTPATH . '../berita/';
         mkdir($curr_folder, 0777, true);
     }
 
@@ -1091,7 +1095,7 @@ class Berita extends BaseController
             session()->remove('folder_name');
             if (!session()->has('folder_name')) {
                 $name_folder = 'raw_file' . round(microtime(true));
-                $curr_folder = ROOTPATH . '/public/berita/' . $name_folder;
+                $curr_folder = ROOTPATH . '../berita/' . $name_folder;
                 mkdir($curr_folder, 0777, true);
                 session()->set('folder_name', $name_folder);
                 // $this->output_json(session()->get('folder_name')); #Outputnya raw_file1622721146
@@ -1114,7 +1118,7 @@ class Berita extends BaseController
             $file_name = "thumbnail_" . $thumbnail['name'];
             $tmp_name =  $thumbnail['tmp_name'];
 
-            $upload_file = move_uploaded_file($tmp_name, ROOTPATH . '/public/berita/' . session()->get('folder_name')  . '/' .  $file_name);
+            $upload_file = move_uploaded_file($tmp_name, ROOTPATH . '../berita/' . session()->get('folder_name')  . '/' .  $file_name);
             if (!$upload_file) return $this->output_json(false);
             $dataset['thumbnail'] = esc($file_name);
 
@@ -1141,31 +1145,31 @@ class Berita extends BaseController
 
         $pager = \Config\Services::pager();
         $client = \Config\Services::curlrequest();
-		$response = $client->request('POST', 'https://pusdiklat-bps.id/api/berita', [
-			'form_params' => [
+        $response = $client->request('POST', 'https://pusdiklat-bps.id/api/berita', [
+            'form_params' => [
                 'kategori' => '1',
-				'token'=>'473KpgTwt9MFxmpAYJ7aF2w5'
-				]
-			]);
+                'token' => '473KpgTwt9MFxmpAYJ7aF2w5'
+            ]
+        ]);
 
-		$beritaApi= json_decode($response->getBody());
-        if($beritaApi->status=='sukses'){
-        $berita = $beritaApi->data;
-        //dd($berita);
-        $page = ! empty( $_GET['page'] ) ? (int) $_GET['page'] : 1;
-        $total = count( $berita ); //total items in array    
-        $limit = 8; //per page    
-        $totalPages = ceil( $total/ $limit ); //calculate total pages
-        $page = max($page, 1); //get 1 page when $_GET['page'] <= 0
-        $page = min($page, $totalPages); //get last page when $_GET['page'] > $totalPages
-        $offset = ($page - 1) * $limit;
-        if( $offset < 0 ) $offset = 0;
-        $berita = array_slice( $berita, $offset, $limit );
+        $beritaApi = json_decode($response->getBody());
+        if ($beritaApi->status == 'sukses') {
+            $berita = $beritaApi->data;
+            //dd($berita);
+            $page = !empty($_GET['page']) ? (int) $_GET['page'] : 1;
+            $total = count($berita); //total items in array    
+            $limit = 8; //per page    
+            $totalPages = ceil($total / $limit); //calculate total pages
+            $page = max($page, 1); //get 1 page when $_GET['page'] <= 0
+            $page = min($page, $totalPages); //get last page when $_GET['page'] > $totalPages
+            $offset = ($page - 1) * $limit;
+            if ($offset < 0) $offset = 0;
+            $berita = array_slice($berita, $offset, $limit);
 
-        $data['apiberita'] = $berita;
-        $data['tot_page']=$totalPages;
-        $data['page'] = $page;
-        }; 
+            $data['apiberita'] = $berita;
+            $data['tot_page'] = $totalPages;
+            $data['page'] = $page;
+        };
 
         return view('websia/kontenWebsia/beritaArtikel/berandaBerita1', $data);
     }

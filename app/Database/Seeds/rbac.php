@@ -557,10 +557,6 @@ class Rbac extends Seeder
 
 		$data = [
 			[
-				'group_id'     		=> 2,
-				'menu_access_id'	=> 2
-			],
-			[
 				'group_id'     		=> 1,
 				'menu_access_id'	=> 1
 			],
@@ -663,10 +659,6 @@ class Rbac extends Seeder
 			[
 				'group_id'     		=> 1,
 				'menu_access_id'	=> 30
-			],
-			[
-				'group_id'     		=> 2,
-				'menu_access_id'	=> 1
 			],
 			[
 				'group_id'     		=> 1,

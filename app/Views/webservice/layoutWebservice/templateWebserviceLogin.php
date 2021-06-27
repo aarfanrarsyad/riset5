@@ -197,12 +197,12 @@
             <!-- akhir footer haistis -->
 
             <!-- awal link ke webservice  -->
-            <div class="flex flex-col text-white font-heading mx-auto md:mx-5 mt-4 md:mt-0">
-                <a href="/" class="mb-2 hover:text-secondary">
+            <div class="flex flex-col text-white font-heading mx-auto md:mx-5 mt-4 md:mt-0 mb-2 md:mb-0">
+                <a href="https://pkl.stis.ac.id/60/" class="mb-2 hover:text-secondary">
                     <h3 class="underline md:no-underline">Website PKL60</h3>
                 </a>
-                <a href="/developer" class="hover:text-secondary">
-                    <h3 class="underline md:no-underline">Webservice(API)</h3>
+                <a href="<?= base_url(); ?>" class="hover:text-secondary">
+                    <h3 class="underline md:no-underline">Website SIA</h3>
                 </a>
             </div>
             <!-- akhir link ke webservice  -->

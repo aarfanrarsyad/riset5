@@ -12,24 +12,25 @@ class Webservice extends BaseController
 {
 	public function __construct()
 	{
+		if (session()->has('role')) {
+			$role = in_array('4', session('role'));
+		} else $role = false;
+
+		if ($role == false) {
+			$this->login = 0;
+		} else {
+			$this->login = 1;
+		};
+
 		$this->model = new WebserviceModel();
 		$this->form_validation = \Config\Services::validation();
 	}
 
 	public function index()
 	{
-		if (session()->has('role')) {
-			$role = array_search('4', session('role'), true);
-		} else $role = false;
-		if ($role == false) {
-			$login = 0;
-		} else {
-			$login = 1;
-		};
-
 		$data = [
 			'login' => 'sudah',
-			'statusLog' => $login,
+			'statusLog' => $this->login,
 			'judul' => 'Web Service | SIA',
 		];
 
@@ -38,17 +39,9 @@ class Webservice extends BaseController
 
 	public function dokumentasi()
 	{
-		if (session()->has('role')) {
-			$role = array_search('4', session('role'), true);
-		} else $role = false;
-		if ($role == false) {
-			$login = 0;
-		} else {
-			$login = 1;
-		};
 		$data = [
 			'login' => 'sudah',
-			'statusLog' => $login,
+			'statusLog' => $this->login,
 			'judul' => 'Dokumentasi Web Service | SIA'
 		];
 		return view('webservice/kontenWebservice/dokumentasi/dokumentasi.php', $data);
@@ -56,21 +49,15 @@ class Webservice extends BaseController
 
 	public function proyek()
 	{
-		if (session()->has('role')) {
-			$role = array_search('4', session('role'), true);
-		} else $role = false;
-		if ($role == false) {
-			$login = 0;
+		if ($this->login == 0)
 			echo '<script>window.location.replace("' . base_url('login') . '");</script>';
-		} else {
-			$login = 1;
-		};
+
 		//user id dapat dari session
 		$uid = session('id_user');
 
 		$data = [
 			'login' => 'sudah',
-			'statusLog' => $login,
+			'statusLog' => $this->login,
 			'judul' => 'Proyek Web Service | SIA',
 			'client_app' => $this->model->getApp($uid)->getResultArray(),
 		];
@@ -79,17 +66,11 @@ class Webservice extends BaseController
 
 	public function buatProyek()
 	{
-		if (session()->has('role')) {
-			$role = array_search('4', session('role'), true);
-		} else $role = false;
-		if ($role == false) {
-			$login = 0;
+		if ($this->login == 0)
 			echo '<script>window.location.replace("' . base_url('login') . '");</script>';
-		} else {
-			$login = 1;
-		};
+
 		$data['login'] = 'sudah';
-		$data['statusLog'] = $login;
+		$data['statusLog'] = $this->login;
 		$data['judul'] = 'Proyek Web Service | SIA';
 		$data['scope_app'] = $this->model->getScope()->getResultArray();
 		return view('webservice/kontenWebservice/proyek/buatProyek.php', $data);
@@ -97,19 +78,15 @@ class Webservice extends BaseController
 
 	public function insertProyek()
 	{
-		if (session()->has('role')) {
-			$role = array_search('4', session('role'), true);
-		} else $role = false;
-		if ($role == false) {
+		if ($this->login == 0)
 			echo '<script>window.location.replace("' . base_url('login') . '");</script>';
-		}
 
 		$time = new Time('now');
 
 		//idUser didapat dari session
-		if(isset($_POST['scope'])) 
+		if (isset($_POST['scope']))
 			$tokScope = $_POST['scope'];
-			else $tokScope = null;
+		else $tokScope = null;
 		$idUser = session('id_user');;
 		$data = [
 			'token_app' => [
@@ -130,12 +107,11 @@ class Webservice extends BaseController
 
 	public function delete() //delete or cancel  project
 	{
-
 		$id = $_POST['id_app'];
 		$id_token = $this->model->getTokenId($id)->getRow()->id_token;
 		$this->model->deleteToken($id_token);
 		$this->model->deleteApp($id);
-		
+
 		echo json_encode('data sukses dihapus');
 	}
 
@@ -155,17 +131,12 @@ class Webservice extends BaseController
 	public function editAkun()
 	{
 		$model = new AlumniModel();
-		if (session()->has('role')) {
-			$role = array_search('4', session('role'), true);
-		} else $role = false;
-		if ($role == false) {
-			$login = 0;
+
+		if ($this->login == 0)
 			echo '<script>window.location.replace("' . base_url('login') . '");</script>';
-		} else {
-			$login = 1;
-		};
+
 		$data['login'] = 'sudah';
-		$data['statusLog'] = $login;
+		$data['statusLog'] = $this->login;
 		$data['email'] = $model->getAlumni(session('id_user'))->getRow()->email;
 
 		$data['judul'] = 'Edit Profil | SIA';
@@ -211,9 +182,9 @@ class Webservice extends BaseController
 	//show detail app via ajax
 	public function ajax_edit()
 	{
-		if (isset($_POST['id'])) 
+		if (isset($_POST['id']))
 			$id = $_POST['id'];
-			else return;
+		else return;
 		//$id=2;
 		$data = $this->model->editApp($id)->getRowArray();
 		$token = $this->model->getToken($data['id_token'])->getRow()->token;

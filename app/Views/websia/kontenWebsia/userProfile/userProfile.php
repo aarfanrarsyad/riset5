@@ -188,7 +188,7 @@ if ($status == 'bukan user') {
                 <span class="font-heading flex justify-start px-3 md:px-0 text-base text-left mb-2 md:mb-0">
                     <img class="my-2 mt-2 mr-0 md:mr-2 ml-1 md:ml-0 w-6 h-6 md:w-6 float-left" src="/img/components/icon/maps_flag.png" alt="alamat">
                     <!-- Lokasi tempat tinggal -->
-                    <p class="font-heading my-2 mt-2"> <?= $alumni->alamat_alumni ?> </p>
+                    <p class="font-heading my-2 mt-2"> <?= ucwords($alumni->alamat_alumni);echo $kabkota;echo $provinsi; ?> </p>
                 </span>
                 <hr class="visible sm:invisible border-primary border-opacity-75 w-4/5 object-center mx-auto mb-6 md:mb-0">
             <?php endif ?>
@@ -361,6 +361,16 @@ if ($status == 'bukan user') {
             } else {
                 $alamat_instansi = $tempat_kerja->alamat_instansi;
             }
+            if ($tempat_kerja->kota == "") {
+                $tkkabkota = "";
+            } else {
+                $tkkabkota = ", ".$tempat_kerja->kota;
+            }
+            if ($tempat_kerja->provinsi == "") {
+                $tkprovinsi = "";
+            } else {
+                $tkprovinsi = ", ".$tempat_kerja->provinsi;
+            }
             ?>
             <div class="flex items-start">
                 <div class="font-bold text-primary w-3/12 md:w-2/12 lg:w-1/12 lg:pb-2">Instansi :</div>
@@ -368,7 +378,7 @@ if ($status == 'bukan user') {
             </div>
             <div class="flex items-start">
                 <div class="font-bold text-primary w-3/12 md:w-2/12 lg:w-1/12 lg:pb-2">Alamat : </div>
-                <div class="w-9/12 md:w-10/12 lg:w-11/12 lg:ml-5"><?= $alamat_instansi ?></div>
+                <div class="w-9/12 md:w-10/12 lg:w-11/12 lg:ml-5"><?= $alamat_instansi; echo $tkkabkota; echo $tkprovinsi; ?></div>
             </div>
             <div class="flex items-start">
                 <div class="font-bold text-primary w-3/12 md:w-2/12 lg:w-1/12 lg:pb-2">Telp : </div>

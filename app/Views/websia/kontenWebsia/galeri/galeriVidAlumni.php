@@ -25,14 +25,6 @@
 <div class="bg-primary">
     <div class="py-4">
         <div class="p-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-10">
-
-            <!-- kalau iframenya ditaruh luar script php gini dia jalan scriptnya -->
-            <iframe frameborder="0" allowfullscreen="1" title="YouTube video player" class="h-52" src="http://www.youtube.com/embed/zXV8GMSc5Vg?enablejsapi=1&amp"></iframe>
-            <iframe frameborder="0" allowfullscreen="1" title="YouTube video player" class="h-52" src="http://www.youtube.com/embed/LTy0TzA_4DQ?enablejsapi=1&amp"></iframe>
-            <iframe frameborder="0" allowfullscreen="1" title="YouTube video player" class="h-52" src="http://www.youtube.com/embed/pRfmrE0ToTo?enablejsapi=1&amp"></iframe>
-
-            <!-- kalau ditaruh dalam gini dia gabisa kebaca di arraynya -->
-            <!-- mungkin bisa diakali biar ga usah pake tag php? -->
             <?php foreach ($video['video'] as $vd) : ?>
                 <iframe frameborder="0" allowfullscreen="1" title="YouTube video player" class="h-52" src="https://www.youtube.com/embed/<?= $vd['link'] ?>?enablejsapi=1&amp"></iframe>
             <?php endforeach; ?>
@@ -46,7 +38,7 @@
                     var $ = jQuery;
                     var players = [];
                     $('iframe').filter(function() {
-                        return this.src.indexOf('http://www.youtube.com/') == 0
+                        return this.src.indexOf('https://www.youtube.com/') == 0
                     }).each(function(k, v) {
                         if (!this.id) {
                             this.id = 'embeddedvideoiframe' + k
@@ -65,7 +57,6 @@
                             }
                         }))
                     });
-                    console.log(players); //ini buat ngecek jumlah video di arraynya aja
                 }
             </script>
         </div>
