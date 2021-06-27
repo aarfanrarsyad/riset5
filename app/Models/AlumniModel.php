@@ -19,7 +19,6 @@ class AlumniModel extends Model
         return $this->builder()->select('nama, id_alumni')->where('id_alumni', $id_alumni)->get()->getFirstRow('array');
     }
 
-
     // Sudah diubah
     public function getAlumniById($id_alumni)
     {
@@ -52,7 +51,7 @@ class AlumniModel extends Model
         //query utama
         $query = $this->table('alumni')->select('alumni.id_alumni,nama,foto_profil,nim,MAX(angkatan) AS angkatan,program_studi')
             ->orderBy('alumni.id_alumni')->groupBy('alumni.id_alumni')->limit($limit)
-            ->where('angkatan >', 0)->whereIn('instansi', ['Sekolah Tinggi Ilmu Statistik', 'Akademi Ilmu Statistik'])
+            ->where('angkatan >', 0)->whereIn('instansi', ['Sekolah Tinggi Ilmu Statistik', 'Akademi Ilmu Statistik', 'Politeknik Statistika STIS'])
             ->join('pendidikan', 'alumni.id_alumni = pendidikan.id_alumni', 'inner')
             ->join('pendidikan_tinggi', 'pendidikan_tinggi.id_pendidikan = pendidikan.id_pendidikan', 'inner');
 
@@ -75,7 +74,7 @@ class AlumniModel extends Model
                 'DI' => ['Ak. Ilmu Statistik', 'D-I Statistika'],
                 'DIII' => ['Akademi D-III', 'D-III Statistika'],
                 'KS' => ['D-IV Komputasi Statistik', 'D-IV Sistem Informasi', 'D-IV Sains Data'],
-                'ST' => ['D-IV Statistika Ekonomi', 'D-IV Statistika Sosial & Kependudukan']
+                'ST' => ['D-IV Statistika Ekonomi', 'D-IV Statistika Sosial & Kependudukan', 'D-IV Statistika']
             ];
 
             $prodi = ['in' => [], 'notIn' => []];
