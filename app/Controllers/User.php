@@ -548,21 +548,21 @@ class User extends BaseController
 			return redirect()->to(base_url('User/editProfil'));
 		} else {
 			$avatar = $this->request->getFile('file_upload');
-			$avatar->move(ROOTPATH . '/public/img/components/user/userid_' . session('id_user'));
+			$avatar->move(ROOTPATH . '../img/components/user/userid_' . session('id_user'));
 
 			if ($foto != 'components/icon/' . $query1->jenis_kelamin . '-icon.svg' && $foto != 'components/avatar.png') {
-				$url = ROOTPATH . '/public/img/' . $foto;
+				$url = ROOTPATH . '../img/' . $foto;
 				if (is_file($url))
 					unlink($url);
 			}
 
 			$image = \Config\Services::image()
-				->withFile(ROOTPATH . '/public/img/components/user/userid_' . session('id_user') . '/' . $avatar->getName())
+				->withFile(ROOTPATH . '../img/components/user/userid_' . session('id_user') . '/' . $avatar->getName())
 				->fit(350, 350, 'center')
 				->convert(IMAGETYPE_JPEG)
-				->save(ROOTPATH . '/public/img/components/user/userid_' . session('id_user') . '/foto_profil.jpeg', 70);
+				->save(ROOTPATH . '../img/components/user/userid_' . session('id_user') . '/foto_profil.jpeg', 70);
 
-			unlink(ROOTPATH . '/public/img/components/user/userid_' . session('id_user') . '/' . $avatar->getName());
+			unlink(ROOTPATH . '../img/components/user/userid_' . session('id_user') . '/' . $avatar->getName());
 
 			$data = [
 				'foto_profil' => 'components/user/userid_' . session('id_user') . '/foto_profil.jpeg'
@@ -581,7 +581,7 @@ class User extends BaseController
 		$foto = $query1->foto_profil;
 
 		if ($foto != 'components/icon/' . $query1->jenis_kelamin . '-icon.svg' && $foto != 'components/avatar.png') {
-			$url = ROOTPATH . '/public/img/' . $foto;
+			$url = ROOTPATH . '../img/' . $foto;
 			if (is_file($url))
 				unlink($url);
 		}
@@ -1246,7 +1246,7 @@ class User extends BaseController
 
 			$caption = str_replace(array("\r", "\n"), ' ', $caption);
 			$year = date("Y");
-			$path = ROOTPATH . '/public/img/galeri/' . $year;
+			$path = ROOTPATH . '../img/galeri/' . $year;
 
 			//cek apakah sudah terdapat foldernya
 			if (!is_dir($path))
@@ -1273,7 +1273,7 @@ class User extends BaseController
 					->save($file  . '.jpeg', 50);
 				// unlink($file . $ext);
 
-				$file = str_replace(ROOTPATH . '/public/img/galeri/', "", $file);
+				$file = str_replace(ROOTPATH . '../img/galeri/', "", $file);
 				$data = [
 					'nama_file'		=> $file  . '.jpeg',
 					'tag'			=> $tags,
@@ -1292,7 +1292,7 @@ class User extends BaseController
 					->save($new_name  . '.jpeg', 50);
 				// unlink($new_name . $ext);
 
-				$new_name = str_replace(ROOTPATH . '/public/img/galeri/', "", $new_name);
+				$new_name = str_replace(ROOTPATH . '../img/galeri/', "", $new_name);
 				$data = [
 					'nama_file'		=> $new_name  . '.jpeg',
 					'tag'			=> $tags,
