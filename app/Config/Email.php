@@ -10,12 +10,12 @@ class Email extends BaseConfig
 	/**
 	 * @var string
 	 */
-	public $fromEmail = 'masihbelajar0004@gmail.com';
+	public $fromEmail = 'sia@stis.ac.id';
 
 	/**
 	 * @var string
 	 */
-	public $fromName = 'Riset 5 PKL';
+	public $fromName = 'Sistem Informasi Alumni';
 
 	/**
 	 * @var string
@@ -55,14 +55,14 @@ class Email extends BaseConfig
 	 *
 	 * @var string
 	 */
-	public $SMTPUser = 'masihbelajar0004@gmail.com';
+	public $SMTPUser = 'sia@stis.ac.id';
 
 	/**
 	 * SMTP Password
 	 *
 	 * @var string
 	 */
-	public $SMTPPass = 'Shawn123#';
+	public $SMTPPass = 'SIAriset5';
 
 	/**
 	 * SMTP Port

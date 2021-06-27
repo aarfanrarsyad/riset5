@@ -935,21 +935,21 @@ class Admin extends BaseController
 			return redirect()->to(previous_url());
 		} else {
 			$avatar = $this->request->getFile('file_upload');
-			$avatar->move(ROOTPATH . '/public/img/components/user/userid_' . session('idAlumni'));
+			$avatar->move(ROOTPATH . '../img/components/user/userid_' . session('idAlumni'));
 
 			if ($foto != 'components/icon/' . $query1->jenis_kelamin . '-icon.svg') {
-				$url = ROOTPATH . '/public/img/' . $foto;
+				$url = ROOTPATH . '../img/' . $foto;
 				if (is_file($url))
 					unlink($url);
 			}
 
 			$image = \Config\Services::image()
-				->withFile(ROOTPATH . '/public/img/components/user/userid_' . session('idAlumni') . '/' . $avatar->getName())
+				->withFile(ROOTPATH . '../img/components/user/userid_' . session('idAlumni') . '/' . $avatar->getName())
 				->fit(350, 350, 'center')
 				->convert(IMAGETYPE_JPEG)
-				->save(ROOTPATH . '/public/img/components/user/userid_' . session('idAlumni') . '/foto_profil.jpeg', 70);
+				->save(ROOTPATH . '../img/components/user/userid_' . session('idAlumni') . '/foto_profil.jpeg', 70);
 
-			unlink(ROOTPATH . '/public/img/components/user/userid_' . session('idAlumni') . '/' . $avatar->getName());
+			unlink(ROOTPATH . '../img/components/user/userid_' . session('idAlumni') . '/' . $avatar->getName());
 
 			$data = [
 				'foto_profil' => 'components/user/userid_' . session('idAlumni') . '/foto_profil.jpeg'
@@ -968,7 +968,7 @@ class Admin extends BaseController
 		$foto = $query1->foto_profil;
 
 		if ($foto != 'components/icon/' . $query1->jenis_kelamin . '-icon.svg') {
-			$url = ROOTPATH . '/public/img/' . $foto;
+			$url = ROOTPATH . '../img/' . $foto;
 			if (is_file($url))
 				unlink($url);
 		}
@@ -1648,9 +1648,11 @@ class Admin extends BaseController
 			}
 		}
 		$out_album = $album;
-		$out_album[count($out_album) + 1] = ['album' => 'Alumni'];
-		$out_album[count($out_album) + 2] = ['album' => 'Wisuda'];
-		$out_album[count($out_album) + 3] = ['album' => 'Kenangan'];
+		$count = count($out_album);
+
+		$out_album[$count + 1] = ['album' => 'Alumni'];
+		$out_album[$count + 2] = ['album' => 'Wisuda'];
+		$out_album[$count + 3] = ['album' => 'Kenangan'];
 
 		$alumni = $alumni_model->getForTags()->getResult();
 		foreach ($alumni as $dt) {
@@ -1701,9 +1703,11 @@ class Admin extends BaseController
 			}
 		}
 		$out_album = $album;
-		$out_album[count($out_album) + 1] = ['album' => 'Alumni'];
-		$out_album[count($out_album) + 2] = ['album' => 'Wisuda'];
-		$out_album[count($out_album) + 3] = ['album' => 'Kenangan'];
+		$count = count($out_album);
+
+		$out_album[$count + 1] = ['album' => 'Alumni'];
+		$out_album[$count + 2] = ['album' => 'Wisuda'];
+		$out_album[$count + 3] = ['album' => 'Kenangan'];
 
 		$i = 0;
 		foreach ($video as $dt) {
@@ -1771,7 +1775,7 @@ class Admin extends BaseController
 
 			$caption = str_replace(array("\r", "\n"), ' ', $caption);
 			$year = date("Y");
-			$path = ROOTPATH . '/public/img/galeri/' . $year;
+			$path = ROOTPATH . '../img/galeri/' . $year;
 
 			// $foto->move($path);
 
@@ -1783,53 +1787,35 @@ class Admin extends BaseController
 			$file = $path . "/" . $foto->getName();
 			$ext = "." . $foto->guessExtension();
 			$file = str_replace($ext, "", $file);
-			if (is_file($file  . '.jpeg')) {
-				$new_name = $file;
+
+			$foto->move($path);
+			if (is_file($file  . $ext)) {
+				$time = date("Ymdhis");
+				$new_name = $file . "-" . $time;
 				while (is_file($new_name  . '.jpeg')) {
 					$time = date("Ymdhis");
 					$new_name = $new_name . "-" . $time;
 				}
-				// rename($file . $ext, $new_name . $ext);
 			}
 
-			if (!isset($new_name)) {
-				$image = \Config\Services::image()
-					->withFile($foto->getPath() . '\\' . $foto->getFilename())
-					->withResource()
-					->convert(IMAGETYPE_JPEG)
-					->save($file  . '.jpeg', 50);
+			$image = \Config\Services::image()
+				->withFile($file . $ext)
+				->withResource()
+				->convert(IMAGETYPE_JPEG)
+				->save($new_name  . '.jpeg', 50);
+			unlink($file . $ext);
 
-				$file = str_replace(ROOTPATH . '/public/img/galeri/', "", $file);
-				$data = [
-					'nama_file'		=> $file  . '.jpeg',
-					'tag'			=> $tags,
-					'caption'		=> $caption,
-					'created_at'	=> $now,
-					'album' 		=> $album,
-					'approval' 		=> 1,
-					'id_alumni' 	=> session('id_alumni'),
-				];
-				$model->db->table('foto')->insert($data);
-			} else {
-				$image = \Config\Services::image()
-					->withFile($foto->getPath() . '\\' . $foto->getFilename())
-					->withResource()
-					->convert(IMAGETYPE_JPEG)
-					->save($new_name  . '.jpeg', 50);
-
-				$new_name = str_replace(ROOTPATH . '/public/img/galeri/', "", $new_name);
-				$data = [
-					'nama_file'		=> $new_name  . '.jpeg',
-					'tag'			=> $tags,
-					'album' 		=> $album,
-					'caption'		=> $caption,
-					'created_at'	=> $now,
-					'album' 		=> $album,
-					'approval' 		=> 1,
-					'id_alumni' 	=> session('id_alumni'),
-				];
-				$model->db->table('foto')->insert($data);
-			}
+			$file = str_replace(ROOTPATH . '../img/galeri/', "", $new_name);
+			$data = [
+				'nama_file'		=> $file  . '.jpeg',
+				'tag'			=> $tags,
+				'caption'		=> $caption,
+				'created_at'	=> $now,
+				'album' 		=> $album,
+				'approval' 		=> 1,
+				'id_alumni' 	=> session('id_alumni'),
+			];
+			$model->db->table('foto')->insert($data);
 
 			$flash = "<script> suksesUnggahFoto(); </script>";
 			session()->setFlashdata('flash', $flash);
@@ -1887,7 +1873,7 @@ class Admin extends BaseController
 		$model = new FotoModel();
 
 		$foto = $model->getById($id);
-		$path = ROOTPATH . '/public/img/galeri/' . $foto['nama_file'];
+		$path = ROOTPATH . '../img/galeri/' . $foto['nama_file'];
 		if (is_file($path)) {
 			unlink($path);
 		}

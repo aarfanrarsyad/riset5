@@ -14,7 +14,11 @@ if ($login == 'belum') {
 
 <?= $this->section('content'); ?>
 
-<!-- <php dd(session()->flash); ?> -->
+<?php if (session('role') != null) if (!in_array("2", session('role'))) if (in_array("4", session('role'))) : ?>
+    <script>
+        window.location.replace("<?= base_url('developer') ?>")
+    </script>
+<?php endif; ?>
 <?= session()->login_notif; ?>
 
 <?php
@@ -233,5 +237,14 @@ if (session()->getFlashdata('role')) { ?>
 
 <?php session()->remove(['login_notif']) ?>
 <script type="text/javascript" src="/js/leaflet.ajax.js"></script>
+<script>
+    var url = "<?= base_url(); ?>/Home/jumlahPeta";
+    $.get(url, function(data, status) {
+        alumni = JSON.parse(data)
+        prov = alumni['Provinsi'];
+        kabKota = alumni['kabupatenKota'];
+        map(prov, kabKota);
+    });
+</script>
 <script type="text/javascript" src="/js/add.js"></script>
 <?= $this->endSection(); ?>

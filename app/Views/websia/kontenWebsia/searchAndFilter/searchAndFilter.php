@@ -167,39 +167,40 @@ $(document).ready(()=>{
     function search(tipe) {
         if (tipe == 'all') {
             data = $('#filterAlumni').serialize()+'&cari='+$("input[name=cari]").val();
-            data += '&awal='+$("input[name=awal]").val()+'&akhir='+$("input[name=akhir]").val();
+            data += '&awal='+$("#awalTahun").val()+'&akhir='+$("#akhirTahun").val();
             data += '&tipe='+tipe;
         } else if (tipe == 'alumni') {
             data = $('#filterAlumni').serialize()+'&cari='+$("input[name=cari]").val()+'&tipe='+tipe
         } else {
             data = {
-                'cari': $("input[name=cari]").val(),
-                'awal':$("input[name=awal]").val(),
-                'akhir':$("input[name=akhir]").val(),
-                'tipe':tipe
+                cari : $("input[name=cari]").val(),
+                awal : $("#awalTahun").val(),
+                akhir: $("#akhirTahun").val(),
+                tipe : tipe
             }
         }
-        console.log(data.split('&'))
+
+        if (typeof data == "string") {console.log(data.split('&'))} else {console.log(data)}
+        
         // if(false)
         $.post({
             url: "#",
             data: data,
             dataType:'json',
+            cache:false,
             success: (ret) => {
-                let jumlahAlumniBerita = 0;
                 console.log(ret)
 
                 if(tipe=='all' || tipe=='alumni'){
                     $('#lisAlumni').empty()
                     $('#jumlahAlumni').html(ret.jumlah.alumni.text)
                     if (ret.jumlah.alumni.ret>0) {
-                        jumlahAlumniBerita += ret.jumlah.alumni.ret
                         $.each(ret.data.alumni, (i, item) => {
                             $('#lisAlumni').append(stringAlumni.replace('{idAlumni}', item.id_alumni).replace('{nama}', item.nama).replace('{foto_profil}', item.foto_profil).replace('{akt}', item.angkatan))
                         })
                         $('#lisAlumni').append("<hr class='-my-4 border-2 border-gray-400'>")
                     } 
-                    if (ret.data.alumni.length <5) {$('#semuaAlumni').hide()} else {$('#semuaAlumni').show()}
+                    if (ret.data.alumni.length <4) {$('#semuaAlumni').hide()} else {$('#semuaAlumni').show()}
                     s = 'cari='+ $("input[name=cari]").val() +'&akt='+ ret.search.akt + '&kerja=' + ret.search.kerja
                     if(ret.search.prodi)
                         s += '&'+ret.search.prodi.map((val)=>{return 'prodi[]='+val}).join('&')
@@ -210,12 +211,17 @@ $(document).ready(()=>{
                     $('#lisBerita').empty()
                     $('#jumlahBerita').html(ret.jumlah.berita.text)
                     if (ret.jumlah.berita.ret>0) {
-                        jumlahAlumniBerita += ret.jumlah.berita.ret
                         console.log(ret.data.berita)
                         $.each(ret.data.berita, (i, item) => {
                             $('#lisBerita').append(stringBerita.replace('{id}', item.id).replaceAll('{thumbnail}', item.id+'/'+item.thumbnail).replace('{judul}', item.judul).replace('{konten}', item.konten).replace('{tanggal_publish}', item.tanggal_publish))
                         })
                         $('#lisBerita').append("<hr class='-my-4 border-2 border-gray-400'>")
+
+                        if (tipe == 'berita' ){
+                            $('html, body').stop().animate({
+                                'scrollTop':$("#lisAlumni").height()
+                            } ,500)
+                        }
                     }
                     if (ret.data.berita.length <5) {$('#semuaBerita').hide()} else {$('#semuaBerita').show()}
                     b = 'cari='+ $("input[name=cari]").val()+'&awal='+ ret.search.awal + '&akhir=' + ret.search.akhir
@@ -224,7 +230,7 @@ $(document).ready(()=>{
 
                 $('#kosong').hide()
                 $('#cariAlumni , #cariBerita').show()
-                if(jumlahAlumniBerita == 0){
+                if($('#lisAlumni , #lisBerita').children().length  == 0){
                     $('#cariAlumni , #cariBerita').hide()
                     $('#kosong').show()
                 }
@@ -232,7 +238,7 @@ $(document).ready(()=>{
         })
     }
     
-    if (<?= count(array_merge($data['alumni'])) ?><5) $('#semuaAlumni').hide()
+    if (<?= count(array_merge($data['alumni'])) ?><4) $('#semuaAlumni').hide()
     if (<?= count(array_merge($data['berita'])) ?><5) $('#semuaBerita').hide()
     if (<?= count(array_merge($data['alumni'],$data['berita'])) ?>>0) {$('#kosong').hide()}
         else {$('#cariAlumni , #cariBerita').hide()}
@@ -250,7 +256,7 @@ $(document).ready(()=>{
         x = setTimeout(function() { search('alumni') }, 300)
     })
     $("input[name=akt], input[name=kerja]").siblings().click( function() { search('alumni') })
-    $(".kalenderAwal div.text-xs, .kalenderAkhir div.text-xs").click( function() { search('berita') })
+    $("#awalTahun, #akhirTahun").change( function() { search('berita') })
 
 })
 </script>

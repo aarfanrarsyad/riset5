@@ -19,7 +19,6 @@ class AlumniModel extends Model
         return $this->builder()->select('nama, id_alumni')->where('id_alumni', $id_alumni)->get()->getFirstRow('array');
     }
 
-
     // Sudah diubah
     public function getAlumniById($id_alumni)
     {
@@ -47,12 +46,12 @@ class AlumniModel extends Model
         return $this->db->query($query);
     }
 
-    public function getAlumniFilter($cari = '', $pro = [], $akt = '', $kerja = '', $limit = 5, $start = 0)
+    public function getAlumniFilter($cari = '', $pro = [], $akt = '', $kerja = '', $limit = 4, $start = 0)
     {
         //query utama
         $query = $this->table('alumni')->select('alumni.id_alumni,nama,foto_profil,nim,MAX(angkatan) AS angkatan,program_studi')
             ->orderBy('alumni.id_alumni')->groupBy('alumni.id_alumni')->limit($limit)
-            ->where('angkatan >',0)->whereIn('instansi',['Sekolah Tinggi Ilmu Statistik','Akademi Ilmu Statistik'])
+            ->where('angkatan >', 0)->whereIn('instansi', ['Sekolah Tinggi Ilmu Statistik', 'Akademi Ilmu Statistik', 'Politeknik Statistika STIS'])
             ->join('pendidikan', 'alumni.id_alumni = pendidikan.id_alumni', 'inner')
             ->join('pendidikan_tinggi', 'pendidikan_tinggi.id_pendidikan = pendidikan.id_pendidikan', 'inner');
 
@@ -70,12 +69,12 @@ class AlumniModel extends Model
         }
 
         // logic pecarian prodi
-        if (count($pro)<4) {
+        if (count($pro) < 4) {
             $listProdi = [
-                'DI' => ['Ak. Ilmu Statistik','D-I Statistika'],
-                'DIII' => ['Akademi D-III','D-III Statistika'],
-                'KS' => ['D-IV Komputasi Statistik','D-IV Sistem Informasi','D-IV Sains Data'],
-                'ST' => ['D-IV Statistika Ekonomi','D-IV Statistika Sosial & Kependudukan']
+                'DI' => ['Ak. Ilmu Statistik', 'D-I Statistika'],
+                'DIII' => ['Akademi D-III', 'D-III Statistika'],
+                'KS' => ['D-IV Komputasi Statistik', 'D-IV Sistem Informasi', 'D-IV Sains Data'],
+                'ST' => ['D-IV Statistika Ekonomi', 'D-IV Statistika Sosial & Kependudukan', 'D-IV Statistika']
             ];
 
             $prodi = ['in' => [], 'notIn' => []];
@@ -84,7 +83,7 @@ class AlumniModel extends Model
                 else foreach ($listProdi[$p] as $di) array_push($prodi['notIn'], $di);
             }
             if (count($prodi['in']) > 0) $query->whereIn('program_studi', $prodi['in']);
-            if(count($prodi['notIn'])>0) $query->whereNotIn('program_studi', $prodi['notIn']);
+            if (count($prodi['notIn']) > 0) $query->whereNotIn('program_studi', $prodi['notIn']);
         }
 
         // logic pecarian angkatan
@@ -101,7 +100,7 @@ class AlumniModel extends Model
 
             $query->groupStart();
             foreach (explode(',', $parse) as $key) {
-                if ($key!= '') {
+                if ($key != '') {
                     $range = explode('-', $key);
                     $range[0] = (intval($range[0]) >= 1) ? intval($range[0]) :  1;
                     $range[1] = (intval(end($range)) <= $max_angkatan) ? intval(end($range)) :  $max_angkatan;
@@ -210,13 +209,6 @@ class AlumniModel extends Model
         AND NOT alumni.id_alumni=$id_alumni
                     ORDER BY RAND() LIMIT 4";
         return $this->db->query($query);
-    }
-
-    // Sudah diubah <Mochi>
-    public function getEmailByIdAlumni($id_alumni)
-    {
-        $query = "SELECT * FROM email WHERE id_alumni = $id_alumni";
-        return $this->db->query($query)->getRow()->email_alumni;
     }
 
     // Sudah diubah <Mochi>
@@ -410,5 +402,15 @@ class AlumniModel extends Model
             ->where('nip_bps', $nip)
             ->get()
             ->getFirstRow('array');
+    }
+
+    public function getAlumniByEmail($email)
+    {
+        return $this->builder()->select('nama, id_alumni')->where('email', $email)->get()->getFirstRow('array');
+    }
+
+    public function getPendidikanTinggiAlumni($id_alumni)
+    {
+        return $this->db->table('pendidikan')->where('id_alumni', $id_alumni)->get()->getFirstRow('array');
     }
 }

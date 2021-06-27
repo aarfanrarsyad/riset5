@@ -26,10 +26,39 @@
     <div class="py-4">
         <div class="p-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-10">
             <?php foreach ($video['video'] as $vd) : ?>
-                <div class="rounded-3xl m-2 relative transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105 cursor-pointer">
-                    <iframe class="w-full h-52 rounded-3xl" src="https://www.youtube.com/embed/<?= $vd['link'] ?>" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                </div>
+                <iframe frameborder="0" allowfullscreen="1" title="YouTube video player" class="h-52" src="https://www.youtube.com/embed/<?= $vd['link'] ?>?enablejsapi=1&amp"></iframe>
             <?php endforeach; ?>
+            <script>
+                var tag = document.createElement('script');
+                tag.src = "//www.youtube.com/iframe_api";
+                var firstScriptTag = document.getElementsByTagName('script')[0];
+                firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+                function onYouTubeIframeAPIReady() {
+                    var $ = jQuery;
+                    var players = [];
+                    $('iframe').filter(function() {
+                        return this.src.indexOf('https://www.youtube.com/') == 0
+                    }).each(function(k, v) {
+                        if (!this.id) {
+                            this.id = 'embeddedvideoiframe' + k
+                        }
+                        players.push(new YT.Player(this.id, {
+                            events: {
+                                'onStateChange': function(event) {
+                                    if (event.data == YT.PlayerState.PLAYING) {
+                                        $.each(players, function(k, v) {
+                                            if (this.getIframe().id != event.target.getIframe().id) {
+                                                this.pauseVideo();
+                                            }
+                                        });
+                                    }
+                                }
+                            }
+                        }))
+                    });
+                }
+            </script>
         </div>
         <!-- Awal Navigasi -->
         <div class="flex justify-center md:justify-end items-center mx-8 p-2 text-secondary font-paragraph">

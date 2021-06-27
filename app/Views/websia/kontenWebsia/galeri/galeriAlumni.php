@@ -236,10 +236,10 @@
                 <div class="text-red-500">
                     <?= service('validation')->getError('deskripsi'); ?>
                 </div>
-                <label for="tags" class="text-primary font-medium">Tags :</label>
+                <div class="text-primary font-medium">Tags :</div>
                 <div id="tags-container">
                     <div class="control-group">
-                        <select id="tags" class="tags inputForm font-heading text-xs" placeholder="Tandai orang"></select>
+                        <select id="tags" class="tags font-heading text-xs" placeholder="Tandai orang"></select>
                     </div>
                 </div>
                 <div class="font-heading text-xs text-primary">

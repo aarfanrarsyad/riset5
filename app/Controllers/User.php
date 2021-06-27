@@ -29,6 +29,8 @@ class User extends BaseController
 	public function searchAndFilter()
 	{
 		helper('text');
+		$dbAlumni = new \App\Models\AlumniModel;
+		$dbBerita = new \App\Models\BeritaModel;
 
 		$tipe = $this->request->getVar('t');
 		if ($this->request->isAJAX()) {
@@ -59,7 +61,6 @@ class User extends BaseController
 
 
 		if ($tipe == 'all' || $tipe == 'alumni') { //query alumni utama
-			$dbAlumni = new \App\Models\AlumniModel;
 			if (is_null($this->request->getVar('t'))) {
 				$query = $dbAlumni->getAlumniFilter($cari, $prodi, $akt, $kerja);
 			} else {
@@ -69,12 +70,12 @@ class User extends BaseController
 				// return json_encode($start);
 			}
 
-        	$compiled['alumni'] = $query->getCompiledSelect(false);
+			$compiled['alumni'] = $query->getCompiledSelect(false);
 			$jumlah['alumni'] = $query->countAllResults(false);
 			$data['alumni'] = $query->get()->getResultArray();
 
 			$jumlah['alumni'] = [
-				'text' => (!empty($cari)) ? ($jumlah['alumni']>0) ? 
+				'text' => (!empty($cari)) ? ($jumlah['alumni'] > 0) ?
 					"Terdapat " . $jumlah['alumni'] . " alumni dengan kata kunci `<B>$cari</B>` ditemukan." :
 					"Hasil pencarian alumni tidak ditemukan" :
 					"Memuat " . $jumlah['alumni'] . " data alumni.",
@@ -84,7 +85,6 @@ class User extends BaseController
 		}
 
 		if ($tipe == 'all' || $tipe == 'berita') { #pencarian berita
-			$dbBerita = new \App\Models\BeritaModel;
 			$awal = (is_null($awal) || $awal == '') ? '2000' : $awal;
 			$akhir = (is_null($akhir) || $akhir == '') ? date('Y') : $akhir;
 
@@ -101,7 +101,7 @@ class User extends BaseController
 			$data['berita'] = array_map(function ($val) {
 				return [
 					'id' => $val['id'],
-					'tanggal_publish' => date('d-m-Y',strtotime($val['tanggal_publish'])),
+					'tanggal_publish' => date('d-m-Y', strtotime($val['tanggal_publish'])),
 					'judul' => $val['judul'],
 					'thumbnail' => $val['thumbnail'],
 					'konten' => word_limiter($val['konten'], 45)
@@ -109,7 +109,7 @@ class User extends BaseController
 			}, $query->get()->getResultArray());
 
 			$jumlah['berita'] = [
-				'text' => (!empty($cari)) ? ($jumlah['berita']>0) ? 
+				'text' => (!empty($cari)) ? ($jumlah['berita'] > 0) ?
 					"Terdapat " . $jumlah['berita'] . " berita dengan kata kunci `<B>$cari</B>` ditemukan." :
 					"Hasil pencarian berita tidak ditemukan" :
 					"Memuat " . $jumlah['berita'] . " berita.",
@@ -133,8 +133,8 @@ class User extends BaseController
 			'cari' => $cari,
 			'data' => $data,
 			'jumlah' => $jumlah,
+			'tahunBerita' => $dbBerita->getYear()
 		];
-		// dd($compiled);
 		// return view('websia/kontenWebsia/searchAndFilter/searchKosong', $data);
 		switch ($this->request->getVar('t')) {
 			case 'alumni':
@@ -259,6 +259,7 @@ class User extends BaseController
 		$sb = $query1->status_bekerja;
 		$ap = $query1->aktif_pns;
 		$ambigu = $query2->ambigu;
+		
 		//angkatan terakhir yang diambil
 		// $angkatan = $model->getAngkatanByIdAlumni(session('id_alumni'));
 
@@ -296,6 +297,15 @@ class User extends BaseController
 			]);
 		}
 
+		$kabkota = "";
+		$provinsi = "";
+		if($query1->kota != NULL){
+			$kabkota = ", ".$query1->kota;
+		}
+		if($query1->provinsi != NULL){
+			$provinsi = ", ".$query1->provinsi;
+		}
+
 		$data = [
 			'status'			=> $status,
 			'judulHalaman' 		=> 'Profil User | Website Riset 5',
@@ -312,6 +322,8 @@ class User extends BaseController
 			'rekomendasi'     	=> $query4,
 			'foto'				=> $galeri_profil,
 			'count'				=> count($galeri_profil),
+			'kabkota'			=> $kabkota,
+			'provinsi'			=> $provinsi,
 		];
 		return view('websia/kontenWebsia/userProfile/userProfile', $data);
 	}
@@ -452,6 +464,15 @@ class User extends BaseController
 			$ap = "Aktif sebagai PNS";
 		}
 
+		$kabkota = "";
+		$provinsi = "";
+		if($query1->kota != NULL){
+			$kabkota = ", ".$query1->kota;
+		}
+		if($query1->provinsi != NULL){
+			$provinsi = ", ".$query1->provinsi;
+		}
+
 		$data = [
 			'status'		=> $status,
 			'judulHalaman' 		=> 'Profil User | Website Riset 5',
@@ -468,6 +489,8 @@ class User extends BaseController
 			'rekomendasi'          => $query4,
 			'foto'				=> $galeri_profil,
 			'count'				=> count($galeri_profil),
+			'kabkota'			=> $kabkota,
+			'provinsi'			=> $provinsi,
 		];
 		return view('websia/kontenWebsia/userProfile/userProfile', $data);
 	}
@@ -548,21 +571,21 @@ class User extends BaseController
 			return redirect()->to(base_url('User/editProfil'));
 		} else {
 			$avatar = $this->request->getFile('file_upload');
-			$avatar->move(ROOTPATH . '/public/img/components/user/userid_' . session('id_user'));
+			$avatar->move(ROOTPATH . '../img/components/user/userid_' . session('id_user'));
 
-			if ($foto != 'components/icon/' . $query1->jenis_kelamin . '-icon.svg') {
-				$url = ROOTPATH . '/public/img/' . $foto;
+			if ($foto != 'components/icon/' . $query1->jenis_kelamin . '-icon.svg' && $foto != 'components/avatar.png') {
+				$url = ROOTPATH . '../img/' . $foto;
 				if (is_file($url))
 					unlink($url);
 			}
 
 			$image = \Config\Services::image()
-				->withFile(ROOTPATH . '/public/img/components/user/userid_' . session('id_user') . '/' . $avatar->getName())
+				->withFile(ROOTPATH . '../img/components/user/userid_' . session('id_user') . '/' . $avatar->getName())
 				->fit(350, 350, 'center')
 				->convert(IMAGETYPE_JPEG)
-				->save(ROOTPATH . '/public/img/components/user/userid_' . session('id_user') . '/foto_profil.jpeg', 70);
+				->save(ROOTPATH . '../img/components/user/userid_' . session('id_user') . '/foto_profil.jpeg', 70);
 
-			unlink(ROOTPATH . '/public/img/components/user/userid_' . session('id_user') . '/' . $avatar->getName());
+			unlink(ROOTPATH . '../img/components/user/userid_' . session('id_user') . '/' . $avatar->getName());
 
 			$data = [
 				'foto_profil' => 'components/user/userid_' . session('id_user') . '/foto_profil.jpeg'
@@ -580,8 +603,8 @@ class User extends BaseController
 		$query1 = $model->bukaProfile(session('id_alumni'))->getRow();
 		$foto = $query1->foto_profil;
 
-		if ($foto != 'components/icon/' . $query1->jenis_kelamin . '-icon.svg') {
-			$url = ROOTPATH . '/public/img/' . $foto;
+		if ($foto != 'components/icon/' . $query1->jenis_kelamin . '-icon.svg' && $foto != 'components/avatar.png') {
+			$url = ROOTPATH . '../img/' . $foto;
 			if (is_file($url))
 				unlink($url);
 		}
@@ -1197,24 +1220,28 @@ class User extends BaseController
 		$validated = $this->validate([
 			'file_upload'   => [
 				'rules' => 'uploaded[file_upload]|max_size[file_upload,2048]',
+				'errors' => [
+					'uploaded' => 'Harus memilih satu foto untuk diunggah.',
+					'max_size' => 'Foto yang diunggah maksimal berukuran 2 MB.',
+				]
 			],
 			'albumFoto'			=> [
 				'rules' => 'required',
 				'errors' => [
-					'required' => 'album harus dipilih'
+					'required' => 'Harus memilih salah satu album foto.'
 				]
 			],
 			'deskripsi'			=> [
 				'rules' => 'required|max_length[150]',
 				'errors' => [
-					'required' => 'deskripsi harus diisi',
-					'max_length' => 'maksimal 150 karakter'
+					'required' => 'Deskripsi harus diisi.',
+					'max_length' => 'Deskripsi diisi maksimal 150 karakter.'
 				]
 			],
 		]);
 
 		if ($validated == FALSE) {
-			$flash = '<strong>Upload gagal!</strong> format upload tidak sesuai ketentuan.';
+			$flash = '<strong>Foto gagal diunggah!</strong> format unggah foto tidak sesuai ketentuan.';
 			$alert = "<div id=\"alert\">
 				<div class=\"fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40\">
 					<div class=\"duration-700 transition-all p-3 rounded-lg flex items-center bg-redAlert\">
@@ -1242,73 +1269,47 @@ class User extends BaseController
 
 			$caption = str_replace(array("\r", "\n"), ' ', $caption);
 			$year = date("Y");
-			$path = ROOTPATH . '/public/img/galeri/' . $year;
+			$path = ROOTPATH . '../img/galeri/' . $year;
 
 			//cek apakah sudah terdapat foldernya
 			if (!is_dir($path))
 				mkdir($path, 0755, true);
 
+
 			//cek apakah sudah terdapat nama file yang sama, jika sudah maka akan direname
 			$file = $path . "/" . $foto->getName();
 			$ext = "." . $foto->guessExtension();
 			$file = str_replace($ext, "", $file);
-			if (is_file($file  . '.jpeg')) {
-				$new_name = $file;
+
+			$foto->move($path);
+			if (is_file($file  . $ext)) {
+				$time = date("Ymdhis");
+				$new_name = $file . "-" . $time;
 				while (is_file($new_name  . '.jpeg')) {
 					$time = date("Ymdhis");
 					$new_name = $new_name . "-" . $time;
 				}
-				// rename($file . $ext, $new_name . $ext);
 			}
 
-			if (!isset($new_name)) {
-				$image = \Config\Services::image()
-					->withFile($foto->getPath() . '\\' . $foto->getFilename())
-					->withResource()
-					->convert(IMAGETYPE_JPEG)
-					->save($file  . '.jpeg', 50);
-				// unlink($file . $ext);
+			$image = \Config\Services::image()
+				->withFile($file . $ext)
+				->withResource()
+				->convert(IMAGETYPE_JPEG)
+				->save($new_name  . '.jpeg', 50);
+			unlink($file . $ext);
 
-				$file = str_replace(ROOTPATH . '/public/img/galeri/', "", $file);
-				$data = [
-					'nama_file'		=> $file  . '.jpeg',
-					'tag'			=> $tags,
-					'caption'		=> $caption,
-					'created_at'	=> $now,
-					'album' 		=> $album,
-					'approval' 		=> 1,
-					'id_alumni' 	=> session('id_alumni'),
-				];
-				$model->db->table('foto')->insert($data);
-			} else {
-				$image = \Config\Services::image()
-					->withFile($foto->getPath() . '\\' . $foto->getFilename())
-					->withResource()
-					->convert(IMAGETYPE_JPEG)
-					->save($new_name  . '.jpeg', 50);
-				// unlink($new_name . $ext);
+			$file = str_replace(ROOTPATH . '../img/galeri/', "", $new_name);
+			$data = [
+				'nama_file'		=> $file  . '.jpeg',
+				'tag'			=> $tags,
+				'caption'		=> $caption,
+				'created_at'	=> $now,
+				'album' 		=> $album,
+				'approval' 		=> 1,
+				'id_alumni' 	=> session('id_alumni'),
+			];
+			$model->db->table('foto')->insert($data);
 
-				$new_name = str_replace(ROOTPATH . '/public/img/galeri/', "", $new_name);
-				$data = [
-					'nama_file'		=> $new_name  . '.jpeg',
-					'tag'			=> $tags,
-					'album' 		=> $album,
-					'caption'		=> $caption,
-					'created_at'	=> $now,
-					'album' 		=> $album,
-					'approval' 		=> 1,
-					'id_alumni' 	=> session('id_alumni'),
-				];
-				$model->db->table('foto')->insert($data);
-			}
-
-			// $foto = $model->getByName($data['nama_file']);
-
-			// $data = [
-			// 	'id_foto'	=> $foto[0]->id_foto,
-			// 	'tag'		=> $tags
-			// ];
-			// $model->db->table('tag_foto')->insert($data);
 			$flash = "<script> suksesUnggahFoto(); </script>";
 			session()->setFlashdata('flash', $flash);
 			return redirect()->back();
@@ -1448,19 +1449,19 @@ class User extends BaseController
 			'linkVideo'   => [
 				'rules' => 'required',
 				'errors' => [
-					'required' => 'link video harus diisi'
+					'required' => 'Link/url video harus diisi.'
 				]
 			],
 			'albumVideo'			=> [
 				'rules' => 'required',
 				'errors' => [
-					'required' => 'album harus dipilih'
+					'required' => 'Harus memilih salah satu album video.'
 				]
 			],
 		]);
 
 		if ($validated == FALSE) {
-			$flash = '<strong>Upload gagal!</strong> format upload tidak sesuai ketentuan.';
+			$flash = '<strong>Video gagal diunggah!</strong> format unggah video tidak sesuai ketentuan.';
 			$alert = "<div id=\"alert\">
 				<div class=\"fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40\">
 					<div class=\"duration-700 transition-all p-3 rounded-lg flex items-center bg-redAlert\">
@@ -1491,9 +1492,22 @@ class User extends BaseController
 					}
 				} else {
 					if (strpos($video, '/channel/')) {
-						echo $video . "<br>";
-						echo "bukan yutub";
-						die();
+						$flash = 'Link/url video harus merupakan link video youtube (bukan channel).';
+						$alert = "<div id=\"alert\">
+							<div class=\"fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40\">
+								<div class=\"duration-700 transition-all p-3 rounded-lg flex items-center bg-redAlert\">
+									<img src=\"/img/components/icon/warning.png\" class=\"h-5 mr-2\" style=\"color: #C51800;\" alt=\"Warning\">
+									<p class=\"sm:text-base text-sm text-danger font-heading\">" . $flash . "</p>
+								</div>
+							</div>
+						</div>
+						<script>
+							setTimeout(function() {
+								$('#alert').fadeOut();
+							}, 1500);
+						</script>";
+						session()->setFlashdata('flash', $alert);
+						return redirect()->to(base_url('user/galeriVideo'));
 					}
 					$v_link = explode('/', $video);
 					if (strpos($v_link[3], '?')) {
@@ -1521,7 +1535,7 @@ class User extends BaseController
 					$flash = "<script> suksesUnggahVideo(); </script>";
 					session()->setFlashdata('flash', $flash);
 				} else {
-					$flash = 'Link yang anda upload sudah terdaftar.';
+					$flash = 'Link video yang anda upload sudah terdaftar.';
 					$alert = "<div id=\"alert\">
 						<div class=\"fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40\">
 							<div class=\"duration-700 transition-all p-3 rounded-lg flex items-center bg-redAlert\">
@@ -1540,7 +1554,7 @@ class User extends BaseController
 				return redirect()->to(base_url('user/galeriVideo'));
 			} else {
 				// buat upload yang bukan link youtube
-				$flash = 'Link yang anda upload bukan link youtube.';
+				$flash = 'Link/url video harus merupakan link video youtube.';
 				$alert = "<div id=\"alert\">
 					<div class=\"fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40\">
 						<div class=\"duration-700 transition-all p-3 rounded-lg flex items-center bg-redAlert\">

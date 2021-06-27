@@ -269,10 +269,10 @@
                 </div>
                 <!-- <label for="angkatan" class="text-primary font-medium">*Angkatan :</label>
                 <input name="angkatan" id="angkatan" type="number" min="1" max="63" step="1" value="60" size="6" class="inputForm font-heading text-xs" required> -->
-                <label for="tags" class="text-primary font-medium">Tags :</label>
+                <div class="text-primary font-medium">Tags :</div>
                 <div id="tags-container">
                     <div class="control-group">
-                        <select id="tags" class="tags inputForm font-heading text-xs" placeholder="Tandai orang"></select>
+                        <select id="tags" class="tags font-heading text-xs" placeholder="Tandai orang"></select>
                     </div>
                 </div>
                 <div class="font-heading text-xs text-primary">
