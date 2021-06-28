@@ -8,9 +8,6 @@
       <li class="nav-item d-none d-sm-inline-block">
         <a href="/" class="nav-link text-primaryHover" style="color:#003C75 !important;">Home</a>
       </li>
-      <li class="nav-item d-none d-sm-inline-block">
-        <a href="#" class="nav-link text-primaryHover" style="color:#003C75 !important;">Contact</a>
-      </li>
     </ul>
     <ul class="navbar-nav ml-auto">
       <a class="nav-link " data-widget="control-sidebar" data-slide="true" href="#" role="button">

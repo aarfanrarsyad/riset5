@@ -107,6 +107,12 @@ class Berita extends BaseController
 
         $authorize = Services::authorization();
         $groups = $authorize->groups();
+        for ($i = 0; $i < count($groups); $i++) {
+            if ($groups[$i]->id == '1' || strtolower($groups[$i]->name) == 'administrator') {
+                unset($groups[$i]);
+            }
+        }
+        $groups = array_values($groups);
 
         $this->data =  [
             'title' => 'Management Berita',
@@ -191,7 +197,7 @@ class Berita extends BaseController
                 $thumbnail = $this->request->getFile('thumbnail');
 
                 $thumb_name = "thumbnail_" . $thumbnail->getName();
-                $thumbnail->move(ROOTPATH . 'public/berita/' . session()->get('folder_name'), $thumb_name);
+                $thumbnail->move(ROOTPATH . '../berita/' . session()->get('folder_name'), $thumb_name);
                 $dataset['thumbnail'] = esc($thumb_name);
 
                 if ($dataset['access'] == 'other') {
@@ -218,7 +224,12 @@ class Berita extends BaseController
 
         $authorize = Services::authorization();
         $groups = $authorize->groups();
-
+        for ($i = 0; $i < count($groups); $i++) {
+            if ($groups[$i]->id == '1' || strtolower($groups[$i]->name) == 'administrator') {
+                unset($groups[$i]);
+            }
+        }
+        $groups = array_values($groups);
         $this->data =  [
             'groups' => $groups,
             'listErrors' => $this->form_validation->listErrors()
@@ -229,12 +240,18 @@ class Berita extends BaseController
 
     public function update_news($id) #SOLVED
     {
-
         $init = new BeritaModel();
         $data = $init->getNewsById($id)->getRowArray();
 
         $authorize = Services::authorization();
         $groups = $authorize->groups();
+
+        for ($i = 0; $i < count($groups); $i++) {
+            if ($groups[$i]->id == '1' || strtolower($groups[$i]->name) == 'administrator') {
+                unset($groups[$i]);
+            }
+        }
+        $groups = array_values($groups);
 
         if (isset($_POST['update_news'])) {
             if ($this->form_validation->run($this->request->getPost(), 'update_news') === FALSE) {
@@ -251,14 +268,13 @@ class Berita extends BaseController
                     'access' =>  $this->request->getPost('access'),
                     'author' =>  $this->request->getPost('author'),
                     'thumbnail' => NULL,
-                    'user_id' => NULL,
                     'groups_id' => NULL,
                 ];
 
                 $thumbnail = $this->request->getFile('thumbnail');
                 if ($thumbnail->getSize() > 0) {
                     $thumb_name = "thumbnail_" . $thumbnail->getName();
-                    $thumbnail->move(ROOTPATH . 'public/berita/berita_' . $id, $thumb_name);
+                    $thumbnail->move(ROOTPATH . '../berita/berita_' . $id, $thumb_name);
                     $dataset['thumbnail'] = esc($thumb_name);
                 }
 
@@ -271,8 +287,6 @@ class Berita extends BaseController
                         return redirect()->to(base_url('/admin/berita/update/' . $id));
                     }
                     $dataset['groups_id'] = preg_replace("/[\s\/.]/", "", array_to_string($access_groups, 1));
-                } else  if ($dataset['access'] == 'private') {
-                    $dataset['user_id'] = userdata()['id'];
                 }
 
                 $query = $init->updateNews($dataset);
@@ -287,6 +301,10 @@ class Berita extends BaseController
         }
 
         if ($data['groups_id']) $data['groups_id'] = explode(',', $data['groups_id']);
+        if ($data['tanggal_publish']) {
+            $date = explode(' ', $data['tanggal_publish']);
+            $data['tanggal_publish'] = $date[0];
+        }
 
         $this->data =  [
             'groups' => $groups,
@@ -537,15 +555,15 @@ class Berita extends BaseController
 
         for ($i = 0; $i < count($userNews); $i++) {
             if ($userNews[$i]['akses'] == 'review' && $userNews[$i]['aktif'] == '0') {
-                $msg = 'Berita dengan judul ' . $userNews[$i]['judul'] . ' oleh ' . $userNews[$i]['author'] . ' sedang menunggu konfirmasi Administrator.';
-            } else if ($userNews[$i]['akses'] != 'review' && $userNews[$i]['akses'] != 'private' && $userNews[$i]['aktif'] == '1' && (strtotime(get_date()) <= strtotime($userNews[$i]['aktif']))) {
-                $msg = 'Berita dengan judul ' . $userNews[$i]['judul'] . ' oleh ' . $userNews[$i]['author'] . ' telah dikonfirmasi dan dipublikasikan.';
-            } else if ($userNews[$i]['akses'] != 'review' && $userNews[$i]['akses'] != 'private' && $userNews[$i]['aktif'] == '1' && (strtotime(get_date()) > strtotime($userNews[$i]['aktif']))) {
-                $msg = 'Berita dengan judul ' . $userNews[$i]['judul'] . ' oleh ' . $userNews[$i]['author'] . ' telah dikonfirmasi dan belum dipublikasikan.';
-            } else if ($userNews[$i]['akses'] != 'review' && $userNews[$i]['akses'] != 'private' && $userNews[$i]['aktif'] == '0' && (strtotime(get_date()) <= strtotime($userNews[$i]['aktif']))) {
-                $msg = 'Berita dengan judul ' . $userNews[$i]['judul'] . ' oleh ' . $userNews[$i]['author'] . ' dinonaktifkan.';
+                $msg = 'Berita anda dengan judul "' . $userNews[$i]['judul']  . '" sedang menunggu konfirmasi Administrator.';
+            } else if ($userNews[$i]['akses'] != 'review' && $userNews[$i]['akses'] != 'private' && $userNews[$i]['aktif'] == '1' && (strtotime(get_date()) >= strtotime($userNews[$i]['tanggal_publish']))) {
+                $msg = 'Berita anda dengan judul "' . $userNews[$i]['judul']  . '" telah dikonfirmasi dan telah dipublikasikan.';
+            } else if ($userNews[$i]['akses'] != 'review' && $userNews[$i]['akses'] != 'private' && $userNews[$i]['aktif'] == '1' && (strtotime(get_date()) < strtotime($userNews[$i]['tanggal_publish']))) {
+                $msg = 'Berita anda dengan judul "' . $userNews[$i]['judul']  . '" telah dikonfirmasi dan belum dipublikasikan.';
+            } else if ($userNews[$i]['akses'] != 'review' && $userNews[$i]['akses'] != 'private' && $userNews[$i]['aktif'] == '0') {
+                $msg = 'Berita anda dengan judul "' . $userNews[$i]['judul']  . '" telah dikonfirmasi dan menunggu dipublikasikan.';
             } else {
-                $msg = 'Berita dengan judul ' . $userNews[$i]['judul'] . ' oleh ' . $userNews[$i]['author'] . ' telah diterima dan sedang menunggu review Administrator.';
+                $msg = 'Berita anda dengan judul "' . $userNews[$i]['judul']  . '" telah diterima dan menunggu review Administrator.';
             }
 
             $dataUserNews[] = [
@@ -558,31 +576,31 @@ class Berita extends BaseController
 
         //API BERITA
         $client = \Config\Services::curlrequest();
-		$response = $client->request('POST', 'https://pusdiklat-bps.id/api/berita', [
-			'form_params' => [
+        $response = $client->request('POST', 'https://pusdiklat-bps.id/api/berita', [
+            'form_params' => [
                 'kategori' => '1',
-				'token'=>'473KpgTwt9MFxmpAYJ7aF2w5'
-				]
-			]);
+                'token' => '473KpgTwt9MFxmpAYJ7aF2w5'
+            ]
+        ]);
 
-		$beritaApi= json_decode($response->getBody());
-        if($beritaApi->status=='sukses'){
-        $berita = $beritaApi->data;
-        //dd($berita);
-        $page = ! empty( $_GET['pageapi'] ) ? (int) $_GET['pageapi'] : 1;
-        $total = count( $berita ); //total items in array    
-        $limit = 8; //per page    
-        $totalPages = ceil( $total/ $limit ); //calculate total pages
-        $page = max($page, 1); //get 1 page when $_GET['page'] <= 0
-        $page = min($page, $totalPages); //get last page when $_GET['page'] > $totalPages
-        $offset = ($page - 1) * $limit;
-        if( $offset < 0 ) $offset = 0;
-        $berita = array_slice( $berita, $offset, $limit );
+        $beritaApi = json_decode($response->getBody());
+        if ($beritaApi->status == 'sukses') {
+            $berita = $beritaApi->data;
+            //dd($berita);
+            $page = !empty($_GET['pageapi']) ? (int) $_GET['pageapi'] : 1;
+            $total = count($berita); //total items in array    
+            $limit = 8; //per page    
+            $totalPages = ceil($total / $limit); //calculate total pages
+            $page = max($page, 1); //get 1 page when $_GET['page'] <= 0
+            $page = min($page, $totalPages); //get last page when $_GET['page'] > $totalPages
+            $offset = ($page - 1) * $limit;
+            if ($offset < 0) $offset = 0;
+            $berita = array_slice($berita, $offset, $limit);
 
-        $data['apiberita'] = $berita;
-        $data['tot_page']=$totalPages;
-        $data['pageapi'] = $page;
-        }; 
+            $data['apiberita'] = $berita;
+            $data['tot_page'] = $totalPages;
+            $data['pageapi'] = $page;
+        };
         // end apiberita
 
         $data['dataset'] = $data_berita;
@@ -715,15 +733,15 @@ class Berita extends BaseController
 
         for ($i = 0; $i < count($userNews); $i++) {
             if ($userNews[$i]['akses'] == 'review' && $userNews[$i]['aktif'] == '0') {
-                $msg = 'Berita dengan judul ' . $userNews[$i]['judul'] . ' oleh ' . $userNews[$i]['author'] . ' sedang menunggu konfirmasi Administrator.';
-            } else if ($userNews[$i]['akses'] != 'review' && $userNews[$i]['akses'] != 'private' && $userNews[$i]['aktif'] == '1' && (strtotime(get_date()) <= strtotime($userNews[$i]['aktif']))) {
-                $msg = 'Berita dengan judul ' . $userNews[$i]['judul'] . ' oleh ' . $userNews[$i]['author'] . ' telah dikonfirmasi dan dipublikasikan.';
-            } else if ($userNews[$i]['akses'] != 'review' && $userNews[$i]['akses'] != 'private' && $userNews[$i]['aktif'] == '1' && (strtotime(get_date()) > strtotime($userNews[$i]['aktif']))) {
-                $msg = 'Berita dengan judul ' . $userNews[$i]['judul'] . ' oleh ' . $userNews[$i]['author'] . ' telah dikonfirmasi dan belum dipublikasikan.';
-            } else if ($userNews[$i]['akses'] != 'review' && $userNews[$i]['akses'] != 'private' && $userNews[$i]['aktif'] == '0' && (strtotime(get_date()) <= strtotime($userNews[$i]['aktif']))) {
-                $msg = 'Berita dengan judul ' . $userNews[$i]['judul'] . ' oleh ' . $userNews[$i]['author'] . ' dinonaktifkan.';
+                $msg = 'Berita anda dengan judul "' . $userNews[$i]['judul']  . '" sedang menunggu konfirmasi Administrator.';
+            } else if ($userNews[$i]['akses'] != 'review' && $userNews[$i]['akses'] != 'private' && $userNews[$i]['aktif'] == '1' && (strtotime(get_date()) >= strtotime($userNews[$i]['tanggal_publish']))) {
+                $msg = 'Berita anda dengan judul "' . $userNews[$i]['judul']  . '" telah dikonfirmasi dan telah dipublikasikan.';
+            } else if ($userNews[$i]['akses'] != 'review' && $userNews[$i]['akses'] != 'private' && $userNews[$i]['aktif'] == '1' && (strtotime(get_date()) < strtotime($userNews[$i]['tanggal_publish']))) {
+                $msg = 'Berita anda dengan judul "' . $userNews[$i]['judul']  . '" telah dikonfirmasi dan belum dipublikasikan.';
+            } else if ($userNews[$i]['akses'] != 'review' && $userNews[$i]['akses'] != 'private' && $userNews[$i]['aktif'] == '0') {
+                $msg = 'Berita anda dengan judul "' . $userNews[$i]['judul']  . '" telah dikonfirmasi dan menunggu dipublikasikan.';
             } else {
-                $msg = 'Berita dengan judul ' . $userNews[$i]['judul'] . ' oleh ' . $userNews[$i]['author'] . ' telah diterima dan sedang menunggu review Administrator.';
+                $msg = 'Berita anda dengan judul "' . $userNews[$i]['judul']  . '" telah diterima dan menunggu review Administrator.';
             }
 
             $dataUserNews[] = [
@@ -731,7 +749,6 @@ class Berita extends BaseController
                 'msg' => $msg,
                 'date' => date('d M Y', strtotime($userNews[$i]['tanggal_publish'])),
                 'thumbnail' => $userNews[$i]['thumbnail'],
-
             ];
         }
 
@@ -878,8 +895,6 @@ class Berita extends BaseController
                 ];
             } else {
                 $data[$chk]['hits'] += (int)$ip[$i]['hits'];
-          
-          
             }
         }
 

@@ -1,7 +1,7 @@
 <?= $this->extend('websia/layoutWebsia/templateBerandaLogin.php'); ?>
 
 <?= $this->section('content'); ?>
-
+<script src="<?= base_url() ?>/vendor/ckeditor/ckeditor.js"></script>
 <div class="md:mt-8 mt-4 lg:px-20 md:px-8 px-3 flex flex-col flex-1 sm:text-sm text-xs">
     <div class="flex justify-between relative">
         <div class="text-primary mb-3">
@@ -55,6 +55,14 @@
                 <input type="text" title="Harus Diisi" class="inputForm" name="author" id="namaPenulis" placeholder="Nama penulis">
             </div>
             <div class="flex">
+                <label for="tanggalPublish" class="text-primary font-bold flex items-center sm:text-sm text-xs mr-2" style="width: 14%;">Tanggal Publish</label>
+                <div class="flex xl:w-1/4 md:w-1/3 w-1/2">
+                    <input type="date" class="inputForm" name="date" id="tanggalPublish">
+                </div>
+                <div class="flex items-center mb-2 ml-4 text-primary mr-">(Optional)</div>
+            </div>
+            <br>
+            <div class="flex">
                 <label for="fotoSampul" class="w-2/12 text-primary font-bold flex items-center mb-2 sm:text-sm text-xs mr-2">Foto Sampul</label>
                 <div class="flex justify-start items-center mb-2 w-full relative">
                     <input type="file" hidden accept=".jpg, .jpeg, .img, .png" title="Pilih Foto" name="thumbnail" id="fotoSampul">
@@ -64,14 +72,7 @@
             </div>
             <div class="flex">
                 <label for="kontenBerita" class="w-2/12 text-primary font-bold sm:text-sm text-xs mr-2 mt-2">Konten Berita</label>
-                <textarea title="Harus Diisi" class="inputForm w-10/12" name="content" id="kontenBerita" cols="30" rows="10"></textarea>
-            </div>
-            <div class="flex">
-                <label for="tanggalPublish" class="text-primary font-bold flex items-center sm:text-sm text-xs mr-2" style="width: 14%;">Tanggal Publish</label>
-                <div class="flex xl:w-1/4 md:w-1/3 w-1/2">
-                    <input type="date" class="inputForm" name="date" id="tanggalPublish">
-                </div>
-                <div class="flex items-center mb-2 ml-4 text-primary mr-">(Optional)</div>
+                <textarea title="Harus Diisi" class="inputForm w-10/12" name="kontenBerita" id="kontenBerita" rows="10"></textarea>
             </div>
             <div class="flex justify-end mt-3">
                 <button type="submit" class="bg-secondary text-white rounded-full w-20 py-1 text-center cursor-pointer hover:bg-secondaryhover transition-colors duration-300 focus:outline-none" value="upload_berita">Kirim</button>
@@ -83,6 +84,10 @@
 
 
 <script>
+    CKEDITOR.replace('kontenBerita', {
+        removeButtons: 'NewPage,Source,Save,spellchecker,Form,Checkbox,Radio,TextField,Textarea,Select,Button,ImageButton,HiddenField,CopyFormatting,RemoveFormat,CreateDiv,BidiLtr,BidiRtl,Language,Link,Unlink,Anchor,Flash,Table,Smiley,SpecialChar,PageBreak,Iframe,About'
+    });
+
     $('form#formUnggahBerita').submit(function(e) {
         e.preventDefault();
         $('body').prepend(`
@@ -129,6 +134,8 @@
         })
 
         var formData = new FormData(this);
+        var editorText = CKEDITOR.instances.kontenBerita.getData();
+        formData.append('content', editorText)
         $('#kirimBerita').click(function(e) {
             $.ajax({
                 url: "<?= base_url('Berita/sendUploadData') ?>",
@@ -138,7 +145,6 @@
                 contentType: false,
                 processData: false,
                 success: function(result) {
-
                     if (result == "true") {
                         $('#konfirUnggahBerita').html(`
                             <div class="hidden opacity-0 duration-700 transition-all p-3 rounded-lg flex items-center" style="background-color: #B1FF66;">

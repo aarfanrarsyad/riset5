@@ -1,6 +1,7 @@
 <?= $this->extend('templates/index'); ?>
 
 <?= $this->section('page-content'); ?>
+<script src="<?= base_url() ?>/vendor/ckeditor/ckeditor.js"></script>
 
 <script>
     function hide_access() {
@@ -16,22 +17,6 @@
         $('.' + ele1 + ' .form-control').attr('required', 'required');
         $('.' + ele2).addClass('d-none');
         $('.' + ele2 + ' .form-control').removeAttr('required');
-    }
-
-    function addlabel(event) {
-        $('#oldfileLabel').empty();
-        let val = $(event.target).val()
-        $('#oldfileLabel').html(val);
-        if (event.target.files && event.target.files[0]) {
-            var reader = new FileReader();
-            reader.onload = function(e) {
-                $('#previewHolder').attr('src', e.target.result);
-            }
-            reader.readAsDataURL(event.target.files[0]);
-        } else {
-            alert('select a file to see preview');
-            $('#previewHolder').attr('src', '');
-        }
     }
 </script>
 
@@ -81,13 +66,13 @@ $errors = session()->getFlashdata('errors');
                     <form id="form-news" action="" method="POST" enctype="multipart/form-data">
                         <div class="card-body">
                             <div class="form-group row">
-                                <label for="date" class="col-sm-2 col-form-label">Tanggal</label>
+                                <label for="date" class="col-sm-2 col-form-label">Tanggal Publish</label>
                                 <div class="col-sm-5">
-                                    <input type="datetime-local" name="date" class="inputForm form-control" id="date" placeholder="Tanggal" value="<?= date("Y-m-d\TH:i:s", strtotime($data['tanggal_publish']))  ?>" required>
+                                    <input type="date" name="date" class="inputForm form-control" id="date" placeholder="Tanggal" value="<?= $data['tanggal_publish'] ?>" required>
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="date" class="col-sm-2 col-form-label">Share to :</label>
+                                <label for="date" class="col-sm-2 col-form-label">Bagikan ke :</label>
                                 <div class="col-sm-5">
                                     <div class="form-check">
                                         <input class="form-check-input" type="radio" name="access" id="access-public" value="public" onclick="hide_access()" <?= ($data['akses'] == 'public') ? 'checked' : '' ?>>
@@ -135,7 +120,7 @@ $errors = session()->getFlashdata('errors');
                             </div>
                             <br>
                             <div class="form-group row">
-                                <label for="author" class="col-sm-2 col-form-label">Author</label>
+                                <label for="author" class="col-sm-2 col-form-label">Penulis</label>
                                 <div class="col-sm-7">
                                     <div class="form-group">
                                         <input type="text" name="author" class="inputForm form-control" id="author" value="<?= $data['author'] ?>" placeholder="Penulis">
@@ -143,23 +128,20 @@ $errors = session()->getFlashdata('errors');
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="header" class="col-sm-2 col-form-label">Header</label>
+                                <label for="header" class="col-sm-2 col-form-label">Judul</label>
                                 <div class="col-sm-10">
                                     <input type="text" name="header" class="inputForm form-control" id="header" placeholder="Judul Berita" value="<?= $data['judul'] ?>" required>
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="thumbnail" class="col-sm-2 col-form-label">Thumbnail</label>
+                                <label for="thumbnail" class="col-sm-2 col-form-label">Foto Sampul</label>
                                 <div class="col-sm-6">
-                                    <input type="file" name="thumbnail" class="" style="border-radius:0" id="thumbnail" placeholder="Thumbnail Berita" onchange="addlabel(event)">
+                                    <input type="file" name="thumbnail" class="border-top-0 border-right-0 border-left-0" style="border-radius:0" id="thumbnail" placeholder="Thumbnail Berita">
                                     <label class="custom-file-label form-control-sm inputForm" for="thumbnail"><span id="oldfileLabel"><?= $data['thumbnail'] ?></span></label>
-                                </div>
-                                <div class="col-sm-4">
-                                    <img src="<?= base_url('berita/berita_' . $data['id'] . '/' . $data['thumbnail']) ?>" class="img-fluid border" id="previewHolder" onclick="show_img(event)">
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="summernote" class="col-sm-2 col-form-label">Content</label>
+                                <label for="summernote" class="col-sm-2 col-form-label">Konten Berita</label>
                                 <div class="col-sm-10">
                                 </div>
                             </div>
@@ -181,49 +163,10 @@ $errors = session()->getFlashdata('errors');
 
 <script>
     $(document).ready(function() {
-        $('#summernote').summernote({
-            height: 500,
-            callbacks: {
-                onMediaDelete: function(target) {
-                    $.ajax({
-                        url: "<?= base_url('/admin/berita/delete-file') ?>",
-                        method: "POST",
-                        data: {
-                            path: target[0].src
-                        },
-                        cache: false,
-                        success: function(result) {
-                            if (!result) {
-                                alert('Image failed to delete')
-                            }
-                        }
-                    });
-                },
-                onImageUpload: function(files) {
-                    let data = new FormData();
-                    data.append("file", files[0]);
-                    data.append("id", '<?= $data['id'] ?>');
-                    $.ajax({
-                        url: "<?= base_url('/admin/berita/upload-file') ?>",
-                        type: 'POST',
-                        enctype: "multipart/form-data",
-                        processData: false,
-                        contentType: false,
-                        data: data,
-                        dataType: 'JSON',
-                        success: function(url) {
-                            $('#summernote').summernote('insertImage', url);
-                        },
-                        error: function(data) {
-                            alert("Upload failed");
-                        }
-                    });
-
-                }
-
-            }
-
+        CKEDITOR.replace('content', {
+            removeButtons: 'NewPage,Source,Save,spellchecker,Form,Checkbox,Radio,TextField,Textarea,Select,Button,ImageButton,HiddenField,CopyFormatting,RemoveFormat,CreateDiv,BidiLtr,BidiRtl,Language,Anchor,SpecialChar,PageBreak,Iframe,About'
         });
+
     })
 </script>
 <?= $this->endSection(); ?>

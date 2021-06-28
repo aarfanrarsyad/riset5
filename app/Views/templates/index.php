@@ -5,6 +5,11 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <?php if (isset($title) && $title) : ?>
+        <title><?= $title ?></title>
+    <?php else : ?>
+        <title>SIA | Sistem Informasi Alumni</title>
+    <?php endif; ?>
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
@@ -119,7 +124,7 @@
             <!-- Control sidebar content goes here -->
             <div class="p-3 control-sidebar-content">
                 <div class="profile text-center my-3">
-                    <img class="img-circle mx-auto" src=" <?= base_url('/img/components/logo/logo_pkl.png') ?>" style="width:100px; height:auto;" alt="logo PKL">
+                    <img class="img-circle mx-auto" src="<?= base_url(userdata()['image']) ?>" style="width:100px; height:auto;background-color:white;" alt="logo PKL">
                     <div class="text-xs mt-3">
                         <h5 class="widget-user-username text-center text-secondaryhover text-lg mb-2"><?php if (userdata()) echo (userdata()['fullname']) ?></h5>
                         <h6 class="widget-user-desc text-center"><?= array_to_string(role_user(), 2, 'name') ?></h6>
@@ -127,10 +132,6 @@
                 </div>
                 <br>
                 <hr class="mb-3 border-primaryDark">
-                <div class="mb-2 text-sm px-2"><span><a href="#" class="hover:text-secondaryhover"><i class="fas fa-user-circle"></i>&ensp;Change profile</span></a></div>
-                <div class="mb-2 text-sm px-2"><span><a href="#" class="hover:text-secondaryhover"><i class="fas fa-unlock"></i>&ensp;Change password</span></a> </div>
-                <div class="mb-2 text-sm px-2"><a href="#" class="hover:text-secondaryhover"><span><i class="fas fa-user-shield"></i>&ensp;Activity of all groups</span></a> </div>
-                <hr class="mt-3 mb-3 border-primaryDark">
                 <div class="mb-2 text-sm px-2 "><a href="<?= base_url("auth/logout") ?>" class="hover:text-secondaryhover"><span><i class="fas fa-sign-out-alt"></i>&ensp;Logout</span></a> </div>
             </div>
         </aside>

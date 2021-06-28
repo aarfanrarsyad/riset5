@@ -242,6 +242,7 @@
                         <select id="tags" class="tags font-heading text-xs" placeholder="Tandai orang"></select>
                     </div>
                 </div>
+                <br>
                 <div class="font-heading text-xs text-primary">
                     <p class="mb-2"> *Harus Diisi </p>
                     <p> Format file harus .jpg/.jpeg/.png </p>

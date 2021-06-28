@@ -214,10 +214,18 @@
 
                     <div class="text-primary text-center font-heading lg:text-lg md:text-base text-sm">Bagikan:</div>
                     <div class="flex justify-center lg:mt-3 mt-2 lg:mb-16 md:mb-12 mb-8">
-                        <img class="lg:h-6 h-4 mx-1" src="/img/components/icon/fb.png">
-                        <img class="lg:h-6 h-4 mx-1" src="/img/components/icon/twit.png">
-                        <img class="lg:h-6 h-4 mx-1" src="/img/components/icon/whatsapp.png">
-                        <img class="lg:h-6 h-4 mx-1" src="/img/components/icon/linkedin.png">
+                        <a href="https://www.facebook.com/sharer/sharer.php?u=<?= current_url() ?>" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false;" target="_blank" title="Share on Facebook">
+                            <img class="lg:h-6 h-4 mx-1" src="/img/components/icon/fb.png">
+                        </a>
+                        <a href="https://twitter.com/share?url=<?= current_url() ?>" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false;" target="_blank" title="Share on Twitter">
+                            <img class="lg:h-6 h-4 mx-1" src="/img/components/icon/twit.png">
+                        </a>
+                        <a href="whatsapp://send?text=<?= current_url() ?>" data-action="share/whatsapp/share" onClick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false;" target="_blank" title="Share on whatsapp">
+                            <img class="lg:h-6 h-4 mx-1" src="/img/components/icon/whatsapp.png">
+                        </a>
+                        <a href="https://www.linkedin.com/shareArticle?mini=true&url=<?= current_url() ?>" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false;" target="_blank" title="Share on Linkedin">
+                            <img class="lg:h-6 h-4 mx-1" src="/img/components/icon/linkedin.png">
+                        </a>
                     </div>
                     <div class="flex items-center font-paragraph text-primary mb-3">
                         <img class="lg:h-8 h-6 mx-1" src="/img/components/icon/komen.png">
@@ -283,7 +291,7 @@
                             <div class="h-24 lg:w-3/7 w-2/5 bg-gray-200 bg-no-repeat bg-contain bg-center" style="background-image:url('<?= base_url('berita/berita_' . $berita_popular[$i]['id'] . '/' . $berita_popular[$i]['thumbnail']) ?>');">
                             </div>
                             <div class="lg:ml-4 md:ml-3 ml-2 lg:w-4/7 w-3/5">
-                                <a href="<?= base_url('berita/news_view/' . $berita_popular[$i]['id']) ?>">
+                                <a href="<?= base_url('beranda/berita/view/' . $berita_popular[$i]['id']) ?>">
                                     <h3 class="font-heading font-semibold text-primary lg:text-lg md:text-base text-sm"><?= $berita_popular[$i]['judul'] ?></h3>
                                 </a>
                                 <div class="flex gap-x-1 items-center">
@@ -304,7 +312,7 @@
                             <div class="h-24 lg:w-3/7 w-2/5 bg-gray-200 bg-no-repeat bg-contain bg-center" style="background-image:url('<?= base_url('berita/berita_' . $berita[$i]['id'] . '/' . $berita[$i]['thumbnail']) ?>');">
                             </div>
                             <div class="lg:ml-4 md:ml-3 ml-2 lg:w-4/7 w-3/5">
-                                <a href="<?= base_url('berita/news_view/' . $berita[$i]['id']) ?>">
+                                <a href="<?= base_url('beranda/berita/view/' . $berita[$i]['id']) ?>">
                                     <h3 class="font-heading font-semibold text-primary lg:text-lg md:text-base text-sm"><?= $berita[$i]['judul'] ?></h3>
                                 </a>
                                 <div class="flex gap-x-1 items-center">

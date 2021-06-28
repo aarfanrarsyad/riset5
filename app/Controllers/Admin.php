@@ -55,6 +55,7 @@ class Admin extends BaseController
 	# Method untuk report 
 	public function report_1_index()
 	{
+		$this->data['title'] = "Administrator | Report";
 		return view('admin' . DIRECTORY_SEPARATOR . 'reports' . DIRECTORY_SEPARATOR . 'report_1', $this->data);
 	}
 
@@ -64,13 +65,14 @@ class Admin extends BaseController
 		$init = new admin_model();
 		$query = $init->getAllUsers()->getResultArray();
 
-		$this->data =  ['data' => $query];
+		$this->data =  ['data' => $query, 'title' => "Administrator | User"];
 		return view('admin' . DIRECTORY_SEPARATOR . 'users' . DIRECTORY_SEPARATOR . 'index', $this->data);
 	}
 
 	# Method untuk update users 
 	public function update_user($id)
 	{
+		$this->data =  ['title' => "Administrator | Update User"];
 		return view('admin' . DIRECTORY_SEPARATOR . 'users' . DIRECTORY_SEPARATOR . 'update', $this->data);
 	}
 
@@ -179,7 +181,7 @@ class Admin extends BaseController
 		$init = new admin_model();
 		$tokens = $init->getActivationTokens()->getResultArray();
 
-		$this->data = ['data' => $tokens];
+		$this->data = ['data' => $tokens, 'title' => "Administrator | Token Aktivasi"];
 		return view('admin' . DIRECTORY_SEPARATOR . 'tokens' . DIRECTORY_SEPARATOR . 'activation_tokens', $this->data);
 	}
 
@@ -189,13 +191,12 @@ class Admin extends BaseController
 		$init = new admin_model();
 		$tokens = $init->getResetTokens()->getResultArray();
 
-		$this->data = ['data' => $tokens];
+		$this->data = ['data' => $tokens, 'title' => "Administrator | Token Reset"];
 		return view('admin' . DIRECTORY_SEPARATOR . 'tokens' . DIRECTORY_SEPARATOR . 'resset_tokens', $this->data);
 	}
 
 
 	#------------------------------------------------------------------------------------------------------------------------------------------------#
-
 
 	# Method untuk index managament users groups
 	public function users_groups_index()
@@ -211,6 +212,7 @@ class Admin extends BaseController
 
 		$groups = $authorize->groups();
 		$this->data =  [
+			'title' => "Administrator | User Role",
 			'users' => $users,
 			'groups' => $groups
 		];
@@ -240,7 +242,7 @@ class Admin extends BaseController
 	{
 		$authorize = Services::authorization();
 		$groups = $authorize->groups();
-		$this->data = ['data' => $groups];
+		$this->data = ['data' => $groups, 'title' => "Administrator | Role",];
 		return view('admin' . DIRECTORY_SEPARATOR . 'groups' . DIRECTORY_SEPARATOR . 'index', $this->data);
 	}
 
@@ -382,7 +384,7 @@ class Admin extends BaseController
 		$resources = $init->getAllResources()->getResultArray();
 
 		$menus = $init->getAllMenu()->getResultArray();
-		$this->data = ['menus' => $menus, 'resources' => $resources];
+		$this->data = ['menus' => $menus, 'resources' => $resources, 'title' => "Administrator | Menu"];
 		return view('admin' . DIRECTORY_SEPARATOR . 'resources' . DIRECTORY_SEPARATOR . 'index', $this->data);
 	}
 
@@ -503,6 +505,7 @@ class Admin extends BaseController
 		}
 
 		$this->data =  [
+			'title' => "Administrator | Akses",
 			'crud' => $crud,
 			'resources' => $resources
 		];
@@ -533,7 +536,7 @@ class Admin extends BaseController
 		$authorize = Services::authorization();
 		$groups = $authorize->groups();
 
-		$this->data = ['groups' => $groups];
+		$this->data = ['groups' => $groups, 'title' => "Administrator | Permission"];
 
 		return view('admin' . DIRECTORY_SEPARATOR . 'permissions' . DIRECTORY_SEPARATOR . 'index', $this->data);
 	}
@@ -589,6 +592,7 @@ class Admin extends BaseController
 		$logins = $init->login_attempts()->getResultArray();
 		$this->data =  [
 			'logins' => $logins,
+			'title' => "Administrator | Upaya Login"
 		];
 
 		return view('admin' . DIRECTORY_SEPARATOR . 'security' . DIRECTORY_SEPARATOR . 'login_attempts', $this->data);
@@ -602,6 +606,7 @@ class Admin extends BaseController
 
 		$this->data =  [
 			'reset_attempts' => $reset_attempts,
+			'title' => "Administrator | Token Reset"
 		];
 
 		return view('admin' . DIRECTORY_SEPARATOR . 'security' . DIRECTORY_SEPARATOR . 'resset_attempts', $this->data);
@@ -613,6 +618,7 @@ class Admin extends BaseController
 		$init = new admin_model();
 		$activation_attempts = $init->get_token_activation()->getResultArray();
 		$this->data =  [
+			'title' => "Administrator | Token Aktivasi",
 			'activation_attempts' => $activation_attempts,
 		];
 
@@ -628,6 +634,7 @@ class Admin extends BaseController
 		$activities = $init->activity_log()->getResultArray();
 
 		$this->data =  [
+			'title' => "Administrator | Aktivitas",
 			'activities' => $activities,
 		];
 
@@ -657,7 +664,7 @@ class Admin extends BaseController
 		}
 
 		$data = [
-			'title' => 'Alumni | Website Riset 5',
+			'title' => 'Administrator | Alumni',
 			'alumni' => $alumni->paginate(1000, 'alumni'),
 			'pager' => $init->pager,
 			'currentPage' => $currentPage
@@ -1285,7 +1292,7 @@ class Admin extends BaseController
 		$currentPage = $this->request->getVar('page_instansi') ? $this->request->getVar('page_instansi') : 1;
 
 		$data = [
-			'title' => 'Instansi | Website Riset 5',
+			'title' => 'Administrator | Instansi',
 			'instansi' => $instansi,
 			'pager' => $init->pager,
 			'currentPage' => $currentPage
@@ -1681,6 +1688,7 @@ class Admin extends BaseController
 		}
 
 		$data =  [
+			'title' 	=> "Administrator | Galeri Foto",
 			'foto' 		=> $foto,
 			'alumni' 	=> $alumni,
 			'album'		=> $out_album,
@@ -1717,8 +1725,9 @@ class Admin extends BaseController
 		}
 
 		$data =  [
-			'video' => $video,
-			'album'	=> $out_album,
+			'title' 	=> "Administrator | Galeri Foto",
+			'video' 	=> $video,
+			'album'		=> $out_album,
 			'isGalery'	=> TRUE
 		];
 
