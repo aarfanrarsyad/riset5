@@ -52,7 +52,7 @@ class Auth extends BaseController
 
 			session()->remove(['id_user', 'id_alumni', 'nama', 'role']);
 			session()->setFlashdata('pesan', 'Logout berhasil!');
-			session()->setFlashdata('warna', 'success');
+			session()->setFlashdata('warna', 'greenAlert');
 
 			//logout bps
 			if (session('oauth2state')) {
@@ -302,8 +302,8 @@ class Auth extends BaseController
 						$flash = '<strong>Login berhasil!</strong> selamat datang <b>' . session('nama') . '</b>.';
 						$alert = "<div id=\"alert\">
 										<div class=\"fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40\">
-											<div class=\"duration-700 transition-all p-3 rounded-lg flex items-center\" style=\"background-color: #34eb52;\">
-												<p class=\"sm:text-base text-sm font-heading font-bold\">" . $flash . "</p>
+											<div class=\"duration-700 transition-all p-3 rounded-lg flex items-center bg-greenAlert\">
+												<p class=\"sm:text-base text-sm text-success font-heading font-bold\">" . $flash . "</p>
 											</div>
 										</div>
 									</div>
@@ -522,8 +522,8 @@ class Auth extends BaseController
 							$flash = '<strong>Login berhasil!</strong> selamat datang <b>' . session('nama') . '</b>.';
 							$alert = "<div id=\"alert\">
 										<div class=\"fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40\">
-											<div class=\"duration-700 transition-all p-3 rounded-lg flex items-center\" style=\"background-color: #34eb52;\">
-												<p class=\"sm:text-base text-sm font-heading font-bold\">" . $flash . "</p>
+											<div class=\"duration-700 transition-all p-3 rounded-lg flex items-center bg-greenAlert\">
+												<p class=\"sm:text-base text-sm text-success font-heading font-bold\">" . $flash . "</p>
 											</div>
 										</div>
 									</div>
