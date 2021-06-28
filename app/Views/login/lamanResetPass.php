@@ -7,6 +7,15 @@
 
         <?= csrf_field() ?>
         <h2 class="sm:text-2xl text-lg mb-3 font-bold text-center pt-8 text-primary">ATUR ULANG KATA SANDI</h2>
+        <div class="pl-3 bg-green-400 rounded-full flex items-center 
+            <?php if (session('message') == "A security token has been emailed to you. Enter it in the box below to continue.") : ?>
+                is-invalid
+            <?php else : ?>
+                hidden
+            <?php endif; ?>">
+            <img src="/img/components/icon/check.png" class="h-5 mr-1" alt="icon check">
+            <p class="text-red-900 sm:text-base text-sm">Token keamanan telah dikirim melalui email kepada Anda.</p>
+        </div>
         <div class="pl-3 bg-red-400 rounded-full flex items-center 
             <?php if (session('error') == "Unable to locate a user with that email.") : ?>
                 is-invalid
@@ -14,7 +23,7 @@
                 hidden
             <?php endif; ?>">
             <img src="/img/components/icon/false.png" class="h-5 mr-1" alt="icon false">
-            <p class="text-red-900 sm:text-base text-sm">Email tidak terdaftar. Mohon periksa kembali.</p>
+            <p class="text-red-900 sm:text-base text-sm">Tidak dapat menemukan pengguna dengan email tersebut. Periksa kembali penulisan token atau email yang Anda masukkan.</p>
         </div>
         <div class="pl-3 bg-red-400 rounded-full flex items-center 
             <?php if (session('error') == "Sorry. Your reset token has expired.") : ?>

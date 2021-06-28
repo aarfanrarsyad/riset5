@@ -263,8 +263,54 @@ function findString(str) {
         alert("Browser Opera tidak didukung, maaf...")
         return;
     }
-    if (!strFound) alert("String '" + str + "' tidak ditemukan!")
+    if (!strFound) {
+        $('body').prepend(`
+    <div class="fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40" id='modalPencarian'>
+        <div class="hidden transform scale-0 opacity-0 duration-300 transition-all bg-gray bg-opacity-0">
+            <div class="mx-3 sm:px-6 px-2 py-3 rounded-lg bg-white flex items-center text-justify" style="background-color: #d96c6c;">
+                <img src="/img/components/icon/false.png" class="h-5 mr-2" alt="icon check">
+                <p class="sm:text-lg text-base" style="color: #000000;">String "<span id='mystr'></span>" tidak ditemukan!</p>
+            </div>
+        </div>
+    </div>
+    `)
+    document.getElementById("mystr").innerHTML=str;
+        $('#modalPencarian').children().first().removeClass('hidden')
+        setTimeout(function() {
+            $('#modalPencarian').children().first().removeClass('opacity-0 scale-0')
+        }, 10);
+
+        $(window).click(function(e) {
+            var modal = document.getElementById('modalPencarian')
+            
+            if (!!modal) {
+                if (e.target === modal) {
+                    $('#modalPencarian').children().first().addClass('opacity-0 scale-0')
+                    $('#modalPencarian').children().first().on('transitionend MSTransitionEnd webkitTransitionEnd oTransitionEnd', function() {
+                        $('#modalPencarian').children().first().addClass('hidden')
+                    });
+                    setTimeout(function() {
+                        $('#modalPencarian').remove()
+                    }, 200);
+                }
+                
+            }
+        })
+
+        setTimeout(() => {
+            $('#modalPencarian').children().first().addClass('opacity-0 scale-0')
+            $('#modalPencarian').children().first().on('transitionend MSTransitionEnd webkitTransitionEnd oTransitionEnd', function() {
+                $('#modalPencarian').children().first().addClass('hidden')
+            });
+            setTimeout(function() {
+                $('#modalPencarian').remove()
+            }, 200);
+        }, 1200);
         return;
+    }
+        
+    // if (!strFound) alert("String '" + str + "' tidak ditemukan!")
+    //     return;
 };
 
 document.getElementById('f1').onsubmit = function() {
