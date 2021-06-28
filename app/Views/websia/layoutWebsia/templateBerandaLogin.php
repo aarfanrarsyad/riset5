@@ -141,7 +141,7 @@
                             KELUAR
                         </a>
                         <div class="">
-                            <button type="button" class="block text-white hover:text-gray-200 focus:text-gray-200 md:hidden" id="hamburger">
+                            <button type="button" class="block text-white hover:text-gray-200 focus:text-gray-200 focus:outline-none md:hidden" id="hamburger">
                                 <svg class="w-8 fill-current" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
                                 </svg>
@@ -254,8 +254,8 @@
 
             <!-- awal footer haistis -->
             <div class="md:mt-0 mx-auto md:mx-0 mb-2 md:mb-0">
-                <a href="https://haisstis.org/"><img class="lg:h-28 h-20 w-36 lg:w-auto lg:-mt-6" src="/img/components/logo/logo_haisstis.png" alt="logo HAISSTIS"></a>
-                <div class="flex justify-start gap-x-2 -mt-2 lg:-mt-4">
+                <a href="https://haisstis.org/"><img class="lg:h-28 h-20 w-36 lg:w-auto md:-mt-4 lg:-mt-6" src="/img/components/logo/logo_haisstis.png" alt="logo HAISSTIS"></a>
+                <div class="flex justify-center md:justify-start gap-x-2 -mt-2 lg:-mt-4">
                     <div><img class="lg:h-5 h-4" src="/img/components/icon/message_white.png" alt="icon message"></div>
                     <div>
                         <h3 class="text-white font-heading">sia@stis.ac.id</h3>
@@ -265,7 +265,7 @@
             <!-- akhir footer haistis -->
 
             <!-- awal link ke webservice  -->
-            <div class="flex flex-col text-white font-heading mx-auto md:mx-5 mt-4 md:mt-0">
+            <div class="flex flex-col text-white text-center md:text-left font-heading mx-auto md:mx-5 mt-4 md:mt-0">
                 <a href="https://pkl.stis.ac.id/60/" class="mb-2 hover:text-secondary">
                     <h3 class="underline md:no-underline">Website PKL60</h3>
                 </a>

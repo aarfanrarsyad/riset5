@@ -89,23 +89,23 @@ if (session()->getFlashdata('role')) { ?>
 <div class="w-full my-8 lg:px-20 md:px-8 px-5">
     <div class="w-full md:mb-6 mb-4 text-center text-xl text-black font-heading font-bold">ALUMNI AIS/STIS/POLSTAT STIS</div>
 
-    <div class="flex flex-col items-center md:flex-row md:justify-around w-full mt-4">
+    <div class="flex flex-col items-center md:flex-row md:justify-around w-full text-center mt-4">
         <!-- Awal Jumlah Alumni AIS/STIS/Polstat STIS I -->
-        <div class="w-min mb-2 md:mb-0 py-6 px-6 bg-contain bg-no-repeat bg-center" style="background-image: url(/img/components/atribut_beranda_sia/bulat.png)">
+        <div class="mb-2 md:mb-0 py-6 px-6 bg-contain bg-no-repeat bg-center" style="background-image: url(/img/components/atribut_beranda_sia/bulat.png)">
             <div class="angka text-primary md:text-6xl text-3xl font-bold md:mb-4 mb-2 font-heading"><?= $lulusan['ais']; ?></div>
             <div class="text-gray-500 text-sm font-semibold text-center font-paragraph">Lulusan AIS</div>
         </div>
         <!-- Akhir Jumlah Alumni AIS/STIS/Polstat STIS I-->
 
         <!-- Awal Jumlah Alumni AIS/STIS/Polstat STIS II-->
-        <div class="w-min mb-2 md:mb-0 py-6 px-6 bg-contain bg-no-repeat bg-center" style="background-image: url(/img/components/atribut_beranda_sia/bulat.png)">
+        <div class="mb-2 md:mb-0 py-6 px-6 bg-contain bg-no-repeat bg-center" style="background-image: url(/img/components/atribut_beranda_sia/bulat.png)">
             <div class="angka text-primary md:text-6xl text-3xl font-bold md:mb-4 mb-2 font-heading"><?= $lulusan['stis']; ?></div>
             <div class="text-gray-500 text-sm font-semibold text-center font-paragraph">Lulusan STIS</div>
         </div>
         <!-- Akhir Jumlah Alumni AIS/STIS/Polstat STIS II-->
 
         <!-- Awal Jumlah Alumni AIS/STIS/Polstat STIS III-->
-        <div class="w-min mb-2 md:mb-0 py-6 px-6 bg-contain bg-no-repeat bg-center" style="background-image: url(/img/components/atribut_beranda_sia/bulat.png)">
+        <div class="mb-2 md:mb-0 py-6 px-6 bg-contain bg-no-repeat bg-center" style="background-image: url(/img/components/atribut_beranda_sia/bulat.png)">
             <div class="angka text-primary md:text-6xl text-3xl font-bold md:mb-4 mb-2 font-heading"><?= $lulusan['pstis']; ?></div>
             <div class="text-gray-500 text-sm font-semibold text-center font-paragraph">Lulusan Polstat STIS</div>
         </div>
