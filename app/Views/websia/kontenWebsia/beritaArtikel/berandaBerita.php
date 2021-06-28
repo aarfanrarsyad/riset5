@@ -33,7 +33,6 @@
 
                 <div class="hidden lg:w-2/5 md:w-2/3 w-3/4 opacity-0 transition-all duration-300 rounded-xl text-primary py-2 text-sm absolute lg:right-18 -lg:right-2 md:right-6 right-1 md:top-48 top-28 overflow-y-auto h-72">
                     <div class="font-bold px-2">Status Unggah Berita</div>
-
                     <?php foreach ($notifications as $notification) : ?>
                         <div class="bg-gray-100 flex p-2 gap-x-2 mb-2">
                             <div class="lg:w-3/4 md:w-4/5 w-2/3">
@@ -43,14 +42,11 @@
                                     <p class="text-xs"><?= $notification['date'] ?></p>
                                 </div>
                             </div>
-
                             <div class="lg:w-1/4 md:w-1/5 w-1/3 lg:h-16 h-12 bg-no-repeat bg-contain bg-center bg-gray-200" style="background-image: url('<?= base_url('berita/berita_' . $notification['id'] . '/' . $notification['thumbnail']) ?>');">
                             </div>
                         </div>
                     <?php endforeach; ?>
                 </div>
-
-
             </div>
         </div>
     </div>
@@ -61,18 +57,18 @@
             </h2>
             <div class="md:grid md:grid-cols-3 md:gap-x-8 mt-4">
                 <div class="md:col-span-2 w-full lg:h-96 md:h-80 h-36 flex items-end sm:mb-8 mb-2 md:mb-0 bg-gray-200 bg-no-repeat bg-contain bg-center" style="background-image: url(<?= base_url('berita/berita_' . $newsPop[0]['id'] . '/' . $newsPop[0]['thumbnail']) ?>);">
-                    <a href="<?= base_url('/berita/news_view/' . $newsPop[0]['id']) ?>" class="bg-black bg-opacity-70 w-full lg:p-2 p-1">
+                    <a href="<?= base_url('/beranda/berita/view/' . $newsPop[0]['id']) ?>" class="bg-black bg-opacity-70 w-full lg:p-2 p-1">
                         <h1 class="text-white font-heading font-bold lg:text-xl md:text-lg text-base"><?= $newsPop[0]['judul'] ?></h1>
                     </a>
                 </div>
                 <div class="md:grid md:grid-rows-2 md:gap-y-6">
                     <div class="lg:h-44 h-36 flex items-end sm:mb-6 mb-2 md:mb-0 bg-gray-200 bg-no-repeat bg-contain bg-center" style="background-image: url(<?= base_url('berita/berita_' . $newsPop[1]['id'] . '/' . $newsPop[1]['thumbnail']) ?>);">
-                        <a href="<?= base_url('/berita/news_view/' . $newsPop[1]['id']) ?>" class="bg-black bg-opacity-70 w-full p-1">
+                        <a href="<?= base_url('/beranda/berita/view/' . $newsPop[1]['id']) ?>" class="bg-black bg-opacity-70 w-full p-1">
                             <h1 class="text-white font-heading font-bold lg:text-lg text-base"><?= $newsPop[1]['judul'] ?></h1>
                         </a>
                     </div>
                     <div class="lg:h-44 h-36 flex items-end bg-gray-200 bg-no-repeat bg-contain bg-center" style="background-image: url(<?= base_url('berita/berita_' . $newsPop[2]['id'] . '/' . $newsPop[2]['thumbnail']) ?>);">
-                        <a href="<?= base_url('/berita/news_view/' . $newsPop[2]['id']) ?>" class="bg-black bg-opacity-80 w-full p-1">
+                        <a href="<?= base_url('/beranda/berita/view/' . $newsPop[2]['id']) ?>" class="bg-black bg-opacity-80 w-full p-1">
                             <h1 class="text-white font-heading font-bold lg:text-lg text-base"><?= $newsPop[2]['judul'] ?></h1>
                         </a>
                     </div>
@@ -86,74 +82,77 @@
         <h2 class="font-bold text-secondary font-heading md:text-xl text-lg mb-4">
             <?= count($dataset) >= 3 ? 'Berita Lainnya' : 'Berita Terbaru' ?> </h2>
         <!-- start card berita -->
-        <div class="md:grid md:grid-cols-2 md:gap-x-6">
-
-            <?php for ($i = 0; $i < count($dataset); $i++) : ?>
-                <?php if ($i % 2 == 0) : ?>
-                    <div>
-                        <div class="flex gap-x-2 items-center">
-                            <div class="lg:w-1/4 w-1/3 lg:h-24 h-20 bg-gray-200 bg-no-repeat bg-contain bg-center" style="background-image: url(<?= base_url('berita/berita_' . $dataset[$i]['id'] . '/' . $dataset[$i]['thumbnail']) ?>);">
-                            </div>
-                            <div class="lg:w-3/4 w-2/3">
-                                <a href="<?= base_url('/berita/news_view/' . $dataset[$i]['id']) ?>">
-                                    <h3 class="font-heading font-semibold text-primary text-lg"><?= $dataset[$i]['judul'] ?>
-                                    </h3>
-                                </a>
-                                <div class="flex gap-x-1 items-center">
-                                    <img src="/img/components/icon/clock.png" class="w-3 h-3" alt="">
-                                    <p class="text-xs text-primary"><?= $dataset[$i]['tanggal_publish'] ?></p>
-                                    <img src="/img/components/icon/profile.png" class="w-3 h-3 ml-2" alt="">
-                                    <p class="text-xs text-primary"><?= $dataset[$i]['author'] ?></p>
+        <?php if (empty($dataset)) : ?>
+            <h1>Berita belum tersedia</h1>
+        <?php else : ?>
+            <div class="md:grid md:grid-cols-2 md:gap-x-6">
+                <?php for ($i = 0; $i < count($dataset); $i++) : ?>
+                    <?php if ($i % 2 == 0) : ?>
+                        <div>
+                            <div class="flex gap-x-2 items-center">
+                                <div class="lg:w-1/4 w-1/3 lg:h-24 h-20 bg-gray-200 bg-no-repeat bg-contain bg-center" style="background-image: url(<?= base_url('berita/berita_' . $dataset[$i]['id'] . '/' . $dataset[$i]['thumbnail']) ?>);">
                                 </div>
-                                <p style="text-align:justify">
-                                    <?= $dataset[$i]['konten'] ?>
-                                </p>
-                            </div>
-                        </div>
-                        <hr class="my-3 border-gray-400">
-                    </div>
-                <?php else : ?>
-                    <div class="md:block hidden">
-                        <div class="flex gap-x-2 items-center">
-                            <div class="lg:w-1/4 w-1/3 lg:h-24 h-20 bg-gray-200 bg-no-repeat bg-center bg-contain" style="background-image: url(<?= base_url('berita/berita_' . $dataset[$i]['id'] . '/' . $dataset[$i]['thumbnail']) ?>);">
-                            </div>
-
-                            <div class="lg:w-3/4 w-2/3">
-                                <a href="<?= base_url('/berita/news_view/' . $dataset[$i]['id']) ?>">
-                                    <h3 class="font-heading font-semibold text-primary text-lg"><?= $dataset[$i]['judul'] ?>
-                                    </h3>
-                                </a>
-                                <div class="flex gap-x-1 items-center">
-                                    <img src="/img/components/icon/clock.png" class="w-3 h-3" alt="">
-                                    <p class="text-xs text-primary"><?= $dataset[$i]['tanggal_publish'] ?></p>
-                                    <img src="/img/components/icon/profile.png" class="w-3 h-3 ml-2" alt="">
-                                    <p class="text-xs text-primary"><?= $dataset[$i]['author'] ?></p>
+                                <div class="lg:w-3/4 w-2/3">
+                                    <a href="<?= base_url('/beranda/berita/view/' . $dataset[$i]['id']) ?>">
+                                        <h3 class="font-heading font-semibold text-primary text-lg"><?= $dataset[$i]['judul'] ?>
+                                        </h3>
+                                    </a>
+                                    <div class="flex gap-x-1 items-center">
+                                        <img src="/img/components/icon/clock.png" class="w-3 h-3" alt="">
+                                        <p class="text-xs text-primary"><?= $dataset[$i]['tanggal_publish'] ?></p>
+                                        <img src="/img/components/icon/profile.png" class="w-3 h-3 ml-2" alt="">
+                                        <p class="text-xs text-primary"><?= $dataset[$i]['author'] ?></p>
+                                    </div>
+                                    <p style="text-align:justify">
+                                        <?= $dataset[$i]['konten'] ?>
+                                    </p>
                                 </div>
-                                <p style="text-align:justify">
-                                    <?= $dataset[$i]['konten'] ?>
-                                </p>
                             </div>
+                            <hr class="my-3 border-gray-400">
                         </div>
-                        <hr class="my-3 border-gray-400">
-                    </div>
-                <?php endif; ?>
-            <?php endfor; ?>
-        </div>
+                    <?php else : ?>
+                        <div class="md:block hidden">
+                            <div class="flex gap-x-2 items-center">
+                                <div class="lg:w-1/4 w-1/3 lg:h-24 h-20 bg-gray-200 bg-no-repeat bg-center bg-contain" style="background-image: url(<?= base_url('berita/berita_' . $dataset[$i]['id'] . '/' . $dataset[$i]['thumbnail']) ?>);">
+                                </div>
+
+                                <div class="lg:w-3/4 w-2/3">
+                                    <a href="<?= base_url('/beranda/berita/view/' . $dataset[$i]['id']) ?>">
+                                        <h3 class="font-heading font-semibold text-primary text-lg"><?= $dataset[$i]['judul'] ?>
+                                        </h3>
+                                    </a>
+                                    <div class="flex gap-x-1 items-center">
+                                        <img src="/img/components/icon/clock.png" class="w-3 h-3" alt="">
+                                        <p class="text-xs text-primary"><?= $dataset[$i]['tanggal_publish'] ?></p>
+                                        <img src="/img/components/icon/profile.png" class="w-3 h-3 ml-2" alt="">
+                                        <p class="text-xs text-primary"><?= $dataset[$i]['author'] ?></p>
+                                    </div>
+                                    <p style="text-align:justify">
+                                        <?= $dataset[$i]['konten'] ?>
+                                    </p>
+                                </div>
+                            </div>
+                            <hr class="my-3 border-gray-400">
+                        </div>
+                    <?php endif; ?>
+                <?php endfor; ?>
+            </div>
+        <?php endif; ?>
         <!-- end card berita -->
 
-        <div class="flex gap-x-2 items-center justify-end mb-8">
-            <a href="<?= $pagination['page'] > 1 ? '?page=' . $pagination['previous'] . '' : '' ?>">
-                <img src="/img/components/icon/left-on.png" class="w-4 h-4 cursor-pointer" alt="">
-            </a>
-
-            <?php for ($x = 1; $x <= $pagination['total_page']; $x++) : ?>
-                <a href="?page=<?= $x ?>" class="text-secondary"><?= $x ?></a>
-            <?php endfor ?>
-
-            <a href="<?= $pagination['page'] < $pagination['total_page'] ? '?page=' . $pagination['next'] . '' : '' ?>">
-                <img src="/img/components/icon/right-on.png" class="w-4 h-4 cursor-pointer" alt="">
-            </a>
-        </div>
+        <?php if (!empty($dataset)) : ?>
+            <div class="flex gap-x-2 items-center justify-end mb-8">
+                <a href="<?= $pagination['page'] > 1 ? '?page=' . $pagination['previous'] . '' : '' ?>">
+                    <img src="/img/components/icon/left-on.png" class="w-4 h-4 cursor-pointer" alt="">
+                </a>
+                <?php for ($x = 1; $x <= $pagination['total_page']; $x++) : ?>
+                    <a href="?page=<?= $x ?>" class="text-secondary"><?= $x ?></a>
+                <?php endfor ?>
+                <a href="<?= $pagination['page'] < $pagination['total_page'] ? '?page=' . $pagination['next'] . '' : '' ?>">
+                    <img src="/img/components/icon/right-on.png" class="w-4 h-4 cursor-pointer" alt="">
+                </a>
+            </div>
+        <?php endif; ?>
 
         <!--- BERITA API XYZ--->
         <hr class="border-primary border-t-2 border-b-0 my-3">
@@ -161,53 +160,54 @@
 
         <div class="md:grid md:grid-cols-2 md:gap-x-6">
 
-            <?php foreach($apiberita as $value){?>
-            <div class="border-gray-400 border-b py-3">
-                <div class="flex gap-x-2 items-center">
-                    <div class="lg:w-1/4 w-1/3 lg:h-24 h-20 bg-gray-200">
-                    </div>
-                    <div class="lg:w-3/4 w-2/3">
-                        <a href="https://www.pusdiklat-bps.id/web/berita/<?=$value->id?>">
-                            <h3 class="font-heading font-semibold text-primary text-lg"><?php if(strlen($value->judul_berita)<45) echo $value->judul_berita; else echo substr($value->judul_berita,0,45).'...'; ?>
-                            </h3>
-                        </a>
-                        <div class="flex gap-x-1 items-center">
-                            <img src="/img/components/icon/clock.png" class="w-3 h-3" alt="">
-                            <?php $tgl = strtotime($value->created_at); 
-                            $tgl =date('d F Y',$tgl);
-                            ?>
-                            <p class="text-xs text-primary"><?=$tgl ?></p>
-                            <img src="/img/components/icon/profile.png" class="w-3 h-3 ml-2" alt="">
-                            <p class="text-xs text-primary"><?=$value->penulis ?></p>
+            <?php foreach ($apiberita as $value) { ?>
+                <div class="border-gray-400 border-b py-3">
+                    <div class="flex gap-x-2 items-center">
+                        <div class="lg:w-1/4 w-1/3 lg:h-24 h-20 bg-gray-200">
                         </div>
-                        <p>
-                            <?php if(strlen($value->konten_berita)<100) echo $value->konten_berita; else echo substr($value->konten_berita,0,strpos($value->konten_berita, ' ', 100)).'...'; ?>
-                        </p>
+                        <div class="lg:w-3/4 w-2/3">
+                            <a href="https://www.pusdiklat-bps.id/web/berita/<?= $value->id ?>">
+                                <h3 class="font-heading font-semibold text-primary text-lg"><?php if (strlen($value->judul_berita) < 45) echo $value->judul_berita;
+                                                                                            else echo substr($value->judul_berita, 0, 45) . '...'; ?>
+                                </h3>
+                            </a>
+                            <div class="flex gap-x-1 items-center">
+                                <img src="/img/components/icon/clock.png" class="w-3 h-3" alt="">
+                                <?php $tgl = strtotime($value->created_at);
+                                $tgl = date('d F Y', $tgl);
+                                ?>
+                                <p class="text-xs text-primary"><?= $tgl ?></p>
+                                <img src="/img/components/icon/profile.png" class="w-3 h-3 ml-2" alt="">
+                                <p class="text-xs text-primary"><?= $value->penulis ?></p>
+                            </div>
+                            <p>
+                                <?php if (strlen($value->konten_berita) < 100) echo $value->konten_berita;
+                                else echo substr($value->konten_berita, 0, strpos($value->konten_berita, ' ', 100)) . '...'; ?>
+                            </p>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <?php }?>
+            <?php } ?>
 
         </div>
         <!-- end card berita -->
         <div class="mt-2 flex gap-x-2 items-center justify-end mb-8">
-        <?php if($pageapi!=1){?>
-            <a href="?pageapi=<?= $pageapi-1;?>">
-                <img src="/img/components/icon/left-on.png" class="w-4 h-4 cursor-pointer" alt="">
-            </a>
-            <?php }?>
-            <?php for($i=1;$i<$tot_page+1;$i++){ ?>
-            <a href="?pageapi=<?= $i;?>" class="<?php if($i==$pageapi){ ?>text-primary<?php } else echo 'text-secondary font-bold' ?>"><?= $i;?></a>
+            <?php if ($pageapi != 1) { ?>
+                <a href="?pageapi=<?= $pageapi - 1; ?>">
+                    <img src="/img/components/icon/left-on.png" class="w-4 h-4 cursor-pointer" alt="">
+                </a>
+            <?php } ?>
+            <?php for ($i = 1; $i < $tot_page + 1; $i++) { ?>
+                <a href="?pageapi=<?= $i; ?>" class="<?php if ($i == $pageapi) { ?>text-primary<?php } else echo 'text-secondary font-bold' ?>"><?= $i; ?></a>
             <?php };
-            if ($pageapi!=$tot_page) {?>
-            <a href="?pageapi=<?= $pageapi+1;?>">
-                <img src="/img/components/icon/right-on.png"" class=" w-4 h-4 cursor-pointer" alt="">
-            </a>
-            <?php }?>
+            if ($pageapi != $tot_page) { ?>
+                <a href="?pageapi=<?= $pageapi + 1; ?>">
+                    <img src="/img/components/icon/right-on.png"" class=" w-4 h-4 cursor-pointer" alt="">
+                </a>
+            <?php } ?>
         </div>
 
         <!--- END BERITA API XYZ--->
-
     </div>
 </div>
 

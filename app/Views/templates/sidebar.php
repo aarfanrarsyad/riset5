@@ -24,7 +24,7 @@
         <img src="<?= base_url(userdata()['image']) ?>" class="img-circle elevation-2 max-w-none" alt="User Image" style="background-color:white">
       </div>
       <div class="info">
-        <a href="#" class="d-block text-white"><?php if (userdata()) echo (userdata()['fullname']) ?></a>
+        <a class="d-block text-white"><?php if (userdata()) echo (userdata()['fullname']) ?></a>
       </div>
     </div>
 

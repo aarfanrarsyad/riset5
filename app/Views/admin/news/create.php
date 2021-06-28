@@ -1,7 +1,7 @@
 <?= $this->extend('templates/index'); ?>
 
 <?= $this->section('page-content'); ?>
-
+<script src="<?= base_url() ?>/vendor/ckeditor/ckeditor.js"></script>
 <script>
     function hide_access() {
         $('.content-groups').addClass('d-none');
@@ -66,7 +66,7 @@ $errors = session()->getFlashdata('errors');
                             <div class="form-group row">
                                 <label for="date" class="col-sm-2 col-form-label">Tanggal</label>
                                 <div class="col-sm-5">
-                                    <input type="datetime-local" name="date" class="inputForm form-control" id="date" placeholder="Tanggal" required>
+                                    <input type="date" name="date" class="inputForm form-control" id="date" placeholder="Tanggal" required>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -121,8 +121,7 @@ $errors = session()->getFlashdata('errors');
                             <div class="form-group row">
                                 <label for="thumbnail" class="col-sm-2 col-form-label">Thumbnail</label>
                                 <input type="file" name="thumbnail" class="border-top-0 border-right-0 border-left-0" style="border-radius:0" id="thumbnail" placeholder="Thumbnail Berita">
-                                <div class="col-sm-10">
-                                </div>
+
                             </div>
                             <div class="form-group row">
                                 <label for="summernote" class="col-sm-2 col-form-label">Content</label>
@@ -147,48 +146,8 @@ $errors = session()->getFlashdata('errors');
 
 <script>
     $(document).ready(function() {
-
-        $('#summernote').summernote({
-            height: 200,
-            callbacks: {
-                onMediaDelete: function(target) {
-                    $.ajax({
-                        url: "<?= base_url('/admin/berita/delete-file') ?>",
-                        method: "POST",
-                        data: {
-                            path: target[0].src
-                        },
-                        cache: false,
-                        success: function(result) {
-                            if (!result) {
-                                alert('Image failed to delete')
-                            }
-                        }
-                    });
-                },
-                onImageUpload: function(files) {
-                    let data = new FormData();
-                    data.append("file", files[0]);
-                    $.ajax({
-                        url: "<?= base_url('/admin/berita/upload-file') ?>",
-                        type: 'POST',
-                        enctype: "multipart/form-data",
-                        processData: false,
-                        contentType: false,
-                        data: data,
-                        dataType: 'JSON',
-                        success: function(url) {
-                            $('#summernote').summernote('insertImage', url);
-                        },
-                        error: function(data) {
-                            alert("Upload failed");
-                        }
-                    });
-
-                }
-
-            }
-
+        CKEDITOR.replace('content', {
+            removeButtons: 'NewPage,Source,Save,spellchecker,Form,Checkbox,Radio,TextField,Textarea,Select,Button,ImageButton,HiddenField,CopyFormatting,RemoveFormat,CreateDiv,BidiLtr,BidiRtl,Language,Anchor,SpecialChar,PageBreak,Iframe,About'
         });
     })
 </script>

@@ -46,11 +46,18 @@ $routes->get('/developer/dokumentasi', 'Webservice::dokumentasi');
 // $routes->get('/reset/lama', 'Home::reset');
 // $routes->get('/reset/baru', 'Home::resetPass');
 
-$routes->group('admin', ['namespace' => 'App\Controllers'], function ($routes) {
+$routes->group('beranda', ['namespace' => 'App\Controllers', 'filter' => 'login'], function ($routes) {
+	$routes->post('berita/post-comment', 'Berita::post_comment');
+	$routes->post('berita/get-comments', 'Berita::get_comments');
+	$routes->get('berita', 'Berita::berita');
+	$routes->match(['get', 'post'], 'berita/view/(:num)', 'Berita::news_view/$1');
+});
+
+$routes->group('admin', ['namespace' => 'App\Controllers', 'filter' => 'role:1'], function ($routes) {
 
 	# This is for homepage, landing page, etc
 
-	// $routes->get('/', 'Admin::index', ['filter' => 'login']);
+	$routes->get('/', 'Admin::index', ['filter' => 'role:1']);
 
 
 	# This is for report dashboard
@@ -220,27 +227,24 @@ $routes->group('admin', ['namespace' => 'App\Controllers'], function ($routes) {
 	1. http://localhost:8080/admin/berita 			=>  URL ini menuju halaman index pada berita.				[5]
 	*/
 
-	$routes->get('berita', 'Berita::news_index');
-	$routes->get('berita/list-berita', 'Berita::news_list');
-	$routes->get('berita/delete/(:num)', 'Berita::delete_news/$1');
-	$routes->match(
-		['get', 'post'],
-		'berita/update/(:num)',
-		'Berita::update_news/$1'
+	$routes->get(
+		'berita',
+		'Berita::news_index',
+		['filter' => 'permission:2,4']
 	);
+	$routes->get('berita/list-berita', 'Berita::news_list', ['filter' => 'permission:2,4']);
+	$routes->get('berita/delete/(:num)', 'Berita::delete_news/$1', ['filter' => 'permission:4']);
+	$routes->match(['get', 'post'], 'berita/update/(:num)', 'Berita::update_news/$1', ['filter' => 'permission:3']);
+	$routes->match(['get', 'post'], 'berita/insert', 'Berita::create_news', ['filter' => 'permission:1']);
 
-	$routes->match(['get', 'post'], 'berita/insert', 'Berita::create_news');
-	$routes->post('berita/delete-file', 'Berita::delete_file');
-	$routes->match(['get', 'post'], 'berita/upload-file', 'Berita::upload_file');
+	$routes->post('berita/post-comment', 'Berita::post_comment'); #Ini nih
+	$routes->post('berita/get-comments', 'Berita::get_comments'); #Ini nih
+	$routes->post('berita/delete-comment', 'Berita::delete_comment', ['filter' => 'permission:3']);
 
-	$routes->post('berita/post-comment', 'Berita::post_comment');
-	$routes->post('berita/get-comments', 'Berita::get_comments');
-	$routes->post('berita/delete-comment', 'Berita::delete_comment');
-	$routes->match(['get', 'post'], 'berita/view/(:num)', 'Berita::news_view/$1');
 	$routes->post('berita/get-content', 'Berita::get_content');
-	$routes->post('berita/change-access', 'Berita::change_access');
-	$routes->post('berita/activate', 'Berita::activate_news');
-	$routes->post('berita/analysis', 'Berita::news_analysis');
+	$routes->post('berita/change-access', 'Berita::change_access', ['filter' => 'permission:3']);
+	$routes->post('berita/activate', 'Berita::activate_news', ['filter' => 'permission:3']);
+	$routes->post('berita/analysis', 'Berita::news_analysis', ['filter' => 'permission:2']);
 
 	#------------------------------------------------------------------------------------------------------------------------------------------------#
 

@@ -19,6 +19,36 @@ class Auth extends BaseController
 		$this->roleModel = new \App\Models\RoleModel();
 	}
 
+	public function blocked(string $errorCode)
+	{
+
+		switch ($errorCode) {
+			case '404':
+				$title = 'Page Not Found';
+				$page = 'error_404';
+				break;
+			case '403':
+				$title = 'Access Forbidden';
+				$page = 'error_403';
+				break;
+			case '500':
+				$title = 'HTTP error 500';
+				$page = 'error_500';
+				break;
+			case '503':
+				$title = 'Service Unavailable';
+				$page = 'error_503';
+				break;
+			default:
+				$title = 'Page Not Found';
+				$page = 'error_404';
+				break;
+		}
+
+		$data['judulHalaman'] = $title;
+		return view('errors' . DIRECTORY_SEPARATOR . 'html' . DIRECTORY_SEPARATOR . $page, $data);
+	}
+
 	public function index() //login
 	{
 	}

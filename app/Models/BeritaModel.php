@@ -128,7 +128,6 @@ class BeritaModel extends Model
                 return false;
             }
         } else {
-
             $dirname = ROOTPATH . session()->get('folder_name');
             array_map('unlink', glob("$dirname/*.*"));
             rmdir($dirname);
@@ -148,11 +147,10 @@ class BeritaModel extends Model
         $author = $data['author'];
 
         $last_data = $this->getNewsById($id)->getRowArray();
-        $user_id = is_null($data['user_id']) ? "NULL" : "'" . $data['user_id'] . "'";
         $groups_id = is_null($data['groups_id']) ? "NULL" : "'" . $data['groups_id'] . "'";
         $thumbnail = is_null($data['thumbnail']) ? "" : ",thumbnail = '" . $data['thumbnail'] . "'";
 
-        $query = "UPDATE berita SET  tanggal_publish = '$date', judul = '$header', konten = '$content', akses = '$access', user_id =  $user_id, groups_id = $groups_id, author='$author' $thumbnail WHERE id = $id ";
+        $query = "UPDATE berita SET  tanggal_publish = '$date', judul = '$header', konten = '$content', akses = '$access', groups_id = $groups_id, author='$author' $thumbnail WHERE id = $id ";
         if ($this->db->query($query)) {
             if ($data['thumbnail']) {
                 $dir_thumb = $last_data['thumbnail'];

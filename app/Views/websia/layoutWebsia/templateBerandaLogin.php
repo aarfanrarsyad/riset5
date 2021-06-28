@@ -105,7 +105,7 @@
                                     <a href="/User/galeriVideo" class="bg-primaryDark hover:bg-primary text-white hover:text-secondary text-left w-full px-2 transition duration-300"> Galeri Video </a>
                                 </div>
                             </div>
-                            <a href="/Berita/berita">
+                            <a href="/beranda/berita">
                                 <div class="nav-menu transition-colors duration-300 <?= ($active == 'berita') ? 'activeMenu' : ''; ?>">
                                     BERITA
                                 </div>
