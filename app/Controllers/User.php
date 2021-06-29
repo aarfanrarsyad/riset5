@@ -528,7 +528,7 @@ class User extends BaseController
 		$sqlcek = "SELECT password_hash from users where id = " . session('id_user');
 		$cekLM = $model->query($sqlcek);
 
-		if ($cekLM->getRow()->password_hash != NULL) {
+		if ($cekLM->getRow()->password_hash !== '$2y$10$nrQkf2SEAmSAYp9ncl0BSukR5YrGNCEV4oX8q5QJSe7V/5WxlqZEq') {
 			session()->set([	//cek login manual atau bukan
 				'manual' => 'yes',
 			]);

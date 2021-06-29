@@ -477,7 +477,7 @@ function get_by_id($id = null, $select = '*', $table = 'pendidikan', $array = fa
 
     switch ($table) {
         case 'pendidikan':
-            $return = $db->table('pendidikan')->select($select)->where('angkatan >',0)
+            $return = $db->table('pendidikan')->select($select)->where('angkatan >', 0)
                 ->join('pendidikan_tinggi', 'pendidikan_tinggi.id_pendidikan = pendidikan.id_pendidikan');
             break;
         case 'tempat_kerja':

@@ -17,6 +17,7 @@ class Auth extends BaseController
 		$this->modelAuth = new \App\Models\AuthModel();
 		$this->modelAlumni = new \App\Models\AlumniModel();
 		$this->roleModel = new \App\Models\RoleModel();
+		$this->auth = service('authentication');
 	}
 
 	public function blocked(string $errorCode)
@@ -77,29 +78,12 @@ class Auth extends BaseController
 
 	public function logout()
 	{
-		// logout sipadu dan manual
+		// logout
 		if (session()->has('id_user')) {
 
 			session()->remove(['id_user', 'id_alumni', 'nama', 'role']);
 			session()->setFlashdata('pesan', 'Logout berhasil!');
 			session()->setFlashdata('warna', 'greenAlert');
-
-			//logout bps
-			if (session('oauth2state')) {
-				$provider = new Keycloak([
-					'authServerUrl'         => 'https://sso.bps.go.id',
-					'realm'                 => 'pegawai-bps',
-					'clientId'              => '02700-dbalumni-mu1',
-					'clientSecret'          => 'e69810d0-f915-49c4-9ed1-cd9edf05436a',
-					'redirectUri'           => 'https://alumni.stis.ac.id/',
-					'scope' 				=> 'openid profile-pegawai'
-				]);
-				session()->remove('oauth2state');
-
-				$url_logout = $provider->getLogoutUrl();
-				// dd($url_logout);
-				return redirect()->to($url_logout);
-			}
 		}
 		return redirect()->to('/logout');
 	}
@@ -175,6 +159,10 @@ class Auth extends BaseController
 				$year_now = date("Y");
 
 				$alumni = false;
+				// $jenjang = 'D-IV';
+				// $tahun_lulus = 2022;
+				// $angkatan = 60;
+				// $prodi = 'D-IV Sistem Informasi Statistik';
 
 				foreach ($hasil['profile']['kelas'] as $kelas) {
 					if (strpos($kelas['kode_kelas'], '3D3') !== false || strpos($kelas['kode_kelas'], '4SI') !== false || strpos($kelas['kode_kelas'], '4SD') !== false || strpos($kelas['kode_kelas'], '4SE') !== false || strpos($kelas['kode_kelas'], '4SK') !== false || strpos($kelas['kode_kelas'], '4KS') !== false || strpos($kelas['kode_kelas'], '4ST') !== false) {
@@ -271,9 +259,10 @@ class Auth extends BaseController
 
 						$data = [
 							'email'				=> $user['nim'] . "@stis.ac.id",
+							'password_hash'		=> '$2y$10$nrQkf2SEAmSAYp9ncl0BSukR5YrGNCEV4oX8q5QJSe7V/5WxlqZEq',
 							'username'			=> $user['nim'],
 							'id_alumni'			=> $cek['id_alumni'],
-							'fullname'			=> $user['nama'],
+							'fullname'			=> ucwords(strtolower($user['nama'])),
 							'user_image'		=> "default.svg",
 							'active'			=> 1,
 							'force_pass_reset'	=> 0,
@@ -324,8 +313,13 @@ class Auth extends BaseController
 							]);
 						}
 
-						$ipAddress = Services::request()->getIPAddress();
-						$this->recordLoginAttempt(session('nim') . '@stis.ac.id', $ipAddress, session('id_user') ?? null, true);	//insert ke tabel auth_login untuk log login
+						if (!$this->auth->attempt(['email' => $user['email'], 'password' => null], false)) {
+							die('Upaya login gagal [Myth-Auth login gagal]');
+						}
+
+						// $ipAddress = Services::request()->getIPAddress();
+						// $this->recordLoginAttempt(session('nim') . '@stis.ac.id', $ipAddress, session('id_user') ?? null, true);	//insert ke tabel auth_login untuk log login
+
 						setcookie('login', 'yes', time() + 60, $_SERVER['SERVER_NAME']);
 						echo '<script>window.close();</script>';
 
@@ -444,6 +438,7 @@ class Auth extends BaseController
 				}
 
 				if (isset($hasil->pesan)) {
+					dd($hasil);
 					exit('SSO sedang dalam perbaikan');
 				} else {
 					$riwayat_pendidikan = array();
@@ -490,6 +485,7 @@ class Auth extends BaseController
 							$now = date("Y-m-d H:i:s");
 							$data = [
 								'email'				=> $user->getEmail(),
+								'password_hash'		=> '$2y$10$nrQkf2SEAmSAYp9ncl0BSukR5YrGNCEV4oX8q5QJSe7V/5WxlqZEq',
 								'username'			=> $user->getUsername(),
 								'id_alumni'			=> $cek['id_alumni'],
 								'fullname'			=> $user->getName(),
@@ -543,8 +539,9 @@ class Auth extends BaseController
 								]);
 							}
 
-							$ipAddress = Services::request()->getIPAddress();
-							$this->recordLoginAttempt($hasil['email'], $ipAddress, session('id_user') ?? null, true);
+							if (!$this->auth->attempt(['email' => $hasil['email'], 'password' => null], false)) {
+								die('Upaya login gagal [Myth-Auth login gagal]');
+							}
 
 							setcookie('login', 'yes', time() + 60, $_SERVER['SERVER_NAME']);
 							echo '<script>window.close();</script>';
