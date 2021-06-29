@@ -39,14 +39,24 @@ $routes->get('/login',AUTHCONT_NAMESPACE.'AuthController::login');
 $routes->get('/auth/logout','Auth::logout');
 $routes->get('/validate_sipadu', 'Auth::validate_sipadu');
 $routes->get('/validate-bps', 'Auth::bps');
-$routes->group('/developer',['filter' => 'role:4'],function ($routes){
-	$routes->get('', 'Webservice::index');
-	$routes->get('edit/biodata', 'Webservice::editBiodata');
+
+//WEBSERVICE
+$routes->get('developer/', 'Webservice::index');
+$routes->get('developer/dokumentasi', 'Webservice::dokumentasi');
+$routes->group('developer',['namespace' => 'App\Controllers', 'filter' => 'login','role:4'],function ($routes){
+	//$routes->get('edit/biodata', 'Webservice::editBiodata');
 	$routes->get('edit/akun', 'Webservice::editAkun');
 	$routes->get('proyek', 'Webservice::proyek');
 	$routes->get('buatProyek', 'Webservice::buatProyek');
-	$routes->get('profil', 'Webservice::profilDeveloper');
-	$routes->get('dokumentasi', 'Webservice::dokumentasi');
+	//$routes->get('profil', 'Webservice::profilDeveloper');
+	$routes->post('insert', 'Webservice::insertProyek');
+	$routes->post('update', 'Webservice::updateAkun');
+
+	//ajax
+	$routes->post('editajx', 'Webservice::ajax_edit');
+	$routes->post('delete', 'Webservice::delete');
+
+	
 });
 // $routes->get('/register', 'Home::register');
 // $routes->get('/register/success', 'Home::registerSuccess');

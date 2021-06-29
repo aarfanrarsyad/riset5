@@ -3,7 +3,7 @@
 <?= $this->section('content'); ?>
 <div class="w-full">
     <div class="shadow-2xl rounded-xl md:p-12 md:pt-4 p-4 pb-6 xl:w-1/2 sm:w-3/4 my-12 sm:mx-auto mx-4">
-        <form action="<?= base_url('webservice/updateakun');?>" method="POST" class="font-paragraph text-primary" id="formEditAkunDev">
+        <form action="<?= base_url('developer/update');?>" method="POST" class="font-paragraph text-primary" id="formEditAkunDev">
             <h2 class="flex justify-center lg:text-4xl md:text-3xl sm:text-2xl text-xl text-secondary font-bold md:mb-4 mb-2">EDIT AKUN</h2>
             <div class="2xl:px-20 md:px-12 sm:px-8 px-0 w-full">
                 <label for="email" class="font-medium">Email:</label>

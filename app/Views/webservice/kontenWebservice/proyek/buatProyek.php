@@ -9,22 +9,28 @@
                 <hr class="border-primary border-2 lg:mt-6 md:mt-4 mt-2">
                 <div class="mx-2 mt-4">
                     <!-- start form buat proyek -->
-                    <form action="<?php echo base_url('/Webservice/insertProyek'); ?>" method="post" class="lg:text-base md:text-sm text-xs">
+                    <form action="<?php echo base_url('/developer/insert'); ?>" method="post" class="lg:text-base md:text-sm text-xs">
                         <label for="nama" class="font-bold text-secondary lg:text-lg md:text-base text-sm">Nama*</label>
+                        <?php if (session()->getFlashdata('nama-fail')) {?>
                         <p class="text-xs text-red-500 text-justify" id="errorNamaProyek">
-                            Nama proyek harus diisi.
+                            <?= session()->getFlashdata('nama-fail');?>
                         </p>
-                        <input type="text" name="nama" id="nama" placeholder="Nama Proyek" class="inputForm lg:mb-4" required>
+                        <?php }?>
+                        <input type="text" name="nama" id="nama" placeholder="Nama Proyek" class="inputForm lg:mb-4" value="<?php if (session()->getFlashdata('nama-true')) echo session()->getFlashdata('nama-true');?>">
                         <label for="deskripsi" class="font-bold text-secondary lg:text-lg md:text-base text-sm">Deskripsi*</label>
+                        <?php if (session()->getFlashdata('deskripsi-fail')) {?>
                         <p class="text-xs text-red-500 text-justify" id="errorDescProyek">
-                            Deskripsi proyek harus diisi.
+                            <?= session()->getFlashdata('deskripsi-fail');?>
                         </p>
-                        <textarea name="deskripsi" id="deskripsi" cols="50" rows="5" class="inputForm lg:mb-4" placeholder="Masukkan Deskripsi Proyek" required></textarea>
+                        <?php }?>
+                        <textarea name="deskripsi" id="deskripsi" cols="50" rows="5" class="inputForm lg:mb-4" placeholder="Masukkan Deskripsi Proyek"><?php if (session()->getFlashdata('deskripsi-true')) echo session()->getFlashdata('deskripsi-true');?></textarea>
                         <div>
                             <label for="scope" class="font-bold text-secondary lg:text-lg md:text-base text-sm">API*</label>
+                            <?php if (session()->getFlashdata('scope-fail')) {?>
                             <p class="text-xs text-red-500 text-justify" id="errorNamaProyek">
-                                Pilih minimum satu data yang diinginkan.
+                                <?= session()->getFlashdata('scope-fail');?>
                             </p>
+                        <?php }?>
                             <!-- start scope webservice -->
                             <div>
                                 <?php foreach ($scope_app as $key => $data) { ?>

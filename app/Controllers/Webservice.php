@@ -6,6 +6,7 @@ use App\Models\WebserviceModel;
 use App\Models\AuthModel;
 use App\Models\AlumniModel;
 use CodeIgniter\I18n\Time;
+use Exception;
 
 
 class Webservice extends BaseController
@@ -84,9 +85,29 @@ class Webservice extends BaseController
 		$time = new Time('now');
 
 		//idUser didapat dari session
+		$er=0;
+
 		if (isset($_POST['scope']))
 			$tokScope = $_POST['scope'];
-		else $tokScope = null;
+		else {
+			session()->setFlashdata('scope-fail', 'Pilih minimum satu data yang diinginkan.');
+			$er++;
+		};
+
+		if(!isset($_POST['nama'])|| $_POST['nama']==''){
+			session()->setFlashdata('nama-fail', 'Nama proyek harus diisi.');
+			$er++;
+		} else session()->setFlashdata('nama-true', $_POST['nama']);
+
+		if(!isset($_POST['deskripsi']) || $_POST['deskripsi']==''){
+			session()->setFlashdata('deskripsi-fail', 'Deskripsi proyek harus diisi.');
+			$er++;
+		} session()->setFlashdata('deskripsi-true', $_POST['deskripsi']);
+
+		if($er!=0){
+			return redirect()->to(base_url('developer/buatProyek'));
+		};
+
 		$idUser = session('id_user');;
 		$data = [
 			'token_app' => [
@@ -107,6 +128,8 @@ class Webservice extends BaseController
 
 	public function delete() //delete or cancel  project
 	{
+		if (!$this->request->isAJAX()) return false;
+	
 		$id = $_POST['id_app'];
 		$id_token = $this->model->getTokenId($id)->getRow()->id_token;
 		$this->model->deleteToken($id_token);
@@ -181,6 +204,7 @@ class Webservice extends BaseController
 	//show detail app via ajax
 	public function ajax_edit()
 	{
+		if (!$this->request->isAJAX()) return false;
 		if (isset($_POST['id']))
 			$id = $_POST['id'];
 		else return;

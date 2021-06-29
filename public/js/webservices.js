@@ -1,9 +1,10 @@
-var baseUrl = "https://alumni.stis.ac.id";
+//const baseUrl = "https://alumni.stis.ac.id";
+const baseUrl = "http://localhost:8080";
 
 //Ajax Detail App
 $('.proyek').each(function () {
     var appID = $(this).attr("data-id");
-    var url = '/webservice/ajax_edit'; //adjust according to your site/setup
+    var url = '/developer/editajx'; //adjust according to your site/setup
     $.post(url, {
             id: appID,
         },
@@ -113,10 +114,10 @@ $(".delete-project").click(function () {
     })
 
     $('.buttonAcc').click(function () {
-        $.post(baseUrl + '/webservice/delete', {
+        $.post(baseUrl + '/developer/delete', {
             id_app: appID
         }, function () {
-            var url = baseUrl + '/webservice/proyek';
+            var url = baseUrl + '/developer/proyek';
             window.location = url;
         });
     })
