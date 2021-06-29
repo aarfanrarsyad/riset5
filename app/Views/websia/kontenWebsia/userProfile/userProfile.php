@@ -145,12 +145,12 @@ if ($status == 'bukan user') {
             </div>
             <!-- tempat dan tanggal lahir -->
             <div class="flex justify-center md:justify-start font-heading text-primary text-center md:text-left text-sm mb-5 md:mb-3 lg:mb-5">
-                <div class="flex-auto">
+                <div class="flex-initial">
                     <?php if ($cttl == "") : ?>
                         <?= $alumni->tempat_lahir ?>, <?= strftime("%d %B %Y", strtotime($alumni->tanggal_lahir)); ?>
                     <?php endif ?>
                 </div>
-                <div class="flex-auto text-primary ml-2">
+                <div class="flex-initial text-primary ml-2">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="sm:w-5 w-4">
                         <path fill-rule="evenodd" d="M3.707 2.293a1 1 0 00-1.414 1.414l14 14a1 1 0 001.414-1.414l-1.473-1.473A10.014 10.014 0 0019.542 10C18.268 5.943 14.478 3 10 3a9.958 9.958 0 00-4.512 1.074l-1.78-1.781zm4.261 4.26l1.514 1.515a2.003 2.003 0 012.45 2.45l1.514 1.514a4 4 0 00-5.478-5.478z" clip-rule="evenodd" />
                         <path d="M12.454 16.697L9.75 13.992a4 4 0 01-3.742-3.741L2.335 6.578A9.98 9.98 0 00.458 10c1.274 4.057 5.065 7 9.542 7 .847 0 1.669-.105 2.454-.303z" />
@@ -193,7 +193,7 @@ if ($status == 'bukan user') {
         <div class="md:pl-5 lg:pl-6">
             <?php if ($calamat == "") : ?>
                 <div class="flex">
-                    <div class="flex-auto font-heading text-primary text-xs pl-5 md:px-0 mt-6">Lokasi Tempat Tinggal Saat Ini</div>
+                    <div class="font-heading text-primary text-xs pl-5 md:px-0 mt-6">Lokasi Tempat Tinggal Saat Ini</div>
                     <div class="flex-auto text-primary md:px-0 mt-6 md:mt-5 ml-2">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="sm:w-5 w-4">
                             <path fill-rule="evenodd" d="M3.707 2.293a1 1 0 00-1.414 1.414l14 14a1 1 0 001.414-1.414l-1.473-1.473A10.014 10.014 0 0019.542 10C18.268 5.943 14.478 3 10 3a9.958 9.958 0 00-4.512 1.074l-1.78-1.781zm4.261 4.26l1.514 1.515a2.003 2.003 0 012.45 2.45l1.514 1.514a4 4 0 00-5.478-5.478z" clip-rule="evenodd" />
@@ -349,7 +349,7 @@ if ($status == 'bukan user') {
 
 <!-- Atribut pada section ini belum ditentukan -->
 <!-- Awal Informasi Instansi -->
-<div class="w-full my-6 md:my-0 lg:mt-12 lg:mb-8 lg:px-20 md:px-8 px-2">
+<div class="w-full my-6 md:mt-5 lg:mt-12 lg:mb-8 lg:px-20 md:px-8 px-2">
     <h3 class="flex-auto font-heading font-bold text-xl text-center md:text-left text-secondary">Informasi Instansi</h3>
     <div class="md:shadow-lg lg:shadow-xl rounded-2xl px-3 py-3 md:px-7 md:py-5 lg:mx-14 lg:py-8 lg:px-11 md:mt-3">
         <div class="font-heading">
@@ -421,9 +421,9 @@ if ($status == 'bukan user') {
 <?php if ($cprestasi == 1) { ?>
     <!-- Awal Riwayat Prestasi -->
     <div class="w-full my-0 md:my-0 lg:mb-4 lg:px-20 md:px-8 px-2">
-        <div class="flex justify-center md:justify-start md:mb-6">
-            <h3 class="font-heading font-bold text-xl text-secondary text-center md:text-left ">Riwayat Prestasi</h3>
-            <div class="flex-auto text-primary mt-1 ml-2">
+        <div class="flex justify-center text-center md:justify-start mb-2 md:mb-6">
+            <h3 class="flex-initial font-heading font-bold text-xl text-secondary text-center md:text-left ">Riwayat Prestasi</h3>
+            <div class="flex-initial text-primary mt-1 ml-2">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5">
                     <path fill-rule="evenodd" d="M3.707 2.293a1 1 0 00-1.414 1.414l14 14a1 1 0 001.414-1.414l-1.473-1.473A10.014 10.014 0 0019.542 10C18.268 5.943 14.478 3 10 3a9.958 9.958 0 00-4.512 1.074l-1.78-1.781zm4.261 4.26l1.514 1.515a2.003 2.003 0 012.45 2.45l1.514 1.514a4 4 0 00-5.478-5.478z" clip-rule="evenodd" />
                     <path d="M12.454 16.697L9.75 13.992a4 4 0 01-3.742-3.741L2.335 6.578A9.98 9.98 0 00.458 10c1.274 4.057 5.065 7 9.542 7 .847 0 1.669-.105 2.454-.303z" />
@@ -452,8 +452,8 @@ if ($status == 'bukan user') {
     <!-- Awal Riwayat Pendidikan -->
     <div class="w-full my-6 md:my-0 lg:mb-3 lg:px-20 md:px-8 px-2">
         <div class="flex justify-center md:justify-start">
-            <h3 class="font-heading font-bold text-xl text-secondary text-center md:text-left ">Riwayat Pendidikan</h3>
-            <div class="flex-auto text-primary mt-1 ml-2">
+            <h3 class="flex-initial font-heading font-bold text-xl text-secondary text-center md:text-left ">Riwayat Pendidikan</h3>
+            <div class="flex-initial text-primary mt-1 ml-2">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5">
                     <path fill-rule="evenodd" d="M3.707 2.293a1 1 0 00-1.414 1.414l14 14a1 1 0 001.414-1.414l-1.473-1.473A10.014 10.014 0 0019.542 10C18.268 5.943 14.478 3 10 3a9.958 9.958 0 00-4.512 1.074l-1.78-1.781zm4.261 4.26l1.514 1.515a2.003 2.003 0 012.45 2.45l1.514 1.514a4 4 0 00-5.478-5.478z" clip-rule="evenodd" />
                     <path d="M12.454 16.697L9.75 13.992a4 4 0 01-3.742-3.741L2.335 6.578A9.98 9.98 0 00.458 10c1.274 4.057 5.065 7 9.542 7 .847 0 1.669-.105 2.454-.303z" />
