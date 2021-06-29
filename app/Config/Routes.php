@@ -20,7 +20,10 @@ $routes->setDefaultNamespace('App\Controllers');
 $routes->setDefaultController('Home');
 $routes->setDefaultMethod('index');
 $routes->setTranslateURIDashes(false);
-$routes->set404Override();
+$routes->set404Override(function () {
+	$data['judulHalaman'] = 'Page Not Found';
+	echo view('errors' . DIRECTORY_SEPARATOR . 'html' . DIRECTORY_SEPARATOR . 'error_404', $data);
+});
 $routes->setAutoRoute(true);
 
 /**
@@ -57,11 +60,11 @@ $routes->group('beranda', ['namespace' => 'App\Controllers', 'filter' => 'login'
 	$routes->match(['get', 'post'], 'berita/view/(:num)', 'Berita::news_view/$1');
 });
 
-$routes->group('admin', ['namespace' => 'App\Controllers', 'filter' => 'login'], function ($routes) {
+$routes->group('admin', ['namespace' => 'App\Controllers', 'filter' => 'role:1'], function ($routes) {
 
 	# This is for homepage, landing page, etc
 
-	$routes->get('/', 'Admin::index', ['filter' => 'login']);
+	$routes->get('/', 'Admin::index', ['filter' => 'role:1']);
 
 
 	# This is for report dashboard
