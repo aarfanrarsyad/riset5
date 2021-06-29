@@ -98,11 +98,25 @@ $('.editTampilan').click(function () {
 
 $('#checkTanggalLahir').click(function () {
     if ($('#checkTanggalLahir').is(':checked')) {
+        document.getElementById('checkTempatLahir').setAttribute("checked","checked");
         $('#labelTempatLahir').removeClass("text-gray-500");
         $('#labelTanggalLahir').removeClass("text-gray-500");
     } else {
+        document.getElementById('checkTempatLahir').removeAttribute("checked","checked");
         $('#labelTempatLahir').addClass("text-gray-500");
         $('#labelTanggalLahir').addClass("text-gray-500");
+    }
+})
+
+$('#checkTempatLahir').click(function () {
+    if ($('#checkTempatLahir').is(':checked')) {
+        document.getElementById('checkTanggalLahir').setAttribute("checked","checked");
+        $('#labelTanggalLahir').removeClass("text-gray-500");
+        $('#labelTempatLahir').removeClass("text-gray-500");
+    } else {
+        document.getElementById('checkTanggalLahir').removeAttribute("checked","checked");
+        $('#labelTanggalLahir').addClass("text-gray-500");
+        $('#labelTempatLahir').addClass("text-gray-500");
     }
 })
 
