@@ -163,7 +163,7 @@
             <?php foreach ($apiberita as $value) { ?>
                 <div class="border-gray-400 border-b py-3">
                     <div class="flex gap-x-2 items-center">
-                        <div class="lg:w-1/4 w-1/3 lg:h-24 h-20 bg-gray-200">
+                        <div class="lg:w-1/4 w-1/3 lg:h-24 h-20 bg-gray-200 bg-no-repeat bg-center bg-contain" style="background-image: url(<?= 'https://www.pusdiklat-bps.id/'.$value->image?>);">
                         </div>
                         <div class="lg:w-3/4 w-2/3">
                             <a href="https://www.pusdiklat-bps.id/web/berita/<?= $value->id ?>">
