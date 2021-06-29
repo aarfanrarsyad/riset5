@@ -181,10 +181,12 @@ class User extends BaseController
 		// dd($query3);
 
 		// untuk mendapatkan rekomendasi
-		if ($model->getIdTempatKerjaByIdAlumni(session('id_alumni')) == NULL) {
-			$query4 = $model->getIdAlumniByAngkatan($model->getAngkatanByIdAlumni(session('id_alumni'))->angkatan, session('id_alumni'))->getResult();
+		$idKerja = $model->getIdTempatKerjaByIdAlumni(session('id_alumni'));
+		$angktAkhir = $model->getAngkatanByIdAlumni(session('id_alumni'))->angkatan;
+		if ($model->cekRekomendasi1($idKerja) < 5) {
+			$query4 = $model->getIdAlumniByAngkatan($angktAkhir, session('id_alumni'))->getResult();
 		} else {
-			$query4 = $model->getIdAlumniByIdTempatKerja($model->getIdTempatKerjaByIdAlumni(session('id_alumni')), session('id_alumni'))->getResult();
+			$query4 = $model->getIdAlumniByIdTempatKerja($idKerja, session('id_alumni'))->getResult();
 		}
 
 		// untuk mendapatkan riwayat prestasi
@@ -291,10 +293,13 @@ class User extends BaseController
 		$query3 = $model->getRole(session('id_user'))->getResult();
 		// dd($query3);
 
-		if ($model->getIdTempatKerjaByIdAlumni(session('id_alumni')) == NULL) {
-			$query4 = $model->getIdAlumniByAngkatan($model->getAngkatanByIdAlumni(session('id_alumni'))->angkatan, session('id_alumni'))->getResult();
+		// mendapatkan rekomendasi
+		$idKerja = $model->getIdTempatKerjaByIdAlumni(session('id_alumni'));
+		$angktAkhir = $model->getAngkatanByIdAlumni(session('id_alumni'))->angkatan;
+		if ($model->cekRekomendasi1($idKerja) < 5) {
+			$query4 = $model->getIdAlumniByAngkatan($angktAkhir, session('id_alumni'))->getResult();
 		} else {
-			$query4 = $model->getIdAlumniByIdTempatKerja($model->getIdTempatKerjaByIdAlumni(session('id_alumni')), session('id_alumni'))->getResult();
+			$query4 = $model->getIdAlumniByIdTempatKerja($idKerja, session('id_alumni'))->getResult();
 		}
 
 		$query5 = $model->getPrestasiByIdAlumni($kunci)->getResult();
@@ -359,12 +364,13 @@ class User extends BaseController
 		$pager = \Config\Services::pager();
 		$model = new AlumniModel();
 
-		if ($model->getIdTempatKerjaByIdAlumni(session('id_alumni')) == NULL) {
-			$query = $model->getRekomendasiAngkatan($model->getAngkatanByIdAlumni(session('id_alumni'))->angkatan, session('id_alumni'));
+		$idKerja = $model->getIdTempatKerjaByIdAlumni(session('id_alumni'));
+		$angktAkhir = $model->getAngkatanByIdAlumni(session('id_alumni'))->angkatan;
+		if ($model->cekRekomendasi1($idKerja) < 5) {
+			$query = $model->getRekomendasiAngkatan($angktAkhir, session('id_alumni'));
 		} else {
-			$query = $model->getRekomendasiTK($model->getIdTempatKerjaByIdAlumni(session('id_alumni')), session('id_alumni'));
+			$query = $model->getRekomendasiTK($idKerja, session('id_alumni'));
 		}
-
 		// dd($query->orderBy('nama', $direction = 'asc')->paginate(16));
 		$data = [
 			'judulHalaman'  => 'Rekomendasi',
@@ -386,7 +392,7 @@ class User extends BaseController
 		$sqlcek = "SELECT password_hash from users where id = " . session('id_user');
 		$cekLM = $model->query($sqlcek)->getRow();
 
-		if ($cekLM->getRow()->password_hash !== '$2y$10$nrQkf2SEAmSAYp9ncl0BSukR5YrGNCEV4oX8q5QJSe7V/5WxlqZEq') {
+		if ($cekLM->password_hash !== '$2y$10$nrQkf2SEAmSAYp9ncl0BSukR5YrGNCEV4oX8q5QJSe7V/5WxlqZEq') {
 			session()->set([	//cek login manual atau bukan
 				'manual' => 'yes',
 			]);
@@ -703,7 +709,7 @@ class User extends BaseController
 
 	public function editTempatKerja()
 	{
-		if (session('BPS') != "no" || session('ambigu') != "yes") {
+		if (session('BPS') != "no" && session('ambigu') != "yes") {
 			return redirect()->to(base_url('User/editProfil'));
 		}
 		$model = new AlumniModel();
@@ -725,7 +731,7 @@ class User extends BaseController
 	public function updateTempatKerja()
 	{
 
-		if (session('BPS') != "no" || session('ambigu') != "yes") {
+		if (session('BPS') != "no" && session('ambigu') != "yes") {
 			return redirect()->to(base_url('User/editProfil'));
 		}
 		$model = new AlumniModel();
@@ -741,7 +747,7 @@ class User extends BaseController
 
 	public function addTempatKerja()
 	{
-		if (session('BPS') != "no" || session('ambigu') != "yes") {
+		if (session('BPS') != "no" && session('ambigu') != "yes") {
 			return redirect()->to(base_url('User/editProfil'));
 		}
 		$model = new AlumniModel();

@@ -22,7 +22,9 @@ if ($ap == 0) {
     ]);
 } else {
     $ap = "Aktif sebagai PNS";
-    session()->remove('BPS');
+    session()->set([    //cek BPS atau bukan
+        'BPS' => 'yes',
+    ]);
 }
 
 ?>

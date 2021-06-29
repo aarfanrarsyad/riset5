@@ -196,7 +196,7 @@ class AlumniModel extends Model
     // Sudah diubah <Mochi>
     public function getAngkatanByIdAlumni($id_alumni)
     {
-        $query = "SELECT * FROM pendidikan WHERE id_alumni = $id_alumni ORDER BY 'angkatan' DESC";
+        $query = "SELECT * FROM pendidikan WHERE id_alumni = $id_alumni ORDER BY angkatan DESC";
         return $this->db->query($query)->getRow();
     }
 
@@ -216,6 +216,12 @@ class AlumniModel extends Model
     {
         $query = "SELECT id_tempat_kerja FROM alumni_tempat_kerja WHERE id_alumni = $id_alumni";
         return $this->db->query($query)->getRow()->id_tempat_kerja;
+    }
+
+    public function cekRekomendasi1($id_tempat_kerja)
+    {
+        $query = "SELECT COUNT(*) AS similar FROM alumni_tempat_kerja WHERE id_tempat_kerja = $id_tempat_kerja";
+        return $this->db->query($query)->getRow()->similar;
     }
 
     // Sudah diubah <Mochi>
