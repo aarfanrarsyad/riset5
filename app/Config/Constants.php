@@ -12,6 +12,7 @@
 // existing namespaces of App\* namespaced-classes.
 //
 defined('APP_NAMESPACE') || define('APP_NAMESPACE', 'App');
+defined('AUTHCONT_NAMESPACE') || define('AUTHCONT_NAMESPACE', '\Myth\Auth\Controllers\\');
 
 /*
 |--------------------------------------------------------------------------
