@@ -31,16 +31,20 @@ $routes->setAutoRoute(true);
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
+$routes->get('/','Home::index');
+$routes->get('/login',AUTHCONT_NAMESPACE.'AuthController::login');
+$routes->get('/auth/logout','Auth::logout');
 $routes->get('/validate_sipadu', 'Auth::validate_sipadu');
 $routes->get('/validate-bps', 'Auth::bps');
-
-$routes->get('/developer', 'Webservice::index');
-$routes->get('/developer/edit/biodata', 'Webservice::editBiodata');
-$routes->get('/developer/edit/akun', 'Webservice::editAkun');
-$routes->get('/developer/proyek', 'Webservice::proyek');
-$routes->get('/developer/buatProyek', 'Webservice::buatProyek');
-$routes->get('/developer/profil', 'Webservice::profilDeveloper');
-$routes->get('/developer/dokumentasi', 'Webservice::dokumentasi');
+$routes->group('/developer',['filter' => 'role:4'],function ($routes){
+	$routes->get('', 'Webservice::index');
+	$routes->get('edit/biodata', 'Webservice::editBiodata');
+	$routes->get('edit/akun', 'Webservice::editAkun');
+	$routes->get('proyek', 'Webservice::proyek');
+	$routes->get('buatProyek', 'Webservice::buatProyek');
+	$routes->get('profil', 'Webservice::profilDeveloper');
+	$routes->get('dokumentasi', 'Webservice::dokumentasi');
+});
 // $routes->get('/register', 'Home::register');
 // $routes->get('/register/success', 'Home::registerSuccess');
 // $routes->get('/reset/lama', 'Home::reset');
@@ -203,16 +207,14 @@ $routes->group('admin', ['namespace' => 'App\Controllers', 'filter' => 'login'],
 
 
 	#------------------------------------------------------------------------------------------------------------------------------------------------#
-
-	$routes->get('request-api', 'Admin::management_api_index');
-	$routes->post('request-api/update', 'Admin::management_api_update');
-	$routes->post('request-api/selected-scope', 'Admin::getSelectedScopeRequest');
-	$routes->post('request-api/create-scope', 'Admin::create_scope');
-	$routes->post('request-api/update-scope', 'Admin::update_scope');
-	$routes->post(
-		'request-api/delete-scope',
-		'Admin::delete_scope'
-	);
+	$routes->group('/request-api',function($routes){
+		$routes->get('', 'Admin::management_api_index');
+		$routes->post('update', 'Admin::management_api_update');
+		$routes->post('selected-scope', 'Admin::getSelectedScopeRequest');
+		$routes->post('create-scope', 'Admin::create_scope');
+		$routes->post('update-scope', 'Admin::update_scope');
+		$routes->post('delete-scope','Admin::delete_scope');
+	});
 
 
 
