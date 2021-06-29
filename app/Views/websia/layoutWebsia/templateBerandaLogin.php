@@ -111,10 +111,10 @@
                                         GALERI
                                     </div>
                                     <div class="dropdown-content ml-1 w-max text-sm">
-                                        <a href="/user/galeriFoto"
+                                        <a href="/user/galerifoto"
                                             class="bg-primaryDark hover:bg-primary text-white hover:text-secondary text-left w-full px-2 border-b-2 border-primary transition duration-300">
                                             Galeri Foto </a>
-                                        <a href="/user/galeriVideo"
+                                        <a href="/user/galerivideo"
                                             class="bg-primaryDark hover:bg-primary text-white hover:text-secondary text-left w-full px-2 transition duration-300">
                                             Galeri Video </a>
                                     </div>
@@ -212,8 +212,8 @@
                                     </div>
                                 </div>
                                 <div class="flex flex-col hidden" id="listGaleri">
-                                    <a href="/user/galeriFoto" class="nav-menu-relative py-2"> Galeri Foto </a>
-                                    <a href="/user/galeriVideo" class="nav-menu-relative py-2"> Galeri Video </a>
+                                    <a href="/user/galerifoto" class="nav-menu-relative py-2"> Galeri Foto </a>
+                                    <a href="/user/galerivideo" class="nav-menu-relative py-2"> Galeri Video </a>
                                 </div>
                             </div>
                             <a href="/Berita/berita">
