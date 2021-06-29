@@ -6,7 +6,7 @@
 $model = new App\Models\AlumniModel();
 $ambigu = $model->getTempatKerjaByNIM(session('id_alumni'))->getRow()->ambigu;
 $ap = $model->bukaProfile(session('id_alumni'))->getRow()->aktif_pns;
-if ($ambigu == 1) {
+if ($ambigu != 0) {
     session()->set([    //cek ambigu atau bukan
         'ambigu' => 'yes',
     ]);
@@ -24,6 +24,7 @@ if ($ap == 0) {
     $ap = "Aktif sebagai PNS";
     session()->remove('BPS');
 }
+
 ?>
 
 <script src="https://code.jquery.com/jquery-1.10.1.min.js" integrity="sha256-SDf34fFWX/ZnUozXXEH0AeB+Ip3hvRsjLwp6QNTEb3k=" crossorigin="anonymous"></script>

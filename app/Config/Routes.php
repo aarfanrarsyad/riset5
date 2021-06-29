@@ -275,6 +275,14 @@ $routes->group('admin', ['namespace' => 'App\Controllers', 'filter' => 'login'],
 	$routes->get('galeri-foto', 'Admin::management_galeri_foto');
 	$routes->get('galeri-video', 'Admin::management_galeri_video');
 });
+
+$routes->group('user', ['namespace' => 'App\Controllers', 'filter' => 'role:2'], function ($routes) {
+	# This is for homepage, landing page, etc
+
+	$routes->get('/profil', 'User::profil', ['filter' => 'role:2']);
+	// gatau nih bener apa engga
+	#------------------------------------------------------------------------------------------------------------------------------------------------#
+});
 /**
  * --------------------------------------------------------------------
  * Additional Routing
