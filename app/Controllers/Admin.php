@@ -1794,7 +1794,8 @@ class Admin extends BaseController
 
 			//cek apakah sudah terdapat nama file yang sama, jika sudah maka akan direname
 			$file = $path . "/" . $foto->getName();
-			$ext = "." . $foto->guessExtension();
+			$ext = explode(".", $foto->getName());
+			$ext = "." . $ext[count($ext) - 1];
 			$file = str_replace($ext, "", $file);
 
 			$foto->move($path);

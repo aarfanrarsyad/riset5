@@ -3,44 +3,22 @@ User itu untuk melihat profil diri sendiri, sedangkan bukan user untuk melihat p
 Hal ini berpengaruh pada ada tidaknya tampilan tombol edit profil di halaman profil -->
 <?php
 if ($status == 'bukan user') {
-    $tombolEdit = 'hidden';
-    $usernya = "Alumni ini";
-
-    // berfungsi, tapi butuh tempat tersendiri biar bisa di hidden, sekarang masih gabung sama tempat lahir
-    if ($alumni->cttl == 1) {
-        $cttl = "";
-    } else {
-        $cttl = "hidden";
-    }
-    if ($alumni->calamat == 1) {
-        $calamat = "";
-    } else {
-        $calamat = "hidden";
-    }
-    if ($alumni->cpendidikan == 1) {
-        $cpendidikan = "1";
-    } else {
-        $cpendidikan = "0";
-    }
-    if ($alumni->cprestasi == 1) {
-        $cprestasi = "1";
-    } else {
-        $cprestasi = "0";
-    }
-} else if ($status == 'user') {
-    $usernya = "Anda";
     $tombolEdit = '';
-    $cttl = "";
-    $cemail = "";
-    $calamat = "";
-    $cjab = "";
-    $cig = "";
-    $ctw = "";
-    $cfb = "";
-    $cpendidikan = "1";
-    $cprestasi  = "1";
+    $usernya = "Alumni ini";
+} else if ($status == 'user') {
+    $tombolEdit = '<a class="block bg-secondary text-white text-center py-1 md:py-2 px-4 mx-auto rounded-full w-24 md:w-32 cursor-pointer hover:bg-secondaryhover transition-colors duration-300" href="/User/editProfil">Edit Profil</a>';
+    $usernya = "Anda";
 }
 
+$sembunyi = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="sm:w-5 w-4">
+<path fill-rule="evenodd" d="M3.707 2.293a1 1 0 00-1.414 1.414l14 14a1 1 0 001.414-1.414l-1.473-1.473A10.014 10.014 0 0019.542 10C18.268 5.943 14.478 3 10 3a9.958 9.958 0 00-4.512 1.074l-1.78-1.781zm4.261 4.26l1.514 1.515a2.003 2.003 0 012.45 2.45l1.514 1.514a4 4 0 00-5.478-5.478z" clip-rule="evenodd" />
+<path d="M12.454 16.697L9.75 13.992a4 4 0 01-3.742-3.741L2.335 6.578A9.98 9.98 0 00.458 10c1.274 4.057 5.065 7 9.542 7 .847 0 1.669-.105 2.454-.303z" />
+</svg>';
+
+$cttl= '<div class="flex-initial text-primary ml-2">'.$sembunyi.'</div>';
+$calamat='<div class="flex-auto text-primary md:px-0 mt-6 md:mt-5 ml-2">'.$sembunyi.'</div>';
+$cpendidikan='<div class="flex-initial text-primary mt-1 ml-2">'.$sembunyi.'</div>';
+$cprestasi='<div class="flex-initial text-primary mt-1 ml-2">'.$sembunyi.'</div>';
 
 ?>
 <?= $this->extend('websia/layoutWebsia/templateBerandaLogin.php'); ?>
@@ -124,7 +102,7 @@ if ($status == 'bukan user') {
                 </div>
             </div>
             <!-- Tombol edit profil yang ketika di klik akan mengarah ke halaman edit profil -->
-            <a class="block bg-secondary text-white text-center py-1 md:py-2 px-4 mx-auto rounded-full w-24 md:w-32 cursor-pointer hover:bg-secondaryhover transition-colors duration-300 <?= $tombolEdit ?>" href="/User/editProfil">Edit Profil</a>
+            <?= $tombolEdit ?>
         </div>
         <div class="md:w-3/5 justify-center mx-auto items-center text-center md:text-left object-center md:px-8 md:py-6">
             <!-- nama alumni -->
@@ -132,35 +110,33 @@ if ($status == 'bukan user') {
             <div class="mb-2">
                 <!-- role alumni -->
                 <?php
-                if ($status == 'bukan user') {
-                } else if ($status == 'user') { ?>
+                if ($status == 'bukan user') :
+                elseif ($status == 'user') : ?>
                     <?php foreach ($role as $row) : ?>
-                        <?php if ($row->name == 'Developer') {
-                        } else { ?>
+                        <?php if ($row->name == 'Developer') :
+                         else : ?>
                             <span class="font-paragraph text-xs inline-block bg-gray-300 mb-1 py-1 px-2 md:px-3 lg:px-4 rounded-lg text-primary align-middle uppercase"><?= $row->name; ?></span>
-                <?php }
+                <?php endif;
                     endforeach;
-                } ?>
+                endif; ?>
 
             </div>
             <!-- tempat dan tanggal lahir -->
             <div class="flex justify-center md:justify-start font-heading text-primary text-center md:text-left text-sm mb-5 md:mb-3 lg:mb-5">
-                <div class="flex-initial">
-                    <?php if ($cttl == "") : ?>
-                        <?= $alumni->tempat_lahir ?>, <?= strftime("%d %B %Y", strtotime($alumni->tanggal_lahir)); ?>
-                    <?php endif ?>
-                </div>
-                <div class="flex-initial text-primary ml-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="sm:w-5 w-4">
-                        <path fill-rule="evenodd" d="M3.707 2.293a1 1 0 00-1.414 1.414l14 14a1 1 0 001.414-1.414l-1.473-1.473A10.014 10.014 0 0019.542 10C18.268 5.943 14.478 3 10 3a9.958 9.958 0 00-4.512 1.074l-1.78-1.781zm4.261 4.26l1.514 1.515a2.003 2.003 0 012.45 2.45l1.514 1.514a4 4 0 00-5.478-5.478z" clip-rule="evenodd" />
-                        <path d="M12.454 16.697L9.75 13.992a4 4 0 01-3.742-3.741L2.335 6.578A9.98 9.98 0 00.458 10c1.274 4.057 5.065 7 9.542 7 .847 0 1.669-.105 2.454-.303z" />
-                    </svg>
-                </div>
+                <?php if ($alumni->cttl == 1 || $status == 'user') : ?>
+                    <div class="flex-initial">
+                            <?= $alumni->tempat_lahir ?>, <?= strftime("%d %B %Y", strtotime($alumni->tanggal_lahir)); ?>
+                    </div>
+                    <?php if($alumni->cttl == 0 && $status == 'user') :
+                        // gambar mata
+                        echo $cttl;
+                    endif; ?>
+                <?php endif; ?>
             </div>
             <p class="font-heading text-center md:text-left text-base mb-5 md:mb-3 lg:mb-5">
                 <!-- Akademi Ilmu Statistik / STIS/ POLSTAT STIS  ========>  Harusnya diatur di BE -->
                 <?php foreach ($pendidikan as $row) {
-                    if ($row->instansi == "Akademi Ilmu Statistik" || $row->instansi == "STIS" || $row->instansi == "POLSTAT STIS") {
+                    if ($row->instansi == "Akademi Ilmu Statistik" || $row->instansi == "Sekolah Tinggi Ilmu Statistik" || $row->instansi == "Politeknik Statistika STIS") {
                         echo $row->instansi; ?>
                         <br />
                         <?php if ($row->nim != NULL and $row->angkatan != NULL) { ?>
@@ -191,15 +167,13 @@ if ($status == 'bukan user') {
         </div>
         <!-- Akhir Deskripsi user profile -->
         <div class="md:pl-5 lg:pl-6">
-            <?php if ($calamat == "") : ?>
+            <?php if ($alumni->calamat == 1 || $status == 'user') : ?>
                 <div class="flex">
                     <div class="font-heading text-primary text-xs pl-5 md:px-0 mt-6">Lokasi Tempat Tinggal Saat Ini</div>
-                    <div class="flex-auto text-primary md:px-0 mt-6 md:mt-5 ml-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="sm:w-5 w-4">
-                            <path fill-rule="evenodd" d="M3.707 2.293a1 1 0 00-1.414 1.414l14 14a1 1 0 001.414-1.414l-1.473-1.473A10.014 10.014 0 0019.542 10C18.268 5.943 14.478 3 10 3a9.958 9.958 0 00-4.512 1.074l-1.78-1.781zm4.261 4.26l1.514 1.515a2.003 2.003 0 012.45 2.45l1.514 1.514a4 4 0 00-5.478-5.478z" clip-rule="evenodd" />
-                            <path d="M12.454 16.697L9.75 13.992a4 4 0 01-3.742-3.741L2.335 6.578A9.98 9.98 0 00.458 10c1.274 4.057 5.065 7 9.542 7 .847 0 1.669-.105 2.454-.303z" />
-                        </svg>
-                    </div>
+                    <?php if($alumni->calamat == 0 && $status == 'user') : 
+                        // gambar mata
+                        echo $calamat;
+                    endif; ?>
                 </div>
                 <span class="font-heading flex justify-start px-3 md:px-0 text-base text-left mb-2 md:mb-0">
                     <img class="my-2 mt-2 mr-0 md:mr-2 ml-1 md:ml-0 w-6 h-6 md:w-6 float-left" src="/img/components/icon/maps_flag.png" alt="alamat">
@@ -209,7 +183,7 @@ if ($status == 'bukan user') {
                                                         echo $provinsi; ?> </p>
                 </span>
                 <hr class="visible sm:invisible border-primary border-opacity-75 w-4/5 object-center mx-auto mb-6 md:mb-0">
-            <?php endif ?>
+            <?php endif; ?>
             <!-- Awal media sosial-->
             <div class="md:space-x-4 md:flex md:flex-row items-start justify-center lg:justify-start md:py-4 px-5 md:px-0">
                 <div class="w-full md:w-1/2 mr-10">
@@ -418,17 +392,15 @@ if ($status == 'bukan user') {
 </div>
 <!-- Akhir Informasi Intsansi -->
 
-<?php if ($cprestasi == 1) { ?>
+<?php if ($alumni->cprestasi == 1 || $status == 'user') { ?>
     <!-- Awal Riwayat Prestasi -->
     <div class="w-full my-0 md:my-0 lg:mb-4 lg:px-20 md:px-8 px-2">
         <div class="flex justify-center text-center md:justify-start mb-2 md:mb-6">
             <h3 class="flex-initial font-heading font-bold text-xl text-secondary text-center md:text-left ">Riwayat Prestasi</h3>
-            <div class="flex-initial text-primary mt-1 ml-2">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5">
-                    <path fill-rule="evenodd" d="M3.707 2.293a1 1 0 00-1.414 1.414l14 14a1 1 0 001.414-1.414l-1.473-1.473A10.014 10.014 0 0019.542 10C18.268 5.943 14.478 3 10 3a9.958 9.958 0 00-4.512 1.074l-1.78-1.781zm4.261 4.26l1.514 1.515a2.003 2.003 0 012.45 2.45l1.514 1.514a4 4 0 00-5.478-5.478z" clip-rule="evenodd" />
-                    <path d="M12.454 16.697L9.75 13.992a4 4 0 01-3.742-3.741L2.335 6.578A9.98 9.98 0 00.458 10c1.274 4.057 5.065 7 9.542 7 .847 0 1.669-.105 2.454-.303z" />
-                </svg>
-            </div>
+            <?php if($alumni->cprestasi == 0 && $status == 'user') :
+                // gambar mata
+                echo $cprestasi;
+                endif;?>
         </div>
         <div class="md:shadow-lg lg:shadow-xl rounded-2xl px-0 py-1 md:px-5 lg:mx-14 lg:p-8 mb-1">
             <?php if ($prestasi == NULL) {
@@ -448,17 +420,15 @@ if ($status == 'bukan user') {
     <!-- Akhir Riwayat Prestasi -->
 <?php } ?>
 
-<?php if ($cpendidikan == 1) { ?>
+<?php if ($alumni->cpendidikan == 1 || $status == 'user') { ?>
     <!-- Awal Riwayat Pendidikan -->
     <div class="w-full my-6 md:my-0 lg:mb-3 lg:px-20 md:px-8 px-2">
         <div class="flex justify-center md:justify-start">
             <h3 class="flex-initial font-heading font-bold text-xl text-secondary text-center md:text-left ">Riwayat Pendidikan</h3>
-            <div class="flex-initial text-primary mt-1 ml-2">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5">
-                    <path fill-rule="evenodd" d="M3.707 2.293a1 1 0 00-1.414 1.414l14 14a1 1 0 001.414-1.414l-1.473-1.473A10.014 10.014 0 0019.542 10C18.268 5.943 14.478 3 10 3a9.958 9.958 0 00-4.512 1.074l-1.78-1.781zm4.261 4.26l1.514 1.515a2.003 2.003 0 012.45 2.45l1.514 1.514a4 4 0 00-5.478-5.478z" clip-rule="evenodd" />
-                    <path d="M12.454 16.697L9.75 13.992a4 4 0 01-3.742-3.741L2.335 6.578A9.98 9.98 0 00.458 10c1.274 4.057 5.065 7 9.542 7 .847 0 1.669-.105 2.454-.303z" />
-                </svg>
-            </div>
+            <?php if($alumni->cpendidikan == 0 && $status == 'user') :
+                // gambar mata
+                echo $cpendidikan;
+                endif;?>
         </div>
         <div class="lg:px-16">
             <div class="md:shadow-lg lg:shadow-xl rounded-3xl w-full mx-auto mt-5">

@@ -1,4 +1,4 @@
-var baseUrl = "http://localhost:8080";
+var baseUrl = "https://alumni.stis.ac.id";
 
 //Ajax Detail App
 $('.proyek').each(function () {

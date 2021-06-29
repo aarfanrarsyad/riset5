@@ -109,7 +109,7 @@
 </div>
 
 <?php if (session('error') || session('err_sso')) :
-    if (session('error') == 'This user account is not yet activated. <a href="http://localhost:8080/resend-activate-account?login=tes%2540gmail.com">Resend activation message one more time.</a>' || session('err_sso') == 'non-active') : ?>
+    if (session('error') == 'non-active' || session('err_sso') == 'non-active') : ?>
         <div id="alert">
             <div class="fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40">
                 <div class="duration-700 transition-all p-3 rounded-lg flex items-center" style="background-color: #FF7474;">

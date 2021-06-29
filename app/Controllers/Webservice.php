@@ -142,8 +142,7 @@ class Webservice extends BaseController
 		$data['judul'] = 'Edit Profil | SIA';
 		$data['active'] = 'akunDev';
 		$dt = new AuthModel();
-
-		if ($dt->getUserById(session('id_user'))['password_hash'] == NULL) {
+		if ($dt->getUserById(session('id_user'))['password_hash'] == '$2y$10$nrQkf2SEAmSAYp9ncl0BSukR5YrGNCEV4oX8q5QJSe7V/5WxlqZEq') {
 			return redirect()->to(base_url('User/editprofil'));
 		} else return view('webservice/kontenWebservice/profilDeveloper/editAkunWS.php', $data);
 	}

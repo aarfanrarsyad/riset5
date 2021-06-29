@@ -10,7 +10,7 @@
             <img src="/img/components/icon/panah_kiri.png" alt="icon panah kiri" class="inline pr-2 pb-1">
             Kembali
         </a>
-        <h2 class="font-heading font-semibold text-xl my-4">Alumni yang mungkin Anda kenal</h2>
+        <h2 class="font-heading font-semibold text-xl my-4">Terdapat <?= $jumlah ?> Alumni yang mungkin Anda kenal</h2>
         <section id="cards">
             <div class="mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-2 sm:gap-y-4 md:gap-y-8">
                 <?php foreach ($alumni as $row) :  ?>

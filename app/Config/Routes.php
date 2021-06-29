@@ -53,11 +53,11 @@ $routes->group('beranda', ['namespace' => 'App\Controllers', 'filter' => 'login'
 	$routes->match(['get', 'post'], 'berita/view/(:num)', 'Berita::news_view/$1');
 });
 
-$routes->group('admin', ['namespace' => 'App\Controllers', 'filter' => 'role:1'], function ($routes) {
+$routes->group('admin', ['namespace' => 'App\Controllers', 'filter' => 'login'], function ($routes) {
 
 	# This is for homepage, landing page, etc
 
-	$routes->get('/', 'Admin::index', ['filter' => 'role:1']);
+	$routes->get('/', 'Admin::index', ['filter' => 'login']);
 
 
 	# This is for report dashboard
@@ -274,6 +274,14 @@ $routes->group('admin', ['namespace' => 'App\Controllers', 'filter' => 'role:1']
 	# Manajemen Galeri
 	$routes->get('galeri-foto', 'Admin::management_galeri_foto');
 	$routes->get('galeri-video', 'Admin::management_galeri_video');
+});
+
+$routes->group('user', ['namespace' => 'App\Controllers', 'filter' => 'role:2'], function ($routes) {
+	# This is for homepage, landing page, etc
+
+	$routes->get('/profil', 'User::profil', ['filter' => 'role:2']);
+	// gatau nih bener apa engga
+	#------------------------------------------------------------------------------------------------------------------------------------------------#
 });
 /**
  * --------------------------------------------------------------------

@@ -152,6 +152,7 @@ class User extends BaseController
 	public function profil()
 	{
 
+		$status = 'user';
 		$model = new AlumniModel();
 		$fotoModel = new \App\Models\FotoModel;
 		$galeri_profil = $fotoModel->getForProfil(session()->id_alumni);
@@ -167,116 +168,50 @@ class User extends BaseController
 		}
 		// dd($galeri_profil);
 
+		// untuk membuka data alumni
 		$query1 = $model->bukaProfile(session('id_alumni'))->getRow();
 		// dd($query1);
-		//isi :
-		// 'aktif_pns'	
-		// 'alamat_alumni'
-		// 'deskripsi' 
-		// 'fb'
-		// 'foto_profil'
-		// 'id_alumni'
-		// 'ig'
-		// 'jabatan_terakhir' 
-		// 'jenis_kelamin'
-		// 'kota'  
-		// 'nama'
-		// 'negara'
-		// 'nip' 	
-		// 'nip_bps'
-		// 'angkatan'      
-		// 'perkiraan_pensiun'
-		// 'provinsi'
-		// 'status_bekerja'	
-		// 'tanggal_lahir'  
-		// 'telp_alumni'    
-		// 'tempat_lahir'   
-		// 'twitter'
-		// 'email'
 
+		// untuk membuka tempat kerja alumni
 		$query2 = $model->getTempatKerjaByNIM(session('id_alumni'))->getRow();
 		// dd($query2);
-		//isi :
-		// 'alamat_instansi'
-		// 'email_instansi'
-		// 'faks_instansi'
-		// 'id_alumni'
-		// 'id_tempat_kerja'	
-		// 'kota'
-		// 'nama_instansi'
-		// 'negara'
-		// 'provinsi'
-		// 'telp_instansi'
 
+		// untuk melihat role alumni
 		$query3 = $model->getRole(session('id_user'))->getResult();
 		// dd($query3);
-		//isi :
-		// array :
-		// 'name'
 
-		if ($model->getIdTempatKerjaByIdAlumni(session('id_alumni')) == NULL) {
-			$query4 = $model->getIdAlumniByAngkatan($model->getAngkatanByIdAlumni(session('id_alumni'))->angkatan, session('id_alumni'))->getResult();
+		// untuk mendapatkan rekomendasi
+		$idKerja = $model->getIdTempatKerjaByIdAlumni(session('id_alumni'));
+		$angktAkhir = $model->getAngkatanByIdAlumni(session('id_alumni'))->angkatan;
+		if ($model->cekRekomendasi1($idKerja) < 5) {
+			$query4 = $model->getIdAlumniByAngkatan($angktAkhir, session('id_alumni'))->getResult();
 		} else {
-			$query4 = $model->getIdAlumniByIdTempatKerja($model->getIdTempatKerjaByIdAlumni(session('id_alumni')), session('id_alumni'))->getResult();
+			$query4 = $model->getIdAlumniByIdTempatKerja($idKerja, session('id_alumni'))->getResult();
 		}
 
+		// untuk mendapatkan riwayat prestasi
 		$query5 = $model->getPrestasiByIdAlumni(session('id_alumni'))->getResult();
 		// dd($query5);
-		//isi :
-		// array :
-		// 'id_prestasi'
-		// 'nama_prestasi'
-		// 'tahun_prestasi'
-		// 'id_alumni'
 
+		// untuk mendapatkan riwayat pendidikan
 		$query6 = $model->getPendidikanByIdAlumni(session('id_alumni'))->getResult();
 		// dd($query6);
-		//isi :
-		// array :
-		// 'id_pendidikan'
-		// 'jenjang'
-		// 'instansi'
-		// 'tahun_lulus'
-		// 'tahun_masuk'
-		// 'angkatan'
-		// 'id_alumni'
-		// 'program_studi'
-		// 'nim'
-		// 'judul_tulisan'
 
-		$query7 = $model->getUsersById(session('id_user'))->getRow();
-		// dd($query7);
-		//isi :
-		// 'email'
-		// 'fullname'
-		// 'id'
-		// 'id_alumni'
-		// 'username'
-		// 'user_image'
-
-		$status = 'user';
 		$jk = $query1->jenis_kelamin;
-		$sb = $query1->status_bekerja;
-		$ap = $query1->aktif_pns;
-		$ambigu = $query2->ambigu;
-
-		//angkatan terakhir yang diambil
-		// $angkatan = $model->getAngkatanByIdAlumni(session('id_alumni'));
-
-
-
 		if ($jk == "Pr") {
 			$jk = "Perempuan";
 		} else {
 			$jk = "Laki-laki";
 		}
 
+		$sb = $query1->status_bekerja;
 		if ($sb == 0) {
 			$sb = "Tidak bekerja";
 		} else {
 			$sb = "Masih bekerja";
 		}
 
+		$ap = $query1->aktif_pns;
 		if ($ap == 0) {
 			$ap = "Tidak aktif sebagai PNS";
 			session()->set([	//cek BPS atau bukan
@@ -287,7 +222,8 @@ class User extends BaseController
 			session()->remove('BPS');
 		}
 
-		if ($ambigu == 1) {
+		$ambigu = $query2->ambigu;
+		if ($ambigu != 0) {
 			session()->set([	//cek ambigu atau bukan
 				'ambigu' => 'yes',
 			]);
@@ -318,7 +254,6 @@ class User extends BaseController
 			'role' 				=> $query3,
 			'prestasi'			=> $query5,
 			'pendidikan' 		=> $query6,
-			'user' 				=> $query7,
 			'rekomendasi'     	=> $query4,
 			'foto'				=> $galeri_profil,
 			'count'				=> count($galeri_profil),
@@ -330,9 +265,12 @@ class User extends BaseController
 
 	public function profilAlumni($id)
 	{
+		$kunci = htmlspecialchars($id);
+		$status = 'bukan user';
+		if ($kunci == session('id_alumni')) {
+			$status = 'user';
+		}
 		$model = new AlumniModel();
-		// $kunci = $_GET['id_alumni'];
-		// $kunci = get_alumni_by_nim($nim);
 		$fotoModel = new \App\Models\FotoModel;
 		$galeri_profil = $fotoModel->getForProfil($id);
 		$i = 0;
@@ -345,119 +283,46 @@ class User extends BaseController
 			}
 			$i++;
 		}
-		$kunci = htmlspecialchars($id);
+
 		$query1 = $model->bukaProfile($kunci)->getRow();
 		// dd($query1);
-		//isi :
-		// 'aktif_pns'	
-		// 'alamat_alumni'
-		// 'deskripsi' 
-		// 'fb'
-		// 'foto_profil'
-		// 'id_alumni'
-		// 'ig'
-		// 'jabatan_terakhir' 
-		// 'jenis_kelamin'
-		// 'kota'  
-		// 'nama'
-		// 'negara'
-		// 'nip' 	
-		// 'nip_bps'
-		// 'angkatan'      
-		// 'perkiraan_pensiun'
-		// 'provinsi'
-		// 'status_bekerja'	
-		// 'tanggal_lahir'  
-		// 'telp_alumni'    
-		// 'tempat_lahir'   
-		// 'twitter'
-		// 'email'
-		// 'checked'
 
 		$query2 = $model->getTempatKerjaByNIM($kunci)->getRow();
 		// dd($query2);
-		//isi :
-		// 'alamat_instansi'
-		// 'email_instansi'
-		// 'faks_instansi'
-		// 'id_alumni'
-		// 'id_tempat_kerja'	
-		// 'kota'
-		// 'nama_instansi'
-		// 'negara'
-		// 'provinsi'
-		// 'telp_instansi'
 
 		$query3 = $model->getRole(session('id_user'))->getResult();
 		// dd($query3);
-		//isi :
-		// array :
-		// 'name'
 
-		if ($model->getIdTempatKerjaByIdAlumni(session('id_alumni')) == NULL) {
-			$query4 = $model->getIdAlumniByAngkatan($model->getAngkatanByIdAlumni(session('id_alumni'))->angkatan, session('id_alumni'))->getResult();
+		// mendapatkan rekomendasi
+		$idKerja = $model->getIdTempatKerjaByIdAlumni(session('id_alumni'));
+		$angktAkhir = $model->getAngkatanByIdAlumni(session('id_alumni'))->angkatan;
+		if ($model->cekRekomendasi1($idKerja) < 5) {
+			$query4 = $model->getIdAlumniByAngkatan($angktAkhir, session('id_alumni'))->getResult();
 		} else {
-			$query4 = $model->getIdAlumniByIdTempatKerja($model->getIdTempatKerjaByIdAlumni(session('id_alumni')), session('id_alumni'))->getResult();
+			$query4 = $model->getIdAlumniByIdTempatKerja($idKerja, session('id_alumni'))->getResult();
 		}
 
 		$query5 = $model->getPrestasiByIdAlumni($kunci)->getResult();
 		// dd($query5);
-		//isi :
-		// array :
-		// 'id_prestasi'
-		// 'nama_prestasi'
-		// 'tahun_prestasi'
-		// 'id_alumni'
 
 		$query6 = $model->getPendidikanByIdAlumni($kunci)->getResult();
 		// dd($query6);
-		//isi :
-		// array :
-		// 'id_pendidikan'
-		// 'jenjang'
-		// 'instansi'
-		// 'tahun_lulus'
-		// 'tahun_masuk'
-		// 'angkatan'
-		// 'id_alumni'
-		// 'program_studi'
-		// 'nim'
-		// 'judul_tulisan'
 
-		$query7 = $model->getUsersById(session('id_user'))->getRow();
-		// dd($query7);
-		//isi :
-		// 'email'
-		// 'fullname'
-		// 'id'
-		// 'id_alumni'
-		// 'username'
-		// 'user_image'
-
-		$status = 'bukan user';
-		if ($kunci == session('id_alumni')) {
-			$status = 'user';
-		}
 		$jk = $query1->jenis_kelamin;
-		$sb = $query1->status_bekerja;
-		$ap = $query1->aktif_pns;
-		//angkatan terakhir yang diambil
-		// $angkatan = $model->getAngkatanByIdAlumni($kunci);
-
-
-
 		if ($jk == "Pr") {
 			$jk = "Perempuan";
 		} else {
 			$jk = "Laki-laki";
 		}
 
+		$sb = $query1->status_bekerja;
 		if ($sb == 0) {
 			$sb = "Tidak bekerja";
 		} else {
 			$sb = "Masih bekerja";
 		}
 
+		$ap = $query1->aktif_pns;
 		if ($ap == 0) {
 			$ap = "Tidak aktif sebagai PNS";
 		} else {
@@ -475,38 +340,37 @@ class User extends BaseController
 
 		$data = [
 			'status'		=> $status,
-			'judulHalaman' 		=> 'Profil User | Website Riset 5',
+			'judulHalaman' 	=> 'Profil User | Website Riset 5',
 			'active' 		=> 'profil',
-			'alumni'      => $query1,
-			'jenis_kelamin'  => $jk,
-			'status_bekerja'	=> $sb,
+			'alumni'      	=> $query1,
+			'jenis_kelamin' => $jk,
+			'status_bekerja' => $sb,
 			'aktif_pns'		=> $ap,
 			'tempat_kerja'	=> $query2,
-			'role' => $query3,
-			'prestasi' => $query5,
-			'pendidikan' => $query6,
-			'user' => $query7,
-			'rekomendasi'          => $query4,
-			'foto'				=> $galeri_profil,
-			'count'				=> count($galeri_profil),
-			'kabkota'			=> $kabkota,
-			'provinsi'			=> $provinsi,
+			'role' 			=> $query3,
+			'prestasi' 		=> $query5,
+			'pendidikan' 	=> $query6,
+			'rekomendasi'   => $query4,
+			'foto'			=> $galeri_profil,
+			'count'			=> count($galeri_profil),
+			'kabkota'		=> $kabkota,
+			'provinsi'		=> $provinsi,
 		];
 		return view('websia/kontenWebsia/userProfile/userProfile', $data);
 	}
 
-	//belum selesai nich
 	public function rekomendasi()
 	{
 		$pager = \Config\Services::pager();
 		$model = new AlumniModel();
 
-		if ($model->getIdTempatKerjaByIdAlumni(session('id_alumni')) == NULL) {
-			$query = $model->getRekomendasiAngkatan($model->getAngkatanByIdAlumni(session('id_alumni'))->angkatan, session('id_alumni'));
+		$idKerja = $model->getIdTempatKerjaByIdAlumni(session('id_alumni'));
+		$angktAkhir = $model->getAngkatanByIdAlumni(session('id_alumni'))->angkatan;
+		if ($model->cekRekomendasi1($idKerja) < 5) {
+			$query = $model->getRekomendasiAngkatan($angktAkhir, session('id_alumni'));
 		} else {
-			$query = $model->getRekomendasiTK($model->getIdTempatKerjaByIdAlumni(session('id_alumni')), session('id_alumni'));
+			$query = $model->getRekomendasiTK($idKerja, session('id_alumni'));
 		}
-
 		// dd($query->orderBy('nama', $direction = 'asc')->paginate(16));
 		$data = [
 			'judulHalaman'  => 'Rekomendasi',
@@ -526,9 +390,9 @@ class User extends BaseController
 		$query = $model->bukaProfile(session('id_alumni'));
 
 		$sqlcek = "SELECT password_hash from users where id = " . session('id_user');
-		$cekLM = $model->query($sqlcek);
+		$cekLM = $model->query($sqlcek)->getRow();
 
-		if ($cekLM->getRow()->password_hash != NULL) {
+		if ($cekLM->password_hash !== '$2y$10$nrQkf2SEAmSAYp9ncl0BSukR5YrGNCEV4oX8q5QJSe7V/5WxlqZEq') {
 			session()->set([	//cek login manual atau bukan
 				'manual' => 'yes',
 			]);
@@ -546,6 +410,7 @@ class User extends BaseController
 		];
 		return view('websia/kontenWebsia/editProfile/editBiodata.php', $data);
 	}
+
 	public function daftarKab()
 	{
 		$model = new AlumniModel();
@@ -844,7 +709,9 @@ class User extends BaseController
 
 	public function editTempatKerja()
 	{
-
+		if (session('BPS') != "no" && session('ambigu') != "yes") {
+			return redirect()->to(base_url('User/editProfil'));
+		}
 		$model = new AlumniModel();
 		$query = $model->getTempatKerjaByNIM(session('id_alumni'));
 		$listtk = $model->getTempatKerja()->getResult();
@@ -864,8 +731,10 @@ class User extends BaseController
 	public function updateTempatKerja()
 	{
 
+		if (session('BPS') != "no" && session('ambigu') != "yes") {
+			return redirect()->to(base_url('User/editProfil'));
+		}
 		$model = new AlumniModel();
-
 		$data = [
 			'id_tempat_kerja'      => $_POST['id_tempat_kerja'],
 			'ambigu'			   => 0,
@@ -878,6 +747,9 @@ class User extends BaseController
 
 	public function addTempatKerja()
 	{
+		if (session('BPS') != "no" && session('ambigu') != "yes") {
+			return redirect()->to(base_url('User/editProfil'));
+		}
 		$model = new AlumniModel();
 		$alamat = NULL;
 		$telp = NULL;
@@ -1110,9 +982,14 @@ class User extends BaseController
 
 	public function editAkun()
 	{
-
 		$model = new AlumniModel();
 		$query = $model->getUsersById(session('id_user'));
+		$sqlcek = "SELECT password_hash from users where id = " . session('id_user');
+		$cekLM = $model->query($sqlcek)->getRow();
+
+		if ($cekLM->password_hash == NULL) {
+			return redirect()->to(base_url('User/editProfil'));
+		}
 		// dd($query->getRow());
 
 		$data = [
@@ -1128,12 +1005,17 @@ class User extends BaseController
 
 	public function updateAkun()
 	{
-
 		$model = new AlumniModel();
 		$curpass = $model->getAlumni(session('id_user'))->getRow()->password_hash;
 		$inputpass = htmlspecialchars($_POST['passlama']);
 		$newpass = htmlspecialchars($_POST['passbaru']);
 		$renewpass = htmlspecialchars($_POST['ulangpassbaru']);
+		$sqlcek = "SELECT password_hash from users where id = " . session('id_user');
+		$cekLM = $model->query($sqlcek)->getRow();
+
+		if ($cekLM->password_hash == NULL) {
+			return redirect()->to(base_url('User/editProfil'));
+		}
 
 		if (password_verify(base64_encode(hash('sha384', $inputpass, true)), $curpass)) {
 			$validate = [
@@ -1275,10 +1157,10 @@ class User extends BaseController
 			if (!is_dir($path))
 				mkdir($path, 0755, true);
 
-
 			//cek apakah sudah terdapat nama file yang sama, jika sudah maka akan direname
 			$file = $path . "/" . $foto->getName();
-			$ext = "." . $foto->guessExtension();
+			$ext = explode(".", $foto->getName());
+			$ext = "." . $ext[count($ext) - 1];
 			$file = str_replace($ext, "", $file);
 
 			$foto->move($path);
