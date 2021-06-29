@@ -6,7 +6,7 @@
 		$model = new App\Models\AlumniModel();
 		$ambigu = $model->getTempatKerjaByNIM(session('id_alumni'))->getRow()->ambigu;
 		$ap = $model->bukaProfile(session('id_alumni'))->getRow()->aktif_pns;
-        if ($ambigu == 1) {
+        if ($ambigu != 0) {
 			session()->set([	//cek ambigu atau bukan
 				'ambigu' => 'yes',
 			]);
