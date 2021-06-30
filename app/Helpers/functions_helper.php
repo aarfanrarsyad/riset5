@@ -166,8 +166,10 @@ function userdata()
 
     if ($user->id_alumni) {
         $alumni = $init->getAlumniById($user->id_alumni)->getRowArray();
-        $check_img = in_array_help(strtolower($alumni['foto_profil']), $default);
-        $tmp =  $check_img !== FALSE ? "/img/components/user/userid_" . $data['id'] . "/" . $alumni['foto_profil'] :  "/img/components/icon/" . $default[$check_img];
+
+        $alumni['foto_profil'] = substr($alumni['foto_profil'], 16, strlen($alumni['foto_profil']));
+        $check_img = in_array($alumni['foto_profil'], $default);
+        $tmp =  $check_img !== FALSE ? "/img/components/icon/" . $alumni['foto_profil'] :  "/img/components/user/" . $alumni['foto_profil'];
         $data['image'] = $tmp;
     }
 

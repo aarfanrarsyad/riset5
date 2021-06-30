@@ -157,7 +157,7 @@ class Auth extends BaseController
 			if (isset($hasil['profile']['nim'])) {	//apabila alumni login dengan akun sipadu mahasiswa
 				date_default_timezone_set("Asia/Jakarta");
 				$year_now = date("Y");
-
+				$p = NULL;
 				$alumni = false;
 				// $jenjang = 'D-IV';
 				// $tahun_lulus = 2022;
@@ -176,8 +176,10 @@ class Auth extends BaseController
 								$jenjang = 'D-IV';
 								$angkatan = $tahun_lulus - 1962;
 								if (strpos($kelas['kode_kelas'], '4SK')) {
+									$p = 'SK';
 									$prodi = 'D-IV Statistika Sosial & Kependudukan';
 								} elseif (strpos($kelas['kode_kelas'], '4SE')) {
+									$p = 'SE';
 									$prodi = 'D-IV Statistika Ekonomi';
 								} elseif (strpos($kelas['kode_kelas'], '4SI')) {
 									$prodi = 'D-IV Sistem Informasi Statistik';
@@ -186,6 +188,7 @@ class Auth extends BaseController
 								} elseif (strpos($kelas['kode_kelas'], '4ST')) {
 									$prodi = 'D-IV Statistika';
 								} else {
+									$p = 'KS';
 									$prodi = 'D-IV Komputasi Statistik';
 								}
 							}
@@ -199,9 +202,13 @@ class Auth extends BaseController
 
 				if ($alumni == true) {
 					$user = $hasil['profile'];
+					$nim = str_replace('.', '', $user['nim']);
 
-					$cek = $this->modelAlumni->bindingSipadu($user['nim']);
-
+					$cek = $this->modelAlumni->bindingSipadu($nim);
+					if ($cek == NULL && $p !== NULL) {
+						$nim = $p . $nim;
+						$cek = $this->modelAlumni->bindingSipadu($nim);
+					}
 					// binding session dengan database (insert data ke tabel alumni kalau belum terdaftar di tabel alumni) 
 					if ($cek == NULL) {
 						$data = [
@@ -243,7 +250,7 @@ class Auth extends BaseController
 						];
 						$this->modelAlumni->db->table('pendidikan_tinggi')->insert($data);
 
-						$cek = $this->modelAlumni->bindingSipadu($user['nim']);
+						$cek = $this->modelAlumni->bindingSipadu($nim);
 						$data = [
 							'id_alumni'      	=> $cek['id_alumni'],
 							'id_tempat_kerja'  	=> 528,
@@ -260,7 +267,7 @@ class Auth extends BaseController
 						$data = [
 							'email'				=> $user['nim'] . "@stis.ac.id",
 							'password_hash'		=> '$2y$10$nrQkf2SEAmSAYp9ncl0BSukR5YrGNCEV4oX8q5QJSe7V/5WxlqZEq',
-							'username'			=> $user['nim'],
+							'username'			=> $nim,
 							'id_alumni'			=> $cek['id_alumni'],
 							'fullname'			=> ucwords(strtolower($user['nama'])),
 							'user_image'		=> "default.svg",
@@ -490,7 +497,7 @@ class Auth extends BaseController
 								'username'			=> $user->getUsername(),
 								'id_alumni'			=> $cek['id_alumni'],
 								'fullname'			=> $user->getName(),
-								'user_image'		=> $user->getUrlFoto(),
+								'user_image'		=> "default.svg",
 								'active'			=> 1,
 								'force_pass_reset'	=> 0,
 								'created_at'		=> $now,
