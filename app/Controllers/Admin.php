@@ -416,11 +416,11 @@ class Admin extends BaseController
 				$query = $init->insertNewResource($data);
 				if ($query === true) {
 					session()->setFlashdata('status', "<script>Swal.fire({icon: 'success',title: 'Success',text: 'Menu added successfully',showConfirmButton: false,timer: 1500})</script>");
-					return redirect()->to(base_url('/admin/resources'));
 				} else {
 					session()->setFlashdata('status', "<script>Swal.fire({icon: 'info',title: 'Oops',text: 'Something went wrong',showConfirmButton: false,timer: 1500})</script>");
-					return redirect()->to(base_url('/admin/resources'));
 				}
+				session()->setFlashdata('crud_resources', $query);
+				return redirect()->to(base_url('/admin/resources'));
 			}
 		}
 
@@ -460,11 +460,11 @@ class Admin extends BaseController
 
 				if ($query === true) {
 					session()->setFlashdata('status', "<script>Swal.fire({icon: 'success',title: 'Success',text: 'Menu updated successfully',showConfirmButton: false,timer: 1500})</script>");
-					return redirect()->to(base_url('/admin/resources'));
 				} else {
 					session()->setFlashdata('status', "<script>Swal.fire({icon: 'info',title: 'Oops',text: 'Something went wrong',showConfirmButton: false,timer: 1500})</script>");
-					return redirect()->to(base_url('/admin/resources'));
 				}
+				session()->setFlashdata('crud_resources', $query);
+				return redirect()->to(base_url('/admin/resources'));
 			}
 		}
 
@@ -483,7 +483,7 @@ class Admin extends BaseController
 			$id   = $this->request->getPost('id');
 			$init = new admin_model();
 			$query = $init->deleteResourceByid($id);
-
+			session()->setFlashdata('crud_resources', $query);
 			$this->output_json($query);
 		}
 	}

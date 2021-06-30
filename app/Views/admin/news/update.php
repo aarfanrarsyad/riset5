@@ -45,11 +45,13 @@ $errors = session()->getFlashdata('errors');
     <div class="container-fluid px-4" style="font-size: small;">
         <div class="alert-content">
             <?php if (!empty($errors)) : ?>
-                <div class="alert  bg-redAlert text-danger" role="alert">
+                <div class="alert  bg-red text-danger" role="alert">
                     Whoops! There was an error when inputting data :
-                    <ul>
+                    <ul class="mt-2">
+                        <?php $i = 1 ?>
                         <?php foreach ($errors as $error) : ?>
-                            <li><?= esc($error) ?></li>
+                            <li><?= $i . ". " . esc($error) ?></li>
+                            <?php $i++ ?>
                         <?php endforeach ?>
                     </ul>
                 </div>
@@ -68,7 +70,8 @@ $errors = session()->getFlashdata('errors');
                             <div class="form-group row">
                                 <label for="date" class="col-sm-2 col-form-label">Tanggal Publish</label>
                                 <div class="col-sm-5">
-                                    <input type="date" name="date" class="inputForm form-control" id="date" placeholder="Tanggal" value="<?= $data['tanggal_publish'] ?>" required>
+
+                                    <input type="date" name="date" class="inputForm form-control" id="date" placeholder="Tanggal" value="<?= session()->getFlashdata('inputs') !== null ? session()->getFlashdata('inputs')['date'] : $data['tanggal_publish'] ?>" required>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -123,14 +126,14 @@ $errors = session()->getFlashdata('errors');
                                 <label for="author" class="col-sm-2 col-form-label">Penulis</label>
                                 <div class="col-sm-7">
                                     <div class="form-group">
-                                        <input type="text" name="author" class="inputForm form-control" id="author" value="<?= $data['author'] ?>" placeholder="Penulis">
+                                        <input type="text" name="author" class="inputForm form-control" id="author" value="<?= session()->getFlashdata('inputs') !== null ? session()->getFlashdata('inputs')['author'] : $data['author'] ?>" placeholder="Penulis">
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="header" class="col-sm-2 col-form-label">Judul</label>
                                 <div class="col-sm-10">
-                                    <input type="text" name="header" class="inputForm form-control" id="header" placeholder="Judul Berita" value="<?= $data['judul'] ?>" required>
+                                    <input type="text" name="header" class="inputForm form-control" id="header" placeholder="Judul Berita" value="<?= session()->getFlashdata('inputs') !== null ? session()->getFlashdata('inputs')['header'] : $data['judul'] ?>" required>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -145,7 +148,8 @@ $errors = session()->getFlashdata('errors');
                                 <div class="col-sm-10">
                                 </div>
                             </div>
-                            <textarea name="content" id="summernote" style="display: none;"><?= $data['konten'] ?></textarea>
+
+                            <textarea name="content" id="summernote" style="display: none;"><?= session()->getFlashdata('inputs') !== null ? session()->getFlashdata('inputs')['content'] : $data['konten'] ?></textarea>
                         </div>
                         <!-- /.card-body -->
                         <div class="card-footer">

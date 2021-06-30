@@ -4,6 +4,7 @@
 
 
 
+
 <div class="md:mt-8 mt-4 lg:px-20 md:px-8 px-3 text-sm">
     <div class="flex justify-between items-end">
         <div class="text-sm text-primary font-medium">
@@ -15,7 +16,7 @@
         </div>
         <div>
             <div class="flex items-center gap-x-2">
-                <a href="/User/unggahBerita">
+                <a href="/beranda/berita/unggah-berita">
                     <div class="bg-secondary hover:bg-secondaryhover md:py-1.5 md:px-3 py-1 px-2 outline-none text-white rounded-full cursor-pointer">
                         Unggah Berita
                     </div>
@@ -163,7 +164,7 @@
             <?php foreach ($apiberita as $value) { ?>
                 <div class="border-gray-400 border-b py-3">
                     <div class="flex gap-x-2 items-center">
-                        <div class="lg:w-1/4 w-1/3 lg:h-24 h-20 bg-gray-200 bg-no-repeat bg-center bg-contain" style="background-image: url(<?= 'https://www.pusdiklat-bps.id/'.$value->image?>);">
+                        <div class="lg:w-1/4 w-1/3 lg:h-24 h-20 bg-gray-200 bg-no-repeat bg-center bg-contain" style="background-image: url(<?= 'https://www.pusdiklat-bps.id/' . $value->image ?>);">
                         </div>
                         <div class="lg:w-3/4 w-2/3">
                             <a href="https://www.pusdiklat-bps.id/web/berita/<?= $value->id ?>">
@@ -211,4 +212,11 @@
     </div>
 </div>
 
+<script>
+    <?php if (session()->getFlashdata('success_create_news') === true) : ?>
+        $("#notif").next().removeClass('hidden')
+        $("#notif").next().removeClass('opacity-0')
+        $("#notif").next().removeClass('scale-0')
+    <?php endif ?>
+</script>
 <?= $this->endSection(); ?>

@@ -147,15 +147,15 @@
                 success: function(result) {
                     if (result == "true") {
                         $('#konfirUnggahBerita').html(`
-                            <div class="hidden opacity-0 duration-700 transition-all p-3 rounded-lg flex items-center bg-greenAlert">
-                                <img src="/img/components/icon/check.png" class="h-5 mr-2 text-success">
-                                <p class="sm:text-base text-sm text-success font-heading font-bold">Berita Berhasil Dikirim</p>
+                            <div class="hidden opacity-0 duration-700 transition-all p-3 rounded-lg flex items-center" style="background-color: #B1FF66;">
+                                <img src="/img/components/icon/check.png" class="h-5 mr-2" style="color: #54AC00;">
+                                <p class="sm:text-base text-sm font-heading font-bold" style="color: #54AC00;">Berita Berhasil Dikirim</p>
                             </div>  
                         `)
-                        window.location.href = "<?= base_url("Berita/uploadBerita") ?>"
+                        window.location.href = "<?= base_url("beranda/berita") ?>"
                     } else if (result == "false") {
                         $('#konfirUnggahBerita').html(`
-                            <div class="hidden opacity-0 duration-700 transition-all p-3 rounded-lg flex items-center bg-redAlert">
+                            <div class="hidden opacity-0 duration-700 transition-all p-3 rounded-lg flex items-center" style="background-color: #FF7474;">
                                 <img src="/img/components/icon/warning.png" class="h-5 mr-2" style="color: #AC1700;">
                             <p class="sm:text-base text-sm font-heading font-bold" style="color: #000000;">Berita Tidak Terkirim</p>
                             </div>  
@@ -172,7 +172,7 @@
                         $('#formErrors').css("display", "");
 
                         $('#konfirUnggahBerita').html(`
-                            <div class="hidden opacity-0 duration-700 transition-all p-3 rounded-lg flex items-center bg-redAlert">
+                            <div class="hidden opacity-0 duration-700 transition-all p-3 rounded-lg flex items-center" style="background-color: #FF7474;">
                                 <img src="/img/components/icon/warning.png" class="h-5 mr-2" style="color: #AC1700;">
                             <p class="sm:text-base text-sm font-heading font-bold" style="color: #000000;">Berita Tidak Terkirim</p>
                             </div>  

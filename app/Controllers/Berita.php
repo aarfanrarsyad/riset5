@@ -93,7 +93,7 @@ class Berita extends BaseController
             $data[$i]['count_comments'] = $this->getPostComment($data[$i]['id'])[1]['total'];
             $data[$i]['visited'] = $init->getVisitedPage($data[$i]['id'])->getRowArray();
 
-            if ($data[$i]['akses'] == 'review') {
+            if (strtolower($data[$i]['akses']) == 'review') {
                 $review[] = $data[$i];
                 unset($data[$i]);
             }
@@ -109,6 +109,7 @@ class Berita extends BaseController
             }
         }
         $groups = array_values($groups);
+
 
         $this->data =  [
             'title' => 'Management Berita',
@@ -1145,7 +1146,7 @@ class Berita extends BaseController
 
             $init = new BeritaModel();
             $dataset = [
-                'date' => $this->request->getPost('date'),
+                'date' => get_date(false),
                 'header' => $this->request->getPost('header'),
                 'content' =>  $this->request->getPost('content'),
                 'access' =>  'review',
@@ -1154,6 +1155,10 @@ class Berita extends BaseController
                 'user_id' => NULL,
                 'groups_id' => NULL,
             ];
+
+            if ($this->request->getPost('date') !== null && !empty($this->request->getPost('date'))) {
+                $dataset['date'] = $this->request->getPost('date');
+            }
 
             $thumbnail = $_FILES['thumbnail'];
 
@@ -1167,9 +1172,12 @@ class Berita extends BaseController
             $query = $init->insertUserNews($dataset);
             session()->remove('folder_name');
 
+            if ($query === TRUE)  session()->setFlashdata('success_create_news', True);
+
             $this->output_json($query);
         }
     }
+
 
     public function uploadBerita()
     {

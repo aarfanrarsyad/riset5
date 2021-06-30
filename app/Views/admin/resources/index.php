@@ -3,7 +3,18 @@
 <?= $this->section('page-content'); ?>
 
 <?= view('admin/resources/dist/index/header') ?>
-
+<?php
+$active_nav_menu = "active";
+$active_nav_res = "";
+$active_tab_men = "active show";
+$active_tab_res = "";
+?>
+<?php if (session()->getFlashdata('crud_resources') !== null) {
+  $active_nav_menu = "";
+  $active_nav_res = "active";
+  $active_tab_men = "";
+  $active_tab_res = "active show";
+} ?>
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
   <div class="content-header">
@@ -31,24 +42,25 @@
           <div class="text-primaryHover text-lg px-3 py-3">
             <h5><i class="fas fa-bars"></i>&ensp;Management Resources</h5>
           </div>
+
           <div class="card-header mt-2 p-0 border-bottom-0 ">
             <ul class="nav nav-tabs" id="custom-tabs-four-tab" role="tablist">
               <li class="nav-item">
-                <a class="nav-link active text-secondary" data-toggle="pill" href="#tab1" role="tab" aria-controls="tab1" aria-selected="false">Management Menu &ensp;
-                  <span class="badge bg-indigo right" title="5 Data ...."><i class="far fa-bell"></i>
-                    5</span>
+                <a class="nav-link <?= $active_nav_menu ?> text-secondary" data-toggle="pill" href="#tab1" role="tab" aria-controls="tab1" aria-selected="false">Management Menu &ensp;
+                  <span class="badge bg-indigo right" title="<?= count($menus) ?> Data menu"><i class="far fa-bell"></i>
+                    <?= count($menus) ?></span>
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link text-secondary" data-toggle="pill" href="#tab2" role="tab" aria-controls="tab2" aria-selected="true">Management Resource &ensp;
-                  <span class="badge badge-info right" title="4 Data ...">4</span>
+                <a class="nav-link <?= $active_nav_res ?> text-secondary" data-toggle="pill" href="#tab2" role="tab" aria-controls="tab2" aria-selected="true">Management Resource &ensp;
+                  <span class="badge badge-info right" title="<?= count($resources) ?> Data resource"><?= count($resources) ?></span>
                 </a>
               </li>
             </ul>
           </div>
           <div class="card-body">
             <div class="tab-content">
-              <div class="tab-pane fade active show" id="tab1" role="tabpanel" aria-labelledby="tab1">
+              <div class="tab-pane fade <?= $active_tab_men ?>" id="tab1" role="tabpanel" aria-labelledby="tab1">
                 <div class="btn-group">
                   <button type="button" class="btn btn-ligjt dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fas fa-th-list text-muted"></i>&ensp;Pilih Tindakan
@@ -87,7 +99,7 @@
                   </div>
                 </div>
               </div>
-              <div class="tab-pane fade" id="tab2" role="tabpanel" aria-labelledby="tabs-for-calculated">
+              <div class="tab-pane fade <?= $active_tab_res ?>" id="tab2" role="tabpanel" aria-labelledby="tabs-for-calculated">
                 <div class="btn-group">
                   <button type="button" class="btn btn-ligjt dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fas fa-th-list text-muted"></i>&ensp;Pilih Tindakan
