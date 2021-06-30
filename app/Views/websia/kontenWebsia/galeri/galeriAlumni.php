@@ -210,7 +210,7 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
                 </svg>
             </div>
-            <form action="<?= base_url('/user/uploadGaleri') ?>" method="post" enctype="multipart/form-data" class="flex flex-col bg-gray-100 sm:px-12 px-4 rounded-b-2xl text-sm">
+            <form action="<?= base_url('/user/uploadgaleri') ?>" method="post" enctype="multipart/form-data" class="flex flex-col bg-gray-100 sm:px-12 px-4 rounded-b-2xl text-sm">
                 <div class="flex mt-5">
                     <div class="flex justify-start items-center mb-2 w-full relative">
                         <input type="file" hidden accept=".jpg, .jpeg, .img, .png" title="Pilih File" id='pilihFile' name="file_upload">
