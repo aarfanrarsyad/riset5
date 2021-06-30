@@ -98,11 +98,11 @@ $('.editTampilan').click(function () {
 
 $('#checkTanggalLahir').click(function () {
     if ($('#checkTanggalLahir').is(':checked')) {
-        document.getElementById('checkTempatLahir').setAttribute("checked","checked");
+        $('#checkTempatLahir').prop('checked', true);
         $('#labelTempatLahir').removeClass("text-gray-500");
         $('#labelTanggalLahir').removeClass("text-gray-500");
     } else {
-        document.getElementById('checkTempatLahir').removeAttribute("checked","checked");
+        $('#checkTempatLahir').prop('checked', false);
         $('#labelTempatLahir').addClass("text-gray-500");
         $('#labelTanggalLahir').addClass("text-gray-500");
     }
@@ -110,13 +110,13 @@ $('#checkTanggalLahir').click(function () {
 
 $('#checkTempatLahir').click(function () {
     if ($('#checkTempatLahir').is(':checked')) {
-        document.getElementById('checkTanggalLahir').setAttribute("checked","checked");
-        $('#labelTanggalLahir').removeClass("text-gray-500");
+        $('#checkTanggalLahir').prop('checked', true);
         $('#labelTempatLahir').removeClass("text-gray-500");
+        $('#labelTanggalLahir').removeClass("text-gray-500");
     } else {
-        document.getElementById('checkTanggalLahir').removeAttribute("checked","checked");
-        $('#labelTanggalLahir').addClass("text-gray-500");
+        $('#checkTanggalLahir').prop('checked', false);
         $('#labelTempatLahir').addClass("text-gray-500");
+        $('#labelTanggalLahir').addClass("text-gray-500");
     }
 })
 

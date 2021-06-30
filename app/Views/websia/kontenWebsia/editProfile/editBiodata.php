@@ -98,7 +98,7 @@ if ($alumni->cprestasi == 0) {
                         </div>
                     </div>
                 </div>
-                <div class="font-medium pt-10 md:pt-0">Nama Lengkap:</div>
+                <div class="font-medium pt-10 md:pt-0"> Nama Lengkap:</div>
                 <div class="text-black font-heading font-normal mb-2"><?= $alumni->nama ?></div>
                 <div class="mb-2">
                     <div class="flex justify-between items-center">
@@ -109,8 +109,10 @@ if ($alumni->cprestasi == 0) {
                 <div class="md:grid md:grid-cols-2 md:gap-x-4">
                     <div class="">
                         <div class="flex justify-between items-center">
-                            <div class="font-medium" id="labelTempatLahir">Tempat Lahir:</div>
-                            <input type="checkbox" <?= $cttl ?> name="checkTempatLahir" id="checkTempatLahir" class="cursor-pointer focus:outline-none editTampilan hidden">
+                            <label for="tempatLahir" class="font-medium" id="labelTempatLahir">Tempat Lahir:</label>
+                            <div>
+                                <input type="checkbox" <?= $cttl ?> name="checkTempatLahir" id="checkTempatLahir" class="cursor-pointer focus:outline-none editTampilan hidden md:hidden">
+                            </div>
                         </div>
                         <?php if (session()->getFlashdata('error-tempat_lahir') != "") { ?>
                             <p class="text-xs text-red-500 text-justify" id="errorNoTelp">
@@ -122,13 +124,15 @@ if ($alumni->cprestasi == 0) {
                                 <input type="text" name="tempat_lahir" id="tempatLahir" class="inputForm" placeholder="Tempat Lahir" value="<?= $alumni->tempat_lahir ?>" required>
                             <?php } ?>
                         <?php } else { ?>
-                            <input type="text" name="tempat_lahir" id="tempat_lahir" class="inputForm" placeholder="Tempat Lahir" value="<?= $alumni->tempat_lahir ?>" required>
+                            <input type="text" name="tempat_lahir" id="tempatLahir" class="inputForm" placeholder="Tempat Lahir" value="<?= $alumni->tempat_lahir ?>" required>
                         <?php } ?>
                     </div>
                     <div>
                         <div class="flex justify-between items-center">
-                            <div class="font-medium" id="labelTanggalLahir">Tanggal Lahir:</div>
-                            <input type="checkbox" <?= $cttl ?> name="checkTanggalLahir" id="checkTanggalLahir" class="cursor-pointer focus:outline-none editTampilan hidden">
+                            <label for="tanggalLahir" class="font-medium" id="labelTanggalLahir">Tanggal Lahir:</label>
+                            <div>
+                                <input type="checkbox" <?= $cttl ?> name="checkTanggalLahir" id="checkTanggalLahir" class="cursor-pointer focus:outline-none editTampilan hidden">
+                            </div>
                         </div>
                         <input type="date" name="tanggal_lahir" data-id="TanggalLahir" id="tanggalLahir" class="inputForm" value="<?= $alumni->tanggal_lahir ?>">
                     </div>
@@ -311,7 +315,7 @@ if ($alumni->cprestasi == 0) {
                     </div>
                     <div class="flex items-center mb-2">
                         <div class="md:w-1/4 w-1/3">
-                            <label for="facebook" class="font-medium" id="labelFacebook">Facebook</label>
+                            <label for="inputFB" class="font-medium" id="labelFacebook">Facebook</label>
                         </div>
                         <div class="md:w-3/4 w-2/3 gap-x-3 flex justify-between items-center">
                             <?php if (session()->getFlashdata('error-fb') != "") { ?>
@@ -330,7 +334,7 @@ if ($alumni->cprestasi == 0) {
                     </div>
                     <div class="flex items-center mb-2">
                         <div class="md:w-1/4 w-1/3">
-                            <label for="scholar" class="font-medium" id="labelScholar">Google Scholar</label>
+                            <label for="inputGscholar" class="font-medium" id="labelScholar">Google Scholar</label>
                         </div>
                         <div class="md:w-3/4 w-2/3 gap-x-3 flex justify-between items-center">
                             <?php if (session()->getFlashdata('error-gscholar') != "") { ?>
@@ -349,7 +353,7 @@ if ($alumni->cprestasi == 0) {
                     </div>
                     <div class="flex items-center mb-2">
                         <div class="md:w-1/4 w-1/3">
-                            <label for="linkedin" class="font-medium" id="labelFacebook">LinkedIn</label>
+                            <label for="inputLinkedin" class="font-medium" id="labelLinkedin">LinkedIn</label>
                         </div>
                         <div class="md:w-3/4 w-2/3 gap-x-3 flex justify-between items-center">
                             <?php if (session()->getFlashdata('error-linkedin') != "") { ?>
