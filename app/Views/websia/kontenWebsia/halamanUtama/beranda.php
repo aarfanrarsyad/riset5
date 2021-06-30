@@ -215,7 +215,7 @@ if (session()->getFlashdata('role')) { ?>
                         <!-- akhir tanggal berita -->
 
                         <!-- awal isi berita -->
-                        <p class="text-gray-600 break-words font-paragraph text-justify leading-none mt-4">
+                        <p class="text-gray-600 break-all font-paragraph text-justify leading-none mt-4">
                             <?= $news['konten'] ?>
                         </p>
                         <!-- akhir isi berita -->
