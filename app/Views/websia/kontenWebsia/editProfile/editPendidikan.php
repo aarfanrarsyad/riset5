@@ -97,8 +97,8 @@
     <!-- BERHASIL edit pendidikan -->
     <div id="berhasilEditPendidikan">
         <div class="fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40">
-            <div class="duration-700 transition-all p-3 rounded-lg flex items-center" style="background-color: #B1FF66;">
-                <img src="/img/components/icon/check.png" class="h-5 mr-2" style="color: #54AC00;" alt="berhasil edit pendidikan">
+            <div class="duration-700 transition-all p-3 rounded-lg flex items-center bg-greenAlert">
+                <img src="/img/components/icon/check.png" class="h-5 mr-2 text-success" alt="berhasil edit pendidikan">
                 <p class="sm:text-base text-sm font-heading font-bold text-success"><?= session()->getFlashdata('edit-pendidikan-success') ?></p>
             </div>
         </div>
@@ -113,9 +113,9 @@ if (session()->getFlashdata('edit-pendidikan-fail')) : ?>
     <!-- GAGAL edit pendidikan -->
     <div id="gagalEditPendidikan">
         <div class="fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40">
-            <div class="duration-700 transition-all p-3 rounded-lg flex items-center" style="background-color: #FF7474;">
-                <img src="/img/components/icon/warning.png" class="h-5 mr-2" alt="gagal edit pendidikan">
-                <p class="sm:text-base text-sm font-heading font-bold" style="color: #C51800;"><?= session()->getFlashdata('edit-pendidikan-fail') ?> : <?= session('error-nim') ?></p>
+            <div class="duration-700 transition-all p-3 rounded-lg flex items-center bg-redAlert">
+                <img src="/img/components/icon/warning.png" class="h-5 mr-2 text-danger" alt="gagal edit pendidikan">
+                <p class="sm:text-base text-sm text-danger font-heading font-bold"><?= session()->getFlashdata('edit-pendidikan-fail') ?> : <?= session('error-nim') ?></p>
             </div>
         </div>
     </div>
@@ -130,8 +130,8 @@ if (session()->getFlashdata('add-pendidikan-success')) : ?>
     <!-- BERHASIL tambah pendidikan -->
     <div id="berhasilTambahPendidikan">
         <div class="fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40">
-            <div class="duration-700 transition-all p-3 rounded-lg flex items-center" style="background-color: #B1FF66;">
-                <img src="/img/components/icon/check.png" class="h-5 mr-2" style="color: #54AC00;" alt="berhasil tambah pendidikan">
+            <div class="duration-700 transition-all p-3 rounded-lg flex items-center bg-greenAlert">
+                <img src="/img/components/icon/check.png" class="h-5 mr-2 text-success" alt="berhasil tambah pendidikan">
                 <p class="sm:text-base text-sm font-heading font-bold text-success"><?= session()->getFlashdata('add-pendidikan-success') ?></p>
             </div>
         </div>
@@ -146,9 +146,9 @@ if (session()->getFlashdata('add-pendidikan-fail')) : ?>
     <!-- GAGAL tambah pendidikan -->
     <div id="gagalTambahPendidikan">
         <div class="fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40">
-            <div class="duration-700 transition-all p-3 rounded-lg flex items-center" style="background-color: #FF7474;">
-                <img src="/img/components/icon/warning.png" class="h-5 mr-2" alt="gagal tambah pendidikan">
-                <p class="sm:text-base text-sm font-heading font-bold" style="color: #C51800;"><?= session()->getFlashdata('add-pendidikan-fail') ?> : <?= session('error-nim') ?></p>
+            <div class="duration-700 transition-all p-3 rounded-lg flex items-center bg-redAlert">
+                <img src="/img/components/icon/warning.png" class="h-5 mr-2 text-danger" alt="gagal tambah pendidikan">
+                <p class="sm:text-base text-sm text-danger font-heading font-bold"><?= session()->getFlashdata('add-pendidikan-fail') ?> : <?= session('error-nim') ?></p>
             </div>
         </div>
     </div>
@@ -164,11 +164,9 @@ if (session()->getFlashdata('delete-pendidikan-success')) : ?>
     <!-- BERHASIL hapus pendidikan-->
     <div id="berhasilHapusPendidikan">
         <div class="fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40">
-            <div class="duration-700 transition-all p-3 rounded-lg flex items-center" style="background-color: #B1FF66;">
-                <img src="/img/components/icon/check.png" class="h-5 mr-2" style="color: #54AC00;" alt="berhasil hapus pendidikan">
-
+            <div class="duration-700 transition-all p-3 rounded-lg flex items-center bg-greenAlert">
+                <img src="/img/components/icon/check.png" class="h-5 mr-2 text-success" alt="berhasil hapus pendidikan">
                 <p class="sm:text-base text-sm font-heading font-bold text-success"><?= session()->getFlashdata('delete-pendidikan-success') ?></p>
-
             </div>
         </div>
     </div>

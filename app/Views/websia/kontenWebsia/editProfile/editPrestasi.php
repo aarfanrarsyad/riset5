@@ -101,8 +101,8 @@
     <!-- BERHASIL edit prestasi -->
     <div id="berhasilEditPrestasi">
         <div class="fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40">
-            <div class="duration-700 transition-all p-3 rounded-lg flex items-center" style="background-color: #B1FF66;">
-                <img src="/img/components/icon/check.png" class="h-5 mr-2" style="color: #54AC00;" alt="berhasil edit prestasi">
+            <div class="duration-700 transition-all p-3 rounded-lg flex items-center bg-greenAlert">
+                <img src="/img/components/icon/check.png" class="h-5 mr-2 text-success" alt="berhasil edit prestasi">
                 <p class="sm:text-base text-sm font-heading font-bold text-success"><?= session()->getFlashdata('edit-prestasi-success') ?></p>
             </div>
         </div>
@@ -116,9 +116,9 @@
 <!-- GAGAL edit prestasi SEPERTINYA TIDAK DIPERLUKAN
 <div id="gagalEditPrestasi">
     <div class="fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40">
-        <div class="duration-700 transition-all p-3 rounded-lg flex items-center" style="background-color: #FF7474;">
-            <img src="/img/components/icon/warning.png" class="h-5 mr-2" alt="gagal edit prestasi">
-            <p class="sm:text-base text-sm font-heading font-bold" style="color: #C51800;">Prestasi Tidak Berhasil Disimpan</p>
+        <div class="duration-700 transition-all p-3 rounded-lg flex items-center bg-redAlert">
+            <img src="/img/components/icon/warning.png" class="h-5 mr-2 text-danger" alt="gagal edit prestasi">
+            <p class="sm:text-base text-sm text-danger font-heading font-bold">Prestasi Tidak Berhasil Disimpan</p>
         </div>
     </div>
 </div>
@@ -131,8 +131,8 @@
     <!-- BERHASIL tambah prestasi -->
     <div id="berhasilTambahPrestasi">
         <div class="fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40">
-            <div class="duration-700 transition-all p-3 rounded-lg flex items-center" style="background-color: #B1FF66;">
-                <img src="/img/components/icon/check.png" class="h-5 mr-2" style="color: #54AC00;" alt="berhasil tambah prestasi">
+            <div class="duration-700 transition-all p-3 rounded-lg flex items-center bg-greenAlert">
+                <img src="/img/components/icon/check.png" class="h-5 mr-2 text-success" alt="berhasil tambah prestasi">
                 <p class="sm:text-base text-sm font-heading font-bold text-success"><?= session()->getFlashdata('add-prestasi-success') ?></p>
             </div>
         </div>
@@ -147,9 +147,9 @@
 <!-- GAGAL tambah prestasi GAPERLU KEKNYA
 <div id="gagalTambahPrestasi">
     <div class="fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40">
-        <div class="duration-700 transition-all p-3 rounded-lg flex items-center" style="background-color: #FF7474;">
-            <img src="/img/components/icon/warning.png" class="h-5 mr-2" alt="gagal tambah prestasi">
-            <p class="sm:text-base text-sm font-heading font-bold" style="color: #C51800;">Prestasi Tidak Berhasil Ditambahkan</p>
+        <div class="duration-700 transition-all p-3 rounded-lg flex items-center bg-redAlert">
+            <img src="/img/components/icon/warning.png" class="h-5 mr-2 text-danger" alt="gagal tambah prestasi">
+            <p class="sm:text-base text-sm text-danger font-heading font-bold">Prestasi Tidak Berhasil Ditambahkan</p>
         </div>
     </div>
 </div>
@@ -163,8 +163,8 @@
     <!-- BERHASIL hapus prestasi-->
     <div id="berhasilHapusPrestasi">
         <div class="fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40">
-            <div class="duration-700 transition-all p-3 rounded-lg flex items-center" style="background-color: #B1FF66;">
-                <img src="/img/components/icon/check.png" class="h-5 mr-2" style="color: #54AC00;" alt="berhasil hapus prestasi">
+            <div class="duration-700 transition-all p-3 rounded-lg flex items-center bg-greenAlert">
+                <img src="/img/components/icon/check.png" class="h-5 mr-2 text-success" alt="berhasil hapus prestasi">
                 <p class="sm:text-base text-sm font-heading font-bold text-success"><?= session()->getFlashdata('delete-prestasi-success') ?></p>
             </div>
         </div>

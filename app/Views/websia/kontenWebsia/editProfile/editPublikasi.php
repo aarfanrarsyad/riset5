@@ -81,8 +81,8 @@
     <!-- BERHASIL edit publikasi -->
     <div id="berhasilEditPublikasi">
         <div class="fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40">
-            <div class="duration-700 transition-all p-3 rounded-lg flex items-center" style="background-color: #B1FF66;">
-                <img src="/img/components/icon/check.png" class="h-5 mr-2" style="color: #54AC00;" alt="berhasil edit publikasi">
+            <div class="duration-700 transition-all p-3 rounded-lg flex items-center bg-greenAlert">
+                <img src="/img/components/icon/check.png" class="h-5 mr-2 text-success" alt="berhasil edit publikasi">
                 <p class="sm:text-base text-sm font-heading font-bold text-success"><?= session()->getFlashdata('edit-publikasi-success') ?></p>
             </div>
         </div>
@@ -96,9 +96,9 @@
 <!-- GAGAL edit publikasi
 <div id="gagalEditPublikasi">
     <div class="fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40">
-        <div class="duration-700 transition-all p-3 rounded-lg flex items-center" style="background-color: #FF7474;">
-            <img src="/img/components/icon/warning.png" class="h-5 mr-2" alt="gagal edit publikasi">
-            <p class="sm:text-base text-sm font-heading font-bold" style="color: #C51800;">Publikasi Tidak Berhasil Disimpan</p>
+        <div class="duration-700 transition-all p-3 rounded-lg flex items-center bg-redAlert">
+            <img src="/img/components/icon/warning.png" class="h-5 mr-2 text-danger" alt="gagal edit publikasi">
+            <p class="sm:text-base text-sm text-danger font-heading font-bold">Publikasi Tidak Berhasil Disimpan</p>
         </div>
     </div>
 </div>
@@ -111,8 +111,8 @@
     <!-- BERHASIL tambah publikasi -->
     <div id="berhasilTambahPublikasi">
         <div class="fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40">
-            <div class="duration-700 transition-all p-3 rounded-lg flex items-center" style="background-color: #B1FF66;">
-                <img src="/img/components/icon/check.png" class="h-5 mr-2" style="color: #54AC00;" alt="berhasil tambah publikasi">
+            <div class="duration-700 transition-all p-3 rounded-lg flex items-center bg-greenAlert">
+                <img src="/img/components/icon/check.png" class="h-5 mr-2 text-success" alt="berhasil tambah publikasi">
                 <p class="sm:text-base text-sm font-heading font-bold text-success"><?= session()->getFlashdata('add-publikasi-success') ?></p>
             </div>
         </div>
@@ -126,9 +126,9 @@
 <!-- GAGAL tambah publikasi
 <div id="gagalTambahPublikasi">
     <div class="fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40">
-        <div class="duration-700 transition-all p-3 rounded-lg flex items-center" style="background-color: #FF7474;">
-            <img src="/img/components/icon/warning.png" class="h-5 mr-2" alt="gagal tambah publikasi">
-            <p class="sm:text-base text-sm font-heading font-bold" style="color: #C51800;">Publikasi Tidak Berhasil Ditambahkan</p>
+        <div class="duration-700 transition-all p-3 rounded-lg flex items-center bg-redAlert">
+            <img src="/img/components/icon/warning.png" class="h-5 mr-2 text-danger" alt="gagal tambah publikasi">
+            <p class="sm:text-base text-sm text-danger font-heading font-bold">Publikasi Tidak Berhasil Ditambahkan</p>
         </div>
     </div>
 </div>
@@ -141,8 +141,8 @@
     <!-- BERHASIL hapus publiikasi -->
     <div id="berhasilHapusPublikasi">
         <div class="fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40">
-            <div class="duration-700 transition-all p-3 rounded-lg flex items-center" style="background-color: #B1FF66;">
-                <img src="/img/components/icon/check.png" class="h-5 mr-2" style="color: #54AC00;" alt="berhasil hapus publikasi">
+            <div class="duration-700 transition-all p-3 rounded-lg flex items-center bg-greenAlert">
+                <img src="/img/components/icon/check.png" class="h-5 mr-2 text-success" alt="berhasil hapus publikasi">
                 <p class="sm:text-base text-sm font-heading font-bold text-success"><?= session()->getFlashdata('delete-publikasi-success') ?></p>
             </div>
         </div>
