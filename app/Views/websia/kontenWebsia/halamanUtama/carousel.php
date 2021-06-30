@@ -4,13 +4,13 @@
 <div class="w-full bg-primary">
     <div id="slider" class="swiper-container w-full">
         <div class="swiper-wrapper">
-            <div class="swiper-slide bg-cover bg-center w-full py-20 md:py-32 lg:py-56 cursor-pointer" style="background-image: url('/img/components/carousel/carousel-01.png');" onclick="location.href='/User/profil';">
+            <div class="swiper-slide bg-cover bg-center w-full py-20 md:py-32 lg:py-56 cursor-pointer" style="background-image: url('/img/components/carousel/carousel-01.png');" onclick="location.href='<?= base_url() ?>/User/profil';">
             </div>
-            <div class="swiper-slide bg-cover bg-left w-full py-20 md:py-32 lg:py-56 cursor-pointer" style="background-image: url('/img/components/carousel/carousel-02.png');" onclick="location.href='/User/galeriFoto';">
+            <div class="swiper-slide bg-cover bg-left w-full py-20 md:py-32 lg:py-56 cursor-pointer" style="background-image: url('/img/components/carousel/carousel-02.png');" onclick="location.href='<?= base_url() ?>/User/galeriFoto';">
             </div>
-            <div class="swiper-slide bg-cover bg-left w-full py-20 md:py-32 lg:py-56 cursor-pointer" style="background-image: url('/img/components/carousel/carousel-03.png');" onclick="location.href='/Berita/berita';">
+            <div class="swiper-slide bg-cover bg-left w-full py-20 md:py-32 lg:py-56 cursor-pointer" style="background-image: url('/img/components/carousel/carousel-03.png');" onclick="location.href='<?= base_url() ?>/Berita/berita';">
             </div>
-            <div class="swiper-slide bg-cover bg-left w-full py-20 md:py-32 lg:py-56 cursor-pointer" style="background-image: url('/img/components/carousel/carousel-04.png');" onclick="location.href='#';">
+            <div class="swiper-slide bg-cover bg-left w-full py-20 md:py-32 lg:py-56 cursor-pointer" style="background-image: url('/img/components/carousel/carousel-04.png');" onclick="location.href='<?= base_url() ?>/User/searchAndFilter';">
             </div>
         </div>
         <div class="hidden md:flex">
