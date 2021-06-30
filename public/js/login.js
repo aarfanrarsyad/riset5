@@ -10,7 +10,7 @@ function loginSipadu() {
 }
 
 function loginBPS() {
-    var win = window.open(`https://alumni.stis.ac.id/auth/bps`, "_blank", "height=700,width=900,status=no,titlebar=no,menubar=no,top=10,left=300", true);
+    var win = window.open(`https://alumni.stis.ac.id/validate-bps`, "_blank", "height=700,width=900,status=no,titlebar=no,menubar=no,top=10,left=300", true);
     var timer = setInterval(function () {
         if (win.closed) {
             clearInterval(timer);            
