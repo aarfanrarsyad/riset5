@@ -326,7 +326,8 @@ class Auth extends BaseController
 						$flash = '<strong>Login berhasil!</strong> selamat datang <b>' . session('nama') . '</b>.';
 						$alert = "<div id=\"alert\">
 										<div class=\"fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40\">
-											<div class=\"duration-700 transition-all p-3 rounded-lg flex items-center bg-greenAlert\">
+											<div class=\"mx-3 duration-700 transition-all p-3 rounded-lg flex items-center bg-greenAlert\">
+											<img src=\"/img/components/icon/check.png\" class=\"h-5 mr-2 text-success\" alt=\icon checklist\">
 												<p class=\"sm:text-base text-sm text-success font-heading font-bold\">" . $flash . "</p>
 											</div>
 										</div>
@@ -549,7 +550,8 @@ class Auth extends BaseController
 							$flash = '<strong>Login berhasil!</strong> selamat datang <b>' . session('nama') . '</b>.';
 							$alert = "<div id=\"alert\">
 										<div class=\"fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40\">
-											<div class=\"duration-700 transition-all p-3 rounded-lg flex items-center bg-greenAlert\">
+											<div class=\"mx-3 duration-700 transition-all p-3 rounded-lg flex items-center bg-greenAlert\">
+												<img src=\"/img/components/icon/check.png\" class=\"h-5 mr-2 text-success\" alt=\icon checklist\">
 												<p class=\"sm:text-base text-sm text-success font-heading font-bold\">" . $flash . "</p>
 											</div>
 										</div>

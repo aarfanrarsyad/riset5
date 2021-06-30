@@ -423,9 +423,9 @@
 
         $('body').prepend(`
         <div class="fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40 font-paragraph" id='suksesUnggahFoto'>
-            <div class="hidden opacity-0 duration-700 transition-all p-3 rounded-lg flex items-center" style="background-color: #B1FF66;">
-                <img src="/img/components/icon/check.png" class="h-5 mr-2" style="color: #54AC00;" alt="icon check">
-                <p class="sm:text-base text-sm font-heading font-bold" style="color: #54AC00">Foto Anda Berhasil Diunggah</p>
+            <div class="hidden opacity-0 duration-700 transition-all p-3 rounded-lg flex items-center bg-greenAlert">
+                <img src="/img/components/icon/check.png" class="h-5 mr-2 text-success" alt="icon check">
+                <p class="sm:text-base text-sm font-heading font-bold text-success">Foto Anda Berhasil Diunggah</p>
             </div>
         </div>
         `);
@@ -466,9 +466,9 @@
 
         $('body').prepend(`
         <div class="fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40 font-paragraph" id='suksesLaporFoto'>
-            <div class="hidden opacity-0 duration-700 transition-all p-3 rounded-lg flex items-center" style="background-color: #B1FF66;">
-                <img src="/img/components/icon/check.png" class="h-5 mr-2" style="color: #54AC00;" alt="icon check">
-                <p class="sm:text-base text-sm font-heading font-bold" style="color: #54AC00">Laporan Anda Berhasil Dikirim</p>
+            <div class="hidden opacity-0 duration-700 transition-all p-3 rounded-lg flex items-center bg-greenAlert">
+                <img src="/img/components/icon/check.png" class="h-5 mr-2 text-success" alt="icon check">
+                <p class="sm:text-base text-sm font-heading font-bold text-success">Laporan Anda Berhasil Dikirim</p>
             </div>
         </div>
         `)

@@ -17,14 +17,14 @@
                         <?php endforeach; ?>
                     </datalist>
                     <input type="hidden" name="id_tempat_kerja" id="instansi-hidden">
-                    <?php if(session('ambigu') == "yes" && !session('BPS') == "no") : ?>
+                    <?php if (session('ambigu') == "yes" && !session('BPS') == "no") : ?>
                     <?php else : ?>
-                    <div class="flex gap-x-2 items-center">
-                        <div>
-                            Jika nama instansi Anda tidak terdaftar pada daftar di atas, tambahkan instansi Anda di sini:
+                        <div class="flex gap-x-2 items-center">
+                            <div>
+                                Jika nama instansi Anda tidak terdaftar pada daftar di atas, tambahkan instansi Anda di sini:
+                            </div>
+                            <div class="bg-primary text-white rounded-full py-1 px-3 text-center cursor-pointer hover:bg-primaryHover transition-colors duration-300 my-2 tambahInstansi">TAMBAH</div>
                         </div>
-                        <div class="bg-primary text-white rounded-full py-1 px-3 text-center cursor-pointer hover:bg-primaryHover transition-colors duration-300 my-2 tambahInstansi">TAMBAH</div>
-                    </div>
                     <?php endif; ?>
                     <div class="flex justify-end md:mb-6 mt-12">
                         <input type="submit" value="SIMPAN" class="w-24 text-center py-1 bg-secondary hover:bg-secondaryhover text-white rounded-full cursor-pointer focus:outline-none" id="submitTempatKerja">
@@ -50,11 +50,11 @@
                 <?php } ?>
                 <input type="text" name="nama_instansi" id="nama" class="inputForm" placeholder="Masukkan nama Instansi">
                 <div class="flex justify-between items-center">
-                    <label for="negara" class="font-medium" id="labelNegara">Negara:</label>    
+                    <label for="negara" class="font-medium" id="labelNegara">Negara:</label>
                 </div>
                 <select name="negara" id="negara" class="inputForm" onchange="displayDiv2('negaraLainIndonesia','negaraIndonesia',this)">
-                        <option selected value="Indonesia">Indonesia</option>
-                        <option value="lainnya">Lainnya...</option>
+                    <option selected value="Indonesia">Indonesia</option>
+                    <option value="lainnya">Lainnya...</option>
                 </select>
 
                 <div class="hidden" id="negaraLainIndonesia">
@@ -65,17 +65,17 @@
                         <div>
                             <label for="provinsi" class="font-medium" id="labelProvinsi">Provinsi:</label>
                             <select name="provinsi" id="provinsi" class="inputForm">
-                                    <option selected disabled>Pilih Provinsi</option>
-                                    <?php foreach ($daftarProv as $prov) : ?>
-                                        <option id="<?= $prov->id_provinsi ?>" value="<?= $prov->nama_provinsi ?>"><?= $prov->nama_provinsi ?></option>
-                                    <?php endforeach ?>
+                                <option selected disabled>Pilih Provinsi</option>
+                                <?php foreach ($daftarProv as $prov) : ?>
+                                    <option id="<?= $prov->id_provinsi ?>" value="<?= $prov->nama_provinsi ?>"><?= $prov->nama_provinsi ?></option>
+                                <?php endforeach ?>
                             </select>
                             <input hidden type="text" name="prov" id="prov-hidden">
                         </div>
                         <div>
                             <label for='kabkota' class='font-medium' id='labelKabkot'>Kabupaten/Kota:</label>
                             <select name='kabkota' id='kabkota' class='inputForm'>
-                                    <option selected disabled>Pilih Kabupaten/Kota</option>
+                                <option selected disabled>Pilih Kabupaten/Kota</option>
                             </select>
                             <input hidden type="text" name="kab" id="kab-hidden">
                         </div>
@@ -122,8 +122,8 @@
     <!-- BERHASIL edit instansi -->
     <div id="berhasilEditInstansi">
         <div class="fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40">
-            <div class="duration-700 transition-all p-3 rounded-lg flex items-center" style="background-color: #B1FF66;">
-                <img src="/img/components/icon/check.png" class="h-5 mr-2" style="color: #54AC00;" alt="berhasil edit instansi">
+            <div class="duration-700 transition-all p-3 rounded-lg flex items-center bg-greenAlert">
+                <img src="/img/components/icon/check.png" class="h-5 mr-2 text-success" alt="berhasil edit instansi">
                 <p class="sm:text-base text-sm font-heading font-bold text-success"><?= session()->getFlashdata('edit-tk-success') ?></p>
             </div>
         </div>
@@ -138,9 +138,9 @@ if (session()->getFlashdata('add-tk-success')) { ?>
     <!-- GAGAL edit instansi KAYAKNYA GAPERLU -->
     <!-- <div id="gagalEditInstansi">
     <div class="fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40">
-        <div class="duration-700 transition-all p-3 rounded-lg flex items-center" style="background-color: #FF7474;">
-            <img src="/img/components/icon/warning.png" class="h-5 mr-2" alt="gagal edit instansi">
-            <p class="sm:text-base text-sm font-heading font-bold" style="color: #C51800;">Tempat Kerja Tidak Berhasil Disimpan</p>
+        <div class="duration-700 transition-all p-3 rounded-lg flex items-center bg-redAlert">
+            <img src="/img/components/icon/warning.png" class="h-5 mr-2 text-danger" alt="gagal edit instansi">
+            <p class="sm:text-base text-sm text-danger font-heading font-bold">Tempat Kerja Tidak Berhasil Disimpan</p>
         </div>
     </div>
 </div>
@@ -152,8 +152,8 @@ if (session()->getFlashdata('add-tk-success')) { ?>
     <!-- BERHASIL tambah instansi -->
     <div id="berhasilTambahInstansi">
         <div class="fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40">
-            <div class="duration-700 transition-all p-3 rounded-lg flex items-center" style="background-color: #B1FF66;">
-                <img src="/img/components/icon/check.png" class="h-5 mr-2" style="color: #54AC00;" alt="berhasil tambah instansi">
+            <div class="duration-700 transition-all p-3 rounded-lg flex items-center bg-greenAlert">
+                <img src="/img/components/icon/check.png" class="h-5 mr-2 text-success" alt="berhasil tambah instansi">
                 <p class="sm:text-base text-sm font-heading font-bold text-success"><?= session()->getFlashdata('add-tk-success') ?></p>
             </div>
         </div>
@@ -168,9 +168,9 @@ if (session()->getFlashdata('add-tk-fail')) { ?>
     <!-- GAGAL tambah instansi -->
     <div id="gagalTambahInstansi">
         <div class="fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40">
-            <div class="duration-700 transition-all p-3 rounded-lg flex items-center" style="background-color: #FF7474;">
-                <img src="/img/components/icon/warning.png" class="h-5 mr-2" alt="gagal tambah instansi">
-                <p class="sm:text-base text-sm font-heading font-bold" style="color: #C51800;"><?= session()->getFlashdata('add-tk-fail') ?></p>
+            <div class="duration-700 transition-all p-3 rounded-lg flex items-center bg-redAlert">
+                <img src="/img/components/icon/warning.png" class="h-5 mr-2 text-danger" alt="gagal tambah instansi">
+                <p class="sm:text-base text-sm text-danger font-heading font-bold"><?= session()->getFlashdata('add-tk-fail') ?></p>
             </div>
         </div>
     </div>

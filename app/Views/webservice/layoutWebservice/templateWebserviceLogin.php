@@ -162,7 +162,7 @@
     <!-- END CONTENT PAGE -->
 
     <!-- FOOTER -->
-    <div class="bg-primary w-full pt-6 pb-3 lg:px-20 md:px-8 px-3">
+    <div class="bg-primary w-full pt-6 pb-3 lg:px-20 md:px-8 px-3 z-30">
         <div class="flex flex-col md:flex-row md:justify-around md:text-sm text-xs  items-center md:items-start">
             <!-- awal footer stis -->
             <div class="flex  gap-x-2 mx-auto md:mx-0 mb-2 md:mb-0">
