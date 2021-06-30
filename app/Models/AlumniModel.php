@@ -11,12 +11,13 @@ class AlumniModel extends Model
 
     public function getForTags()
     {
-        return $this->builder()->select('nama, id_alumni')->get();
+        $query = "SELECT `alumni`.`nama` AS `nama`, `alumni`.`id_alumni` AS `id_alumni`, `pendidikan`.`angkatan` AS `angkatan` FROM `alumni` JOIN `pendidikan` ON `alumni`.`id_alumni` = `pendidikan`.`id_alumni` WHERE `angkatan` != 0";
+        return $this->db->query($query);
     }
 
     public function getTags($id_alumni)
     {
-        return $this->builder()->select('nama, id_alumni')->where('id_alumni', $id_alumni)->get()->getFirstRow('array');
+        return $this->builder()->select('nama, id_alumni')->where('id_alumni', $id_alumni)->limit(10)->get()->getFirstRow('array');
     }
 
     // Sudah diubah

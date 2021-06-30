@@ -1662,19 +1662,6 @@ class Admin extends BaseController
 		$out_album[$count + 3] = ['album' => 'Kenangan'];
 
 		$alumni = $alumni_model->getForTags()->getResult();
-		foreach ($alumni as $dt) {
-			$alumni_angktn = array();
-			$angkatan = $pendidikan->getAngkatan($dt->id_alumni);
-			if ($angkatan != null) {
-				foreach ($angkatan as $aktn) {
-					array_push($alumni_angktn, $aktn->angkatan);
-				}
-				$dt->angkatan = $alumni_angktn[0];
-			} else {
-				$dt->angkatan = 0;
-			}
-		}
-
 		$foto = $model->findAll();
 
 		$i = 0;

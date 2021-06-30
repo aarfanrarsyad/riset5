@@ -1058,18 +1058,6 @@ class User extends BaseController
 		$out_album[count($out_album) + 3] = ['album' => 'Kenangan'];
 
 		$alumni = $model->getForTags()->getResult();
-		foreach ($alumni as $dt) {
-			$alumni_angktn = array();
-			$angkatan = $pendidikan->getAngkatan($dt->id_alumni);
-			if ($angkatan != null) {
-				foreach ($angkatan as $aktn) {
-					array_push($alumni_angktn, $aktn->angkatan);
-				}
-				$dt->angkatan = $alumni_angktn[0];
-			} else {
-				$dt->angkatan = 0;
-			}
-		}
 
 		$galeri = $fotoModel->getApprovePhotos();
 		$count = $fotoModel->getCountPhotos();
@@ -1153,7 +1141,7 @@ class User extends BaseController
 			$year = date("Y");
 			$path = 'img/galeri/' . $year;
 			//cek apakah sudah terdapat foldernya
-			if (!is_dir($path)){
+			if (!is_dir($path)) {
 				mkdir($path, 0755, true);
 			}
 			//cek apakah sudah terdapat nama file yang sama, jika sudah maka akan direname
@@ -1172,12 +1160,12 @@ class User extends BaseController
 			}
 
 			$image = \Config\Services::image()
-			->withFile($file . $ext)
-			->withResource()
-			->convert(IMAGETYPE_JPEG)
-			->save($new_name  . '.jpeg', 50);
+				->withFile($file . $ext)
+				->withResource()
+				->convert(IMAGETYPE_JPEG)
+				->save($new_name  . '.jpeg', 50);
 			unlink($file . $ext);
-			
+
 			$file = str_replace('img/galeri/', "", $new_name);
 
 			$data = [
@@ -1215,18 +1203,6 @@ class User extends BaseController
 		$out_album[count($out_album) + 3] = ['album' => 'Kenangan'];
 
 		$alumni = $model->getForTags()->getResult();
-		foreach ($alumni as $dt) {
-			$alumni_angktn = array();
-			$angkatan = $pendidikan->getAngkatan($dt->id_alumni);
-			if ($angkatan != null) {
-				foreach ($angkatan as $aktn) {
-					array_push($alumni_angktn, $aktn->angkatan);
-				}
-				$dt->angkatan = $alumni_angktn[0];
-			} else {
-				$dt->angkatan = 0;
-			}
-		}
 
 		$data = [
 			'alumni' 		=> $alumni,
@@ -1257,18 +1233,6 @@ class User extends BaseController
 		$out_album[count($out_album) + 3] = ['album' => 'Kenangan'];
 
 		$alumni = $model->getForTags()->getResult();
-		foreach ($alumni as $dt) {
-			$alumni_angktn = array();
-			$angkatan = $pendidikan->getAngkatan($dt->id_alumni);
-			if ($angkatan != null) {
-				foreach ($angkatan as $aktn) {
-					array_push($alumni_angktn, $aktn->angkatan);
-				}
-				$dt->angkatan = $alumni_angktn[0];
-			} else {
-				$dt->angkatan = 0;
-			}
-		}
 
 		$galeri = $fotoModel->getByAlbum($key);
 		$count = $fotoModel->getCountAlbum($key);
