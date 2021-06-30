@@ -90,7 +90,7 @@ class Auth extends BaseController
 
 	//--------------------------------------------------------------------
 
-	public function sipadu()	//masuk()
+	public function validate_sipadu()	//masuk()
 	{
 		if (session()->has('id_user'))
 			return redirect()->back();
@@ -102,11 +102,6 @@ class Auth extends BaseController
 			'scope' => 'user:profile:read'
 		]);
 
-		return redirect()->to('https://ws.stis.ac.id/oauth/authorize?' . $query);
-	}
-
-	public function validate_sipadu()	//masuk()
-	{
 		if (isset($_GET['code']) && $_GET['code']) {
 			$faker = \Faker\Factory::create('id_ID');
 
@@ -378,6 +373,8 @@ class Auth extends BaseController
 				die();
 			}
 		}
+
+		return redirect()->to('https://ws.stis.ac.id/oauth/authorize?' . $query);
 	}
 
 	public function bps()	//masuk()

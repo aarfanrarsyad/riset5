@@ -1,5 +1,5 @@
 function loginSipadu() {
-    var win = window.open(`https://alumni.stis.ac.id/auth/sipadu`, "_blank", "height=700,width=550,status=no,titlebar=no,menubar=no,top=10,left=300", true);
+    var win = window.open(`https://alumni.stis.ac.id/validate_sipadu`, "_blank", "height=700,width=550,status=no,titlebar=no,menubar=no,top=10,left=300", true);
     var timer = setInterval(function () {
         if (win.closed) {
             clearInterval(timer);
