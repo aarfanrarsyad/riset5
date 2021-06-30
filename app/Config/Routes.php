@@ -293,8 +293,9 @@ $routes->group('admin', ['namespace' => 'App\Controllers', 'filter' => 'role:1']
 
 $routes->group('user', ['namespace' => 'App\Controllers', 'filter' => 'role:2'], function ($routes) {
 	# This is for homepage, landing page, etc
-
-	$routes->get('/profil', 'User::profil', ['filter' => 'role:2']);
+	$routes->get('galerifoto','User::galerifoto');
+	$routes->post('uploadgaleri','User::uploadGaleri');
+	$routes->get('profil', 'User::profil');
 	// gatau nih bener apa engga
 	#------------------------------------------------------------------------------------------------------------------------------------------------#
 });

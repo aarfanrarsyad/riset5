@@ -1040,7 +1040,7 @@ class User extends BaseController
 		return redirect()->to(base_url('User/editAkun'));
 	}
 
-	public function galeriFoto()
+	public function galerifoto()
 	{
 		$model = new \App\Models\AlumniModel;
 		$pendidikan = new \App\Models\PendidikanModel();
@@ -1151,18 +1151,16 @@ class User extends BaseController
 
 			$caption = str_replace(array("\r", "\n"), ' ', $caption);
 			$year = date("Y");
-			$path = ROOTPATH . '../img/galeri/' . $year;
-
+			$path = 'img/galeri/' . $year;
 			//cek apakah sudah terdapat foldernya
-			if (!is_dir($path))
+			if (!is_dir($path)){
 				mkdir($path, 0755, true);
-
+			}
 			//cek apakah sudah terdapat nama file yang sama, jika sudah maka akan direname
 			$file = $path . "/" . $foto->getName();
 			$ext = explode(".", $foto->getName());
 			$ext = "." . $ext[count($ext) - 1];
 			$file = str_replace($ext, "", $file);
-
 			$foto->move($path);
 			if (is_file($file  . $ext)) {
 				$time = date("Ymdhis");
@@ -1174,13 +1172,14 @@ class User extends BaseController
 			}
 
 			$image = \Config\Services::image()
-				->withFile($file . $ext)
-				->withResource()
-				->convert(IMAGETYPE_JPEG)
-				->save($new_name  . '.jpeg', 50);
+			->withFile($file . $ext)
+			->withResource()
+			->convert(IMAGETYPE_JPEG)
+			->save($new_name  . '.jpeg', 50);
 			unlink($file . $ext);
+			
+			$file = str_replace('img/galeri/', "", $new_name);
 
-			$file = str_replace(ROOTPATH . '../img/galeri/', "", $new_name);
 			$data = [
 				'nama_file'		=> $file  . '.jpeg',
 				'tag'			=> $tags,
@@ -1299,7 +1298,7 @@ class User extends BaseController
 		return view('websia/kontenWebsia/galeri/albumFoto', $data);
 	}
 
-	public function galeriVideo()
+	public function galerivideo()
 	{
 		$model = new \App\Models\VideoModel;
 
@@ -1358,7 +1357,7 @@ class User extends BaseController
 				}, 1500);
 			</script>";
 			session()->setFlashdata('flash', $alert);
-			return redirect()->to(base_url('User/galeriVideo'))->withInput();
+			return redirect()->to(base_url('User/galerivideo'))->withInput();
 		} else {
 			$video = $this->request->getPost('linkVideo');
 			$album = $this->request->getPost('albumVideo');
@@ -1389,7 +1388,7 @@ class User extends BaseController
 							}, 1500);
 						</script>";
 						session()->setFlashdata('flash', $alert);
-						return redirect()->to(base_url('user/galeriVideo'));
+						return redirect()->to(base_url('user/galerivideo'));
 					}
 					$v_link = explode('/', $video);
 					if (strpos($v_link[3], '?')) {
@@ -1433,7 +1432,7 @@ class User extends BaseController
 					</script>";
 					session()->setFlashdata('flash', $alert);
 				}
-				return redirect()->to(base_url('user/galeriVideo'));
+				return redirect()->to(base_url('user/galerivideo'));
 			} else {
 				// buat upload yang bukan link youtube
 				$flash = 'Link/url video harus merupakan link video youtube.';
@@ -1451,7 +1450,7 @@ class User extends BaseController
 					}, 1500);
 				</script>";
 				session()->setFlashdata('flash', $alert);
-				return redirect()->to(base_url('user/galeriVideo'));
+				return redirect()->to(base_url('user/galerivideo'));
 			}
 		}
 	}
