@@ -13,13 +13,12 @@
         <link rel="stylesheet" href="/css/img-viewer.css">
         <script src="/js/swiper-bundle.js"></script>
         <script src="/js/alpine.min.js" defer></script>
-        <script type="text/javascript" src="/js/navbar.js"></script>
         <script type="text/javascript" src="/js/jquery.js"></script>
+        <script type="text/javascript" src="/js/navbar.js"></script>
         <script type="text/javascript" src="/js/leaflet.js"></script>
 
         <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
-        <script type="text/javascript" src="/js/jquery.min.js"></script>
         <script type="text/javascript" src="/js/bootstrap.min.js"></script>
 
 
