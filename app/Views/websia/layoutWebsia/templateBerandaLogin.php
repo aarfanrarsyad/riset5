@@ -13,13 +13,12 @@
         <link rel="stylesheet" href="/css/img-viewer.css">
         <script src="/js/swiper-bundle.js"></script>
         <script src="/js/alpine.min.js" defer></script>
-        <script type="text/javascript" src="/js/navbar.js"></script>
         <script type="text/javascript" src="/js/jquery.js"></script>
+        <script type="text/javascript" src="/js/navbar.js"></script>
         <script type="text/javascript" src="/js/leaflet.js"></script>
 
         <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
-        <script type="text/javascript" src="/js/jquery.min.js"></script>
         <script type="text/javascript" src="/js/bootstrap.min.js"></script>
 
 
@@ -111,10 +110,10 @@
                                         GALERI
                                     </div>
                                     <div class="dropdown-content ml-1 w-max text-sm">
-                                        <a href="/user/galeriFoto"
+                                        <a href="/user/galerifoto"
                                             class="bg-primaryDark hover:bg-primary text-white hover:text-secondary text-left w-full px-2 border-b-2 border-primary transition duration-300">
                                             Galeri Foto </a>
-                                        <a href="/user/galeriVideo"
+                                        <a href="/user/galerivideo"
                                             class="bg-primaryDark hover:bg-primary text-white hover:text-secondary text-left w-full px-2 transition duration-300">
                                             Galeri Video </a>
                                     </div>
@@ -212,8 +211,8 @@
                                     </div>
                                 </div>
                                 <div class="flex flex-col hidden" id="listGaleri">
-                                    <a href="/user/galeriFoto" class="nav-menu-relative py-2"> Galeri Foto </a>
-                                    <a href="/user/galeriVideo" class="nav-menu-relative py-2"> Galeri Video </a>
+                                    <a href="/user/galerifoto" class="nav-menu-relative py-2"> Galeri Foto </a>
+                                    <a href="/user/galerivideo" class="nav-menu-relative py-2"> Galeri Video </a>
                                 </div>
                             </div>
                             <a href="/Berita/berita">
