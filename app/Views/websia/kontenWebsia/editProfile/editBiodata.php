@@ -98,7 +98,7 @@ if ($alumni->cprestasi == 0) {
                         </div>
                     </div>
                 </div>
-                <div class="font-medium">Nama Lengkap:</div>
+                <div class="font-medium pt-10 md:pt-0">Nama Lengkap:</div>
                 <div class="text-black font-heading font-normal mb-2"><?= $alumni->nama ?></div>
                 <div class="mb-2">
                     <div class="flex justify-between items-center">

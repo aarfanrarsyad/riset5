@@ -15,10 +15,10 @@ $sembunyi = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="c
 <path d="M12.454 16.697L9.75 13.992a4 4 0 01-3.742-3.741L2.335 6.578A9.98 9.98 0 00.458 10c1.274 4.057 5.065 7 9.542 7 .847 0 1.669-.105 2.454-.303z" />
 </svg>';
 
-$cttl= '<div class="flex-initial text-primary ml-2">'.$sembunyi.'</div>';
-$calamat='<div class="flex-auto text-primary md:px-0 mt-6 md:mt-5 ml-2">'.$sembunyi.'</div>';
-$cpendidikan='<div class="flex-initial text-primary mt-1 ml-2">'.$sembunyi.'</div>';
-$cprestasi='<div class="flex-initial text-primary mt-1 ml-2">'.$sembunyi.'</div>';
+$cttl = '<div class="flex-initial text-primary ml-2">' . $sembunyi . '</div>';
+$calamat = '<div class="flex-auto text-primary md:px-0 mt-6 md:mt-5 ml-2">' . $sembunyi . '</div>';
+$cpendidikan = '<div class="flex-initial text-primary mt-1 ml-2">' . $sembunyi . '</div>';
+$cprestasi = '<div class="flex-initial text-primary mt-1 ml-2">' . $sembunyi . '</div>';
 
 ?>
 <?= $this->extend('websia/layoutWebsia/templateBerandaLogin.php'); ?>
@@ -114,7 +114,7 @@ $cprestasi='<div class="flex-initial text-primary mt-1 ml-2">'.$sembunyi.'</div>
                 elseif ($status == 'user') : ?>
                     <?php foreach ($role as $row) : ?>
                         <?php if ($row->name == 'Developer') :
-                         else : ?>
+                        else : ?>
                             <span class="font-paragraph text-xs inline-block bg-gray-300 mb-1 py-1 px-2 md:px-3 lg:px-4 rounded-lg text-primary align-middle uppercase"><?= $row->name; ?></span>
                 <?php endif;
                     endforeach;
@@ -125,9 +125,9 @@ $cprestasi='<div class="flex-initial text-primary mt-1 ml-2">'.$sembunyi.'</div>
             <div class="flex justify-center md:justify-start font-heading text-primary text-center md:text-left text-sm mb-5 md:mb-3 lg:mb-5">
                 <?php if ($alumni->cttl == 1 || $status == 'user') : ?>
                     <div class="flex-initial">
-                            <?= $alumni->tempat_lahir ?>, <?= strftime("%d %B %Y", strtotime($alumni->tanggal_lahir)); ?>
+                        <?= $alumni->tempat_lahir ?>, <?= strftime("%d %B %Y", strtotime($alumni->tanggal_lahir)); ?>
                     </div>
-                    <?php if($alumni->cttl == 0 && $status == 'user') :
+                    <?php if ($alumni->cttl == 0 && $status == 'user') :
                         // gambar mata
                         echo $cttl;
                     endif; ?>
@@ -170,7 +170,7 @@ $cprestasi='<div class="flex-initial text-primary mt-1 ml-2">'.$sembunyi.'</div>
             <?php if ($alumni->calamat == 1 || $status == 'user') : ?>
                 <div class="flex">
                     <div class="font-heading text-primary text-xs pl-5 md:px-0 mt-6">Lokasi Tempat Tinggal Saat Ini</div>
-                    <?php if($alumni->calamat == 0 && $status == 'user') : 
+                    <?php if ($alumni->calamat == 0 && $status == 'user') :
                         // gambar mata
                         echo $calamat;
                     endif; ?>
@@ -189,32 +189,32 @@ $cprestasi='<div class="flex-initial text-primary mt-1 ml-2">'.$sembunyi.'</div>
                 <div class="w-full md:w-1/2 mr-10">
                     <!-- Email -->
                     <div class="inline-block mb-2 flex flex-row">
-                        <img src="/img/components/icon/message.png" alt="message" class="float-left w-5">
+                        <img src="/img/components/icon/message.png" alt="message" class="float-left w-5 h-4">
                         <?php if ($alumni->email == NULL) { ?>
-                            <span class="font-heading text-xs text-primary text-center ml-2 md:ml-2"><i>belum terisi</i></span>
+                            <span class="font-heading text-xs text-primary text-left ml-2 md:ml-2"><i>belum terisi</i></span>
                         <?php } else { ?>
-                            <span class="font-heading text-xs text-primary text-center ml-2 md:ml-2"><?= $alumni->email ?></span>
+                            <span class="font-heading text-xs text-primary text-left ml-2 md:ml-2"><?= $alumni->email ?></span>
                         <?php } ?>
                     </div>
                     <!-- Twitter -->
                     <a href="https://www.twitter.com/<?= $alumni->twitter ?>" target="_new">
                         <div class="inline-block mb-2 flex flex-row">
-                            <img src="/img/components/icon/tiny_twitter.png" alt="twitter" class="float-left w-4 w-4">
+                            <img src="/img/components/icon/tiny_twitter.png" alt="twitter" class="float-left w-4 h-4">
                             <?php if ($alumni->twitter == NULL) { ?>
-                                <span class="font-heading text-xs text-primary text-center ml-3 md:ml-3"><i>belum terisi</i></span>
+                                <span class="font-heading text-xs text-primary text-left ml-3 md:ml-3"><i>belum terisi</i></span>
                             <?php } else { ?>
-                                <span class="font-heading text-xs text-primary text-center ml-3 md:ml-3"><?= $alumni->twitter ?></span>
+                                <span class="font-heading text-xs text-primary text-left ml-3 md:ml-3"><?= $alumni->twitter ?></span>
                             <?php } ?>
                         </div>
                     </a>
                     <!-- Instagram -->
                     <a href="https://www.instagram.com/<?= $alumni->ig ?>" target="_new">
                         <div class="inline-block flex flex-row">
-                            <img src="/img/components/icon/tiny_instagram.png" alt="instagram" class="float-left w-4">
+                            <img src="/img/components/icon/tiny_instagram.png" alt="instagram" class="float-left w-4 h-4">
                             <?php if ($alumni->ig == NULL) { ?>
-                                <span class="font-heading text-xs text-primary text-center flex items-center ml-3 md:ml-3"><i>belum terisi</i></span>
+                                <span class="font-heading text-xs text-primary text-left flex items-center ml-3 md:ml-3"><i>belum terisi</i></span>
                             <?php } else { ?>
-                                <span class="font-heading text-xs text-primary text-center flex items-center ml-3 md:ml-3"><?= $alumni->ig ?></span>
+                                <span class="font-heading text-xs text-primary text-left flex items-center ml-3 md:ml-3"><?= $alumni->ig ?></span>
                             <?php } ?>
                         </div>
                     </a>
@@ -227,7 +227,7 @@ $cprestasi='<div class="flex-initial text-primary mt-1 ml-2">'.$sembunyi.'</div>
                         <div class="w-full md:w-1/2 mt-2 md:mt-0">
                             <!-- Facebook -->
                             <div class="inline-block mb-2 flex flex-row">
-                                <img src="/img/components/icon/fb.png" alt="facebook" class="float-left ml-1 md:ml-1 h-4">
+                                <img src="/img/components/icon/fb.png" alt="facebook" class="float-left ml-1 md:ml-1 h-4 h-4">
                                 <span class="font-heading text-xs text-primary text-left flex items-center ml-4 md:ml-5">Facebook</span>
                             </div>
                         </a>
@@ -238,8 +238,8 @@ $cprestasi='<div class="flex-initial text-primary mt-1 ml-2">'.$sembunyi.'</div>
                                 <a href="<?= $alumni->linkedin ?>" target="_new">
                                 <?php endif; ?>
                                 <div class="inline-block mb-2 flex flex-row">
-                                    <img src="/img/components/icon/linkedin.png" alt="linkedin" class="float-left w-5">
-                                    <span class="font-heading text-xs text-primary text-center flex items-center ml-2 md:ml-3">LinkedIn</span>
+                                    <img src="/img/components/icon/linkedin.png" alt="linkedin" class="float-left w-5 h-5">
+                                    <span class="font-heading text-xs text-primary text-left flex items-center ml-2 md:ml-3">LinkedIn</span>
                                 </div>
                                 </a>
                                 <!-- Google Scholar -->
@@ -250,8 +250,8 @@ $cprestasi='<div class="flex-initial text-primary mt-1 ml-2">'.$sembunyi.'</div>
                                         <a href="<?= $alumni->gscholar ?>" target="_new">
                                         <?php endif; ?>
                                         <div class="inline-block flex flex-row">
-                                            <img src="/img/components/icon/google.png" alt="google" class="float-left w-5">
-                                            <span class="font-heading text-xs text-primary text-center flex items-center ml-2 md:ml-3">Google Scholar</span>
+                                            <img src="/img/components/icon/google.png" alt="google" class="float-left w-5 h-5">
+                                            <span class="font-heading text-xs text-primary text-left flex items-center ml-2 md:ml-3">Google Scholar</span>
                                         </div>
                                         </a>
             </div>
@@ -397,10 +397,10 @@ $cprestasi='<div class="flex-initial text-primary mt-1 ml-2">'.$sembunyi.'</div>
     <div class="w-full my-0 md:my-0 lg:mb-4 lg:px-20 md:px-8 px-2">
         <div class="flex justify-center text-center md:justify-start mb-2 md:mb-6">
             <h3 class="flex-initial font-heading font-bold text-xl text-secondary text-center md:text-left ">Riwayat Prestasi</h3>
-            <?php if($alumni->cprestasi == 0 && $status == 'user') :
+            <?php if ($alumni->cprestasi == 0 && $status == 'user') :
                 // gambar mata
                 echo $cprestasi;
-                endif;?>
+            endif; ?>
         </div>
         <div class="md:shadow-lg lg:shadow-xl rounded-2xl px-0 py-1 md:px-5 lg:mx-14 lg:p-8 mb-1">
             <?php if ($prestasi == NULL) {
@@ -425,10 +425,10 @@ $cprestasi='<div class="flex-initial text-primary mt-1 ml-2">'.$sembunyi.'</div>
     <div class="w-full my-6 md:my-0 lg:mb-3 lg:px-20 md:px-8 px-2">
         <div class="flex justify-center md:justify-start">
             <h3 class="flex-initial font-heading font-bold text-xl text-secondary text-center md:text-left ">Riwayat Pendidikan</h3>
-            <?php if($alumni->cpendidikan == 0 && $status == 'user') :
+            <?php if ($alumni->cpendidikan == 0 && $status == 'user') :
                 // gambar mata
                 echo $cpendidikan;
-                endif;?>
+            endif; ?>
         </div>
         <div class="lg:px-16">
             <div class="md:shadow-lg lg:shadow-xl rounded-3xl w-full mx-auto mt-5">

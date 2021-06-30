@@ -267,9 +267,9 @@ function findString(str) {
         $('body').prepend(`
     <div class="fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40" id='modalPencarian'>
         <div class="hidden transform scale-0 opacity-0 duration-300 transition-all bg-gray bg-opacity-0">
-            <div class="mx-3 sm:px-6 px-2 py-3 rounded-lg bg-white flex items-center text-justify" style="background-color: #d96c6c;">
-                <img src="/img/components/icon/false.png" class="h-5 mr-2" alt="icon check">
-                <p class="sm:text-lg text-base" style="color: #000000;">String "<span id='mystr'></span>" tidak ditemukan!</p>
+            <div class="mx-3 sm:px-6 px-2 py-3 rounded-lg flex items-center text-justify bg-redAlert">
+                <img src="/img/components/icon/false.png" class="h-5 mr-2 text-danger" alt="icon check">
+                <p class="sm:text-lg text-base text-danger">Kata kunci "<span id='mystr'></span>" tidak ditemukan!</p>
             </div>
         </div>
     </div>

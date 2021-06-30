@@ -151,7 +151,7 @@
             <!-- awal footer haistis -->
             <div class="md:mt-0 mx-auto md:mx-0 mb-2 md:mb-0">
                 <a href="https://haisstis.org/"><img class="lg:h-28 h-20 w-36 lg:w-auto lg:-mt-6" src="/img/components/logo/logo_haisstis.png" alt="logo HAISSTIS"></a>
-                <div class="flex justify-start gap-x-2 -mt-2 lg:-mt-4">
+                <div class="flex justify-center md:justify-start gap-x-2 -mt-2 lg:-mt-4">
                     <div><img class="lg:h-5 h-4" src="/img/components/icon/message_white.png" alt="icon message"></div>
                     <div>
                         <h3 class="text-white font-heading">sia@stis.ac.id</h3>
