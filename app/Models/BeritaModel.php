@@ -43,7 +43,7 @@ class BeritaModel extends Model
     public function getNewsByUserId($id)
     {
         if (!isset($id) || empty($id))  redirect('auth/server-error', 'refresh');
-        return $this->db->query("SELECT * FROM berita WHERE user_id=$id");
+        return $this->db->query("SELECT * FROM berita WHERE user_id=$id ORDER BY id DESC");
     }
 
     public function getLastRecordNews()
