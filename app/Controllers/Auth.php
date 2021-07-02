@@ -161,7 +161,7 @@ class Auth extends BaseController
 
 				foreach ($hasil['profile']['kelas'] as $kelas) {
 					if (strpos($kelas['kode_kelas'], '3D3') !== false || strpos($kelas['kode_kelas'], '4SI') !== false || strpos($kelas['kode_kelas'], '4SD') !== false || strpos($kelas['kode_kelas'], '4SE') !== false || strpos($kelas['kode_kelas'], '4SK') !== false || strpos($kelas['kode_kelas'], '4KS') !== false || strpos($kelas['kode_kelas'], '4ST') !== false) {
-						if ($year_now - $kelas['tahun_akademik'] >= 1) {
+						if ($year_now - $kelas['tahun_akademik'] > 1) {
 							$tahun_lulus = $kelas['tahun_akademik'] + 1;
 							if (strpos($kelas['kode_kelas'], '3D3')) {
 								$jenjang = 'D-III';
@@ -488,7 +488,7 @@ class Auth extends BaseController
 							// $cek = $this->modelAlumni->getAlumniByNipBPS($user->getNip());
 						}
 
-						if ($this->modelAuth->getUserByUsername($user->getUsername()) == NULL) {
+						if ($this->modelAuth->getUserByUsername($user->getUsername()) == NULL && $this->modelAuth->getUserByIdAlumni($cek['id_alumni']) == NULL) {
 							date_default_timezone_set("Asia/Jakarta");
 							$now = date("Y-m-d H:i:s");
 							$data = [
@@ -507,6 +507,9 @@ class Auth extends BaseController
 						}
 
 						$hasil = $this->modelAuth->getUserByUsername($user->getUsername());
+						if ($hasil == NULL) {
+							$hasil = $this->modelAuth->getUserByIdAlumni($cek['id_alumni']);
+						}
 
 						if ($hasil['active'] == 1) {
 							session()->set([	//set session (informasi identitas) dari tabel users

@@ -65,6 +65,7 @@ $routes->group('beranda', ['namespace' => 'App\Controllers', 'filter' => 'login'
 	$routes->post('berita/post-comment', 'Berita::post_comment');
 	$routes->post('berita/get-comments', 'Berita::get_comments');
 	$routes->get('berita', 'Berita::berita');
+	$routes->get('berita/unggah-berita', 'User::unggahBerita');
 	$routes->match(['get', 'post'], 'berita/view/(:num)', 'Berita::news_view/$1');
 });
 
