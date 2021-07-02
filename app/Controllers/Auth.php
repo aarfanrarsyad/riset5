@@ -275,6 +275,9 @@ class Auth extends BaseController
 					}
 
 					$user = $this->modelAuth->getUserByUsername($nim);
+					if ($user == NULL) {
+						$user = $this->modelAuth->getUserByIdAlumni($cek['id_alumni']);
+					}
 
 					if ($user['active'] == 1) {
 						session()->set([	//set session (informasi identitas) dari tabel users
