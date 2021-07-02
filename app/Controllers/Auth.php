@@ -241,7 +241,7 @@ class Auth extends BaseController
 						$data = [
 							'id_pendidikan'     => $sipadu['id_pendidikan'],
 							'program_studi'     => $prodi,
-							'nim'               => $user['nim'],
+							'nim'               => $nim,
 						];
 						$this->modelAlumni->db->table('pendidikan_tinggi')->insert($data);
 
@@ -255,7 +255,7 @@ class Auth extends BaseController
 					}
 
 					//insert new user sipadu (mahasiswa)
-					if ($this->modelAuth->getUserByUsername($hasil['profile']['nim']) == NULL) {
+					if ($this->modelAuth->getUserByUsername($nim) == NULL && $this->modelAuth->getUserByIdAlumni($cek['id_alumni']) == NULL) {
 						date_default_timezone_set("Asia/Jakarta");
 						$now = date("Y-m-d H:i:s");
 
@@ -274,7 +274,7 @@ class Auth extends BaseController
 						$this->modelAuth->insertUser($data);
 					}
 
-					$user = $this->modelAuth->getUserByUsername($hasil['profile']['nim']);
+					$user = $this->modelAuth->getUserByUsername($nim);
 
 					if ($user['active'] == 1) {
 						session()->set([	//set session (informasi identitas) dari tabel users
