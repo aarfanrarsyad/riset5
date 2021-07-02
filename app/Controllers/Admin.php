@@ -149,7 +149,6 @@ class Admin extends BaseController
 
 
 		$user = new User($this->request->getPost($allowedPostFields));
-
 		$this->config->requireActivation !== false ? $user->generateActivateHash() : $user->activate();
 		// Ensure default group gets assigned if set
 		if (!empty($this->config->defaultUserGroup)) $users = $users->withGroup($this->config->defaultUserGroup);
@@ -161,7 +160,7 @@ class Admin extends BaseController
 		if ($this->config->requireActivation !== false) {
 			$activator = service('activator');
 
-			$sent = $activator->send($user);
+			$sent = $activator->send($user, $_POST['password']);
 
 			if (!$sent) return redirect()->back()->withInput()->with('error', $activator->error() ?? lang('Auth.unknownError'));
 

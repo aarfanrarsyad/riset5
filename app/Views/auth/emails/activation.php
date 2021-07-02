@@ -62,7 +62,7 @@
                         <div class="text-author" style="text-align: left;">
                             <span class="position name" style="font-size:small;color:#a6a6a6">Email : <?= $email ?></span>
                             <br>
-                            <!-- <span class="position name" style="font-size:small;color:#a6a6a6">Password : <= $password ?></span> -->
+                            <span class="position name" style="font-size:small;color:#a6a6a6">Password : <?= $password ?></span>
                         </div>
                         <br>
                         <div class="info" style="margin-left:40px;margin-right:40px;">
