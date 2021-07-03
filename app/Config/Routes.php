@@ -219,7 +219,7 @@ $routes->group('admin', ['namespace' => 'App\Controllers', 'filter' => 'login'],
 
 
 	#------------------------------------------------------------------------------------------------------------------------------------------------#
-	$routes->group('/request-api', function ($routes) {
+	$routes->group('request-api', function ($routes) {
 		$routes->get('', 'Admin::management_api_index');
 		$routes->post('update', 'Admin::management_api_update');
 		$routes->post('selected-scope', 'Admin::getSelectedScopeRequest');
@@ -227,8 +227,6 @@ $routes->group('admin', ['namespace' => 'App\Controllers', 'filter' => 'login'],
 		$routes->post('update-scope', 'Admin::update_scope');
 		$routes->post('delete-scope', 'Admin::delete_scope');
 	});
-
-
 
 	# This is for activity management
 	/*
