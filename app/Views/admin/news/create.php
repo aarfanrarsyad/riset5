@@ -43,11 +43,13 @@ $errors = session()->getFlashdata('errors');
     <div class="container-fluid px-4" style="font-size: small;">
         <div class="alert-content">
             <?php if (!empty($errors)) : ?>
-                <div class="alert bg-redAlert text-danger" role="alert">
+                <div class="alert bg-red text-danger" role="alert">
                     Whoops! There was an error when inputting data :
-                    <ul>
+                    <ul class="mt-2">
+                        <?php $i = 1 ?>
                         <?php foreach ($errors as $error) : ?>
-                            <li><?= esc($error) ?></li>
+                            <li><?= $i . ". " . esc($error) ?></li>
+                            <?php $i++ ?>
                         <?php endforeach ?>
                     </ul>
                 </div>
@@ -66,7 +68,7 @@ $errors = session()->getFlashdata('errors');
                             <div class="form-group row">
                                 <label for="date" class="col-sm-2 col-form-label">Tanggal</label>
                                 <div class="col-sm-5">
-                                    <input type="date" name="date" class="inputForm form-control" id="date" placeholder="Tanggal" required>
+                                    <input type="date" name="date" class="inputForm form-control" id="date" placeholder="Tanggal" required value="<?= session()->getFlashdata('inputs') !== null ? session()->getFlashdata('inputs')['date'] : '' ?>">
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -108,25 +110,25 @@ $errors = session()->getFlashdata('errors');
                                 <label for="author" class="col-sm-2 col-form-label">Author</label>
                                 <div class="col-sm-10">
                                     <div class="form-group">
-                                        <input type="text" name="author" class="inputForm form-control" id="author" placeholder="Penulis">
+                                        <input type="text" name="author" class="inputForm form-control" id="author" placeholder="Penulis" required value="<?= session()->getFlashdata('inputs') !== null ? session()->getFlashdata('inputs')['author'] : '' ?>">
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="header" class="col-sm-2 col-form-label">Header</label>
                                 <div class="col-sm-10">
-                                    <input type="text" name="header" class="inputForm form-control" id="header" placeholder="Judul Berita" required>
+                                    <input type="text" name="header" class="inputForm form-control" id="header" placeholder="Judul Berita" required value="<?= session()->getFlashdata('inputs') !== null ? session()->getFlashdata('inputs')['header'] : '' ?>">
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="thumbnail" class="col-sm-2 col-form-label">Thumbnail</label>
-                                <input type="file" name="thumbnail" class="border-top-0 border-right-0 border-left-0" style="border-radius:0" id="thumbnail" placeholder="Thumbnail Berita">
+                                <input type="file" name="thumbnail" class="border-top-0 border-right-0 border-left-0" style="border-radius:0" id="thumbnail" placeholder="Thumbnail Berita" required>
 
                             </div>
                             <div class="form-group row">
                                 <label for="summernote" class="col-sm-2 col-form-label">Content</label>
                                 <div class="col-sm-10">
-                                    <textarea name="content" id="summernote" required></textarea>
+                                    <textarea name="content" id="summernote" required><?= session()->getFlashdata('inputs') !== null ? session()->getFlashdata('inputs')['content'] : '' ?></textarea>
                                 </div>
                             </div>
                         </div>

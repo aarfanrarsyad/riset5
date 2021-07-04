@@ -13,10 +13,6 @@
         if ($.fn.DataTable.isDataTable('#' + ele)) {
             $('#' + ele).DataTable().clear();
             $('#' + ele).DataTable().destroy();
-
-            initalize_dataTables('#' + ele)
-        } else {
-            initalize_dataTables('#' + ele)
         }
     }
 
@@ -60,18 +56,21 @@
                 id: id,
             },
             success: function(result) {
-
                 $('#download').attr("href", "<?= base_url('/berita/downloadReport') ?>/" + id)
                 $('.canvas_visitor').html('<canvas id="visitor" height="120"></canvas>')
                 initialize_chart(result[0])
 
-                $('#table_ip_visits tbody').html(result[2])
-                $('#user_comments tbody').html(result[3])
                 reinitialize_tables("table_ip_visits")
                 reinitialize_tables("user_comments")
+                $('#table_ip_visits tbody').html(result[2])
+                $('#user_comments tbody').html(result[3])
+                initalize_dataTables('#table_ip_visits')
+                initalize_dataTables('#user_comments')
+
                 $('.visited').html(result[1].visited)
                 $('.hits').html(result[1].hits)
                 $('.comments').html(result[1].comments)
+
             }
         })
     }
@@ -403,7 +402,7 @@
                                                     <tr>
                                                         <td class="text-center"><?= $i ?></td>
                                                         <td class="text-center"><img class="img-fluid img-thumbnail rounded" src="<?= base_url('berita/berita_' . $dataset['id'] . '/' . $dataset['thumbnail']) ?>" width="140px" onclick="get_content(<?= $dataset['id'] ?>)"></td>
-                                                        <td><?= date_formats($dataset['tanggal_publish']) ?></td>
+                                                        <td><?= date("d/m/Y", strtotime($dataset['tanggal_publish'])) ?></td>
                                                         <td><?= $dataset['author'] ?></td>
                                                         <td><?= $dataset['judul'] ?></td>
                                                         <td>
@@ -481,7 +480,7 @@
                                                         <td class="text-center"><?= $i ?></td>
                                                         <td class="text-center"><img class="img-fluid" src="<?= base_url('berita/berita_' . $dataset['id'] . '/' . $dataset['thumbnail']) ?>" width="140px" onclick="get_content(<?= $dataset['id'] ?>)"></td>
                                                         <td><a href="<?= base_url('User/profilAlumni/' . $dataset['user_id']) ?>" target="_blank"><?= $dataset['user'] ?></a></td>
-                                                        <td><?= date_formats($dataset['tanggal_publish']) ?></td>
+                                                        <td><?= date("d/m/Y", strtotime($dataset['tanggal_publish'])) ?></td>
                                                         <td><?= $dataset['author'] ?></td>
                                                         <td><?= $dataset['judul'] ?></td>
                                                         <td><?= $dataset['aktif'] == 1 ? '<span class="badge bg-indigo">Aktif</span>' : '<span class="badge bg-maroon">Tidak Aktif</span>' ?></td>

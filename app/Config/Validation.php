@@ -88,27 +88,117 @@ class Validation
 	];
 
 	public $create_news = [
-		'date'     => 'required',
-		'header'   => 'required',
-		'access' => 'required|in_list[public,private,other]',
-		'author' => 'required',
-		'thumbnail' => 'uploaded[thumbnail]|max_size[thumbnail,1024]|ext_in[thumbnail,png,jpg,jpeg,img]'
+		'date' => [
+			'rules'  => 'required',
+			'errors' => [
+				'required' => 'Tanggal Publish harus diisi.'
+			]
+		],
+		'header' => [
+			'rules'  => 'required',
+			'errors' => [
+				'required' => 'Judul berita harus diisi.'
+			]
+		],
+		'author' => [
+			'rules'  => 'required',
+			'errors' => [
+				'required' => 'Nama penulis harus diisi.'
+			]
+		],
+		'access' => [
+			'rules'  => 'required|in_list[public,private,other]',
+			'errors' => [
+				'required' => 'Akses berita harus diisi.',
+				'in_list' => 'Akses berita yang tersedia hanya public, private, dan other.',
+			]
+		],
+		'content' => [
+			'rules'  => 'required',
+			'errors' => [
+				'required' => 'Kontent berita harus diisi.'
+			]
+		],
+		'thumbnail' => [
+			'rules'  => 'uploaded[thumbnail]|max_size[thumbnail,1024]|ext_in[thumbnail,png,jpg,jpeg,img]',
+			'errors' => [
+				'uploaded' => 'Tambahkan foto sampul berita.',
+				'max_size' => 'Ukuran maksimal foto sampul adalah 1024 Kb.',
+				'ext_in' => 'File foto sampul tidak valid.',
+			]
+		],
 	];
 
 	public $create_user_news = [
-		'header'   => 'required',
-		'author' => 'required',
-		'content' => 'required',
-		'thumbnail' => 'uploaded[thumbnail]|max_size[thumbnail,1024]|ext_in[thumbnail,png,jpg,jpeg,img]',
+		'header' => [
+			'rules'  => 'required',
+			'errors' => [
+				'required' => 'Judul berita harus diisi.'
+			]
+		],
+		'author' => [
+			'rules'  => 'required',
+			'errors' => [
+				'required' => 'Nama penulis harus diisi.'
+			]
+		],
+		'content' => [
+			'rules'  => 'required',
+			'errors' => [
+				'required' => 'Kontent berita harus diisi.'
+			]
+		],
+		'thumbnail' => [
+			'rules'  => 'uploaded[thumbnail]|max_size[thumbnail,1024]|ext_in[thumbnail,png,jpg,jpeg,img]',
+			'errors' => [
+				'uploaded' => 'Tambahkan foto sampul berita.',
+				'max_size' => 'Ukuran maksimal foto sampul adalah 1024 Kb.',
+				'ext_in' => 'File foto sampul tidak valid.',
+			]
+		],
 	];
 
 	public $update_news = [
-		'date'     => 'required',
-		'header'   => 'required',
-		'access' => 'required|in_list[public,private,review,other]',
-		'author' => 'required',
+		'date' => [
+			'rules'  => 'required',
+			'errors' => [
+				'required' => 'Tanggal Publish harus diisi.'
+			]
+		],
+		'header' => [
+			'rules'  => 'required',
+			'errors' => [
+				'required' => 'Judul berita harus diisi.'
+			]
+		],
+		'author' => [
+			'rules'  => 'required',
+			'errors' => [
+				'required' => 'Nama penulis harus diisi.'
+			]
+		],
+		'access' => [
+			'rules'  => 'required|in_list[public,private,other,review]',
+			'errors' => [
+				'required' => 'Akses berita harus diisi.',
+				'in_list' => 'Akses berita yang tersedia hanya public, private, review, dan other.',
+			]
+		],
+		'content' => [
+			'rules'  => 'required',
+			'errors' => [
+				'required' => 'Kontent berita harus diisi.'
+			]
+		],
+		'thumbnail' => [
+			'rules'  => 'max_size[thumbnail,1024]|ext_in[thumbnail,png,jpg,jpeg,img]',
+			'errors' => [
+				'uploaded' => 'Tambahkan foto sampul berita.',
+				'max_size' => 'Ukuran maksimal foto sampul adalah 1024 Kb.',
+				'ext_in' => 'File foto sampul tidak valid.',
+			]
+		],
 	];
-
 
 	public $editProfil = [
 		'tempat_lahir'   => [

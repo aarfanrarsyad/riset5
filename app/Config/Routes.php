@@ -34,16 +34,16 @@ $routes->setAutoRoute(true);
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
-$routes->get('/','Home::index');
-$routes->get('/login',AUTHCONT_NAMESPACE.'AuthController::login');
-$routes->get('/auth/logout','Auth::logout');
+$routes->get('/', 'Home::index');
+$routes->get('/login', AUTHCONT_NAMESPACE . 'AuthController::login');
+$routes->get('/auth/logout', 'Auth::logout');
 $routes->get('/validate_sipadu', 'Auth::validate_sipadu');
 $routes->get('/validate-bps', 'Auth::bps');
 
 //WEBSERVICE
 $routes->get('developer/', 'Webservice::index');
 $routes->get('developer/dokumentasi', 'Webservice::dokumentasi');
-$routes->group('developer',['namespace' => 'App\Controllers', 'filter' => 'login','role:4'],function ($routes){
+$routes->group('developer', ['namespace' => 'App\Controllers', 'filter' => 'login', 'role:4'], function ($routes) {
 	//$routes->get('edit/biodata', 'Webservice::editBiodata');
 	$routes->get('edit/akun', 'Webservice::editAkun');
 	$routes->get('proyek', 'Webservice::proyek');
@@ -55,8 +55,6 @@ $routes->group('developer',['namespace' => 'App\Controllers', 'filter' => 'login
 	//ajax
 	$routes->post('editajx', 'Webservice::ajax_edit');
 	$routes->post('delete', 'Webservice::delete');
-
-	
 });
 // $routes->get('/register', 'Home::register');
 // $routes->get('/register/success', 'Home::registerSuccess');
@@ -67,14 +65,15 @@ $routes->group('beranda', ['namespace' => 'App\Controllers', 'filter' => 'login'
 	$routes->post('berita/post-comment', 'Berita::post_comment');
 	$routes->post('berita/get-comments', 'Berita::get_comments');
 	$routes->get('berita', 'Berita::berita');
+	$routes->get('berita/unggah-berita', 'User::unggahBerita');
 	$routes->match(['get', 'post'], 'berita/view/(:num)', 'Berita::news_view/$1');
 });
 
-$routes->group('admin', ['namespace' => 'App\Controllers', 'filter' => 'role:1'], function ($routes) {
+$routes->group('admin', ['namespace' => 'App\Controllers', 'filter' => 'login'], function ($routes) {
 
 	# This is for homepage, landing page, etc
 
-	$routes->get('/', 'Admin::index', ['filter' => 'role:1']);
+	$routes->get('/', 'Admin::index', ['filter' => 'login']);
 
 
 	# This is for report dashboard
@@ -220,16 +219,14 @@ $routes->group('admin', ['namespace' => 'App\Controllers', 'filter' => 'role:1']
 
 
 	#------------------------------------------------------------------------------------------------------------------------------------------------#
-	$routes->group('/request-api',function($routes){
+	$routes->group('request-api', function ($routes) {
 		$routes->get('', 'Admin::management_api_index');
 		$routes->post('update', 'Admin::management_api_update');
 		$routes->post('selected-scope', 'Admin::getSelectedScopeRequest');
 		$routes->post('create-scope', 'Admin::create_scope');
 		$routes->post('update-scope', 'Admin::update_scope');
-		$routes->post('delete-scope','Admin::delete_scope');
+		$routes->post('delete-scope', 'Admin::delete_scope');
 	});
-
-
 
 	# This is for activity management
 	/*
@@ -293,8 +290,8 @@ $routes->group('admin', ['namespace' => 'App\Controllers', 'filter' => 'role:1']
 
 $routes->group('user', ['namespace' => 'App\Controllers', 'filter' => 'role:2'], function ($routes) {
 	# This is for homepage, landing page, etc
-	$routes->get('galerifoto','User::galerifoto');
-	$routes->post('uploadgaleri','User::uploadGaleri');
+	$routes->get('galerifoto', 'User::galerifoto');
+	$routes->post('uploadgaleri', 'User::uploadGaleri');
 	$routes->get('profil', 'User::profil');
 	// gatau nih bener apa engga
 	#------------------------------------------------------------------------------------------------------------------------------------------------#

@@ -90,7 +90,7 @@ class Auth extends BaseController
 
 	//--------------------------------------------------------------------
 
-	public function sipadu()	//masuk()
+	public function validate_sipadu()	//masuk()
 	{
 		if (session()->has('id_user'))
 			return redirect()->back();
@@ -102,11 +102,6 @@ class Auth extends BaseController
 			'scope' => 'user:profile:read'
 		]);
 
-		return redirect()->to('https://ws.stis.ac.id/oauth/authorize?' . $query);
-	}
-
-	public function validate_sipadu()	//masuk()
-	{
 		if (isset($_GET['code']) && $_GET['code']) {
 			$faker = \Faker\Factory::create('id_ID');
 
@@ -166,7 +161,7 @@ class Auth extends BaseController
 
 				foreach ($hasil['profile']['kelas'] as $kelas) {
 					if (strpos($kelas['kode_kelas'], '3D3') !== false || strpos($kelas['kode_kelas'], '4SI') !== false || strpos($kelas['kode_kelas'], '4SD') !== false || strpos($kelas['kode_kelas'], '4SE') !== false || strpos($kelas['kode_kelas'], '4SK') !== false || strpos($kelas['kode_kelas'], '4KS') !== false || strpos($kelas['kode_kelas'], '4ST') !== false) {
-						if ($year_now - $kelas['tahun_akademik'] >= 1) {
+						if ($year_now - $kelas['tahun_akademik'] > 1) {
 							$tahun_lulus = $kelas['tahun_akademik'] + 1;
 							if (strpos($kelas['kode_kelas'], '3D3')) {
 								$jenjang = 'D-III';
@@ -246,7 +241,7 @@ class Auth extends BaseController
 						$data = [
 							'id_pendidikan'     => $sipadu['id_pendidikan'],
 							'program_studi'     => $prodi,
-							'nim'               => $user['nim'],
+							'nim'               => $nim,
 						];
 						$this->modelAlumni->db->table('pendidikan_tinggi')->insert($data);
 
@@ -260,7 +255,7 @@ class Auth extends BaseController
 					}
 
 					//insert new user sipadu (mahasiswa)
-					if ($this->modelAuth->getUserByUsername($hasil['profile']['nim']) == NULL) {
+					if ($this->modelAuth->getUserByUsername($nim) == NULL && $this->modelAuth->getUserByIdAlumni($cek['id_alumni']) == NULL) {
 						date_default_timezone_set("Asia/Jakarta");
 						$now = date("Y-m-d H:i:s");
 
@@ -279,7 +274,10 @@ class Auth extends BaseController
 						$this->modelAuth->insertUser($data);
 					}
 
-					$user = $this->modelAuth->getUserByUsername($hasil['profile']['nim']);
+					$user = $this->modelAuth->getUserByUsername($nim);
+					if ($user == NULL) {
+						$user = $this->modelAuth->getUserByIdAlumni($cek['id_alumni']);
+					}
 
 					if ($user['active'] == 1) {
 						session()->set([	//set session (informasi identitas) dari tabel users
@@ -378,6 +376,8 @@ class Auth extends BaseController
 				die();
 			}
 		}
+
+		return redirect()->to('https://ws.stis.ac.id/oauth/authorize?' . $query);
 	}
 
 	public function bps()	//masuk()
@@ -488,7 +488,7 @@ class Auth extends BaseController
 							// $cek = $this->modelAlumni->getAlumniByNipBPS($user->getNip());
 						}
 
-						if ($this->modelAuth->getUserByUsername($user->getUsername()) == NULL) {
+						if ($this->modelAuth->getUserByUsername($user->getUsername()) == NULL && $this->modelAuth->getUserByIdAlumni($cek['id_alumni']) == NULL) {
 							date_default_timezone_set("Asia/Jakarta");
 							$now = date("Y-m-d H:i:s");
 							$data = [
@@ -507,6 +507,9 @@ class Auth extends BaseController
 						}
 
 						$hasil = $this->modelAuth->getUserByUsername($user->getUsername());
+						if ($hasil == NULL) {
+							$hasil = $this->modelAuth->getUserByIdAlumni($cek['id_alumni']);
+						}
 
 						if ($hasil['active'] == 1) {
 							session()->set([	//set session (informasi identitas) dari tabel users

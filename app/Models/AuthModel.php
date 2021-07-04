@@ -33,6 +33,11 @@ class AuthModel extends Model
         return $this->builder()->where('username', $username)->get()->getFirstRow('array');
     }
 
+    public function getUserByIdAlumni($id)
+    {
+        return $this->builder()->where('id_alumni', $id)->get()->getFirstRow('array');
+    }
+
     public function getUserById($id)
     {
         return $this->builder()->where('id', $id)->get()->getFirstRow('array');

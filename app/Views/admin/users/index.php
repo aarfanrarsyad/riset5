@@ -92,8 +92,6 @@
                                   <?php else : ?>
                                     <button class="dropdown-item" type="button" onclick="change_active_status(event)" data-id="<?= $dataset['id'] ?>" data-active="1" data-user="<?= $dataset['fullname'] ?>"><i class="fas fa-toggle-on text-secondary"></i>&ensp;Aktifkan user</button>
                                   <?php endif; ?>
-                                  <button class="dropdown-item" type="button"><i class="far fa-eye text-secondary"></i>&ensp;Detail User</button>
-                                  <button class="dropdown-item" type="button"><i class="fas fa-edit text-secondary"></i>&ensp;Update User</button>
                                   <button class="dropdown-item" type="button" onclick="delete_user('<?= $dataset['id'] ?>','<?= $dataset['fullname'] ?>')"><i class="fas fa-trash text-secondary"></i>&ensp;Hapus User</button>
                                 </div>
                               </div>

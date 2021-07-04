@@ -149,7 +149,6 @@ class Admin extends BaseController
 
 
 		$user = new User($this->request->getPost($allowedPostFields));
-
 		$this->config->requireActivation !== false ? $user->generateActivateHash() : $user->activate();
 		// Ensure default group gets assigned if set
 		if (!empty($this->config->defaultUserGroup)) $users = $users->withGroup($this->config->defaultUserGroup);
@@ -161,7 +160,7 @@ class Admin extends BaseController
 		if ($this->config->requireActivation !== false) {
 			$activator = service('activator');
 
-			$sent = $activator->send($user);
+			$sent = $activator->send($user, $_POST['password']);
 
 			if (!$sent) return redirect()->back()->withInput()->with('error', $activator->error() ?? lang('Auth.unknownError'));
 
@@ -416,11 +415,11 @@ class Admin extends BaseController
 				$query = $init->insertNewResource($data);
 				if ($query === true) {
 					session()->setFlashdata('status', "<script>Swal.fire({icon: 'success',title: 'Success',text: 'Menu added successfully',showConfirmButton: false,timer: 1500})</script>");
-					return redirect()->to(base_url('/admin/resources'));
 				} else {
 					session()->setFlashdata('status', "<script>Swal.fire({icon: 'info',title: 'Oops',text: 'Something went wrong',showConfirmButton: false,timer: 1500})</script>");
-					return redirect()->to(base_url('/admin/resources'));
 				}
+				session()->setFlashdata('crud_resources', $query);
+				return redirect()->to(base_url('/admin/resources'));
 			}
 		}
 
@@ -460,11 +459,11 @@ class Admin extends BaseController
 
 				if ($query === true) {
 					session()->setFlashdata('status', "<script>Swal.fire({icon: 'success',title: 'Success',text: 'Menu updated successfully',showConfirmButton: false,timer: 1500})</script>");
-					return redirect()->to(base_url('/admin/resources'));
 				} else {
 					session()->setFlashdata('status', "<script>Swal.fire({icon: 'info',title: 'Oops',text: 'Something went wrong',showConfirmButton: false,timer: 1500})</script>");
-					return redirect()->to(base_url('/admin/resources'));
 				}
+				session()->setFlashdata('crud_resources', $query);
+				return redirect()->to(base_url('/admin/resources'));
 			}
 		}
 
@@ -483,7 +482,7 @@ class Admin extends BaseController
 			$id   = $this->request->getPost('id');
 			$init = new admin_model();
 			$query = $init->deleteResourceByid($id);
-
+			session()->setFlashdata('crud_resources', $query);
 			$this->output_json($query);
 		}
 	}
@@ -1648,33 +1647,14 @@ class Admin extends BaseController
 		$pendidikan = new \App\Models\PendidikanModel();
 		$model = new \App\Models\FotoModel;
 
-		$album = $model->getAlbum();
-		for ($n = 0; $n < count($album); $n++) {
-			if ($album[$n]['album'] == 'Alumni' || $album[$n]['album'] == 'Wisuda' || $album[$n]['album'] == 'Kenangan') {
-				unset($album[$n]);
-			}
-		}
-		$out_album = $album;
-		$count = count($out_album);
+		$out_album = $model->getAlbum();
+		$cout = count($out_album);
+		$out_album[$cout] = ['album' => 'Alumni'];
+		$out_album[$cout + 1] = ['album' => 'Wisuda'];
+		$out_album[$cout + 2] = ['album' => 'Kenangan'];
 
-		$out_album[$count + 1] = ['album' => 'Alumni'];
-		$out_album[$count + 2] = ['album' => 'Wisuda'];
-		$out_album[$count + 3] = ['album' => 'Kenangan'];
 
 		$alumni = $alumni_model->getForTags()->getResult();
-		foreach ($alumni as $dt) {
-			$alumni_angktn = array();
-			$angkatan = $pendidikan->getAngkatan($dt->id_alumni);
-			if ($angkatan != null) {
-				foreach ($angkatan as $aktn) {
-					array_push($alumni_angktn, $aktn->angkatan);
-				}
-				$dt->angkatan = $alumni_angktn[0];
-			} else {
-				$dt->angkatan = 0;
-			}
-		}
-
 		$foto = $model->findAll();
 
 		$i = 0;
@@ -1704,18 +1684,11 @@ class Admin extends BaseController
 		$model = new VideoModel();
 		$video = $model->findAll();
 
-		$album = $model->getAlbum();
-		for ($n = 0; $n < count($album); $n++) {
-			if ($album[$n]['album'] == 'Alumni' || $album[$n]['album'] == 'Wisuda' || $album[$n]['album'] == 'Kenangan') {
-				unset($album[$n]);
-			}
-		}
-		$out_album = $album;
-		$count = count($out_album);
-
-		$out_album[$count + 1] = ['album' => 'Alumni'];
-		$out_album[$count + 2] = ['album' => 'Wisuda'];
-		$out_album[$count + 3] = ['album' => 'Kenangan'];
+		$out_album = $model->getAlbum();
+		$cout = count($out_album);
+		$out_album[$cout] = ['album' => 'Alumni'];
+		$out_album[$cout + 1] = ['album' => 'Wisuda'];
+		$out_album[$cout + 2] = ['album' => 'Kenangan'];
 
 		$i = 0;
 		foreach ($video as $dt) {

@@ -206,7 +206,7 @@
 
                 <div class="lg:text-sm md:text-xs text-xs text-primary font-paragraph font-medium mb-4">Foto oleh : <?= $dataset['author'] ?></div>
 
-                <div class="text-justify break-words font-paragraph w-full">
+                <div class="text-justify break-all font-paragraph w-full">
                     <div class="container">
                         <?= $dataset['konten'] ?>
                     </div>

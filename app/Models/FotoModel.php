@@ -40,7 +40,7 @@ class FotoModel extends Model
 
     public function getAlbum()
     {
-        return $this->builder()->select('album')->distinct('album')->get()->getResultArray();
+        return $this->builder()->select('album')->distinct('album')->notLike('album', 'Alumni')->NotLike('album', 'Wisuda')->notLike('album', 'Kenangan')->get()->getResultArray();
     }
 
     public function getOrderAlbum()
