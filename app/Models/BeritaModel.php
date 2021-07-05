@@ -30,7 +30,7 @@ class BeritaModel extends Model
     public function getNewsForLandingPage()
     {
         $curdate = get_date(true);
-        $query = "SELECT * FROM berita WHERE (aktif = 1 AND akses = 'public' AND tanggal_publish <= '$curdate') ORDER BY tanggal_publish DESC LIMIT 4";
+        $query = "SELECT * FROM berita WHERE (aktif = 1 AND akses = 'public' AND tanggal_publish <= '$curdate') ORDER BY tanggal_publish DESC LIMIT 3";
         return $this->db->query($query);
     }
 

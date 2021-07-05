@@ -29,9 +29,14 @@ class Home extends BaseController
 
 		// Load three news populer
 		$hotNews = $this->beritaModel->getNewsForLandingPage()->getResultArray();
-		for ($i = 0; $i < count($hotNews); $i++) {
-			$hotNews[$i]['tanggal_publish'] = date('d F Y');
-			$hotNews[$i]['konten'] = substr(strip_tags($hotNews[$i]['konten']), 0, 215) . ' ..';
+
+		if (count($hotNews) >= 3) {
+			for ($i = 0; $i < count($hotNews); $i++) {
+				$hotNews[$i]['tanggal_publish'] = date('d F Y');
+				$hotNews[$i]['konten'] = substr(strip_tags($hotNews[$i]['konten']), 0, 215) . ' ..';
+			}
+		} else {
+			$hotNews = [];
 		}
 
 		// Load Data jumlah lulusan

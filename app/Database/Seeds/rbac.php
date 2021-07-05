@@ -93,7 +93,7 @@ class Rbac extends Seeder
 				'group_name'       	=> 'Administrator,Alumni',
 				'access_name'       => 1,
 				'target_scope_id'   => 2,
-				'description'       => 'MMenambahkan role/group Alumni untuk user Dummy_dummy',
+				'description'       => 'Menambahkan role/group Alumni untuk user Dummy_dummy',
 				'status'       		=> 1
 			]
 		];
