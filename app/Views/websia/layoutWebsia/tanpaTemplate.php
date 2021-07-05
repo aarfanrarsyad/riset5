@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="/css/leaflet.css">
     <link rel="stylesheet" href="/css/tailwind.css">
     <link rel="stylesheet" href="/css/scrollbar.css">
+    <link rel="stylesheet" href="/css/font.css">
     <script type="text/javascript" src="/js/jquery.js"></script>
     <title><?php echo $judulHalaman ?></title>
     <link rel="shortcut icon" type="image/png" href="/img/components/logo/logo_sia.png" />

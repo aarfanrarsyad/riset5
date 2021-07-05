@@ -175,7 +175,7 @@ $cprestasi = '<div class="flex-initial text-primary mt-1 ml-2">' . $sembunyi . '
                         echo $calamat;
                     endif; ?>
                 </div>
-                <span class="font-heading flex justify-start px-3 md:px-0 text-base text-left mb-2 md:mb-0">
+                <span class="font-heading flex justify-start px-3 md:px-0 text-sm text-left mb-2 md:mb-0">
                     <img class="my-2 mt-2 mr-0 md:mr-2 ml-1 md:ml-0 w-6 h-6 md:w-6 float-left" src="/img/components/icon/maps_flag.png" alt="alamat">
                     <!-- Lokasi tempat tinggal -->
                     <p class="font-heading my-2 mt-2"> <?= ucwords($alumni->alamat_alumni);

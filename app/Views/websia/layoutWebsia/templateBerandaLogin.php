@@ -54,8 +54,6 @@
     <title><?php echo $judulHalaman ?></title>
 </head>
 
-<!-- CATATAN: Font Cabin belum bisa dipakai, kayaknya ada salah waktu konfigurasi di Tailwind nya, coba bantu cek lagi ya guys! Sama font Poppins nya masih tebel banget, gabisa diganti jenis ketebalannya... -->
-
 <body class="flex min-h-screen flex-col overflow-x-hidden">
     <!-- loading -->
     <div class="loading flex fixed w-full h-screen z-50 transition-opacity duration-200">

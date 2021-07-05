@@ -38,7 +38,7 @@
 
         <div class="flex justify-between sm:my-2 my-1">
             <div id="tulisanNav" class="font-heading flex md:w-auto sm:w-5/12 items-center xl:gap-x-3 lg:gap-x-1 gap-x-1">
-                <a href="<?= base_url(); ?>">
+                <a href="/developer">
                     <img src="/img/components/logo/logo_sia.png" class="md:w-16 w-10" alt="logo SIA">
                 </a>
                 <div class="md:px-3 px-2 my-auto text-white">
@@ -48,8 +48,8 @@
             </div>
             <div id="nav" class="hidden sm:flex sm:items-center">
                 <ul class="flex items-center xl:gap-x-6 lg:gap-x-2 md:gap-x-1.5 gap-x-2 relative">
-                    <a href="/developer">
-                        <li class="bg-secondary text-white py-1.5 sm:px-1 md:w-24 text-center cursor-pointer border-secondary border-2 hover:text-secondary hover:bg-white transition-colors duration-300">BERANDA</li>
+                    <a href="<?= base_url(); ?>">
+                        <li class="bg-secondary text-white py-1.5 sm:px-1 md:w-24 text-center cursor-pointer border-secondary border-2 hover:text-secondary hover:bg-white transition-colors duration-300">WEBSITE</li>
                     </a>
                     <li style="min-width: 55px;" class="bg-secondary text-white py-1.5 sm:px-1 md:w-24 text-center cursor-pointer border-secondary border-2 hover:text-secondary hover:bg-white transition-colors duration-300 relative">API
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-4 inline" viewBox="0 0 20 20" fill="currentColor">
@@ -201,8 +201,8 @@
                 <a href="https://pkl.stis.ac.id/60/" class="mb-2 hover:text-secondary">
                     <h3 class="underline md:no-underline">Website PKL60</h3>
                 </a>
-                <a href="<?= base_url(); ?>" class="hover:text-secondary">
-                    <h3 class="underline md:no-underline">Website SIA</h3>
+                <a href="/developer" class="hover:text-secondary">
+                    <h3 class="underline md:no-underline">Webservice(API)</h3>
                 </a>
             </div>
             <!-- akhir link ke webservice  -->

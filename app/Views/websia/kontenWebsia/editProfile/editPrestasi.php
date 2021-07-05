@@ -53,7 +53,7 @@
                     <tr class="border-t-2 border-b-2 bg-white">
                         <td class="text-center py-3"><?= $n ?></td>
                         <td><?= $row->nama_prestasi ?></td>
-                        <td><?= $row->tahun_prestasi ?></td>
+                        <td class="text-center"><?= $row->tahun_prestasi ?></td>
                         <td>
                             <div class="flex justify-center">
                                 <div class="editPrestasi cursor-pointer mr-1" onclick="formPrestasi('<?= $row->id_prestasi ?>', '<?= $row->nama_prestasi ?>', '<?= $row->tahun_prestasi ?>')"><svg class="lg:w-5 lg:h-5 w-4 h-4" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
