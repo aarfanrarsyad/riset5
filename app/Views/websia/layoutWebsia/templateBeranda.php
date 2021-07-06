@@ -28,6 +28,9 @@
         <img src="/img/components/load.gif" alt="loading gif" class="m-auto items-center md:w-96 sm:w-72 w-60">
     </div>
     <!-- loading -->
+    <button id="faq" title="Frequently Asked Questions" class="fixed bottom-16 right-8 w-10 h-10 p-1 cursor-pointer rounded-full border-none focus:outline-none z-50 bg-secondary">
+        <p class="mx-auto font-heading text-white text-2xl">?</p>
+    </button>
     <!-- tombol kembali ke atas -->
     <button onclick="topFunction()" id="onTopBtn" title="Kembali ke Atas" class="hidden fixed bottom-5 right-8 w-10 h-10 p-1 cursor-pointer rounded-full border-none focus:outline-none z-50 bg-secondary">
         <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-white mx-auto" fill="currentColor" class="bi bi-caret-up-fill" viewBox="0 0 16 16">
