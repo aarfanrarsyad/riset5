@@ -1,40 +1,59 @@
 // awal js edit biodata 
 if ($('#negara').val() === "Indonesia") {
+    $('#negaraLainnya').removeAttr('required')
     $('#negaraIndonesia').removeClass("hidden")
 
-    if ($('#provinsi option:selected').val() !== "Pilih Provinsi") {
+    if ($('#provinsi option:selected').val() !== "") {
         let prov = $('#provinsi option:selected').val()
         $('#provinsi option:selected').remove()
         $('#provinsi').val(prov)
         $('#prov-hidden').val($('#provinsi').val())
 
-        if ($('#kabkota option:selected').val() !== "Pilih Kabupaten/Kota") {
-            let kab = $('#kabkota option:selected').val()
-            $('#kabkota option:selected').remove()
+        let kab = $('#kabkota option:selected').val()
+        $.post("daftarKab", {
+                'id': $('#provinsi option:selected').attr('id')
+            },
+            function (data) {
+                JSON.parse(data).forEach(el => {
+                    $('#kabkota').append(`
+                    <option id="${el['id_kabkota']}" value="${el['nama_kabkota']}">${el['nama_kabkota']}</option>
+                    `)
+                })
 
-            $.post("daftarKab", {
-                    'id': $('#provinsi option:selected').attr('id')
-                },
-                function (data) {
-                    JSON.parse(data).forEach(el => {
-                        $('#kabkota').append(`
-                        <option id="${el['id_kabkota']}" value="${el['nama_kabkota']}">${el['nama_kabkota']}</option>
-                        `)
-                    });
+                if ($('#kabkota option:selected').val() !== "") {
+                    $('#kabkota option:selected').remove()
                     $('#kabkota').val(kab)
                     $('#kab-hidden').val($('#kabkota').val())
-                },
-            );
-        }
+                }
+            },
+        );
+
     }
+} else {
+    $('#negaraLainnya').removeAttr('required')
+    $('#provinsi').removeAttr('required')
+    $('#kabkota').removeAttr('required')
 }
 
 $('#negara').change(function () {
-    $('#kab-hidden').val($('#kabkota option:selected').val())
+    if ($('#negara').val() === "Indonesia") {
+        $('#negaraLainnya').removeAttr('required')
+        $('#provinsi').prop('required', true)
+        $('#kabkota').prop('required', true)
+    } else if ($('#negara').val() === "lainnya") {
+        $('#provinsi').removeAttr('required')
+        $('#kabkota').removeAttr('required')
+        $('#negaraLainnya').prop('required', true)
+    } else {
+        $('#negaraLainnya').removeAttr('required')
+        $('#provinsi').removeAttr('required')
+        $('#kabkota').removeAttr('required')
+    }
 })
 
 $('#provinsi').change(function () {
     $('#prov-hidden').val($('#provinsi option:selected').val())
+    $('#provinsi option[value=""]').remove()
 
     $.post("daftarKab", {
             'id': $('#provinsi option:selected').attr('id')
@@ -46,9 +65,7 @@ $('#provinsi').change(function () {
                         <option id="${el['id_kabkota']}" value="${el['nama_kabkota']}">${el['nama_kabkota']}</option>
                     `)
             });
-            $('#kabkota').prepend(`
-                        <option disabled value="Select">Pilih Kabupaten/Kota</option>
-                    `);
+            $('#kab-hidden').val($('#kabkota option:selected').val())
         },
     );
 

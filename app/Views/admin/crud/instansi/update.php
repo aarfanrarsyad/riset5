@@ -30,9 +30,9 @@
                                     <h5><i class="fas fa-building text-primaryHover"></i>&ensp;Form Update Instasi</h5>
                                 </div>
                             </div>
-                            <br>                        
+                            <br>
                             <form action="/admin/updateInstansi/<?= $instansi->id_tempat_kerja; ?>" method="POST">
-                            <?= csrf_field(); ?>                                
+                                <?= csrf_field(); ?>
                                 <label for="nama" class="font-medium">Nama Instansi:</label>
                                 <?php if (session()->getFlashdata('error-nama_instansi') != "") { ?>
                                     <p class="text-xs text-red-500 text-justify" id="errorNamaInstansi">
@@ -41,41 +41,41 @@
                                 <?php } ?>
                                 <input type="text" name="nama_instansi" id="nama" class="inputForm" placeholder="Masukkan nama Instansi" value="<?= $instansi->nama_instansi; ?>">
                                 <div class="flex justify-between items-center">
-                                    <label for="negara" class="font-medium" id="labelNegara">Negara:</label>    
+                                    <label for="negara" class="font-medium" id="labelNegara">Negara:</label>
                                 </div>
-                                    <select name="negara" id="negara" class="inputForm" onchange="displayDiv2('negaraLainIndonesia','negaraIndonesia',this)">
-                                        <?php if ($instansi->negara == NULL) : ?>
-                                            <option disabled selected>Pilih Negara</option>
-                                            <option value="Indonesia">Indonesia</option>
-                                            <option value="lainnya">Lainnya...</option>
-                                        <?php elseif ($instansi->negara == "Indonesia") : ?>
-                                            <option selected value="Indonesia">Indonesia</option>
-                                            <option value="lainnya">Lainnya...</option>
-                                        <?php else : ?>
-                                            <option value="<?= $instansi->negara ?>" selected>
-                                                <?= $instansi->negara ?>
-                                            </option>
-                                            <option value="Indonesia">Indonesia</option>
-                                            <option value="lainnya">Lainnya...</option>
-                                        <?php endif; ?>
-                                    </select>
+                                <select name="negara" id="negara" class="inputForm" onchange="displayDiv2('negaraLainIndonesia','negaraIndonesia',this)" required>
+                                    <?php if ($instansi->negara == NULL || $instansi->negara == "") : ?>
+                                        <option disabled selected value="">Pilih Negara</option>
+                                        <option value="Indonesia">Indonesia</option>
+                                        <option value="lainnya">Lainnya...</option>
+                                    <?php elseif ($instansi->negara == "Indonesia") : ?>
+                                        <option selected value="Indonesia">Indonesia</option>
+                                        <option value="lainnya">Lainnya...</option>
+                                    <?php else : ?>
+                                        <option value="<?= $instansi->negara ?>" selected>
+                                            <?= $instansi->negara ?>
+                                        </option>
+                                        <option value="Indonesia">Indonesia</option>
+                                        <option value="lainnya">Lainnya...</option>
+                                    <?php endif; ?>
+                                </select>
                                 <div class="hidden" id="negaraLainIndonesia">
-                                    <input type="text" name="negaraLainnya" id="negaraLainnya" class="inputForm" placeholder="Masukkan nama negara">
+                                    <input type="text" name="negaraLainnya" id="negaraLainnya" class="inputForm" placeholder="Masukkan nama negara" required>
                                 </div>
                                 <div class="hidden" id="negaraIndonesia">
                                     <div class="md:grid md:grid-cols-2 md:gap-x-4">
                                         <div>
                                             <label for="provinsi" class="font-medium" id="labelProvinsi">Provinsi:</label>
-                                            <select name="provinsi" id="nama-provinsi" class="inputForm">
-                                                <?php if ($instansi->provinsi != NULL) : ?>
-                                                    <option value="<?= $instansi->provinsi ?>" selected>
+                                            <select name="provinsi" id="nama-provinsi" class="inputForm" required>
+                                                <?php if ($instansi->provinsi != NULL || $instansi->provinsi != "") : ?>
+                                                    <option selected>
                                                         <?= $instansi->provinsi ?>
                                                     </option>
                                                     <?php foreach ($daftarProv as $prov) : ?>
                                                         <option id="<?= $prov->id_provinsi ?>" value="<?= $prov->nama_provinsi ?>"><?= $prov->nama_provinsi ?></option>
                                                     <?php endforeach ?>
                                                 <?php else : ?>
-                                                    <option selected disabled>Pilih Provinsi</option>
+                                                    <option selected disabled value="">Pilih Provinsi</option>
                                                     <?php foreach ($daftarProv as $prov) : ?>
                                                         <option id="<?= $prov->id_provinsi ?>" value="<?= $prov->nama_provinsi ?>"><?= $prov->nama_provinsi ?></option>
                                                     <?php endforeach ?>
@@ -85,13 +85,13 @@
                                         </div>
                                         <div>
                                             <label for='kabkota' class='font-medium' id='labelKabkot'>Kabupaten/Kota:</label>
-                                            <select name='kabkota' id='kabkota' class='inputForm'>
-                                                <?php if ($instansi->kota != NULL) : ?>
-                                                    <option value="<?= $instansi->kota ?>" selected>
+                                            <select name='kabkota' id='kabkota' class='inputForm' required>
+                                                <?php if ($instansi->kota != NULL || $instansi->kota != "") : ?>
+                                                    <option selected>
                                                         <?= $instansi->kota ?>
                                                     </option>
                                                 <?php else : ?>
-                                                    <option selected disabled>Pilih Kabupaten/Kota</option>
+                                                    <option selected disabled value="">Pilih Kabupaten/Kota</option>
                                                 <?php endif; ?>
                                             </select>
                                             <input hidden type="text" name="kab" id="kab-hidden">
@@ -125,7 +125,7 @@
                                 </div>
                                 <div class="flex justify-end md:mb-6 mt-12">
                                     <input type="submit" value="SIMPAN" class="w-24 text-center py-1 bg-primarySidebar hover:bg-secondaryhover text-white rounded-full cursor-pointer focus:outline-none" id="tambahTempatKerja">
-                                </div>                                                    
+                                </div>
                             </form>
                         </div>
                     </div>

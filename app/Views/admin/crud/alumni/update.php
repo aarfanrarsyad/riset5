@@ -169,9 +169,9 @@ if ($instansi != NULL) {
                                         <div class="row mb-3">
                                             <label for="negara" class="col-sm-2 col-form-label">Negara</label>
                                             <div class="col-sm-10">
-                                                <select name="negara" id="negara" class="inputForm" onchange="displayDiv2('negaraLainIndonesia','negaraIndonesia',this)">
-                                                    <?php if ($alumni['negara'] == NULL) : ?>
-                                                        <option disabled selected>Pilih Negara</option>
+                                                <select name="negara" id="negara" class="inputForm" onchange="displayDiv2('negaraLainIndonesia','negaraIndonesia',this)" required>
+                                                    <?php if ($alumni['negara'] == NULL || $alumni['negara'] == "") : ?>
+                                                        <option disabled selected value="">Pilih Negara</option>
                                                         <option value="Indonesia">Indonesia</option>
                                                         <option value="lainnya">Lainnya...</option>
                                                     <?php elseif ($alumni['negara'] == "Indonesia") : ?>
@@ -191,7 +191,7 @@ if ($instansi != NULL) {
                                             <div class="row mb-3">
                                                 <label for="negara" class="col-sm-2 col-form-label">Negara</label>
                                                 <div class="col-sm-10">
-                                                    <input type="text" name="negaraLainnya" id="negaraLainnya" class="inputForm" placeholder="Masukkan nama negara">
+                                                    <input type="text" name="negaraLainnya" id="negaraLainnya" class="inputForm" placeholder="Masukkan nama negara" required>
                                                 </div>
                                             </div>
                                         </div>
@@ -199,16 +199,16 @@ if ($instansi != NULL) {
                                             <div class="row mb-3">
                                                 <label for="provinsi" class="col-sm-2 col-form-label">Provinsi</label>
                                                 <div class="col-sm-10">
-                                                    <select name="provinsi" id="nama-provinsi" class="inputForm">
-                                                        <?php if ($alumni['provinsi'] != NULL) : ?>
-                                                            <option selected disabled>
+                                                    <select name="provinsi" id="nama-provinsi" class="inputForm" required>
+                                                        <?php if ($alumni['provinsi'] != NULL || $alumni['provinsi'] != "") : ?>
+                                                            <option selected>
                                                                 <?= $alumni['provinsi'] ?>
                                                             </option>
                                                             <?php foreach ($daftarProv as $prov) : ?>
                                                                 <option id="<?= $prov->id_provinsi ?>" value="<?= $prov->nama_provinsi ?>"><?= $prov->nama_provinsi ?></option>
                                                             <?php endforeach ?>
                                                         <?php else : ?>
-                                                            <option selected disabled>Pilih Provinsi</option>
+                                                            <option selected disabled value="">Pilih Provinsi</option>
                                                             <?php foreach ($daftarProv as $prov) : ?>
                                                                 <option id="<?= $prov->id_provinsi ?>" value="<?= $prov->nama_provinsi ?>"><?= $prov->nama_provinsi ?></option>
                                                             <?php endforeach ?>
@@ -220,13 +220,13 @@ if ($instansi != NULL) {
                                             <div class="row mb-3">
                                                 <label for="kota" class="col-sm-2 col-form-label">Kota/Kabupaten</label>
                                                 <div class="col-sm-10">
-                                                    <select name='kabkota' id='kabkota' class='inputForm'>
-                                                        <?php if ($alumni['kota'] != NULL) : ?>
-                                                            <option selected disabled>
+                                                    <select name='kabkota' id='kabkota' class='inputForm' required>
+                                                        <?php if ($alumni['kota'] != NULL || $alumni['kota'] != "") : ?>
+                                                            <option selected>
                                                                 <?= $alumni['kota'] ?>
                                                             </option>
                                                         <?php else : ?>
-                                                            <option selected disabled>Pilih Kabupaten/Kota</option>
+                                                            <option selected disabled value="">Pilih Kabupaten/Kota</option>
                                                         <?php endif; ?>
                                                     </select>
                                                     <input hidden type="text" name="kab" id="kab-hidden">

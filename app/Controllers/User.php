@@ -493,36 +493,25 @@ class User extends BaseController
 		$telp_alumni   	= htmlspecialchars($_POST['telp_alumni']);
 		$email			= htmlspecialchars($_POST['email']);
 		$alamat       	= htmlspecialchars($_POST['alamat']);
+		$negara = NULL;
+		$provinsi = NULL;
+		$kota = NULL;
 		if (isset($_POST['negara'])) {
-			$negara       	= htmlspecialchars($_POST['negara']);
-		} else {
-			$negara = NULL;
-		}
-		$negara2       	= htmlspecialchars($_POST['negaraLainnya']);
-		if (isset($_POST['prov'])) {
-			$provinsi 		= htmlspecialchars($_POST['prov']);
-		} else {
-			$provinsi = NULL;
-		}
-		$kota			= NULL;
-		if ($negara == "Indonesia") {
-			if ($provinsi != NULL) {
-				$provinsi       = ucwords(htmlspecialchars($_POST['prov']));
-				if (isset($_POST['kab'])) {
-					$kota       	= ucwords(htmlspecialchars($_POST['kab']));
+			$negara  = htmlspecialchars($_POST['negara']);
+
+			if ($negara == "Indonesia") {
+				if (isset($_POST['prov'])) {
+					$provinsi = ucwords(htmlspecialchars($_POST['prov']));
+
+					if (isset($_POST['kab'])) {
+						$kota  = ucwords(htmlspecialchars($_POST['kab']));
+					}
 				}
-			} else {
-				$provinsi = NULL;
-			}
-		} else {
-			if ($negara2 == "") {
-				$negara = NULL;
-				$provinsi = NULL;
-			} else {
-				$negara = htmlspecialchars($negara2);
-				$provinsi = NULL;
+			} else if ($negara == "lainnya") {
+				$negara = htmlspecialchars($_POST['negaraLainnya']);
 			}
 		}
+
 		$ig				= htmlspecialchars($_POST['ig']);
 		$fb				= htmlspecialchars($_POST['fb']);
 		$twitter		= htmlspecialchars($_POST['twitter']);

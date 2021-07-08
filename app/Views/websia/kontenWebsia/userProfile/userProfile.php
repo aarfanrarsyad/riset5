@@ -777,7 +777,6 @@ $cprestasi = '<div class="flex-initial text-primary mt-1 ml-2">' . $sembunyi . '
     </a>
 </div>
 <hr class="invisible border-primary border-opacity-75 w-4/5 object-center mx-auto mb-8 lg:mb-12">
-</div>
 <!-- Akhir Foto Tentang Anda -->
 
 <script>

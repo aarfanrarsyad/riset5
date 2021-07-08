@@ -1,58 +1,73 @@
 if ($('#negara').val() === "Indonesia") {
+    $('#negaraLainnya').removeAttr('required')
     $('#negaraIndonesia').removeClass("hidden")
 
-    if ($('#nama-provinsi option:selected').val() !== "Pilih Provinsi") {
+    if ($('#nama-provinsi option:selected').val() !== "") {
         let prov = $('#nama-provinsi option:selected').val()
         $('#nama-provinsi option:selected').remove()
         $('#nama-provinsi').val(prov)
         $('#prov-hidden').val($('#nama-provinsi').val())
 
-        if ($('#kabkota option:selected').val() !== "Pilih Kabupaten/Kota") {
-            let kab = $('#kabkota option:selected').val()
-            $('#kabkota option:selected').remove()
-
-            $.post(
-              "../../../User/daftarKab",
-              {
+        let kab = $('#kabkota option:selected').val()
+        $.post(
+            "../../../User/daftarKab", {
                 id: $("#nama-provinsi option:selected").attr("id"),
-              },
-              function (data) {
+            },
+            function (data) {
                 JSON.parse(data).forEach((el) => {
-                  $("#kabkota").append(`
-                        <option id="${el["id_kabkota"]}" value="${el["nama_kabkota"]}">${el["nama_kabkota"]}</option>
-                        `);
+                    $("#kabkota").append(`
+                    <option id="${el["id_kabkota"]}" value="${el["nama_kabkota"]}">${el["nama_kabkota"]}</option>
+                    `);
                 });
-                $("#kabkota").val(kab);
-                $("#kab-hidden").val($("#kabkota").val());
-              }
-            );
-        }
+
+                if ($('#kabkota option:selected').val() !== "") {
+                    $('#kabkota option:selected').remove()
+                    $('#kabkota').val(kab)
+                    $('#kab-hidden').val($('#kabkota').val())
+                }
+            }
+        );
+
     }
+} else {
+    $('#negaraLainnya').removeAttr('required')
+    $('#nama-provinsi').removeAttr('required')
+    $('#kabkota').removeAttr('required')
 }
 
 $('#negara').change(function () {
-    $('#kab-hidden').val($('#kabkota option:selected').val())
+    if ($('#negara').val() === "Indonesia") {
+        $('#negaraLainnya').removeAttr('required')
+        $('#nama-provinsi').prop('required', true)
+        $('#kabkota').prop('required', true)
+    } else if ($('#negara').val() === "lainnya") {
+        $('#nama-provinsi').removeAttr('required')
+        $('#kabkota').removeAttr('required')
+        $('#negaraLainnya').prop('required', true)
+    } else {
+        $('#negaraLainnya').removeAttr('required')
+        $('#nama-provinsi').removeAttr('required')
+        $('#kabkota').removeAttr('required')
+    }
 })
 
 $('#nama-provinsi').change(function () {
     $('#prov-hidden').val($('#nama-provinsi option:selected').val())
+    $('#nama-provinsi option[value=""]').remove()
 
     $.post(
-      "../../../User/daftarKab",
-      {
-        id: $("#nama-provinsi option:selected").attr("id"),
-      },
-      function (data) {
-        $("#kabkota").html("");
-        JSON.parse(data).forEach((el) => {
-          $("#kabkota").append(`
+        "../../../User/daftarKab", {
+            id: $("#nama-provinsi option:selected").attr("id"),
+        },
+        function (data) {
+            $("#kabkota").html("");
+            JSON.parse(data).forEach((el) => {
+                $("#kabkota").append(`
                         <option id="${el["id_kabkota"]}" value="${el["nama_kabkota"]}">${el["nama_kabkota"]}</option>
                     `);
-        });
-        $("#kabkota").prepend(`
-                        <option disabled value="Select">Pilih Kabupaten/Kota</option>
-                    `);
-      }
+            });
+            $('#kab-hidden').val($('#kabkota option:selected').val())
+        }
     );
 
 })
@@ -425,7 +440,8 @@ $('.tambahPendidikan').click(function () {
             setTimeout(function () {
                 $('#formTambahPendidikan').remove()
             }, 400);
-        } e
+        }
+        e
     })
 })
 

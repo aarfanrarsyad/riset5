@@ -181,10 +181,10 @@ if ($alumni->cprestasi == 0) {
                     <label for="negara" class="font-medium" id="labelNegara">Negara:</label>
                     <input type="checkbox" <?= $calamat ?> name="checkAlamat" data-id="Alamat" id="checkAlamat" class="cursor-pointer focus:outline-none editTampilan hidden">
                 </div>
-                <select name="negara" id="negara" class="inputForm" onchange="displayDiv2('negaraLainIndonesia','negaraIndonesia',this)">
+                <select name="negara" id="negara" class="inputForm" onchange="displayDiv2('negaraLainIndonesia','negaraIndonesia',this)" required>
 
-                    <?php if ($alumni->negara == NULL) : ?>
-                        <option disabled selected>Pilih Negara</option>
+                    <?php if ($alumni->negara == NULL || $alumni->negara == "") : ?>
+                        <option disabled selected value="">Pilih Negara</option>
                         <option value="Indonesia">Indonesia</option>
                         <option value="lainnya">Lainnya...</option>
                     <?php elseif ($alumni->negara == "Indonesia") : ?>
@@ -201,22 +201,22 @@ if ($alumni->cprestasi == 0) {
                 </select>
 
                 <div class="hidden" id="negaraLainIndonesia">
-                    <input type="text" name="negaraLainnya" id="negaraLainnya" class="inputForm" placeholder="Masukkan nama negara">
+                    <input type="text" name="negaraLainnya" id="negaraLainnya" class="inputForm" placeholder="Masukkan nama negara" required>
                 </div>
                 <div class="hidden" id="negaraIndonesia">
                     <div class="md:grid md:grid-cols-2 md:gap-x-4">
                         <div>
                             <label for="provinsi" class="font-medium" id="labelProvinsi">Provinsi:</label>
-                            <select name="provinsi" id="provinsi" class="inputForm">
-                                <?php if ($alumni->provinsi != NULL) : ?>
-                                    <option selected disabled>
+                            <select name="provinsi" id="provinsi" class="inputForm" required>
+                                <?php if ($alumni->provinsi != NULL || $alumni->provinsi != "") : ?>
+                                    <option selected>
                                         <?= $alumni->provinsi ?>
                                     </option>
                                     <?php foreach ($daftarProv as $prov) : ?>
                                         <option id="<?= $prov->id_provinsi ?>" value="<?= $prov->nama_provinsi ?>"><?= $prov->nama_provinsi ?></option>
                                     <?php endforeach ?>
                                 <?php else : ?>
-                                    <option selected disabled>Pilih Provinsi</option>
+                                    <option selected disabled value="">Pilih Provinsi</option>
                                     <?php foreach ($daftarProv as $prov) : ?>
                                         <option id="<?= $prov->id_provinsi ?>" value="<?= $prov->nama_provinsi ?>"><?= $prov->nama_provinsi ?></option>
                                     <?php endforeach ?>
@@ -227,14 +227,14 @@ if ($alumni->cprestasi == 0) {
                         </div>
                         <div>
                             <label for='kabkota' class='font-medium' id='labelKabkot'>Kabupaten/Kota:</label>
-                            <select name='kabkota' id='kabkota' class='inputForm'>
+                            <select name='kabkota' id='kabkota' class='inputForm' required>
 
-                                <?php if ($alumni->kota != NULL) : ?>
-                                    <option selected disabled>
+                                <?php if ($alumni->kota != NULL || $alumni->kota != "") : ?>
+                                    <option selected>
                                         <?= $alumni->kota ?>
                                     </option>
                                 <?php else : ?>
-                                    <option selected disabled>Pilih Kabupaten/Kota</option>
+                                    <option selected disabled value="">Pilih Kabupaten/Kota</option>
                                 <?php endif; ?>
 
                             </select>

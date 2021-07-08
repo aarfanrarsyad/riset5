@@ -1047,37 +1047,22 @@ class Admin extends BaseController
 			return redirect()->back()->withInput();
 		}
 
-		$negara		= htmlspecialchars($_POST['negara']);
-		$negara2    = htmlspecialchars($_POST['negaraLainnya']);
-
-		if (isset($_POST['negara'])) {
-			$negara       	= htmlspecialchars($_POST['negara']);
-		} else {
-			$negara = NULL;
-		}
-		$negara2       	= htmlspecialchars($_POST['negaraLainnya']);
-		if (isset($_POST['prov'])) {
-			$provinsi 		= htmlspecialchars($_POST['prov']);
-		} else {
-			$provinsi = NULL;
-		}
+		$negara = NULL;
+		$provinsi = NULL;
 		$kota = NULL;
-		if ($negara == "Indonesia") {
-			if ($provinsi != NULL) {
-				$provinsi       = ucwords(htmlspecialchars($_POST['prov']));
-				if (isset($_POST['kab'])) {
-					$kota       	= ucwords(htmlspecialchars($_POST['kab']));
+		if (isset($_POST['negara'])) {
+			$negara  = htmlspecialchars($_POST['negara']);
+
+			if ($negara == "Indonesia") {
+				if (isset($_POST['prov'])) {
+					$provinsi = ucwords(htmlspecialchars($_POST['prov']));
+
+					if (isset($_POST['kab'])) {
+						$kota  = ucwords(htmlspecialchars($_POST['kab']));
+					}
 				}
-			} else {
-				$provinsi = NULL;
-			}
-		} else {
-			if ($negara2 == "") {
-				$negara = NULL;
-				$provinsi = NULL;
-			} else {
-				$negara = htmlspecialchars($negara2);
-				$provinsi = NULL;
+			} else if ($negara == "lainnya") {
+				$negara = htmlspecialchars($_POST['negaraLainnya']);
 			}
 		}
 
