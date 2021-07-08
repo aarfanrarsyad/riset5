@@ -1,94 +1,59 @@
 <?= $this->extend('websia/kontenWebsia/editProfile/layoutEdit.php'); ?>
 
 <?= $this->section('contentEdit'); ?>
-<style>
-    .formEdit {
-        background-color: #F9F9F9;
-    }
-</style>
 
-<div class="w-full bg-white mb-8" id="pagePendidikan">
-    <!--<div class="flex justify-end w-full mb-4">
-        <div class="bg-secondary hover:bg-secondaryhover text-white lg:py-1.5 py-1 px-3 lg:text-sm text-xs outline-none cursor-pointer rounded-full flex gap-x-2 items-center" id="buttonEditTampilanPendidikan">
-            <div>
-                Edit Tampilan
-            </div>
-            <img src="/img/components/icon/edit.png" alt="edit pendidikan" class="w-4 h-4">
-        </div>
-    </div>
-    <div class="editTampilanPendidikan hidden">
-        <form action="/User/updateTampilanPendidikan" method="POST">
-            <div class="flex justify-between mb-4">
-                <label for="checkPendidikan" id="labelCheckPendidikan" class="text-gray-500 font-bold">Tampilkan Pendidikan</label>
-                <input type="checkbox" <= $cpendidikan ?> name="checkPendidikan" id="checkPendidikan" class="cursor-pointer outline-none" onclick="checkPendidikan()">
-            </div>
-            <div class="flex justify-end">
-                <input type="submit" value="SIMPAN" class="ml-auto bg-secondary text-white rounded-full w-24 py-1 text-center cursor-pointer hover:bg-secondaryhover transition-colors duration-300 -mt-2 mb-4">
-            </div>
-        </form>
-    </div>-->
-    <div class="md:overflow-x-auto overflow-x-scroll shadow-2xl rounded-3xl">
-        <!-- start tabel pendidikan-->
-        <table class="w-full sm:text-sm text-xs rounded-3xl shadow-2xl md:shadow-none font-paragraph">
-            <!-- start nama kolom tabel pendidikan-->
-            <thead class="formEdit">
+<div class="w-full bg-white mb-8 md:overflow-x-auto overflow-x-scroll shadow-2xl rounded-3xl" id="pagePendidikan">
+    <!-- start tabel pendidikan-->
+    <table class="w-full sm:text-sm text-xs font-paragraph shadow-2xl rounded-3xl">
+        <!-- start nama kolom tabel pendidikan-->
+        <thead class="formEdit">
+            <tr>
+                <th class="py-4 lg:px-3 px-2">No</th>
+                <th class="lg:px-2 px-1">Jenjang</th>
+                <th class="lg:px-2 px-1">Instansi</th>
+                <th class="lg:px-2 px-1">Program Studi</th>
+                <th class="lg:px-2 px-1">Tahun Masuk</th>
+                <th class="lg:px-2 px-1">Tahun Lulus</th>
+                <th class="lg:px-2 px-1">Judul Tulisan</th>
+            </tr>
+        </thead>
+        <!-- end nama kolom tabel pendidikan-->
+
+        <!-- start isi tabel pendidikan-->
+        <tbody>
+            <?php $n = 1;
+            foreach ($pendidikan as $row) : ?>
+                <tr class="border-t-2 border-b-2 bg-white">
+                    <td class="text-center md:py-3 py-2"><?= $n ?></td>
+                    <td><?= $row->jenjang ?></td>
+                    <td><?= $row->instansi ?></td>
+                    <td><?= $row->program_studi ?></td>
+                    <td><?= $row->tahun_masuk ?></td>
+                    <td><?= $row->tahun_lulus ?></td>
+                    <td class="md:py-1.5 py-1 text-justify"><?= $row->judul_tulisan ?></td>
+                </tr>
+            <?php $n = $n + 1;
+            endforeach; ?>
+            <tr class="formEdit">
+                <?php if (session('BPS') == "KATA IHZA ADAIN ADD SAMA DELETE AJA") : ?>
+                    <td colspan="8" class="border-b-2">
+                        <div class="ml-auto mr-3 bg-secondary text-white rounded-full w-28 py-1 text-center cursor-pointer hover:bg-secondaryhover transition-colors duration-300 my-2 tambahPendidikan">TAMBAH</div>
+                    </td>
+                <?php endif ?>
+            </tr>
+            <?php if ($pendidikan == NULL) : ?>
+                <!-- Tampilan jika data semua kolom belum diisi -->
                 <tr>
-                    <th class="pt-4 lg:px-3 md:px-2 px-1 pb-1 w-1/12">No</th>
-                    <th class="pt-4 lg:px-2 px-1 pb-1 w-1/12">Jenjang</th>
-                    <th class="pt-4 lg:px-2 px-1 pb-1 w-2/12">Instansi</th>
-                    <th class="pt-4 lg:px-2 px-1 pb-1 w-2/12">Program Studi</th>
-                    <th class="pt-4 pb-1 pl-1 w-1/12">
-                        <div class="flex">
-                            <span class="mr-1">Tahun Masuk</span>
-                        </div>
-                    </th>
-                    <th class="pt-4 pb-1 pl-1 w-1/12">
-                        <div class="flex">
-                            <span class="mr-1">Tahun Lulus</span>
-                        </div>
-
-                    </th>
-                    <th class="pt-4 lg:px-2 px-1 pb-1 w-4/12">Judul Tulisan</th>
+                    <td colspan="8" class="text-sm text-center border-b-2 border-gray-200 px-3 lg:px-5 py-2 md:py-3 lg:py-4">Riwayat pendidikan tidak ditemukan.</td>
                 </tr>
-            </thead>
-            <!-- end nama kolom tabel pendidikan-->
-
-            <!-- start isi tabel pendidikan-->
-            <tbody>
-                <?php $n = 1;
-                foreach ($pendidikan as $row) : ?>
-                    <tr class="border-t-2 border-b-2 bg-white">
-                        <td class="text-center py-3"><?= $n ?></td>
-                        <td><?= $row->jenjang ?></td>
-                        <td><?= $row->instansi ?></td>
-                        <td><?= $row->program_studi ?></td>
-                        <td><?= $row->tahun_masuk ?></td>
-                        <td><?= $row->tahun_lulus ?></td>
-                        <td class="py-1.5"><?= $row->judul_tulisan ?></td>
-                    </tr>
-                <?php $n = $n + 1;
-                endforeach; ?>
-                <tr class="formEdit">
-                    <?php if (session('BPS') == "KATA IHZA ADAIN ADD SAMA DELETE AJA") : ?>
-                        <td colspan="8" class="border-b-2">
-                            <div class="ml-auto mr-3 bg-secondary text-white rounded-full w-28 py-1 text-center cursor-pointer hover:bg-secondaryhover transition-colors duration-300 my-2 tambahPendidikan">TAMBAH</div>
-                        </td>
-                    <?php endif ?>
-                </tr>
-                <?php if ($pendidikan == NULL) : ?>
-                    <!-- Tampilan jika data semua kolom belum diisi -->
-                    <tr>
-                        <td colspan="8" class="text-sm text-center border-b-2 border-gray-200 px-3 lg:px-5 py-2 md:py-3 lg:py-4">Riwayat pendidikan tidak ditemukan.</td>
-                    </tr>
-                <?php endif; ?>
-                <tr class="h-5 formEdit">
-                    <td colspan="8" class="rounded-b-3xl"></td>
-                </tr>
-            </tbody>
-            <!-- end isi tabel pendidikan-->
-        </table>
-        <!-- end tabel pendidikan-->
-    </div>
+            <?php endif; ?>
+            <tr class="h-5 formEdit">
+                <td colspan="8" class="rounded-b-3xl"></td>
+            </tr>
+        </tbody>
+        <!-- end isi tabel pendidikan-->
+    </table>
+    <!-- end tabel pendidikan-->
 </div>
 
 <!-- dialog box di edit pendidikan -->

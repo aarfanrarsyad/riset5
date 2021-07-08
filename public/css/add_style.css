@@ -64,7 +64,7 @@ body div.loading {
     top: 6.5rem;
   }
 
-  #sidebarDok > img {
+  #sidebarDok>img {
     margin-top: 1.3rem;
     margin-bottom: 1.3rem;
   }
@@ -88,7 +88,7 @@ body div.loading {
     top: 4rem;
   }
 
-  #sidebarDok > img {
+  #sidebarDok>img {
     margin-top: 1.2rem;
     margin-bottom: 1.2rem;
   }
@@ -103,8 +103,8 @@ body div.loading {
 }
 
 #menu1:hover,
-#menu1 + ul > li > div:hover,
-#menu1 + ul > li > ul > li:hover {
+#menu1+ul>li>div:hover,
+#menu1+ul>li>ul>li:hover {
   background-color: rgb(1, 89, 152);
 }
 
@@ -118,7 +118,7 @@ body div.loading {
 
 /* style layoutDokumentasi */
 
-#nav ul li:hover > ul {
+#nav ul li:hover>ul {
   max-height: 5em;
 }
 
@@ -139,6 +139,50 @@ body div.loading {
 }
 
 /* style editProfi */
+@media (max-width:767px) {
+  .logoSia {
+    height: 40px;
+  }
+}
+
+@media (max-width: 639px) {
+  .toogleEdit {
+    right: 8px;
+  }
+}
+
+@media (min-width: 640px) and (max-width:767px) {
+  .toogleEdit {
+    right: 15px;
+  }
+}
+
+@media (min-width: 768px) {
+  .logoSia {
+    height: 111px;
+  }
+
+  .toogleEdit {
+    left: 19px;
+  }
+
+  .toogleEdit.buka {
+    left: 150px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .toogleEdit.buka {
+    left: 200px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .toogleEdit.buka {
+    left: 250px;
+  }
+}
+
 .formEdit {
   background-color: #f9f9f9;
 }
@@ -188,11 +232,11 @@ input[type="checkbox"] {
 }
 
 /* style unggah berita */
-#infoBerita ~ div {
+#infoBerita~div {
   background-color: #6cf;
 }
 
-#infoBerita ~ div:before {
+#infoBerita~div:before {
   position: absolute;
   top: -10px;
   content: "";
@@ -202,11 +246,11 @@ input[type="checkbox"] {
   border-color: transparent transparent #6cf transparent;
 }
 
-#notif ~ div {
+#notif~div {
   background-color: #6cf;
 }
 
-#notif ~ div:before {
+#notif~div:before {
   position: absolute;
   top: -10px;
   content: "";
@@ -216,11 +260,11 @@ input[type="checkbox"] {
   border-color: transparent transparent #6cf transparent;
 }
 
-#notif1 ~ div {
+#notif1~div {
   background-color: #6cf;
 }
 
-#notif1 ~ div:before {
+#notif1~div:before {
   position: absolute;
   top: -10px;
   content: "";
@@ -230,32 +274,11 @@ input[type="checkbox"] {
   border-color: transparent transparent #6cf transparent;
 }
 
-#infoMedsos ~ div {
+#infoMedsos~div {
   background-color: #6cf;
-  position: absolute;
-  top: 1148px;
-  right: 38px;
 }
 
-@media (min-width: 768px) {
-  #infoMedsos ~ div {
-    background-color: #6cf;
-    position: absolute;
-    top: 1140px;
-    right: 220px;
-  }
-}
-
-@media (min-width: 1024px) {
-  #infoMedsos ~ div {
-    background-color: #6cf;
-    position: absolute;
-    top: 853px;
-    right: 126px;
-  }
-}
-
-#infoMedsos ~ div:before {
+#infoMedsos~div:before {
   position: absolute;
   top: -10px;
   content: "";
@@ -265,8 +288,21 @@ input[type="checkbox"] {
   border-color: transparent transparent #6cf transparent;
 }
 
+
+@media (min-width:768px) {
+  #infoMedsos~div {
+    left: 113px;
+  }
+}
+
+@media (max-width:767px) {
+  #infoMedsos~div {
+    left: 111px;
+  }
+}
+
 /* style proyek WS */
-.proyek + div {
+.proyek+div {
   box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.1), 0 0px 3px 3px rgba(0, 0, 0, 0.06);
 }
 

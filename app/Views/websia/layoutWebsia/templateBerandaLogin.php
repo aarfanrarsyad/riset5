@@ -54,7 +54,7 @@
     <title><?php echo $judulHalaman ?></title>
 </head>
 
-<body class="flex min-h-screen flex-col overflow-x-hidden">
+<body>
     <!-- loading -->
     <div class="loading flex fixed w-full h-screen z-50 transition-opacity duration-200">
         <img src="/img/components/load.gif" alt="loading gif" class="m-auto items-center md:w-96 sm:w-72 w-60">
@@ -69,13 +69,13 @@
             <path d="M7.247 4.86l-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z" />
         </svg>
     </button>
-
-    <!-- HEADER -->
-    <div class="navbar w-full fixed z-30 bg-cover bg-no-repeat bg-left transition duration-700 ease-out" style="background-image: url(/img/components/bgHeader.png)" id="navbar">
+    <div class="h-screen m-0 flex flex-col">
+        <!-- HEADER -->
+        <!-- class="navbar w-full fixed z-30 bg-cover bg-no-repeat bg-left" style="background-image: url(/img/components/bgHeader.png)" id="navbar" -->
         <header>
-            <div class="flex flex-col">
-                <div class="flex items-center justify-between px-6 md:pt-3 pt-1 ">
-                    <div class="">
+            <div class="navbar w-full fixed z-30 bg-cover bg-no-repeat bg-left" style="background-image: url(/img/components/bgHeader.png)" id="navbar">
+                <div class="flex items-center justify-between px-6 md:pt-3 pt-1">
+                    <div>
                         <div class="flex">
                             <a href="<?= base_url(); ?>">
                                 <img src="/img/components/logo/logo_sia.png" class=" z-50 md:w-16 w-10" alt="logo SIA">
@@ -144,7 +144,7 @@
                         <a href="/auth/logout" class="font-paragraph font-medium items-center hidden md:flex md:h-9 md:px-5 md:mt-3.5 md:-mb-14 md:shadow-sm md:text-base  md:text-white md:bg-secondary hover:bg-secondaryhover transition-colors duration-200 hover:rounded">
                             KELUAR
                         </a>
-                        <div class="">
+                        <div>
                             <button type="button" class="block text-white hover:text-gray-200 focus:text-gray-200 focus:outline-none md:hidden" id="hamburger">
                                 <svg class="w-8 fill-current" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
@@ -217,80 +217,77 @@
                         </a>
                     </div>
                 </div>
-
-
             </div>
+            <div class="w-full md:h-28 h-10 bg-primary">
+                <!-- Codingan Navbar Taruh Sini juga buat semacam marginnya -->
+            </div>
+            <!-- END HEADER -->
         </header>
-    </div>
-    <div class="w-full md:h-28 h-12 bg-primary">
-        <!-- Codingan Navbar Taruh Sini juga buat semacam marginnya -->
-    </div>
-    <!-- END HEADER -->
 
-    <!-- CONTENT PAGE DI SINI -->
-    <div class="w-full flex flex-1 flex-col">
-        <?= $this->renderSection('content'); ?>
-    </div>
-    <!-- END CONTENT PAGE -->
-
-    <!-- FOOTER -->
-    <div class="bg-primary w-full pt-6 pb-3 lg:px-20 md:px-8 px-3">
-        <div class="flex flex-col md:flex-row md:justify-around md:text-sm text-xs  items-center md:items-start">
-            <!-- awal footer stis -->
-            <div class="flex  gap-x-2 mx-auto md:mx-0 mb-2 md:mb-0">
-                <div class=" md:w-auto">
-                    <a href="https://stis.ac.id/"><img class="lg:w-24 lg:h-24 w-20 h-20" src="/img/components/logo/logo_stis.png" alt="logo STIS"></a>
-                </div>
-                <div class="text-white font-heading">
-                    <h3>Jl. Otto Iskandardinata </h3>
-                    <h3>No.64C Jakarta 13330</h3>
-                    <h3>Telp. (021) 8191437, 8508812</h3>
-                    <h3>Fax. (021) 8197577</h3>
-                    <div class="flex gap-x-2 mt-2">
-                        <a href="https://www.facebook.com/PolstatSTIS/"><img class="lg:h-6 h-4" src="/img/components/icon/facebook.png" alt="icon facebook"></a>
-                        <a href="https://www.youtube.com/channel/UCwmpr4lmrApoGRpq4TcmsvA"><img class="lg:h-6 h-4" src="/img/components/icon/youtube.png" alt="icon youtube"></a>
-                        <a href="https://twitter.com/stisjkt"><img class="lg:h-6 h-4" src="/img/components/icon/twitter.png" alt="icon twitter"></a>
-                        <a href="https://www.instagram.com/polstatstis/"><img class="lg:h-6 h-4" src="/img/components/icon/instagram.png" alt="icon instagram"></a>
-                    </div>
-                </div>
-            </div>
-            <!-- akhir footer stis -->
-
-            <!-- awal footer haistis -->
-            <div class="md:mt-0 mx-auto md:mx-0 mb-2 md:mb-0">
-                <a href="https://haisstis.org/"><img class="lg:h-28 h-20 w-36 lg:w-auto md:-mt-4 lg:-mt-6" src="/img/components/logo/logo_haisstis.png" alt="logo HAISSTIS"></a>
-                <div class="flex justify-center md:justify-start gap-x-2 -mt-2 lg:-mt-4">
-                    <div><img class="lg:h-5 h-4" src="/img/components/icon/message_white.png" alt="icon message">
-                    </div>
-                    <div>
-                        <h3 class="text-white font-heading">sia@stis.ac.id</h3>
-                    </div>
-                </div>
-            </div>
-            <!-- akhir footer haistis -->
-
-            <!-- awal link ke webservice  -->
-            <div class="flex flex-col text-white text-center md:text-left font-heading mx-auto md:mx-5 mt-4 md:mt-0">
-                <a href="https://pkl.stis.ac.id/60/" class="mb-2 hover:text-secondary">
-                    <h3 class="underline md:no-underline">Website PKL60</h3>
-                </a>
-                <a href="/developer" class="hover:text-secondary">
-                    <h3 class="underline md:no-underline">Webservice(API)</h3>
-                </a>
-            </div>
-            <!-- akhir link ke webservice  -->
-
+        <!-- CONTENT PAGE DI SINI -->
+        <div class="w-full">
+            <?= $this->renderSection('content'); ?>
         </div>
+        <!-- END CONTENT PAGE -->
 
-        <div class="flex items-center mt-4">
-            <div class="flex-grow">
-                <hr class="text-white bg-white border my-auto">
+        <!-- FOOTER -->
+        <footer class="z-20 mt-auto bg-primary w-full pt-6 pb-3 lg:px-20 md:px-8 px-3">
+            <div class="flex flex-col md:flex-row md:justify-around md:text-sm text-xs  items-center md:items-start">
+                <!-- awal footer stis -->
+                <div class="flex  gap-x-2 mx-auto md:mx-0 mb-2 md:mb-0">
+                    <div class=" md:w-auto">
+                        <a href="https://stis.ac.id/"><img class="lg:w-24 lg:h-24 w-20 h-20" src="/img/components/logo/logo_stis.png" alt="logo STIS"></a>
+                    </div>
+                    <div class="text-white font-heading">
+                        <h3>Jl. Otto Iskandardinata </h3>
+                        <h3>No.64C Jakarta 13330</h3>
+                        <h3>Telp. (021) 8191437, 8508812</h3>
+                        <h3>Fax. (021) 8197577</h3>
+                        <div class="flex gap-x-2 mt-2">
+                            <a href="https://www.facebook.com/PolstatSTIS/"><img class="lg:h-6 h-4" src="/img/components/icon/facebook.png" alt="icon facebook"></a>
+                            <a href="https://www.youtube.com/channel/UCwmpr4lmrApoGRpq4TcmsvA"><img class="lg:h-6 h-4" src="/img/components/icon/youtube.png" alt="icon youtube"></a>
+                            <a href="https://twitter.com/stisjkt"><img class="lg:h-6 h-4" src="/img/components/icon/twitter.png" alt="icon twitter"></a>
+                            <a href="https://www.instagram.com/polstatstis/"><img class="lg:h-6 h-4" src="/img/components/icon/instagram.png" alt="icon instagram"></a>
+                        </div>
+                    </div>
+                </div>
+                <!-- akhir footer stis -->
+
+                <!-- awal footer haistis -->
+                <div class="md:mt-0 mx-auto md:mx-0 mb-2 md:mb-0">
+                    <a href="https://haisstis.org/"><img class="lg:h-28 h-20 w-36 lg:w-auto md:-mt-4 lg:-mt-6" src="/img/components/logo/logo_haisstis.png" alt="logo HAISSTIS"></a>
+                    <div class="flex justify-center md:justify-start gap-x-2 -mt-2 lg:-mt-4">
+                        <div><img class="lg:h-5 h-4" src="/img/components/icon/message_white.png" alt="icon message">
+                        </div>
+                        <div>
+                            <h3 class="text-white font-heading">sia@stis.ac.id</h3>
+                        </div>
+                    </div>
+                </div>
+                <!-- akhir footer haistis -->
+
+                <!-- awal link ke webservice  -->
+                <div class="flex flex-col text-white text-center md:text-left font-heading mx-auto md:mx-5 mt-4 md:mt-0">
+                    <a href="https://pkl.stis.ac.id/60/" class="mb-2 hover:text-secondary">
+                        <h3 class="underline md:no-underline">Website PKL60</h3>
+                    </a>
+                    <a href="/developer" class="hover:text-secondary">
+                        <h3 class="underline md:no-underline">Webservice(API)</h3>
+                    </a>
+                </div>
+                <!-- akhir link ke webservice  -->
             </div>
-        </div>
 
-        <h2 class="text-white text-sm text-center mt-1">Copyright &copy; PKL 60 Riset 5</h2>
+            <div class="flex items-center mt-4">
+                <div class="flex-grow">
+                    <hr class="text-white bg-white border my-auto">
+                </div>
+            </div>
+
+            <h2 class="text-white text-sm text-center mt-1">Copyright &copy; PKL 60 Riset 5</h2>
+        </footer>
+        <!-- END FOOTER -->
     </div>
-    <!-- END FOOTER -->
 </body>
 <script type="text/javascript" src="/js/loading.js"></script>
 <script src="/js/aos.js"></script>

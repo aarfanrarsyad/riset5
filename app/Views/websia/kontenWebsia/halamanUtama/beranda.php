@@ -45,7 +45,6 @@ if (session()->getFlashdata('role')) { ?>
 <!-- Akhir Carousel -->
 
 <!-- Awal Sejarah Singkat HAISTIS -->
-</div>
 <div class="flex md:flex-row flex-col-reverse my-8 pt-0 lg:px-20 md:px-8 px-5">
     <div class="md:w-2/3 block md:px-2 md:py-8 pb-4">
         <div class="md:mb-6 mb-2 text-xl text-center md:text-left text-black font-heading font-semibold">HASIL DARI PROYEK PKL RISET 5</div>

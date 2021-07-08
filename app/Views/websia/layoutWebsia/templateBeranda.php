@@ -39,33 +39,32 @@
     </button>
 
     <!-- HEADER -->
-    <div class="navbar w-full fixed z-30 bg-cover bg-no-repeat bg-left" style="background-image: url(/img/components/bgHeader.png)" id="navbar">
+    <header>
         <div class="navbar w-full fixed z-30 bg-cover bg-no-repeat bg-left" style="background-image: url(/img/components/bgHeader.png)" id="navbar">
-            <header>
-                <div class="flex items-center justify-between px-6 pt-3">
-                    <div class="flex">
-                        <a href="<?= base_url(); ?>">
-                            <img src="/img/components/logo/logo_sia.png" class=" z-50 md:w-16 w-10" alt="logo SIA">
-                        </a>
-                        <div class="md:px-3 px-2 my-auto text-white z-50">
-                            <p class="font-heading text-lg md:text-2xl font-semibold">Sistem Informasi Alumni</p>
-                            <p class="font-heading md:text-xs font-normal hidden md:block -mt-1.5">Akademi Ilmu Statistik - Sekolah Tinggi Ilmu Statistik - Politeknik Statistika STIS</p>
-                        </div>
-                    </div>
-
-                    <a href="/login">
-                        <button type="button" class="font-paragraph font-medium flex px-3 md:px-5 md:py-2 py-1 my-auto rounded-3xl shadow-sm md:text-base text-xs text-white bg-secondary hover:bg-secondaryhover transition-colors duration-200 focus:outline-none">
-                            MASUK
-                        </button>
+            <div class="flex items-center justify-between px-6 pt-3">
+                <div class="flex">
+                    <a href="<?= base_url(); ?>">
+                        <img src="/img/components/logo/logo_sia.png" class=" z-50 md:w-16 w-10" alt="logo SIA">
                     </a>
+                    <div class="md:px-3 px-2 my-auto text-white z-50">
+                        <p class="font-heading text-lg md:text-2xl font-semibold">Sistem Informasi Alumni</p>
+                        <p class="font-heading md:text-xs font-normal hidden md:block -mt-1.5">Akademi Ilmu Statistik - Sekolah Tinggi Ilmu Statistik - Politeknik Statistika STIS</p>
+                    </div>
                 </div>
-            </header>
+
+                <a href="/login">
+                    <button type="button" class="font-paragraph font-medium flex px-3 md:px-5 md:py-2 py-1 my-auto rounded-3xl shadow-sm md:text-base text-xs text-white bg-secondary hover:bg-secondaryhover transition-colors duration-200 focus:outline-none">
+                        MASUK
+                    </button>
+                </a>
+            </div>
         </div>
-    </div>
-    <div class="w-full md:h-18 h-12 bg-primary">
-        <!-- Codingan Navbar Taruh Sini juga buat semacam marginnya -->
-    </div>
-    <!-- END HEADER -->
+
+        <div class="w-full md:h-18 h-12 bg-primary">
+            <!-- Codingan Navbar Taruh Sini juga buat semacam marginnya -->
+        </div>
+        <!-- END HEADER -->
+    </header>
 
     <!-- CONTENT PAGE DI SINI -->
     <div class="w-full">
@@ -74,7 +73,7 @@
     <!-- END CONTENT PAGE -->
 
     <!-- FOOTER -->
-    <div class="bg-primary w-full pt-6 pb-3 lg:px-20 md:px-8 px-3">
+    <footer class="bg-primary w-full pt-6 pb-3 lg:px-20 md:px-8 px-3">
         <div class="flex flex-col md:flex-row md:justify-around md:text-sm text-xs items-center md:items-start">
             <!-- awal footer stis -->
             <div class="flex  gap-x-2 mx-auto md:mx-0 mb-2 md:mb-0">
@@ -128,7 +127,7 @@
         </div>
 
         <h2 class="text-white text-sm text-center mt-1">Copyright &copy; PKL 60 Riset 5</h2>
-    </div>
+    </footer>
     <!-- END FOOTER -->
 </body>
 <script type="text/javascript" src="/js/loading.js"></script>

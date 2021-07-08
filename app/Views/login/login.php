@@ -112,7 +112,7 @@
     if (session('error') == 'non-active' || session('err_sso') == 'non-active') : ?>
         <div id="alert">
             <div class="fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40">
-                <div class="mx-3 duration-700 transition-all p-3 rounded-lg flex items-center bg-redAlert">
+                <div class="mx-3 text-justify duration-700 transition-all p-3 rounded-lg flex items-center bg-redAlert">
                     <img src="/img/components/icon/warning.png" class="h-5 mr-2 text-danger" alt="Icon Warning">
                     <p class="sm:text-base text-sm text-danger font-heading font-bold"><strong>Login gagal!</strong> akun anda sedang dinonaktifkan. Silahkan hubungi admin.</p>
                 </div>
@@ -126,7 +126,7 @@
     <?php elseif (session('error') == 'sipadu_dosen') : ?>
         <div id="alert">
             <div class="fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40">
-                <div class="mx-3 duration-700 transition-all p-3 rounded-lg flex items-center bg-redAlert">
+                <div class="mx-3 text-justify duration-700 transition-all p-3 rounded-lg flex items-center bg-redAlert">
                     <img src="/img/components/icon/warning.png" class="h-5 mr-2 text-danger" alt="Icon Warning">
                     <p class="sm:text-base text-sm text-danger font-heading font-bold"><strong>Login gagal!</strong> silahkan gunakan akun Sipadu Mahasiswa atau akun BPS, atau hubungi admin website.</p>
                 </div>
@@ -140,7 +140,7 @@
     <?php elseif (session('err_sso') == 'bps_not_listed') : ?>
         <div id="alert">
             <div class="fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40">
-                <div class="mx-3 duration-700 transition-all p-3 rounded-lg flex items-center bg-redAlert">
+                <div class="mx-3 text-justify duration-700 transition-all p-3 rounded-lg flex items-center bg-redAlert">
                     <img src="/img/components/icon/warning.png" class="h-5 mr-2 text-danger" alt="Icon Warning">
                     <p class="sm:text-base text-sm text-danger font-heading font-bold"><strong>Login gagal!</strong> alumni belum terdaftar di database, harap hubungi admin website.</p>
                 </div>
@@ -154,7 +154,7 @@
     <?php else : ?>
         <div id="alert">
             <div class="fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40">
-                <div class="mx-3 duration-700 transition-all p-3 rounded-lg flex items-center bg-redAlert">
+                <div class="mx-3 text-justify duration-700 transition-all p-3 rounded-lg flex items-center bg-redAlert">
                     <img src="/img/components/icon/warning.png" class="h-5 mr-2 text-danger" alt="Icon Warning">
                     <p class="sm:text-base text-sm text-danger font-heading font-bold"><strong>Login gagal!</strong> username atau password anda salah.</p>
                 </div>
@@ -173,7 +173,7 @@ endif; ?>
 <?php if (session('not_alumni')) : ?>
     <div id="alert">
         <div class="fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40">
-            <div class="mx-3 duration-700 transition-all p-3 rounded-lg flex items-center bg-redAlert">
+            <div class="mx-3 text-justify duration-700 transition-all p-3 rounded-lg flex items-center bg-redAlert">
                 <img src="/img/components/icon/warning.png" class="h-5 mr-2 text-danger" alt="Icon Warning">
                 <p class="sm:text-base text-sm text-danger font-heading font-bold"><strong>Login gagal!</strong> anda belum termasuk sebagai ikatan alumni STIS.</p>
             </div>
@@ -195,7 +195,7 @@ session()->remove('not_alumni'); ?>
         <div class="hidden transform scale-0 opacity-0 duration-300 transition-all bg-gray bg-opacity-0">
             <div class="mx-3 sm:px-6 px-2 py-3 rounded-lg flex items-center text-justify bg-greenAlert">
                 <img src="/img/components/icon/check.png" class="h-5 mr-2 text-success" alt="icon check">
-                <p class="sm:text-lg text-base text-success">Kata sandi Anda berhasil diubah. Silakan login dengan kata sandi baru.</p>
+                <p class="sm:text-lg text-base text-success font-heading font-bold">Kata sandi Anda <strong>berhasil diubah.</strong> Silakan login dengan kata sandi baru.</p>
             </div>
         </div>
     </div>
@@ -229,7 +229,7 @@ session()->remove('not_alumni'); ?>
             setTimeout(function() {
                 $('#modalResetPass').remove()
             }, 200);
-        }, 2400);
+        }, 3000);
     }
 </script>
 
