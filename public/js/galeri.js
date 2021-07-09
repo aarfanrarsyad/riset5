@@ -236,7 +236,7 @@ function laporkanFoto(id){
     var base_url = window.location.origin;
 
     $('body').prepend(`
-    <div class="fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40 font-paragraph" id='formLaporFoto'>
+    <div class="fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40 font-paragraph overflow-auto" id='formLaporFoto'>
         <div class="hidden opacity-0 duration-700 transition-all xl:w-1/2 lg:w-7/12 md:w-2/3 sm:w-3/4 w-11/12 bg-gray bg-opacity-0">
             <div class="bg-primary py-4 px-6 rounded-t-2xl flex items-center justify-between text-secondary text-2xl">
                 <p class="font-heading font-bold">Laporkan Foto</p>

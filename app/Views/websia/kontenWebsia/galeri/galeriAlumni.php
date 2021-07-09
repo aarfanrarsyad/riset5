@@ -185,7 +185,7 @@
 <!-- Awal fitur unggah foto galeri -->
 <?php $validation = service('validation') ?>
 
-<div class="flex flex-col-reverse md:grid md:grid-cols-4 lg:grid-cols-5 md:gap-4 mb-8">
+<div class="flex flex-col-reverse md:grid md:grid-cols-4 lg:grid-cols-5 md:gap-4 mb-8 overflow-auto">
     <div class="md:col-span-2 lg:col-span-3 md:mx-8 mb-6">
         <div class="flex flex-col mx-6 md:m-6">
             <div class="mt-5 md:mt-1 text-center md:text-left text-3xl text-secondary font-bold font-heading">
@@ -202,7 +202,7 @@
             <img src="<?= base_url() ?>/img/components/galeri.png" alt="icon galeri" class="w-full md:h-full md:w-auto">
         </div>
     </div>
-    <div class="fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40 font-paragraph hidden" id='formUnggahFoto'>
+    <div class="fixed top-0 bottom-0 right-0 left-0 z-50 flex justify-center items-center bg-black bg-opacity-40 font-paragraph overflow-auto hidden" id='formUnggahFoto'>
         <div class="duration-700 transition-all xl:w-1/2 lg:w-7/12 md:w-2/3 sm:w-3/4 w-11/12 bg-gray bg-opacity-0">
             <div class="bg-primary py-4 px-6 rounded-t-2xl flex items-center justify-between text-secondary text-2xl">
                 <p class="font-heading font-bold">Unggah Foto</p>
