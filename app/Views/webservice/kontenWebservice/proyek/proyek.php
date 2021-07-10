@@ -2,19 +2,19 @@
 
 <?= $this->section('content'); ?>
 
-<div class="lg:mx-36 mx-5 lg:mt-12 md:mt-16 mt-12 mb-8 w-full">
-    <h3 class="font-heading font-bold text-center text-secondary xl:text-6xl lg:text-5xl md:text-4xl text-2xl">PROYEK
+<div class="xl:mx-36 md:mx-24 sm:mx-14 mx-5 lg:mt-12 md:mt-16 mt-12 mb-10">
+    <h3 class="font-heading font-bold text-center text-secondary xl:text-6xl lg:text-5xl md:text-4xl text-3xl">PROYEK
     </h3>
     <!-- start tombol buat proyek -->
     <!-- href="/developer/buatProyek" -->
-    <a href="/developer/buatProyek" class="">
-        <div class="flex justify-center items-center md:w-44 w-28 md:px-2 md:py-2 px-1 py-1 lg:mt-12 mt-4 mb-8 rounded-lg border-gray shadow-lg tracking-wider cursor-pointer hover:bg-gray-100">
-            <svg class="text-secondary md:w-8 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+    <div class="md:w-44 w-32 md:px-2 md:py-2 px-1 py-1 lg:mt-12 mt-4 md:mb-8 mb-5 rounded-lg border-gray shadow-lg tracking-wider cursor-pointer hover:bg-gray-100">
+        <a href="/developer/buatProyek" class="flex items-center">
+            <svg class="text-secondary md:w-8 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                 <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd" />
             </svg>
-            <div class="font-heading font-semibold md:text-base text-xs">Buat Proyek</div>
-        </div>
-    </a>
+            <div class="font-heading font-semibold md:text-base text-sm">Buat Proyek</div>
+        </a>
+    </div>
     <!-- end tombol buat proyek -->
     <?php foreach ($client_app as $key => $data) { ?>
         <div class="proyek flex justify-between items-center rounded-md border font-paragraph mb-4 md:px-2 md:py-2 px-1 py-1 hover:bg-gray-100 cursor-pointer select-none" data-id="<?= $data['id'] ?>">
@@ -69,7 +69,8 @@
             </div> -->
                 <div class="flex mx-3 pb-4">
                     <p class="w-1/4 text-primary text-sm font-bold">Cakupan Data</p>
-                    <p id="scope<?php echo $data['id'] ?>" class="w-3/4 text-justify text-primary text-sm"></p>
+                    <ul id="scope<?php echo $data['id'] ?>" class="list-disc list-inside w-3/4 text-justify text-primary text-sm">
+                    </ul>
                 </div>
             </div>
         </div>
@@ -78,9 +79,8 @@
     <!-- ini harusnya cuma muncul kalau belum ada proyek yg terdaftar di db, jadi mungkin bisa dikasih ifelse buat nampilin div ini atau div isi proyeknya-->
     <?php if ($client_app == NULL) { ?>
         <div id="tidakAdaProyek" class="flex justify-center">
-            <div class="mt-8 mb-24">
-                <span class="font-heading text-center text-xl">Belum ada proyek yang terdaftar. <b>Buat proyekmu
-                        sekarang!</b></span>
+            <div class="mb-24 text-justify">
+                <span class="font-heading text-center xl:text-2xl md:text-xl sm:text-lg text-base">Belum ada proyek yang terdaftar. <b>Buat proyekmu sekarang!</b></span>
             </div>
         </div>
     <?php } ?>

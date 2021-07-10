@@ -20,18 +20,28 @@ $('.proyek').each(function () {
                 $('#req_acc' + appID).text(data.req_acc);
 
                 $('#deskripsi' + appID).text(data.deskripsi);
-                var string = "";
-                data.scope.map((item, index) => {
-                    string = string + item.scope_dev + " [" + item.scope + "]<br>"
-                });
-                $('#scope' + appID).html(string);
-
-
+                var tag = "";
+                if (data.scope.length > 1) {
+                    data.scope.map((item, index) => {
+                        tag += `<li>${item.scope_dev} [${item.scope}]</li>`
+                    });
+                } else {
+                    tag = `${data.scope[0].scope_dev} [${data.scope[0].scope}]`
+                }
+                $('#scope' + appID).html(tag);
             } else {
                 alert('No message available');
             }
         },
     );
+});
+
+$(function () {
+    var loc = window.location.href
+    if ((/developer\/proyek/).test(loc)) {
+        $('header').next().removeClass('my-auto')
+        $('footer').addClass('mt-auto')
+    }
 });
 
 $(".proyek").click(function () {

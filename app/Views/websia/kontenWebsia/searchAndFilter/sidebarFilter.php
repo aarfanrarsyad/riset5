@@ -1,7 +1,7 @@
-<div class="fixed md:static flex flex-col bg-primary rounded-r min-h-screen sidebarSearch">
-
-    <div class="flex md:px-5 px-2 py-2 justify-between bg-primaryHover items-center cursor-pointer boxFilter">
-        <div class="md:text-2xl text-base font-heading font-semibold text-secondary hidden md:block md:mr-32 param1"> FILTER</div>
+<div class="fixed top-0 flex flex-col min-h-screen bg-primarySidebar sidebarSearch">
+    <img src="/img/components/logo/logo_sia.png" class="md:w-auto w-7 mx-auto logoSia" alt="Logo SIA">
+    <div class="flex md:px-5 px-2 py-2 justify-between bg-primaryHover items-center cursor-pointer boxFilter select-none">
+        <div class="md:text-2xl text-base font-heading font-semibold text-secondary hidden md:block md:mr-32 param1">FILTER</div>
         <svg class="md:w-7 w-4 fill-current text-secondary cursor-pointer hamburgerSidebar" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
         </svg>
@@ -200,9 +200,9 @@
                         <div class="flex-grow">
                             <select name="awalTahun" id="awalTahun" onmousedown="if(this.options.length>5){this.size=5;}" onchange="this.blur()" onblur="this.size=0;" class=" text-xs px-2 py-1 outline-none focus:ring-2 focus:ring-secondary font-paragraph font-medium rounded-lg w-full">
                                 <option id="awalHilang" class="mb-1">Tahun Awal</option>
-                                <?php $awal = (is_null($tahunBerita->awal)) ? 2021 : $tahunBerita->awal; 
+                                <?php $awal = (is_null($tahunBerita->awal)) ? 2021 : $tahunBerita->awal;
                                 for ($a = date('Y'); $a >= $awal; $a -= 1) {
-                                    $select = (isset($_GET['awal']) && $a==$_GET['awal']) ? 'selected' : '' ;
+                                    $select = (isset($_GET['awal']) && $a == $_GET['awal']) ? 'selected' : '';
                                     echo "<option class='mb-1 font-medium' $select value=$a> $a </option>";
                                 } ?>
                             </select>
@@ -217,9 +217,9 @@
                         <div class="flex-grow">
                             <select name="akhir" id="akhirTahun" onmousedown="if(this.options.length>5){this.size=5;}" onchange="this.blur()" onblur="this.size=0;" class=" text-xs px-2 py-1 outline-none focus:ring-2 focus:ring-secondary font-paragraph font-medium rounded-lg w-full">
                                 <option id="akhirHilang" value="" class="mb-1">Tahun Akhir</option>
-                                <?php $awal = (is_null($tahunBerita->awal)) ? 2021 : $tahunBerita->awal; 
+                                <?php $awal = (is_null($tahunBerita->awal)) ? 2021 : $tahunBerita->awal;
                                 for ($a = date('Y'); $a >= $awal; $a -= 1) {
-                                    $select = (isset($_GET['akhir']) && $a==$_GET['akhir']) ? 'selected' : '' ;
+                                    $select = (isset($_GET['akhir']) && $a == $_GET['akhir']) ? 'selected' : '';
                                     echo "<option class='mb-1 font-medium' $select value=$a> $a </option>";
                                 } ?>
                             </select>

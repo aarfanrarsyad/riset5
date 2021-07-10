@@ -19,19 +19,6 @@
   background: linear-gradient(360deg, #015998 0%, rgba(1, 89, 152, 0) 100%);
 }
 
-.lingkaran {
-  width: 600px;
-  height: 600px;
-  background: linear-gradient(
-    302.03deg,
-    #005998 15.78%,
-    rgba(0, 89, 152, 0) 80.65%
-  );
-  border-radius: 100%;
-  margin-top: -520px;
-  margin-left: -220px;
-}
-
 .active {
   display: block;
 }

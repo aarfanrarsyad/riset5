@@ -1,11 +1,7 @@
 // awal js buat scroll navbar interaktif
-
 var y = null;
-var tinggiLayar = $(window).height();
 var tinggiNavbar = $('.navbar').height();
-var tinggiMenu = $('.nav-menu').height();
 var lastScroll = $(window).scrollTop();
-var batasBawahLayar = 0;
 var isMouseOver = false;
 
 $('#nav ul li').mouseover(function () {
@@ -48,22 +44,8 @@ $('.menuGaleri').mouseover(function () {
     $('.navbar').removeClass('invisible');
 });
 
-$('.menuGaleri').mouseout(function () {
-    // supaya header tidak invisible ketika paling atas
-    if (lastScroll > tinggiNavbar) {
-        $('.navbar').addClass('invisible');
-    }
-});
-
 $('.menuWebService').mouseover(function () {
     $('.navbar').removeClass('invisible');
-});
-
-$('.menuWebService').mouseout(function () {
-    // supaya header tidak invisible ketika paling atas
-    if (lastScroll > tinggiNavbar) {
-        $('.navbar').addClass('invisible');
-    }
 });
 
 window.addEventListener('mousemove', onMouseUpdate, false);
@@ -142,8 +124,7 @@ $('.toogleEdit').click(function () {
                 $('.ulEdit').removeClass('md:block').addClass('hidden')
                 $('.burgerEdit').removeClass('md:hidden hidden').addClass('block')
             }, 150)
-            $('.pEdit').removeClass('md:opacity-100').addClass('opacity-0')
-            $('.ulEdit').removeClass('md:opacity-100').addClass('opacity-0')
+            $('.pEdit, .ulEdit').removeClass('md:opacity-100').addClass('opacity-0')
             $('.burgerEdit').removeClass('md:opacity-0').addClass('opacity-100')
 
         } else {
@@ -177,9 +158,8 @@ $('.toogleEdit').click(function () {
             // terbuka
             $('#sideEditProfil').removeClass('w-1/2').addClass('sm:w-14 w-10')
 
-            $('.ulEdit').addClass('opacity-0').removeClass('opacity-100')
+            $('.ulEdit, .pEdit').addClass('opacity-0').removeClass('opacity-100')
             $('.burgerEdit').addClass('opacity-100').removeClass('opacity-0')
-            $('.pEdit').addClass('opacity-0').removeClass('opacity-100')
             setTimeout(() => {
                 $('.ulEdit').addClass('hidden')
                 $('.burgerEdit').removeClass('hidden').addClass('block')

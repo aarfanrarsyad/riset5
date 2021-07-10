@@ -127,9 +127,9 @@ body div.loading {
     content: " ";
     display: block;
     position: absolute;
-    top: 25px;
+    top: 17px;
     width: 100%;
-    height: 100%;
+    height: 88%;
     opacity: 0.15;
     background-image: url("/img/components/logo/logo_api.svg");
     background-repeat: no-repeat;
@@ -142,6 +142,12 @@ body div.loading {
 @media (max-width:767px) {
   .logoSia {
     height: 40px;
+  }
+}
+
+@media (max-width:340px) {
+  .logoSia {
+    height: 60px;
   }
 }
 

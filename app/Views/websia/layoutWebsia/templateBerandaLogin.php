@@ -14,7 +14,6 @@
     <script src="/js/swiper-bundle.js"></script>
     <script src="/js/alpine.min.js" defer></script>
     <script type="text/javascript" src="/js/jquery.js"></script>
-    <script type="text/javascript" src="/js/navbar.js"></script>
     <script type="text/javascript" src="/js/leaflet.js"></script>
 
     <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
@@ -69,14 +68,13 @@
             <path d="M7.247 4.86l-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z" />
         </svg>
     </button>
-    <div class="h-screen m-0 flex flex-col">
+    <div class="h-screen flex flex-col">
         <!-- HEADER -->
-        <!-- class="navbar w-full fixed z-30 bg-cover bg-no-repeat bg-left" style="background-image: url(/img/components/bgHeader.png)" id="navbar" -->
         <header>
-            <div class="navbar w-full fixed z-30 bg-cover bg-no-repeat bg-left" style="background-image: url(/img/components/bgHeader.png)" id="navbar">
-                <div class="flex items-center justify-between px-6 md:pt-3 pt-1">
+            <div class="navbar w-full fixed z-30 bg-cover bg-no-repeat bg-left" style="background-image: url(/img/components/bgHeader.png)">
+                <div class="flex items-center justify-between sm:px-6 px-3 md:pt-3 pt-1">
                     <div>
-                        <div class="flex">
+                        <div class="flex items-center">
                             <a href="<?= base_url(); ?>">
                                 <img src="/img/components/logo/logo_sia.png" class=" z-50 md:w-16 w-10" alt="logo SIA">
                             </a>
@@ -218,7 +216,7 @@
                     </div>
                 </div>
             </div>
-            <div class="w-full md:h-28 h-10 bg-primary">
+            <div class="w-full md:h-28 h-10 bg-primarySidebar">
                 <!-- Codingan Navbar Taruh Sini juga buat semacam marginnya -->
             </div>
             <!-- END HEADER -->
