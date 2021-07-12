@@ -297,12 +297,10 @@ $('.updateFotoProfil').click(function () {
 })
 
 $('#infoMedsos').click(function () {
-    if ($(this).next().hasClass('opacity-0')) {
-        $(this).next().removeClass('opacity-0')
-        $(this).next().removeClass('scale-0')
+    if ($('#divInfoMedsos').hasClass('hidden')) {
+        $('#divInfoMedsos').removeClass('hidden')
     } else {
-        $(this).next().addClass('opacity-0')
-        $(this).next().addClass('scale-0')
+        $('#divInfoMedsos').addClass('hidden')
     }
 })
 // akhir js edit biodata

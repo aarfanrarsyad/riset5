@@ -62,6 +62,14 @@
     </table>
     <!-- end tabel prestasi -->
 </div>
+<div class="text-sm">
+    <div class="font-bold">
+        Keterangan:
+    </div>
+    <div>
+        Prestasi yang dimaksud mencakup prestasi sejak berkuliah di AIS/STIS/Polstat STIS hingga prestasi yang terbaru.
+    </div>
+</div>
 
 <!-- dialog box edit prestasi -->
 <!-- kalau mau ngecek hilangin kelas hidden sama opacity-0 nya-->
